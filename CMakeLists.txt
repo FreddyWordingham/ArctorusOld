@@ -62,10 +62,12 @@ set(ARCTORUS_SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 configure_file(${CMAKE_SOURCE_DIR}/res/src/gen/config.hpp.in ${CMAKE_SOURCE_DIR}/src/gen/config.hpp)
 
 
+
 #   == SOURCE CODE ==
 #   -- Glob Files --
 file(GLOB_RECURSE SOURCE_FILES ${ARCTORUS_SRC_DIR}/*.cpp)
 file(GLOB_RECURSE SOURCE_FILES ${ARCTORUS_SRC_DIR}/*.hpp)
+
 
 
 #   == FLAGS ==
