@@ -66,7 +66,7 @@ configure_file(${CMAKE_SOURCE_DIR}/res/src/gen/config.hpp.in ${CMAKE_SOURCE_DIR}
 #   == SOURCE CODE ==
 #   -- Glob Files --
 file(GLOB_RECURSE SOURCE_FILES ${ARCTORUS_SRC_DIR}/*.cpp)
-file(GLOB_RECURSE SOURCE_FILES ${ARCTORUS_SRC_DIR}/*.hpp)
+file(GLOB_RECURSE HEADER_FILES ${ARCTORUS_SRC_DIR}/*.hpp)
 
 
 
