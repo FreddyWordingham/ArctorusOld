@@ -52,7 +52,7 @@ namespace arc
          *
          *  @return A sexidecimal string representing the given number of seconds.
          */
-        std::string create_timestring(int sec)
+        std::string create_time_string(int sec)
         {
             const int hrs = sec / 3600;
             sec %= 3600;
@@ -72,7 +72,7 @@ namespace arc
          *
          *  @return True if the string can be parsed into a numerical value.
          */
-        bool is_numerical(const std::string str)
+        bool is_numerical(const std::string &str)
         {
             std::stringstream string_stream(str);
 

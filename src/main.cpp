@@ -35,8 +35,6 @@ int main()
     std::cout << "Hello world!\n";
     std::cout << "Build information:\n" << BUILD_INFO << "\n";
 
-    double x;
-
     std::string a = "one";
     std::string b = "1.23";
     std::string c = "1e92.3";

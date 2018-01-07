@@ -30,10 +30,10 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Timestamp --
         std::string create_timestamp();
-        std::string create_timestring(int sec);
+        std::string create_time_string(int sec);
 
         //  -- Properties --
-        bool is_numerical(const std::string str);
+        bool is_numerical(const std::string &str);
 
 
 
