@@ -78,12 +78,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 #   -- Optimisation --
 if (CMAKE_BUILD_TYPE MATCHES "debug")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}                       \
-        -DDEBUG                                                   \
-        -g                                                        \
-        -O0                                                       \
-        -fsanitize=integer                                        \
-        -fsanitize=undefined                                      \
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+        -DDEBUG                             \
+        -g                                  \
+        -O0                                 \
+        -fsanitize=integer                  \
+        -fsanitize=undefined                \
     ")
 elseif (CMAKE_BUILD_TYPE MATCHES "release")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
@@ -96,9 +96,9 @@ endif ()
 
 #   -- Warning --
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}      \
-        -Weverything                             \
-        -Wno-c++98-compat                        \
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+        -Weverything                        \
+        -Wno-c++98-compat                   \
     ")
 else ()
     message(FATAL_ERROR "Warning flags are not defined for compiler type: '${CMAKE_CXX_COMPILER_ID}'.")
