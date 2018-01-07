@@ -30,7 +30,7 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Timestamp --
         std::string create_timestamp();
-        std::string create_timestring(const int sec);
+        std::string create_timestring(int sec);
 
 
 

@@ -14,6 +14,9 @@
 //  -- General --
 #include "gen/config.hpp"
 
+//  -- Utility --
+#include "utl/string.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -31,6 +34,13 @@ int main()
 {
     std::cout << "Hello world!\n";
     std::cout << "Build information:\n" << BUILD_INFO << "\n";
+
+    std::cout << utl::create_timestamp() << "\n";
+
+    for (int i=0; i<1000; ++i)
+    {
+        std::cout << utl::create_timestring(i) << "\n";
+    }
 
     return (0);
 }
