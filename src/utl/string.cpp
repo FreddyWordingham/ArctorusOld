@@ -14,9 +14,8 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <ctime>
-#include <iomanip>
 #include <sstream>
+#include <iomanip>
 
 
 
@@ -62,6 +61,25 @@ namespace arc
             sec %= 60;
 
             return (std::to_string(hrs) + "h " + std::to_string(min) + "m " + std::to_string(sec) + "s");
+        }
+
+
+        //  -- Properties --
+        /**
+         *  Determine if the given string can be parsed into a numerical value.
+         *
+         *  @param  str String to be tested.
+         *
+         *  @return True if the string can be parsed into a numerical value.
+         */
+        bool is_numerical(const std::string str)
+        {
+            std::stringstream string_stream(str);
+
+            double x;
+            string_stream >> x;
+
+            return (!string_stream.fail() && (!string_stream.rdbuf()->in_avail()));
         }
 
 

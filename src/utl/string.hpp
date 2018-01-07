@@ -32,6 +32,9 @@ namespace arc
         std::string create_timestamp();
         std::string create_timestring(int sec);
 
+        //  -- Properties --
+        bool is_numerical(const std::string str);
+
 
 
     } // namespace utl
