@@ -64,6 +64,66 @@ namespace arc
         }
 
 
+        //  -- Manipulation --
+        /**
+         *  Find and replace all substrings within a given source string with another replacement string.
+         *
+         *  @param  source  Source string in which substring values will be replaced.
+         *  @param  find    Substring to be replaced with the rep string.
+         *  @param  rep     String to replace the found substrings with.
+         */
+        void find_and_replace(std::string& source, const std::string& find, const std::string& rep)
+        {
+            for (size_t pos = 0; (pos = source.find(find, pos)) != std::string::npos; pos += rep.size())
+            {
+                source.replace(pos, find.size(), rep);
+            }
+        }
+
+        /**
+         *  Remove all parts of string between two given comment identifying strings.
+         *
+         *  @param  source          Source string to filter comments from.
+         *  @param  comment_start   Comment start string identifier.
+         *  @param  comment_end     Comment end string identifier.
+         */
+        void filter(std::string& source, const std::string& comment_start, const std::string& comment_end)
+        {
+            size_t start;
+            while ((start = source.find(comment_start)) != std::string::npos)
+            {
+                size_t end;
+                if ((end = source.find(comment_end, start)) != std::string::npos)
+                {
+                    source.erase(start, end - start + comment_end.size());
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
+        /**
+         *  Strip the path leaving only the filename and extension, from the full file path.
+         *
+         *  @param  path    Full file path.
+         *
+         *  @return The filename.
+         */
+        std::string strip_path(const std::string& path)
+        {
+            size_t last_slash_pos = path.find_last_of('/');
+
+            if (last_slash_pos == std::string::npos)
+            {
+                return (path);
+            }
+
+            return (path.substr(last_slash_pos + 1));
+        }
+
+
         //  -- Properties --
         /**
          *  Determine if the given string can be parsed into a numerical value.
