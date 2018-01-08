@@ -211,20 +211,19 @@ namespace arc
         /**
          *  Determine if a given vector's elements are sorted in ascending order.
          *  Vector is not considered ascending if two consecutive values are equal.
-         *  Vector is considered ascending if the vector contains only one element.
          *
          *  @tparam T   Type stored by the vector.
          *
          *  @param  vec Vector to be analysed.
          *
-         *  @pre    vec must not be empty.
+         *  @pre    vec must contain more than one element.
          *
          *  @return True if the vector's elements are sorted in ascending order.
          */
         template <typename T>
         constexpr bool is_ascending(const std::vector<T>& vec)
         {
-            assert(!vec.empty());
+            assert(vec.size() > 1);
 
             for (size_t i = 1; i < vec.size(); ++i)
             {
@@ -240,20 +239,19 @@ namespace arc
         /**
          *  Determine if a given vector's elements are sorted in descending order.
          *  Vector is not considered descending if two consecutive values are equal.
-         *  Vector is considered descending if the vector contains only one element.
          *
          *  @tparam T   Type stored by the vector.
          *
          *  @param  vec Vector to be analysed.
          *
-         *  @pre    vec must not be empty.
+         *  @pre    vec must contain more than one element.
          *
          *  @return True if the vector's elements are sorted in descending order.
          */
         template <typename T>
         constexpr bool is_descending(const std::vector<T>& vec)
         {
-            assert(!vec.empty());
+            assert(vec.size() > 1);
 
             for (size_t i = 1; i < vec.size(); ++i)
             {
@@ -276,14 +274,14 @@ namespace arc
          *
          *  @param  vec Vector to be analysed.
          *
-         *  @pre    vec must not be empty.
+         *  @pre    vec must contain more than one element.
          *
          *  @return True if the vector's elements are sorted in monotonic order.
          */
         template <typename T>
         constexpr bool is_monotonic(const std::vector<T>& vec)
         {
-            assert(!vec.empty());
+            assert(vec.size() > 1);
 
             return (is_ascending(vec) || is_descending(vec));
         }
