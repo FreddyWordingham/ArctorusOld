@@ -26,6 +26,12 @@ namespace arc
 
 
 
+        //  == SETTINGS ==
+        //  -- Defaults --
+        constexpr const double DEFAULT_ARR_UNIFORM_TOL = std::numeric_limits<double>::epsilon();    //! Default uniform tol.
+
+
+
         //  == FUNCTION PROTOTYPES ==
         //  -- Mathematical --
         template <typename T, size_t N>
@@ -40,6 +46,16 @@ namespace arc
         constexpr T total(const std::array<T, N>& arr);
         template <typename T, size_t N>
         constexpr double magnitude(const std::array<T, N>& arr);
+
+        //  -- Properties --
+        template <typename T, size_t N>
+        constexpr bool is_ascending(const std::array<T, N>& arr);
+        template <typename T, size_t N>
+        constexpr bool is_descending(const std::array<T, N>& arr);
+        template <typename T, size_t N>
+        constexpr bool is_monotonic(const std::array<T, N>& arr);
+        template <typename T, size_t N>
+        constexpr bool is_uniform(const std::array<T, N>& arr, double tol = DEFAULT_ARR_UNIFORM_TOL);
 
 
 
@@ -193,6 +209,123 @@ namespace arc
             }
 
             return (sqrt(static_cast<double>(squared_total)));
+        }
+
+
+        //  -- Properties --
+        /**
+         *  Determine if a given array's elements are sorted in ascending order.
+         *  Array is not considered ascending if two consecutive values are equal.
+         *  Array is considered ascending if the array contains only one element.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *
+         *  @param  arr Array to be analysed.
+         *
+         *  @pre    N must not be zero.
+         *
+         *  @return True if the array's elements are sorted in ascending order.
+         */
+        template <typename T, size_t N>
+        constexpr bool is_ascending(const std::array<T, N>& arr)
+        {
+            static_assert(N != 0);
+
+            for (size_t i = 1; i < N; ++i)
+            {
+                if (arr[i] < arr[i - 1])
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given array's elements are sorted in descending order.
+         *  Array is not considered descending if two consecutive values are equal.
+         *  Array is considered descending if the array contains only one element.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *
+         *  @param  arr Array to be analysed.
+         *
+         *  @pre    N must not be zero.
+         *
+         *  @return True if the array's elements are sorted in descending order.
+         */
+        template <typename T, size_t N>
+        constexpr bool is_descending(const std::array<T, N>& arr)
+        {
+            static_assert(N != 0);
+
+            for (size_t i = 1; i < N; ++i)
+            {
+                if (arr[i] > arr[i - 1])
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given array's elements are sorted in monotonic order.
+         *  Determine if the array's elements are sorted in ascending or descending order.
+         *  Array is not considered monotonic if two consecutive values are equal.
+         *  Array is considered monotonic if the array contains only one element.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *
+         *  @param  arr Array to be analysed.
+         *
+         *  @pre    N must not be zero.
+         *
+         *  @return True if the array's elements are sorted in monotonic order.
+         */
+        template <typename T, size_t N>
+        constexpr bool is_monotonic(const std::array<T, N>& arr)
+        {
+            static_assert(N != 0);
+
+            return (is_ascending(arr) || is_descending(arr));
+        }
+
+        /**
+         *  Determine if a given array's elements are uniformly separated to within a given tolerance.
+         *  Array must contain at more than one element.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *
+         *  @param  arr Array to be analysed.
+         *  @param  tol Maximum consecutive delta difference from the average delta where array is considered uniform.
+         *
+         *  @pre    N must be greater than one.
+         *
+         *  @return True if the array's elements are uniformly spaced.
+         */
+        template <typename T, size_t N>
+        constexpr bool is_uniform(const std::array<T, N>& arr, double tol)
+        {
+            static_assert(N >= 2);
+
+            const double ave_delta = (arr.front() - arr.back()) / static_cast<double>(N - 1);
+
+            for (size_t i = 1; i < N; ++i)
+            {
+                if ((fabs(arr[i - 1] - arr[i]) - ave_delta) > tol)
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
         }
 
 
