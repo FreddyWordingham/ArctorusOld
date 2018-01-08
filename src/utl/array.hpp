@@ -469,6 +469,51 @@ namespace arc
 
 
     } // namespace utl
+
+
+
+    //  == OPERATORS PROTOTYPES ==
+    //  -- Printing --
+    template <typename T, size_t N>
+    std::ostream& operator<<(std::ostream& stream, const std::array<T, N>& arr);
+
+
+
+    //  == OPERATORS PROTOTYPES ==
+    //  -- Printing --
+    /**
+     *  Enable writing of an array to a given ostream.
+     *
+     *  @tparam T   Type stored by the array.
+     *  @tparam N   Size of the array.
+     *
+     *  @param  stream  Stream to write to.
+     *  @param  arr     Array to be written.
+     *
+     *  @return A reference to the stream post-write.
+     */
+    template <typename T, size_t N>
+    std::ostream& operator<<(std::ostream& stream, const std::array<T, N>& arr)
+    {
+        if (N == 0)
+        {
+            stream << "[]";
+
+            return (stream);
+        }
+
+        stream << "[" << arr[0];
+        for (size_t i = 1; i < N; ++i)
+        {
+            stream << ", " << arr[i];
+        }
+        stream << "]";
+
+        return (stream);
+    }
+
+
+
 } // namespace arc
 
 

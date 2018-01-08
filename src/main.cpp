@@ -49,5 +49,7 @@ int main()
         std::cout << x << "\t" << utl::lower_index(arr, x) << "\t" << utl::upper_index(arr, x) << "\n";
     }
 
+    std::cout << arr << "\n";
+
     return (0);
 }
