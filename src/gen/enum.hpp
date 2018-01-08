@@ -33,6 +33,16 @@ namespace arc
     };
 
 
+    //  -- Colours --
+    enum colours
+    {
+        R,  //! Red colour channel.
+        G,  //! Green colour channel.
+        B,  //! Blue colour channel.
+        A   //! Transparency colour channel.
+    };
+
+
 
 } // namespace arc
 
