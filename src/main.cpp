@@ -39,13 +39,15 @@ int main()
     std::cout << "Build information:\n" << BUILD_INFO << "\n";
     std::cout << "Arctorus directory:\n" << ARCTORUS_DIR << "\n";
 
-    std::array<int, 7> arr({{9, 7, 3, 0, -2, -3, -5}});
+    std::array<int, 4> arr({{0, 1, 2, 3}});
 
     std::cout << "\n-\n";
 
-    std::cout << utl::lower_index(arr, -0.5) << "\n";
-    std::cout << utl::upper_index(arr, -0.5) << "\n";
-//    std::cout << utl::lower_index(arr, -3.2) << "\n";
+    for (int i=0; i<=20; ++i)
+    {
+        double x = i * 0.1;
+        std::cout << x << "\t" << utl::lower_index(arr, x) << "\t" << utl::upper_index(arr, x) << "\n";
+    }
 
     return (0);
 }
