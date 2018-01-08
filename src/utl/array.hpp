@@ -348,7 +348,7 @@ namespace arc
          *  @param  val         Value to locate within the array.
          *  @param  init_guess  Initial guess for the lower index.
          *
-         *  @pre    N must not be zero.
+         *  @pre    N must be greater than one.
          *  @pre    arr must be sorted in monotonic order.
          *  @pre    val must be within the array limits.
          *  @pre    init_guess must be a valid index of the arr.
@@ -358,7 +358,7 @@ namespace arc
         template <typename T, size_t N, typename S>
         size_t lower_index(const std::array<T, N>& arr, S val, const size_t init_guess)
         {
-            static_assert(N != 0);
+            static_assert(N > 1);
             assert(is_monotonic(arr));
             assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
             assert(init_guess < N);
@@ -446,7 +446,7 @@ namespace arc
          *  @param  val         Value to locate within the array.
          *  @param  init_guess  Initial guess for the upper index.
          *
-         *  @pre    N must not be zero.
+         *  @pre    N must be greater than one.
          *  @pre    arr must be sorted in monotonic order.
          *  @pre    val must be within the array limits.
          *  @pre    init_guess must be a valid index of the arr.
@@ -456,7 +456,7 @@ namespace arc
         template <typename T, size_t N, typename S>
         size_t upper_index(const std::array<T, N>& arr, S val, const size_t init_guess)
         {
-            static_assert(N != 0);
+            static_assert(N > 1);
             assert(is_monotonic(arr));
             assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
             assert(init_guess < N);
