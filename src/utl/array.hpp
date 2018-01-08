@@ -71,7 +71,7 @@ namespace arc
         //  == FUNCTIONS ==
         //  -- Mathematical --
         /**
-         *  Find the index of the array which holds the smallest element within the array.
+         *  Find the index of the array which holds the smallest element.
          *  If multiple array elements are equally the smallest, the index of the first will be returned.
          *
          *  @tparam T   Type stored by the array.
@@ -102,7 +102,7 @@ namespace arc
         }
 
         /**
-         *  Find the index of the array which holds the largest element within the array.
+         *  Find the index of the array which holds the largest element.
          *  If multiple array elements are equally the largest, the index of the first will be returned.
          *
          *  @tparam T   Type stored by the array.
