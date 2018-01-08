@@ -44,5 +44,12 @@ int main()
 
     std::cout << vec << "\n";
 
+    std::cout << utl::min_index(vec) << "\n";
+    std::cout << utl::max_index(vec) << "\n";
+    std::cout << utl::min(vec) << "\n";
+    std::cout << utl::max(vec) << "\n";
+    std::cout << utl::total(vec) << "\n";
+    std::cout << utl::magnitude(vec) << "\n";
+
     return (0);
 }
