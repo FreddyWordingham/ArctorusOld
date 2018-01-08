@@ -33,6 +33,20 @@ namespace arc
     };
 
 
+    //  -- Vertices --
+    /**
+     *  Enumeration of the triangle vertices.
+     *  Used for index consistency.
+     *  Spatial ordering of vertices is not guaranteed.
+     */
+    enum triangle_vertices
+    {
+        ALPHA,  //! First vertex.
+        BETA,   //! Second vertex.
+        GAMMA   //! Third vertex.
+    };
+
+
     //  -- Colours --
     /**
      *  Enumeration of the colour channels.
