@@ -63,7 +63,7 @@ namespace arc
         template <typename T, typename S>
         size_t lower_index(const std::vector<T>& vec, S val, size_t init_guess = 0);
         template <typename T, typename S>
-        size_t upper_index(const std::vector<T>& vec, S val, size_t init_guess = 0);
+        size_t upper_index(const std::vector<T>& vec, S val, size_t init_guess = 1);
 
 
 
