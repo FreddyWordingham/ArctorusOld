@@ -28,9 +28,9 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Power --
         template <typename T>
-        constexpr T square(const T x);
+        constexpr T square(T x);
         template <typename T>
-        constexpr T cube(const T x);
+        constexpr T cube(T x);
 
 
 
