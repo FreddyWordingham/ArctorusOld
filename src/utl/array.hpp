@@ -342,7 +342,7 @@ namespace arc
          *
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
-         *  @tparam S   Type of the value to be found within the array,
+         *  @tparam S   Type of the value to be found within the array.
          *
          *  @param  arr         Array to hunt got the value placement.
          *  @param  val         Value to locate within the array.
@@ -440,7 +440,7 @@ namespace arc
          *
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
-         *  @tparam S   Type of the value to be found within the array,
+         *  @tparam S   Type of the value to be found within the array.
          *
          *  @param  arr         Array to hunt got the value placement.
          *  @param  val         Value to locate within the array.
@@ -461,7 +461,7 @@ namespace arc
             assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
             assert(init_guess < arr.size());
 
-            return (lower_index(arr, val, init_guess) + 1);
+            return (lower_index(arr, val, init_guess - 1) + 1);
         }
 
 
