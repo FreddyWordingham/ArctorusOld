@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <array>
+#include <cassert>
 
 
 
@@ -29,6 +30,7 @@ namespace arc
         //  == SETTINGS ==
         //  -- Defaults --
         constexpr const double DEFAULT_ARR_UNIFORM_TOL = std::numeric_limits<double>::epsilon();    //! Default uniform tol.
+        constexpr const double HUNT_END_TOL            = std::numeric_limits<double>::epsilon();    //! Tol for hunt search end.
 
 
 
@@ -56,6 +58,12 @@ namespace arc
         constexpr bool is_monotonic(const std::array<T, N>& arr);
         template <typename T, size_t N>
         constexpr bool is_uniform(const std::array<T, N>& arr, double tol = DEFAULT_ARR_UNIFORM_TOL);
+
+        //  -- Searching --
+        template <typename T, size_t N, typename S>
+        constexpr size_t lower_index(const std::array<T, N>& arr, S val, size_t init_guess = 0);
+        template <typename T, size_t N, typename S>
+        constexpr size_t upper_index(const std::array<T, N>& arr, S val, size_t init_guess = 0);
 
 
 
@@ -326,6 +334,202 @@ namespace arc
             }
 
             return (true);
+        }
+
+
+        //  -- Searching --
+        /**
+         *  Determine the lower index of the element pair which encapsulates the given value.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *  @tparam S   Type of the value to be found within the array,
+         *
+         *  @param  arr         Array to hunt got the value placement.
+         *  @param  val         Value to locate within the array.
+         *  @param  init_guess  Initial guess for the lower index.
+         *
+         *  @pre    N must not be zero.
+         *  @pre    arr must be sorted in monotonic order.
+         *  @pre    val must be within the array limits.
+         *  @pre    init_guess must be a valid index of the arr.
+         *
+         *  @return The lower index of the element pair which encapsulates the value.
+         */
+        template <typename T, size_t N, typename S>
+        constexpr size_t lower_index(const std::array<T, N>& arr, S val, const size_t init_guess)
+        {
+            static_assert(N != 0);
+            assert(is_monotonic(arr));
+            assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
+            assert(init_guess < arr.size());
+
+            bool ascending = arr.front() < arr.back();
+
+            size_t lower_index = init_guess;
+            size_t upper_index = arr.size() - 1;
+
+            size_t jump = 1;
+            if (val >= arr[lower_index] == ascending)
+            {
+                if (lower_index == (arr.size() - 1))
+                {
+                    return (lower_index);
+                }
+
+                upper_index = lower_index + 1;
+                while (val >= arr[upper_index] == ascending)
+                {
+                    lower_index = upper_index;
+                    jump += jump;
+                    upper_index = lower_index + jump;
+                    if (upper_index >= (arr.size() - 1))
+                    {
+                        upper_index = arr.size();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                upper_index = lower_index--;
+                while (val < arr[lower_index] == ascending)
+                {
+                    upper_index = lower_index;
+                    jump <<= 1;
+                    if (jump >= upper_index)
+                    {
+                        lower_index = 0;
+                        break;
+                    }
+                    else
+                    {
+                        lower_index = upper_index - jump;
+                    }
+                }
+            }
+
+            while ((upper_index - lower_index) != 1)
+            {
+                size_t mid_index = (upper_index + lower_index) >> 1;
+                if (val >= arr[mid_index] == ascending)
+                {
+                    lower_index = mid_index;
+                }
+                else
+                {
+                    upper_index = mid_index;
+                }
+            }
+
+            if (fabs(val - arr.front()) <= HUNT_END_TOL)
+            {
+                return (0);
+            }
+
+            if (fabs(val - arr.back()) <= HUNT_END_TOL)
+            {
+                return (arr.size() - 2);
+            }
+
+            return (lower_index);
+        }
+
+        /**
+         *  Determine the upper index of the element pair which encapsulates the given value.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *  @tparam S   Type of the value to be found within the array,
+         *
+         *  @param  arr         Array to hunt got the value placement.
+         *  @param  val         Value to locate within the array.
+         *  @param  init_guess  Initial guess for the upper index.
+         *
+         *  @pre    N must not be zero.
+         *  @pre    arr must be sorted in monotonic order.
+         *  @pre    val must be within the array limits.
+         *  @pre    init_guess must be a valid index of the arr.
+         *
+         *  @return The upper index of the element pair which encapsulates the value.
+         */
+        template <typename T, size_t N, typename S>
+        constexpr size_t upper_index(const std::array<T, N>& arr, S val, const size_t init_guess)
+        {
+            static_assert(N != 0);
+            assert(is_monotonic(arr));
+            assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
+            assert(init_guess < arr.size());
+
+            bool ascending = arr.front() < arr.back();
+
+            size_t lower_index = 0;
+            size_t upper_index = init_guess;
+
+            size_t jump = 1;
+            if (val >= arr[lower_index] == ascending)
+            {
+                if (lower_index == (arr.size() - 1))
+                {
+                    return (lower_index);
+                }
+
+                upper_index = lower_index + 1;
+                while (val >= arr[upper_index] == ascending)
+                {
+                    lower_index = upper_index;
+                    jump += jump;
+                    upper_index = lower_index + jump;
+                    if (upper_index >= (arr.size() - 1))
+                    {
+                        upper_index = arr.size();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                upper_index = lower_index--;
+                while (val < arr[lower_index] == ascending)
+                {
+                    upper_index = lower_index;
+                    jump <<= 1;
+                    if (jump >= upper_index)
+                    {
+                        lower_index = 0;
+                        break;
+                    }
+                    else
+                    {
+                        lower_index = upper_index - jump;
+                    }
+                }
+            }
+
+            while ((upper_index - lower_index) != 1)
+            {
+                size_t mid_index = (upper_index + lower_index) >> 1;
+                if (val >= arr[mid_index] == ascending)
+                {
+                    lower_index = mid_index;
+                }
+                else
+                {
+                    upper_index = mid_index;
+                }
+            }
+
+            if (fabs(val - arr.front()) <= HUNT_END_TOL)
+            {
+                return (1);
+            }
+
+            if (fabs(val - arr.back()) <= HUNT_END_TOL)
+            {
+                return (arr.size() - 1);
+            }
+
+            return (upper_index);
         }
 
 

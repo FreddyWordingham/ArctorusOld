@@ -39,14 +39,13 @@ int main()
     std::cout << "Build information:\n" << BUILD_INFO << "\n";
     std::cout << "Arctorus directory:\n" << ARCTORUS_DIR << "\n";
 
-    std::array<int, 7> arr({{10, 3, -2, -5, -9, -10, -11}});
+    std::array<int, 7> arr({{9, 7, 3, 0, -2, -3, -5}});
 
     std::cout << "\n-\n";
 
-    std::cout << utl::is_ascending(arr) << "\n";
-    std::cout << utl::is_descending(arr) << "\n";
-    std::cout << utl::is_monotonic(arr) << "\n";
-    std::cout << utl::is_uniform(arr, 1) << "\n";
+    std::cout << utl::lower_index(arr, -0.5) << "\n";
+    std::cout << utl::upper_index(arr, -0.5) << "\n";
+//    std::cout << utl::lower_index(arr, -3.2) << "\n";
 
     return (0);
 }
