@@ -27,6 +27,12 @@ namespace arc
 
 
 
+        //  == SETTINGS ==
+        //  -- Defaults --
+        constexpr const double DEFAULT_VEC_UNIFORM_TOL = std::numeric_limits<double>::epsilon();    //! Default uniform tol.
+
+
+
         //  == FUNCTION PROTOTYPES ==
         //  -- Mathematical --
         template <typename T>
@@ -41,6 +47,16 @@ namespace arc
         constexpr T total(const std::vector<T>& vec);
         template <typename T>
         constexpr double magnitude(const std::vector<T>& vec);
+
+        //  -- Properties --
+        template <typename T>
+        constexpr bool is_ascending(const std::vector<T>& vec);
+        template <typename T>
+        constexpr bool is_descending(const std::vector<T>& vec);
+        template <typename T>
+        constexpr bool is_monotonic(const std::vector<T>& vec);
+        template <typename T>
+        constexpr bool is_uniform(const std::vector<T>& vec, double tol = DEFAULT_VEC_UNIFORM_TOL);
 
 
 
@@ -188,6 +204,119 @@ namespace arc
             }
 
             return (std::sqrt(static_cast<double>(squared_total)));
+        }
+
+
+        //  -- Properties --
+        /**
+         *  Determine if a given vector's elements are sorted in ascending order.
+         *  Vector is not considered ascending if two consecutive values are equal.
+         *  Vector is considered ascending if the vector contains only one element.
+         *
+         *  @tparam T   Type stored by the vector.
+         *
+         *  @param  vec Vector to be analysed.
+         *
+         *  @pre    vec must not be empty.
+         *
+         *  @return True if the vector's elements are sorted in ascending order.
+         */
+        template <typename T>
+        constexpr bool is_ascending(const std::vector<T>& vec)
+        {
+            assert(!vec.empty());
+
+            for (size_t i = 1; i < vec.size(); ++i)
+            {
+                if (vec[i] < vec[i - 1])
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given vector's elements are sorted in descending order.
+         *  Vector is not considered descending if two consecutive values are equal.
+         *  Vector is considered descending if the vector contains only one element.
+         *
+         *  @tparam T   Type stored by the vector.
+         *
+         *  @param  vec Vector to be analysed.
+         *
+         *  @pre    vec must not be empty.
+         *
+         *  @return True if the vector's elements are sorted in descending order.
+         */
+        template <typename T>
+        constexpr bool is_descending(const std::vector<T>& vec)
+        {
+            assert(!vec.empty());
+
+            for (size_t i = 1; i < vec.size(); ++i)
+            {
+                if (vec[i] > vec[i - 1])
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given vector's elements are sorted in monotonic order.
+         *  Determine if the vector's elements are sorted in ascending or descending order.
+         *  Vector is not considered monotonic if two consecutive values are equal.
+         *  Vector is considered monotonic if the vector contains only one element.
+         *
+         *  @tparam T   Type stored by the vector.
+         *
+         *  @param  vec Vector to be analysed.
+         *
+         *  @pre    vec must not be empty.
+         *
+         *  @return True if the vector's elements are sorted in monotonic order.
+         */
+        template <typename T>
+        constexpr bool is_monotonic(const std::vector<T>& vec)
+        {
+            assert(!vec.empty());
+
+            return (is_ascending(vec) || is_descending(vec));
+        }
+
+        /**
+         *  Determine if a given vector's elements are uniformly separated to within a given tolerance.
+         *  Vector must contain at more than one element.
+         *
+         *  @tparam T   Type stored by the vector.
+         *
+         *  @param  vec Vector to be analysed.
+         *  @param  tol Maximum consecutive delta difference from the average delta where vector is considered uniform.
+         *
+         *  @pre    vec must contain more than one element.
+         *
+         *  @return True if the vector's elements are uniformly spaced.
+         */
+        template <typename T>
+        constexpr bool is_uniform(const std::vector<T>& vec, double tol)
+        {
+            assert(vec.size() > 1);
+
+            const double ave_delta = (vec.front() - vec.back()) / static_cast<double>(vec.size() - 1);
+
+            for (size_t i = 1; i < vec.size(); ++i)
+            {
+                if ((std::fabs((vec[i - 1] - vec[i]) - ave_delta)) > tol)
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
         }
 
 

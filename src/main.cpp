@@ -18,6 +18,7 @@
 
 //  -- Utility --
 #include "utl/vector.hpp"
+#include "utl/array.hpp"
 
 
 
@@ -50,6 +51,15 @@ int main()
     std::cout << utl::max(vec) << "\n";
     std::cout << utl::total(vec) << "\n";
     std::cout << utl::magnitude(vec) << "\n";
+
+    std::cout << utl::is_ascending(vec) << "\n";
+    std::cout << utl::is_descending(vec) << "\n";
+    std::cout << utl::is_monotonic(vec) << "\n";
+    std::cout << utl::is_uniform(vec) << "\n";
+
+
+    std::array<int, 4> arr({{0, 1, 2, 3}});
+    std::cout << "-\n" << utl::is_uniform(arr, 0.1) << "\n";
 
     return (0);
 }
