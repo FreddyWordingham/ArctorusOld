@@ -34,9 +34,12 @@ int main()
 {
     std::cout << "Hello world!\n";
     std::cout << "Build information:\n" << BUILD_INFO << "\n";
+    std::cout << "Arctorus directory:\n" << ARCTORUS_DIR << "\n";
 
     std::cout << square(2.5) << "\n";
     std::cout << cube(2.5) << "\n";
+    std::cout << equal(2.5, 2.500000000001) << "\n";
+    std::cout << equal(2.500000000001, 2.500000000001) << "\n";
 
     return (0);
 }
