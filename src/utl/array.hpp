@@ -30,8 +30,8 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Defaults --
-        constexpr const double DEFAULT_ARR_UNIFORM_TOL = std::numeric_limits<double>::epsilon();    //! Default uniform tol.
-        constexpr const double HUNT_END_TOL            = std::numeric_limits<double>::epsilon();    //! Tol for hunt search end.
+        constexpr const double ARR_DEFAULT_UNIFORM_TOL  = std::numeric_limits<double>::epsilon();   //! Default uniform tol.
+        constexpr const double ARR_HUNT_END_TOL         = std::numeric_limits<double>::epsilon();   //! Tol for hunt search end.
 
 
 
@@ -58,7 +58,7 @@ namespace arc
         template <typename T, size_t N>
         constexpr bool is_monotonic(const std::array<T, N>& arr);
         template <typename T, size_t N>
-        constexpr bool is_uniform(const std::array<T, N>& arr, double tol = DEFAULT_ARR_UNIFORM_TOL);
+        constexpr bool is_uniform(const std::array<T, N>& arr, double tol = ARR_DEFAULT_UNIFORM_TOL);
 
         //  -- Searching --
         template <typename T, size_t N, typename S>
@@ -421,12 +421,12 @@ namespace arc
                 }
             }
 
-            if (std::fabs(val - arr.front()) <= HUNT_END_TOL)
+            if (std::fabs(val - arr.front()) <= ARR_HUNT_END_TOL)
             {
                 return (0);
             }
 
-            if (std::fabs(val - arr.back()) <= HUNT_END_TOL)
+            if (std::fabs(val - arr.back()) <= ARR_HUNT_END_TOL)
             {
                 return (arr.size() - 2);
             }
