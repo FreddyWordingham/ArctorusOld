@@ -18,7 +18,6 @@
 
 //  -- Utility --
 #include "utl/vector.hpp"
-#include "utl/array.hpp"
 
 
 
