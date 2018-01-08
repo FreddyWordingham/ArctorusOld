@@ -225,21 +225,20 @@ namespace arc
         /**
          *  Determine if a given array's elements are sorted in ascending order.
          *  Array is not considered ascending if two consecutive values are equal.
-         *  Array is considered ascending if the array contains only one element.
          *
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
          *  @param  arr Array to be analysed.
          *
-         *  @pre    N must not be zero.
+         *  @pre    N must be greater than one.
          *
          *  @return True if the array's elements are sorted in ascending order.
          */
         template <typename T, size_t N>
         constexpr bool is_ascending(const std::array<T, N>& arr)
         {
-            static_assert(N != 0);
+            static_assert(N > 1);
 
             for (size_t i = 1; i < N; ++i)
             {
@@ -255,21 +254,20 @@ namespace arc
         /**
          *  Determine if a given array's elements are sorted in descending order.
          *  Array is not considered descending if two consecutive values are equal.
-         *  Array is considered descending if the array contains only one element.
          *
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
          *  @param  arr Array to be analysed.
          *
-         *  @pre    N must not be zero.
+         *  @pre    N must be greater than one.
          *
          *  @return True if the array's elements are sorted in descending order.
          */
         template <typename T, size_t N>
         constexpr bool is_descending(const std::array<T, N>& arr)
         {
-            static_assert(N != 0);
+            static_assert(N > 1);
 
             for (size_t i = 1; i < N; ++i)
             {
@@ -286,21 +284,20 @@ namespace arc
          *  Determine if a given array's elements are sorted in monotonic order.
          *  Determine if the array's elements are sorted in ascending or descending order.
          *  Array is not considered monotonic if two consecutive values are equal.
-         *  Array is considered monotonic if the array contains only one element.
          *
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
          *  @param  arr Array to be analysed.
          *
-         *  @pre    N must not be zero.
+         *  @pre    N must be greater than one.
          *
          *  @return True if the array's elements are sorted in monotonic order.
          */
         template <typename T, size_t N>
         constexpr bool is_monotonic(const std::array<T, N>& arr)
         {
-            static_assert(N != 0);
+            static_assert(N > 1);
 
             return (is_ascending(arr) || is_descending(arr));
         }
