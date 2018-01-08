@@ -34,6 +34,10 @@ namespace arc
 
 
     //  -- Colours --
+    /**
+     *  Enumeration of the colour channels.
+     *  Used for index consistency.
+     */
     enum colours
     {
         R,  //! Red colour channel.
