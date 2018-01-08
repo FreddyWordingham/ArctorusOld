@@ -41,11 +41,7 @@ int main()
 
     std::vector<int> vec({0, 1, 2, 3});
 
-    for (int i=0; i<=30; ++i)
-    {
-        double x = i * 0.1;
-        std::cout << x << "\t:\t" << utl::lower_index(vec, x) << "\t:\t" << utl::upper_index(vec, x) << "\n";
-    }
+
 
     return (0);
 }

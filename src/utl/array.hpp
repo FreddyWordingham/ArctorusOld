@@ -361,7 +361,7 @@ namespace arc
             static_assert(N != 0);
             assert(is_monotonic(arr));
             assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
-            assert(init_guess < arr.size());
+            assert(init_guess < N);
 
             bool ascending = arr.front() < arr.back();
 
@@ -371,7 +371,7 @@ namespace arc
             size_t jump = 1;
             if (val >= arr[lower_index] == ascending)
             {
-                if (lower_index == (arr.size() - 1))
+                if (lower_index == (N - 1))
                 {
                     return (lower_index);
                 }
@@ -382,9 +382,9 @@ namespace arc
                     lower_index = upper_index;
                     jump += jump;
                     upper_index = lower_index + jump;
-                    if (upper_index >= (arr.size() - 1))
+                    if (upper_index >= (N - 1))
                     {
-                        upper_index = arr.size();
+                        upper_index = N;
                         break;
                     }
                 }
@@ -428,7 +428,7 @@ namespace arc
 
             if (std::fabs(val - arr.back()) <= ARR_HUNT_END_TOL)
             {
-                return (arr.size() - 2);
+                return (N - 2);
             }
 
             return (lower_index);
@@ -459,7 +459,7 @@ namespace arc
             static_assert(N != 0);
             assert(is_monotonic(arr));
             assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
-            assert(init_guess < arr.size());
+            assert(init_guess < N);
 
             return (lower_index(arr, val, init_guess - 1) + 1);
         }
