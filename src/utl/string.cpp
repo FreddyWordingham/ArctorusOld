@@ -46,11 +46,11 @@ namespace arc
         }
 
         /**
-         *  Convert a given number of seconds into a sexidecimal time string.
+         *  Convert a given number of seconds into a sexagesimal time string.
          *
          *  @param  sec Number of seconds to convert to a time string.
          *
-         *  @return A sexidecimal string representing the given number of seconds.
+         *  @return A sexagesimal string representing the given number of seconds.
          */
         std::string create_time_string(int sec)
         {
