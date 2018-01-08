@@ -30,7 +30,7 @@ namespace arc
         X,  //! X spatial dimension.
         Y,  //! Y spatial dimension.
         Z   //! Z spatial dimension.
-    }
+    };
 
 
 
