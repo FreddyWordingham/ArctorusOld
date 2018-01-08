@@ -6,6 +6,7 @@
  */
 
 
+
 //  == GUARD ==
 #ifndef ARCTORUS_SRC_GEN_MATH_HPP
 #define ARCTORUS_SRC_GEN_MATH_HPP
