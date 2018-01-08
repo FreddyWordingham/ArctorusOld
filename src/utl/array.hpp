@@ -16,6 +16,7 @@
 //  -- System --
 #include <array>
 #include <cassert>
+#include <cmath>
 
 
 
@@ -216,7 +217,7 @@ namespace arc
                 squared_total += arr[i] * arr[i];
             }
 
-            return (sqrt(static_cast<double>(squared_total)));
+            return (std::sqrt(static_cast<double>(squared_total)));
         }
 
 
@@ -327,7 +328,7 @@ namespace arc
 
             for (size_t i = 1; i < N; ++i)
             {
-                if ((fabs(arr[i - 1] - arr[i]) - ave_delta) > tol)
+                if ((std::fabs(arr[i - 1] - arr[i]) - ave_delta) > tol)
                 {
                     return (false);
                 }
@@ -423,12 +424,12 @@ namespace arc
                 }
             }
 
-            if (fabs(val - arr.front()) <= HUNT_END_TOL)
+            if (std::fabs(val - arr.front()) <= HUNT_END_TOL)
             {
                 return (0);
             }
 
-            if (fabs(val - arr.back()) <= HUNT_END_TOL)
+            if (std::fabs(val - arr.back()) <= HUNT_END_TOL)
             {
                 return (arr.size() - 2);
             }
@@ -479,7 +480,7 @@ namespace arc
 
 
 
-    //  == OPERATORS PROTOTYPES ==
+    //  == OPERATORS ==
     //  -- Printing --
     /**
      *  Enable writing of an array to a given ostream.
