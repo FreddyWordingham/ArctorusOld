@@ -17,8 +17,7 @@
 #include "gen/math.hpp"
 
 //  -- Utility --
-#include "utl/string.hpp"
-#include "utl/array.hpp"
+#include "utl/vector.hpp"
 
 
 
@@ -39,17 +38,11 @@ int main()
     std::cout << "Build information:\n" << BUILD_INFO << "\n";
     std::cout << "Arctorus directory:\n" << ARCTORUS_DIR << "\n";
 
-    std::array<int, 4> arr({{0, 1, 2, 3}});
+    std::vector<int> vec({0, 1, 2, 3});
 
     std::cout << "\n-\n";
 
-    for (int i=0; i<=20; ++i)
-    {
-        double x = i * 0.1;
-        std::cout << x << "\t" << utl::lower_index(arr, x) << "\t" << utl::upper_index(arr, x) << "\n";
-    }
-
-    std::cout << arr << "\n";
+    std::cout << vec << "\n";
 
     return (0);
 }
