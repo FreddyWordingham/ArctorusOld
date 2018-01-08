@@ -328,7 +328,7 @@ namespace arc
 
             for (size_t i = 1; i < N; ++i)
             {
-                if ((std::fabs(arr[i - 1] - arr[i]) - ave_delta) > tol)
+                if ((std::fabs((arr[i - 1] - arr[i]) - ave_delta)) > tol)
                 {
                     return (false);
                 }
