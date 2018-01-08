@@ -268,7 +268,6 @@ namespace arc
          *  Determine if a given vector's elements are sorted in monotonic order.
          *  Determine if the vector's elements are sorted in ascending or descending order.
          *  Vector is not considered monotonic if two consecutive values are equal.
-         *  Vector is considered monotonic if the vector contains only one element.
          *
          *  @tparam T   Type stored by the vector.
          *
