@@ -29,7 +29,8 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Defaults --
-        constexpr const double DEFAULT_VEC_UNIFORM_TOL = std::numeric_limits<double>::epsilon();    //! Default uniform tol.
+        constexpr const double VEC_DEFAULT_UNIFORM_TOL  = std::numeric_limits<double>::epsilon();   //! Default uniform tol.
+        constexpr const double VEC_HUNT_END_TOL         = std::numeric_limits<double>::epsilon();   //! Tol for hunt search end.
 
 
 
@@ -56,7 +57,13 @@ namespace arc
         template <typename T>
         constexpr bool is_monotonic(const std::vector<T>& vec);
         template <typename T>
-        constexpr bool is_uniform(const std::vector<T>& vec, double tol = DEFAULT_VEC_UNIFORM_TOL);
+        constexpr bool is_uniform(const std::vector<T>& vec, double tol = VEC_DEFAULT_UNIFORM_TOL);
+
+        //  -- Searching --
+        template <typename T, typename S>
+        size_t lower_index(const std::vector<T>& vec, S val, size_t init_guess = 0);
+        template <typename T, typename S>
+        size_t upper_index(const std::vector<T>& vec, S val, size_t init_guess = 0);
 
 
 
@@ -314,6 +321,134 @@ namespace arc
             }
 
             return (true);
+        }
+
+
+        //  -- Searching --
+        /**
+         *  Determine the lower index of the element pair which encapsulates the given value.
+         *  If the value is equal to an element of the vector then the lower index is that index, unless it is the final element.
+         *
+         *  @tparam T   Type stored by the vector.
+         *  @tparam S   Type of the value to be found within the vector,
+         *
+         *  @param  vec         Vector to hunt got the value placement.
+         *  @param  val         Value to locate within the vector.
+         *  @param  init_guess  Initial guess for the lower index.
+         *
+         *  @pre    vec must contain more than one element.
+         *  @pre    vec must be sorted in monotonic order.
+         *  @pre    val must be within the vec limits.
+         *  @pre    init_guess must be a valid index of the vec.
+         *
+         *  @return The lower index of the element pair which encapsulates the value.
+         */
+        template <typename T, typename S>
+        size_t lower_index(const std::vector<T>& vec, S val, const size_t init_guess)
+        {
+            assert(vec.size() > 1);
+            assert(is_monotonic(vec));
+            assert(((val >= vec.front()) && (val <= vec.back())) || ((val <= vec.front()) && (val >= vec.back())));
+            assert(init_guess < vec.size());
+
+            bool ascending = vec.front() < vec.back();
+
+            size_t lower_index = init_guess;
+            size_t upper_index;
+
+            size_t jump = 1;
+            if (val >= vec[lower_index] == ascending)
+            {
+                if (lower_index == (vec.size() - 1))
+                {
+                    return (lower_index);
+                }
+
+                upper_index = lower_index + 1;
+                while (val >= vec[upper_index] == ascending)
+                {
+                    lower_index = upper_index;
+                    jump += jump;
+                    upper_index = lower_index + jump;
+                    if (upper_index >= (vec.size() - 1))
+                    {
+                        upper_index = vec.size();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                upper_index = lower_index--;
+                while (val < vec[lower_index] == ascending)
+                {
+                    upper_index = lower_index;
+                    jump <<= 1;
+                    if (jump >= upper_index)
+                    {
+                        lower_index = 0;
+                        break;
+                    }
+                    else
+                    {
+                        lower_index = upper_index - jump;
+                    }
+                }
+            }
+
+            while ((upper_index - lower_index) != 1)
+            {
+                size_t mid_index = (upper_index + lower_index) >> 1;
+                if (val >= vec[mid_index] == ascending)
+                {
+                    lower_index = mid_index;
+                }
+                else
+                {
+                    upper_index = mid_index;
+                }
+            }
+
+            if (std::fabs(val - vec.front()) <= VEC_HUNT_END_TOL)
+            {
+                return (0);
+            }
+
+            if (std::fabs(val - vec.back()) <= VEC_HUNT_END_TOL)
+            {
+                return (vec.size() - 2);
+            }
+
+            return (lower_index);
+        }
+
+        /**
+         *  Determine the upper index of the element pair which encapsulates the given value.
+         *  If the value is equal to an element of the vector then the upper index is that index, unless it is the first element.
+         *
+         *  @tparam T   Type stored by the vector.
+         *  @tparam S   Type of the value to be found within the vector.
+         *
+         *  @param  vec         Vector to hunt for the value placement.
+         *  @param  val         Value to locate within the vector.
+         *  @param  init_guess  Initial guess for the upper index.
+         *
+         *  @pre    vec must contain more than one element.
+         *  @pre    vec must be sorted in monotonic order.
+         *  @pre    val must be within the vec limits.
+         *  @pre    init_guess must be a valid index of the vec.
+         *
+         *  @return The upper index of the element pair which encapsulates the value.
+         */
+        template <typename T, typename S>
+        size_t upper_index(const std::vector<T>& vec, S val, const size_t init_guess)
+        {
+            assert(vec.size() > 1);
+            assert(is_monotonic(vec));
+            assert(((val >= vec.front()) && (val <= vec.back())) || ((val <= vec.front()) && (val >= vec.back())));
+            assert(init_guess < vec.size());
+
+            return (lower_index(vec, val, init_guess - 1) + 1);
         }
 
 

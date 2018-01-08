@@ -45,21 +45,5 @@ int main()
 
     std::cout << vec << "\n";
 
-    std::cout << utl::min_index(vec) << "\n";
-    std::cout << utl::max_index(vec) << "\n";
-    std::cout << utl::min(vec) << "\n";
-    std::cout << utl::max(vec) << "\n";
-    std::cout << utl::total(vec) << "\n";
-    std::cout << utl::magnitude(vec) << "\n";
-
-    std::cout << utl::is_ascending(vec) << "\n";
-    std::cout << utl::is_descending(vec) << "\n";
-    std::cout << utl::is_monotonic(vec) << "\n";
-    std::cout << utl::is_uniform(vec) << "\n";
-
-
-    std::array<int, 4> arr({{0, 1, 2, 3}});
-    std::cout << "-\n" << utl::is_uniform(arr, 0.1) << "\n";
-
     return (0);
 }
