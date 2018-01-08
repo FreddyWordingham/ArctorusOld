@@ -330,7 +330,7 @@ namespace arc
          *  If the value is equal to an element of the vector then the lower index is that index, unless it is the final element.
          *
          *  @tparam T   Type stored by the vector.
-         *  @tparam S   Type of the value to be found within the vector,
+         *  @tparam S   Type of the value to be found within the vector.
          *
          *  @param  vec         Vector to hunt got the value placement.
          *  @param  val         Value to locate within the vector.
