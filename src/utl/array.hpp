@@ -322,7 +322,7 @@ namespace arc
         template <typename T, size_t N>
         constexpr bool is_uniform(const std::array<T, N>& arr, double tol)
         {
-            static_assert(N >= 2);
+            static_assert(N > 1);
 
             const double ave_delta = (arr.front() - arr.back()) / static_cast<double>(N - 1);
 
