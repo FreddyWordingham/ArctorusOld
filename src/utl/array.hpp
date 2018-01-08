@@ -27,6 +27,20 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Mathematical --
+        template <typename T, size_t N>
+        constexpr size_t min_index(const std::array<T, N>& arr);
+
+
+
+        //  == FUNCTIONS ==
+        //  -- Mathematical --
+
+        template <typename T, size_t N>
+        constexpr size_t min_index(const std::array<T, N> &arr)
+        {
+            static_assert(N != 0);
+        };
 
 
 

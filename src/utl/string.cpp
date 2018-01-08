@@ -16,6 +16,7 @@
 //  -- System --
 #include <sstream>
 #include <iomanip>
+#include <cassert>
 
 
 
@@ -50,10 +51,14 @@ namespace arc
          *
          *  @param  sec Number of seconds to convert to a time string.
          *
+         *  @pre    sec must be positive.
+         *
          *  @return A sexagesimal string representing the given number of seconds.
          */
         std::string create_time_string(int sec)
         {
+            assert(sec > 0);
+
             const int hrs = sec / 3600;
             sec %= 3600;
 
@@ -71,9 +76,15 @@ namespace arc
          *  @param  source  Source string in which substring values will be replaced.
          *  @param  find    Substring to be replaced with the rep string.
          *  @param  rep     String to replace the found substrings with.
+         *
+         *  @pre    source must not be empty.
+         *  @pre    find must not be empty.
          */
         void find_and_replace(std::string& source, const std::string& find, const std::string& rep)
         {
+            assert(!source.empty());
+            assert(!find.empty());
+
             for (size_t pos = 0; (pos = source.find(find, pos)) != std::string::npos; pos += rep.size())
             {
                 source.replace(pos, find.size(), rep);
@@ -86,9 +97,17 @@ namespace arc
          *  @param  source          Source string to filter comments from.
          *  @param  comment_start   Comment start string identifier.
          *  @param  comment_end     Comment end string identifier.
+         *
+         *  @pre    source must not be empty.
+         *  @pre    comment_start must not be empty.
+         *  @pre    comment_end must not be empty.
          */
         void filter(std::string& source, const std::string& comment_start, const std::string& comment_end)
         {
+            assert(!source.empty());
+            assert(!comment_start.empty());
+            assert(!comment_end.empty());
+
             size_t start;
             while ((start = source.find(comment_start)) != std::string::npos)
             {
@@ -109,10 +128,14 @@ namespace arc
          *
          *  @param  path    Full file path.
          *
+         *  @pre    path must not be empty.
+         *
          *  @return The filename.
          */
         std::string strip_path(const std::string& path)
         {
+            assert(!path.empty());
+
             size_t last_slash_pos = path.find_last_of('/');
 
             if (last_slash_pos == std::string::npos)

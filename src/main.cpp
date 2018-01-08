@@ -16,6 +16,7 @@
 #include "gen/math.hpp"
 
 //  -- Utility --
+#include "utl/string.hpp"
 
 
 
@@ -36,10 +37,13 @@ int main()
     std::cout << "Build information:\n" << BUILD_INFO << "\n";
     std::cout << "Arctorus directory:\n" << ARCTORUS_DIR << "\n";
 
-    std::cout << square(2.5) << "\n";
-    std::cout << cube(2.5) << "\n";
-    std::cout << equal(2.5, 2.500000000001) << "\n";
-    std::cout << equal(2.500000000001, 2.500000000001) << "\n";
+    std::cout << utl::is_numerical("0.123") << "\n";
+    std::cout << utl::is_numerical("1E23") << "\n";
+    std::cout << utl::is_numerical("-2.0E2") << "\n";
+    std::cout << utl::is_numerical("E3") << "\n";
+    std::cout << utl::is_numerical("") << "\n";
+    std::cout << utl::is_numerical(" ") << "\n";
+    std::cout << utl::is_numerical("  ") << "\n";
 
     return (0);
 }
