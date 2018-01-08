@@ -64,7 +64,7 @@ namespace arc
         template <typename T, size_t N, typename S>
         size_t lower_index(const std::array<T, N>& arr, S val, size_t init_guess = 0);
         template <typename T, size_t N, typename S>
-        size_t upper_index(const std::array<T, N>& arr, S val, size_t init_guess = 0);
+        size_t upper_index(const std::array<T, N>& arr, S val, size_t init_guess = 1);
 
 
 
