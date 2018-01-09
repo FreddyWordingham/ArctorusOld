@@ -155,7 +155,7 @@ namespace arc
          *
          *  @return True if the string can be parsed into a numerical value.
          */
-        bool is_numerical(const std::string &str)
+        bool is_numerical(const std::string& str)
         {
             std::stringstream string_stream(str);
 

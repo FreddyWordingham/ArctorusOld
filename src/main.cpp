@@ -40,7 +40,7 @@ int main()
 
     std::vector<double> vec({-3.0, -2.5, -0.1, 2.34, 4.0});
 
-    for (int i=0; i<=100; ++i)
+    for (int i = 0; i <= 100; ++i)
     {
         double x = (i * 0.1) - 4.0;
         std::cout << x << "\t:\t" << utl::is_always_greater_than(vec, x) << "\n";
