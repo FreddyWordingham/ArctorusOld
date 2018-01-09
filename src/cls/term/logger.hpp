@@ -15,7 +15,8 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <ostream>
+#include <iostream>
+#include <array>
 
 //  -- General --
 #include "gen/config.hpp"
@@ -140,14 +141,19 @@ namespace arc
 
             //  == INSTANTIATION ==
           public:
+            //  -- Singleton --
+            static Logger& get_instance(std::ostream& stream = std::cout);
+
+          private:
             //  -- Constructors --
+            Logger(std::ostream& stream);
 
-          private:
+            //  -- Destructors --
+            ~Logger();
+
             //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
+            std::array<std::string, TOTAL_COLS> init_text_cols() const;
+            std::array<std::string, TOTAL_TYPES> init_log_types() const;
 
 
             //  == METHODS ==
