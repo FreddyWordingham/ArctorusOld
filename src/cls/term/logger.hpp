@@ -62,6 +62,17 @@ namespace arc
 
 
 
+        //  == ASSERTIONS ==
+        //  -- Validation --
+        static_assert(TITLE_WIDTH <= LINE_WIDTH);
+        static_assert((TIME_WIDTH + TYPE_WIDTH + TEXT_WIDTH) == LINE_WIDTH);
+        static_assert(TEXT_WIDTH >= MIN_TEXT_WIDTH);
+        static_assert(MIN_TEXT_WIDTH > WRAP_INDENT);
+        static_assert(VALUE_NAME_WIDTH < TEXT_WIDTH);
+        static_assert(TEXT_WIDTH > (VALUE_NAME_WIDTH - 3));
+
+
+
         //  == CLASS ==
         /**
          *  Terminal logger class which allows formatted printing of message logs.
