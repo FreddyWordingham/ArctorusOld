@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <ostream>
 
 //  -- General --
 #include "gen/config.hpp"
@@ -44,11 +45,11 @@ namespace arc
             R"( //--\\  ||  \\  \\__,,    ||    \\__//  ||  \\  \\__//   ___// )";  //! Arctorus title.
 
         //  -- Type Strings --
-        constexpr const char* LOG_TYPE_STRING   = "[       ]";    //! String indicating a standard message.
-        constexpr const char* VERB_TYPE_STRING  = "[verbose]";    //! String indicating a verbose message.
-        constexpr const char* VAL_TYPE_STRING   = "[ value ]";    //! String indicating a value message.
-        constexpr const char* WARN_TYPE_STRING  = "[warning]";    //! String indicating a warning message.
-        constexpr const char* ERROR_TYPE_STRING = "[!ERROR!]";    //! String indicating an error message.
+        constexpr const char* LOG_TYPE_STRING   = "[       ]";  //! String indicating a standard message.
+        constexpr const char* VERB_TYPE_STRING  = "[verbose]";  //! String indicating a verbose message.
+        constexpr const char* VAL_TYPE_STRING   = "[ value ]";  //! String indicating a value message.
+        constexpr const char* WARN_TYPE_STRING  = "[warning]";  //! String indicating a warning message.
+        constexpr const char* ERROR_TYPE_STRING = "[!ERROR!]";  //! String indicating an error message.
 
         //  -- Formatting --
         constexpr const int LINE_WIDTH       = 128;                                     //! Total width of a single line.
@@ -104,7 +105,7 @@ namespace arc
 
             //  -- Log Types --
             /**
-             *  Enumeration of the log types avalible.
+             *  Enumeration of the log types available.
              */
             enum types
             {
@@ -119,6 +120,22 @@ namespace arc
 
             //  == FIELDS ==
           private:
+            //  -- Output Stream --
+            std::ostream& stream;   //! Output stream to write to.
+
+            //  -- Colouring --
+            const std::array<std::string, TOTAL_COLS> text_cols;    //! Array of colour escape strings.
+
+            //  -- Type Strings --
+            const std::array<std::string, TOTAL_TYPES> log_types;   //! Array of log type strings.
+
+            //  -- Format Strings --
+            const std::string indent_string;    //! Indentation string.
+            const std::string padding_string;   //! Padding string.
+
+            //  -- Counters --
+            int num_warnings;   //! Count of the total number of reported warnings.
+            int num_errors;     //! Count of the total number of reported errors.
 
 
             //  == INSTANTIATION ==
