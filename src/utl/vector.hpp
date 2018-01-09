@@ -27,13 +27,6 @@ namespace arc
 
 
 
-        //  == SETTINGS ==
-        //  -- Defaults --
-        constexpr const double VEC_DEFAULT_UNIFORM_TOL  = std::numeric_limits<double>::epsilon();   //! Default uniform tol.
-        constexpr const double VEC_HUNT_END_TOL         = std::numeric_limits<double>::epsilon();   //! Tol for hunt search end.
-
-
-
         //  == FUNCTION PROTOTYPES ==
         //  -- Mathematical --
         template <typename T>
@@ -57,7 +50,7 @@ namespace arc
         template <typename T>
         constexpr bool is_monotonic(const std::vector<T>& vec);
         template <typename T>
-        constexpr bool is_uniform(const std::vector<T>& vec, double tol = VEC_DEFAULT_UNIFORM_TOL);
+        constexpr bool is_uniform(const std::vector<T>& vec, double tol = std::numeric_limits<double>::epsilon());
 
         //  -- Searching --
         template <typename T, typename S>
@@ -409,12 +402,12 @@ namespace arc
                 }
             }
 
-            if (std::fabs(val - vec.front()) <= VEC_HUNT_END_TOL)
+            if (std::fabs(val - vec.front()) <= std::numeric_limits<double>::epsilon())
             {
                 return (0);
             }
 
-            if (std::fabs(val - vec.back()) <= VEC_HUNT_END_TOL)
+            if (std::fabs(val - vec.back()) <= std::numeric_limits<double>::epsilon())
             {
                 return (vec.size() - 2);
             }
