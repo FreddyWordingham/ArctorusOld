@@ -82,6 +82,27 @@ namespace arc
          */
         class Logger
         {
+            //  == ENUMERATIONS ==
+          private:
+            //  -- Colours --
+            /**
+             *  Enumeration of text colours available.
+             */
+            enum cols
+            {
+                RESET,      //! Reset text colouring.
+                BLACK,      //! Black text colouring.
+                RED,        //! Red text colouring.
+                GREEN,      //! Green text colouring.
+                YELLOW,     //! Yellow text colouring.
+                BLUE,       //! Blue text colouring.
+                MAGENTA,    //! Magenta text colouring.
+                CYAN,       //! Cyan text colouring.
+                WHITE,      //! White text colouring.
+                TOTAL_COLS  //! Total number of text colours.
+            };
+
+
             //  == FIELDS ==
           private:
 
