@@ -54,6 +54,14 @@ namespace arc
         constexpr bool is_monotonic(const std::array<T, N>& arr);
         template <typename T, size_t N>
         constexpr bool is_uniform(const std::array<T, N>& arr, double tol = std::numeric_limits<double>::epsilon());
+        template <typename T, size_t N, typename S>
+        constexpr bool is_always_less_than(const std::array<T, N>& arr, S limit);
+        template <typename T, size_t N, typename S>
+        constexpr bool is_always_less_than_or_equal_to(const std::array<T, N>& arr, S limit);
+        template <typename T, size_t N, typename S>
+        constexpr bool is_always_greater_than(const std::array<T, N>& arr, S limit);
+        template <typename T, size_t N, typename S>
+        constexpr bool is_always_greater_than_or_equal_to(const std::array<T, N>& arr, S limit);
 
         //  -- Searching --
         template <typename T, size_t N, typename S>
@@ -321,6 +329,110 @@ namespace arc
             for (size_t i = 1; i < N; ++i)
             {
                 if ((std::fabs((arr[i - 1] - arr[i]) - ave_delta)) > tol)
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given array's elements are always less than a given limit.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *  @tparam S   Type of the limit.
+         *
+         *  @param  arr     Array to be analysed.
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the array's elements are all less than the given limit.
+         */
+        template <typename T, size_t N, typename S>
+        constexpr bool is_always_less_than(const std::array<T, N>& arr, const S limit)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                if (!(arr[i] < limit))
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given array's elements are always less than, or equal to, a given limit.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *  @tparam S   Type of the limit.
+         *
+         *  @param  arr     Array to be analysed.
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the array's elements are all less than, or equal to, the given limit.
+         */
+        template <typename T, size_t N, typename S>
+        constexpr bool is_always_less_than_or_equal_to(const std::array<T, N>& arr, const S limit)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                if (!(arr[i] <= limit))
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given array's elements are always greater than a given limit.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *  @tparam S   Type of the limit.
+         *
+         *  @param  arr     Array to be analysed.
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the array's elements are all greater than the given limit.
+         */
+        template <typename T, size_t N, typename S>
+        constexpr bool is_always_greater_than(const std::array<T, N>& arr, const S limit)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                if (!(arr[i] > limit))
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given array's elements are always less than, or equal to, a given limit.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam N   Size of the array.
+         *  @tparam S   Type of the limit.
+         *
+         *  @param  arr     Array to be analysed.
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the array's elements are all greater than, or equal to, the given limit.
+         */
+        template <typename T, size_t N, typename S>
+        constexpr bool is_always_greater_than_or_equal_to(const std::array<T, N>& arr, const S limit)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                if (!(arr[i] >= limit))
                 {
                     return (false);
                 }
