@@ -43,6 +43,13 @@ namespace arc
             R"(  //\\   ||__))  //  ``    ||    //  \\  ||__))  ||  ||  //____ )"
             R"( //--\\  ||  \\  \\__,,    ||    \\__//  ||  \\  \\__//   ___// )";  //! Arctorus title.
 
+        //  -- Type Strings --
+        constexpr const char* LOG_TYPE_STRING   = "[       ]";    //! String indicating a standard message.
+        constexpr const char* VERB_TYPE_STRING  = "[verbose]";    //! String indicating a verbose message.
+        constexpr const char* VAL_TYPE_STRING   = "[ value ]";    //! String indicating a value message.
+        constexpr const char* WARN_TYPE_STRING  = "[warning]";    //! String indicating a warning message.
+        constexpr const char* ERROR_TYPE_STRING = "[!ERROR!]";    //! String indicating an error message.
+
 
 
         //  == CLASS ==
