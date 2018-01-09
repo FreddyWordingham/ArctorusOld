@@ -142,11 +142,11 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Singleton --
-            static Logger& get_instance(std::ostream& stream = std::cout);
+            static Logger& get_instance(std::ostream& init_stream = std::cout);
 
           private:
             //  -- Constructors --
-            Logger(std::ostream& stream);
+            Logger(std::ostream& init_stream);
 
             //  -- Destructors --
             ~Logger();
