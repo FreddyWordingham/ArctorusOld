@@ -52,6 +52,14 @@ namespace arc
         constexpr bool is_monotonic(const std::vector<T>& vec);
         template <typename T>
         constexpr bool is_uniform(const std::vector<T>& vec, double tol = std::numeric_limits<double>::epsilon());
+        template <typename T, typename S>
+        constexpr bool is_always_less_than(const std::vector<T>& vec, S limit);
+        template <typename T, typename S>
+        constexpr bool is_always_less_than_or_equal_to(const std::vector<T>& vec, S limit);
+        template <typename T, typename S>
+        constexpr bool is_always_greater_than(const std::vector<T>& vec, S limit);
+        template <typename T, typename S>
+        constexpr bool is_always_greater_than_or_equal_to(const std::vector<T>& vec, S limit);
 
         //  -- Searching --
         template <typename T, typename S>
@@ -309,6 +317,106 @@ namespace arc
             for (size_t i = 1; i < vec.size(); ++i)
             {
                 if ((std::fabs((vec[i - 1] - vec[i]) - ave_delta)) > tol)
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given vector's elements are always less than a given limit.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam S   Type of the limit.
+         *
+         *  @param  vec     Vector to be analysed.
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the vector's elements are all less than the given limit.
+         */
+        template <typename T, typename S>
+        constexpr bool is_always_less_than(const std::vector<T>& vec, const S limit)
+        {
+            for (size_t i = 0; i < vec.size(); ++i)
+            {
+                if (!(vec[i] < limit))
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given vector's elements are always less than, or equal to, a given limit.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam S   Type of the limit.
+         *
+         *  @param  vec     Vector to be analysed.
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the vector's elements are all less than, or equal to, the given limit.
+         */
+        template <typename T, typename S>
+        constexpr bool is_always_less_than_or_equal_to(const std::vector<T>& vec, const S limit)
+        {
+            for (size_t i = 0; i < vec.size(); ++i)
+            {
+                if (!(vec[i] <= limit))
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given vector's elements are always greater than a given limit.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam S   Type of the limit.
+         *
+         *  @param  vec     Vector to be analysed.
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the vector's elements are all greater than the given limit.
+         */
+        template <typename T, typename S>
+        constexpr bool is_always_greater_than(const std::vector<T>& vec, const S limit)
+        {
+            for (size_t i = 0; i < vec.size(); ++i)
+            {
+                if (!(vec[i] > limit))
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+        /**
+         *  Determine if a given vector's elements are always less than, or equal to, a given limit.
+         *
+         *  @tparam T   Type stored by the array.
+         *  @tparam S   Type of the limit.
+         *
+         *  @param  vec     Vector to be analysed.
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the vector's elements are all greater than, or equal to, the given limit.
+         */
+        template <typename T, typename S>
+        constexpr bool is_always_greater_than_or_equal_to(const std::vector<T>& vec, const S limit)
+        {
+            for (size_t i = 0; i < vec.size(); ++i)
+            {
+                if (!(vec[i] >= limit))
                 {
                     return (false);
                 }
