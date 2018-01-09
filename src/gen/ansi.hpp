@@ -21,15 +21,18 @@
 //  == NAMESPACE ==
 namespace arc
 {
+    namespace ansi
+    {
 
 
 
-    //  == SETTINGS ==
-    //  -- Ansi Colour Codes --
-    constexpr const char* ANSI_COLOUR_RED
+        //  == SETTINGS ==
+        //  -- Ansi Colour Codes --
+        constexpr const char* ANSI_COLOUR_RED;
 
 
 
+    } // namespace ansi
 } // namespace arc
 
 
