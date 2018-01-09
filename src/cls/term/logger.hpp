@@ -102,6 +102,20 @@ namespace arc
                 TOTAL_COLS  //! Total number of text colours.
             };
 
+            //  -- Log Types --
+            /**
+             *  Enumeration of the log types avalible.
+             */
+            enum types
+            {
+                LOG,        //! Standard log message.
+                VERB,       //! Verbose log message.
+                VAL,        //! Value log message.
+                WARN,       //! Warning log message.
+                ERROR,      //! Error log message.
+                TOTAL_TYPES //! Total number of log types.
+            };
+
 
             //  == FIELDS ==
           private:
