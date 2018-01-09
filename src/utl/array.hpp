@@ -6,6 +6,7 @@
  */
 
 
+
 //  == GUARD ==
 #ifndef ARCTORUS_SRC_UTL_ARRAY_HPP
 #define ARCTORUS_SRC_UTL_ARRAY_HPP
