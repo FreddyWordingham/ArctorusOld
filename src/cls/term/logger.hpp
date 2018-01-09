@@ -16,6 +16,9 @@
 //  == INCLUDES ==
 //  -- System --
 
+//  -- General --
+#include "gen/config.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -28,7 +31,7 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Title --
-        constexpr const char* TITLE = R"(                              llrr                              )"
+        constexpr const char* TITLE_CARD = R"(                              llrr                              )"
             R"(                             lllrrr                             )"
             R"(                            llllrrrr                            )"
             R"(                      ~~~~~lllllrrrrrMBBGGGYYYYRRRRRRRRRRRRRRRRR)"
@@ -39,7 +42,6 @@ namespace arc
             R"(   __     ____    ____   ______   ____    ____   __  __   ____  )"
             R"(  //\\   ||__))  //  ``    ||    //  \\  ||__))  ||  ||  //____ )"
             R"( //--\\  ||  \\  \\__,,    ||    \\__//  ||  \\  \\__//   ___// )";  //! Arctorus title.
-
 
 
 
