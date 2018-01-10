@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <unistd.h>
+#include <gen/ansi.hpp>
 
 
 
@@ -91,15 +92,39 @@ namespace arc
 
             if ((&stream == &std::cout) && (isatty(fileno(stdout)) != 0))
             {
-
+                init_text_cols[RESET]   = ansi::RESET;
+                init_text_cols[BLACK]   = ansi::BLACK;
+                init_text_cols[RED]     = ansi::RED;
+                init_text_cols[GREEN]   = ansi::GREEN;
+                init_text_cols[YELLOW]  = ansi::YELLOW;
+                init_text_cols[BLUE]    = ansi::BLUE;
+                init_text_cols[MAGENTA] = ansi::MAGENTA;
+                init_text_cols[CYAN]    = ansi::CYAN;
+                init_text_cols[WHITE]   = ansi::WHITE;
             }
 
             return (init_text_cols);
         }
 
+        /**
+         *  Initialise the array of log type string identifiers.
+         *
+         *  @return The array of initialised log type string identifiers.
+         */
         std::array<std::string, Logger::TOTAL_TYPES> Logger::init_log_types() const
         {
             std::array<std::string, TOTAL_TYPES> init_log_types;
+
+            init_log_types[LOG]   = std::string(LOG_TYPE_STRING);
+            init_log_types[VERB]  = std::string(VERB_TYPE_STRING);
+            init_log_types[VAL]   = std::string(VAL_TYPE_STRING);
+            init_log_types[WARN]  = std::string(WARN_TYPE_STRING);
+            init_log_types[ERROR] = std::string(ERROR_TYPE_STRING);
+
+            for (size_t i = 0; i < TOTAL_TYPES; ++i)
+            {
+                init_log_types[i].resize(TYPE_WIDTH, ' ');
+            }
 
             return (init_log_types);
         }
