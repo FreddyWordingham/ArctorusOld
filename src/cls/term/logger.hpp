@@ -147,7 +147,7 @@ namespace arc
 
           private:
             //  -- Constructors --
-            Logger(std::ostream& init_stream);
+            explicit Logger(std::ostream& init_stream);
 
             //  -- Destructors --
             ~Logger();
