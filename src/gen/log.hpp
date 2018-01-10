@@ -72,6 +72,20 @@
     term::Logger::get_instance().warn(symptom_stream.str(), cause_stream.str());    \
 }                                                                                   \
 
+/**
+ *  Macro used to log an error message.
+ *
+ *  @param  symptom Text describing the symptom of the error.
+ *  @param  cause   Text describing the cause of the error.
+ */
+#define ERROR(symptom, cause)                                                                                           \
+{                                                                                                                       \
+    std::stringstream symptom_stream, cause_stream;                                                                     \
+    symptom_stream << std::boolalpha << symptom;                                                                        \
+    cause_stream << std::boolalpha << cause;                                                                            \
+    term::Logger::get_instance().error(__FILE__, std::to_string(__LINE__), symptom_stream.str(), cause_stream.str());   \
+}                                                                                                                       \
+
 
 
 //  == GUARD END ==
