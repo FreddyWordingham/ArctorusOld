@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <unistd.h>
 
 
 
@@ -78,9 +79,20 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the array of colour escape strings.
+         *  Colouring is enabled whilst writing to cout and not being redirected to a file.
+         *
+         *  @return The array of initialised colour escape codes.
+         */
         std::array<std::string, Logger::TOTAL_COLS> Logger::init_text_cols() const
         {
             std::array<std::string, TOTAL_COLS> init_text_cols;
+
+            if ((&stream == &std::cout) && (isatty(fileno(stdout)) != 0))
+            {
+
+            }
 
             return (init_text_cols);
         }
