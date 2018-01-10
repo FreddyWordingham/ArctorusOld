@@ -158,6 +158,10 @@ namespace arc
 
 
             //  == METHODS ==
+          public:
+            //  -- Logging --
+            void log(const std::string& text) const;
+
           private:
             //  -- Printing --
             void print_hr(char hr_char = '-') const;

@@ -145,6 +145,18 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Logging --
+        /**
+         *  Log a standard message.
+         *
+         *  @param  text    Message text to be logged.
+         */
+        void Logger::log(const std::string& text) const
+        {
+            print_text(CYAN, LOG, text);
+        }
+
+
         //  -- Printing --
         /**
          *  Print a horizontal rule using a given character.

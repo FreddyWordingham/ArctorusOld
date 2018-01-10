@@ -42,7 +42,7 @@ int main()
     std::cout << "Arctorus directory:\n" << ARCTORUS_DIR << "\n";
 
 
-    term::Logger::get_instance();
+    term::Logger::get_instance().log("This is some text to be... logged.");
 
     return (0);
 }
