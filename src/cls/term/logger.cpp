@@ -14,8 +14,11 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <unistd.h>
 #include <gen/ansi.hpp>
+#include <unistd.h>
+
+//  -- Utility --
+#include "utl/string.hpp"
 
 
 
@@ -64,7 +67,7 @@ namespace arc
             num_warnings(0),
             num_errors(0)
         {
-            // TODO Print title card.
+            print_title_card();
         }
 
 
@@ -75,7 +78,11 @@ namespace arc
          */
         Logger::~Logger()
         {
+            print_hr('=');
+
             // TODO Print exit info.
+
+            print_hr('=');
         }
 
 
@@ -138,9 +145,47 @@ namespace arc
          *
          *  @param  hr_char Character used to draw the horizontal rule.
          */
-        void Logger::print_hr(const char hr_char = '=') const
+        void Logger::print_hr(const char hr_char) const
         {
             stream << std::string(LINE_WIDTH, hr_char) << "\n";
+        }
+
+        /**
+         *  Print the Arctorus title card.
+         */
+        void Logger::print_title_card() const
+        {
+            print_hr('=');
+
+            std::string       title = TITLE_CARD;
+            const std::string pre_title_pad((LINE_WIDTH - TITLE_WIDTH) / 2, ' ');
+            const std::string post_title_pad(LINE_WIDTH - (TITLE_WIDTH + pre_title_pad.size()), ' ');
+
+            while (!title.empty())
+            {
+                std::string line = title.substr(0, TITLE_WIDTH);
+                title.erase(0, TITLE_WIDTH);
+
+                utl::find_and_replace(line, "l", text_cols[CYAN] + "/" + text_cols[RESET]);
+                utl::find_and_replace(line, "r", text_cols[CYAN] + R"(\)" + text_cols[RESET]);
+                utl::find_and_replace(line, "M", text_cols[MAGENTA] + "~" + text_cols[RESET]);
+                utl::find_and_replace(line, "B", text_cols[BLUE] + "~" + text_cols[RESET]);
+                utl::find_and_replace(line, "G", text_cols[GREEN] + "~" + text_cols[RESET]);
+                utl::find_and_replace(line, "Y", text_cols[YELLOW] + "~" + text_cols[RESET]);
+                utl::find_and_replace(line, "R", text_cols[RED] + "~" + text_cols[RESET]);
+
+                stream << pre_title_pad << line << post_title_pad << "\n";
+            }
+
+            print_hr('=');
+
+            std::string       build = BUILD_INFO;
+            const std::string pre_build_pad((LINE_WIDTH - build.size()) / 2, ' ');
+            const std::string post_build_pad(LINE_WIDTH - (build.size() + pre_build_pad.size()), ' ');
+
+            stream << pre_build_pad << build << post_build_pad << "\n";
+
+            print_hr('=');
         }
 
 
