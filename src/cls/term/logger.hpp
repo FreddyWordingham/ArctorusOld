@@ -162,7 +162,7 @@ namespace arc
             //  -- Printing --
             void print_hr(char hr_char = '-') const;
             void print_title_card() const;
-            void print_text(const size_t col, const size_t type, const std::string& text);
+            void print_text(size_t col, size_t type, const std::string& text) const;
 
             //  -- Formatting --
             std::vector<std::string> form_lines(std::string text) const;

@@ -204,7 +204,7 @@ namespace arc
          *  @pre    col must be a valid cols enumeration.
          *  @pre    type must be a valid types enumeration.
          */
-        void Logger::print_text(const size_t col, const size_t type, const std::string& text)
+        void Logger::print_text(const size_t col, const size_t type, const std::string& text) const
         {
             assert(col < TOTAL_COLS);
             assert(type < TOTAL_TYPES);
