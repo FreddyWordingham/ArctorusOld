@@ -166,9 +166,13 @@ namespace arc
          */
         void Logger::verb(const std::string& text) const
         {
-#ifdef VERBOSE_MESSAGES
-            print_text(CYAN, LOG, text);
-#endif
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCSimplifyInspection"
+            if (VERBOSE_LOG)
+            {
+                print_text(CYAN, LOG, text);
+            }
+#pragma clang diagnostic pop
         }
 
 
