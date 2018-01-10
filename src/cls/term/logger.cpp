@@ -103,7 +103,9 @@ namespace arc
         {
             std::array<std::string, TOTAL_COLS> init_text_cols;
 
-            if ((&stream == &std::cout) && (isatty(fileno(stdout)) != 0))
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCSimplifyInspection"
+            if (COLOUR_LOG && (&stream == &std::cout) && (isatty(fileno(stdout)) != 0))
             {
                 init_text_cols[RESET]   = ansi::RESET;
                 init_text_cols[BLACK]   = ansi::BLACK;
@@ -115,6 +117,7 @@ namespace arc
                 init_text_cols[CYAN]    = ansi::CYAN;
                 init_text_cols[WHITE]   = ansi::WHITE;
             }
+#pragma clang diagnostic pop
 
             return (init_text_cols);
         }
