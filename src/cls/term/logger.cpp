@@ -14,9 +14,11 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <gen/ansi.hpp>
 #include <unistd.h>
 #include <cassert>
+
+//  -- General --
+#include <gen/ansi.hpp>
 
 //  -- Utility --
 #include "utl/string.hpp"
