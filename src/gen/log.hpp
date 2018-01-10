@@ -48,6 +48,12 @@
     term::Logger::get_instance().log(text_stream.str());    \
 }                                                           \
 
+#define VAL(x)                                  \
+{                                               \
+    term::Logger::get_instance().val(#x, x);    \
+}                                               \
+
+
 
 
 //  == GUARD END ==

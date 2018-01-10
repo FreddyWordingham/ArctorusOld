@@ -12,6 +12,7 @@
 #include "gen/config.hpp"
 #include "gen/log.hpp"
 
+#include "utl/array.hpp"
 
 
 //  == NAMESPACE ==
@@ -29,6 +30,10 @@ int main()
 {
     LOG("Hello world!");
     VERB("Arctorus directory:\n" << ARCTORUS_DIR);
+
+    //std::array<double, 3> arr({{0.0, 1.0, -1.0}});
+    double x = 1.25;
+    VAL(x);
 
     return (0);
 }

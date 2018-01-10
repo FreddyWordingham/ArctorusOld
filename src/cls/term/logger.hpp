@@ -17,6 +17,7 @@
 //  -- System --
 #include <iostream>
 #include <array>
+#include <sstream>
 #include <vector>
 
 //  -- General --
