@@ -14,8 +14,8 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <unistd.h>
 #include <cassert>
+#include <unistd.h>
 
 //  -- General --
 #include <gen/ansi.hpp>
