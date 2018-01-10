@@ -28,7 +28,7 @@
 #define LOG(text)                                           \
 {                                                           \
     std::stringstream text_stream;                          \
-    text_stream << std::boolalpha << text;                  \
+    text_stream << std::boolalpha << (text);                \
     term::Logger::get_instance().log(text_stream.str());    \
 }                                                           \
 
