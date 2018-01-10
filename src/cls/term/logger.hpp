@@ -162,6 +162,8 @@ namespace arc
             //  -- Logging --
             void log(const std::string& text) const;
             void verb(const std::string& text) const;
+            template <typename T>
+            void val(const std::string& name, const T& val) const;
 
           private:
             //  -- Printing --
@@ -172,6 +174,32 @@ namespace arc
             //  -- Formatting --
             std::vector<std::string> form_lines(std::string text) const;
         };
+
+
+
+        //  == METHODS ==
+        //  -- Logging --
+        /**
+         *  Log a name-value pair message.
+         *
+         *  @tparam T   Type of value to be printed.
+         *
+         *  @param  name    Name of the value.
+         *  @param  val     Value of the value.
+         */
+        template <typename T>
+        void Logger::val(const std::string& name, const T& val) const
+        {
+            std::string text = name;
+            text.resize(VALUE_NAME_WIDTH, ' ');
+            text += " : ";
+
+            std::stringstream val_stream;
+            val_stream << std::boolalpha << val;
+            text += val_stream.str();
+
+            print_text(MAGENTA, VAL, text);
+        }
 
 
 
