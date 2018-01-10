@@ -17,6 +17,7 @@
 //  -- System --
 #include <vector>
 #include <cassert>
+#include <ostream>
 
 
 
