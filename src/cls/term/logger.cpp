@@ -196,6 +196,38 @@ namespace arc
             print_text(YELLOW, WARN, text);
         }
 
+        /**
+         *  Log an error message.
+         *  Increment the number of recorded errors.
+         *  Program will then exit.
+         *
+         *  @param  file    File path where the error occurred.
+         *  @param  line    Line where the error occurred.
+         *  @param  symptom Description of the symptom of the error.
+         *  @param  cause   Description of the cause of the error.
+         *
+         *  @pre    file must not be empty.
+         *  @pre    line must not be empty.
+         *  @pre    symptom must not be empty.
+         *  @pre    cause must not be empty.
+         */
+        void Logger::error(const std::string& file, const std::string& line, const std::string& symptom,
+                           const std::string& cause)
+        {
+            assert(!file.empty());
+            assert(!line.empty());
+            assert(!symptom.empty());
+            assert(!cause.empty());
+
+            ++num_errors;
+
+            std::string text = "File: " + file + "\nLine: " + line + "\n" + symptom + "\n" + cause;
+            print_text(RED, ERROR, text);
+
+            exit(1);
+        }
+
+
         //  -- Printing --
         /**
          *  Print a horizontal rule using a given character.

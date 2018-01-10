@@ -166,6 +166,8 @@ namespace arc
             template <typename T>
             void val(const std::string& name, const T& val) const;
             void warn(const std::string& symptom, const std::string& cause);
+            [[noreturn]] void error(const std::string& file, const std::string& line, const std::string& symptom,
+                                    const std::string& cause);
 
           private:
             //  -- Printing --
