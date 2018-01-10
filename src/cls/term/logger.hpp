@@ -17,6 +17,7 @@
 //  -- System --
 #include <iostream>
 #include <array>
+#include <vector>
 
 //  -- General --
 #include "gen/config.hpp"
@@ -159,8 +160,12 @@ namespace arc
             //  == METHODS ==
           private:
             //  -- Printing --
-            void print_hr(const char hr_char = '-') const;
+            void print_hr(char hr_char = '-') const;
             void print_title_card() const;
+            void print_text(const size_t col, const size_t type, const std::string& text);
+
+            //  -- Formatting --
+            std::vector<std::string> form_lines(std::string text) const;
         };
 
 

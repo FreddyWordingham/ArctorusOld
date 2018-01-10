@@ -16,6 +16,7 @@
 //  -- System --
 #include <gen/ansi.hpp>
 #include <unistd.h>
+#include <cassert>
 
 //  -- Utility --
 #include "utl/string.hpp"
@@ -80,7 +81,10 @@ namespace arc
         {
             print_hr('=');
 
-            // TODO Print exit info.
+            print_text(num_warnings == 0 ? GREEN : YELLOW, num_warnings == 0 ? LOG : WARN,
+                       "Total warnings: " + std::to_string(num_warnings));
+            print_text(num_errors == 0 ? GREEN : RED, num_errors == 0 ? LOG : ERROR,
+                       "Total errors  : " + std::to_string(num_errors));
 
             print_hr('=');
         }
@@ -186,6 +190,77 @@ namespace arc
             stream << pre_build_pad << build << post_build_pad << "\n";
 
             print_hr('=');
+        }
+
+        /**
+         *  Print the given text string in a formatted, coloured message.
+         *
+         *  @param  col     Colour to print the text in.
+         *  @param  type    Type string to be prepended to the message.
+         *  @param  text    Text to be printed.
+         *
+         *  @pre    col must be a valid cols enumeration.
+         *  @pre    type must be a valid types enumeration.
+         */
+        void Logger::print_text(const size_t col, const size_t type, const std::string& text)
+        {
+            assert(col < TOTAL_COLS);
+            assert(type < TOTAL_TYPES);
+
+            std::vector<std::string> lines     = form_lines(text);
+            std::string              timestamp = "[" + utl::create_timestamp() + "]";
+            timestamp.resize(TIME_WIDTH, ' ');
+
+            stream << timestamp << text_cols[col] << log_types[type] << lines[0];
+            for (size_t i = 1; i < lines.size(); ++i)
+            {
+                stream << "\n" << padding_string << lines[i];
+            }
+            stream << text_cols[RESET] << "\n";
+        }
+
+
+        //  -- Formatting --
+        /**
+         *  Form a given text string into separate formatted lines.
+         *
+         *  @param  text    Text string to be formatted.
+         *
+         *  @return Vector of text lines.
+         */
+        std::vector<std::string> Logger::form_lines(std::string text) const
+        {
+            text += '\n';
+
+            utl::find_and_replace(text, "\t", "    ");
+
+            std::vector<std::string> lines;
+            size_t                   newline_pos;
+            while ((newline_pos = text.find_first_of('\n')) != std::string::npos)
+            {
+                std::string line = text.substr(0, newline_pos);
+                text.erase(0, newline_pos + 1);
+
+                if (line.size() <= TEXT_WIDTH)
+                {
+                    lines.push_back(line);
+                }
+                else
+                {
+                    lines.push_back(line.substr(0, static_cast<size_t>(TEXT_WIDTH)));
+                    line.erase(0, static_cast<size_t>(TEXT_WIDTH));
+
+                    while (line.size() > (TEXT_WIDTH - WRAP_INDENT))
+                    {
+                        lines.push_back(indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
+                        line.erase(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT));
+                    }
+
+                    lines.push_back(indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
+                }
+            }
+
+            return (lines);
         }
 
 
