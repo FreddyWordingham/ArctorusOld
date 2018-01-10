@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <sstream>
+#include <ostream>
 
 //  -- Classes --
 #include "cls/term/logger.hpp"
