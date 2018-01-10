@@ -161,6 +161,7 @@ namespace arc
           public:
             //  -- Logging --
             void log(const std::string& text) const;
+            void verb(const std::string& text) const;
 
           private:
             //  -- Printing --

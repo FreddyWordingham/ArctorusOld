@@ -156,6 +156,18 @@ namespace arc
             print_text(CYAN, LOG, text);
         }
 
+        /**
+         *  Log a verbose message.
+         *
+         *  @param  text    Message text to be logged.
+         */
+        void Logger::verb(const std::string& text) const
+        {
+#ifdef VERBOSE_MESSAGES
+            print_text(CYAN, LOG, text);
+#endif
+        }
+
 
         //  -- Printing --
         /**

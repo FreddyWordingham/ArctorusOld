@@ -25,6 +25,10 @@ namespace arc
     constexpr const char* BUILD_INFO   = "@BUILD_BRANCH@-@BUILD_HASH@-@BUILD_PATCH@"
         " : @BUILD_COMPILER@ : @BUILD_TYPE@ : @BUILD_DATE@";    //! Arctorus build information.
 
+    //  -- Logging --
+    constexpr const bool COLOURED_LOG = @COLOURED_LOG@; //! When true, colour the message log if possible.
+    constexpr const bool VERBOSE_LOG  = @VERBOSE_LOG@;  //! When true, log verbose messages.
+
 
 
 } // namespace arc
