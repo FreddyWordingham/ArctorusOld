@@ -175,6 +175,26 @@ namespace arc
 #pragma clang diagnostic pop
         }
 
+        /**
+         *  Log a warning message.
+         *  Increment the number of recorded warnings.
+         *
+         *  @param  symptom Description of the symptom of the warning.
+         *  @param  cause   Description of the cause of the warning.
+         *
+         *  @pre    symptom must not be empty.
+         *  @pre    cause must not be empty.
+         */
+        void Logger::warn(const std::string& symptom, const std::string& cause)
+        {
+            assert(!symptom.empty());
+            assert(!cause.empty());
+
+            ++num_warnings;
+
+            std::string text = symptom + "\n" + cause;
+            print_text(YELLOW, WARN, text);
+        }
 
         //  -- Printing --
         /**

@@ -165,6 +165,7 @@ namespace arc
             void verb(const std::string& text) const;
             template <typename T>
             void val(const std::string& name, const T& val) const;
+            void warn(const std::string& symptom, const std::string& cause);
 
           private:
             //  -- Printing --
