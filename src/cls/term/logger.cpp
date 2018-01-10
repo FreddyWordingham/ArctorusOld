@@ -131,5 +131,19 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Printing --
+        /**
+         *  Print a horizontal rule using a given character.
+         *
+         *  @param  hr_char Character used to draw the horizontal rule.
+         */
+        void Logger::print_hr(const char hr_char = '=') const
+        {
+            stream << std::string(LINE_WIDTH, hr_char) << "\n";
+        }
+
+
+
     } // namespace term
 } // namespace arc

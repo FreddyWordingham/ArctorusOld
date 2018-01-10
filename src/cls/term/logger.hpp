@@ -158,6 +158,8 @@ namespace arc
 
             //  == METHODS ==
           private:
+            //  -- Printing --
+            void print_hr(const char hr_char = '=') const;
         };
 
 
