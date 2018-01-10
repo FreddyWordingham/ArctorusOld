@@ -8,19 +8,9 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-#include <array>
-#include <iostream>
-
 //  -- General --
 #include "gen/config.hpp"
-#include "gen/math.hpp"
-
-//  -- Utility --
-#include "utl/vector.hpp"
-
-//  -- Classes --
-#include "cls/term/logger.hpp"
+#include "gen/log.hpp"
 
 
 
@@ -37,12 +27,8 @@ using namespace arc;
  */
 int main()
 {
-    std::cout << "Hello world!\n";
-    std::cout << "Build information:\n" << BUILD_INFO << "\n";
-    std::cout << "Arctorus directory:\n" << ARCTORUS_DIR << "\n";
-
-
-    term::Logger::get_instance().log("This is some text to be... logged.");
+    LOG("Hello world!");
+    LOG("Arctorus directory:\n" << ARCTORUS_DIR);
 
     return (0);
 }

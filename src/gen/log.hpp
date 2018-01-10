@@ -14,12 +14,23 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <sstream>
+
 //  -- Classes --
 #include "cls/term/logger.hpp"
 
 
 
 //  == MACROS ==
+//  -- Logging --
+
+#define LOG(text)                                           \
+{                                                           \
+    std::stringstream text_stream;                          \
+    text_stream << std::boolalpha << text;                  \
+    term::Logger::get_instance().log(text_stream.str());    \
+}                                                           \
 
 
 
