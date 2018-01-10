@@ -48,6 +48,11 @@
     term::Logger::get_instance().log(text_stream.str());    \
 }                                                           \
 
+/**
+ *  Macro used to log a name-value pair message.
+ *
+ *  @param  x   Value to be named and logged.
+ */
 #define VAL(x)                                  \
 {                                               \
     term::Logger::get_instance().val(#x, x);    \
