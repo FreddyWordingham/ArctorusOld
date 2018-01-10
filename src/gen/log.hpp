@@ -16,7 +16,6 @@
 //  == INCLUDES ==
 //  -- System --
 #include <sstream>
-#include <ostream>
 
 //  -- Classes --
 #include "cls/term/logger.hpp"
@@ -25,11 +24,27 @@
 
 //  == MACROS ==
 //  -- Logging --
-
+/**
+ *  Macro used to log a standard message.
+ *
+ *  @param  text    Message text to be logged.
+ */
 #define LOG(text)                                           \
 {                                                           \
     std::stringstream text_stream;                          \
-    text_stream << std::boolalpha << (text);                \
+    text_stream << std::boolalpha << text;                  \
+    term::Logger::get_instance().log(text_stream.str());    \
+}                                                           \
+
+/**
+ *  Macro used to log a verbose message.
+ *
+ *  @param  text    Message text to be logged.
+ */
+#define VERB(text)                                          \
+{                                                           \
+    std::stringstream text_stream;                          \
+    text_stream << std::boolalpha << text;                  \
     term::Logger::get_instance().log(text_stream.str());    \
 }                                                           \
 
