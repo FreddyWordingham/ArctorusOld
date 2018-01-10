@@ -48,6 +48,20 @@ set(ARCTORUS_DIR ${CMAKE_SOURCE_DIR})
 message("Build directory:'${ARCTORUS_DIR}'.")
 
 
+#   == LOGGING OPTIONS ==
+#   -- Colour --
+if (NOT DEFINED COLOUR)
+    set(COLOUR true)
+endif ()
+message("Coloured messages: ${COLOUR}")
+
+#   -- Verbose --
+if (NOT DEFINED VERBOSE)
+    set(VERBOSE true)
+endif ()
+message("Verbose messages: ${VERBOSE}")
+
+
 
 #   == DIRECTORIES ==
 #   -- Binary Output --
@@ -55,6 +69,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 #   -- Source Code --
 set(ARCTORUS_SRC_DIR ${CMAKE_SOURCE_DIR}/src)
+
 
 
 #   == CONFIGURATION ==
