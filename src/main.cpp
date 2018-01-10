@@ -35,5 +35,7 @@ int main()
     double x = 1.25;
     VAL(x);
 
+    WARN("Something.", "Went wrong.");
+
     return (0);
 }

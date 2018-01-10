@@ -58,6 +58,19 @@
     term::Logger::get_instance().val(#x, x);    \
 }                                               \
 
+/**
+ *  Macro used to log a warning message.
+ *
+ *  @param  symptom Text describing the symptom of the warning.
+ *  @param  cause   Text describing the cause of the warning.
+ */
+#define WARN(symptom, cause)                                                        \
+{                                                                                   \
+    std::stringstream symptom_stream, cause_stream;                                 \
+    symptom_stream << std::boolalpha << symptom;                                    \
+    cause_stream << std::boolalpha << cause;                                        \
+    term::Logger::get_instance().warn(symptom_stream.str(), cause_stream.str());    \
+}                                                                                   \
 
 
 
