@@ -65,6 +65,13 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the handle to the file itself.
+         *
+         *  @param  mode    Mode to open the file with.
+         *
+         *  @return The handle to the requested file.
+         */
         std::fstream Handle::init_file(const std::fstream::openmode& mode) const
         {
             std::fstream init_file;
