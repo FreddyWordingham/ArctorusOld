@@ -55,6 +55,7 @@ namespace arc
         constexpr const char* LOG_TYPE_STRING   = "[       ]";  //! String indicating a standard message.
         constexpr const char* VERB_TYPE_STRING  = "[verbose]";  //! String indicating a verbose message.
         constexpr const char* VAL_TYPE_STRING   = "[ value ]";  //! String indicating a value message.
+        constexpr const char* TEMP_TYPE_STRING  = "[ tempo ]";  //! String indicating a temporary message.
         constexpr const char* WARN_TYPE_STRING  = "[warning]";  //! String indicating a warning message.
         constexpr const char* ERROR_TYPE_STRING = "[!ERROR!]";  //! String indicating an error message.
 
@@ -122,6 +123,7 @@ namespace arc
                 LOG,        //! Standard log message.
                 VERB,       //! Verbose log message.
                 VAL,        //! Value log message.
+                TEMP,       //! Temporary log message.
                 WARN,       //! Warning log message.
                 ERROR,      //! Error log message.
                 TOTAL_TYPES //! Total number of log types.
@@ -227,7 +229,7 @@ namespace arc
         void Logger::temp(const std::string& name, const T& val) const
         {
             // Return if not printing to cout, or cout is being piped to a file.
-            static const bool terminal                            = (&stream != &std::cout) || (isatty(fileno(stdout)) == 0);
+            static const bool terminal                            = (&stream == &std::cout) && (isatty(fileno(stdout)) != 0);
             if (!terminal)
             {
                 return;
@@ -257,7 +259,7 @@ namespace arc
             timestamp.resize(TIME_WIDTH, ' ');
 
             // Print the temporary.
-            stream << timestamp << text_cols[YELLOW] << log_types[LOG] << text << text_cols[RESET] << "\r";
+            stream << timestamp << text_cols[YELLOW] << log_types[TEMP] << text << text_cols[RESET] << "\r";
         }
 
 
