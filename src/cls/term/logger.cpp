@@ -13,9 +13,6 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-#include <cassert>
-
 //  -- General --
 #include <gen/ansi.hpp>
 
