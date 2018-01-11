@@ -17,6 +17,7 @@
 //  -- System --
 #include <array>
 #include <cassert>
+#include <cstdio>
 #include <iostream>
 #include <sstream>
 #include <unistd.h>

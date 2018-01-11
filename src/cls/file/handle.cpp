@@ -115,7 +115,7 @@ namespace arc
         {
             const std::streampos get_pos = file.tellg();
 
-            file.seekg(0);
+            file.seekg(0, std::fstream::beg);
 
             const std::streampos first = file.tellg();
             file.seekg(0, std::fstream::end);
