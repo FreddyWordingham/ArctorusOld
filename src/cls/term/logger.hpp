@@ -218,7 +218,7 @@ namespace arc
 
         /**
          *  Log a temporary name-value pair which will be overwritten by the next log.
-         *  Log will only be written if writhin to cout and not being redirected to a file.
+         *  Log will only be written if within to cout and not being redirected to a file.
          *
          *  @tparam T   Type of value to be printed.
          *
