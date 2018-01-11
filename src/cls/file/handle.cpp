@@ -89,8 +89,8 @@ namespace arc
 
             if (mode == std::fstream::out)
             {
-                file << COMMENT_CHAR << " Created by Arctorus: " << utl::create_timestamp() << "\n";
-                file << COMMENT_CHAR << " Build: " << config::BUILD_INFO << "\n";
+                init_file << COMMENT_CHAR << " Created by Arctorus: " << utl::create_timestamp() << "\n";
+                init_file << COMMENT_CHAR << " Build: " << config::BUILD_INFO << "\n";
             }
 
             return (init_file);
