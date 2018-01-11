@@ -15,10 +15,10 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <vector>
 #include <cassert>
-#include <ostream>
 #include <cmath>
+#include <ostream>
+#include <vector>
 
 
 
