@@ -28,6 +28,9 @@ namespace arc
 
 
         //  == SETTINGS ==
+        //  -- Warnings --
+        constexpr const int SIZE_WARNING = 1E3; //! [bytes] Warning triggered when opening files larger than this size.
+
         //  -- Formatting --
         constexpr const char COMMENT_CHAR = '#';    //! Character used to comment file lines.
         constexpr const char DELIMIT_CHAR = ',';    //! Character used to delimit file data.

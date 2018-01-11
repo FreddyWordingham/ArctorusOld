@@ -42,7 +42,11 @@ namespace arc
             filename(utl::strip_path(path)),
             file(init_file(mode))
         {
-            // TODO file size warning.
+            const size_t size = get_file_size();
+            if (size > SIZE_WARNING)
+            {
+                WARN("Large file opened.", "file: '" << filename << "' is " << size << "bytes.");
+            }
         }
 
 
