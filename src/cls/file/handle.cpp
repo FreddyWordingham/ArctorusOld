@@ -14,7 +14,10 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <cassert>
+
+//  -- General --
+#include "gen/config.hpp"
+#include "gen/log.hpp"
 
 
 
@@ -64,7 +67,25 @@ namespace arc
         //  -- Initialisation --
         std::fstream Handle::init_file(const std::fstream::openmode& mode) const
         {
+            std::fstream file;
+            file.open(path, mode);
 
+            if (!file.is_open())
+            {
+                file.open(config::ARCTORUS_DIR + path, mode);
+            }
+
+            if (file.is_open())
+            {
+                ERROR("Failed to construct file::Handle object.", "The file: '" << filename << "' could not be opened.");
+            }
+
+            if (mode == std::fstream::out)
+            {
+
+            }
+
+            return (file);
         }
 
 

@@ -28,7 +28,7 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
-    VERB("Arctorus directory:\n" << ARCTORUS_DIR);
+    VERB("Arctorus directory:\n" << config::ARCTORUS_DIR);
 
     return (0);
 }

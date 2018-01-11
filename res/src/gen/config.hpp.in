@@ -16,6 +16,8 @@
 //  == NAMESPACE ==
 namespace arc
 {
+    namespace config
+    {
 
 
 
@@ -31,6 +33,7 @@ namespace arc
 
 
 
+    } // namespace config
 } // namespace arc
 
 

@@ -101,7 +101,7 @@ namespace arc
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCSimplifyInspection"
-            if (COLOUR_LOG && (&stream == &std::cout) && (isatty(fileno(stdout)) != 0))
+            if (config::COLOUR_LOG && (&stream == &std::cout) && (isatty(fileno(stdout)) != 0))
             {
                 init_text_cols[RESET]   = ansi::RESET;
                 init_text_cols[BLACK]   = ansi::BLACK;
@@ -173,7 +173,7 @@ namespace arc
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCSimplifyInspection"
-            if (VERBOSE_LOG)
+            if (config::VERBOSE_LOG)
             {
                 print_text(CYAN, LOG, text);
             }
@@ -273,7 +273,7 @@ namespace arc
 
             print_hr('=');
 
-            std::string       build = BUILD_INFO;
+            std::string       build = config::BUILD_INFO;
             const std::string pre_build_pad((LINE_WIDTH - build.size()) / 2, ' ');
             const std::string post_build_pad(LINE_WIDTH - (build.size() + pre_build_pad.size()), ' ');
 
