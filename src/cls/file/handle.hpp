@@ -67,7 +67,7 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
             //  -- Writing --
             template <typename T>
             Handle& operator<<(const T& val);

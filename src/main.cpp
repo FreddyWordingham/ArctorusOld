@@ -12,6 +12,7 @@
 #include "gen/config.hpp"
 #include "gen/log.hpp"
 
+#include "cls/file/handle.hpp"
 
 
 //  == NAMESPACE ==
@@ -29,6 +30,10 @@ int main()
 {
     LOG("Hello world!");
     VERB("Arctorus directory:\n" << config::ARCTORUS_DIR);
+
+
+    file::Handle file("test.txt", std::fstream::out);
+    file << "This is a test!\n";
 
     return (0);
 }
