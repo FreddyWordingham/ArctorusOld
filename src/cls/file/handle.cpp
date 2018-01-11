@@ -70,6 +70,8 @@ namespace arc
          *
          *  @param  mode    Mode to open the file with.
          *
+         *  @post   file should be open.
+         *
          *  @return The handle to the requested file.
          */
         std::fstream Handle::init_file(const std::fstream::openmode& mode) const
@@ -92,6 +94,8 @@ namespace arc
                 init_file << COMMENT_CHAR << " Created by Arctorus: " << utl::create_timestamp() << "\n";
                 init_file << COMMENT_CHAR << " Build: " << config::BUILD_INFO << "\n";
             }
+
+            assert(init_file.is_open());
 
             return (init_file);
         }
