@@ -144,7 +144,7 @@ namespace arc
             file.seekg(get_pos);
 
             std::string contents = contents_stream.str();
-            utl::filter(contents, std::string(COMMENT_CHAR, 1));
+            utl::filter(contents, std::string(1, COMMENT_CHAR));
 
             return (contents);
         }
