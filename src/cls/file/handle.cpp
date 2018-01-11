@@ -84,7 +84,7 @@ namespace arc
                 init_file.open(config::ARCTORUS_DIR + path, mode);
             }
 
-            if (init_file.is_open())
+            if (!init_file.is_open())
             {
                 ERROR("Failed to construct file::Handle object.", "The file: '" << filename << "' could not be opened.");
             }
