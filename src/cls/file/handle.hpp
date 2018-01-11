@@ -68,11 +68,35 @@ namespace arc
 
             //  == OPERATORS ==
           private:
+            //  -- Writing --
+            template <typename T>
+            Handle& operator<<(const T& val);
 
 
             //  == METHODS ==
           private:
         };
+
+
+
+        //  == OPERATORS ==
+        //  -- Writing --
+        /**
+         *  Enable writing of the file opened by the file handle.
+         *
+         *  @tparam T   Type of variable to be written to the file.
+         *
+         *  @param  val Value to be written to the file.
+         *
+         *  @return A reference to this file handler.
+         */
+        template <typename T>
+        Handle& Handle::operator<<(const T& val)
+        {
+            file << val;
+
+            return (*this);
+        }
 
 
 
