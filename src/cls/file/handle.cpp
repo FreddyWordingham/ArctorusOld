@@ -67,15 +67,15 @@ namespace arc
         //  -- Initialisation --
         std::fstream Handle::init_file(const std::fstream::openmode& mode) const
         {
-            std::fstream file;
-            file.open(path, mode);
+            std::fstream init_file;
+            init_file.open(path, mode);
 
-            if (!file.is_open())
+            if (!init_file.is_open())
             {
-                file.open(config::ARCTORUS_DIR + path, mode);
+                init_file.open(config::ARCTORUS_DIR + path, mode);
             }
 
-            if (file.is_open())
+            if (init_file.is_open())
             {
                 ERROR("Failed to construct file::Handle object.", "The file: '" << filename << "' could not be opened.");
             }
@@ -85,7 +85,7 @@ namespace arc
 
             }
 
-            return (file);
+            return (init_file);
         }
 
 
