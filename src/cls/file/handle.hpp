@@ -81,6 +81,7 @@ namespace arc
             //  -- Getters --
             std::string get_filename() const { return (filename); }
             size_t get_file_size() const;
+            std::string get_contents() const;
         };
 
 

@@ -126,6 +126,29 @@ namespace arc
             return (size);
         }
 
+        /**
+         *  Retrieve the contents of the open file as a string.
+         *  Commented lines are filtered out.
+         *
+         *  @return A string of the open file's contents.
+         */
+        std::string Handle::get_contents() const
+        {
+            const std::streampos get_pos = file.tellg();
+
+            file.seekg(0, std::fstream::beg);
+
+            std::stringstream contents_stream;
+            contents_stream << file.rdbuf();
+
+            file.seekg(get_pos);
+
+            std::string contents = contents_stream.str();
+            utl::filter(contents, std::string(COMMENT_CHAR, 1));
+
+            return (contents);
+        }
+
 
 
     } // namespace file

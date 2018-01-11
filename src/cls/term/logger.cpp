@@ -226,7 +226,7 @@ namespace arc
             std::string text = "File: " + file + "\nLine: " + line + "\n" + symptom + "\n" + cause;
             print_text(RED, ERROR, text);
 
-            exit(1);
+            std::exit(1);
         }
 
 
