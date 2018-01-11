@@ -83,11 +83,11 @@ namespace arc
          *  Determine if two double values can be considered equal to within a given tolerance.
          *  If the values differ by exactly the tolerance they are considered equal.
          *
-         * @param   lhs Left hand side double.
-         * @param   rhs Right hand side double.
-         * @param   tol Maximum tolerance to which the values are considered equal.
+         *  @param  lhs Left hand side double.
+         *  @param  rhs Right hand side double.
+         *  @param  tol Maximum tolerance to which the values are considered equal.
          *
-         * @return  True if the values are equal within a given tolerance.
+         *  @return True if the values are equal within a given tolerance.
          */
         inline bool equal(const double lhs, const double rhs, const double tol)
         {
