@@ -252,7 +252,7 @@ namespace arc
             std::stringstream val_stream;
             val_stream << std::boolalpha << val;
             text += val_stream.str();
-            text.resize(TEXT_WIDTH, ' ');
+            text.resize(static_cast<size_t>(TEXT_WIDTH), ' ');
 
             // Create a timestamp string.
             std::string timestamp = "[" + utl::create_timestamp() + "]";
