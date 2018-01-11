@@ -19,9 +19,13 @@
 #include <array>
 #include <sstream>
 #include <vector>
+#include <unistd.h>
 
 //  -- General --
 #include "gen/config.hpp"
+
+//  -- Utility --
+#include "utl/string.hpp"
 
 
 
@@ -63,6 +67,9 @@ namespace arc
         constexpr const int TEXT_WIDTH       = LINE_WIDTH - (TIME_WIDTH + TYPE_WIDTH);  //! Width allocated to the text buffer.
         constexpr const int WRAP_INDENT      = 2;                                       //! Indentation width of wrapped lines.
         constexpr const int VALUE_NAME_WIDTH = 16;                                      //! Space allocated to the value name.
+
+        //  -- Updating --
+        constexpr const double MIN_UPDATE_DELAY = 5.0;  //! Minimum delay between temporary logs.
 
 
 
@@ -165,6 +172,8 @@ namespace arc
             void verb(const std::string& text) const;
             template <typename T>
             void val(const std::string& name, const T& val) const;
+            template <typename T>
+            void temp(const std::string& name, const T& val) const;
             void warn(const std::string& symptom, const std::string& cause);
             [[noreturn]] void error(const std::string& file, const std::string& line, const std::string& symptom,
                                     const std::string& cause);
@@ -203,6 +212,52 @@ namespace arc
             text += val_stream.str();
 
             print_text(MAGENTA, VAL, text);
+        }
+
+        /**
+         *  Log a temporary name-value pair which will be overwritten by the next log.
+         *  Log will only be written if writhin to cout and not being redirected to a file.
+         *
+         *  @tparam T   Type of value to be printed.
+         *
+         *  @param  name    Name of the value.
+         *  @param  val     Value of the value.
+         */
+        template <typename T>
+        void Logger::temp(const std::string& name, const T& val) const
+        {
+            // Return if not printing to cout, or cout is being piped to a file.
+            static const bool terminal                            = (&stream != &std::cout) || (isatty(fileno(stdout)) == 0);
+            if (!terminal)
+            {
+                return;
+            }
+
+            // Return if the minimum delay time has not been met yet.
+            static std::chrono::steady_clock::time_point last_update;
+            const std::chrono::steady_clock::time_point  cur_time = std::chrono::steady_clock::now();
+            if (std::chrono::duration_cast<std::chrono::duration<double>>(cur_time - last_update).count() < MIN_UPDATE_DELAY)
+            {
+                return;
+            }
+            last_update = cur_time;
+
+            // Form the name-value pair string.
+            std::string text = name;
+            text.resize(VALUE_NAME_WIDTH, ' ');
+            text += " : ";
+
+            std::stringstream val_stream;
+            val_stream << std::boolalpha << val;
+            text += val_stream.str();
+            text.resize(TEXT_WIDTH, ' ');
+
+            // Create a timestamp string.
+            std::string timestamp = "[" + utl::create_timestamp() + "]";
+            timestamp.resize(TIME_WIDTH, ' ');
+
+            // Print the temporary.
+            stream << timestamp << text_cols[YELLOW] << log_types[LOG] << text << text_cols[RESET] << "\r";
         }
 
 
