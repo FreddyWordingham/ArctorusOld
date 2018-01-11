@@ -50,7 +50,7 @@ namespace arc
             const std::string filename; //! Name of the file.
 
             //  -- Handle --
-            std::fstream file;    //! Handle to the file.
+            mutable std::fstream file;  //! Handle to the file.
 
 
             //  == INSTANTIATION ==
