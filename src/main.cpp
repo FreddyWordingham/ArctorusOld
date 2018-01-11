@@ -12,7 +12,6 @@
 #include "gen/config.hpp"
 #include "gen/log.hpp"
 
-#include "utl/array.hpp"
 
 
 //  == NAMESPACE ==
@@ -30,12 +29,6 @@ int main()
 {
     LOG("Hello world!");
     VERB("Arctorus directory:\n" << ARCTORUS_DIR);
-
-    for (int i = 0; i < 10; ++i)
-    {
-        term::Logger::get_instance().temp("This is temporary: ", i);
-        usleep(900000);
-    }
 
     return (0);
 }
