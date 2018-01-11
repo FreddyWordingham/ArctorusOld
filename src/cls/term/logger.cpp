@@ -134,7 +134,6 @@ namespace arc
             init_log_types[WARN]  = std::string(WARN_TYPE_STRING);
             init_log_types[ERROR] = std::string(ERROR_TYPE_STRING);
 
-            // Cut to required size.
             for (size_t i = 0; i < TOTAL_TYPES; ++i)
             {
                 init_log_types[i].resize(TYPE_WIDTH, ' ');

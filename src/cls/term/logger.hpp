@@ -228,14 +228,12 @@ namespace arc
         template <typename T>
         void Logger::temp(const std::string& name, const T& val) const
         {
-            // Return if not printing to cout, or cout is being piped to a file.
             static const bool terminal                            = (&stream == &std::cout) && (isatty(fileno(stdout)) != 0);
             if (!terminal)
             {
                 return;
             }
 
-            // Return if the minimum delay time has not been met yet.
             static std::chrono::steady_clock::time_point last_update;
             const std::chrono::steady_clock::time_point  cur_time = std::chrono::steady_clock::now();
             if (std::chrono::duration_cast<std::chrono::duration<double>>(cur_time - last_update).count() < MIN_UPDATE_DELAY)
@@ -244,7 +242,6 @@ namespace arc
             }
             last_update = cur_time;
 
-            // Form the name-value pair string.
             std::string text = name;
             text.resize(VALUE_NAME_WIDTH, ' ');
             text += " : ";
@@ -254,11 +251,9 @@ namespace arc
             text += val_stream.str();
             text.resize(static_cast<size_t>(TEXT_WIDTH), ' ');
 
-            // Create a timestamp string.
             std::string timestamp = "[" + utl::create_timestamp() + "]";
             timestamp.resize(TIME_WIDTH, ' ');
 
-            // Print the temporary.
             stream << timestamp << text_cols[YELLOW] << log_types[TEMP] << text << text_cols[RESET] << "\r";
         }
 
