@@ -19,6 +19,12 @@
 
 
 
+//  == MACROS ==
+//  -- File Contents --
+#define FILE(file_path) arc::file::Handle(file_path, std::fstream::in).get_contents()
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {

@@ -32,9 +32,8 @@ int main()
     VERB("Arctorus directory:\n" << config::ARCTORUS_DIR);
 
 
-    file::Handle file("../README.md", std::fstream::in);
 
-    LOG(file.get_contents());
+    LOG(FILE("../README.md"));
 
     return (0);
 }
