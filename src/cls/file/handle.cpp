@@ -107,6 +107,16 @@ namespace arc
         //  == METHODS ==
         //  -- Getters --
         /**
+         *  Get the filename of the open file.
+         *
+         *  @return The filename of the file.
+         */
+        std::string Handle::get_filename() const
+        {
+            return (filename);
+        }
+
+        /**
          *  Get the size of the file in bytes.
          *
          *  @return The size of the file in bytes.
