@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <cassert>
 
 
 
@@ -60,8 +61,11 @@ namespace arc
         }
 
 
-
         //  -- Initialisation --
+        std::fstream Handle::init_file(const std::fstream::openmode& mode) const
+        {
+
+        }
 
 
 
