@@ -15,12 +15,12 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <iostream>
 #include <array>
-#include <sstream>
-#include <vector>
-#include <unistd.h>
 #include <cassert>
+#include <iostream>
+#include <sstream>
+#include <unistd.h>
+#include <vector>
 
 //  -- General --
 #include "gen/config.hpp"
