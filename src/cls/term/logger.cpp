@@ -150,9 +150,13 @@ namespace arc
          *  Log a standard message.
          *
          *  @param  text    Message text to be logged.
+         *
+         *  @pre    text must not be empty.
          */
         void Logger::log(const std::string& text) const
         {
+            assert(!text.empty());
+
             print_text(CYAN, LOG, text);
         }
 
@@ -160,9 +164,13 @@ namespace arc
          *  Log a verbose message.
          *
          *  @param  text    Message text to be logged.
+         *
+         *  @pre    text must not be empty.
          */
         void Logger::verb(const std::string& text) const
         {
+            assert(!text.empty());
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCSimplifyInspection"
             if (VERBOSE_LOG)
@@ -283,11 +291,13 @@ namespace arc
          *
          *  @pre    col must be a valid cols enumeration.
          *  @pre    type must be a valid types enumeration.
+         *  @pre    text must not be empty.
          */
         void Logger::print_text(const size_t col, const size_t type, const std::string& text) const
         {
             assert(col < TOTAL_COLS);
             assert(type < TOTAL_TYPES);
+            assert(!text.empty());
 
             std::vector<std::string> lines     = form_lines(text);
             std::string              timestamp = "[" + utl::create_timestamp() + "]";
@@ -308,10 +318,14 @@ namespace arc
          *
          *  @param  text    Text string to be formatted.
          *
+         *  @pre    text must not be empty.
+         *
          *  @return Vector of text lines.
          */
         std::vector<std::string> Logger::form_lines(std::string text) const
         {
+            assert(!text.empty());
+
             text += '\n';
 
             utl::find_and_replace(text, "\t", "    ");

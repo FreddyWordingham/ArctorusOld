@@ -20,6 +20,7 @@
 #include <sstream>
 #include <vector>
 #include <unistd.h>
+#include <cassert>
 
 //  -- General --
 #include "gen/config.hpp"
@@ -201,10 +202,14 @@ namespace arc
          *
          *  @param  name    Name of the value.
          *  @param  val     Value of the value.
+         *
+         *  @pre    name must not be empty.
          */
         template <typename T>
         void Logger::val(const std::string& name, const T& val) const
         {
+            assert(!name.empty());
+
             std::string text = name;
             text.resize(VALUE_NAME_WIDTH, ' ');
             text += " : ";
@@ -224,10 +229,14 @@ namespace arc
          *
          *  @param  name    Name of the value.
          *  @param  val     Value of the value.
+         *
+         *  @pre    name must not be empty.
          */
         template <typename T>
         void Logger::temp(const std::string& name, const T& val) const
         {
+            assert(!name.empty());
+
             static const bool terminal                            = (&stream == &std::cout) && (isatty(fileno(stdout)) != 0);
             if (!terminal)
             {
