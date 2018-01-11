@@ -33,7 +33,7 @@ int main()
 
 
 
-    LOG(FILE("../README.md"));
+    LOG(READ_FILE("../README.md"));
 
     return (0);
 }
