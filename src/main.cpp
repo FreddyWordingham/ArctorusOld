@@ -34,5 +34,7 @@ int main()
 
     file::Handle file("../README.md", std::fstream::in);
 
+    LOG(file.get_contents());
+
     return (0);
 }
