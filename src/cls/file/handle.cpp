@@ -13,8 +13,6 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-
 //  -- General --
 #include "gen/config.hpp"
 #include "gen/log.hpp"
