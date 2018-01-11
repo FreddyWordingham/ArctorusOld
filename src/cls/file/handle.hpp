@@ -27,6 +27,13 @@ namespace arc
 
 
 
+        //  == SETTINGS ==
+        //  -- Formatting --
+        constexpr const char COMMENT_CHAR = '#';    //! Character used to comment file lines.
+        constexpr const char DELIMIT_CHAR = ',';    //! Character used to delimit file data.
+
+
+
         //  == CLASS ==
         /**
          *  A class which creates a handle to a given file.
