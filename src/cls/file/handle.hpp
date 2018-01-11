@@ -65,6 +65,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Handle(const Handle&) = delete;
+            Handle(const Handle&&) = delete;
             Handle(const std::string& init_path, const std::fstream::openmode& mode);
 
             //  -- Destructors --
@@ -77,6 +79,10 @@ namespace arc
 
             //  == OPERATORS ==
           public:
+            //  -- Copy --
+            Handle& operator=(const Handle&) = delete;
+            Handle& operator=(const Handle&&) = delete;
+
             //  -- Writing --
             template <typename T>
             Handle& operator<<(const T& val);

@@ -253,13 +253,13 @@ namespace arc
                 std::string line = title.substr(0, TITLE_WIDTH);
                 title.erase(0, TITLE_WIDTH);
 
-                utl::find_and_replace(line, "l", text_cols[CYAN] + "/" + text_cols[RESET]);
-                utl::find_and_replace(line, "r", text_cols[CYAN] + R"(\)" + text_cols[RESET]);
-                utl::find_and_replace(line, "M", text_cols[MAGENTA] + "~" + text_cols[RESET]);
-                utl::find_and_replace(line, "B", text_cols[BLUE] + "~" + text_cols[RESET]);
-                utl::find_and_replace(line, "G", text_cols[GREEN] + "~" + text_cols[RESET]);
-                utl::find_and_replace(line, "Y", text_cols[YELLOW] + "~" + text_cols[RESET]);
-                utl::find_and_replace(line, "R", text_cols[RED] + "~" + text_cols[RESET]);
+                utl::find_and_replace(&line, "l", text_cols[CYAN] + "/" + text_cols[RESET]);
+                utl::find_and_replace(&line, "r", text_cols[CYAN] + R"(\)" + text_cols[RESET]);
+                utl::find_and_replace(&line, "M", text_cols[MAGENTA] + "~" + text_cols[RESET]);
+                utl::find_and_replace(&line, "B", text_cols[BLUE] + "~" + text_cols[RESET]);
+                utl::find_and_replace(&line, "G", text_cols[GREEN] + "~" + text_cols[RESET]);
+                utl::find_and_replace(&line, "Y", text_cols[YELLOW] + "~" + text_cols[RESET]);
+                utl::find_and_replace(&line, "R", text_cols[RED] + "~" + text_cols[RESET]);
 
                 stream << pre_title_pad << line << post_title_pad << "\n";
             }
@@ -321,7 +321,7 @@ namespace arc
 
             text += '\n';
 
-            utl::find_and_replace(text, "\t", "    ");
+            utl::find_and_replace(&text, "\t", "    ");
 
             std::vector<std::string> lines;
             size_t                   newline_pos;

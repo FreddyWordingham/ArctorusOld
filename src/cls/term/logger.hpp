@@ -157,6 +157,11 @@ namespace arc
             //  -- Singleton --
             static Logger& get_instance(std::ostream& init_stream = std::cout);
 
+          public:
+            //  -- Constructors --
+            Logger(const Logger&) = delete;
+            Logger(const Logger&&) = delete;
+
           private:
             //  -- Constructors --
             explicit Logger(std::ostream& init_stream);
@@ -167,6 +172,13 @@ namespace arc
             //  -- Initialisation --
             std::array<std::string, TOTAL_COLS> init_text_cols() const;
             std::array<std::string, TOTAL_TYPES> init_log_types() const;
+
+
+            //  == OPERATORS ==
+          public:
+            //  -- Copy --
+            Logger& operator=(const Logger&) = delete;
+            Logger& operator=(const Logger&&) = delete;
 
 
             //  == METHODS ==

@@ -80,14 +80,14 @@ namespace arc
          *  @pre    source must not be empty.
          *  @pre    find must not be empty.
          */
-        void find_and_replace(std::string& source, const std::string& find, const std::string& rep)
+        void find_and_replace(std::string* source, const std::string& find, const std::string& rep)
         {
-            assert(!source.empty());
+            assert(!source->empty());
             assert(!find.empty());
 
-            for (size_t pos = 0; (pos = source.find(find, pos)) != std::string::npos; pos += rep.size())
+            for (size_t pos = 0; (pos = source->find(find, pos)) != std::string::npos; pos += rep.size())
             {
-                source.replace(pos, find.size(), rep);
+                source->replace(pos, find.size(), rep);
             }
         }
 
@@ -102,19 +102,19 @@ namespace arc
          *  @pre    comment_start must not be empty.
          *  @pre    comment_end must not be empty.
          */
-        void filter(std::string& source, const std::string& comment_start, const std::string& comment_end)
+        void filter(std::string* source, const std::string& comment_start, const std::string& comment_end)
         {
-            assert(!source.empty());
+            assert(!source->empty());
             assert(!comment_start.empty());
             assert(!comment_end.empty());
 
             size_t start;
-            while ((start = source.find(comment_start)) != std::string::npos)
+            while ((start = source->find(comment_start)) != std::string::npos)
             {
                 size_t end;
-                if ((end = source.find(comment_end, start)) != std::string::npos)
+                if ((end = source->find(comment_end, start)) != std::string::npos)
                 {
-                    source.erase(start, end - start + comment_end.size());
+                    source->erase(start, end - start + comment_end.size());
                 }
                 else
                 {
@@ -162,7 +162,7 @@ namespace arc
             double x;
             string_stream >> x;
 
-            return (!string_stream.fail() && (!string_stream.rdbuf()->in_avail()));
+            return (!string_stream.fail() && (string_stream.rdbuf()->in_avail() == 0));
         }
 
 

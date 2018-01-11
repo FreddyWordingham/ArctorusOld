@@ -431,7 +431,8 @@ namespace arc
         //  -- Searching --
         /**
          *  Determine the lower index of the element pair which encapsulates the given value.
-         *  If the value is equal to an element of the vector then the lower index is that index, unless it is the final element.
+         *  If the value is equal to an element of the vector then the lower index is that index, unless it is the final
+         *  element.
          *
          *  @tparam T   Type stored by the vector.
          *  @tparam S   Type of the value to be found within the vector.
@@ -477,6 +478,7 @@ namespace arc
                     if (upper_index >= (vec.size() - 1))
                     {
                         upper_index = vec.size();
+
                         break;
                     }
                 }
@@ -491,12 +493,11 @@ namespace arc
                     if (jump >= upper_index)
                     {
                         lower_index = 0;
+
                         break;
                     }
-                    else
-                    {
-                        lower_index = upper_index - jump;
-                    }
+
+                    lower_index = upper_index - jump;
                 }
             }
 
@@ -528,7 +529,8 @@ namespace arc
 
         /**
          *  Determine the upper index of the element pair which encapsulates the given value.
-         *  If the value is equal to an element of the vector then the upper index is that index, unless it is the first element.
+         *  If the value is equal to an element of the vector then the upper index is that index, unless it is the first
+         *  element.
          *
          *  @tparam T   Type stored by the vector.
          *  @tparam S   Type of the value to be found within the vector.

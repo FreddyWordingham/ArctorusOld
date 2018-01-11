@@ -33,8 +33,8 @@ namespace arc
         std::string create_time_string(int sec);
 
         //  -- Manipulation --
-        void find_and_replace(std::string& source, const std::string& find, const std::string& replace);
-        void filter(std::string& source, const std::string& comment_start, const std::string& comment_end = "\n");
+        void find_and_replace(std::string* source, const std::string& find, const std::string& replace);
+        void filter(std::string* source, const std::string& comment_start, const std::string& comment_end = "\n");
         std::string strip_path(const std::string& path);
 
         //  -- Properties --

@@ -492,6 +492,7 @@ namespace arc
                     if (upper_index >= (N - 1))
                     {
                         upper_index = N;
+
                         break;
                     }
                 }
@@ -506,12 +507,11 @@ namespace arc
                     if (jump >= upper_index)
                     {
                         lower_index = 0;
+
                         break;
                     }
-                    else
-                    {
-                        lower_index = upper_index - jump;
-                    }
+
+                    lower_index = upper_index - jump;
                 }
             }
 
