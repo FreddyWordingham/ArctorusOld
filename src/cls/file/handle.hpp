@@ -75,6 +75,9 @@ namespace arc
 
             //  == METHODS ==
           private:
+            //  -- Getters --
+            std::string get_filename() const { return (filename); }
+            size_t get_file_size() const;
         };
 
 

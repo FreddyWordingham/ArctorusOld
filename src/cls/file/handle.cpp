@@ -102,5 +102,29 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Get the size of the file in bytes.
+         *
+         *  @return The size of the file in bytes.
+         */
+        size_t Handle::get_file_size() const
+        {
+            const std::streampos get_pos = file.tellg();
+
+            file.seekg(0);
+
+            const std::streampos first = file.tellg();
+            file.seekg(0, std::fstream::end);
+            const size_t size = static_cast<size_t>(file.tellg() - first);
+
+            file.seekg(get_pos);
+
+            return (size);
+        }
+
+
+
     } // namespace file
 } // namespace arc
