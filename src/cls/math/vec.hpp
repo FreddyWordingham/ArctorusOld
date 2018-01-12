@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <array>
+#include <ostream>
 
 
 
@@ -55,6 +56,11 @@ namespace arc
             //  -- Access --
             constexpr double& operator[](size_t index);
             constexpr const double& operator[](size_t index) const;
+
+            //  -- Printing --
+            template <size_t M>
+            friend std::ostream& operator<<(std::ostream& stream, const Vec<M>& vec);
+
 
 
             //  == METHODS ==
@@ -108,6 +114,38 @@ namespace arc
         constexpr const double& Vec<N>::operator[](const size_t index) const
         {
             return (elements[index]);
+        }
+
+
+        //  -- Printing --
+        /**
+         *  Enable printing of a vec to a given ostream.
+         *
+         *  @tparam M   Size of the vec.
+         *
+         *  @param  stream  Stream to write to.
+         *  @param  vec     Vec to be written.
+         *
+         *  @return A reference to the stream post-write.
+         */
+        template <size_t M>
+        friend std::ostream& operator<<(std::ostream& stream, const Vec<M>& vec)
+        {
+            if (M == 0)
+            {
+                stream << "[]";
+
+                return (stream);
+            }
+
+            stream << "[" << vec[0];
+            for (size_t i = 1; i < M; ++i)
+            {
+                stream << ", " << vec[i];
+            }
+            stream << "]";
+
+            return (stream);
         }
 
 
