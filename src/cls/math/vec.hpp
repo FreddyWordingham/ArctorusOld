@@ -85,7 +85,13 @@ namespace arc
             friend constexpr Vec<M> operator-(const Vec<M>& lhs, double rhs);
             template <size_t M>
             friend constexpr Vec<M> operator-(const Vec<M>& lhs, const Vec<M>& rhs);
-
+            template <size_t M>
+            friend constexpr Vec<M> operator*(const Vec<M>& lhs, double rhs);
+            template <size_t M>
+            friend constexpr double operator*(const Vec<M>& lhs, const Vec<M>& rhs);
+            template <size_t M>
+            friend constexpr Vec<M> operator/(const Vec<M>& lhs, double rhs);
+            friend constexpr Vec<3> operator^(const Vec<3>& lhs, const Vec<3>& rhs);
 
             //  -- Printing --
             template <size_t M>
@@ -527,6 +533,94 @@ namespace arc
             }
 
             return (vec);
+        }
+
+        /**
+         *  Create a new vec by multiplying elements of a given vec by a value.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  lhs Left hand side vec operand.
+         *  @param  rhs Right hand side value operand.
+         *
+         *  @return The created vec.
+         */
+        template <size_t N>
+        constexpr Vec<N> operator*(const Vec<N>& lhs, const double rhs)
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec.element[i] = lhs.element[i] * rhs;
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Determine the dot-product of two vectors.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  lhs Left hand side vec operand.
+         *  @param  rhs Right hand side vec operand.
+         *
+         *  @return The dot-product of the vectors.
+         */
+        template <size_t N>
+        constexpr double operator*(const Vec<N>& lhs, const Vec<N>& rhs)
+        {
+            double prod = 0.0;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                prod += lhs.element[i] * rhs.element[i];
+            }
+
+            return (prod);
+        }
+
+        /**
+         *  Create a new vec by dividing elements of a given vec by a value.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  lhs Left hand side vec operand.
+         *  @param  rhs Right hand side value operand.
+         *
+         *  @return The created vec.
+         */
+        template <size_t N>
+        constexpr Vec<N> operator/(const Vec<N>& lhs, const double rhs)
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec.element[i] = lhs.element[i] / rhs;
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Determine the cross-product of two vectors.
+         *
+         *  @param  lhs Left hand side vec operand.
+         *  @param  rhs Right hand side vec operand.
+         *
+         *  @return The cross-product of the vectors.
+         */
+        constexpr Vec<3> operator^(const Vec<3>& lhs, const Vec<3>& rhs)
+        {
+            Vec<3> prod;
+
+            prod.element[X] = (lhs.element[Y] * rhs.element[Z]) - (lhs.element[Z] * rhs.element[Y]);
+            prod.element[Y] = (lhs.element[Z] * rhs.element[X]) - (lhs.element[X] * rhs.element[Z]);
+            prod.element[Z] = (lhs.element[X] * rhs.element[Y]) - (lhs.element[Y] * rhs.element[X]);
+
+            return (prod);
         }
 
 

@@ -75,6 +75,11 @@ int main()
     VAL(vec);
 
 
+    arc::math::Vec<3> a({{1.0, 0.0, 0.0}});
+    arc::math::Vec<3> b({{0.0, 1.0, 0.0}});
+    VAL(a ^ b);
+    VAL(b ^ a);
+
 
     return (0);
 }
