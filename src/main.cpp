@@ -62,6 +62,18 @@ int main()
     vec /= 3.0;
     VAL(vec);
 
+    ++vec;
+    VAL(vec);
+
+    vec++;
+    VAL(vec);
+
+    --vec;
+    VAL(vec);
+
+    vec--;
+    VAL(vec);
+
 
 
     return (0);

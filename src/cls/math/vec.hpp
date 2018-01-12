@@ -71,6 +71,10 @@ namespace arc
             constexpr Vec<N>& operator*=(double rhs);
             constexpr Vec<N>& operator/=(double rhs);
             constexpr Vec<N>& operator^=(const Vec<3>& rhs);
+            constexpr Vec<N>& operator++();
+            constexpr Vec<N> operator++(int /*unused*/);
+            constexpr Vec<N>& operator--();
+            constexpr Vec<N> operator--(int /*unused*/);
 
 
             //  -- Printing --
@@ -285,6 +289,8 @@ namespace arc
          *  Determine the cross-product of this vec and another given vec.
          *  This vec acts as the left hand side operand.
          *
+         *  @tparam N   Size of the vec.
+         *
          *  @param  rhs Vec to perform cross product with.
          *
          *  @pre    N must equal three.
@@ -304,6 +310,83 @@ namespace arc
 
             return (*this);
         }
+
+        /**
+         *  Increment each element stored by the vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @return A reference to this vec post-increment.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator++()
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                ++element[i];
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Increment each element stored by the vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @return A copy of this vec post-increment.
+         */
+        template <size_t N>
+        constexpr Vec<N> Vec<N>::operator++(const int /*unused*/)
+        {
+            const Vec<N> vec = *this;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                ++element[i];
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Decrement each element stored by the vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @return A reference to this vec post-decrement.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator--()
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                --element[i];
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Decrement each element stored by the vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @return A copy of this vec post-decrement.
+         */
+        template <size_t N>
+        constexpr Vec<N> Vec<N>::operator--(const int /*unused*/)
+        {
+            const Vec<N> vec = *this;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                --element[i];
+            }
+
+            return (vec);
+        }
+
 
 
         //  -- Printing --
