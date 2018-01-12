@@ -19,6 +19,9 @@
 #include <initializer_list>
 #include <ostream>
 
+//  -- General --
+#include "gen/enum.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -55,10 +58,20 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
             //  -- Access --
             constexpr double& operator[](size_t index);
             constexpr const double& operator[](size_t index) const;
+
+            //  -- Mathematical --
+            constexpr Vec<N>& operator+=(double rhs);
+            constexpr Vec<N>& operator+=(const Vec<N>& rhs);
+            constexpr Vec<N>& operator-=(double rhs);
+            constexpr Vec<N>& operator-=(const Vec<N>& rhs);
+            constexpr Vec<N>& operator*=(double rhs);
+            constexpr Vec<N>& operator/=(double rhs);
+            constexpr Vec<N>& operator^=(const Vec<3>& rhs);
+
 
             //  -- Printing --
             template <size_t M>
@@ -143,6 +156,153 @@ namespace arc
         constexpr const double& Vec<N>::operator[](const size_t index) const
         {
             return (element[index]);
+        }
+
+
+        //  -- Mathematical --
+        /**
+         *  Add a value to all elements of a vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  rhs Value to add to each vec element.
+         *
+         *  @return A reference to this vec post-addition.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator+=(const double rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                element[i] += rhs;
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Add the element values of another vec to this vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  rhs Vec of elements to add to this vec.
+         *
+         *  @return A reference to this vec post-addition.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator+=(const Vec<N>& rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                element[i] += rhs.element[i];
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Subtract a value from all elements of a vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  rhs Value to subtract from each vec element.
+         *
+         *  @return A reference to this vec post-subtraction.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator-=(const double rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                element[i] -= rhs;
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Subtract the element values of another vec from this vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  rhs Vec of elements to subtract from this vec.
+         *
+         *  @return A reference to this vec post-subtraction.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator-=(const Vec<N>& rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                element[i] -= rhs.element[i];
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Multiply all elements of a vec by a value.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  rhs Value to multiply each vec element by.
+         *
+         *  @return A reference to this vec post-multiplication.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator*=(const double rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                element[i] *= rhs;
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Divide all elements of a vec by a value.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  rhs Value to divide each vec element by.
+         *
+         *  @return A reference to this vec post-division.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator/=(const double rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                element[i] /= rhs;
+            }
+
+            return (*this);
+        }
+
+
+        /**
+         *  Determine the cross-product of this vec and another given vec.
+         *  This vec acts as the left hand side operand.
+         *
+         *  @param  rhs Vec to perform cross product with.
+         *
+         *  @pre    N must equal three.
+         *
+         *  @return A reference to this vec post-operation.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator^=(const Vec<3>& rhs)
+        {
+            static_assert(N == 3);
+
+            const std::array<double, 3> lhs = element;
+
+            element[X] = (lhs[Y] * rhs[Z]) - (lhs[Z] * rhs[Y]);
+            element[Y] = (lhs[Z] * rhs[X]) - (lhs[X] * rhs[Z]);
+            element[Z] = (lhs[X] * rhs[Y]) - (lhs[Y] * rhs[X]);
+
+            return (*this);
         }
 
 

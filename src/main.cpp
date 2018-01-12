@@ -8,6 +8,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <cmath>
+
 //  -- General --
 #include "gen/config.hpp"
 #include "gen/log.hpp"
@@ -31,17 +34,35 @@ int main()
 
     LOG(READ_FILE("../README.md"));
 
-    arc::math::Vec<4> u;
-    VAL(u);
+    arc::math::Vec<5> vec({{0.0, 1.0, -1.0, 7.0, -7.0}});
 
-    arc::math::Vec<4> v(7.7);
-    VAL(v);
+    VAL(vec);
 
-    arc::math::Vec<4> w({0.0, 1.0, 2.0, 3.0});
-    VAL(w);
+    vec += 0.7;
+    VAL(vec);
 
-    arc::math::Vec<4> x({{0.0, 1.0, 2.0, 3.0}});
-    VAL(x);
+    vec -= 0.7;
+    VAL(vec);
+
+    vec += vec;
+    VAL(vec);
+
+    vec -= vec;
+    VAL(vec);
+
+    for (int i = 0; i < 5; ++i)
+    {
+        vec[i] = std::pow(2.0, static_cast<double>(i));
+    }
+    VAL(vec);
+
+    vec *= 1.5;
+    VAL(vec);
+
+    vec /= 3.0;
+    VAL(vec);
+
+
 
     return (0);
 }
