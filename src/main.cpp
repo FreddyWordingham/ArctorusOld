@@ -31,9 +31,14 @@ int main()
 
     LOG(READ_FILE("../README.md"));
 
-    arc::math::Vec<4> v;
+    arc::math::Vec<4> u;
+    VAL(u);
 
+    arc::math::Vec<4> v(7.7);
     VAL(v);
+
+    arc::math::Vec<4> w({0.0, 1.0, 2.0, 3.0});
+    VAL(w);
 
     return (0);
 }
