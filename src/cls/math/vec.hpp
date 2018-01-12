@@ -75,6 +75,8 @@ namespace arc
             constexpr Vec<N> operator++(int /*unused*/);
             constexpr Vec<N>& operator--();
             constexpr Vec<N> operator--(int /*unused*/);
+            constexpr Vec<N> operator+() const;
+            constexpr Vec<N> operator-() const;
 
 
             //  -- Printing --
@@ -382,6 +384,46 @@ namespace arc
             for (size_t i = 0; i < N; ++i)
             {
                 --element[i];
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Create a vec with a copy of the element values.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @return A copy of this vec with the same element values.
+         */
+        template <size_t N>
+        constexpr Vec<N> Vec<N>::operator+() const
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec[i] = +element[i];
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Create a vec with a copy of the negated element values.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @return A copy of this vec with the negated element values.
+         */
+        template <size_t N>
+        constexpr Vec<N> Vec<N>::operator-() const
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec[i] = -element[i];
             }
 
             return (vec);
