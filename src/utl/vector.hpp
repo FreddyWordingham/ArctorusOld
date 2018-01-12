@@ -587,17 +587,17 @@ namespace arc
     {
         if (vec.empty())
         {
-            stream << "[]";
+            stream << "()";
 
             return (stream);
         }
 
-        stream << "[" << vec[0];
+        stream << "(" << vec[0];
         for (size_t i = 1; i < vec.size(); ++i)
         {
             stream << ", " << vec[i];
         }
-        stream << "]";
+        stream << ")";
 
         return (stream);
     }
