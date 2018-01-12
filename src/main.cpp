@@ -19,6 +19,7 @@
 #include "cls/file/handle.hpp"
 #include "cls/math/vec.hpp"
 
+using namespace arc;
 
 
 //  == MAIN ==
@@ -79,6 +80,10 @@ int main()
     arc::math::Vec<3> b({{0.0, 1.0, 0.0}});
     VAL(a ^ b);
     VAL(b ^ a);
+
+
+    std::vector<double> vect({0.0, 2.0, 5.0});
+    std::cout << vect << "\n";
 
 
     return (0);

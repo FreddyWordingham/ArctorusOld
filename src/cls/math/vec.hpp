@@ -77,30 +77,39 @@ namespace arc
             constexpr Vec<N> operator--(int /*unused*/);
             constexpr Vec<N> operator+() const;
             constexpr Vec<N> operator-() const;
-            template <size_t M>
-            friend constexpr Vec<M> operator+(const Vec<M>& lhs, double rhs);
-            template <size_t M>
-            friend constexpr Vec<M> operator+(const Vec<M>& lhs, const Vec<M>& rhs);
-            template <size_t M>
-            friend constexpr Vec<M> operator-(const Vec<M>& lhs, double rhs);
-            template <size_t M>
-            friend constexpr Vec<M> operator-(const Vec<M>& lhs, const Vec<M>& rhs);
-            template <size_t M>
-            friend constexpr Vec<M> operator*(const Vec<M>& lhs, double rhs);
-            template <size_t M>
-            friend constexpr double operator*(const Vec<M>& lhs, const Vec<M>& rhs);
-            template <size_t M>
-            friend constexpr Vec<M> operator/(const Vec<M>& lhs, double rhs);
+            template <size_t V>
+            friend constexpr Vec<V> operator+(const Vec<V>& lhs, double rhs);
+            template <size_t V>
+            friend constexpr Vec<V> operator+(const Vec<V>& lhs, const Vec<V>& rhs);
+            template <size_t V>
+            friend constexpr Vec<V> operator-(const Vec<V>& lhs, double rhs);
+            template <size_t V>
+            friend constexpr Vec<V> operator-(const Vec<V>& lhs, const Vec<V>& rhs);
+            template <size_t V>
+            friend constexpr Vec<V> operator*(const Vec<V>& lhs, double rhs);
+            template <size_t V>
+            friend constexpr double operator*(const Vec<V>& lhs, const Vec<V>& rhs);
+            template <size_t V>
+            friend constexpr Vec<V> operator/(const Vec<V>& lhs, double rhs);
             friend constexpr Vec<3> operator^(const Vec<3>& lhs, const Vec<3>& rhs);
 
             //  -- Printing --
-            template <size_t M>
-            friend std::ostream& operator<<(std::ostream& stream, const Vec<M>& vec);
+            template <size_t V>
+            friend std::ostream& operator<<(std::ostream& stream, const Vec<V>& vec);
 
 
 
             //  == METHODS ==
           private:
+
+
+
+            //  == FUNCTION PROTOTYPES ==
+            //  -- Mathematical --
+            template <size_t V>
+            friend constexpr size_t min_index(const Vec<V>& vec);
+            template <size_t V>
+            friend constexpr size_t max_index(const Vec<V>& vec);
         };
 
 
@@ -654,6 +663,70 @@ namespace arc
             stream << "⟩";
 
             return (stream);
+        }
+
+
+
+        //  == FUNCTIONS ==
+        //  -- Mathematical --
+        /**
+         *  Find the index of the vec which holds the smallest element.
+         *  If multiple vec elements are equally the smallest, the index of the first will be returned.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  vec Vec to search.
+         *
+         *  @pre    N must not be zero.
+         *
+         *  @return The index of the smallest element within the vec.
+         */
+        template <size_t N>
+        constexpr size_t min_index(const Vec<N>& vec)
+        {
+            static_assert(N != 0);
+
+            size_t index = 0;
+
+            for (size_t i = 1; i < N; ++i)
+            {
+                if (vec.element[i] < vec.element[index])
+                {
+                    index = i;
+                }
+            }
+
+            return (index);
+        }
+
+        /**
+         *  Find the index of the vec which holds the largest element.
+         *  If multiple vec elements are equally the largest, the index of the first will be returned.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  vec Vec to search.
+         *
+         *  @pre    N must not be zero.
+         *
+         *  @return The index of the largest element within the vec.
+         */
+        template <size_t N>
+        constexpr size_t max_index(const Vec<N>& vec)
+        {
+            static_assert(N != 0);
+
+            size_t index = 0;
+
+            for (size_t i = 1; i < N; ++i)
+            {
+                if (vec.element[i] > vec.element[index])
+                {
+                    index = i;
+                }
+            }
+
+            return (index);
         }
 
 
