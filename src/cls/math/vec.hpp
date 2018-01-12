@@ -50,8 +50,8 @@ namespace arc
           public:
             //  -- Constructors --
             constexpr Vec();
-            explicit constexpr Vec(double init_elements);
-            explicit constexpr Vec(const std::initializer_list<double>& init_elements);
+            explicit constexpr Vec(double init_element);
+            explicit constexpr Vec(const std::array<double, N>& init_element);
 
 
             //  == OPERATORS ==
@@ -99,25 +99,16 @@ namespace arc
         }
 
         /**
-         *  Construct a vec and initialise all of its elements using the given initialiser list.
+         *  Construct a vec and initialise all of its elements using the given array.
          *
          *  @tparam N   Size of the vec.
          *
-         *  @param  init_element    List of values to initialise the vec elements to.
-         *
-         *  @post   All elements of the vec must vec must have been initialised.
+         *  @param  init_element    Array of values to initialise the vec elements to.
          */
         template <size_t N>
-        constexpr Vec<N>::Vec(const std::initializer_list<double>& init_element)
+        constexpr Vec<N>::Vec(const std::array<double, N>& init_element) :
+            element(init_element)
         {
-            size_t            i = 0;
-            for (const double val : init_element)
-            {
-                element[i] = val;
-                ++i;
-            }
-
-            assert(i == N);
         }
 
 

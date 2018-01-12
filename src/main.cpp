@@ -40,5 +40,8 @@ int main()
     arc::math::Vec<4> w({0.0, 1.0, 2.0, 3.0});
     VAL(w);
 
+    arc::math::Vec<4> x({{0.0, 1.0, 2.0, 3.0}});
+    VAL(x);
+
     return (0);
 }
