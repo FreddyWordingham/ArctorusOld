@@ -52,6 +52,9 @@ namespace arc
 
             //  == OPERATORS ==
           private:
+            //  -- Access --
+            constexpr double& operator[](size_t index);
+            constexpr const double& operator[](size_t index) const;
 
 
             //  == METHODS ==
@@ -71,6 +74,40 @@ namespace arc
         constexpr Vec<N>::Vec()
         {
             std::fill(elements.begin(), elements.end(), 0.0);
+        }
+
+
+
+        //  == OPERATORS ==
+        //  -- Access --
+        /**
+         *  Retrieve a reference to an element of the vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  index   Index of the element to access.
+         *
+         *  @return A reference to the vec element.
+         */
+        template <size_t N>
+        constexpr double& Vec<N>::operator[](const size_t index)
+        {
+            return (elements[index]);
+        }
+
+        /**
+         *  Retrieve a reference to a const element of the vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  index   Index of the element to access.
+         *
+         *  @return A reference to the const vec element.
+         */
+        template <size_t N>
+        constexpr const double& Vec<N>::operator[](const size_t index) const
+        {
+            return (elements[index]);
         }
 
 
