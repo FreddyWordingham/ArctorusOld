@@ -60,6 +60,21 @@ namespace arc
 
 
 
+        //  == INSTANTIATION ==
+        //  -- Constructors --
+        /**
+         *  Construct a vec and initialise all of its elements to zero.
+         *
+         * @tparam N
+         */
+        template <size_t N>
+        constexpr Vec<N>::Vec()
+        {
+            std::fill(elements.begin(), elements.end(), 0.0);
+        }
+
+
+
     } // namespace math
 } // namespace arc
 
