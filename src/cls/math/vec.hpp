@@ -77,6 +77,14 @@ namespace arc
             constexpr Vec<N> operator--(int /*unused*/);
             constexpr Vec<N> operator+() const;
             constexpr Vec<N> operator-() const;
+            template <size_t M>
+            friend constexpr Vec<M> operator+(const Vec<M>& lhs, double rhs);
+            template <size_t M>
+            friend constexpr Vec<M> operator+(const Vec<M>& lhs, const Vec<M>& rhs);
+            template <size_t M>
+            friend constexpr Vec<M> operator-(const Vec<M>& lhs, double rhs);
+            template <size_t M>
+            friend constexpr Vec<M> operator-(const Vec<M>& lhs, const Vec<M>& rhs);
 
 
             //  -- Printing --
@@ -429,23 +437,115 @@ namespace arc
             return (vec);
         }
 
+        /**
+         *  Create a new vec by adding a given value to the elements of a given vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  lhs Left hand side vec operand.
+         *  @param  rhs Right hand side value operand.
+         *
+         *  @return The created vec.
+         */
+        template <size_t N>
+        constexpr Vec<N> operator+(const Vec<N>& lhs, const double rhs)
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec.element[i] = lhs.element[i] + rhs;
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Create a new vec by adding the elements of a given vec to another vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  lhs Left hand side vec operand.
+         *  @param  rhs Right hand side vec operand.
+         *
+         *  @return The created vec.
+         */
+        template <size_t N>
+        constexpr Vec<N> operator+(const Vec<N>& lhs, const Vec<N>& rhs)
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec.element[i] = lhs.element[i] + rhs.element[i];
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Create a new vec by subtracting a given value form the elements of a given vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  lhs Left hand side vec operand.
+         *  @param  rhs Right hand side value operand.
+         *
+         *  @return The created vec.
+         */
+        template <size_t N>
+        constexpr Vec<N> operator-(const Vec<N>& lhs, const double rhs)
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec.element[i] = lhs.element[i] - rhs;
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Create a new vec by subtracting the elements of a given vec from another vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  lhs Left hand side vec operand.
+         *  @param  rhs Right hand side vec operand.
+         *
+         *  @return The created vec.
+         */
+        template <size_t N>
+        constexpr Vec<N> operator-(const Vec<N>& lhs, const Vec<N>& rhs)
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec.element[i] = lhs.element[i] - rhs.element[i];
+            }
+
+            return (vec);
+        }
+
 
 
         //  -- Printing --
         /**
          *  Enable printing of a vec to a given ostream.
          *
-         *  @tparam M   Size of the vec.
+         *  @tparam N   Size of the vec.
          *
          *  @param  stream  Stream to write to.
          *  @param  vec     Vec to be written.
          *
          *  @return A reference to the stream post-write.
          */
-        template <size_t M>
-        std::ostream& operator<<(std::ostream& stream, const Vec<M>& vec)
+        template <size_t N>
+        std::ostream& operator<<(std::ostream& stream, const Vec<N>& vec)
         {
-            if (M == 0)
+            if (N == 0)
             {
                 stream << "⟨⟩";
 
@@ -453,7 +553,7 @@ namespace arc
             }
 
             stream << "⟨" << vec.element[0];
-            for (size_t i = 1; i < M; ++i)
+            for (size_t i = 1; i < N; ++i)
             {
                 stream << ", " << vec.element[i];
             }
