@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <array>
+#include <initializer_list>
 #include <ostream>
 
 
@@ -42,13 +43,15 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            std::array<double, N> elements; //! Array of element values.
+            std::array<double, N> element;  //! Array of element values.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
             constexpr Vec();
+            explicit constexpr Vec(double init_elements);
+            explicit constexpr Vec(const std::initializer_list<double>& init_elements);
 
 
             //  == OPERATORS ==
@@ -74,12 +77,47 @@ namespace arc
         /**
          *  Construct a vec and initialise all of its elements to zero.
          *
-         * @tparam N
+         *  @tparam N   Size of the vec.
          */
         template <size_t N>
         constexpr Vec<N>::Vec()
         {
-            std::fill(elements.begin(), elements.end(), 0.0);
+            std::fill(element.begin(), element.end(), 0.0);
+        }
+
+        /**
+         *  Construct a vec and initialise all of its elements to the given initial value.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  init_element    Value to initialise all elements to.
+         */
+        template <size_t N>
+        constexpr Vec<N>::Vec(const double init_element)
+        {
+            std::fill(element.begin(), element.end(), init_element);
+        }
+
+        /**
+         *  Construct a vec and initialise all of its elements using the given initialiser list.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  init_element    List of values to initialise the vec elements to.
+         *
+         *  @post   All elements of the vec must vec must have been initialised.
+         */
+        template <size_t N>
+        constexpr Vec<N>::Vec(const std::initializer_list<double>& init_element)
+        {
+            size_t            i = 0;
+            for (const double val : init_element)
+            {
+                element[i] = val;
+                ++i;
+            }
+
+            assert(i == N);
         }
 
 
@@ -98,7 +136,7 @@ namespace arc
         template <size_t N>
         constexpr double& Vec<N>::operator[](const size_t index)
         {
-            return (elements[index]);
+            return (element[index]);
         }
 
         /**
@@ -113,7 +151,7 @@ namespace arc
         template <size_t N>
         constexpr const double& Vec<N>::operator[](const size_t index) const
         {
-            return (elements[index]);
+            return (element[index]);
         }
 
 
@@ -138,10 +176,10 @@ namespace arc
                 return (stream);
             }
 
-            stream << "⟨" << vec[0];
+            stream << "⟨" << vec.element[0];
             for (size_t i = 1; i < M; ++i)
             {
-                stream << ", " << vec[i];
+                stream << ", " << vec.element[i];
             }
             stream << "⟩";
 
