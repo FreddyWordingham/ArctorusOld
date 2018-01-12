@@ -30,14 +30,9 @@ int main()
 
     LOG(READ_FILE("../README.md"));
 
+    std::cout << 1 << "\n" << 2 << "\n";
+    std::cout << "\r\r" << 3 << "\n" << 4 << "\n";
 
-    std::array<double, 4> arr({{0.0, 1.0, 2.0, 3.0}});
-    for (size_t           i = 0; i < 5; ++i)
-    {
-        std::cout << i << " : ";
-        std::cout << arr[i];
-        std::cout << "\n";
-    }
 
     return (0);
 }
