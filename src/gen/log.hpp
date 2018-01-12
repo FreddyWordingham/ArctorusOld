@@ -59,6 +59,17 @@
 }                                                   \
 
 /**
+ *  Macro used to log a temporary string-value pair message.
+ *
+ *  @param  str String to be logged.
+ *  @param  val Value to be logged.
+ */
+#define TEMP(str, val)                                  \
+{                                                       \
+    arc::term::Logger::get_instance().temp(str, val);   \
+}                                                       \
+
+/**
  *  Macro used to log a warning message.
  *
  *  @param  symptom Text describing the symptom of the warning.
