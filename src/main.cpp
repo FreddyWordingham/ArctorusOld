@@ -14,6 +14,7 @@
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
+#include "cls/math/vec.hpp"
 
 
 
@@ -30,9 +31,9 @@ int main()
 
     LOG(READ_FILE("../README.md"));
 
-    std::cout << 1 << "\n" << 2 << "\n";
-    std::cout << "\r\r" << 3 << "\n" << 4 << "\n";
+    arc::math::Vec<4> v;
 
+    VAL(v);
 
     return (0);
 }

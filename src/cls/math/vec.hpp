@@ -129,21 +129,21 @@ namespace arc
          *  @return A reference to the stream post-write.
          */
         template <size_t M>
-        friend std::ostream& operator<<(std::ostream& stream, const Vec<M>& vec)
+        std::ostream& operator<<(std::ostream& stream, const Vec<M>& vec)
         {
             if (M == 0)
             {
-                stream << "[]";
+                stream << "⟨⟩";
 
                 return (stream);
             }
 
-            stream << "[" << vec[0];
+            stream << "⟨" << vec[0];
             for (size_t i = 1; i < M; ++i)
             {
                 stream << ", " << vec[i];
             }
-            stream << "]";
+            stream << "⟩";
 
             return (stream);
         }
