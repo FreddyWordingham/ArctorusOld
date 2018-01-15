@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <array>
 
 
 
@@ -40,14 +41,16 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            std::array<std::array<double, M>, N> element;   //! Two-dimensional array of element values.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-
-          private:
-            //  -- Initialisation --
+            constexpr Vec();
+            explicit constexpr Vec(double init_element);
+            explicit constexpr Vec(const std::array<double, N>& init_element);
 
 
             //  == OPERATORS ==
