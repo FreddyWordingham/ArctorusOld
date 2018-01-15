@@ -80,25 +80,25 @@ namespace arc
             constexpr Vec<N> operator--(int /*unused*/);
             constexpr Vec<N> operator+() const;
             constexpr Vec<N> operator-() const;
-            template <size_t V>
-            friend constexpr Vec<V> operator+(const Vec<V>& lhs, double rhs);
-            template <size_t V>
-            friend constexpr Vec<V> operator+(const Vec<V>& lhs, const Vec<V>& rhs);
-            template <size_t V>
-            friend constexpr Vec<V> operator-(const Vec<V>& lhs, double rhs);
-            template <size_t V>
-            friend constexpr Vec<V> operator-(const Vec<V>& lhs, const Vec<V>& rhs);
-            template <size_t V>
-            friend constexpr Vec<V> operator*(const Vec<V>& lhs, double rhs);
-            template <size_t V>
-            friend constexpr double operator*(const Vec<V>& lhs, const Vec<V>& rhs);
-            template <size_t V>
-            friend constexpr Vec<V> operator/(const Vec<V>& lhs, double rhs);
+            template <size_t U>
+            friend constexpr Vec<U> operator+(const Vec<U>& lhs, double rhs);
+            template <size_t U>
+            friend constexpr Vec<U> operator+(const Vec<U>& lhs, const Vec<U>& rhs);
+            template <size_t U>
+            friend constexpr Vec<U> operator-(const Vec<U>& lhs, double rhs);
+            template <size_t U>
+            friend constexpr Vec<U> operator-(const Vec<U>& lhs, const Vec<U>& rhs);
+            template <size_t U>
+            friend constexpr Vec<U> operator*(const Vec<U>& lhs, double rhs);
+            template <size_t U>
+            friend constexpr double operator*(const Vec<U>& lhs, const Vec<U>& rhs);
+            template <size_t U>
+            friend constexpr Vec<U> operator/(const Vec<U>& lhs, double rhs);
             friend constexpr Vec<3> operator^(const Vec<3>& lhs, const Vec<3>& rhs);
 
             //  -- Printing --
-            template <size_t V>
-            friend std::ostream& operator<<(std::ostream& stream, const Vec<V>& vec);
+            template <size_t U>
+            friend std::ostream& operator<<(std::ostream& stream, const Vec<U>& vec);
 
 
 
