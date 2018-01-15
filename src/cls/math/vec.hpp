@@ -105,12 +105,12 @@ namespace arc
             //  == METHODS ==
           private:
             //  -- Mathematical --
-            constexpr size_t min_index(const Vec<N>& vec) const;
-            constexpr size_t max_index(const Vec<N>& vec) const;
-            constexpr double min(const Vec<N>& vec) const;
-            constexpr double max(const Vec<N>& vec) const;
-            constexpr double total(const Vec<N>& vec) const;
-            constexpr double magnitude(const Vec<N>& vec) const;
+            constexpr size_t min_index() const;
+            constexpr size_t max_index() const;
+            constexpr double min() const;
+            constexpr double max() const;
+            constexpr double total() const;
+            constexpr double magnitude() const;
 
             //  -- Properties --
             constexpr bool is_ascending() const;
@@ -641,132 +641,86 @@ namespace arc
         *  Find the index of the vec which holds the smallest element.
         *  If multiple vec elements are equally the smallest, the index of the first will be returned.
         *
-        *  @param  vec vec to search.
-        *
         *  @pre    N must not be zero.
         *
         *  @return The index of the smallest element within the vec.
         */
         template <size_t N>
-        constexpr size_t Vec<N>::min_index(const Vec<N>& vec) const
+        constexpr size_t Vec<N>::min_index() const
         {
             static_assert(N != 0);
 
-            size_t index = 0;
-
-            for (size_t i = 1; i < N; ++i)
-            {
-                if (vec[i] < vec[index])
-                {
-                    index = i;
-                }
-            }
-
-            return (index);
+            return (utl::min_index(element));
         }
 
         /**
-        *  Find the index of the vec which holds the largest element.
-        *  If multiple vec elements are equally the largest, the index of the first will be returned.
-        *
-        *  @param  vec Vec to search.
-        *
-        *  @pre    N must not be zero.
-        *
-        *  @return The index of the largest element within the vec.
-        */
-        template <size_t N>
-        constexpr size_t Vec<N>::max_index(const Vec<N>& vec) const
-        {
-            static_assert(N != 0);
-
-            size_t index = 0;
-
-            for (size_t i = 1; i < N; ++i)
-            {
-                if (vec[i] > vec[index])
-                {
-                    index = i;
-                }
-            }
-
-            return (index);
-        }
-
-        /**
-         *  Create a copy of the smallest element within a given vec.
+         *  Find the index of the vec which holds the largest element.
+         *  If multiple vec elements are equally the largest, the index of the first will be returned.
          *
-         *  @param  vec Vec to copy the minimum value of.
+         *  @pre    N must not be zero.
+         *
+         *  @return The index of the largest element within the vec.
+         */
+        template <size_t N>
+        constexpr size_t Vec<N>::max_index() const
+        {
+            static_assert(N != 0);
+
+            return (utl::max_index(element));
+        }
+
+        /**
+         *  Create a copy of the smallest element within the vec.
          *
          *  @pre    N must not be zero.
          *
          * @return  A copy of the smallest value within the vec.
          */
         template <size_t N>
-        constexpr double Vec<N>::min(const Vec<N>& vec) const
+        constexpr double Vec<N>::min() const
         {
             static_assert(N != 0);
 
-            return (vec[min_index(vec)]);
+            return (utl::min(element));
         }
 
         /**
-         *  Create a copy of the largest element within a given vec.
-         *
-         *  @param  vec Vec to copy the maximum value of.
+         *  Create a copy of the largest element within the vec.
          *
          *  @pre    N must not be zero.
          *
          * @return  A copy of the largest value within the vec.
          */
         template <size_t N>
-        constexpr double Vec<N>::max(const Vec<N>& vec) const
+        constexpr double Vec<N>::max() const
         {
             static_assert(N != 0);
 
-            return (vec[max_index(vec)]);
+            return (utl::max(element));
         }
 
         /**
-         *  Determine the total of all elements stored within a given vec.
+         *  Determine the total of all elements stored within the vec.
          *  Empty vecs are considered to have a total of zero.
-         *
-         *  @param  vec Vec to find the total of.
          *
          *  @return The total of all elements stored within the vec.
          */
         template <size_t N>
-        constexpr double Vec<N>::total(const Vec<N>& vec) const
+        constexpr double Vec<N>::total() const
         {
-            double total = 0.0;
-
-            for (size_t i = 0; i < N; ++i)
-            {
-                total += vec[i];
-            }
-
-            return (total);
+            return (utl::total(element));
         }
 
         /**
-         *  Determine the magnitude of the given vec.
+         *  Determine the magnitude of the vec.
          *  Empty vecs are considered to have a magnitude of zero.
-         *
-         *  @param  vec Vec to find the magnitude of.
          *
          *  @return The magnitude of the vec.
          */
         template <size_t N>
-        constexpr double Vec<N>::magnitude(const Vec<N>& vec) const
+        constexpr double Vec<N>::magnitude() const
         {
-            double squared_total = 0.0;
-
-            for (size_t i = 0; i < N; ++i)
-            {
-                squared_total += vec[i] * vec[i];
-            }
-
-            return (std::sqrt(squared_total));
+            return (utl::magnitude(element));
         }
 
 
