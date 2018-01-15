@@ -101,15 +101,18 @@ namespace arc
 
             //  == METHODS ==
           private:
+            //  -- Mathematical --
+            constexpr size_t min_index(const Vec<N>& vec);
+            constexpr size_t max_index(const Vec<N>& vec);
+            constexpr double min(const Vec<N>& vec);
+            constexpr double max(const Vec<N>& vec);
+            constexpr double total(const Vec<N>& vec);
+            constexpr double magnitude(const Vec<N>& vec);
 
 
 
             //  == FUNCTION PROTOTYPES ==
             //  -- Mathematical --
-            template <size_t V>
-            friend constexpr size_t min_index(const Vec<V>& vec);
-            template <size_t V>
-            friend constexpr size_t max_index(const Vec<V>& vec);
         };
 
 
@@ -633,7 +636,6 @@ namespace arc
         }
 
 
-
         //  -- Printing --
         /**
          *  Enable printing of a vec to a given ostream.
@@ -667,22 +669,22 @@ namespace arc
 
 
 
-        //  == FUNCTIONS ==
+        //  == METHODS ==
         //  -- Mathematical --
         /**
-         *  Find the index of the vec which holds the smallest element.
-         *  If multiple vec elements are equally the smallest, the index of the first will be returned.
-         *
-         *  @tparam N   Size of the vec.
-         *
-         *  @param  vec Vec to search.
-         *
-         *  @pre    N must not be zero.
-         *
-         *  @return The index of the smallest element within the vec.
-         */
+        *  Find the index of the Vec which holds the smallest element.
+        *  If multiple Vec elements are equally the smallest, the index of the first will be returned.
+        *
+        *  @tparam N   Size of the Vec.
+        *
+        *  @param  vec Vec to search.
+        *
+        *  @pre    N must not be zero.
+        *
+        *  @return The index of the smallest element within the Vec.
+        */
         template <size_t N>
-        constexpr size_t min_index(const Vec<N>& vec)
+        constexpr size_t Vec<N>::min_index(const Vec<N>& vec)
         {
             static_assert(N != 0);
 
@@ -690,7 +692,7 @@ namespace arc
 
             for (size_t i = 1; i < N; ++i)
             {
-                if (vec.element[i] < vec.element[index])
+                if (vec[i] < vec[index])
                 {
                     index = i;
                 }
@@ -700,19 +702,19 @@ namespace arc
         }
 
         /**
-         *  Find the index of the vec which holds the largest element.
-         *  If multiple vec elements are equally the largest, the index of the first will be returned.
-         *
-         *  @tparam N   Size of the vec.
-         *
-         *  @param  vec Vec to search.
-         *
-         *  @pre    N must not be zero.
-         *
-         *  @return The index of the largest element within the vec.
-         */
+        *  Find the index of the Vec which holds the largest element.
+        *  If multiple Vec elements are equally the largest, the index of the first will be returned.
+        *
+        *  @tparam N   Size of the Vec.
+        *
+        *  @param  vec Vec to search.
+        *
+        *  @pre    N must not be zero.
+        *
+        *  @return The index of the largest element within the Vec.
+        */
         template <size_t N>
-        constexpr size_t max_index(const Vec<N>& vec)
+        constexpr size_t Vec<N>::max_index(const Vec<N>& vec)
         {
             static_assert(N != 0);
 
@@ -720,13 +722,97 @@ namespace arc
 
             for (size_t i = 1; i < N; ++i)
             {
-                if (vec.element[i] > vec.element[index])
+                if (vec[i] > vec[index])
                 {
                     index = i;
                 }
             }
 
             return (index);
+        }
+
+        /**
+         *  Create a copy of the smallest element within a given Vec.
+         *
+         *  @tparam N   Size of the Vec.
+         *
+         *  @param  vec Vec to copy the minimum value of.
+         *
+         *  @pre    N must not be zero.
+         *
+         * @return  A copy of the smallest value within the Vec.
+         */
+        template <size_t N>
+        constexpr double Vec<N>::min(const Vec<N>& vec)
+        {
+            static_assert(N != 0);
+
+            return (vec[min_index(vec)]);
+        }
+
+        /**
+         *  Create a copy of the largest element within a given Vec.
+         *
+         *  @tparam N   Size of the Vec.
+         *
+         *  @param  vec Vec to copy the maximum value of.
+         *
+         *  @pre    N must not be zero.
+         *
+         * @return  A copy of the largest value within the Vec.
+         */
+        template <size_t N>
+        constexpr double Vec<N>::max(const Vec<N>& vec)
+        {
+            static_assert(N != 0);
+
+            return (vec[max_index(vec)]);
+        }
+
+        /**
+         *  Determine the total of all elements stored within a given Vec.
+         *  Empty Vecs are considered to have a total of zero.
+         *
+         *  @tparam N   Size of the Vec.
+         *
+         *  @param  vec Vec to find the total of.
+         *
+         *  @return The total of all elements stored within the Vec.
+         */
+        template <size_t N>
+        constexpr double Vec<N>::total(const Vec<N>& vec)
+        {
+            double total = 0.0;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                total += vec[i];
+            }
+
+            return (total);
+        }
+
+        /**
+         *  Determine the magnitude of the given Vec.
+         *  Empty Vecs are considered to have a magnitude of zero.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  vec Vec to find the magnitude of.
+         *
+         *  @return The magnitude of the vec.
+         */
+        template <size_t N>
+        constexpr double Vec<N>::magnitude(const Vec<N>& vec)
+        {
+            double squared_total = 0.0;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                squared_total += vec[i] * vec[i];
+            }
+
+            return (std::sqrt(squared_total));
         }
 
 
