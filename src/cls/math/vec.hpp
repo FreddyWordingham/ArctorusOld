@@ -126,10 +126,11 @@ namespace arc
             template <typename T>
             constexpr bool is_always_greater_than_or_equal_to(T limit);
 
-
-
-            //  == FUNCTION PROTOTYPES ==
-            //  -- Mathematical --
+            //  -- Searching --
+            template <typename S>
+            size_t lower_index(S val, size_t init_guess = 0);
+            template <typename S>
+            size_t upper_index(S val, size_t init_guess = 1);
         };
 
 
@@ -901,6 +902,65 @@ namespace arc
             return (utl::is_always_greater_than_or_equal_to(element, limit));
         }
 
+
+        //  -- Searching --
+        /**
+         *  Determine the lower index of the element pair which encapsulates the given value.
+         *  If the value is equal to an element of the vec then the lower index is that index, unless it is the last element.
+         *
+         *  @tparam S   Type of the value to be found within the array.
+         *
+         *  @param  val         Value to locate within the vec.
+         *  @param  init_guess  Initial guess for the upper index.
+         *
+         *  @pre    N must be greater than one.
+         *  @pre    vec must be sorted in monotonic order.
+         *  @pre    val must be within the array limits.
+         *  @pre    init_guess must be a valid index of the vec.
+         *
+         *  @return The upper index of the element pair which encapsulates the value.
+         */
+        template <size_t N>
+        template <typename S>
+        size_t Vec<N>::lower_index(const S val, const size_t init_guess)
+        {
+            static_assert(N > 1);
+            assert(utl::is_monotonic(element));
+            assert(
+                ((val >= element.front()) && (val <= element.back())) || ((val <= element.front()) && (val >= element.back())));
+            assert(init_guess < N);
+
+            return (utl::lower_index(element, val, init_guess));
+        }
+
+        /**
+         *  Determine the upper index of the element pair which encapsulates the given value.
+         *  If the value is equal to an element of the vec then the upper index is that index, unless it is the first element.
+         *
+         *  @tparam S   Type of the value to be found within the array.
+         *
+         *  @param  val         Value to locate within the vec.
+         *  @param  init_guess  Initial guess for the upper index.
+         *
+         *  @pre    N must be greater than one.
+         *  @pre    vec must be sorted in monotonic order.
+         *  @pre    val must be within the array limits.
+         *  @pre    init_guess must be a valid index of the vec.
+         *
+         *  @return The upper index of the element pair which encapsulates the value.
+         */
+        template <size_t N>
+        template <typename S>
+        size_t Vec<N>::upper_index(const S val, const size_t init_guess)
+        {
+            static_assert(N > 1);
+            assert(utl::is_monotonic(element));
+            assert(
+                ((val >= element.front()) && (val <= element.back())) || ((val <= element.front()) && (val >= element.back())));
+            assert(init_guess < N);
+
+            return (utl::upper_index(element, val, init_guess));
+        }
 
 
 
