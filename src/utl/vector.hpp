@@ -431,7 +431,7 @@ namespace arc
         //  -- Searching --
         /**
          *  Determine the lower index of the element pair which encapsulates the given value.
-         *  If the value is equal to an element of the vector then the lower index is that index, unless it is the final
+         *  If the value is equal to an element of the vector then the lower index is that index, unless it is the last
          *  element.
          *
          *  @tparam T   Type stored by the vector.
@@ -444,7 +444,7 @@ namespace arc
          *  @pre    vec must contain more than one element.
          *  @pre    vec must be sorted in monotonic order.
          *  @pre    val must be within the vec limits.
-         *  @pre    init_guess must be a valid index of the vec.
+         *  @pre    init_guess must be a valid index of the vector.
          *
          *  @return The lower index of the element pair which encapsulates the value.
          */
@@ -542,7 +542,7 @@ namespace arc
          *  @pre    vec must contain more than one element.
          *  @pre    vec must be sorted in monotonic order.
          *  @pre    val must be within the vec limits.
-         *  @pre    init_guess must be a valid index of the vec.
+         *  @pre    init_guess must be a valid index of the vector.
          *
          *  @return The upper index of the element pair which encapsulates the value.
          */
