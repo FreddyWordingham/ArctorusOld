@@ -105,32 +105,32 @@ namespace arc
             //  == METHODS ==
           private:
             //  -- Mathematical --
-            constexpr size_t min_index(const Vec<N>& vec);
-            constexpr size_t max_index(const Vec<N>& vec);
-            constexpr double min(const Vec<N>& vec);
-            constexpr double max(const Vec<N>& vec);
-            constexpr double total(const Vec<N>& vec);
-            constexpr double magnitude(const Vec<N>& vec);
+            constexpr size_t min_index(const Vec<N>& vec) const;
+            constexpr size_t max_index(const Vec<N>& vec) const;
+            constexpr double min(const Vec<N>& vec) const;
+            constexpr double max(const Vec<N>& vec) const;
+            constexpr double total(const Vec<N>& vec) const;
+            constexpr double magnitude(const Vec<N>& vec) const;
 
             //  -- Properties --
-            constexpr bool is_ascending();
-            constexpr bool is_descending();
-            constexpr bool is_monotonic();
-            constexpr bool is_uniform(double tol = std::numeric_limits<double>::epsilon());
+            constexpr bool is_ascending() const;
+            constexpr bool is_descending() const;
+            constexpr bool is_monotonic() const;
+            constexpr bool is_uniform(double tol = std::numeric_limits<double>::epsilon()) const;
             template <typename T>
-            constexpr bool is_always_less_than(T limit);
+            constexpr bool is_always_less_than(T limit) const;
             template <typename T>
-            constexpr bool is_always_less_than_or_equal_to(T limit);
+            constexpr bool is_always_less_than_or_equal_to(T limit) const;
             template <typename T>
-            constexpr bool is_always_greater_than(T limit);
+            constexpr bool is_always_greater_than(T limit) const;
             template <typename T>
-            constexpr bool is_always_greater_than_or_equal_to(T limit);
+            constexpr bool is_always_greater_than_or_equal_to(T limit) const;
 
             //  -- Searching --
             template <typename S>
-            size_t lower_index(S val, size_t init_guess = 0);
+            size_t lower_index(S val, size_t init_guess = 0) const;
             template <typename S>
-            size_t upper_index(S val, size_t init_guess = 1);
+            size_t upper_index(S val, size_t init_guess = 1) const;
         };
 
 
@@ -648,7 +648,7 @@ namespace arc
         *  @return The index of the smallest element within the vec.
         */
         template <size_t N>
-        constexpr size_t Vec<N>::min_index(const Vec<N>& vec)
+        constexpr size_t Vec<N>::min_index(const Vec<N>& vec) const
         {
             static_assert(N != 0);
 
@@ -676,7 +676,7 @@ namespace arc
         *  @return The index of the largest element within the vec.
         */
         template <size_t N>
-        constexpr size_t Vec<N>::max_index(const Vec<N>& vec)
+        constexpr size_t Vec<N>::max_index(const Vec<N>& vec) const
         {
             static_assert(N != 0);
 
@@ -703,7 +703,7 @@ namespace arc
          * @return  A copy of the smallest value within the vec.
          */
         template <size_t N>
-        constexpr double Vec<N>::min(const Vec<N>& vec)
+        constexpr double Vec<N>::min(const Vec<N>& vec) const
         {
             static_assert(N != 0);
 
@@ -720,7 +720,7 @@ namespace arc
          * @return  A copy of the largest value within the vec.
          */
         template <size_t N>
-        constexpr double Vec<N>::max(const Vec<N>& vec)
+        constexpr double Vec<N>::max(const Vec<N>& vec) const
         {
             static_assert(N != 0);
 
@@ -736,7 +736,7 @@ namespace arc
          *  @return The total of all elements stored within the vec.
          */
         template <size_t N>
-        constexpr double Vec<N>::total(const Vec<N>& vec)
+        constexpr double Vec<N>::total(const Vec<N>& vec) const
         {
             double total = 0.0;
 
@@ -757,7 +757,7 @@ namespace arc
          *  @return The magnitude of the vec.
          */
         template <size_t N>
-        constexpr double Vec<N>::magnitude(const Vec<N>& vec)
+        constexpr double Vec<N>::magnitude(const Vec<N>& vec) const
         {
             double squared_total = 0.0;
 
@@ -780,7 +780,7 @@ namespace arc
          *  @return True if the vec's elements are sorted in ascending order.
         */
         template <size_t N>
-        constexpr bool Vec<N>::is_ascending()
+        constexpr bool Vec<N>::is_ascending() const
         {
             static_assert(N > 1);
 
@@ -796,7 +796,7 @@ namespace arc
          *  @return True if the vec's elements are sorted in descending order.
         */
         template <size_t N>
-        constexpr bool Vec<N>::is_descending()
+        constexpr bool Vec<N>::is_descending() const
         {
             static_assert(N > 1);
 
@@ -813,7 +813,7 @@ namespace arc
          *  @return True if the vec's elements are sorted in monotonic order.
          */
         template <size_t N>
-        constexpr bool Vec<N>::is_monotonic()
+        constexpr bool Vec<N>::is_monotonic() const
         {
             static_assert(N > 1);
 
@@ -831,7 +831,7 @@ namespace arc
          *  @return True if the vec's elements are uniformly spaced.
          */
         template <size_t N>
-        constexpr bool Vec<N>::is_uniform(const double tol)
+        constexpr bool Vec<N>::is_uniform(const double tol) const
         {
             static_assert(N > 1);
 
@@ -849,7 +849,7 @@ namespace arc
          */
         template <size_t N>
         template <typename T>
-        constexpr bool Vec<N>::is_always_less_than(const T limit)
+        constexpr bool Vec<N>::is_always_less_than(const T limit) const
         {
             return (utl::is_always_less_than(element, limit));
         }
@@ -865,7 +865,7 @@ namespace arc
          */
         template <size_t N>
         template <typename T>
-        constexpr bool Vec<N>::is_always_less_than_or_equal_to(const T limit)
+        constexpr bool Vec<N>::is_always_less_than_or_equal_to(const T limit) const
         {
             return (utl::is_always_less_than_or_equal_to(element, limit));
         }
@@ -881,7 +881,7 @@ namespace arc
          */
         template <size_t N>
         template <typename T>
-        constexpr bool Vec<N>::is_always_greater_than(const T limit)
+        constexpr bool Vec<N>::is_always_greater_than(const T limit) const
         {
             return (utl::is_always_greater_than(element, limit));
         }
@@ -897,7 +897,7 @@ namespace arc
          */
         template <size_t N>
         template <typename T>
-        constexpr bool Vec<N>::is_always_greater_than_or_equal_to(const T limit)
+        constexpr bool Vec<N>::is_always_greater_than_or_equal_to(const T limit) const
         {
             return (utl::is_always_greater_than_or_equal_to(element, limit));
         }
@@ -922,7 +922,7 @@ namespace arc
          */
         template <size_t N>
         template <typename S>
-        size_t Vec<N>::lower_index(const S val, const size_t init_guess)
+        size_t Vec<N>::lower_index(const S val, const size_t init_guess) const
         {
             static_assert(N > 1);
             assert(utl::is_monotonic(element));
@@ -951,7 +951,7 @@ namespace arc
          */
         template <size_t N>
         template <typename S>
-        size_t Vec<N>::upper_index(const S val, const size_t init_guess)
+        size_t Vec<N>::upper_index(const S val, const size_t init_guess) const
         {
             static_assert(N > 1);
             assert(utl::is_monotonic(element));
