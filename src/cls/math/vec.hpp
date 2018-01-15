@@ -103,7 +103,7 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
             //  -- Mathematical --
             constexpr size_t min_index() const;
             constexpr size_t max_index() const;
@@ -114,7 +114,7 @@ namespace arc
             constexpr void normalise();
 
             //  -- Properties --
-            constexpr void is_normalised(double tol = std::numeric_limits<double>::epsilon()) const;
+            constexpr bool is_normalised(double tol = std::numeric_limits<double>::epsilon()) const;
             constexpr bool is_ascending() const;
             constexpr bool is_descending() const;
             constexpr bool is_monotonic() const;

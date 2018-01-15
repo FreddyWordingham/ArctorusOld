@@ -37,5 +37,15 @@ int main()
 
     arc::math::Vec<5> vec({{0.0, 1.0, -1.0, 7.0, -7.0}});
 
+    VAL(vec.min_index());
+    VAL(vec.max_index());
+    VAL(vec.min());
+    VAL(vec.max());
+    VAL(vec.total());
+    VAL(vec.normalise());
+    VAL(vec);
+    VAL(vec.is_normalised());
+
+
     return (0);
 }
