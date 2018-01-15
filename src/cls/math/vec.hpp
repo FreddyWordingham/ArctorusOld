@@ -22,6 +22,9 @@
 //  -- General --
 #include "gen/enum.hpp"
 
+//  -- Utility --
+#include "utl/array.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -109,6 +112,20 @@ namespace arc
             constexpr double total(const Vec<N>& vec);
             constexpr double magnitude(const Vec<N>& vec);
 
+            //  -- Properties --
+            constexpr bool is_ascending();
+            constexpr bool is_descending();
+            constexpr bool is_monotonic();
+            constexpr bool is_uniform(double tol = std::numeric_limits<double>::epsilon());
+            template <typename T>
+            constexpr bool is_always_less_than(T limit);
+            template <typename T>
+            constexpr bool is_always_less_than_or_equal_to(T limit);
+            template <typename T>
+            constexpr bool is_always_greater_than(T limit);
+            template <typename T>
+            constexpr bool is_always_greater_than_or_equal_to(T limit);
+
 
 
             //  == FUNCTION PROTOTYPES ==
@@ -121,8 +138,6 @@ namespace arc
         //  -- Constructors --
         /**
          *  Construct a vec and initialise all of its elements to zero.
-         *
-         *  @tparam N   Size of the vec.
          */
         template <size_t N>
         constexpr Vec<N>::Vec()
@@ -132,8 +147,6 @@ namespace arc
 
         /**
          *  Construct a vec and initialise all of its elements to the given initial value.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  init_element    Value to initialise all elements to.
          */
@@ -145,8 +158,6 @@ namespace arc
 
         /**
          *  Construct a vec and initialise all of its elements using the given array.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  init_element    Array of values to initialise the vec elements to.
          */
@@ -163,8 +174,6 @@ namespace arc
         /**
          *  Retrieve a reference to an element of the vec.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @param  index   Index of the element to access.
          *
          *  @return A reference to the vec element.
@@ -177,8 +186,6 @@ namespace arc
 
         /**
          *  Retrieve a reference to a const element of the vec.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  index   Index of the element to access.
          *
@@ -194,8 +201,6 @@ namespace arc
         //  -- Mathematical --
         /**
          *  Add a value to all elements of a vec.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  rhs Value to add to each vec element.
          *
@@ -215,8 +220,6 @@ namespace arc
         /**
          *  Add the element values of another vec to this vec.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @param  rhs Vec of elements to add to this vec.
          *
          *  @return A reference to this vec post-addition.
@@ -234,8 +237,6 @@ namespace arc
 
         /**
          *  Subtract a value from all elements of a vec.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  rhs Value to subtract from each vec element.
          *
@@ -255,8 +256,6 @@ namespace arc
         /**
          *  Subtract the element values of another vec from this vec.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @param  rhs Vec of elements to subtract from this vec.
          *
          *  @return A reference to this vec post-subtraction.
@@ -275,8 +274,6 @@ namespace arc
         /**
          *  Multiply all elements of a vec by a value.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @param  rhs Value to multiply each vec element by.
          *
          *  @return A reference to this vec post-multiplication.
@@ -294,8 +291,6 @@ namespace arc
 
         /**
          *  Divide all elements of a vec by a value.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  rhs Value to divide each vec element by.
          *
@@ -316,8 +311,6 @@ namespace arc
         /**
          *  Determine the cross-product of this vec and another given vec.
          *  This vec acts as the left hand side operand.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  rhs Vec to perform cross product with.
          *
@@ -342,8 +335,6 @@ namespace arc
         /**
          *  Increment each element stored by the vec.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @return A reference to this vec post-increment.
          */
         template <size_t N>
@@ -359,8 +350,6 @@ namespace arc
 
         /**
          *  Increment each element stored by the vec.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @return A copy of this vec post-increment.
          */
@@ -380,8 +369,6 @@ namespace arc
         /**
          *  Decrement each element stored by the vec.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @return A reference to this vec post-decrement.
          */
         template <size_t N>
@@ -397,8 +384,6 @@ namespace arc
 
         /**
          *  Decrement each element stored by the vec.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @return A copy of this vec post-decrement.
          */
@@ -418,8 +403,6 @@ namespace arc
         /**
          *  Create a vec with a copy of the element values.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @return A copy of this vec with the same element values.
          */
         template <size_t N>
@@ -438,8 +421,6 @@ namespace arc
         /**
          *  Create a vec with a copy of the negated element values.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @return A copy of this vec with the negated element values.
          */
         template <size_t N>
@@ -457,8 +438,6 @@ namespace arc
 
         /**
          *  Create a new vec by adding a given value to the elements of a given vec.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side value operand.
@@ -481,8 +460,6 @@ namespace arc
         /**
          *  Create a new vec by adding the elements of a given vec to another vec.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side vec operand.
          *
@@ -503,8 +480,6 @@ namespace arc
 
         /**
          *  Create a new vec by subtracting a given value form the elements of a given vec.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side value operand.
@@ -527,8 +502,6 @@ namespace arc
         /**
          *  Create a new vec by subtracting the elements of a given vec from another vec.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side vec operand.
          *
@@ -550,8 +523,6 @@ namespace arc
         /**
          *  Create a new vec by multiplying elements of a given vec by a value.
          *
-         *  @tparam N   Size of the vec.
-         *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side value operand.
          *
@@ -571,14 +542,12 @@ namespace arc
         }
 
         /**
-         *  Determine the dot-product of two vectors.
-         *
-         *  @tparam N   Size of the vec.
+         *  Determine the dot-product of two vecs.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side vec operand.
          *
-         *  @return The dot-product of the vectors.
+         *  @return The dot-product of the vecs.
          */
         template <size_t N>
         constexpr double operator*(const Vec<N>& lhs, const Vec<N>& rhs)
@@ -595,8 +564,6 @@ namespace arc
 
         /**
          *  Create a new vec by dividing elements of a given vec by a value.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side value operand.
@@ -617,12 +584,12 @@ namespace arc
         }
 
         /**
-         *  Determine the cross-product of two vectors.
+         *  Determine the cross-product of two vecs.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side vec operand.
          *
-         *  @return The cross-product of the vectors.
+         *  @return The cross-product of the vecs.
          */
         constexpr Vec<3> operator^(const Vec<3>& lhs, const Vec<3>& rhs)
         {
@@ -639,8 +606,6 @@ namespace arc
         //  -- Printing --
         /**
          *  Enable printing of a vec to a given ostream.
-         *
-         *  @tparam N   Size of the vec.
          *
          *  @param  stream  Stream to write to.
          *  @param  vec     Vec to be written.
@@ -672,16 +637,14 @@ namespace arc
         //  == METHODS ==
         //  -- Mathematical --
         /**
-        *  Find the index of the Vec which holds the smallest element.
-        *  If multiple Vec elements are equally the smallest, the index of the first will be returned.
+        *  Find the index of the vec which holds the smallest element.
+        *  If multiple vec elements are equally the smallest, the index of the first will be returned.
         *
-        *  @tparam N   Size of the Vec.
-        *
-        *  @param  vec Vec to search.
+        *  @param  vec vec to search.
         *
         *  @pre    N must not be zero.
         *
-        *  @return The index of the smallest element within the Vec.
+        *  @return The index of the smallest element within the vec.
         */
         template <size_t N>
         constexpr size_t Vec<N>::min_index(const Vec<N>& vec)
@@ -702,16 +665,14 @@ namespace arc
         }
 
         /**
-        *  Find the index of the Vec which holds the largest element.
-        *  If multiple Vec elements are equally the largest, the index of the first will be returned.
-        *
-        *  @tparam N   Size of the Vec.
+        *  Find the index of the vec which holds the largest element.
+        *  If multiple vec elements are equally the largest, the index of the first will be returned.
         *
         *  @param  vec Vec to search.
         *
         *  @pre    N must not be zero.
         *
-        *  @return The index of the largest element within the Vec.
+        *  @return The index of the largest element within the vec.
         */
         template <size_t N>
         constexpr size_t Vec<N>::max_index(const Vec<N>& vec)
@@ -732,15 +693,13 @@ namespace arc
         }
 
         /**
-         *  Create a copy of the smallest element within a given Vec.
-         *
-         *  @tparam N   Size of the Vec.
+         *  Create a copy of the smallest element within a given vec.
          *
          *  @param  vec Vec to copy the minimum value of.
          *
          *  @pre    N must not be zero.
          *
-         * @return  A copy of the smallest value within the Vec.
+         * @return  A copy of the smallest value within the vec.
          */
         template <size_t N>
         constexpr double Vec<N>::min(const Vec<N>& vec)
@@ -751,15 +710,13 @@ namespace arc
         }
 
         /**
-         *  Create a copy of the largest element within a given Vec.
-         *
-         *  @tparam N   Size of the Vec.
+         *  Create a copy of the largest element within a given vec.
          *
          *  @param  vec Vec to copy the maximum value of.
          *
          *  @pre    N must not be zero.
          *
-         * @return  A copy of the largest value within the Vec.
+         * @return  A copy of the largest value within the vec.
          */
         template <size_t N>
         constexpr double Vec<N>::max(const Vec<N>& vec)
@@ -770,14 +727,12 @@ namespace arc
         }
 
         /**
-         *  Determine the total of all elements stored within a given Vec.
-         *  Empty Vecs are considered to have a total of zero.
-         *
-         *  @tparam N   Size of the Vec.
+         *  Determine the total of all elements stored within a given vec.
+         *  Empty vecs are considered to have a total of zero.
          *
          *  @param  vec Vec to find the total of.
          *
-         *  @return The total of all elements stored within the Vec.
+         *  @return The total of all elements stored within the vec.
          */
         template <size_t N>
         constexpr double Vec<N>::total(const Vec<N>& vec)
@@ -793,10 +748,8 @@ namespace arc
         }
 
         /**
-         *  Determine the magnitude of the given Vec.
-         *  Empty Vecs are considered to have a magnitude of zero.
-         *
-         *  @tparam N   Size of the vec.
+         *  Determine the magnitude of the given vec.
+         *  Empty vecs are considered to have a magnitude of zero.
          *
          *  @param  vec Vec to find the magnitude of.
          *
@@ -814,6 +767,140 @@ namespace arc
 
             return (std::sqrt(squared_total));
         }
+
+
+        //  -- Properties --
+        /**
+         *  Determine if the vec's elements are sorted in ascending order.
+         *  Vec is not considered ascending if two consecutive values are equal.
+         *
+         *  @pre    N must be greater than one.
+         *
+         *  @return True if the vec's elements are sorted in ascending order.
+        */
+        template <size_t N>
+        constexpr bool Vec<N>::is_ascending()
+        {
+            static_assert(N > 1);
+
+            return (utl::is_ascending(element));
+        }
+
+        /**
+         *  Determine if the vec's elements are sorted in descending order.
+         *  Vec is not considered descending if two consecutive values are equal.
+         *
+         *  @pre    N must be greater than one.
+         *
+         *  @return True if the vec's elements are sorted in descending order.
+        */
+        template <size_t N>
+        constexpr bool Vec<N>::is_descending()
+        {
+            static_assert(N > 1);
+
+            return (utl::is_descending(element));
+        }
+
+        /**
+         *  Determine if the vec's elements are sorted in monotonic order.
+         *  Determine if the vec's elements are sorted in ascending or descending order.
+         *  Vec is not considered monotonic if two consecutive values are equal.
+         *
+         *  @pre    N must be greater than one.
+         *
+         *  @return True if the vec's elements are sorted in monotonic order.
+         */
+        template <size_t N>
+        constexpr bool Vec<N>::is_monotonic()
+        {
+            static_assert(N > 1);
+
+            return (utl::is_monotonic(element));
+        }
+
+        /**
+         *  Determine if the vec's elements are uniformly separated to within a given tolerance.
+         *  Vec must contain at more than one element.
+         *
+         *  @param  tol Maximum consecutive delta difference from the average delta where vec is considered uniform.
+         *
+         *  @pre    N must be greater than one.
+         *
+         *  @return True if the vec's elements are uniformly spaced.
+         */
+        template <size_t N>
+        constexpr bool Vec<N>::is_uniform(const double tol)
+        {
+            static_assert(N > 1);
+
+            return (utl::is_uniform(element, tol));
+        }
+
+        /**
+         *  Determine if a given vec's elements are always less than a given limit.
+         *
+         *  @tparam T   Type of the limit.
+         *
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the vec's elements are all less than the given limit.
+         */
+        template <size_t N>
+        template <typename T>
+        constexpr bool Vec<N>::is_always_less_than(const T limit)
+        {
+            return (utl::is_always_less_than(element, limit));
+        }
+
+        /**
+         *  Determine if a given vec's elements are always less than, or equal to, a given limit.
+         *
+         *  @tparam T   Type of the limit.
+         *
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the vec's elements are all less than, or equal to, the given limit.
+         */
+        template <size_t N>
+        template <typename T>
+        constexpr bool Vec<N>::is_always_less_than_or_equal_to(const T limit)
+        {
+            return (utl::is_always_less_than_or_equal_to(element, limit));
+        }
+
+        /**
+         *  Determine if the vec's elements are always greater than a given limit.
+         *
+         *  @tparam T   Type of the limit.
+         *
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the vec's elements are all greater than the given limit.
+         */
+        template <size_t N>
+        template <typename T>
+        constexpr bool Vec<N>::is_always_greater_than(const T limit)
+        {
+            return (utl::is_always_greater_than(element, limit));
+        }
+
+        /**
+         *  Determine if the vec's elements are always less than, or equal to, a given limit.
+         *
+         *  @tparam T   Type of the limit.
+         *
+         *  @param  limit   Limit to be tested.
+         *
+         *  @return True if the vec's elements are all greater than, or equal to, the given limit.
+         */
+        template <size_t N>
+        template <typename T>
+        constexpr bool Vec<N>::is_always_greater_than_or_equal_to(const T limit)
+        {
+            return (utl::is_always_greater_than_or_equal_to(element, limit));
+        }
+
 
 
 
