@@ -445,7 +445,7 @@ namespace arc
         //  -- Searching --
         /**
          *  Determine the lower index of the element pair which encapsulates the given value.
-         *  If the value is equal to an element of the array then the lower index is that index, unless it is the final element.
+         *  If the value is equal to an element of the array then the lower index is that index, unless it is the last element.
          *
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
@@ -458,7 +458,7 @@ namespace arc
          *  @pre    N must be greater than one.
          *  @pre    arr must be sorted in monotonic order.
          *  @pre    val must be within the array limits.
-         *  @pre    init_guess must be a valid index of the arr.
+         *  @pre    init_guess must be a valid index of the array.
          *
          *  @return The lower index of the element pair which encapsulates the value.
          */
@@ -556,7 +556,7 @@ namespace arc
          *  @pre    N must be greater than one.
          *  @pre    arr must be sorted in monotonic order.
          *  @pre    val must be within the array limits.
-         *  @pre    init_guess must be a valid index of the arr.
+         *  @pre    init_guess must be a valid index of the array.
          *
          *  @return The upper index of the element pair which encapsulates the value.
          */
