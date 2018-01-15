@@ -111,8 +111,10 @@ namespace arc
             constexpr double max() const;
             constexpr double total() const;
             constexpr double magnitude() const;
+            constexpr void normalise();
 
             //  -- Properties --
+            constexpr void is_normalised(double tol = std::numeric_limits<double>::epsilon()) const;
             constexpr bool is_ascending() const;
             constexpr bool is_descending() const;
             constexpr bool is_monotonic() const;
@@ -723,8 +725,37 @@ namespace arc
             return (utl::magnitude(element));
         }
 
+        /**
+         *  Normalise the vec by deviding each element by the magnitude of the total vec.
+         */
+        template <size_t N>
+        constexpr void Vec<N>::normalise()
+        {
+            const double mag = utl::magnitude(element);
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                element[i] /= mag;
+            }
+
+            assert(is_normalised());
+        }
+
 
         //  -- Properties --
+        /**
+         *  Determine if the vec is normalised to within a given tolerance.
+         *
+         *  @param  tol Maximum deviation from unity where vec is considered uniform.
+         *
+         *  @return True if the vec's magnitude is equal to one within the given tolerance.
+         */
+        template <size_t N>
+        constexpr bool Vec<N>::is_normalised(const double tol) const
+        {
+            return (std::fabs(utl::magnitude(element) - 1.0) <= tol);
+        }
+
         /**
          *  Determine if the vec's elements are sorted in ascending order.
          *  Vec is not considered ascending if two consecutive values are equal.
