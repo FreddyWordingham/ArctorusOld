@@ -17,7 +17,7 @@
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
-#include "cls/math/vec.hpp"
+#include "cls/math/mat.hpp"
 
 using namespace arc;
 
@@ -35,9 +35,7 @@ int main()
 
     LOG(READ_FILE("../README.md"));
 
-    arc::math::Vec<5> vec({{0.0, 1.0, -1.0, 7.0, -7.0}});
-
-    VAL(vec.magnitude());
+    arc::math::Mat<3, 2> mat({{{{0, 1}}, {{2, 3}}, {{4, 5}}}});
 
 
     return (0);

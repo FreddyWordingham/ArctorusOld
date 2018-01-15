@@ -48,9 +48,9 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            constexpr Vec();
-            explicit constexpr Vec(double init_element);
-            explicit constexpr Vec(const std::array<double, N>& init_element);
+            constexpr Mat();
+            explicit constexpr Mat(double init_element);
+            explicit constexpr Mat(const std::array<std::array<double, M>, N>& init_element);
 
 
             //  == OPERATORS ==
@@ -60,6 +60,47 @@ namespace arc
             //  == METHODS ==
           private:
         };
+
+
+
+        //  == INSTANTIATION ==
+        //  -- Constructors --
+        /**
+         *  Construct a mat and initialise all of its elements to zero.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>::Mat()
+        {
+            std::fill(element.begin(), element.end(), 0.0);
+        }
+
+        /**
+         *  Construct a mat and initialise all of its elements to the given initial value.
+         *
+         *  @param  init_element    Value to initialise all elements to.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>::Mat(const double init_element)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    element[i][j] = init_element;
+                }
+            }
+        }
+
+        /**
+         *  Construct a mat and initialise all of its elements using the given two-dimensional array.
+         *
+         *  @param  init_element    Two-dimensional array of values to initialise the vec elements to.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>::Mat(const std::array<std::array<double, M>, N>& init_element) :
+            element(init_element)
+        {
+        }
 
 
 
