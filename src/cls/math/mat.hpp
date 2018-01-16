@@ -59,6 +59,15 @@ namespace arc
             constexpr std::array<double, M>& operator[](size_t index);
             constexpr const std::array<double, M>& operator[](size_t index) const;
 
+            //  -- Mathematical --
+            constexpr Mat<N, M>& operator+=(double rhs);
+            constexpr Mat<N, M>& operator+=(const Mat<N, M>& rhs);
+            constexpr Mat<N, M>& operator-=(double rhs);
+            constexpr Mat<N, M>& operator-=(const Mat<N, M>& rhs);
+            constexpr Mat<N, M>& operator*=(double rhs);
+            constexpr Mat<N, M>& operator*=(const Mat<M, M>& rhs)
+            constexpr Mat<N, M>& operator/=(double rhs);
+
             //  -- Printing --
             template <size_t U, size_t V>
             friend std::ostream& operator<<(std::ostream& stream, const Mat<U, V>& mat);
@@ -101,7 +110,7 @@ namespace arc
         /**
          *  Construct a mat and initialise all of its elements using the given two-dimensional array.
          *
-         *  @param  init_element    Two-dimensional array of values to initialise the vec elements to.
+         *  @param  init_element    Two-dimensional array of values to initialise the mat elements to.
          */
         template <size_t N, size_t M>
         constexpr Mat<N, M>::Mat(const std::array<std::array<double, M>, N>& init_element) :
@@ -137,6 +146,163 @@ namespace arc
         constexpr const std::array<double, M>& Mat<N, M>::operator[](const size_t index) const
         {
             return (element[index]);
+        }
+
+
+        //  -- Mathematical --
+        /**
+         *  Add a value to all elements of a mat.
+         *
+         *  @param  rhs Value to add to each mat element.
+         *
+         *  @return A reference to this mat post-addition.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator+=(const double rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    element[i][j] += rhs;
+                }
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Add the element values of another mat to this mat.
+         *
+         *  @param  rhs Mat of elements to add to this mat.
+         *
+         *  @return A reference to this mat post-addition.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator+=(const const Mat<N, M>& rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    element[i][j] += rhs.element[i][j];
+                }
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Subtract a value from all elements of a mat.
+         *
+         *  @param  rhs Value to subtract from each mat element.
+         *
+         *  @return A reference to this mat post-subtraction.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator-=(const double rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    element[i][j] -= rhs;
+                }
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Subtract the element values of another mat from this mat.
+         *
+         *  @param  rhs Mat of elements to subtract from this mat.
+         *
+         *  @return A reference to this mat post-subtraction.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator-=(const const Mat<N, M>& rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    element[i][j] -= rhs.element[i][j];
+                }
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Multiply all elements of a mat by a value.
+         *
+         *  @param  rhs Value to multiply each mat element by.
+         *
+         *  @return A reference to this mat post-multiplication.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator*=(const double rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    element[i][j] *= rhs;
+                }
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Multiply this mat by another mat.
+         *  Multiplying mat must be a square matrix with a number of rows and columns equal to this mat's number of columns.
+         *
+         *  @param  rhs Mat to multiply this mat by.
+         *
+         *  @return A reference to this mat post-multiplication.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator*=(const Mat<M, M>& rhs)
+        {
+            const std::array<std::array<double, M>, N> lhs = element;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    element[i][j] = 0.0;
+
+                    for (size_t k = 0; k < M; ++k)
+                    {
+                        element[i][j] += lhs[i][k] * rhs[k][j];
+                    }
+                }
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Divide all elements of a mat by a value.
+         *
+         *  @param  rhs Value to divide each mat element by.
+         *
+         *  @return A reference to this mat post-division.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator/=(const double rhs)
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    element[i][j] /= rhs;
+                }
+            }
+
+            return (*this);
         }
 
 
