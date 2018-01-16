@@ -54,7 +54,11 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
+            //  -- Access --
+            constexpr std::array<double, M>& operator[](size_t index);
+            constexpr const std::array<double, M>& operator[](size_t index) const;
+
             //  -- Printing --
             template <size_t U, size_t V>
             friend std::ostream& operator<<(std::ostream& stream, const Mat<U, V>& mat);
@@ -108,6 +112,34 @@ namespace arc
 
 
         //  == OPERATORS ==
+        //  -- Access --
+        /**
+         *  Retrieve a reference to a column element of the mat.
+         *
+         *  @param  index   Index of the element to access.
+         *
+         *  @return A reference to the mat element.
+         */
+        template <size_t N, size_t M>
+        constexpr std::array<double, M>& Mat<N, M>::operator[](const size_t index)
+        {
+            return (element[index]);
+        }
+
+        /**
+         *  Retrieve a reference to a const column element of the mat.
+         *
+         *  @param  index   Index of the element to access.
+         *
+         *  @return A reference to the const mat element.
+         */
+        template <size_t N, size_t M>
+        constexpr const std::array<double, M>& Mat<N, M>::operator[](const size_t index) const
+        {
+            return (element[index]);
+        }
+
+
         //  -- Printing --
         /**
          *  Enable printing of a mat to a given ostream.

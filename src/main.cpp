@@ -35,8 +35,9 @@ int main()
 
     LOG(READ_FILE("../README.md"));
 
-    arc::math::Mat<3, 2> mat({{{{0, 1}}, {{2, 3}}, {{4, 5}}}});
+    arc::math::Mat<2, 2> mat(0.0);
 
+    mat[0][1] = 1.0;
 
     std::cout << mat << "\n";
 
