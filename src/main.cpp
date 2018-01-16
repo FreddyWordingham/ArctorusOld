@@ -38,5 +38,7 @@ int main()
     arc::math::Mat<3, 2> mat({{{{0, 1}}, {{2, 3}}, {{4, 5}}}});
 
 
+    std::cout << mat << "\n";
+
     return (0);
 }

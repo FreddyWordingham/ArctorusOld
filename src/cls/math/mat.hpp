@@ -107,6 +107,59 @@ namespace arc
 
 
 
+        //  == OPERATORS ==
+        //  -- Printing --
+        /**
+         *  Enable printing of a mat to a given ostream.
+         *
+         *  @param  stream  Stream to write to.
+         *  @param  mat     Mat to be written.
+         *
+         *  @return A reference to the stream post-write.
+         */
+        template <size_t N, size_t M>
+        std::ostream& operator<<(std::ostream& stream, const Mat<N, M>& mat)
+        {
+            if (N == 0)
+            {
+                stream << "{{}}";
+
+                return (stream);
+            }
+            if (M == 0)
+            {
+                stream << "{{}}";
+                for (size_t i = 0; i < M; ++i)
+                {
+                    stream << ", {}";
+                }
+                stream << "}";
+
+                return (stream);
+            }
+
+            stream << "{{" << mat.element[0][0];
+            for (size_t i = 1; i < M; ++i)
+            {
+                stream << ", " << mat.element[0][i];
+            }
+            stream << "}";
+            for (size_t i = 1; i < N; ++i)
+            {
+                stream << ", {" << mat.element[i][0];
+                for (size_t j = 1; j < M; ++j)
+                {
+                    stream << ", " << mat.element[i][j];
+                }
+                stream << "}";
+            }
+            stream << "}";
+
+            return (stream);
+        }
+
+
+
     } // namespace math
 } // namespace arc
 
