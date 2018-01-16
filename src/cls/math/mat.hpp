@@ -65,7 +65,7 @@ namespace arc
             constexpr Mat<N, M>& operator-=(double rhs);
             constexpr Mat<N, M>& operator-=(const Mat<N, M>& rhs);
             constexpr Mat<N, M>& operator*=(double rhs);
-            constexpr Mat<N, M>& operator*=(const Mat<M, M>& rhs)
+            constexpr Mat<N, M>& operator*=(const Mat<M, M>& rhs);
             constexpr Mat<N, M>& operator/=(double rhs);
             constexpr Mat<N, M>& operator++();
             constexpr Mat<N, M> operator++(int /*unused*/);
@@ -73,6 +73,20 @@ namespace arc
             constexpr Mat<N, M> operator--(int /*unused*/);
             constexpr Mat<N, M> operator+() const;
             constexpr Mat<N, M> operator-() const;
+            template <size_t U, size_t V>
+            friend constexpr Mat<U, V> operator+(const Mat<U, V>& lhs, double rhs);
+            template <size_t U, size_t V>
+            friend constexpr Mat<U, V> operator+(const Mat<U, V>& lhs, const Mat<U, V>& rhs);
+            template <size_t U, size_t V>
+            friend constexpr Mat<U, V> operator-(const Mat<U, V>& lhs, double rhs);
+            template <size_t U, size_t V>
+            friend constexpr Mat<U, V> operator-(const Mat<U, V>& lhs, const Mat<U, V>& rhs);
+            template <size_t U, size_t V>
+            friend constexpr Mat<U, V> operator*(const Mat<U, V>& lhs, double rhs);
+            template <size_t U, size_t V, size_t W>
+            friend constexpr Mat<U, V> operator*(const Mat<U, V>& lhs, const Mat<V, W>& rhs);
+            template <size_t U, size_t V>
+            friend constexpr Mat<U, V> operator/(const Mat<U, V>& lhs, double rhs);
 
             //  -- Printing --
             template <size_t U, size_t V>
@@ -185,7 +199,7 @@ namespace arc
          *  @return A reference to this mat post-addition.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator+=(const const Mat<N, M>& rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator+=(const Mat<N, M>& rhs)
         {
             for (size_t i = 0; i < N; ++i)
             {
@@ -227,7 +241,7 @@ namespace arc
          *  @return A reference to this mat post-subtraction.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator-=(const const Mat<N, M>& rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator-=(const Mat<N, M>& rhs)
         {
             for (size_t i = 0; i < N; ++i)
             {
@@ -282,7 +296,7 @@ namespace arc
 
                     for (size_t k = 0; k < M; ++k)
                     {
-                        element[i][j] += lhs[i][k] * rhs[k][j];
+                        element[i][j] += lhs[i][k] * rhs.element[k][j];
                     }
                 }
             }
@@ -433,6 +447,176 @@ namespace arc
             return (mat);
         }
 
+        /**
+         *  Create a new mat by adding a given value to the elements of a given mat.
+         *
+         *  @param  lhs Left hand side mat operand.
+         *  @param  rhs Right hand side value operand.
+         *
+         *  @return The created mat.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> operator+(const Mat<N, M>& lhs, const double rhs)
+        {
+            Mat<N, M> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    mat.element[i][j] = lhs.element[i][j] + rhs;
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Create a new mat by adding the elements of a given mat to another mat.
+         *
+         *  @param  lhs Left hand side mat operand.
+         *  @param  rhs Right hand side mat operand.
+         *
+         *  @return The created mat.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> operator+(const Mat<N, M>& lhs, const Mat<N, M>& rhs)
+        {
+            Mat<N, M> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    mat.element[i][j] = lhs.element[i][j] + rhs.element[i][j];
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Create a new mat by subtracting a given value form the elements of a given mat.
+         *
+         *  @param  lhs Left hand side mat operand.
+         *  @param  rhs Right hand side value operand.
+         *
+         *  @return The created mat.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> operator-(const Mat<N, M>& lhs, const double rhs)
+        {
+            Mat<N, M> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    mat.element[i][j] = lhs.element[i][j] - rhs;
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Create a new mat by subtracting the elements of a given mat from another mat.
+         *
+         *  @param  lhs Left hand side mat operand.
+         *  @param  rhs Right hand side mat operand.
+         *
+         *  @return The created mat.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> operator-(const Mat<N, M>& lhs, const Mat<N, M>& rhs)
+        {
+            Mat<N, M> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    mat.element[i][j] = lhs.element[i][j] - rhs.element[i][j];
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Create a new mat by multiplying elements of a given mat by a value.
+         *
+         *  @param  lhs Left hand side mat operand.
+         *  @param  rhs Right hand side value operand.
+         *
+         *  @return The created mat.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> operator*(const Mat<N, M>& lhs, const double rhs)
+        {
+            Mat<N, M> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    mat.element[i][j] = lhs.element[i][j] * rhs;
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Determine the matrix-product of two mats.
+         *
+         *  @param  lhs Left hand side mat operand.
+         *  @param  rhs Right hand side mat operand.
+         *
+         *  @return The matrix-product of the mats.
+         */
+        template <size_t N, size_t M, size_t O>
+        constexpr Mat<N, O> operator*(const Mat<N, M>& lhs, const Mat<M, O>& rhs)
+        {
+            Mat<N, O> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < O; ++j)
+                {
+                    for (size_t k = 0; k < M; ++k)
+                    {
+                        mat.element[i][j] += lhs.element[i][k] * rhs.element[k][j];
+                    }
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Create a new mat by dividing elements of a given mat by a value.
+         *
+         *  @param  lhs Left hand side mat operand.
+         *  @param  rhs Right hand side value operand.
+         *
+         *  @return The created mat.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> operator/(const Mat<N, M>& lhs, const double rhs)
+        {
+            Mat<N, M> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    mat.element[i][j] = lhs.element[i][j] / rhs;
+                }
+            }
+
+            return (mat);
+        }
 
 
         //  -- Printing --
