@@ -67,6 +67,12 @@ namespace arc
             constexpr Mat<N, M>& operator*=(double rhs);
             constexpr Mat<N, M>& operator*=(const Mat<M, M>& rhs)
             constexpr Mat<N, M>& operator/=(double rhs);
+            constexpr Mat<N, M>& operator++();
+            constexpr Mat<N, M> operator++(int /*unused*/);
+            constexpr Mat<N, M>& operator--();
+            constexpr Mat<N, M> operator--(int /*unused*/);
+            constexpr Mat<N, M> operator+() const;
+            constexpr Mat<N, M> operator-() const;
 
             //  -- Printing --
             template <size_t U, size_t V>
@@ -304,6 +310,129 @@ namespace arc
 
             return (*this);
         }
+
+        /**
+         *  Increment each element stored by the mat.
+         *
+         *  @return A reference to this mat post-increment.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator++()
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    ++element[i][j];
+                }
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Increment each element stored by the mat.
+         *
+         *  @return A copy of this mat post-increment.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> Mat<N, M>::operator++(int /*unused*/)
+        {
+            const Mat<N, M> mat = *this;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    ++element[i][j];
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Decrement each element stored by the mat.
+         *
+         *  @return A reference to this mat post-decrement.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M>& Mat<N, M>::operator--()
+        {
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    --element[i][j];
+                }
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Decrement each element stored by the vec.
+         *
+         *  @return A copy of this mat post-decrement.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> Mat<N, M>::operator--(int /*unused*/)
+        {
+            const Mat<N, M> mat = *this;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    --element[i][j];
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Create a mat with a copy of the element values.
+         *
+         *  @return A copy of this vec with the same element values.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> Mat<N, M>::operator+() const
+        {
+            Mat<N, M> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    mat.element[i][j] = +element[i][j];
+                }
+            }
+
+            return (mat);
+        }
+
+        /**
+         *  Create a mat with a copy of the negated element values.
+         *
+         *  @return A copy of this mat with the negated element values.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<N, M> Mat<N, M>::operator-() const
+        {
+            Mat<N, M> mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    mat.element[i][j] = -element[i][j];
+                }
+            }
+
+            return (mat);
+        }
+
 
 
         //  -- Printing --
