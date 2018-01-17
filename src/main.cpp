@@ -35,10 +35,12 @@ int main()
 
     LOG(READ_FILE("../README.md"));
 
-    arc::math::Mat<2, 2> mat(0.0);
+    arc::math::Mat<2, 2> a({{{{4.0, 1.0}}, {{2.0, -3.0}}}});
+    arc::math::Mat<2, 2> b({{{{-1.0, -3.0}}, {{4.0, 2.0}}}});
 
-    std::cout << arc::math::create_pos_trans(arc::math::Vec<3>({{0.0, 0.0, 0.0}}), arc::math::Vec<3>({{0.0, 0.0, 0.0}}),
-                                             arc::math::Vec<3>({{0.0, 0.0, 0.0}})) << "\n";
+    VAL(a);
+    VAL(b);
+    VAL(a + b);
 
     return (0);
 }

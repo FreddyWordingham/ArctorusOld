@@ -103,7 +103,10 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M>::Mat()
         {
-            std::fill(element.begin(), element.end(), 0.0);
+            for (size_t i = 0; i < N; ++i)
+            {
+                std::fill(element[i].begin(), element[i].end(), 0.0);
+            }
         }
 
         /**
@@ -116,10 +119,7 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                for (size_t j = 0; j < M; ++j)
-                {
-                    element[i][j] = init_element;
-                }
+                std::fill(element[i].begin(), element[i].end(), init_element);
             }
         }
 
@@ -484,7 +484,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = lhs.element[i][j] + rhs.element[i][j];
+                    mat.element[i][j] = lhs.element[i][j] - rhs.element[i][j];
                 }
             }
 
