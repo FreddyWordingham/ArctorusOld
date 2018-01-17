@@ -17,6 +17,9 @@
 //  -- System --
 #include <array>
 
+//  -- Classes --
+#include "cls/math/vec.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -83,6 +86,8 @@ namespace arc
             friend constexpr Mat<U, V> operator-(const Mat<U, V>& lhs, const Mat<U, V>& rhs);
             template <size_t U, size_t V>
             friend constexpr Mat<U, V> operator*(const Mat<U, V>& lhs, double rhs);
+            template <size_t U, size_t V>
+            friend constexpr Vec<U> operator*(const Mat<U, V>& lhs, const Vec<V>& rhs);
             template <size_t U, size_t V, size_t W>
             friend constexpr Mat<U, W> operator*(const Mat<U, V>& lhs, const Mat<V, W>& rhs);
             template <size_t U, size_t V>
@@ -564,12 +569,36 @@ namespace arc
         }
 
         /**
-         *  Determine the matrix-product of two mats.
+         *  Determine the matrix-vector vector product.
+         *
+         *  @param  lhs Left hand side mat operand.
+         *  @param  rhs Right hand side vec operand.
+         *
+         *  @return The matrix-vector vector product.
+         */
+        template <size_t N, size_t M>
+        constexpr Vec<N> operator*(const Mat<N, M>& lhs, const Vec<M>& rhs)
+        {
+            Vec<N> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    vec[i] += lhs.element[i][j] * rhs[j];
+                }
+            }
+
+            return (vec);
+        }
+
+        /**
+         *  Determine the matrix-matrix product.
          *
          *  @param  lhs Left hand side mat operand.
          *  @param  rhs Right hand side mat operand.
          *
-         *  @return The matrix-product of the mats.
+         *  @return The matrix-matrix matrix product.
          */
         template <size_t N, size_t M, size_t O>
         constexpr Mat<N, O> operator*(const Mat<N, M>& lhs, const Mat<M, O>& rhs)
