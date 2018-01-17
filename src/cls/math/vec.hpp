@@ -55,15 +55,15 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            std::array<double, N> element;  //! Array of element values.
+            std::array<double, N> data; //! Array of data element values.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
             constexpr Vec();
-            explicit constexpr Vec(double init_element);
-            explicit constexpr Vec(const std::array<double, N>& init_element);
+            explicit constexpr Vec(double init_data);
+            explicit constexpr Vec(const std::array<double, N>& init_data);
 
 
             //  == OPERATORS ==
@@ -148,33 +148,33 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a vec and initialise all of its elements to zero.
+         *  Construct a vec and initialise all of its data elements to zero.
          */
         template <size_t N>
         constexpr Vec<N>::Vec()
         {
-            std::fill(element.begin(), element.end(), 0.0);
+            std::fill(data.begin(), data.end(), 0.0);
         }
 
         /**
-         *  Construct a vec and initialise all of its elements to the given initial value.
+         *  Construct a vec and initialise all of its data elements to the given initial value.
          *
-         *  @param  init_element    Value to initialise all elements to.
+         *  @param  init_data    Value to initialise all data elements to.
          */
         template <size_t N>
-        constexpr Vec<N>::Vec(const double init_element)
+        constexpr Vec<N>::Vec(const double init_data)
         {
-            std::fill(element.begin(), element.end(), init_element);
+            std::fill(data.begin(), data.end(), init_data);
         }
 
         /**
-         *  Construct a vec and initialise all of its elements using the given array.
+         *  Construct a vec and initialise all of its data elements using the given array.
          *
-         *  @param  init_element    Array of values to initialise the vec elements to.
+         *  @param  init_data    Array of values to initialise the vec data elements to.
          */
         template <size_t N>
-        constexpr Vec<N>::Vec(const std::array<double, N>& init_element) :
-            element(init_element)
+        constexpr Vec<N>::Vec(const std::array<double, N>& init_data) :
+            data(init_data)
         {
         }
 
@@ -183,37 +183,37 @@ namespace arc
         //  == OPERATORS ==
         //  -- Access --
         /**
-         *  Retrieve a reference to an element of the vec.
+         *  Retrieve a reference to an data element of the vec.
          *
-         *  @param  index   Index of the element to access.
+         *  @param  index   Index of the data element to access.
          *
-         *  @return A reference to the vec element.
+         *  @return A reference to the vec data element.
          */
         template <size_t N>
         constexpr double& Vec<N>::operator[](const size_t index)
         {
-            return (element[index]);
+            return (data[index]);
         }
 
         /**
-         *  Retrieve a reference to a const element of the vec.
+         *  Retrieve a reference to a const data element of the vec.
          *
-         *  @param  index   Index of the element to access.
+         *  @param  index   Index of the data element to access.
          *
-         *  @return A reference to the const vec element.
+         *  @return A reference to the const vec data element.
          */
         template <size_t N>
         constexpr const double& Vec<N>::operator[](const size_t index) const
         {
-            return (element[index]);
+            return (data[index]);
         }
 
 
         //  -- Mathematical --
         /**
-         *  Add a value to all elements of a vec.
+         *  Add a value to all data elements of a vec.
          *
-         *  @param  rhs Value to add to each vec element.
+         *  @param  rhs Value to add to each vec data element.
          *
          *  @return A reference to this vec post-addition.
          */
@@ -222,16 +222,16 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                element[i] += rhs;
+                data[i] += rhs;
             }
 
             return (*this);
         }
 
         /**
-         *  Add the element values of another vec to this vec.
+         *  Add the data element values of another vec to this vec.
          *
-         *  @param  rhs Vec of elements to add to this vec.
+         *  @param  rhs Vec of data elements to add to this vec.
          *
          *  @return A reference to this vec post-addition.
          */
@@ -240,16 +240,16 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                element[i] += rhs.element[i];
+                data[i] += rhs.data[i];
             }
 
             return (*this);
         }
 
         /**
-         *  Subtract a value from all elements of a vec.
+         *  Subtract a value from all data elements of a vec.
          *
-         *  @param  rhs Value to subtract from each vec element.
+         *  @param  rhs Value to subtract from each vec data element.
          *
          *  @return A reference to this vec post-subtraction.
          */
@@ -258,16 +258,16 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                element[i] -= rhs;
+                data[i] -= rhs;
             }
 
             return (*this);
         }
 
         /**
-         *  Subtract the element values of another vec from this vec.
+         *  Subtract the data element values of another vec from this vec.
          *
-         *  @param  rhs Vec of elements to subtract from this vec.
+         *  @param  rhs Vec of data elements to subtract from this vec.
          *
          *  @return A reference to this vec post-subtraction.
          */
@@ -276,16 +276,16 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                element[i] -= rhs.element[i];
+                data[i] -= rhs.data[i];
             }
 
             return (*this);
         }
 
         /**
-         *  Multiply all elements of a vec by a value.
+         *  Multiply all data elements of a vec by a value.
          *
-         *  @param  rhs Value to multiply each vec element by.
+         *  @param  rhs Value to multiply each vec data element by.
          *
          *  @return A reference to this vec post-multiplication.
          */
@@ -294,16 +294,16 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                element[i] *= rhs;
+                data[i] *= rhs;
             }
 
             return (*this);
         }
 
         /**
-         *  Divide all elements of a vec by a value.
+         *  Divide all data elements of a vec by a value.
          *
-         *  @param  rhs Value to divide each vec element by.
+         *  @param  rhs Value to divide each vec data element by.
          *
          *  @return A reference to this vec post-division.
          */
@@ -312,7 +312,7 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                element[i] /= rhs;
+                data[i] /= rhs;
             }
 
             return (*this);
@@ -334,17 +334,17 @@ namespace arc
         {
             static_assert(N == 3);
 
-            const std::array<double, 3> lhs = element;
+            const std::array<double, 3> lhs = data;
 
-            element[X] = (lhs[Y] * rhs[Z]) - (lhs[Z] * rhs[Y]);
-            element[Y] = (lhs[Z] * rhs[X]) - (lhs[X] * rhs[Z]);
-            element[Z] = (lhs[X] * rhs[Y]) - (lhs[Y] * rhs[X]);
+            data[X] = (lhs[Y] * rhs[Z]) - (lhs[Z] * rhs[Y]);
+            data[Y] = (lhs[Z] * rhs[X]) - (lhs[X] * rhs[Z]);
+            data[Z] = (lhs[X] * rhs[Y]) - (lhs[Y] * rhs[X]);
 
             return (*this);
         }
 
         /**
-         *  Increment each element stored by the vec.
+         *  Increment each data element stored by the vec.
          *
          *  @return A reference to this vec post-increment.
          */
@@ -353,14 +353,14 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                ++element[i];
+                ++data[i];
             }
 
             return (*this);
         }
 
         /**
-         *  Increment each element stored by the vec.
+         *  Increment each data element stored by the vec.
          *
          *  @return A copy of this vec post-increment.
          */
@@ -371,14 +371,14 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                ++element[i];
+                ++data[i];
             }
 
             return (vec);
         }
 
         /**
-         *  Decrement each element stored by the vec.
+         *  Decrement each data element stored by the vec.
          *
          *  @return A reference to this vec post-decrement.
          */
@@ -387,14 +387,14 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                --element[i];
+                --data[i];
             }
 
             return (*this);
         }
 
         /**
-         *  Decrement each element stored by the vec.
+         *  Decrement each data element stored by the vec.
          *
          *  @return A copy of this vec post-decrement.
          */
@@ -405,16 +405,16 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                --element[i];
+                --data[i];
             }
 
             return (vec);
         }
 
         /**
-         *  Create a vec with a copy of the element values.
+         *  Create a vec with a copy of the data element values.
          *
-         *  @return A copy of this vec with the same element values.
+         *  @return A copy of this vec with the same data element values.
          */
         template <size_t N>
         constexpr Vec<N> Vec<N>::operator+() const
@@ -423,16 +423,16 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                vec[i] = +element[i];
+                vec[i] = +data[i];
             }
 
             return (vec);
         }
 
         /**
-         *  Create a vec with a copy of the negated element values.
+         *  Create a vec with a copy of the negated data element values.
          *
-         *  @return A copy of this vec with the negated element values.
+         *  @return A copy of this vec with the negated data element values.
          */
         template <size_t N>
         constexpr Vec<N> Vec<N>::operator-() const
@@ -441,14 +441,14 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                vec[i] = -element[i];
+                vec[i] = -data[i];
             }
 
             return (vec);
         }
 
         /**
-         *  Create a new vec by adding a given value to the elements of a given vec.
+         *  Create a new vec by adding a given value to the data elements of a given vec.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side value operand.
@@ -462,14 +462,14 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                vec.element[i] = lhs.element[i] + rhs;
+                vec.data[i] = lhs.data[i] + rhs;
             }
 
             return (vec);
         }
 
         /**
-         *  Create a new vec by adding the elements of a given vec to another vec.
+         *  Create a new vec by adding the data elements of a given vec to another vec.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side vec operand.
@@ -483,14 +483,14 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                vec.element[i] = lhs.element[i] + rhs.element[i];
+                vec.data[i] = lhs.data[i] + rhs.data[i];
             }
 
             return (vec);
         }
 
         /**
-         *  Create a new vec by subtracting a given value form the elements of a given vec.
+         *  Create a new vec by subtracting a given value form the data elements of a given vec.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side value operand.
@@ -504,14 +504,14 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                vec.element[i] = lhs.element[i] - rhs;
+                vec.data[i] = lhs.data[i] - rhs;
             }
 
             return (vec);
         }
 
         /**
-         *  Create a new vec by subtracting the elements of a given vec from another vec.
+         *  Create a new vec by subtracting the data elements of a given vec from another vec.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side vec operand.
@@ -525,14 +525,14 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                vec.element[i] = lhs.element[i] - rhs.element[i];
+                vec.data[i] = lhs.data[i] - rhs.data[i];
             }
 
             return (vec);
         }
 
         /**
-         *  Create a new vec by multiplying elements of a given vec by a value.
+         *  Create a new vec by multiplying data elements of a given vec by a value.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side value operand.
@@ -546,7 +546,7 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                vec.element[i] = lhs.element[i] * rhs;
+                vec.data[i] = lhs.data[i] * rhs;
             }
 
             return (vec);
@@ -567,14 +567,14 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                prod += lhs.element[i] * rhs.element[i];
+                prod += lhs.data[i] * rhs.data[i];
             }
 
             return (prod);
         }
 
         /**
-         *  Create a new vec by dividing elements of a given vec by a value.
+         *  Create a new vec by dividing data elements of a given vec by a value.
          *
          *  @param  lhs Left hand side vec operand.
          *  @param  rhs Right hand side value operand.
@@ -588,7 +588,7 @@ namespace arc
 
             for (size_t i = 0; i < N; ++i)
             {
-                vec.element[i] = lhs.element[i] / rhs;
+                vec.data[i] = lhs.data[i] / rhs;
             }
 
             return (vec);
@@ -606,9 +606,9 @@ namespace arc
         {
             Vec<3> prod;
 
-            prod.element[X] = (lhs.element[Y] * rhs.element[Z]) - (lhs.element[Z] * rhs.element[Y]);
-            prod.element[Y] = (lhs.element[Z] * rhs.element[X]) - (lhs.element[X] * rhs.element[Z]);
-            prod.element[Z] = (lhs.element[X] * rhs.element[Y]) - (lhs.element[Y] * rhs.element[X]);
+            prod.data[X] = (lhs.data[Y] * rhs.data[Z]) - (lhs.data[Z] * rhs.data[Y]);
+            prod.data[Y] = (lhs.data[Z] * rhs.data[X]) - (lhs.data[X] * rhs.data[Z]);
+            prod.data[Z] = (lhs.data[X] * rhs.data[Y]) - (lhs.data[Y] * rhs.data[X]);
 
             return (prod);
         }
@@ -633,10 +633,10 @@ namespace arc
                 return (stream);
             }
 
-            stream << "⟨" << vec.element[0];
+            stream << "⟨" << vec.data[0];
             for (size_t i = 1; i < N; ++i)
             {
-                stream << ", " << vec.element[i];
+                stream << ", " << vec.data[i];
             }
             stream << "⟩";
 
@@ -648,39 +648,39 @@ namespace arc
         //  == METHODS ==
         //  -- Mathematical --
         /**
-        *  Find the index of the vec which holds the smallest element.
-        *  If multiple vec elements are equally the smallest, the index of the first will be returned.
+        *  Find the index of the vec which holds the smallest data element.
+        *  If multiple vec data elements are equally the smallest, the index of the first will be returned.
         *
         *  @pre    N must not be zero.
         *
-        *  @return The index of the smallest element within the vec.
+        *  @return The index of the smallest data element within the vec.
         */
         template <size_t N>
         constexpr size_t Vec<N>::min_index() const
         {
             static_assert(N != 0);
 
-            return (utl::min_index(element));
+            return (utl::min_index(data));
         }
 
         /**
-         *  Find the index of the vec which holds the largest element.
-         *  If multiple vec elements are equally the largest, the index of the first will be returned.
+         *  Find the index of the vec which holds the largest data element.
+         *  If multiple vec data elements are equally the largest, the index of the first will be returned.
          *
          *  @pre    N must not be zero.
          *
-         *  @return The index of the largest element within the vec.
+         *  @return The index of the largest data element within the vec.
          */
         template <size_t N>
         constexpr size_t Vec<N>::max_index() const
         {
             static_assert(N != 0);
 
-            return (utl::max_index(element));
+            return (utl::max_index(data));
         }
 
         /**
-         *  Create a copy of the smallest element within the vec.
+         *  Create a copy of the smallest data element within the vec.
          *
          *  @pre    N must not be zero.
          *
@@ -691,11 +691,11 @@ namespace arc
         {
             static_assert(N != 0);
 
-            return (utl::min(element));
+            return (utl::min(data));
         }
 
         /**
-         *  Create a copy of the largest element within the vec.
+         *  Create a copy of the largest data element within the vec.
          *
          *  @pre    N must not be zero.
          *
@@ -706,19 +706,19 @@ namespace arc
         {
             static_assert(N != 0);
 
-            return (utl::max(element));
+            return (utl::max(data));
         }
 
         /**
-         *  Determine the total of all elements stored within the vec.
+         *  Determine the total of all data elements stored within the vec.
          *  Empty vecs are considered to have a total of zero.
          *
-         *  @return The total of all elements stored within the vec.
+         *  @return The total of all data elements stored within the vec.
          */
         template <size_t N>
         constexpr double Vec<N>::total() const
         {
-            return (utl::total(element));
+            return (utl::total(data));
         }
 
         /**
@@ -730,20 +730,20 @@ namespace arc
         template <size_t N>
         constexpr double Vec<N>::magnitude() const
         {
-            return (utl::magnitude(element));
+            return (utl::magnitude(data));
         }
 
         /**
-         *  Normalise the vec by deviding each element by the magnitude of the total vec.
+         *  Normalise the vec by deviding each data element by the magnitude of the total vec.
          */
         template <size_t N>
         constexpr void Vec<N>::normalise()
         {
-            const double mag = utl::magnitude(element);
+            const double mag = utl::magnitude(data);
 
             for (size_t i = 0; i < N; ++i)
             {
-                element[i] /= mag;
+                data[i] /= mag;
             }
 
             assert(is_normalised());
@@ -761,145 +761,145 @@ namespace arc
         template <size_t N>
         constexpr bool Vec<N>::is_normalised(const double tol) const
         {
-            return (std::fabs(utl::magnitude(element) - 1.0) <= tol);
+            return (std::fabs(utl::magnitude(data) - 1.0) <= tol);
         }
 
         /**
-         *  Determine if the vec's elements are sorted in ascending order.
+         *  Determine if the vec's data elements are sorted in ascending order.
          *  Vec is not considered ascending if two consecutive values are equal.
          *
          *  @pre    N must be greater than one.
          *
-         *  @return True if the vec's elements are sorted in ascending order.
+         *  @return True if the vec's data elements are sorted in ascending order.
         */
         template <size_t N>
         constexpr bool Vec<N>::is_ascending() const
         {
             static_assert(N > 1);
 
-            return (utl::is_ascending(element));
+            return (utl::is_ascending(data));
         }
 
         /**
-         *  Determine if the vec's elements are sorted in descending order.
+         *  Determine if the vec's data elements are sorted in descending order.
          *  Vec is not considered descending if two consecutive values are equal.
          *
          *  @pre    N must be greater than one.
          *
-         *  @return True if the vec's elements are sorted in descending order.
+         *  @return True if the vec's data elements are sorted in descending order.
         */
         template <size_t N>
         constexpr bool Vec<N>::is_descending() const
         {
             static_assert(N > 1);
 
-            return (utl::is_descending(element));
+            return (utl::is_descending(data));
         }
 
         /**
-         *  Determine if the vec's elements are sorted in monotonic order.
-         *  Determine if the vec's elements are sorted in ascending or descending order.
+         *  Determine if the vec's data elements are sorted in monotonic order.
+         *  Determine if the vec's data elements are sorted in ascending or descending order.
          *  Vec is not considered monotonic if two consecutive values are equal.
          *
          *  @pre    N must be greater than one.
          *
-         *  @return True if the vec's elements are sorted in monotonic order.
+         *  @return True if the vec's data elements are sorted in monotonic order.
          */
         template <size_t N>
         constexpr bool Vec<N>::is_monotonic() const
         {
             static_assert(N > 1);
 
-            return (utl::is_monotonic(element));
+            return (utl::is_monotonic(data));
         }
 
         /**
-         *  Determine if the vec's elements are uniformly separated to within a given tolerance.
-         *  Vec must contain at more than one element.
+         *  Determine if the vec's data elements are uniformly separated to within a given tolerance.
+         *  Vec must contain at more than one data element.
          *
          *  @param  tol Maximum consecutive delta difference from the average delta where vec is considered uniform.
          *
          *  @pre    N must be greater than one.
          *
-         *  @return True if the vec's elements are uniformly spaced.
+         *  @return True if the vec's data elements are uniformly spaced.
          */
         template <size_t N>
         constexpr bool Vec<N>::is_uniform(const double tol) const
         {
             static_assert(N > 1);
 
-            return (utl::is_uniform(element, tol));
+            return (utl::is_uniform(data, tol));
         }
 
         /**
-         *  Determine if a given vec's elements are always less than a given limit.
+         *  Determine if a given vec's data elements are always less than a given limit.
          *
          *  @tparam T   Type of the limit.
          *
          *  @param  limit   Limit to be tested.
          *
-         *  @return True if the vec's elements are all less than the given limit.
+         *  @return True if the vec's data elements are all less than the given limit.
          */
         template <size_t N>
         template <typename T>
         constexpr bool Vec<N>::is_always_less_than(const T limit) const
         {
-            return (utl::is_always_less_than(element, limit));
+            return (utl::is_always_less_than(data, limit));
         }
 
         /**
-         *  Determine if a given vec's elements are always less than, or equal to, a given limit.
+         *  Determine if a given vec's data elements are always less than, or equal to, a given limit.
          *
          *  @tparam T   Type of the limit.
          *
          *  @param  limit   Limit to be tested.
          *
-         *  @return True if the vec's elements are all less than, or equal to, the given limit.
+         *  @return True if the vec's data elements are all less than, or equal to, the given limit.
          */
         template <size_t N>
         template <typename T>
         constexpr bool Vec<N>::is_always_less_than_or_equal_to(const T limit) const
         {
-            return (utl::is_always_less_than_or_equal_to(element, limit));
+            return (utl::is_always_less_than_or_equal_to(data, limit));
         }
 
         /**
-         *  Determine if the vec's elements are always greater than a given limit.
+         *  Determine if the vec's data elements are always greater than a given limit.
          *
          *  @tparam T   Type of the limit.
          *
          *  @param  limit   Limit to be tested.
          *
-         *  @return True if the vec's elements are all greater than the given limit.
+         *  @return True if the vec's data elements are all greater than the given limit.
          */
         template <size_t N>
         template <typename T>
         constexpr bool Vec<N>::is_always_greater_than(const T limit) const
         {
-            return (utl::is_always_greater_than(element, limit));
+            return (utl::is_always_greater_than(data, limit));
         }
 
         /**
-         *  Determine if the vec's elements are always less than, or equal to, a given limit.
+         *  Determine if the vec's data elements are always less than, or equal to, a given limit.
          *
          *  @tparam T   Type of the limit.
          *
          *  @param  limit   Limit to be tested.
          *
-         *  @return True if the vec's elements are all greater than, or equal to, the given limit.
+         *  @return True if the vec's data elements are all greater than, or equal to, the given limit.
          */
         template <size_t N>
         template <typename T>
         constexpr bool Vec<N>::is_always_greater_than_or_equal_to(const T limit) const
         {
-            return (utl::is_always_greater_than_or_equal_to(element, limit));
+            return (utl::is_always_greater_than_or_equal_to(data, limit));
         }
 
 
         //  -- Searching --
         /**
-         *  Determine the lower index of the element pair which encapsulates the given value.
-         *  If the value is equal to an element of the vec then the lower index is that index, unless it is the last element.
+         *  Determine the lower index of the data element pair which encapsulates the given value.
+         *  If the value is equal to an data element of the vec then the lower index is that index, unless it is the last data element.
          *
          *  @tparam S   Type of the value to be found within the array.
          *
@@ -911,24 +911,23 @@ namespace arc
          *  @pre    val must be within the array limits.
          *  @pre    init_guess must be a valid index of the vec.
          *
-         *  @return The upper index of the element pair which encapsulates the value.
+         *  @return The upper index of the data element pair which encapsulates the value.
          */
         template <size_t N>
         template <typename S>
         size_t Vec<N>::lower_index(const S val, const size_t init_guess) const
         {
             static_assert(N > 1);
-            assert(utl::is_monotonic(element));
-            assert(
-                ((val >= element.front()) && (val <= element.back())) || ((val <= element.front()) && (val >= element.back())));
+            assert(utl::is_monotonic(data));
+            assert(((val >= data.front()) && (val <= data.back())) || ((val <= data.front()) && (val >= data.back())));
             assert(init_guess < N);
 
-            return (utl::lower_index(element, val, init_guess));
+            return (utl::lower_index(data, val, init_guess));
         }
 
         /**
-         *  Determine the upper index of the element pair which encapsulates the given value.
-         *  If the value is equal to an element of the vec then the upper index is that index, unless it is the first element.
+         *  Determine the upper index of the data element pair which encapsulates the given value.
+         *  If the value is equal to an data element of the vec then the upper index is that index, unless it is the first data element.
          *
          *  @tparam S   Type of the value to be found within the array.
          *
@@ -940,19 +939,18 @@ namespace arc
          *  @pre    val must be within the array limits.
          *  @pre    init_guess must be a valid index of the vec.
          *
-         *  @return The upper index of the element pair which encapsulates the value.
+         *  @return The upper index of the data element pair which encapsulates the value.
          */
         template <size_t N>
         template <typename S>
         size_t Vec<N>::upper_index(const S val, const size_t init_guess) const
         {
             static_assert(N > 1);
-            assert(utl::is_monotonic(element));
-            assert(
-                ((val >= element.front()) && (val <= element.back())) || ((val <= element.front()) && (val >= element.back())));
+            assert(utl::is_monotonic(data));
+            assert(((val >= data.front()) && (val <= data.back())) || ((val <= data.front()) && (val >= data.back())));
             assert(init_guess < N);
 
-            return (utl::upper_index(element, val, init_guess));
+            return (utl::upper_index(data, val, init_guess));
         }
 
 

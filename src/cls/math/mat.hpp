@@ -585,7 +585,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    vec[i] += lhs.element[i][j] * rhs.element[j];
+                    vec[i] += lhs.element[i][j] * rhs.data[j];
                 }
             }
 
