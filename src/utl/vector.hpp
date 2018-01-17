@@ -33,41 +33,41 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Mathematical --
         template <typename T>
-        constexpr size_t min_index(const std::vector<T>& vec);
+        constexpr size_t min_index(const std::vector<T>& t_vec);
         template <typename T>
-        constexpr size_t max_index(const std::vector<T>& vec);
+        constexpr size_t max_index(const std::vector<T>& t_vec);
         template <typename T>
-        constexpr T min(const std::vector<T>& vec);
+        constexpr T min(const std::vector<T>& t_vec);
         template <typename T>
-        constexpr T max(const std::vector<T>& vec);
+        constexpr T max(const std::vector<T>& t_vec);
         template <typename T>
-        constexpr T total(const std::vector<T>& vec);
+        constexpr T total(const std::vector<T>& t_vec);
         template <typename T>
-        constexpr double magnitude(const std::vector<T>& vec);
+        constexpr double magnitude(const std::vector<T>& t_vec);
 
         //  -- Properties --
         template <typename T>
-        constexpr bool is_ascending(const std::vector<T>& vec);
+        constexpr bool is_ascending(const std::vector<T>& t_vec);
         template <typename T>
-        constexpr bool is_descending(const std::vector<T>& vec);
+        constexpr bool is_descending(const std::vector<T>& t_vec);
         template <typename T>
-        constexpr bool is_monotonic(const std::vector<T>& vec);
+        constexpr bool is_monotonic(const std::vector<T>& t_vec);
         template <typename T>
-        constexpr bool is_uniform(const std::vector<T>& vec, double tol = std::numeric_limits<double>::epsilon());
+        constexpr bool is_uniform(const std::vector<T>& t_vec, double t_tol = std::numeric_limits<double>::epsilon());
         template <typename T, typename S>
-        constexpr bool is_always_less_than(const std::vector<T>& vec, S limit);
+        constexpr bool is_always_less_than(const std::vector<T>& t_vec, S t_limit);
         template <typename T, typename S>
-        constexpr bool is_always_less_than_or_equal_to(const std::vector<T>& vec, S limit);
+        constexpr bool is_always_less_than_or_equal_to(const std::vector<T>& t_vec, S t_limit);
         template <typename T, typename S>
-        constexpr bool is_always_greater_than(const std::vector<T>& vec, S limit);
+        constexpr bool is_always_greater_than(const std::vector<T>& t_vec, S t_limit);
         template <typename T, typename S>
-        constexpr bool is_always_greater_than_or_equal_to(const std::vector<T>& vec, S limit);
+        constexpr bool is_always_greater_than_or_equal_to(const std::vector<T>& t_vec, S t_limit);
 
         //  -- Searching --
         template <typename T, typename S>
-        size_t lower_index(const std::vector<T>& vec, S val, size_t init_guess = 0);
+        size_t lower_index(const std::vector<T>& t_vec, S t_val, size_t t_init_guess = 0);
         template <typename T, typename S>
-        size_t upper_index(const std::vector<T>& vec, S val, size_t init_guess = 1);
+        size_t upper_index(const std::vector<T>& t_vec, S t_val, size_t t_init_guess = 1);
 
 
 
@@ -79,22 +79,22 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to search.
+         *  @param  t_vec   Vector to search.
          *
-         *  @pre    vec must not be empty.
+         *  @pre    t_vec must not be empty.
          *
          *  @return The index of the smallest element within the vector.
          */
         template <typename T>
-        constexpr size_t min_index(const std::vector<T>& vec)
+        constexpr size_t min_index(const std::vector<T>& t_vec)
         {
-            assert(!vec.empty());
+            assert(!t_vec.empty());
 
             size_t index = 0;
 
-            for (size_t i = 1; i < vec.size(); ++i)
+            for (size_t i = 1; i < t_vec.size(); ++i)
             {
-                if (vec[i] < vec[index])
+                if (t_vec[i] < t_vec[index])
                 {
                     index = i;
                 }
@@ -109,22 +109,22 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to search.
+         *  @param  t_vec   Vector to search.
          *
-         *  @pre    vec must not be empty.
+         *  @pre    t_vec must not be empty.
          *
          *  @return The index of the largest element within the vector.
          */
         template <typename T>
-        constexpr size_t max_index(const std::vector<T>& vec)
+        constexpr size_t max_index(const std::vector<T>& t_vec)
         {
-            assert(!vec.empty());
+            assert(!t_vec.empty());
 
             size_t index = 0;
 
-            for (size_t i = 1; i < vec.size(); ++i)
+            for (size_t i = 1; i < t_vec.size(); ++i)
             {
-                if (vec[i] > vec[index])
+                if (t_vec[i] > t_vec[index])
                 {
                     index = i;
                 }
@@ -138,18 +138,18 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to copy the minimum value of.
+         *  @param  t_vec   Vector to copy the minimum value of.
          *
-         *  @pre    vec must not be empty.
+         *  @pre    t_vec must not be empty.
          *
          * @return  A copy of the smallest value within the vector.
          */
         template <typename T>
-        constexpr T min(const std::vector<T>& vec)
+        constexpr T min(const std::vector<T>& t_vec)
         {
-            assert(!vec.empty());
+            assert(!t_vec.empty());
 
-            return (vec[min_index(vec)]);
+            return (t_vec[min_index(t_vec)]);
         }
 
         /**
@@ -157,18 +157,18 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to copy the maximum value of.
+         *  @param  t_vec   Vector to copy the maximum value of.
          *
-         *  @pre    vec must not be empty.
+         *  @pre    t_vec must not be empty.
          *
          * @return  A copy of the largest value within the vector.
          */
         template <typename T>
-        constexpr T max(const std::vector<T>& vec)
+        constexpr T max(const std::vector<T>& t_vec)
         {
-            assert(!vec.empty());
+            assert(!t_vec.empty());
 
-            return (vec[max_index(vec)]);
+            return (t_vec[max_index(t_vec)]);
         }
 
         /**
@@ -177,18 +177,18 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to find the total of.
+         *  @param  t_vec   Vector to find the total of.
          *
          *  @return The total of all elements stored within the vector.
          */
         template <typename T>
-        constexpr T total(const std::vector<T>& vec)
+        constexpr T total(const std::vector<T>& t_vec)
         {
             T total = 0;
 
-            for (size_t i = 0; i < vec.size(); ++i)
+            for (size_t i = 0; i < t_vec.size(); ++i)
             {
-                total += vec[i];
+                total += t_vec[i];
             }
 
             return (total);
@@ -200,18 +200,18 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to find the magnitude of.
+         *  @param  t_vec   Vector to find the magnitude of.
          *
          *  @return The magnitude of the vector.
          */
         template <typename T>
-        constexpr double magnitude(const std::vector<T>& vec)
+        constexpr double magnitude(const std::vector<T>& t_vec)
         {
             T squared_total = 0;
 
-            for (size_t i = 0; i < vec.size(); ++i)
+            for (size_t i = 0; i < t_vec.size(); ++i)
             {
-                squared_total += vec[i] * vec[i];
+                squared_total += t_vec[i] * t_vec[i];
             }
 
             return (std::sqrt(static_cast<double>(squared_total)));
@@ -225,20 +225,20 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to be analysed.
+         *  @param  t_vec   Vector to be analysed.
          *
-         *  @pre    vec must contain more than one element.
+         *  @pre    t_vec must contain more than one element.
          *
          *  @return True if the vector's elements are sorted in ascending order.
          */
         template <typename T>
-        constexpr bool is_ascending(const std::vector<T>& vec)
+        constexpr bool is_ascending(const std::vector<T>& t_vec)
         {
-            assert(vec.size() > 1);
+            assert(t_vec.size() > 1);
 
-            for (size_t i = 1; i < vec.size(); ++i)
+            for (size_t i = 1; i < t_vec.size(); ++i)
             {
-                if (vec[i] < vec[i - 1])
+                if (t_vec[i] < t_vec[i - 1])
                 {
                     return (false);
                 }
@@ -253,20 +253,20 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to be analysed.
+         *  @param  t_vec   Vector to be analysed.
          *
-         *  @pre    vec must contain more than one element.
+         *  @pre    t_vec must contain more than one element.
          *
          *  @return True if the vector's elements are sorted in descending order.
          */
         template <typename T>
-        constexpr bool is_descending(const std::vector<T>& vec)
+        constexpr bool is_descending(const std::vector<T>& t_vec)
         {
-            assert(vec.size() > 1);
+            assert(t_vec.size() > 1);
 
-            for (size_t i = 1; i < vec.size(); ++i)
+            for (size_t i = 1; i < t_vec.size(); ++i)
             {
-                if (vec[i] > vec[i - 1])
+                if (t_vec[i] > t_vec[i - 1])
                 {
                     return (false);
                 }
@@ -282,18 +282,18 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to be analysed.
+         *  @param  t_vec   Vector to be analysed.
          *
-         *  @pre    vec must contain more than one element.
+         *  @pre    t_vec must contain more than one element.
          *
          *  @return True if the vector's elements are sorted in monotonic order.
          */
         template <typename T>
-        constexpr bool is_monotonic(const std::vector<T>& vec)
+        constexpr bool is_monotonic(const std::vector<T>& t_vec)
         {
-            assert(vec.size() > 1);
+            assert(t_vec.size() > 1);
 
-            return (is_ascending(vec) || is_descending(vec));
+            return (is_ascending(t_vec) || is_descending(t_vec));
         }
 
         /**
@@ -302,23 +302,23 @@ namespace arc
          *
          *  @tparam T   Type stored by the vector.
          *
-         *  @param  vec Vector to be analysed.
-         *  @param  tol Maximum consecutive delta difference from the average delta where vector is considered uniform.
+         *  @param  t_vec   Vector to be analysed.
+         *  @param  t_tol   Maximum consecutive delta difference from the average delta where vector is considered uniform.
          *
-         *  @pre    vec must contain more than one element.
+         *  @pre    t_vec must contain more than one element.
          *
          *  @return True if the vector's elements are uniformly spaced.
          */
         template <typename T>
-        constexpr bool is_uniform(const std::vector<T>& vec, double tol)
+        constexpr bool is_uniform(const std::vector<T>& t_vec, double t_tol)
         {
-            assert(vec.size() > 1);
+            assert(t_vec.size() > 1);
 
-            const double ave_delta = (vec.front() - vec.back()) / static_cast<double>(vec.size() - 1);
+            const double ave_delta = (t_vec.front() - t_vec.back()) / static_cast<double>(t_vec.size() - 1);
 
-            for (size_t i = 1; i < vec.size(); ++i)
+            for (size_t i = 1; i < t_vec.size(); ++i)
             {
-                if ((std::fabs((vec[i - 1] - vec[i]) - ave_delta)) > tol)
+                if ((std::fabs((t_vec[i - 1] - t_vec[i]) - ave_delta)) > t_tol)
                 {
                     return (false);
                 }
@@ -333,17 +333,17 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam S   Type of the limit.
          *
-         *  @param  vec     Vector to be analysed.
-         *  @param  limit   Limit to be tested.
+         *  @param  t_vec   Vector to be analysed.
+         *  @param  t_limit Limit to be tested.
          *
          *  @return True if the vector's elements are all less than the given limit.
          */
         template <typename T, typename S>
-        constexpr bool is_always_less_than(const std::vector<T>& vec, const S limit)
+        constexpr bool is_always_less_than(const std::vector<T>& t_vec, const S t_limit)
         {
-            for (size_t i = 0; i < vec.size(); ++i)
+            for (size_t i = 0; i < t_vec.size(); ++i)
             {
-                if (!(vec[i] < limit))
+                if (!(t_vec[i] < t_limit))
                 {
                     return (false);
                 }
@@ -358,17 +358,17 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam S   Type of the limit.
          *
-         *  @param  vec     Vector to be analysed.
-         *  @param  limit   Limit to be tested.
+         *  @param  t_vec   Vector to be analysed.
+         *  @param  t_limit Limit to be tested.
          *
          *  @return True if the vector's elements are all less than, or equal to, the given limit.
          */
         template <typename T, typename S>
-        constexpr bool is_always_less_than_or_equal_to(const std::vector<T>& vec, const S limit)
+        constexpr bool is_always_less_than_or_equal_to(const std::vector<T>& t_vec, const S t_limit)
         {
-            for (size_t i = 0; i < vec.size(); ++i)
+            for (size_t i = 0; i < t_vec.size(); ++i)
             {
-                if (!(vec[i] <= limit))
+                if (!(t_vec[i] <= t_limit))
                 {
                     return (false);
                 }
@@ -383,17 +383,17 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam S   Type of the limit.
          *
-         *  @param  vec     Vector to be analysed.
-         *  @param  limit   Limit to be tested.
+         *  @param  t_vec   Vector to be analysed.
+         *  @param  t_limit Limit to be tested.
          *
          *  @return True if the vector's elements are all greater than the given limit.
          */
         template <typename T, typename S>
-        constexpr bool is_always_greater_than(const std::vector<T>& vec, const S limit)
+        constexpr bool is_always_greater_than(const std::vector<T>& t_vec, const S t_limit)
         {
-            for (size_t i = 0; i < vec.size(); ++i)
+            for (size_t i = 0; i < t_vec.size(); ++i)
             {
-                if (!(vec[i] > limit))
+                if (!(t_vec[i] > t_limit))
                 {
                     return (false);
                 }
@@ -408,17 +408,17 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam S   Type of the limit.
          *
-         *  @param  vec     Vector to be analysed.
-         *  @param  limit   Limit to be tested.
+         *  @param  t_vec   Vector to be analysed.
+         *  @param  t_limit Limit to be tested.
          *
          *  @return True if the vector's elements are all greater than, or equal to, the given limit.
          */
         template <typename T, typename S>
-        constexpr bool is_always_greater_than_or_equal_to(const std::vector<T>& vec, const S limit)
+        constexpr bool is_always_greater_than_or_equal_to(const std::vector<T>& t_vec, const S t_limit)
         {
-            for (size_t i = 0; i < vec.size(); ++i)
+            for (size_t i = 0; i < t_vec.size(); ++i)
             {
-                if (!(vec[i] >= limit))
+                if (!(t_vec[i] >= t_limit))
                 {
                     return (false);
                 }
@@ -437,47 +437,48 @@ namespace arc
          *  @tparam T   Type stored by the vector.
          *  @tparam S   Type of the value to be found within the vector.
          *
-         *  @param  vec         Vector to hunt got the value placement.
-         *  @param  val         Value to locate within the vector.
-         *  @param  init_guess  Initial guess for the lower index.
+         *  @param  t_vec           Vector to hunt got the value placement.
+         *  @param  t_val           Value to locate within the vector.
+         *  @param  t_init_guess    Initial guess for the lower index.
          *
-         *  @pre    vec must contain more than one element.
-         *  @pre    vec must be sorted in monotonic order.
-         *  @pre    val must be within the vec limits.
-         *  @pre    init_guess must be a valid index of the vector.
+         *  @pre    t_vec must contain more than one element.
+         *  @pre    t_vec must be sorted in monotonic order.
+         *  @pre    t_val must be within the vec limits.
+         *  @pre    t_init_guess must be a valid index of the vector.
          *
          *  @return The lower index of the element pair which encapsulates the value.
          */
         template <typename T, typename S>
-        size_t lower_index(const std::vector<T>& vec, S val, const size_t init_guess)
+        size_t lower_index(const std::vector<T>& t_vec, S t_val, const size_t t_init_guess)
         {
-            assert(vec.size() > 1);
-            assert(is_monotonic(vec));
-            assert(((val >= vec.front()) && (val <= vec.back())) || ((val <= vec.front()) && (val >= vec.back())));
-            assert(init_guess < vec.size());
+            assert(t_vec.size() > 1);
+            assert(is_monotonic(t_vec));
+            assert(
+                ((t_val >= t_vec.front()) && (t_val <= t_vec.back())) || ((t_val <= t_vec.front()) && (t_val >= t_vec.back())));
+            assert(t_init_guess < t_vec.size());
 
-            bool ascending = vec.front() < vec.back();
+            bool ascending = t_vec.front() < t_vec.back();
 
-            size_t lower_index = init_guess;
+            size_t lower_index = t_init_guess;
             size_t upper_index;
 
             size_t jump = 1;
-            if (val >= vec[lower_index] == ascending)
+            if (t_val >= t_vec[lower_index] == ascending)
             {
-                if (lower_index == (vec.size() - 1))
+                if (lower_index == (t_vec.size() - 1))
                 {
                     return (lower_index);
                 }
 
                 upper_index = lower_index + 1;
-                while (val >= vec[upper_index] == ascending)
+                while (t_val >= t_vec[upper_index] == ascending)
                 {
                     lower_index = upper_index;
                     jump += jump;
                     upper_index = lower_index + jump;
-                    if (upper_index >= (vec.size() - 1))
+                    if (upper_index >= (t_vec.size() - 1))
                     {
-                        upper_index = vec.size();
+                        upper_index = t_vec.size();
 
                         break;
                     }
@@ -486,7 +487,7 @@ namespace arc
             else
             {
                 upper_index = lower_index--;
-                while (val < vec[lower_index] == ascending)
+                while (t_val < t_vec[lower_index] == ascending)
                 {
                     upper_index = lower_index;
                     jump <<= 1;
@@ -504,7 +505,7 @@ namespace arc
             while ((upper_index - lower_index) != 1)
             {
                 size_t mid_index = (upper_index + lower_index) >> 1;
-                if (val >= vec[mid_index] == ascending)
+                if (t_val >= t_vec[mid_index] == ascending)
                 {
                     lower_index = mid_index;
                 }
@@ -514,14 +515,14 @@ namespace arc
                 }
             }
 
-            if (std::fabs(val - vec.front()) <= std::numeric_limits<double>::epsilon())
+            if (std::fabs(t_val - t_vec.front()) <= std::numeric_limits<double>::epsilon())
             {
                 return (0);
             }
 
-            if (std::fabs(val - vec.back()) <= std::numeric_limits<double>::epsilon())
+            if (std::fabs(t_val - t_vec.back()) <= std::numeric_limits<double>::epsilon())
             {
-                return (vec.size() - 2);
+                return (t_vec.size() - 2);
             }
 
             return (lower_index);
@@ -535,26 +536,27 @@ namespace arc
          *  @tparam T   Type stored by the vector.
          *  @tparam S   Type of the value to be found within the vector.
          *
-         *  @param  vec         Vector to hunt for the value placement.
-         *  @param  val         Value to locate within the vector.
-         *  @param  init_guess  Initial guess for the upper index.
+         *  @param  t_vec           Vector to hunt for the value placement.
+         *  @param  t_val           Value to locate within the vector.
+         *  @param  t_init_guess    Initial guess for the upper index.
          *
-         *  @pre    vec must contain more than one element.
-         *  @pre    vec must be sorted in monotonic order.
-         *  @pre    val must be within the vec limits.
-         *  @pre    init_guess must be a valid index of the vector.
+         *  @pre    t_vec must contain more than one element.
+         *  @pre    t_vec must be sorted in monotonic order.
+         *  @pre    t_val must be within the vec limits.
+         *  @pre    t_init_guess must be a valid index of the vector.
          *
          *  @return The upper index of the element pair which encapsulates the value.
          */
         template <typename T, typename S>
-        size_t upper_index(const std::vector<T>& vec, S val, const size_t init_guess)
+        size_t upper_index(const std::vector<T>& t_vec, S t_val, const size_t t_init_guess)
         {
-            assert(vec.size() > 1);
-            assert(is_monotonic(vec));
-            assert(((val >= vec.front()) && (val <= vec.back())) || ((val <= vec.front()) && (val >= vec.back())));
-            assert(init_guess < vec.size());
+            assert(t_vec.size() > 1);
+            assert(is_monotonic(t_vec));
+            assert(
+                ((t_val >= t_vec.front()) && (t_val <= t_vec.back())) || ((t_val <= t_vec.front()) && (t_val >= t_vec.back())));
+            assert(t_init_guess < t_vec.size());
 
-            return (lower_index(vec, val, init_guess - 1) + 1);
+            return (lower_index(t_vec, t_val, t_init_guess - 1) + 1);
         }
 
 
@@ -566,7 +568,7 @@ namespace arc
     //  == OPERATORS PROTOTYPES ==
     //  -- Printing --
     template <typename T>
-    std::ostream& operator<<(std::ostream& stream, const std::vector<T>& vec);
+    std::ostream& operator<<(std::ostream& t_stream, const std::vector<T>& t_vec);
 
 
 
@@ -577,29 +579,29 @@ namespace arc
      *
      *  @tparam T   Type stored by the vector.
      *
-     *  @param  stream  Stream to write to.
-     *  @param  vec     Vector to be written.
+     *  @param  t_stream    Stream to write to.
+     *  @param  t_vec       Vector to be written.
      *
      *  @return A reference to the stream post-write.
      */
     template <typename T>
-    std::ostream& operator<<(std::ostream& stream, const std::vector<T>& vec)
+    std::ostream& operator<<(std::ostream& t_stream, const std::vector<T>& t_vec)
     {
-        if (vec.empty())
+        if (t_vec.empty())
         {
-            stream << "()";
+            t_stream << "()";
 
-            return (stream);
+            return (t_stream);
         }
 
-        stream << "(" << vec[0];
-        for (size_t i = 1; i < vec.size(); ++i)
+        t_stream << "(" << t_vec[0];
+        for (size_t i = 1; i < t_vec.size(); ++i)
         {
-            stream << ", " << vec[i];
+            t_stream << ", " << t_vec[i];
         }
-        stream << ")";
+        t_stream << ")";
 
-        return (stream);
+        return (t_stream);
     }
 
 
