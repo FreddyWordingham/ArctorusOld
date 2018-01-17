@@ -91,10 +91,6 @@ namespace arc
             //  -- Printing --
             template <size_t U, size_t V>
             friend std::ostream& operator<<(std::ostream& stream, const Mat<U, V>& mat);
-
-
-            //  == METHODS ==
-          private:
         };
 
 
