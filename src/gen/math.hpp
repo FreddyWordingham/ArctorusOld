@@ -33,29 +33,29 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Defaults --
-        constexpr const double DEFAULT_EQUAL_TOL = std::numeric_limits<double>::epsilon(); //! Default maximum delta when equal.
+        constexpr const double DEFAULT_EQUAL_TOL = std::numeric_limits<double>::epsilon();  //! Default max delta when equal.
 
 
 
         //  == FUNCTION PROTOTYPES ==
         //  -- Power --
         template <typename T>
-        constexpr T square(T x);
+        constexpr T square(T t_x);
         template <typename T>
-        constexpr T cube(T x);
+        constexpr T cube(T t_x);
 
         //  -- Comparison --
-        inline bool equal(double lhs, double rhs, double tol = DEFAULT_EQUAL_TOL);
+        inline bool equal(double t_lhs, double t_rhs, double t_tol = DEFAULT_EQUAL_TOL);
 
         //  -- Matrix --
-        inline Mat<4, 4> pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& trans);
-        inline Mat<4, 4> dir_trans(const Vec<3>& scale, const Vec<3>& rot);
+        inline Mat<4, 4> pos_trans(const Vec<3>& t_scale, const Vec<3>& t_rot, const Vec<3>& t_trans);
+        inline Mat<4, 4> dir_trans(const Vec<3>& t_scale, const Vec<3>& t_rot);
 
         //  -- Geometry --
         template <size_t N>
-        constexpr double dist(const math::Vec<N>& start, const math::Vec<N>& end);
-        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& pos);
-        inline double area(const std::array<math::Vec<3>, 3>& pos);
+        constexpr double dist(const math::Vec<N>& t_start, const math::Vec<N>& t_end);
+        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos);
+        inline double area(const std::array<math::Vec<3>, 3>& t_pos);
 
 
 
@@ -66,14 +66,14 @@ namespace arc
          *
          *  @tparam T   Type being squared.
          *
-         *  @param  x   Value to be squared.
+         *  @param  t_x Value to be squared.
          *
          *  @return The square of the given value.
          */
         template <typename T>
-        constexpr T square(const T x)
+        constexpr T square(const T t_x)
         {
-            return (x * x);
+            return (t_x * t_x);
         }
 
         /**
@@ -81,14 +81,14 @@ namespace arc
          *
          *  @tparam T   Type being cubed.
          *
-         *  @param  x   Value to be cubed.
+         *  @param  t_x Value to be cubed.
          *
          *  @return The cube of the given value.
          */
         template <typename T>
-        constexpr T cube(const T x)
+        constexpr T cube(const T t_x)
         {
-            return (x * x * x);
+            return (t_x * t_x * t_x);
         }
 
 
@@ -97,15 +97,15 @@ namespace arc
          *  Determine if two double values can be considered equal to within a given tolerance.
          *  If the values differ by exactly the tolerance they are considered equal.
          *
-         *  @param  lhs Left hand side double.
-         *  @param  rhs Right hand side double.
-         *  @param  tol Maximum tolerance to which the values are considered equal.
+         *  @param  t_lhs   Left hand side double.
+         *  @param  t_rhs   Right hand side double.
+         *  @param  t_tol   Maximum tolerance to which the values are considered equal.
          *
          *  @return True if the values are equal within a given tolerance.
          */
-        inline bool equal(const double lhs, const double rhs, const double tol)
+        inline bool equal(const double t_lhs, const double t_rhs, const double t_tol)
         {
-            return (std::fabs(lhs - rhs) <= tol);
+            return (std::fabs(t_lhs - t_rhs) <= t_tol);
         }
 
 
@@ -115,28 +115,29 @@ namespace arc
          *  Transformation matrix is constructed from the individual transformations given.
          *  Rotations are performed in the order x, y, z-axis.
          *
-         *  @param  scale   Scaling vector.
-         *  @param  rot     Rotation vector.
-         *  @param  trans   Translation vector.
+         *  @param  t_scale Scaling vector.
+         *  @param  t_rot   Rotation vector.
+         *  @param  t_trans Translation vector.
          *
          *  @return The position transformation matrix.
          */
-        inline Mat<4, 4> pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& trans)
+        inline Mat<4, 4> pos_trans(const Vec<3>& t_scale, const Vec<3>& t_rot, const Vec<3>& t_trans)
         {
-            Mat<4, 4> scale_mat(
-                {{{{scale[X], 0.0, 0.0, 0.0}}, {{0.0, scale[Y], 0.0, 0.0}}, {{0.0, 0.0, scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+            Mat<4, 4> scale(
+                {{{{t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
-            Mat<4, 4> rot_mat(
-                {{{{cos(rot[Y]) * cos(rot[Z]), (cos(rot[Z]) * sin(rot[X]) * sin(rot[Y])) - (cos(rot[X]) * sin(rot[Z])), (cos(
-                    rot[X]) * cos(rot[Z]) * sin(rot[Y])) - (sin(rot[X]) * sin(rot[Z])), 0.0}}, {{cos(rot[Y]) * sin(
-                    rot[Z]), (cos(rot[X]) * cos(rot[Z])) + (sin(rot[X]) * sin(rot[Y]) * sin(rot[Z])), (cos(rot[X]) * sin(
-                    rot[Y]) * sin(rot[Z])) - (cos(rot[Z]) * sin(rot[X])), 0.0}}, {{-sin(rot[Y]), cos(rot[Y]) * sin(rot[X]), cos(
-                    rot[X]) * cos(rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+            Mat<4, 4> rot(
+                {{{{cos(t_rot[Y]) * cos(t_rot[Z]), (cos(t_rot[Z]) * sin(t_rot[X]) * sin(t_rot[Y])) - (cos(t_rot[X]) * sin(
+                    t_rot[Z])), (cos(t_rot[X]) * cos(t_rot[Z]) * sin(t_rot[Y])) - (sin(t_rot[X]) * sin(t_rot[Z])), 0.0}}, {{cos(
+                    t_rot[Y]) * sin(t_rot[Z]), (cos(t_rot[X]) * cos(t_rot[Z])) + (sin(t_rot[X]) * sin(t_rot[Y]) * sin(
+                    t_rot[Z])), (cos(t_rot[X]) * sin(t_rot[Y]) * sin(t_rot[Z])) - (cos(t_rot[Z]) * sin(
+                    t_rot[X])), 0.0}}, {{-sin(t_rot[Y]), cos(t_rot[Y]) * sin(t_rot[X]), cos(t_rot[X]) * cos(
+                    t_rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
-            Mat<4, 4> trans_mat(
-                {{{{1.0, 0.0, 0.0, trans[X]}}, {{1.0, 0.0, 0.0, trans[Y]}}, {{1.0, 0.0, 0.0, trans[Z]}}, {{0.0, 0.0, 0.0, 1.0}}}});
+            Mat<4, 4> trans(
+                {{{{1.0, 0.0, 0.0, t_trans[X]}}, {{1.0, 0.0, 0.0, t_trans[Y]}}, {{1.0, 0.0, 0.0, t_trans[Z]}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
-            return (trans_mat * rot_mat * scale_mat);
+            return (trans * rot * scale);
         }
 
         /**
@@ -144,24 +145,25 @@ namespace arc
          *  Transformation matrix is constructed from the individual transformations given.
          *  Rotations are performed in the order x, y, z-axis.
          *
-         *  @param  scale   Scaling vector.
-         *  @param  rot     Rotation vector.
+         *  @param  t_scale Scaling vector.
+         *  @param  t_rot   Rotation vector.
          *
          *  @return The rotation transformation matrix.
          */
-        inline Mat<4, 4> dir_trans(const Vec<3>& scale, const Vec<3>& rot)
+        inline Mat<4, 4> dir_trans(const Vec<3>& t_scale, const Vec<3>& t_rot)
         {
-            Mat<4, 4> scale_mat(
-                {{{{1.0 / scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0 / scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0 / scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+            Mat<4, 4> scale(
+                {{{{1.0 / t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0 / t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0 / t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
-            Mat<4, 4> rot_mat(
-                {{{{cos(rot[Y]) * cos(rot[Z]), (cos(rot[Z]) * sin(rot[X]) * sin(rot[Y])) - (cos(rot[X]) * sin(rot[Z])), (cos(
-                    rot[X]) * cos(rot[Z]) * sin(rot[Y])) - (sin(rot[X]) * sin(rot[Z])), 0.0}}, {{cos(rot[Y]) * sin(
-                    rot[Z]), (cos(rot[X]) * cos(rot[Z])) + (sin(rot[X]) * sin(rot[Y]) * sin(rot[Z])), (cos(rot[X]) * sin(
-                    rot[Y]) * sin(rot[Z])) - (cos(rot[Z]) * sin(rot[X])), 0.0}}, {{-sin(rot[Y]), cos(rot[Y]) * sin(rot[X]), cos(
-                    rot[X]) * cos(rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+            Mat<4, 4> rot(
+                {{{{cos(t_rot[Y]) * cos(t_rot[Z]), (cos(t_rot[Z]) * sin(t_rot[X]) * sin(t_rot[Y])) - (cos(t_rot[X]) * sin(
+                    t_rot[Z])), (cos(t_rot[X]) * cos(t_rot[Z]) * sin(t_rot[Y])) - (sin(t_rot[X]) * sin(t_rot[Z])), 0.0}}, {{cos(
+                    t_rot[Y]) * sin(t_rot[Z]), (cos(t_rot[X]) * cos(t_rot[Z])) + (sin(t_rot[X]) * sin(t_rot[Y]) * sin(
+                    t_rot[Z])), (cos(t_rot[X]) * sin(t_rot[Y]) * sin(t_rot[Z])) - (cos(t_rot[Z]) * sin(
+                    t_rot[X])), 0.0}}, {{-sin(t_rot[Y]), cos(t_rot[Y]) * sin(t_rot[X]), cos(t_rot[X]) * cos(
+                    t_rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
-            return (rot_mat * scale_mat);
+            return (rot * scale);
         }
 
 
@@ -171,27 +173,27 @@ namespace arc
          *
          *  @tparam N   Size of the vecs.
          *
-         *  @param  start   Start point.
-         *  @param  end     End point.
+         *  @param  t_start Start point.
+         *  @param  t_end   End point.
          *
          *  @return The distance between the two points.
          */
         template <size_t N>
-        constexpr double dist(const math::Vec<N>& start, const math::Vec<N>& end)
+        constexpr double dist(const math::Vec<N>& t_start, const math::Vec<N>& t_end)
         {
-            return ((start - end).magnitude());
+            return ((t_start - t_end).magnitude());
         }
 
         /**
          *  Determine the normal of a plane described by three points.
          *
-         *  @param  pos Array of the three positional points lying within the plane.
+         *  @param  t_pos   Array of the three positional points lying within the plane.
          *
          *  @return The normal vector of the plane.
          */
-        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& pos)
+        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos)
         {
-            math::Vec<3> norm = (pos[BETA] - pos[ALPHA]) ^(pos[GAMMA] - pos[ALPHA]);
+            math::Vec<3> norm = (t_pos[BETA] - t_pos[ALPHA]) ^(t_pos[GAMMA] - t_pos[ALPHA]);
 
             return (norm);
         }
@@ -199,15 +201,15 @@ namespace arc
         /**
          *  Determine the area described by three points.
          *
-         *  @param  pos Array of three positional points describing the area.
+         *  @param  t_pos   Array of three positional points describing the area.
          *
          *  @return The area described by the three points.
          */
-        inline double area(const std::array<math::Vec<3>, 3>& pos)
+        inline double area(const std::array<math::Vec<3>, 3>& t_pos)
         {
-            const double alpha_beta  = dist(pos[ALPHA], pos[BETA]);
-            const double beta_gamma  = dist(pos[BETA], pos[GAMMA]);
-            const double gamma_alpha = dist(pos[GAMMA], pos[ALPHA]);
+            const double alpha_beta  = dist(t_pos[ALPHA], t_pos[BETA]);
+            const double beta_gamma  = dist(t_pos[BETA], t_pos[GAMMA]);
+            const double gamma_alpha = dist(t_pos[GAMMA], t_pos[ALPHA]);
 
             const double half_perim = (alpha_beta + beta_gamma + gamma_alpha) / 2.0;
 
