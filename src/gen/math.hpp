@@ -48,7 +48,8 @@ namespace arc
         inline bool equal(double lhs, double rhs, double tol = DEFAULT_EQUAL_TOL);
 
         //  -- Matrix --
-        inline Mat<4, 4> create_pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& tran);
+        inline Mat<4, 4> pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& trans);
+        inline Mat<4, 4> dir_trans(const Vec<3>& scale, const Vec<3>& rot);
 
 
 
@@ -103,27 +104,58 @@ namespace arc
 
 
         //  -- Matrix --
-        inline Mat<4, 4> create_pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& tran)
+        /**
+         *  Create a position transformation matrix.
+         *  Transformation matrix is constructed from the individual transformations given.
+         *  Rotations are performed in the order x, y, z-axis.
+         *
+         *  @param  scale   Scaling vector.
+         *  @param  rot     Rotation vector.
+         *  @param  trans   Translation vector.
+         *
+         *  @return The position transformation matrix.
+         */
+        inline Mat<4, 4> pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& trans)
         {
-            return (Mat<4, 4>(
-                {{{{scale[X], 0.0, 0.0, 0.0}}, {{0.0, scale[Y], 0.0, 0.0}}, {{0.0, 0.0, scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
+            Mat<4, 4> scale_mat(
+                {{{{scale[X], 0.0, 0.0, 0.0}}, {{0.0, scale[Y], 0.0, 0.0}}, {{0.0, 0.0, scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
-/*            Mat<4, 4> rotate(
-                {{cos(rot[Y]) * cos(rot[Z]),
-                     (cos(rot[Z]) * sin(rot[X]) * sin(rot[Y])) - (cos(rot[X]) * sin(rot[Z])),
-                     (cos(rot[X]) * cos(rot[Z]) * sin(rot[Y])) - (sin(rot[X]) * sin(rot[Z])), 0.0},
-                 {cos(rot[Y]) * sin(rot[Z]),
-                     (cos(rot[X]) * cos(rot[Z])) + (sin(rot[X]) * sin(rot[Y]) * sin(rot[Z])),
-                     (cos(rot[X]) * sin(rot[Y]) * sin(rot[Z])) - (cos(rot[Z]) * sin(rot[X])), 0.0},
-                 {-sin(rot[Y]), cos(rot[Y]) * sin(rot[X]), cos(rot[X]) * cos(rot[Y]), 0.0},
-                 {0.0, 0.0, 0.0, 1.0}});
+            Mat<4, 4> rot_mat(
+                {{{{cos(rot[Y]) * cos(rot[Z]), (cos(rot[Z]) * sin(rot[X]) * sin(rot[Y])) - (cos(rot[X]) * sin(rot[Z])), (cos(
+                    rot[X]) * cos(rot[Z]) * sin(rot[Y])) - (sin(rot[X]) * sin(rot[Z])), 0.0}}, {{cos(rot[Y]) * sin(
+                    rot[Z]), (cos(rot[X]) * cos(rot[Z])) + (sin(rot[X]) * sin(rot[Y]) * sin(rot[Z])), (cos(rot[X]) * sin(
+                    rot[Y]) * sin(rot[Z])) - (cos(rot[Z]) * sin(rot[X])), 0.0}}, {{-sin(rot[Y]), cos(rot[Y]) * sin(rot[X]), cos(
+                    rot[X]) * cos(rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
-            Mat<4, 4> translate({{1.0, 0.0, 0.0, t_translate[X]},
-                                 {1.0, 0.0, 0.0, t_translate[Y]},
-                                 {1.0, 0.0, 0.0, t_translate[Z]},
-                                 {0.0, 0.0, 0.0, 1.0}});
+            Mat<4, 4> trans_mat(
+                {{{{1.0, 0.0, 0.0, trans[X]}}, {{1.0, 0.0, 0.0, trans[Y]}}, {{1.0, 0.0, 0.0, trans[Z]}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
-            return (translate * rotate * scale);*/
+            return (trans_mat * rot_mat * scale_mat);
+        }
+
+        /**
+         *  Create a direction transformation matrix.
+         *  Transformation matrix is constructed from the individual transformations given.
+         *  Rotations are performed in the order x, y, z-axis.
+         *
+         *  @param  scale   Scaling vector.
+         *  @param  rot     Rotation vector.
+         *
+         *  @return The rotation transformation matrix.
+         */
+        inline Mat<4, 4> dir_trans(const Vec<3>& scale, const Vec<3>& rot)
+        {
+            Mat<4, 4> scale_mat(
+                {{{{1.0 / scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0 / scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0 / scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+
+            Mat<4, 4> rot_mat(
+                {{{{cos(rot[Y]) * cos(rot[Z]), (cos(rot[Z]) * sin(rot[X]) * sin(rot[Y])) - (cos(rot[X]) * sin(rot[Z])), (cos(
+                    rot[X]) * cos(rot[Z]) * sin(rot[Y])) - (sin(rot[X]) * sin(rot[Z])), 0.0}}, {{cos(rot[Y]) * sin(
+                    rot[Z]), (cos(rot[X]) * cos(rot[Z])) + (sin(rot[X]) * sin(rot[Y]) * sin(rot[Z])), (cos(rot[X]) * sin(
+                    rot[Y]) * sin(rot[Z])) - (cos(rot[Z]) * sin(rot[X])), 0.0}}, {{-sin(rot[Y]), cos(rot[Y]) * sin(rot[X]), cos(
+                    rot[X]) * cos(rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+
+            return (rot_mat * scale_mat);
         }
 
 

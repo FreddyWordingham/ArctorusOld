@@ -40,7 +40,9 @@ int main()
 
     VAL(a);
     VAL(b);
-    VAL(a + b);
+    VAL(a * b);
+    VAL(math::pos_trans(math::Vec<3>({{1.0, 1.0, 1.0}}), math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 0.0}})));
+    VAL(math::dir_trans(math::Vec<3>({{1.0, 1.0, 1.0}}), math::Vec<3>({{0.0, 0.0, 0.0}})));
 
     return (0);
 }
