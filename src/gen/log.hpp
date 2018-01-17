@@ -27,73 +27,73 @@
 /**
  *  Macro used to log a standard message.
  *
- *  @param  text    Message text to be logged.
+ *  @param  t_text  Message text to be logged.
  */
-#define LOG(text)                                               \
+#define LOG(t_text)                                             \
 {                                                               \
     std::stringstream text_stream;                              \
-    text_stream << std::boolalpha << text;  /*NOLINT*/          \
+    text_stream << std::boolalpha << t_text;  /*NOLINT*/        \
     arc::term::Logger::get_instance().log(text_stream.str());   \
 }                                                               \
 
 /**
  *  Macro used to log a verbose message.
  *
- *  @param  text    Message text to be logged.
+ *  @param  t_text  Message text to be logged.
  */
-#define VERB(text)                                              \
+#define VERB(t_text)                                            \
 {                                                               \
     std::stringstream text_stream;                              \
-    text_stream << std::boolalpha << text;  /*NOLINT*/          \
+    text_stream << std::boolalpha << t_text;  /*NOLINT*/        \
     arc::term::Logger::get_instance().log(text_stream.str());   \
 }                                                               \
 
 /**
  *  Macro used to log a name-value pair message.
  *
- *  @param  x   Value to be named and logged.
+ *  @param  t_x Value to be named and logged.
  */
-#define VAL(x)                                      \
-{                                                   \
-    arc::term::Logger::get_instance().val(#x, x);   \
-}                                                   \
+#define VAL(t_x)                                        \
+{                                                       \
+    arc::term::Logger::get_instance().val(#t_x, t_x);   \
+}                                                       \
 
 /**
  *  Macro used to log a temporary string-value pair message.
  *
- *  @param  str String to be logged.
- *  @param  val Value to be logged.
+ *  @param  t_str   String to be logged.
+ *  @param  t_val   Value to be logged.
  */
-#define TEMP(str, val)                                  \
-{                                                       \
-    arc::term::Logger::get_instance().temp(str, val);   \
-}                                                       \
+#define TEMP(t_str, t_val)                                  \
+{                                                           \
+    arc::term::Logger::get_instance().temp(t_str, t_val);   \
+}                                                           \
 
 /**
  *  Macro used to log a warning message.
  *
- *  @param  symptom Text describing the symptom of the warning.
- *  @param  cause   Text describing the cause of the warning.
+ *  @param  t_symptom   Text describing the symptom of the warning.
+ *  @param  t_cause     Text describing the cause of the warning.
  */
-#define WARN(symptom, cause)                                                            \
+#define WARN(t_symptom, t_cause)                                                        \
 {                                                                                       \
     std::stringstream symptom_stream, cause_stream;                                     \
     symptom_stream << std::boolalpha << symptom;    /*NOLINT*/                          \
-    cause_stream << std::boolalpha << cause;        /*NOLINT*/                          \
+    cause_stream << std::boolalpha << t_cause;      /*NOLINT*/                          \
     arc::term::Logger::get_instance().warn(symptom_stream.str(), cause_stream.str());   \
 }                                                                                       \
 
 /**
  *  Macro used to log an error message.
  *
- *  @param  symptom Text describing the symptom of the error.
- *  @param  cause   Text describing the cause of the error.
+ *  @param  t_symptom   Text describing the symptom of the error.
+ *  @param  t_cause     Text describing the cause of the error.
  */
-#define ERROR(symptom, cause)                                                                                               \
+#define ERROR(t_symptom, t_cause)                                                                                           \
 {                                                                                                                           \
     std::stringstream symptom_stream, cause_stream;                                                                         \
-    symptom_stream << std::boolalpha << symptom;    /*NOLINT*/                                                              \
-    cause_stream << std::boolalpha << cause;        /*NOLINT*/                                                              \
+    symptom_stream << std::boolalpha << t_symptom;  /*NOLINT*/                                                              \
+    cause_stream << std::boolalpha << t_cause;      /*NOLINT*/                                                              \
     arc::term::Logger::get_instance().error(__FILE__, std::to_string(__LINE__), symptom_stream.str(), cause_stream.str());  \
 }                                                                                                                           \
 
