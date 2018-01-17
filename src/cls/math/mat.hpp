@@ -484,7 +484,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = lhs.element[i][j] - rhs.element[i][j];
+                    mat.element[i][j] = lhs.element[i][j] + rhs.element[i][j];
                 }
             }
 
