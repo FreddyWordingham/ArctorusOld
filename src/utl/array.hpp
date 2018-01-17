@@ -33,41 +33,41 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Mathematical --
         template <typename T, size_t N>
-        constexpr size_t min_index(const std::array<T, N>& arr);
+        constexpr size_t min_index(const std::array<T, N>& t_arr);
         template <typename T, size_t N>
-        constexpr size_t max_index(const std::array<T, N>& arr);
+        constexpr size_t max_index(const std::array<T, N>& t_arr);
         template <typename T, size_t N>
-        constexpr T min(const std::array<T, N>& arr);
+        constexpr T min(const std::array<T, N>& t_arr);
         template <typename T, size_t N>
-        constexpr T max(const std::array<T, N>& arr);
+        constexpr T max(const std::array<T, N>& t_arr);
         template <typename T, size_t N>
-        constexpr T total(const std::array<T, N>& arr);
+        constexpr T total(const std::array<T, N>& t_arr);
         template <typename T, size_t N>
-        constexpr double magnitude(const std::array<T, N>& arr);
+        constexpr double magnitude(const std::array<T, N>& t_arr);
 
         //  -- Properties --
         template <typename T, size_t N>
-        constexpr bool is_ascending(const std::array<T, N>& arr);
+        constexpr bool is_ascending(const std::array<T, N>& t_arr);
         template <typename T, size_t N>
-        constexpr bool is_descending(const std::array<T, N>& arr);
+        constexpr bool is_descending(const std::array<T, N>& t_arr);
         template <typename T, size_t N>
-        constexpr bool is_monotonic(const std::array<T, N>& arr);
+        constexpr bool is_monotonic(const std::array<T, N>& t_arr);
         template <typename T, size_t N>
-        constexpr bool is_uniform(const std::array<T, N>& arr, double tol = std::numeric_limits<double>::epsilon());
+        constexpr bool is_uniform(const std::array<T, N>& t_arr, double t_tol = std::numeric_limits<double>::epsilon());
         template <typename T, size_t N, typename S>
-        constexpr bool is_always_less_than(const std::array<T, N>& arr, S limit);
+        constexpr bool is_always_less_than(const std::array<T, N>& t_arr, S t_limit);
         template <typename T, size_t N, typename S>
-        constexpr bool is_always_less_than_or_equal_to(const std::array<T, N>& arr, S limit);
+        constexpr bool is_always_less_than_or_equal_to(const std::array<T, N>& t_arr, S t_limit);
         template <typename T, size_t N, typename S>
-        constexpr bool is_always_greater_than(const std::array<T, N>& arr, S limit);
+        constexpr bool is_always_greater_than(const std::array<T, N>& t_arr, S t_limit);
         template <typename T, size_t N, typename S>
-        constexpr bool is_always_greater_than_or_equal_to(const std::array<T, N>& arr, S limit);
+        constexpr bool is_always_greater_than_or_equal_to(const std::array<T, N>& t_arr, S t_limit);
 
         //  -- Searching --
         template <typename T, size_t N, typename S>
-        size_t lower_index(const std::array<T, N>& arr, S val, size_t init_guess = 0);
+        size_t lower_index(const std::array<T, N>& t_arr, S t_val, size_t t_init_guess = 0);
         template <typename T, size_t N, typename S>
-        size_t upper_index(const std::array<T, N>& arr, S val, size_t init_guess = 1);
+        size_t upper_index(const std::array<T, N>& t_arr, S t_val, size_t t_init_guess = 1);
 
 
 
@@ -80,14 +80,14 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to search.
+         *  @param  t_arr   Array to search.
          *
          *  @pre    N must not be zero.
          *
          *  @return The index of the smallest element within the array.
          */
         template <typename T, size_t N>
-        constexpr size_t min_index(const std::array<T, N>& arr)
+        constexpr size_t min_index(const std::array<T, N>& t_arr)
         {
             static_assert(N != 0);
 
@@ -95,7 +95,7 @@ namespace arc
 
             for (size_t i = 1; i < N; ++i)
             {
-                if (arr[i] < arr[index])
+                if (t_arr[i] < t_arr[index])
                 {
                     index = i;
                 }
@@ -111,14 +111,14 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to search.
+         *  @param  t_arr   Array to search.
          *
          *  @pre    N must not be zero.
          *
          *  @return The index of the largest element within the array.
          */
         template <typename T, size_t N>
-        constexpr size_t max_index(const std::array<T, N>& arr)
+        constexpr size_t max_index(const std::array<T, N>& t_arr)
         {
             static_assert(N != 0);
 
@@ -126,7 +126,7 @@ namespace arc
 
             for (size_t i = 1; i < N; ++i)
             {
-                if (arr[i] > arr[index])
+                if (t_arr[i] > t_arr[index])
                 {
                     index = i;
                 }
@@ -141,18 +141,18 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to copy the minimum value of.
+         *  @param  t_arr   Array to copy the minimum value of.
          *
          *  @pre    N must not be zero.
          *
          * @return  A copy of the smallest value within the array.
          */
         template <typename T, size_t N>
-        constexpr T min(const std::array<T, N>& arr)
+        constexpr T min(const std::array<T, N>& t_arr)
         {
             static_assert(N != 0);
 
-            return (arr[min_index(arr)]);
+            return (t_arr[min_index(t_arr)]);
         }
 
         /**
@@ -161,18 +161,18 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to copy the maximum value of.
+         *  @param  t_arr   Array to copy the maximum value of.
          *
          *  @pre    N must not be zero.
          *
          * @return  A copy of the largest value within the array.
          */
         template <typename T, size_t N>
-        constexpr T max(const std::array<T, N>& arr)
+        constexpr T max(const std::array<T, N>& t_arr)
         {
             static_assert(N != 0);
 
-            return (arr[max_index(arr)]);
+            return (t_arr[max_index(t_arr)]);
         }
 
         /**
@@ -182,18 +182,18 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to find the total of.
+         *  @param  t_arr   Array to find the total of.
          *
          *  @return The total of all elements stored within the array.
          */
         template <typename T, size_t N>
-        constexpr T total(const std::array<T, N>& arr)
+        constexpr T total(const std::array<T, N>& t_arr)
         {
             T total = 0;
 
             for (size_t i = 0; i < N; ++i)
             {
-                total += arr[i];
+                total += t_arr[i];
             }
 
             return (total);
@@ -206,18 +206,18 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to find the magnitude of.
+         *  @param  t_arr   Array to find the magnitude of.
          *
          *  @return The magnitude of the array.
          */
         template <typename T, size_t N>
-        constexpr double magnitude(const std::array<T, N>& arr)
+        constexpr double magnitude(const std::array<T, N>& t_arr)
         {
             T squared_total = 0;
 
             for (size_t i = 0; i < N; ++i)
             {
-                squared_total += arr[i] * arr[i];
+                squared_total += t_arr[i] * t_arr[i];
             }
 
             return (std::sqrt(static_cast<double>(squared_total)));
@@ -232,20 +232,20 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to be analysed.
+         *  @param  t_arr   Array to be analysed.
          *
          *  @pre    N must be greater than one.
          *
          *  @return True if the array's elements are sorted in ascending order.
          */
         template <typename T, size_t N>
-        constexpr bool is_ascending(const std::array<T, N>& arr)
+        constexpr bool is_ascending(const std::array<T, N>& t_arr)
         {
             static_assert(N > 1);
 
             for (size_t i = 1; i < N; ++i)
             {
-                if (arr[i] < arr[i - 1])
+                if (t_arr[i] < t_arr[i - 1])
                 {
                     return (false);
                 }
@@ -261,20 +261,20 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to be analysed.
+         *  @param  t_arr   Array to be analysed.
          *
          *  @pre    N must be greater than one.
          *
          *  @return True if the array's elements are sorted in descending order.
          */
         template <typename T, size_t N>
-        constexpr bool is_descending(const std::array<T, N>& arr)
+        constexpr bool is_descending(const std::array<T, N>& t_arr)
         {
             static_assert(N > 1);
 
             for (size_t i = 1; i < N; ++i)
             {
-                if (arr[i] > arr[i - 1])
+                if (t_arr[i] > t_arr[i - 1])
                 {
                     return (false);
                 }
@@ -291,18 +291,18 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to be analysed.
+         *  @param  t_arr   Array to be analysed.
          *
          *  @pre    N must be greater than one.
          *
          *  @return True if the array's elements are sorted in monotonic order.
          */
         template <typename T, size_t N>
-        constexpr bool is_monotonic(const std::array<T, N>& arr)
+        constexpr bool is_monotonic(const std::array<T, N>& t_arr)
         {
             static_assert(N > 1);
 
-            return (is_ascending(arr) || is_descending(arr));
+            return (is_ascending(t_arr) || is_descending(t_arr));
         }
 
         /**
@@ -312,23 +312,23 @@ namespace arc
          *  @tparam T   Type stored by the array.
          *  @tparam N   Size of the array.
          *
-         *  @param  arr Array to be analysed.
-         *  @param  tol Maximum consecutive delta difference from the average delta where array is considered uniform.
+         *  @param  t_arr   Array to be analysed.
+         *  @param  t_tol   Maximum consecutive delta difference from the average delta where array is considered uniform.
          *
          *  @pre    N must be greater than one.
          *
          *  @return True if the array's elements are uniformly spaced.
          */
         template <typename T, size_t N>
-        constexpr bool is_uniform(const std::array<T, N>& arr, double tol)
+        constexpr bool is_uniform(const std::array<T, N>& t_arr, const double t_tol)
         {
             static_assert(N > 1);
 
-            const double ave_delta = (arr.front() - arr.back()) / static_cast<double>(N - 1);
+            const double ave_delta = (t_arr.front() - t_arr.back()) / static_cast<double>(N - 1);
 
             for (size_t i = 1; i < N; ++i)
             {
-                if ((std::fabs((arr[i - 1] - arr[i]) - ave_delta)) > tol)
+                if ((std::fabs((t_arr[i - 1] - t_arr[i]) - ave_delta)) > t_tol)
                 {
                     return (false);
                 }
@@ -344,17 +344,17 @@ namespace arc
          *  @tparam N   Size of the array.
          *  @tparam S   Type of the limit.
          *
-         *  @param  arr     Array to be analysed.
-         *  @param  limit   Limit to be tested.
+         *  @param  t_arr   Array to be analysed.
+         *  @param  t_limit Limit to be tested.
          *
          *  @return True if the array's elements are all less than the given limit.
          */
         template <typename T, size_t N, typename S>
-        constexpr bool is_always_less_than(const std::array<T, N>& arr, const S limit)
+        constexpr bool is_always_less_than(const std::array<T, N>& t_arr, const S t_limit)
         {
             for (size_t i = 0; i < N; ++i)
             {
-                if (!(arr[i] < limit))
+                if (!(t_arr[i] < t_limit))
                 {
                     return (false);
                 }
@@ -370,17 +370,17 @@ namespace arc
          *  @tparam N   Size of the array.
          *  @tparam S   Type of the limit.
          *
-         *  @param  arr     Array to be analysed.
-         *  @param  limit   Limit to be tested.
+         *  @param  t_arr   Array to be analysed.
+         *  @param  t_limit Limit to be tested.
          *
          *  @return True if the array's elements are all less than, or equal to, the given limit.
          */
         template <typename T, size_t N, typename S>
-        constexpr bool is_always_less_than_or_equal_to(const std::array<T, N>& arr, const S limit)
+        constexpr bool is_always_less_than_or_equal_to(const std::array<T, N>& t_arr, const S t_limit)
         {
             for (size_t i = 0; i < N; ++i)
             {
-                if (!(arr[i] <= limit))
+                if (!(t_arr[i] <= t_limit))
                 {
                     return (false);
                 }
@@ -396,17 +396,17 @@ namespace arc
          *  @tparam N   Size of the array.
          *  @tparam S   Type of the limit.
          *
-         *  @param  arr     Array to be analysed.
-         *  @param  limit   Limit to be tested.
+         *  @param  t_arr   Array to be analysed.
+         *  @param  t_limit Limit to be tested.
          *
          *  @return True if the array's elements are all greater than the given limit.
          */
         template <typename T, size_t N, typename S>
-        constexpr bool is_always_greater_than(const std::array<T, N>& arr, const S limit)
+        constexpr bool is_always_greater_than(const std::array<T, N>& t_arr, const S t_limit)
         {
             for (size_t i = 0; i < N; ++i)
             {
-                if (!(arr[i] > limit))
+                if (!(t_arr[i] > t_limit))
                 {
                     return (false);
                 }
@@ -422,17 +422,17 @@ namespace arc
          *  @tparam N   Size of the array.
          *  @tparam S   Type of the limit.
          *
-         *  @param  arr     Array to be analysed.
-         *  @param  limit   Limit to be tested.
+         *  @param  t_arr   Array to be analysed.
+         *  @param  t_limit Limit to be tested.
          *
          *  @return True if the array's elements are all greater than, or equal to, the given limit.
          */
         template <typename T, size_t N, typename S>
-        constexpr bool is_always_greater_than_or_equal_to(const std::array<T, N>& arr, const S limit)
+        constexpr bool is_always_greater_than_or_equal_to(const std::array<T, N>& t_arr, const S t_limit)
         {
             for (size_t i = 0; i < N; ++i)
             {
-                if (!(arr[i] >= limit))
+                if (!(t_arr[i] >= t_limit))
                 {
                     return (false);
                 }
@@ -451,9 +451,9 @@ namespace arc
          *  @tparam N   Size of the array.
          *  @tparam S   Type of the value to be found within the array.
          *
-         *  @param  arr         Array to hunt got the value placement.
-         *  @param  val         Value to locate within the array.
-         *  @param  init_guess  Initial guess for the lower index.
+         *  @param  t_arr           Array to hunt got the value placement.
+         *  @param  t_val           Value to locate within the array.
+         *  @param  t_init_guess    Initial guess for the lower index.
          *
          *  @pre    N must be greater than one.
          *  @pre    arr must be sorted in monotonic order.
@@ -463,20 +463,21 @@ namespace arc
          *  @return The lower index of the element pair which encapsulates the value.
          */
         template <typename T, size_t N, typename S>
-        size_t lower_index(const std::array<T, N>& arr, S val, const size_t init_guess)
+        size_t lower_index(const std::array<T, N>& t_arr, S t_val, const size_t t_init_guess)
         {
             static_assert(N > 1);
-            assert(is_monotonic(arr));
-            assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
-            assert(init_guess < N);
+            assert(is_monotonic(t_arr));
+            assert(
+                ((t_val >= t_arr.front()) && (t_val <= t_arr.back())) || ((t_val <= t_arr.front()) && (t_val >= t_arr.back())));
+            assert(t_init_guess < N);
 
-            bool ascending = arr.front() < arr.back();
+            bool ascending = t_arr.front() < t_arr.back();
 
-            size_t lower_index = init_guess;
+            size_t lower_index = t_init_guess;
             size_t upper_index;
 
             size_t jump = 1;
-            if (val >= arr[lower_index] == ascending)
+            if (t_val >= t_arr[lower_index] == ascending)
             {
                 if (lower_index == (N - 1))
                 {
@@ -484,7 +485,7 @@ namespace arc
                 }
 
                 upper_index = lower_index + 1;
-                while (val >= arr[upper_index] == ascending)
+                while (t_val >= t_arr[upper_index] == ascending)
                 {
                     lower_index = upper_index;
                     jump += jump;
@@ -500,7 +501,7 @@ namespace arc
             else
             {
                 upper_index = lower_index--;
-                while (val < arr[lower_index] == ascending)
+                while (t_val < t_arr[lower_index] == ascending)
                 {
                     upper_index = lower_index;
                     jump <<= 1;
@@ -518,7 +519,7 @@ namespace arc
             while ((upper_index - lower_index) != 1)
             {
                 size_t mid_index = (upper_index + lower_index) >> 1;
-                if (val >= arr[mid_index] == ascending)
+                if (t_val >= t_arr[mid_index] == ascending)
                 {
                     lower_index = mid_index;
                 }
@@ -528,12 +529,12 @@ namespace arc
                 }
             }
 
-            if (std::fabs(val - arr.front()) <= std::numeric_limits<double>::epsilon())
+            if (std::fabs(t_val - t_arr.front()) <= std::numeric_limits<double>::epsilon())
             {
                 return (0);
             }
 
-            if (std::fabs(val - arr.back()) <= std::numeric_limits<double>::epsilon())
+            if (std::fabs(t_val - t_arr.back()) <= std::numeric_limits<double>::epsilon())
             {
                 return (N - 2);
             }
@@ -549,9 +550,9 @@ namespace arc
          *  @tparam N   Size of the array.
          *  @tparam S   Type of the value to be found within the array.
          *
-         *  @param  arr         Array to hunt got the value placement.
-         *  @param  val         Value to locate within the array.
-         *  @param  init_guess  Initial guess for the upper index.
+         *  @param  t_arr           Array to hunt got the value placement.
+         *  @param  t_val           Value to locate within the array.
+         *  @param  t_init_guess    Initial guess for the upper index.
          *
          *  @pre    N must be greater than one.
          *  @pre    arr must be sorted in monotonic order.
@@ -561,14 +562,15 @@ namespace arc
          *  @return The upper index of the element pair which encapsulates the value.
          */
         template <typename T, size_t N, typename S>
-        size_t upper_index(const std::array<T, N>& arr, S val, const size_t init_guess)
+        size_t upper_index(const std::array<T, N>& t_arr, S t_val, const size_t t_init_guess)
         {
             static_assert(N > 1);
-            assert(is_monotonic(arr));
-            assert(((val >= arr.front()) && (val <= arr.back())) || ((val <= arr.front()) && (val >= arr.back())));
-            assert(init_guess < N);
+            assert(is_monotonic(t_arr));
+            assert(
+                ((t_val >= t_arr.front()) && (t_val <= t_arr.back())) || ((t_val <= t_arr.front()) && (t_val >= t_arr.back())));
+            assert(t_init_guess < N);
 
-            return (lower_index(arr, val, init_guess - 1) + 1);
+            return (lower_index(t_arr, t_val, t_init_guess - 1) + 1);
         }
 
 
@@ -580,7 +582,7 @@ namespace arc
     //  == OPERATORS PROTOTYPES ==
     //  -- Printing --
     template <typename T, size_t N>
-    std::ostream& operator<<(std::ostream& stream, const std::array<T, N>& arr);
+    std::ostream& operator<<(std::ostream& t_stream, const std::array<T, N>& t_arr);
 
 
 
@@ -592,29 +594,29 @@ namespace arc
      *  @tparam T   Type stored by the array.
      *  @tparam N   Size of the array.
      *
-     *  @param  stream  Stream to write to.
-     *  @param  arr     Array to be written.
+     *  @param  t_stream    Stream to write to.
+     *  @param  t_arr       Array to be written.
      *
      *  @return A reference to the stream post-write.
      */
     template <typename T, size_t N>
-    std::ostream& operator<<(std::ostream& stream, const std::array<T, N>& arr)
+    std::ostream& operator<<(std::ostream& t_stream, const std::array<T, N>& t_arr)
     {
         if (N == 0)
         {
-            stream << "[]";
+            t_stream << "[]";
 
-            return (stream);
+            return (t_stream);
         }
 
-        stream << "[" << arr[0];
+        t_stream << "[" << t_arr[0];
         for (size_t i = 1; i < N; ++i)
         {
-            stream << ", " << arr[i];
+            t_stream << ", " << t_arr[i];
         }
-        stream << "]";
+        t_stream << "]";
 
-        return (stream);
+        return (t_stream);
     }
 
 
