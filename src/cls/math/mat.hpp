@@ -45,15 +45,15 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            std::array<std::array<double, M>, N> element;   //! Two-dimensional array of element values.
+            std::array<std::array<double, M>, N> data;  //! Two-dimensional array of data element values.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
             constexpr Mat();
-            explicit constexpr Mat(double init_element);
-            explicit constexpr Mat(const std::array<std::array<double, M>, N>& init_element);
+            explicit constexpr Mat(double init_data);
+            explicit constexpr Mat(const std::array<std::array<double, M>, N>& init_data);
 
 
             //  == OPERATORS ==
@@ -103,39 +103,39 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a mat and initialise all of its elements to zero.
+         *  Construct a mat and initialise all of its data elements to zero.
          */
         template <size_t N, size_t M>
         constexpr Mat<N, M>::Mat()
         {
             for (size_t i = 0; i < N; ++i)
             {
-                std::fill(element[i].begin(), element[i].end(), 0.0);
+                std::fill(data[i].begin(), data[i].end(), 0.0);
             }
         }
 
         /**
-         *  Construct a mat and initialise all of its elements to the given initial value.
+         *  Construct a mat and initialise all of its data elements to the given initial value.
          *
-         *  @param  init_element    Value to initialise all elements to.
+         *  @param  init_data    Value to initialise all data elements to.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>::Mat(const double init_element)
+        constexpr Mat<N, M>::Mat(const double init_data)
         {
             for (size_t i = 0; i < N; ++i)
             {
-                std::fill(element[i].begin(), element[i].end(), init_element);
+                std::fill(data[i].begin(), data[i].end(), init_data);
             }
         }
 
         /**
-         *  Construct a mat and initialise all of its elements using the given two-dimensional array.
+         *  Construct a mat and initialise all of its data elements using the given two-dimensional array.
          *
-         *  @param  init_element    Two-dimensional array of values to initialise the mat elements to.
+         *  @param  init_data    Two-dimensional array of values to initialise the mat data elements to.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>::Mat(const std::array<std::array<double, M>, N>& init_element) :
-            element(init_element)
+        constexpr Mat<N, M>::Mat(const std::array<std::array<double, M>, N>& init_data) :
+            data(init_data)
         {
         }
 
@@ -144,37 +144,37 @@ namespace arc
         //  == OPERATORS ==
         //  -- Access --
         /**
-         *  Retrieve a reference to a column element of the mat.
+         *  Retrieve a reference to a column data element of the mat.
          *
-         *  @param  index   Index of the element to access.
+         *  @param  index   Index of the data element to access.
          *
-         *  @return A reference to the mat element.
+         *  @return A reference to the mat data element.
          */
         template <size_t N, size_t M>
         constexpr std::array<double, M>& Mat<N, M>::operator[](const size_t index)
         {
-            return (element[index]);
+            return (data[index]);
         }
 
         /**
-         *  Retrieve a reference to a const column element of the mat.
+         *  Retrieve a reference to a const column data element of the mat.
          *
-         *  @param  index   Index of the element to access.
+         *  @param  index   Index of the data element to access.
          *
-         *  @return A reference to the const mat element.
+         *  @return A reference to the const mat data element.
          */
         template <size_t N, size_t M>
         constexpr const std::array<double, M>& Mat<N, M>::operator[](const size_t index) const
         {
-            return (element[index]);
+            return (data[index]);
         }
 
 
         //  -- Mathematical --
         /**
-         *  Add a value to all elements of a mat.
+         *  Add a value to all data elements of a mat.
          *
-         *  @param  rhs Value to add to each mat element.
+         *  @param  rhs Value to add to each mat data element.
          *
          *  @return A reference to this mat post-addition.
          */
@@ -185,7 +185,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    element[i][j] += rhs;
+                    data[i][j] += rhs;
                 }
             }
 
@@ -193,9 +193,9 @@ namespace arc
         }
 
         /**
-         *  Add the element values of another mat to this mat.
+         *  Add the data element values of another mat to this mat.
          *
-         *  @param  rhs Mat of elements to add to this mat.
+         *  @param  rhs Mat of data elements to add to this mat.
          *
          *  @return A reference to this mat post-addition.
          */
@@ -206,7 +206,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    element[i][j] += rhs.element[i][j];
+                    data[i][j] += rhs.data[i][j];
                 }
             }
 
@@ -214,9 +214,9 @@ namespace arc
         }
 
         /**
-         *  Subtract a value from all elements of a mat.
+         *  Subtract a value from all data elements of a mat.
          *
-         *  @param  rhs Value to subtract from each mat element.
+         *  @param  rhs Value to subtract from each mat data element.
          *
          *  @return A reference to this mat post-subtraction.
          */
@@ -227,7 +227,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    element[i][j] -= rhs;
+                    data[i][j] -= rhs;
                 }
             }
 
@@ -235,9 +235,9 @@ namespace arc
         }
 
         /**
-         *  Subtract the element values of another mat from this mat.
+         *  Subtract the data element values of another mat from this mat.
          *
-         *  @param  rhs Mat of elements to subtract from this mat.
+         *  @param  rhs Mat of data elements to subtract from this mat.
          *
          *  @return A reference to this mat post-subtraction.
          */
@@ -248,7 +248,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    element[i][j] -= rhs.element[i][j];
+                    data[i][j] -= rhs.data[i][j];
                 }
             }
 
@@ -256,9 +256,9 @@ namespace arc
         }
 
         /**
-         *  Multiply all elements of a mat by a value.
+         *  Multiply all data elements of a mat by a value.
          *
-         *  @param  rhs Value to multiply each mat element by.
+         *  @param  rhs Value to multiply each mat data element by.
          *
          *  @return A reference to this mat post-multiplication.
          */
@@ -269,7 +269,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    element[i][j] *= rhs;
+                    data[i][j] *= rhs;
                 }
             }
 
@@ -287,17 +287,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M>& Mat<N, M>::operator*=(const Mat<M, M>& rhs)
         {
-            const std::array<std::array<double, M>, N> lhs = element;
+            const std::array<std::array<double, M>, N> lhs = data;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    element[i][j] = 0.0;
+                    data[i][j] = 0.0;
 
                     for (size_t k = 0; k < M; ++k)
                     {
-                        element[i][j] += lhs[i][k] * rhs.element[k][j];
+                        data[i][j] += lhs[i][k] * rhs.data[k][j];
                     }
                 }
             }
@@ -306,9 +306,9 @@ namespace arc
         }
 
         /**
-         *  Divide all elements of a mat by a value.
+         *  Divide all data elements of a mat by a value.
          *
-         *  @param  rhs Value to divide each mat element by.
+         *  @param  rhs Value to divide each mat data element by.
          *
          *  @return A reference to this mat post-division.
          */
@@ -319,7 +319,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    element[i][j] /= rhs;
+                    data[i][j] /= rhs;
                 }
             }
 
@@ -327,7 +327,7 @@ namespace arc
         }
 
         /**
-         *  Increment each element stored by the mat.
+         *  Increment each data element stored by the mat.
          *
          *  @return A reference to this mat post-increment.
          */
@@ -338,7 +338,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    ++element[i][j];
+                    ++data[i][j];
                 }
             }
 
@@ -346,7 +346,7 @@ namespace arc
         }
 
         /**
-         *  Increment each element stored by the mat.
+         *  Increment each data element stored by the mat.
          *
          *  @return A copy of this mat post-increment.
          */
@@ -359,7 +359,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    ++element[i][j];
+                    ++data[i][j];
                 }
             }
 
@@ -367,7 +367,7 @@ namespace arc
         }
 
         /**
-         *  Decrement each element stored by the mat.
+         *  Decrement each data element stored by the mat.
          *
          *  @return A reference to this mat post-decrement.
          */
@@ -378,7 +378,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    --element[i][j];
+                    --data[i][j];
                 }
             }
 
@@ -386,7 +386,7 @@ namespace arc
         }
 
         /**
-         *  Decrement each element stored by the mat.
+         *  Decrement each data element stored by the mat.
          *
          *  @return A copy of this mat post-decrement.
          */
@@ -399,7 +399,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    --element[i][j];
+                    --data[i][j];
                 }
             }
 
@@ -407,9 +407,9 @@ namespace arc
         }
 
         /**
-         *  Create a mat with a copy of the element values.
+         *  Create a mat with a copy of the data element values.
          *
-         *  @return A copy of this mat with the same element values.
+         *  @return A copy of this mat with the same data element values.
          */
         template <size_t N, size_t M>
         constexpr Mat<N, M> Mat<N, M>::operator+() const
@@ -420,7 +420,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = +element[i][j];
+                    mat.data[i][j] = +data[i][j];
                 }
             }
 
@@ -428,9 +428,9 @@ namespace arc
         }
 
         /**
-         *  Create a mat with a copy of the negated element values.
+         *  Create a mat with a copy of the negated data element values.
          *
-         *  @return A copy of this mat with the negated element values.
+         *  @return A copy of this mat with the negated data element values.
          */
         template <size_t N, size_t M>
         constexpr Mat<N, M> Mat<N, M>::operator-() const
@@ -441,7 +441,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = -element[i][j];
+                    mat.data[i][j] = -data[i][j];
                 }
             }
 
@@ -449,7 +449,7 @@ namespace arc
         }
 
         /**
-         *  Create a new mat by adding a given value to the elements of a given mat.
+         *  Create a new mat by adding a given value to the data elements of a given mat.
          *
          *  @param  lhs Left hand side mat operand.
          *  @param  rhs Right hand side value operand.
@@ -465,7 +465,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = lhs.element[i][j] + rhs;
+                    mat.data[i][j] = lhs.data[i][j] + rhs;
                 }
             }
 
@@ -473,7 +473,7 @@ namespace arc
         }
 
         /**
-         *  Create a new mat by adding the elements of a given mat to another mat.
+         *  Create a new mat by adding the data elements of a given mat to another mat.
          *
          *  @param  lhs Left hand side mat operand.
          *  @param  rhs Right hand side mat operand.
@@ -489,7 +489,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = lhs.element[i][j] + rhs.element[i][j];
+                    mat.data[i][j] = lhs.data[i][j] + rhs.data[i][j];
                 }
             }
 
@@ -497,7 +497,7 @@ namespace arc
         }
 
         /**
-         *  Create a new mat by subtracting a given value form the elements of a given mat.
+         *  Create a new mat by subtracting a given value form the data elements of a given mat.
          *
          *  @param  lhs Left hand side mat operand.
          *  @param  rhs Right hand side value operand.
@@ -513,7 +513,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = lhs.element[i][j] - rhs;
+                    mat.data[i][j] = lhs.data[i][j] - rhs;
                 }
             }
 
@@ -521,7 +521,7 @@ namespace arc
         }
 
         /**
-         *  Create a new mat by subtracting the elements of a given mat from another mat.
+         *  Create a new mat by subtracting the data elements of a given mat from another mat.
          *
          *  @param  lhs Left hand side mat operand.
          *  @param  rhs Right hand side mat operand.
@@ -537,7 +537,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = lhs.element[i][j] - rhs.element[i][j];
+                    mat.data[i][j] = lhs.data[i][j] - rhs.data[i][j];
                 }
             }
 
@@ -545,7 +545,7 @@ namespace arc
         }
 
         /**
-         *  Create a new mat by multiplying elements of a given mat by a value.
+         *  Create a new mat by multiplying data elements of a given mat by a value.
          *
          *  @param  lhs Left hand side mat operand.
          *  @param  rhs Right hand side value operand.
@@ -561,7 +561,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = lhs.element[i][j] * rhs;
+                    mat.data[i][j] = lhs.data[i][j] * rhs;
                 }
             }
 
@@ -585,7 +585,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    vec[i] += lhs.element[i][j] * rhs.data[j];
+                    vec[i] += lhs.data[i][j] * rhs.data[j];
                 }
             }
 
@@ -611,7 +611,7 @@ namespace arc
                 {
                     for (size_t k = 0; k < M; ++k)
                     {
-                        mat.element[i][j] += lhs.element[i][k] * rhs.element[k][j];
+                        mat.data[i][j] += lhs.data[i][k] * rhs.data[k][j];
                     }
                 }
             }
@@ -620,7 +620,7 @@ namespace arc
         }
 
         /**
-         *  Create a new mat by dividing elements of a given mat by a value.
+         *  Create a new mat by dividing data elements of a given mat by a value.
          *
          *  @param  lhs Left hand side mat operand.
          *  @param  rhs Right hand side value operand.
@@ -636,7 +636,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.element[i][j] = lhs.element[i][j] / rhs;
+                    mat.data[i][j] = lhs.data[i][j] / rhs;
                 }
             }
 
@@ -674,18 +674,18 @@ namespace arc
                 return (stream);
             }
 
-            stream << "{{" << mat.element[0][0];
+            stream << "{{" << mat.data[0][0];
             for (size_t i = 1; i < M; ++i)
             {
-                stream << ", " << mat.element[0][i];
+                stream << ", " << mat.data[0][i];
             }
             stream << "}";
             for (size_t i = 1; i < N; ++i)
             {
-                stream << ", {" << mat.element[i][0];
+                stream << ", {" << mat.data[i][0];
                 for (size_t j = 1; j < M; ++j)
                 {
-                    stream << ", " << mat.element[i][j];
+                    stream << ", " << mat.data[i][j];
                 }
                 stream << "}";
             }
