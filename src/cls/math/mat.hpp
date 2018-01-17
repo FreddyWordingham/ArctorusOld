@@ -381,7 +381,7 @@ namespace arc
         }
 
         /**
-         *  Decrement each element stored by the vec.
+         *  Decrement each element stored by the mat.
          *
          *  @return A copy of this mat post-decrement.
          */
@@ -404,7 +404,7 @@ namespace arc
         /**
          *  Create a mat with a copy of the element values.
          *
-         *  @return A copy of this vec with the same element values.
+         *  @return A copy of this mat with the same element values.
          */
         template <size_t N, size_t M>
         constexpr Mat<N, M> Mat<N, M>::operator+() const
