@@ -456,9 +456,9 @@ namespace arc
          *  @param  t_init_guess    Initial guess for the lower index.
          *
          *  @pre    N must be greater than one.
-         *  @pre    arr must be sorted in monotonic order.
-         *  @pre    val must be within the array limits.
-         *  @pre    init_guess must be a valid index of the array.
+         *  @pre    t_arr must be sorted in monotonic order.
+         *  @pre    t_val must be within the array limits.
+         *  @pre    t_init_guess must be a valid index of the array.
          *
          *  @return The lower index of the element pair which encapsulates the value.
          */
@@ -555,9 +555,9 @@ namespace arc
          *  @param  t_init_guess    Initial guess for the upper index.
          *
          *  @pre    N must be greater than one.
-         *  @pre    arr must be sorted in monotonic order.
-         *  @pre    val must be within the array limits.
-         *  @pre    init_guess must be a valid index of the array.
+         *  @pre    t_arr must be sorted in monotonic order.
+         *  @pre    t_val must be within the array limits.
+         *  @pre    t_init_guess must be a valid index of the array.
          *
          *  @return The upper index of the element pair which encapsulates the value.
          */
