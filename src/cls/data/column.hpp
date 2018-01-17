@@ -44,6 +44,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Column(const std::string& init_title, const std::vector<double>& init_data);
 
           private:
             //  -- Initialisation --
