@@ -78,7 +78,7 @@
 #define WARN(t_symptom, t_cause)                                                        \
 {                                                                                       \
     std::stringstream symptom_stream, cause_stream;                                     \
-    symptom_stream << std::boolalpha << symptom;    /*NOLINT*/                          \
+    symptom_stream << std::boolalpha << t_symptom;    /*NOLINT*/                        \
     cause_stream << std::boolalpha << t_cause;      /*NOLINT*/                          \
     arc::term::Logger::get_instance().warn(symptom_stream.str(), cause_stream.str());   \
 }                                                                                       \

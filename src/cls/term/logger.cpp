@@ -35,18 +35,18 @@ namespace arc
          *  Implements a singleton whereby only one logger may be created.
          *  Uses lazy initialisation.
          *
-         *  @param  init_stream Output stream to write the log to.
+         *  @param  t_stream    Output stream to write the log to.
          *
          *  @return A reference to the initialised logger object.
          */
-        Logger& Logger::get_instance(std::ostream& init_stream)
+        Logger& Logger::get_instance(std::ostream& t_stream)
         {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wexit-time-destructors"
-            static Logger log(init_stream);
+            static Logger s_log(t_stream);
 #pragma clang diagnostic pop
 
-            return (log);
+            return (s_log);
         }
 
 
@@ -54,16 +54,16 @@ namespace arc
         /**
          *  Construct a logger object which will write to a given stream.
          *
-         *  @param  init_stream Output stream to write the log to.
+         *  @param  t_stream    Output stream to write the log to.
          */
-        Logger::Logger(std::ostream& init_stream) :
-            stream(init_stream),
-            text_cols(init_text_cols()),
-            log_types(init_log_types()),
-            indent_string(WRAP_INDENT, ' '),
-            padding_string(TIME_WIDTH + TYPE_WIDTH, ' '),
-            num_warnings(0),
-            num_errors(0)
+        Logger::Logger(std::ostream& t_stream) :
+            m_stream(t_stream),
+            m_text_col(init_text_cols()),
+            m_log_type(init_log_types()),
+            m_indent_string(WRAP_INDENT, ' '),
+            m_padding_string(TIME_WIDTH + TYPE_WIDTH, ' '),
+            m_num_warnings(0),
+            m_num_errors(0)
         {
             print_title_card();
         }
@@ -78,10 +78,10 @@ namespace arc
         {
             print_hr('=');
 
-            print_text(num_warnings == 0 ? GREEN : YELLOW, num_warnings == 0 ? LOG : WARN,
-                       "Total warnings: " + std::to_string(num_warnings));
-            print_text(num_errors == 0 ? GREEN : RED, num_errors == 0 ? LOG : ERROR,
-                       "Total errors  : " + std::to_string(num_errors));
+            print_text(m_num_warnings == 0 ? GREEN : YELLOW, m_num_warnings == 0 ? LOG : WARN,
+                       "Total warnings: " + std::to_string(m_num_warnings));
+            print_text(m_num_errors == 0 ? GREEN : RED, m_num_errors == 0 ? LOG : ERROR,
+                       "Total errors  : " + std::to_string(m_num_errors));
 
             print_hr('=');
         }
@@ -96,22 +96,22 @@ namespace arc
          */
         std::array<std::string, Logger::TOTAL_COLS> Logger::init_text_cols() const
         {
-            std::array<std::string, TOTAL_COLS> init_text_cols;
+            std::array<std::string, TOTAL_COLS> text_col;
 
-            if (config::COLOUR_LOG && (&stream == &std::cout) && (isatty(fileno(stdout)) != 0))
+            if (config::COLOUR_LOG && (&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0))
             {
-                init_text_cols[RESET]   = ansi::RESET;
-                init_text_cols[BLACK]   = ansi::BLACK;
-                init_text_cols[RED]     = ansi::RED;
-                init_text_cols[GREEN]   = ansi::GREEN;
-                init_text_cols[YELLOW]  = ansi::YELLOW;
-                init_text_cols[BLUE]    = ansi::BLUE;
-                init_text_cols[MAGENTA] = ansi::MAGENTA;
-                init_text_cols[CYAN]    = ansi::CYAN;
-                init_text_cols[WHITE]   = ansi::WHITE;
+                text_col[RESET]   = ansi::RESET;
+                text_col[BLACK]   = ansi::BLACK;
+                text_col[RED]     = ansi::RED;
+                text_col[GREEN]   = ansi::GREEN;
+                text_col[YELLOW]  = ansi::YELLOW;
+                text_col[BLUE]    = ansi::BLUE;
+                text_col[MAGENTA] = ansi::MAGENTA;
+                text_col[CYAN]    = ansi::CYAN;
+                text_col[WHITE]   = ansi::WHITE;
             }
 
-            return (init_text_cols);
+            return (text_col);
         }
 
         /**
@@ -121,21 +121,21 @@ namespace arc
          */
         std::array<std::string, Logger::TOTAL_TYPES> Logger::init_log_types() const
         {
-            std::array<std::string, TOTAL_TYPES> init_log_types;
+            std::array<std::string, TOTAL_TYPES> log_type;
 
-            init_log_types[LOG]   = std::string(LOG_TYPE_STRING);
-            init_log_types[VERB]  = std::string(VERB_TYPE_STRING);
-            init_log_types[VAL]   = std::string(VAL_TYPE_STRING);
-            init_log_types[TEMP]  = std::string(TEMP_TYPE_STRING);
-            init_log_types[WARN]  = std::string(WARN_TYPE_STRING);
-            init_log_types[ERROR] = std::string(ERROR_TYPE_STRING);
+            log_type[LOG]   = std::string(LOG_TYPE_STRING);
+            log_type[VERB]  = std::string(VERB_TYPE_STRING);
+            log_type[VAL]   = std::string(VAL_TYPE_STRING);
+            log_type[TEMP]  = std::string(TEMP_TYPE_STRING);
+            log_type[WARN]  = std::string(WARN_TYPE_STRING);
+            log_type[ERROR] = std::string(ERROR_TYPE_STRING);
 
             for (size_t i = 0; i < TOTAL_TYPES; ++i)
             {
-                init_log_types[i].resize(TYPE_WIDTH, ' ');
+                log_type[i].resize(TYPE_WIDTH, ' ');
             }
 
-            return (init_log_types);
+            return (log_type);
         }
 
 
@@ -145,31 +145,31 @@ namespace arc
         /**
          *  Log a standard message.
          *
-         *  @param  text    Message text to be logged.
+         *  @param  t_text  Message text to be logged.
          *
-         *  @pre    text must not be empty.
+         *  @pre    t_text must not be empty.
          */
-        void Logger::log(const std::string& text) const
+        void Logger::log(const std::string& t_text) const
         {
-            assert(!text.empty());
+            assert(!t_text.empty());
 
-            print_text(CYAN, LOG, text);
+            print_text(CYAN, LOG, t_text);
         }
 
         /**
          *  Log a verbose message.
          *
-         *  @param  text    Message text to be logged.
+         *  @param  t_text  Message text to be logged.
          *
-         *  @pre    text must not be empty.
+         *  @pre    t_text must not be empty.
          */
-        void Logger::verb(const std::string& text) const
+        void Logger::verb(const std::string& t_text) const
         {
-            assert(!text.empty());
+            assert(!t_text.empty());
 
             if (config::VERBOSE_LOG)
             {
-                print_text(CYAN, LOG, text);
+                print_text(CYAN, LOG, t_text);
             }
         }
 
@@ -177,20 +177,20 @@ namespace arc
          *  Log a warning message.
          *  Increment the number of recorded warnings.
          *
-         *  @param  symptom Description of the symptom of the warning.
-         *  @param  cause   Description of the cause of the warning.
+         *  @param  t_symptom   Description of the symptom of the warning.
+         *  @param  t_cause     Description of the cause of the warning.
          *
-         *  @pre    symptom must not be empty.
-         *  @pre    cause must not be empty.
+         *  @pre    t_symptom must not be empty.
+         *  @pre    t_cause must not be empty.
          */
-        void Logger::warn(const std::string& symptom, const std::string& cause)
+        void Logger::warn(const std::string& t_symptom, const std::string& t_cause)
         {
-            assert(!symptom.empty());
-            assert(!cause.empty());
+            assert(!t_symptom.empty());
+            assert(!t_cause.empty());
 
-            ++num_warnings;
+            ++m_num_warnings;
 
-            std::string text = symptom + "\n" + cause;
+            std::string text = t_symptom + "\n" + t_cause;
             print_text(YELLOW, WARN, text);
         }
 
@@ -199,27 +199,27 @@ namespace arc
          *  Increment the number of recorded errors.
          *  Program will then exit.
          *
-         *  @param  file    File path where the error occurred.
-         *  @param  line    Line where the error occurred.
-         *  @param  symptom Description of the symptom of the error.
-         *  @param  cause   Description of the cause of the error.
+         *  @param  t_file      File path where the error occurred.
+         *  @param  t_line      Line where the error occurred.
+         *  @param  t_symptom   Description of the symptom of the error.
+         *  @param  t_cause     Description of the cause of the error.
          *
-         *  @pre    file must not be empty.
-         *  @pre    line must not be empty.
-         *  @pre    symptom must not be empty.
-         *  @pre    cause must not be empty.
+         *  @pre    t_file must not be empty.
+         *  @pre    t_line must not be empty.
+         *  @pre    t_symptom must not be empty.
+         *  @pre    t_cause must not be empty.
          */
-        void Logger::error(const std::string& file, const std::string& line, const std::string& symptom,
-                           const std::string& cause)
+        void Logger::error(const std::string& t_file, const std::string& t_line, const std::string& t_symptom,
+                           const std::string& t_cause)
         {
-            assert(!file.empty());
-            assert(!line.empty());
-            assert(!symptom.empty());
-            assert(!cause.empty());
+            assert(!t_file.empty());
+            assert(!t_line.empty());
+            assert(!t_symptom.empty());
+            assert(!t_cause.empty());
 
-            ++num_errors;
+            ++m_num_errors;
 
-            std::string text = "File: " + file + "\nLine: " + line + "\n" + symptom + "\n" + cause;
+            std::string text = "File: " + t_file + "\nLine: " + t_line + "\n" + t_symptom + "\n" + t_cause;
             print_text(RED, ERROR, text);
 
             std::exit(1);
@@ -230,11 +230,11 @@ namespace arc
         /**
          *  Print a horizontal rule using a given character.
          *
-         *  @param  hr_char Character used to draw the horizontal rule.
+         *  @param  t_hr_char   Character used to draw the horizontal rule.
          */
-        void Logger::print_hr(const char hr_char) const
+        void Logger::print_hr(const char t_hr_char) const
         {
-            stream << std::string(LINE_WIDTH, hr_char) << "\n";
+            m_stream << std::string(LINE_WIDTH, t_hr_char) << "\n";
         }
 
         /**
@@ -253,15 +253,15 @@ namespace arc
                 std::string line = title.substr(0, TITLE_WIDTH);
                 title.erase(0, TITLE_WIDTH);
 
-                utl::find_and_replace(&line, "l", text_cols[CYAN] + "/" + text_cols[RESET]);
-                utl::find_and_replace(&line, "r", text_cols[CYAN] + R"(\)" + text_cols[RESET]);
-                utl::find_and_replace(&line, "M", text_cols[MAGENTA] + "~" + text_cols[RESET]);
-                utl::find_and_replace(&line, "B", text_cols[BLUE] + "~" + text_cols[RESET]);
-                utl::find_and_replace(&line, "G", text_cols[GREEN] + "~" + text_cols[RESET]);
-                utl::find_and_replace(&line, "Y", text_cols[YELLOW] + "~" + text_cols[RESET]);
-                utl::find_and_replace(&line, "R", text_cols[RED] + "~" + text_cols[RESET]);
+                utl::find_and_replace(&line, "l", m_text_col[CYAN] + "/" + m_text_col[RESET]);
+                utl::find_and_replace(&line, "r", m_text_col[CYAN] + R"(\)" + m_text_col[RESET]);
+                utl::find_and_replace(&line, "M", m_text_col[MAGENTA] + "~" + m_text_col[RESET]);
+                utl::find_and_replace(&line, "B", m_text_col[BLUE] + "~" + m_text_col[RESET]);
+                utl::find_and_replace(&line, "G", m_text_col[GREEN] + "~" + m_text_col[RESET]);
+                utl::find_and_replace(&line, "Y", m_text_col[YELLOW] + "~" + m_text_col[RESET]);
+                utl::find_and_replace(&line, "R", m_text_col[RED] + "~" + m_text_col[RESET]);
 
-                stream << pre_title_pad << line << post_title_pad << "\n";
+                m_stream << pre_title_pad << line << post_title_pad << "\n";
             }
 
             print_hr('=');
@@ -270,7 +270,7 @@ namespace arc
             const std::string pre_build_pad((LINE_WIDTH - build.size()) / 2, ' ');
             const std::string post_build_pad(LINE_WIDTH - (build.size() + pre_build_pad.size()), ' ');
 
-            stream << pre_build_pad << build << post_build_pad << "\n";
+            m_stream << pre_build_pad << build << post_build_pad << "\n";
 
             print_hr('=');
         }
@@ -278,30 +278,30 @@ namespace arc
         /**
          *  Print the given text string in a formatted, coloured message.
          *
-         *  @param  col     Colour to print the text in.
-         *  @param  type    Type string to be prepended to the message.
-         *  @param  text    Text to be printed.
+         *  @param  t_col   Colour to print the text in.
+         *  @param  t_type  Type string to be prepended to the message.
+         *  @param  t_text  Text to be printed.
          *
-         *  @pre    col must be a valid cols enumeration.
-         *  @pre    type must be a valid types enumeration.
-         *  @pre    text must not be empty.
+         *  @pre    t_col must be a valid cols enumeration.
+         *  @pre    t_type must be a valid types enumeration.
+         *  @pre    t_text must not be empty.
          */
-        void Logger::print_text(const size_t col, const size_t type, const std::string& text) const
+        void Logger::print_text(const size_t t_col, const size_t t_type, const std::string& t_text) const
         {
-            assert(col < TOTAL_COLS);
-            assert(type < TOTAL_TYPES);
-            assert(!text.empty());
+            assert(t_col < TOTAL_COLS);
+            assert(t_type < TOTAL_TYPES);
+            assert(!t_text.empty());
 
-            std::vector<std::string> lines     = form_lines(text);
+            std::vector<std::string> lines     = form_lines(t_text);
             std::string              timestamp = "[" + utl::create_timestamp() + "]";
             timestamp.resize(TIME_WIDTH, ' ');
 
-            stream << timestamp << text_cols[col] << log_types[type] << lines[0];
+            m_stream << timestamp << m_text_col[t_col] << m_log_type[t_type] << lines[0];
             for (size_t i = 1; i < lines.size(); ++i)
             {
-                stream << "\n" << padding_string << lines[i];
+                m_stream << "\n" << m_padding_string << lines[i];
             }
-            stream << text_cols[RESET] << "\n";
+            m_stream << m_text_col[RESET] << "\n";
         }
 
 
@@ -309,26 +309,25 @@ namespace arc
         /**
          *  Form a given text string into separate formatted lines.
          *
-         *  @param  text    Text string to be formatted.
+         *  @param  t_text  Text string to be formatted.
          *
-         *  @pre    text must not be empty.
+         *  @pre    t_text must not be empty.
          *
          *  @return Vector of text lines.
          */
-        std::vector<std::string> Logger::form_lines(std::string text) const
+        std::vector<std::string> Logger::form_lines(std::string t_text) const
         {
-            assert(!text.empty());
+            assert(!t_text.empty());
+            t_text += '\n';
 
-            text += '\n';
-
-            utl::find_and_replace(&text, "\t", "    ");
+            utl::find_and_replace(&t_text, "\t", "    ");
 
             std::vector<std::string> lines;
             size_t                   newline_pos;
-            while ((newline_pos = text.find_first_of('\n')) != std::string::npos)
+            while ((newline_pos = t_text.find_first_of('\n')) != std::string::npos)
             {
-                std::string line = text.substr(0, newline_pos);
-                text.erase(0, newline_pos + 1);
+                std::string line = t_text.substr(0, newline_pos);
+                t_text.erase(0, newline_pos + 1);
 
                 if (line.size() <= TEXT_WIDTH)
                 {
@@ -341,11 +340,11 @@ namespace arc
 
                     while (line.size() > (TEXT_WIDTH - WRAP_INDENT))
                     {
-                        lines.push_back(indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
+                        lines.push_back(m_indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
                         line.erase(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT));
                     }
 
-                    lines.push_back(indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
+                    lines.push_back(m_indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
                 }
             }
 

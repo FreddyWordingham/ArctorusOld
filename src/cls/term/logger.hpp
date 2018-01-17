@@ -135,36 +135,36 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Output Stream --
-            std::ostream& stream;   //! Output stream to write to.
+            std::ostream& m_stream; //! Output stream to write to.
 
             //  -- Colouring --
-            const std::array<std::string, TOTAL_COLS> text_cols;    //! Array of colour escape strings.
+            const std::array<std::string, TOTAL_COLS> m_text_col;   //! Array of colour escape strings.
 
             //  -- Type Strings --
-            const std::array<std::string, TOTAL_TYPES> log_types;   //! Array of log type strings.
+            const std::array<std::string, TOTAL_TYPES> m_log_type;  //! Array of log type strings.
 
             //  -- Format Strings --
-            const std::string indent_string;    //! Indentation string.
-            const std::string padding_string;   //! Padding string.
+            const std::string m_indent_string;  //! Indentation string.
+            const std::string m_padding_string; //! Padding string.
 
             //  -- Counters --
-            int num_warnings;   //! Count of the total number of reported warnings.
-            int num_errors;     //! Count of the total number of reported errors.
+            int m_num_warnings; //! Count of the total number of reported warnings.
+            int m_num_errors;   //! Count of the total number of reported errors.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Singleton --
-            static Logger& get_instance(std::ostream& init_stream = std::cout);
+            static Logger& get_instance(std::ostream& t_stream = std::cout);
 
           public:
             //  -- Constructors --
-            Logger(const Logger&) = delete;
-            Logger(const Logger&&) = delete;
+            Logger(const Logger& /*unused*/) = delete;
+            Logger(const Logger&& /*unused*/) = delete;
 
           private:
             //  -- Constructors --
-            explicit Logger(std::ostream& init_stream);
+            explicit Logger(std::ostream& t_stream);
 
             //  -- Destructors --
             ~Logger();
@@ -177,31 +177,31 @@ namespace arc
             //  == OPERATORS ==
           public:
             //  -- Copy --
-            Logger& operator=(const Logger&) = delete;
-            Logger& operator=(const Logger&&) = delete;
+            Logger& operator=(const Logger& /*unused*/) = delete;
+            Logger& operator=(const Logger&& /*unused*/) = delete;
 
 
             //  == METHODS ==
           public:
             //  -- Logging --
-            void log(const std::string& text) const;
-            void verb(const std::string& text) const;
+            void log(const std::string& t_text) const;
+            void verb(const std::string& t_text) const;
             template <typename T>
-            void val(const std::string& name, const T& val) const;
+            void val(const std::string& t_name, const T& t_val) const;
             template <typename T>
-            void temp(const std::string& name, const T& val) const;
-            void warn(const std::string& symptom, const std::string& cause);
-            [[noreturn]] void error(const std::string& file, const std::string& line, const std::string& symptom,
-                                    const std::string& cause);
+            void temp(const std::string& t_name, const T& t_val) const;
+            void warn(const std::string& t_symptom, const std::string& t_cause);
+            [[noreturn]] void error(const std::string& t_file, const std::string& t_line, const std::string& t_symptom,
+                                    const std::string& t_cause);
 
           private:
             //  -- Printing --
-            void print_hr(char hr_char = '-') const;
+            void print_hr(char t_hr_char = '-') const;
             void print_title_card() const;
-            void print_text(size_t col, size_t type, const std::string& text) const;
+            void print_text(size_t t_col, size_t t_type, const std::string& t_text) const;
 
             //  -- Formatting --
-            std::vector<std::string> form_lines(std::string text) const;
+            std::vector<std::string> form_lines(std::string t_text) const;
         };
 
 
@@ -213,22 +213,22 @@ namespace arc
          *
          *  @tparam T   Type of value to be printed.
          *
-         *  @param  name    Name of the value.
-         *  @param  val     Value of the value.
+         *  @param  t_name  Name of the value.
+         *  @param  t_val   Value of the value.
          *
          *  @pre    name must not be empty.
          */
         template <typename T>
-        void Logger::val(const std::string& name, const T& val) const
+        void Logger::val(const std::string& t_name, const T& t_val) const
         {
-            assert(!name.empty());
+            assert(!t_name.empty());
 
-            std::string text = name;
+            std::string text = t_name;
             text.resize(VALUE_NAME_WIDTH, ' ');
             text += " : ";
 
             std::stringstream val_stream;
-            val_stream << std::boolalpha << val;
+            val_stream << std::boolalpha << t_val;
             text += val_stream.str();
 
             print_text(MAGENTA, VAL, text);
@@ -240,18 +240,18 @@ namespace arc
          *
          *  @tparam T   Type of value to be printed.
          *
-         *  @param  name    Name of the value.
-         *  @param  val     Value of the value.
+         *  @param  t_name  Name of the value.
+         *  @param  t_val   Value of the value.
          *
          *  @pre    name must not be empty.
          */
         template <typename T>
-        void Logger::temp(const std::string& name, const T& val) const
+        void Logger::temp(const std::string& t_name, const T& t_val) const
         {
-            assert(!name.empty());
+            assert(!t_name.empty());
 
-            static const bool terminal                            = (&stream == &std::cout) && (isatty(fileno(stdout)) != 0);
-            if (!terminal)
+            static const bool s_term                              = (&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0);
+            if (!s_term)
             {
                 return;
             }
@@ -264,19 +264,19 @@ namespace arc
             }
             last_update = cur_time;
 
-            std::string text = name;
+            std::string text = t_name;
             text.resize(VALUE_NAME_WIDTH, ' ');
             text += " : ";
 
             std::stringstream val_stream;
-            val_stream << std::boolalpha << val;
+            val_stream << std::boolalpha << t_val;
             text += val_stream.str();
             text.resize(static_cast<size_t>(TEXT_WIDTH), ' ');
 
             std::string timestamp = "[" + utl::create_timestamp() + "]";
             timestamp.resize(TIME_WIDTH, ' ');
 
-            stream << timestamp << text_cols[YELLOW] << log_types[TEMP] << text << text_cols[RESET] << "\r";
+            m_stream << timestamp << m_text_col[YELLOW] << m_log_type[TEMP] << text << m_text_col[RESET] << "\r";
         }
 
 
