@@ -51,6 +51,12 @@ namespace arc
         inline Mat<4, 4> pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& trans);
         inline Mat<4, 4> dir_trans(const Vec<3>& scale, const Vec<3>& rot);
 
+        //  -- Geometry --
+        template <size_t N>
+        constexpr double dist(const math::Vec<N>& start, const math::Vec<N>& end);
+        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& pos);
+        inline double area(const std::array<math::Vec<3>, 3>& pos);
+
 
 
         //  == FUNCTIONS ==
@@ -156,6 +162,56 @@ namespace arc
                     rot[X]) * cos(rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
             return (rot_mat * scale_mat);
+        }
+
+
+        //  -- Geometry --
+        /**
+         *  Determine the distance between two points.
+         *
+         *  @tparam N   Size of the vecs.
+         *
+         *  @param  start   Start point.
+         *  @param  end     End point.
+         *
+         *  @return The distance between the two points.
+         */
+        template <size_t N>
+        constexpr double dist(const math::Vec<N>& start, const math::Vec<N>& end)
+        {
+            return ((start - end).magnitude());
+        }
+
+        /**
+         *  Determine the normal of a plane described by three points.
+         *
+         *  @param  pos Array of the three positional points lying within the plane.
+         *
+         *  @return The normal vector of the plane.
+         */
+        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& pos)
+        {
+            math::Vec<3> norm = (pos[BETA] - pos[ALPHA]) ^(pos[GAMMA] - pos[ALPHA]);
+
+            return (norm);
+        }
+
+        /**
+         *  Determine the area described by three points.
+         *
+         *  @param  pos Array of three positional points describing the area.
+         *
+         *  @return The area described by the three points.
+         */
+        inline double area(const std::array<math::Vec<3>, 3>& pos)
+        {
+            const double alpha_beta  = dist(pos[ALPHA], pos[BETA]);
+            const double beta_gamma  = dist(pos[BETA], pos[GAMMA]);
+            const double gamma_alpha = dist(pos[GAMMA], pos[ALPHA]);
+
+            const double half_perim = (alpha_beta + beta_gamma + gamma_alpha) / 2.0;
+
+            return (std::sqrt(half_perim * (half_perim - alpha_beta) * (half_perim - beta_gamma) * (half_perim - gamma_alpha)));
         }
 
 
