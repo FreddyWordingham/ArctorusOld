@@ -14,10 +14,10 @@
 //  -- General --
 #include "gen/config.hpp"
 #include "gen/log.hpp"
+#include "gen/math.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
-#include "cls/math/mat.hpp"
 
 using namespace arc;
 
@@ -37,9 +37,8 @@ int main()
 
     arc::math::Mat<2, 2> mat(0.0);
 
-    mat[0][1] = 1.0;
-
-    std::cout << mat << "\n";
+    std::cout << arc::math::create_pos_trans(arc::math::Vec<3>({{0.0, 0.0, 0.0}}), arc::math::Vec<3>({{0.0, 0.0, 0.0}}),
+                                             arc::math::Vec<3>({{0.0, 0.0, 0.0}})) << "\n";
 
     return (0);
 }

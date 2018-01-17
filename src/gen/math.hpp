@@ -17,6 +17,10 @@
 //  -- System --
 #include <cmath>
 
+//  -- Classes --
+#include "cls/math/mat.hpp"
+#include "cls/math/vec.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -42,6 +46,9 @@ namespace arc
 
         //  -- Comparison --
         inline bool equal(double lhs, double rhs, double tol = DEFAULT_EQUAL_TOL);
+
+        //  -- Matrix --
+        inline Mat<4, 4> create_pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& tran);
 
 
 
@@ -92,6 +99,31 @@ namespace arc
         inline bool equal(const double lhs, const double rhs, const double tol)
         {
             return (std::fabs(lhs - rhs) <= tol);
+        }
+
+
+        //  -- Matrix --
+        inline Mat<4, 4> create_pos_trans(const Vec<3>& scale, const Vec<3>& rot, const Vec<3>& tran)
+        {
+            return (Mat<4, 4>(
+                {{{{scale[X], 0.0, 0.0, 0.0}}, {{0.0, scale[Y], 0.0, 0.0}}, {{0.0, 0.0, scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
+
+/*            Mat<4, 4> rotate(
+                {{cos(rot[Y]) * cos(rot[Z]),
+                     (cos(rot[Z]) * sin(rot[X]) * sin(rot[Y])) - (cos(rot[X]) * sin(rot[Z])),
+                     (cos(rot[X]) * cos(rot[Z]) * sin(rot[Y])) - (sin(rot[X]) * sin(rot[Z])), 0.0},
+                 {cos(rot[Y]) * sin(rot[Z]),
+                     (cos(rot[X]) * cos(rot[Z])) + (sin(rot[X]) * sin(rot[Y]) * sin(rot[Z])),
+                     (cos(rot[X]) * sin(rot[Y]) * sin(rot[Z])) - (cos(rot[Z]) * sin(rot[X])), 0.0},
+                 {-sin(rot[Y]), cos(rot[Y]) * sin(rot[X]), cos(rot[X]) * cos(rot[Y]), 0.0},
+                 {0.0, 0.0, 0.0, 1.0}});
+
+            Mat<4, 4> translate({{1.0, 0.0, 0.0, t_translate[X]},
+                                 {1.0, 0.0, 0.0, t_translate[Y]},
+                                 {1.0, 0.0, 0.0, t_translate[Z]},
+                                 {0.0, 0.0, 0.0, 1.0}});
+
+            return (translate * rotate * scale);*/
         }
 
 
