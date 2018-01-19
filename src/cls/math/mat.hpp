@@ -45,31 +45,31 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            std::array<std::array<double, M>, N> data;  //! Two-dimensional array of data element values.
+            std::array<std::array<double, M>, N> m_data;    //! Two-dimensional array of data element values.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
             constexpr Mat();
-            explicit constexpr Mat(double init_data);
-            explicit constexpr Mat(const std::array<std::array<double, M>, N>& init_data);
+            explicit constexpr Mat(double t_data);
+            explicit constexpr Mat(const std::array<std::array<double, M>, N>& t_data);
 
 
             //  == OPERATORS ==
           public:
             //  -- Access --
-            constexpr std::array<double, M>& operator[](size_t index);
-            constexpr const std::array<double, M>& operator[](size_t index) const;
+            constexpr std::array<double, M>& operator[](size_t t_index);
+            constexpr const std::array<double, M>& operator[](size_t t_index) const;
 
             //  -- Mathematical --
-            constexpr Mat<N, M>& operator+=(double rhs);
-            constexpr Mat<N, M>& operator+=(const Mat<N, M>& rhs);
-            constexpr Mat<N, M>& operator-=(double rhs);
-            constexpr Mat<N, M>& operator-=(const Mat<N, M>& rhs);
-            constexpr Mat<N, M>& operator*=(double rhs);
-            constexpr Mat<N, M>& operator*=(const Mat<M, M>& rhs);
-            constexpr Mat<N, M>& operator/=(double rhs);
+            constexpr Mat<N, M>& operator+=(double t_rhs);
+            constexpr Mat<N, M>& operator+=(const Mat<N, M>& t_rhs);
+            constexpr Mat<N, M>& operator-=(double t_rhs);
+            constexpr Mat<N, M>& operator-=(const Mat<N, M>& t_rhs);
+            constexpr Mat<N, M>& operator*=(double t_rhs);
+            constexpr Mat<N, M>& operator*=(const Mat<M, M>& t_rhs);
+            constexpr Mat<N, M>& operator/=(double t_rhs);
             constexpr Mat<N, M>& operator++();
             constexpr Mat<N, M> operator++(int /*unused*/);
             constexpr Mat<N, M>& operator--();
@@ -77,25 +77,25 @@ namespace arc
             constexpr Mat<N, M> operator+() const;
             constexpr Mat<N, M> operator-() const;
             template <size_t U, size_t V>
-            friend constexpr Mat<U, V> operator+(const Mat<U, V>& lhs, double rhs);
+            friend constexpr Mat<U, V> operator+(const Mat<U, V>& t_lhs, double t_rhs);
             template <size_t U, size_t V>
-            friend constexpr Mat<U, V> operator+(const Mat<U, V>& lhs, const Mat<U, V>& rhs);
+            friend constexpr Mat<U, V> operator+(const Mat<U, V>& t_lhs, const Mat<U, V>& t_rhs);
             template <size_t U, size_t V>
-            friend constexpr Mat<U, V> operator-(const Mat<U, V>& lhs, double rhs);
+            friend constexpr Mat<U, V> operator-(const Mat<U, V>& t_lhs, double t_rhs);
             template <size_t U, size_t V>
-            friend constexpr Mat<U, V> operator-(const Mat<U, V>& lhs, const Mat<U, V>& rhs);
+            friend constexpr Mat<U, V> operator-(const Mat<U, V>& t_lhs, const Mat<U, V>& t_rhs);
             template <size_t U, size_t V>
-            friend constexpr Mat<U, V> operator*(const Mat<U, V>& lhs, double rhs);
+            friend constexpr Mat<U, V> operator*(const Mat<U, V>& t_lhs, double t_rhs);
             template <size_t U, size_t V>
-            friend constexpr Vec<U> operator*(const Mat<U, V>& lhs, const Vec<V>& rhs);
+            friend constexpr Vec<U> operator*(const Mat<U, V>& t_lhs, const Vec<V>& t_rhs);
             template <size_t U, size_t V, size_t W>
-            friend constexpr Mat<U, W> operator*(const Mat<U, V>& lhs, const Mat<V, W>& rhs);
+            friend constexpr Mat<U, W> operator*(const Mat<U, V>& t_lhs, const Mat<V, W>& t_rhs);
             template <size_t U, size_t V>
-            friend constexpr Mat<U, V> operator/(const Mat<U, V>& lhs, double rhs);
+            friend constexpr Mat<U, V> operator/(const Mat<U, V>& t_lhs, double t_rhs);
 
             //  -- Printing --
             template <size_t U, size_t V>
-            friend std::ostream& operator<<(std::ostream& stream, const Mat<U, V>& mat);
+            friend std::ostream& operator<<(std::ostream& t_stream, const Mat<U, V>& t_mat);
         };
 
 
@@ -110,32 +110,32 @@ namespace arc
         {
             for (size_t i = 0; i < N; ++i)
             {
-                std::fill(data[i].begin(), data[i].end(), 0.0);
+                std::fill(m_data[i].begin(), m_data[i].end(), 0.0);
             }
         }
 
         /**
          *  Construct a mat and initialise all of its data elements to the given initial value.
          *
-         *  @param  init_data    Value to initialise all data elements to.
+         *  @param  t_data  Value to initialise all data elements to.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>::Mat(const double init_data)
+        constexpr Mat<N, M>::Mat(const double t_data)
         {
             for (size_t i = 0; i < N; ++i)
             {
-                std::fill(data[i].begin(), data[i].end(), init_data);
+                std::fill(m_data[i].begin(), m_data[i].end(), t_data);
             }
         }
 
         /**
          *  Construct a mat and initialise all of its data elements using the given two-dimensional array.
          *
-         *  @param  init_data    Two-dimensional array of values to initialise the mat data elements to.
+         *  @param  t_data  Two-dimensional array of values to initialise the mat data elements to.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>::Mat(const std::array<std::array<double, M>, N>& init_data) :
-            data(init_data)
+        constexpr Mat<N, M>::Mat(const std::array<std::array<double, M>, N>& t_data) :
+            m_data(t_data)
         {
         }
 
@@ -146,27 +146,27 @@ namespace arc
         /**
          *  Retrieve a reference to a column data element of the mat.
          *
-         *  @param  index   Index of the data element to access.
+         *  @param  t_index Index of the data element to access.
          *
          *  @return A reference to the mat data element.
          */
         template <size_t N, size_t M>
-        constexpr std::array<double, M>& Mat<N, M>::operator[](const size_t index)
+        constexpr std::array<double, M>& Mat<N, M>::operator[](const size_t t_index)
         {
-            return (data[index]);
+            return (m_data[t_index]);
         }
 
         /**
          *  Retrieve a reference to a const column data element of the mat.
          *
-         *  @param  index   Index of the data element to access.
+         *  @param  t_index Index of the data element to access.
          *
          *  @return A reference to the const mat data element.
          */
         template <size_t N, size_t M>
-        constexpr const std::array<double, M>& Mat<N, M>::operator[](const size_t index) const
+        constexpr const std::array<double, M>& Mat<N, M>::operator[](const size_t t_index) const
         {
-            return (data[index]);
+            return (m_data[t_index]);
         }
 
 
@@ -174,18 +174,18 @@ namespace arc
         /**
          *  Add a value to all data elements of a mat.
          *
-         *  @param  rhs Value to add to each mat data element.
+         *  @param  t_rhs   Value to add to each mat data element.
          *
          *  @return A reference to this mat post-addition.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator+=(const double rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator+=(const double t_rhs)
         {
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    data[i][j] += rhs;
+                    m_data[i][j] += t_rhs;
                 }
             }
 
@@ -195,18 +195,18 @@ namespace arc
         /**
          *  Add the data element values of another mat to this mat.
          *
-         *  @param  rhs Mat of data elements to add to this mat.
+         *  @param  t_rhs   Mat of data elements to add to this mat.
          *
          *  @return A reference to this mat post-addition.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator+=(const Mat<N, M>& rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator+=(const Mat<N, M>& t_rhs)
         {
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    data[i][j] += rhs.data[i][j];
+                    m_data[i][j] += t_rhs.m_data[i][j];
                 }
             }
 
@@ -216,18 +216,18 @@ namespace arc
         /**
          *  Subtract a value from all data elements of a mat.
          *
-         *  @param  rhs Value to subtract from each mat data element.
+         *  @param  t_rhs   Value to subtract from each mat data element.
          *
          *  @return A reference to this mat post-subtraction.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator-=(const double rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator-=(const double t_rhs)
         {
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    data[i][j] -= rhs;
+                    m_data[i][j] -= t_rhs;
                 }
             }
 
@@ -237,18 +237,18 @@ namespace arc
         /**
          *  Subtract the data element values of another mat from this mat.
          *
-         *  @param  rhs Mat of data elements to subtract from this mat.
+         *  @param  t_rhs   Mat of data elements to subtract from this mat.
          *
          *  @return A reference to this mat post-subtraction.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator-=(const Mat<N, M>& rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator-=(const Mat<N, M>& t_rhs)
         {
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    data[i][j] -= rhs.data[i][j];
+                    m_data[i][j] -= t_rhs.m_data[i][j];
                 }
             }
 
@@ -258,18 +258,18 @@ namespace arc
         /**
          *  Multiply all data elements of a mat by a value.
          *
-         *  @param  rhs Value to multiply each mat data element by.
+         *  @param  t_rhs   Value to multiply each mat data element by.
          *
          *  @return A reference to this mat post-multiplication.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator*=(const double rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator*=(const double t_rhs)
         {
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    data[i][j] *= rhs;
+                    m_data[i][j] *= t_rhs;
                 }
             }
 
@@ -280,24 +280,24 @@ namespace arc
          *  Multiply this mat by another mat.
          *  Multiplying mat must be a square matrix with a number of rows and columns equal to this mat's number of columns.
          *
-         *  @param  rhs Mat to multiply this mat by.
+         *  @param  t_rhs   Mat to multiply this mat by.
          *
          *  @return A reference to this mat post-multiplication.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator*=(const Mat<M, M>& rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator*=(const Mat<M, M>& t_rhs)
         {
-            const std::array<std::array<double, M>, N> lhs = data;
+            const std::array<std::array<double, M>, N> lhs = m_data;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    data[i][j] = 0.0;
+                    m_data[i][j] = 0.0;
 
                     for (size_t k = 0; k < M; ++k)
                     {
-                        data[i][j] += lhs[i][k] * rhs.data[k][j];
+                        m_data[i][j] += lhs[i][k] * t_rhs.m_data[k][j];
                     }
                 }
             }
@@ -308,18 +308,18 @@ namespace arc
         /**
          *  Divide all data elements of a mat by a value.
          *
-         *  @param  rhs Value to divide each mat data element by.
+         *  @param  t_rhs   Value to divide each mat data element by.
          *
          *  @return A reference to this mat post-division.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M>& Mat<N, M>::operator/=(const double rhs)
+        constexpr Mat<N, M>& Mat<N, M>::operator/=(const double t_rhs)
         {
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    data[i][j] /= rhs;
+                    m_data[i][j] /= t_rhs;
                 }
             }
 
@@ -338,7 +338,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    ++data[i][j];
+                    ++m_data[i][j];
                 }
             }
 
@@ -359,7 +359,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    ++data[i][j];
+                    ++m_data[i][j];
                 }
             }
 
@@ -378,7 +378,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    --data[i][j];
+                    --m_data[i][j];
                 }
             }
 
@@ -399,7 +399,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    --data[i][j];
+                    --m_data[i][j];
                 }
             }
 
@@ -420,7 +420,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.data[i][j] = +data[i][j];
+                    mat.m_data[i][j] = +m_data[i][j];
                 }
             }
 
@@ -441,7 +441,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.data[i][j] = -data[i][j];
+                    mat.m_data[i][j] = -m_data[i][j];
                 }
             }
 
@@ -451,13 +451,13 @@ namespace arc
         /**
          *  Create a new mat by adding a given value to the data elements of a given mat.
          *
-         *  @param  lhs Left hand side mat operand.
-         *  @param  rhs Right hand side value operand.
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side value operand.
          *
          *  @return The created mat.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M> operator+(const Mat<N, M>& lhs, const double rhs)
+        constexpr Mat<N, M> operator+(const Mat<N, M>& t_lhs, const double t_rhs)
         {
             Mat<N, M> mat;
 
@@ -465,7 +465,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.data[i][j] = lhs.data[i][j] + rhs;
+                    mat.m_data[i][j] = t_lhs.m_data[i][j] + t_rhs;
                 }
             }
 
@@ -475,13 +475,13 @@ namespace arc
         /**
          *  Create a new mat by adding the data elements of a given mat to another mat.
          *
-         *  @param  lhs Left hand side mat operand.
-         *  @param  rhs Right hand side mat operand.
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side mat operand.
          *
          *  @return The created mat.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M> operator+(const Mat<N, M>& lhs, const Mat<N, M>& rhs)
+        constexpr Mat<N, M> operator+(const Mat<N, M>& t_lhs, const Mat<N, M>& t_rhs)
         {
             Mat<N, M> mat;
 
@@ -489,7 +489,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.data[i][j] = lhs.data[i][j] + rhs.data[i][j];
+                    mat.m_data[i][j] = t_lhs.m_data[i][j] + t_rhs.m_data[i][j];
                 }
             }
 
@@ -499,13 +499,13 @@ namespace arc
         /**
          *  Create a new mat by subtracting a given value form the data elements of a given mat.
          *
-         *  @param  lhs Left hand side mat operand.
-         *  @param  rhs Right hand side value operand.
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side value operand.
          *
          *  @return The created mat.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M> operator-(const Mat<N, M>& lhs, const double rhs)
+        constexpr Mat<N, M> operator-(const Mat<N, M>& t_lhs, const double t_rhs)
         {
             Mat<N, M> mat;
 
@@ -513,7 +513,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.data[i][j] = lhs.data[i][j] - rhs;
+                    mat.m_data[i][j] = t_lhs.m_data[i][j] - t_rhs;
                 }
             }
 
@@ -523,13 +523,13 @@ namespace arc
         /**
          *  Create a new mat by subtracting the data elements of a given mat from another mat.
          *
-         *  @param  lhs Left hand side mat operand.
-         *  @param  rhs Right hand side mat operand.
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side mat operand.
          *
          *  @return The created mat.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M> operator-(const Mat<N, M>& lhs, const Mat<N, M>& rhs)
+        constexpr Mat<N, M> operator-(const Mat<N, M>& t_lhs, const Mat<N, M>& t_rhs)
         {
             Mat<N, M> mat;
 
@@ -537,7 +537,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.data[i][j] = lhs.data[i][j] - rhs.data[i][j];
+                    mat.m_data[i][j] = t_lhs.m_data[i][j] - t_rhs.m_data[i][j];
                 }
             }
 
@@ -547,13 +547,13 @@ namespace arc
         /**
          *  Create a new mat by multiplying data elements of a given mat by a value.
          *
-         *  @param  lhs Left hand side mat operand.
-         *  @param  rhs Right hand side value operand.
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side value operand.
          *
          *  @return The created mat.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M> operator*(const Mat<N, M>& lhs, const double rhs)
+        constexpr Mat<N, M> operator*(const Mat<N, M>& t_lhs, const double t_rhs)
         {
             Mat<N, M> mat;
 
@@ -561,7 +561,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.data[i][j] = lhs.data[i][j] * rhs;
+                    mat.m_data[i][j] = t_lhs.m_data[i][j] * t_rhs;
                 }
             }
 
@@ -571,13 +571,13 @@ namespace arc
         /**
          *  Determine the matrix-vector vector product.
          *
-         *  @param  lhs Left hand side mat operand.
-         *  @param  rhs Right hand side vec operand.
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side vec operand.
          *
          *  @return The matrix-vector vector product.
          */
         template <size_t N, size_t M>
-        constexpr Vec<N> operator*(const Mat<N, M>& lhs, const Vec<M>& rhs)
+        constexpr Vec<N> operator*(const Mat<N, M>& t_lhs, const Vec<M>& t_rhs)
         {
             Vec<N> vec;
 
@@ -585,7 +585,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    vec[i] += lhs.data[i][j] * rhs.data[j];
+                    vec[i] += t_lhs.m_data[i][j] * t_rhs.data[j];
                 }
             }
 
@@ -595,13 +595,13 @@ namespace arc
         /**
          *  Determine the matrix-matrix product.
          *
-         *  @param  lhs Left hand side mat operand.
-         *  @param  rhs Right hand side mat operand.
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side mat operand.
          *
          *  @return The matrix-matrix matrix product.
          */
         template <size_t N, size_t M, size_t O>
-        constexpr Mat<N, O> operator*(const Mat<N, M>& lhs, const Mat<M, O>& rhs)
+        constexpr Mat<N, O> operator*(const Mat<N, M>& t_lhs, const Mat<M, O>& t_rhs)
         {
             Mat<N, O> mat;
 
@@ -611,7 +611,7 @@ namespace arc
                 {
                     for (size_t k = 0; k < M; ++k)
                     {
-                        mat.data[i][j] += lhs.data[i][k] * rhs.data[k][j];
+                        mat.m_data[i][j] += t_lhs.m_data[i][k] * t_rhs.m_data[k][j];
                     }
                 }
             }
@@ -622,13 +622,13 @@ namespace arc
         /**
          *  Create a new mat by dividing data elements of a given mat by a value.
          *
-         *  @param  lhs Left hand side mat operand.
-         *  @param  rhs Right hand side value operand.
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side value operand.
          *
          *  @return The created mat.
          */
         template <size_t N, size_t M>
-        constexpr Mat<N, M> operator/(const Mat<N, M>& lhs, const double rhs)
+        constexpr Mat<N, M> operator/(const Mat<N, M>& t_lhs, const double t_rhs)
         {
             Mat<N, M> mat;
 
@@ -636,7 +636,7 @@ namespace arc
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.data[i][j] = lhs.data[i][j] / rhs;
+                    mat.m_data[i][j] = t_lhs.m_data[i][j] / t_rhs;
                 }
             }
 
@@ -648,50 +648,50 @@ namespace arc
         /**
          *  Enable printing of a mat to a given ostream.
          *
-         *  @param  stream  Stream to write to.
-         *  @param  mat     Mat to be written.
+         *  @param  t_stream    Stream to write to.
+         *  @param  t_mat       Mat to be written.
          *
          *  @return A reference to the stream post-write.
          */
         template <size_t N, size_t M>
-        std::ostream& operator<<(std::ostream& stream, const Mat<N, M>& mat)
+        std::ostream& operator<<(std::ostream& t_stream, const Mat<N, M>& t_mat)
         {
             if (N == 0)
             {
-                stream << "{{}}";
+                t_stream << "{{}}";
 
-                return (stream);
+                return (t_stream);
             }
             if (M == 0)
             {
-                stream << "{{}}";
+                t_stream << "{{}}";
                 for (size_t i = 0; i < M; ++i)
                 {
-                    stream << ", {}";
+                    t_stream << ", {}";
                 }
-                stream << "}";
+                t_stream << "}";
 
-                return (stream);
+                return (t_stream);
             }
 
-            stream << "{{" << mat.data[0][0];
+            t_stream << "{{" << t_mat.m_data[0][0];
             for (size_t i = 1; i < M; ++i)
             {
-                stream << ", " << mat.data[0][i];
+                t_stream << ", " << t_mat.m_data[0][i];
             }
-            stream << "}";
+            t_stream << "}";
             for (size_t i = 1; i < N; ++i)
             {
-                stream << ", {" << mat.data[i][0];
+                t_stream << ", {" << t_mat.m_data[i][0];
                 for (size_t j = 1; j < M; ++j)
                 {
-                    stream << ", " << mat.data[i][j];
+                    t_stream << ", " << t_mat.m_data[i][j];
                 }
-                stream << "}";
+                t_stream << "}";
             }
-            stream << "}";
+            t_stream << "}";
 
-            return (stream);
+            return (t_stream);
         }
 
 
