@@ -90,17 +90,17 @@ namespace arc
         {
             assert(!t_vec.empty());
 
-            size_t index = 0;
+            size_t r_index = 0;
 
             for (size_t i = 1; i < t_vec.size(); ++i)
             {
-                if (t_vec[i] < t_vec[index])
+                if (t_vec[i] < t_vec[r_index])
                 {
-                    index = i;
+                    r_index = i;
                 }
             }
 
-            return (index);
+            return (r_index);
         }
 
         /**
@@ -120,17 +120,17 @@ namespace arc
         {
             assert(!t_vec.empty());
 
-            size_t index = 0;
+            size_t r_index = 0;
 
             for (size_t i = 1; i < t_vec.size(); ++i)
             {
-                if (t_vec[i] > t_vec[index])
+                if (t_vec[i] > t_vec[r_index])
                 {
-                    index = i;
+                    r_index = i;
                 }
             }
 
-            return (index);
+            return (r_index);
         }
 
         /**
@@ -184,14 +184,14 @@ namespace arc
         template <typename T>
         constexpr T total(const std::vector<T>& t_vec)
         {
-            T total = 0;
+            T r_total = 0;
 
             for (size_t i = 0; i < t_vec.size(); ++i)
             {
-                total += t_vec[i];
+                r_total += t_vec[i];
             }
 
-            return (total);
+            return (r_total);
         }
 
         /**
@@ -459,23 +459,23 @@ namespace arc
 
             bool ascending = t_vec.front() < t_vec.back();
 
-            size_t lower_index = t_init_guess;
+            size_t r_lower_index = t_init_guess;
             size_t upper_index;
 
             size_t jump = 1;
-            if (t_val >= t_vec[lower_index] == ascending)
+            if (t_val >= t_vec[r_lower_index] == ascending)
             {
-                if (lower_index == (t_vec.size() - 1))
+                if (r_lower_index == (t_vec.size() - 1))
                 {
-                    return (lower_index);
+                    return (r_lower_index);
                 }
 
-                upper_index = lower_index + 1;
+                upper_index = r_lower_index + 1;
                 while (t_val >= t_vec[upper_index] == ascending)
                 {
-                    lower_index = upper_index;
+                    r_lower_index = upper_index;
                     jump += jump;
-                    upper_index = lower_index + jump;
+                    upper_index   = r_lower_index + jump;
                     if (upper_index >= (t_vec.size() - 1))
                     {
                         upper_index = t_vec.size();
@@ -486,28 +486,28 @@ namespace arc
             }
             else
             {
-                upper_index = lower_index--;
-                while (t_val < t_vec[lower_index] == ascending)
+                upper_index = r_lower_index--;
+                while (t_val < t_vec[r_lower_index] == ascending)
                 {
-                    upper_index = lower_index;
+                    upper_index = r_lower_index;
                     jump <<= 1;
                     if (jump >= upper_index)
                     {
-                        lower_index = 0;
+                        r_lower_index = 0;
 
                         break;
                     }
 
-                    lower_index = upper_index - jump;
+                    r_lower_index = upper_index - jump;
                 }
             }
 
-            while ((upper_index - lower_index) != 1)
+            while ((upper_index - r_lower_index) != 1)
             {
-                size_t mid_index = (upper_index + lower_index) >> 1;
+                size_t mid_index = (upper_index + r_lower_index) >> 1;
                 if (t_val >= t_vec[mid_index] == ascending)
                 {
-                    lower_index = mid_index;
+                    r_lower_index = mid_index;
                 }
                 else
                 {
@@ -525,7 +525,7 @@ namespace arc
                 return (t_vec.size() - 2);
             }
 
-            return (lower_index);
+            return (r_lower_index);
         }
 
         /**
