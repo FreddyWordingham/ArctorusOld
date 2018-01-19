@@ -56,8 +56,8 @@ namespace arc
          */
         Logger::Logger(std::ostream& t_stream) :
             m_stream(t_stream),
-            m_text_col(init_text_cols()),
-            m_log_type(init_log_types()),
+            m_text_col(init_text_col()),
+            m_log_type(init_log_type()),
             m_indent_string(WRAP_INDENT, ' '),
             m_padding_string(TIME_WIDTH + TYPE_WIDTH, ' '),
             m_num_warnings(0),
@@ -92,24 +92,24 @@ namespace arc
          *
          *  @return The array of initialised colour escape codes.
          */
-        std::array<std::string, Logger::TOTAL_COLS> Logger::init_text_cols() const
+        std::array<std::string, Logger::TOTAL_COLS> Logger::init_text_col() const
         {
-            std::array<std::string, TOTAL_COLS> text_col;
+            std::array<std::string, TOTAL_COLS> r_text_col;
 
             if (config::COLOUR_LOG && (&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0))
             {
-                text_col[RESET]   = ansi::RESET;
-                text_col[BLACK]   = ansi::BLACK;
-                text_col[RED]     = ansi::RED;
-                text_col[GREEN]   = ansi::GREEN;
-                text_col[YELLOW]  = ansi::YELLOW;
-                text_col[BLUE]    = ansi::BLUE;
-                text_col[MAGENTA] = ansi::MAGENTA;
-                text_col[CYAN]    = ansi::CYAN;
-                text_col[WHITE]   = ansi::WHITE;
+                r_text_col[RESET]   = ansi::RESET;
+                r_text_col[BLACK]   = ansi::BLACK;
+                r_text_col[RED]     = ansi::RED;
+                r_text_col[GREEN]   = ansi::GREEN;
+                r_text_col[YELLOW]  = ansi::YELLOW;
+                r_text_col[BLUE]    = ansi::BLUE;
+                r_text_col[MAGENTA] = ansi::MAGENTA;
+                r_text_col[CYAN]    = ansi::CYAN;
+                r_text_col[WHITE]   = ansi::WHITE;
             }
 
-            return (text_col);
+            return (r_text_col);
         }
 
         /**
@@ -117,23 +117,23 @@ namespace arc
          *
          *  @return The array of initialised log type string identifiers.
          */
-        std::array<std::string, Logger::TOTAL_TYPES> Logger::init_log_types() const
+        std::array<std::string, Logger::TOTAL_TYPES> Logger::init_log_type() const
         {
-            std::array<std::string, TOTAL_TYPES> log_type;
+            std::array<std::string, TOTAL_TYPES> r_log_type;
 
-            log_type[LOG]   = std::string(LOG_TYPE_STRING);
-            log_type[VERB]  = std::string(VERB_TYPE_STRING);
-            log_type[VAL]   = std::string(VAL_TYPE_STRING);
-            log_type[TEMP]  = std::string(TEMP_TYPE_STRING);
-            log_type[WARN]  = std::string(WARN_TYPE_STRING);
-            log_type[ERROR] = std::string(ERROR_TYPE_STRING);
+            r_log_type[LOG]   = std::string(LOG_TYPE_STRING);
+            r_log_type[VERB]  = std::string(VERB_TYPE_STRING);
+            r_log_type[VAL]   = std::string(VAL_TYPE_STRING);
+            r_log_type[TEMP]  = std::string(TEMP_TYPE_STRING);
+            r_log_type[WARN]  = std::string(WARN_TYPE_STRING);
+            r_log_type[ERROR] = std::string(ERROR_TYPE_STRING);
 
             for (size_t i = 0; i < TOTAL_TYPES; ++i)
             {
-                log_type[i].resize(TYPE_WIDTH, ' ');
+                r_log_type[i].resize(TYPE_WIDTH, ' ');
             }
 
-            return (log_type);
+            return (r_log_type);
         }
 
 
@@ -320,7 +320,7 @@ namespace arc
 
             utl::find_and_replace(&t_text, "\t", "    ");
 
-            std::vector<std::string> lines;
+            std::vector<std::string> r_line;
             size_t                   newline_pos;
             while ((newline_pos = t_text.find_first_of('\n')) != std::string::npos)
             {
@@ -329,24 +329,24 @@ namespace arc
 
                 if (line.size() <= TEXT_WIDTH)
                 {
-                    lines.push_back(line);
+                    r_line.push_back(line);
                 }
                 else
                 {
-                    lines.push_back(line.substr(0, static_cast<size_t>(TEXT_WIDTH)));
+                    r_line.push_back(line.substr(0, static_cast<size_t>(TEXT_WIDTH)));
                     line.erase(0, static_cast<size_t>(TEXT_WIDTH));
 
                     while (line.size() > (TEXT_WIDTH - WRAP_INDENT))
                     {
-                        lines.push_back(m_indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
+                        r_line.push_back(m_indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
                         line.erase(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT));
                     }
 
-                    lines.push_back(m_indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
+                    r_line.push_back(m_indent_string + line.substr(0, static_cast<size_t>(TEXT_WIDTH - WRAP_INDENT)));
                 }
             }
 
-            return (lines);
+            return (r_line);
         }
 
 

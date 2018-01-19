@@ -170,8 +170,8 @@ namespace arc
             ~Logger();
 
             //  -- Initialisation --
-            std::array<std::string, TOTAL_COLS> init_text_cols() const;
-            std::array<std::string, TOTAL_TYPES> init_log_types() const;
+            std::array<std::string, TOTAL_COLS> init_text_col() const;
+            std::array<std::string, TOTAL_TYPES> init_log_type() const;
 
 
             //  == OPERATORS ==
