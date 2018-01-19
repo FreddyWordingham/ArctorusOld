@@ -19,12 +19,6 @@
 
 
 
-//  == MACROS ==
-//  -- File Contents --
-#define READ_FILE(t_file_path) arc::file::Handle(t_file_path, std::fstream::in).get_contents()
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -95,6 +89,12 @@ namespace arc
             size_t get_file_size() const;
             std::string get_contents() const;
         };
+
+
+
+        //  == FUNCTION PROTOTYPES ==
+        //  -- File Contents --
+        std::string read_file(const std::string& t_file_path);
 
 
 
