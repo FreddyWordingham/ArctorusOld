@@ -37,14 +37,14 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            const std::string   title;    //! Title of the data column.
-            std::vector<double> data;   //! Elements of the data column.
+            const std::string   m_title;    //! Title of the data column.
+            std::vector<double> m_data;     //! Elements of the data column.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Column(const std::string& init_title, const std::vector<double>& init_data);
+            Column(const std::string& t_title, const std::vector<double>& t_data);
 
           private:
             //  -- Initialisation --
