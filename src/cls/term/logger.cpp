@@ -13,8 +13,6 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-
 //  -- General --
 #include <gen/ansi.hpp>
 
