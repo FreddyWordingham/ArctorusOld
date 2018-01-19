@@ -47,10 +47,6 @@ namespace arc
         //  -- Comparison --
         inline bool equal(double t_lhs, double t_rhs, double t_tol = DEFAULT_EQUAL_TOL);
 
-        //  -- Matrix --
-        inline Mat<4, 4> pos_trans(const Vec<3>& t_scale, const Vec<3>& t_rot, const Vec<3>& t_trans);
-        inline Mat<4, 4> dir_trans(const Vec<3>& t_scale, const Vec<3>& t_rot);
-
         //  -- Geometry --
         template <size_t N>
         constexpr double dist(const math::Vec<N>& t_start, const math::Vec<N>& t_end);
@@ -106,64 +102,6 @@ namespace arc
         inline bool equal(const double t_lhs, const double t_rhs, const double t_tol)
         {
             return (std::fabs(t_lhs - t_rhs) <= t_tol);
-        }
-
-
-        //  -- Matrix --
-        /**
-         *  Create a position transformation matrix.
-         *  Transformation matrix is constructed from the individual transformations given.
-         *  Rotations are performed in the order x, y, z-axis.
-         *
-         *  @param  t_scale Scaling vector.
-         *  @param  t_rot   Rotation vector.
-         *  @param  t_trans Translation vector.
-         *
-         *  @return The position transformation matrix.
-         */
-        inline Mat<4, 4> pos_trans(const Vec<3>& t_scale, const Vec<3>& t_rot, const Vec<3>& t_trans)
-        {
-            Mat<4, 4> scale(
-                {{{{t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
-
-            Mat<4, 4> rot(
-                {{{{cos(t_rot[Y]) * cos(t_rot[Z]), (cos(t_rot[Z]) * sin(t_rot[X]) * sin(t_rot[Y])) - (cos(t_rot[X]) * sin(
-                    t_rot[Z])), (cos(t_rot[X]) * cos(t_rot[Z]) * sin(t_rot[Y])) - (sin(t_rot[X]) * sin(t_rot[Z])), 0.0}}, {{cos(
-                    t_rot[Y]) * sin(t_rot[Z]), (cos(t_rot[X]) * cos(t_rot[Z])) + (sin(t_rot[X]) * sin(t_rot[Y]) * sin(
-                    t_rot[Z])), (cos(t_rot[X]) * sin(t_rot[Y]) * sin(t_rot[Z])) - (cos(t_rot[Z]) * sin(
-                    t_rot[X])), 0.0}}, {{-sin(t_rot[Y]), cos(t_rot[Y]) * sin(t_rot[X]), cos(t_rot[X]) * cos(
-                    t_rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
-
-            Mat<4, 4> trans(
-                {{{{1.0, 0.0, 0.0, t_trans[X]}}, {{1.0, 0.0, 0.0, t_trans[Y]}}, {{1.0, 0.0, 0.0, t_trans[Z]}}, {{0.0, 0.0, 0.0, 1.0}}}});
-
-            return (trans * rot * scale);
-        }
-
-        /**
-         *  Create a direction transformation matrix.
-         *  Transformation matrix is constructed from the individual transformations given.
-         *  Rotations are performed in the order x, y, z-axis.
-         *
-         *  @param  t_scale Scaling vector.
-         *  @param  t_rot   Rotation vector.
-         *
-         *  @return The rotation transformation matrix.
-         */
-        inline Mat<4, 4> dir_trans(const Vec<3>& t_scale, const Vec<3>& t_rot)
-        {
-            Mat<4, 4> scale(
-                {{{{1.0 / t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0 / t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0 / t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
-
-            Mat<4, 4> rot(
-                {{{{cos(t_rot[Y]) * cos(t_rot[Z]), (cos(t_rot[Z]) * sin(t_rot[X]) * sin(t_rot[Y])) - (cos(t_rot[X]) * sin(
-                    t_rot[Z])), (cos(t_rot[X]) * cos(t_rot[Z]) * sin(t_rot[Y])) - (sin(t_rot[X]) * sin(t_rot[Z])), 0.0}}, {{cos(
-                    t_rot[Y]) * sin(t_rot[Z]), (cos(t_rot[X]) * cos(t_rot[Z])) + (sin(t_rot[X]) * sin(t_rot[Y]) * sin(
-                    t_rot[Z])), (cos(t_rot[X]) * sin(t_rot[Y]) * sin(t_rot[Z])) - (cos(t_rot[Z]) * sin(
-                    t_rot[X])), 0.0}}, {{-sin(t_rot[Y]), cos(t_rot[Y]) * sin(t_rot[X]), cos(t_rot[X]) * cos(
-                    t_rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
-
-            return (rot * scale);
         }
 
 

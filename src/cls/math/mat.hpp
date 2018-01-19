@@ -100,6 +100,13 @@ namespace arc
 
 
 
+        //  == FUNCTION PROTOTYPES ==
+        //  -- Transformation --
+        Mat<4, 4> pos_trans(const Vec<3>& t_scale, const Vec<3>& t_rot, const Vec<3>& t_trans);
+        Mat<4, 4> dir_trans(const Vec<3>& t_scale, const Vec<3>& t_rot);
+
+
+
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
