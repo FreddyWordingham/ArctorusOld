@@ -353,7 +353,7 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> Mat<N, M>::operator++(int /*unused*/)
         {
-            const Mat<N, M> mat = *this;
+            const Mat<N, M> r_mat = *this;
 
             for (size_t i = 0; i < N; ++i)
             {
@@ -363,7 +363,7 @@ namespace arc
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -393,7 +393,7 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> Mat<N, M>::operator--(int /*unused*/)
         {
-            const Mat<N, M> mat = *this;
+            const Mat<N, M> r_mat = *this;
 
             for (size_t i = 0; i < N; ++i)
             {
@@ -403,7 +403,7 @@ namespace arc
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -414,17 +414,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> Mat<N, M>::operator+() const
         {
-            Mat<N, M> mat;
+            Mat<N, M> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.m_data[i][j] = +m_data[i][j];
+                    r_mat.m_data[i][j] = +m_data[i][j];
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -435,17 +435,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> Mat<N, M>::operator-() const
         {
-            Mat<N, M> mat;
+            Mat<N, M> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.m_data[i][j] = -m_data[i][j];
+                    r_mat.m_data[i][j] = -m_data[i][j];
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -459,17 +459,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> operator+(const Mat<N, M>& t_lhs, const double t_rhs)
         {
-            Mat<N, M> mat;
+            Mat<N, M> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.m_data[i][j] = t_lhs.m_data[i][j] + t_rhs;
+                    r_mat.m_data[i][j] = t_lhs.m_data[i][j] + t_rhs;
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -483,17 +483,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> operator+(const Mat<N, M>& t_lhs, const Mat<N, M>& t_rhs)
         {
-            Mat<N, M> mat;
+            Mat<N, M> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.m_data[i][j] = t_lhs.m_data[i][j] + t_rhs.m_data[i][j];
+                    r_mat.m_data[i][j] = t_lhs.m_data[i][j] + t_rhs.m_data[i][j];
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -507,17 +507,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> operator-(const Mat<N, M>& t_lhs, const double t_rhs)
         {
-            Mat<N, M> mat;
+            Mat<N, M> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.m_data[i][j] = t_lhs.m_data[i][j] - t_rhs;
+                    r_mat.m_data[i][j] = t_lhs.m_data[i][j] - t_rhs;
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -531,17 +531,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> operator-(const Mat<N, M>& t_lhs, const Mat<N, M>& t_rhs)
         {
-            Mat<N, M> mat;
+            Mat<N, M> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.m_data[i][j] = t_lhs.m_data[i][j] - t_rhs.m_data[i][j];
+                    r_mat.m_data[i][j] = t_lhs.m_data[i][j] - t_rhs.m_data[i][j];
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -555,17 +555,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> operator*(const Mat<N, M>& t_lhs, const double t_rhs)
         {
-            Mat<N, M> mat;
+            Mat<N, M> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.m_data[i][j] = t_lhs.m_data[i][j] * t_rhs;
+                    r_mat.m_data[i][j] = t_lhs.m_data[i][j] * t_rhs;
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -579,17 +579,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Vec<N> operator*(const Mat<N, M>& t_lhs, const Vec<M>& t_rhs)
         {
-            Vec<N> vec;
+            Vec<N> r_vec;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    vec[i] += t_lhs.m_data[i][j] * t_rhs.data[j];
+                    r_vec[i] += t_lhs.m_data[i][j] * t_rhs.data[j];
                 }
             }
 
-            return (vec);
+            return (r_vec);
         }
 
         /**
@@ -603,7 +603,7 @@ namespace arc
         template <size_t N, size_t M, size_t O>
         constexpr Mat<N, O> operator*(const Mat<N, M>& t_lhs, const Mat<M, O>& t_rhs)
         {
-            Mat<N, O> mat;
+            Mat<N, O> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
@@ -611,12 +611,12 @@ namespace arc
                 {
                     for (size_t k = 0; k < M; ++k)
                     {
-                        mat.m_data[i][j] += t_lhs.m_data[i][k] * t_rhs.m_data[k][j];
+                        r_mat.m_data[i][j] += t_lhs.m_data[i][k] * t_rhs.m_data[k][j];
                     }
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
         /**
@@ -630,17 +630,17 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<N, M> operator/(const Mat<N, M>& t_lhs, const double t_rhs)
         {
-            Mat<N, M> mat;
+            Mat<N, M> r_mat;
 
             for (size_t i = 0; i < N; ++i)
             {
                 for (size_t j = 0; j < M; ++j)
                 {
-                    mat.m_data[i][j] = t_lhs.m_data[i][j] / t_rhs;
+                    r_mat.m_data[i][j] = t_lhs.m_data[i][j] / t_rhs;
                 }
             }
 
-            return (mat);
+            return (r_mat);
         }
 
 
