@@ -21,7 +21,7 @@
 
 //  == MACROS ==
 //  -- File Contents --
-#define READ_FILE(file_path) arc::file::Handle(file_path, std::fstream::in).get_contents()
+#define READ_FILE(t_file_path) arc::file::Handle(t_file_path, std::fstream::in).get_contents()
 
 
 
@@ -55,37 +55,37 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Properties --
-            const std::string path;     //! Path to the file.
-            const std::string filename; //! Name of the file.
+            const std::string m_path;       //! Path to the file.
+            const std::string m_filename;   //! Name of the file.
 
             //  -- Handle --
-            mutable std::fstream file;  //! Handle to the file.
+            mutable std::fstream m_file;    //! Handle to the file.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Handle(const Handle&) = delete;
-            Handle(const Handle&&) = delete;
-            Handle(const std::string& init_path, const std::fstream::openmode& mode);
+            Handle(const Handle& /*unused*/) = delete;
+            Handle(const Handle&& /*unused*/) = delete;
+            Handle(const std::string& t_path, const std::fstream::openmode& t_mode);
 
             //  -- Destructors --
             ~Handle();
 
           private:
             //  -- Initialisation --
-            std::fstream init_file(const std::fstream::openmode& mode) const;
+            std::fstream init_file(const std::fstream::openmode& t_mode) const;
 
 
             //  == OPERATORS ==
           public:
             //  -- Copy --
-            Handle& operator=(const Handle&) = delete;
-            Handle& operator=(const Handle&&) = delete;
+            Handle& operator=(const Handle& /*unused*/) = delete;
+            Handle& operator=(const Handle&& /*unused*/) = delete;
 
             //  -- Writing --
             template <typename T>
-            Handle& operator<<(const T& val);
+            Handle& operator<<(const T& t_val);
 
 
             //  == METHODS ==
@@ -105,14 +105,14 @@ namespace arc
          *
          *  @tparam T   Type of variable to be written to the file.
          *
-         *  @param  val Value to be written to the file.
+         *  @param  t_val   Value to be written to the file.
          *
          *  @return A reference to this file handler.
          */
         template <typename T>
-        Handle& Handle::operator<<(const T& val)
+        Handle& Handle::operator<<(const T& t_val)
         {
-            file << val;
+            m_file << t_val;
 
             return (*this);
         }

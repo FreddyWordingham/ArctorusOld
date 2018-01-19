@@ -32,18 +32,18 @@ namespace arc
         /**
          *  Construct a handle to a given file with the specified mode.
          *
-         *  @param  init_path   Path to the file being opened.
-         *  @param  mode        Mode to open the file with.
+         *  @param  t_path  Path to the file being opened.
+         *  @param  t_mode  Mode to open the file with.
          */
-        Handle::Handle(const std::string& init_path, const std::fstream::openmode& mode) :
-            path(init_path),
-            filename(utl::strip_path(path)),
-            file(init_file(mode))
+        Handle::Handle(const std::string& t_path, const std::fstream::openmode& t_mode) :
+            m_path(t_path),
+            m_filename(utl::strip_path(m_path)),
+            m_file(init_file(t_mode))
         {
             const size_t size = get_file_size();
             if (size > SIZE_WARNING)
             {
-                WARN("Large file opened.", "file: '" << filename << "' is " << size << "bytes.");
+                WARN("Large file opened.", "file: '" << m_filename << "' is " << size << "bytes.");
             }
         }
 
@@ -52,17 +52,17 @@ namespace arc
         /**
          *  Close the open file.
          *
-         *  @pre    file must be open.
+         *  @pre    m_file must be open.
          *
-         *  @post   file must be closed.
+         *  @post   m_file must be closed.
          */
         Handle::~Handle()
         {
-            assert(file.is_open());
+            assert(m_file.is_open());
 
-            file.close();
+            m_file.close();
 
-            assert(!file.is_open());
+            assert(!m_file.is_open());
         }
 
 
@@ -70,36 +70,36 @@ namespace arc
         /**
          *  Initialise the handle to the file itself.
          *
-         *  @param  mode    Mode to open the file with.
+         *  @param  t_mode  Mode to open the file with.
          *
-         *  @post   file should be open.
+         *  @post   r_file should be open.
          *
          *  @return The handle to the requested file.
          */
-        std::fstream Handle::init_file(const std::fstream::openmode& mode) const
+        std::fstream Handle::init_file(const std::fstream::openmode& t_mode) const
         {
-            std::fstream init_file;
-            init_file.open(path, mode);
+            std::fstream r_file;
+            r_file.open(m_path, t_mode);
 
-            if (!init_file.is_open())
+            if (!r_file.is_open())
             {
-                init_file.open(config::ARCTORUS_DIR + path, mode);
+                r_file.open(config::ARCTORUS_DIR + m_path, t_mode);
             }
 
-            if (!init_file.is_open())
+            if (!r_file.is_open())
             {
-                ERROR("Failed to construct file::Handle object.", "The file: '" << filename << "' could not be opened.");
+                ERROR("Failed to construct file::Handle object.", "The file: '" << m_filename << "' could not be opened.");
             }
 
-            if (mode == std::fstream::out)
+            if (t_mode == std::fstream::out)
             {
-                init_file << COMMENT_CHAR << " Created by Arctorus: " << utl::create_timestamp() << "\n";
-                init_file << COMMENT_CHAR << " Build: " << config::BUILD_INFO << "\n";
+                r_file << COMMENT_CHAR << " Created by Arctorus: " << utl::create_timestamp() << "\n";
+                r_file << COMMENT_CHAR << " Build: " << config::BUILD_INFO << "\n";
             }
 
-            assert(init_file.is_open());
+            assert(r_file.is_open());
 
-            return (init_file);
+            return (r_file);
         }
 
 
@@ -113,7 +113,7 @@ namespace arc
          */
         std::string Handle::get_filename() const
         {
-            return (filename);
+            return (m_filename);
         }
 
         /**
@@ -123,17 +123,17 @@ namespace arc
          */
         size_t Handle::get_file_size() const
         {
-            const std::streampos get_pos = file.tellg();
+            const std::streampos get_pos = m_file.tellg();
 
-            file.seekg(0, std::fstream::beg);
+            m_file.seekg(0, std::fstream::beg);
 
-            const std::streampos first = file.tellg();
-            file.seekg(0, std::fstream::end);
-            const size_t size = static_cast<size_t>(file.tellg() - first);
+            const std::streampos first = m_file.tellg();
+            m_file.seekg(0, std::fstream::end);
+            const size_t r_size = static_cast<size_t>(m_file.tellg() - first);
 
-            file.seekg(get_pos);
+            m_file.seekg(get_pos);
 
-            return (size);
+            return (r_size);
         }
 
         /**
@@ -144,24 +144,24 @@ namespace arc
          */
         std::string Handle::get_contents() const
         {
-            const std::streampos get_pos = file.tellg();
+            const std::streampos get_pos = m_file.tellg();
 
-            file.seekg(0, std::fstream::beg);
+            m_file.seekg(0, std::fstream::beg);
 
             std::stringstream contents_stream;
-            contents_stream << file.rdbuf();
+            contents_stream << m_file.rdbuf();
 
-            file.seekg(get_pos);
+            m_file.seekg(get_pos);
 
-            std::string contents = contents_stream.str();
-            utl::filter(&contents, std::string(1, COMMENT_CHAR));
+            std::string r_contents = contents_stream.str();
+            utl::filter(&r_contents, std::string(1, COMMENT_CHAR));
 
-            if (contents.back() == '\n')
+            if (r_contents.back() == '\n')
             {
-                contents.pop_back();
+                r_contents.pop_back();
             }
 
-            return (contents);
+            return (r_contents);
         }
 
 
