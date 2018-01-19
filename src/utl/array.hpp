@@ -91,17 +91,17 @@ namespace arc
         {
             static_assert(N != 0);
 
-            size_t index = 0;
+            size_t r_index = 0;
 
             for (size_t i = 1; i < N; ++i)
             {
-                if (t_arr[i] < t_arr[index])
+                if (t_arr[i] < t_arr[r_index])
                 {
-                    index = i;
+                    r_index = i;
                 }
             }
 
-            return (index);
+            return (r_index);
         }
 
         /**
@@ -122,17 +122,17 @@ namespace arc
         {
             static_assert(N != 0);
 
-            size_t index = 0;
+            size_t r_index = 0;
 
             for (size_t i = 1; i < N; ++i)
             {
-                if (t_arr[i] > t_arr[index])
+                if (t_arr[i] > t_arr[r_index])
                 {
-                    index = i;
+                    r_index = i;
                 }
             }
 
-            return (index);
+            return (r_index);
         }
 
         /**
@@ -189,14 +189,14 @@ namespace arc
         template <typename T, size_t N>
         constexpr T total(const std::array<T, N>& t_arr)
         {
-            T total = 0;
+            T r_total = 0;
 
             for (size_t i = 0; i < N; ++i)
             {
-                total += t_arr[i];
+                r_total += t_arr[i];
             }
 
-            return (total);
+            return (r_total);
         }
 
         /**
@@ -473,23 +473,23 @@ namespace arc
 
             bool ascending = t_arr.front() < t_arr.back();
 
-            size_t lower_index = t_init_guess;
+            size_t r_lower_index = t_init_guess;
             size_t upper_index;
 
             size_t jump = 1;
-            if (t_val >= t_arr[lower_index] == ascending)
+            if (t_val >= t_arr[r_lower_index] == ascending)
             {
-                if (lower_index == (N - 1))
+                if (r_lower_index == (N - 1))
                 {
-                    return (lower_index);
+                    return (r_lower_index);
                 }
 
-                upper_index = lower_index + 1;
+                upper_index = r_lower_index + 1;
                 while (t_val >= t_arr[upper_index] == ascending)
                 {
-                    lower_index = upper_index;
+                    r_lower_index = upper_index;
                     jump += jump;
-                    upper_index = lower_index + jump;
+                    upper_index   = r_lower_index + jump;
                     if (upper_index >= (N - 1))
                     {
                         upper_index = N;
@@ -500,28 +500,28 @@ namespace arc
             }
             else
             {
-                upper_index = lower_index--;
-                while (t_val < t_arr[lower_index] == ascending)
+                upper_index = r_lower_index--;
+                while (t_val < t_arr[r_lower_index] == ascending)
                 {
-                    upper_index = lower_index;
+                    upper_index = r_lower_index;
                     jump <<= 1;
                     if (jump >= upper_index)
                     {
-                        lower_index = 0;
+                        r_lower_index = 0;
 
                         break;
                     }
 
-                    lower_index = upper_index - jump;
+                    r_lower_index = upper_index - jump;
                 }
             }
 
-            while ((upper_index - lower_index) != 1)
+            while ((upper_index - r_lower_index) != 1)
             {
-                size_t mid_index = (upper_index + lower_index) >> 1;
+                size_t mid_index = (upper_index + r_lower_index) >> 1;
                 if (t_val >= t_arr[mid_index] == ascending)
                 {
-                    lower_index = mid_index;
+                    r_lower_index = mid_index;
                 }
                 else
                 {
@@ -539,7 +539,7 @@ namespace arc
                 return (N - 2);
             }
 
-            return (lower_index);
+            return (r_lower_index);
         }
 
         /**
