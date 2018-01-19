@@ -193,9 +193,9 @@ namespace arc
          */
         constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos)
         {
-            math::Vec<3> norm = (t_pos[BETA] - t_pos[ALPHA]) ^(t_pos[GAMMA] - t_pos[ALPHA]);
+            math::Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^(t_pos[GAMMA] - t_pos[ALPHA]);
 
-            return (norm);
+            return (r_norm);
         }
 
         /**
