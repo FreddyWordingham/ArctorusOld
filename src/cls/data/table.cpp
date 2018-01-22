@@ -150,6 +150,10 @@ namespace arc
             {
                 file.comment() << "Rows: " << m_col.front().size() << "\n";
             }
+            else
+            {
+                file.comment() << "Rows: 0\n";
+            }
 
             file << (*this);
         }
