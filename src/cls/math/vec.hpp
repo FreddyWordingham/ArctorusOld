@@ -743,7 +743,7 @@ namespace arc
         }
 
         /**
-         *  Normalise the vec by deviding each data element by the magnitude of the total vec.
+         *  Normalise the vec by dividing each data element by the magnitude of the total vec.
          */
         template <size_t N>
         constexpr void Vec<N>::normalise()
