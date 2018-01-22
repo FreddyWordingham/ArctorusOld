@@ -19,8 +19,7 @@
 
 //  -- General --
 #include "gen/log.hpp"
-
-//  -- Utility --
+#include "gen/math.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -103,13 +102,7 @@ namespace arc
 
             while (std::getline(stream, line))
             {
-                if (!utl::is_numerical(line))
-                {
-                    ERROR("Unable to construct data::Column object.",
-                          "Unable to parse line:'" << line << "' into a numerical value.");
-                }
-
-                r_data.push_back(utl::str_to<double>(line));
+                r_data.push_back(math::str_to<double>(line));
             }
 
             return (r_data);

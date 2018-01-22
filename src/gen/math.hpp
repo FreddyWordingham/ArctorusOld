@@ -17,6 +17,9 @@
 //  -- System --
 #include <cmath>
 
+//  -- General --
+#include "gen/log.hpp"
+
 //  -- Classes --
 #include "cls/math/mat.hpp"
 #include "cls/math/vec.hpp"
@@ -46,6 +49,10 @@ namespace arc
 
         //  -- Comparison --
         inline bool equal(double t_lhs, double t_rhs, double t_tol = DEFAULT_EQUAL_TOL);
+
+        //  -- Conversion --
+        template <typename T>
+        inline T str_to(const std::string& t_str);
 
 
 
@@ -96,6 +103,48 @@ namespace arc
         inline bool equal(const double t_lhs, const double t_rhs, const double t_tol)
         {
             return (std::fabs(t_lhs - t_rhs) <= t_tol);
+        }
+
+
+        //  -- Conversion --
+        /**
+         *  Parse the string into a numerical value.
+         *
+         *  @tparam T   Type to parse the string into.
+         *
+         *  @param  t_str   String to be parsed.
+         *
+         *  @pre  t_str may not be empty.
+         *
+         *  @post string_stream read may not fail.
+         *  @post string_stream may not have left over characters.
+         *
+         *  @return The parsed value of the string.
+         */
+        template <typename T>
+        inline T str_to(const std::string& t_str)
+        {
+            assert(!t_str.empty());
+
+            std::stringstream string_stream(t_str);
+
+            T x;
+            string_stream >> x;
+
+            if (string_stream.fail())
+            {
+                ERROR("Unable to parse string to type.",
+                      "String: '" << t_str << "' can not be parsed to type: '" << typeid(T).name() << "'.");
+            }
+
+            if (string_stream.rdbuf()->in_avail() != 0)
+            {
+                ERROR("Unable to parse string to type.",
+                      "String: '" << t_str << "' contains leftover characters after parsing to type: '" << typeid(T).name()
+                                  << "'.");
+            }
+
+            return (x);
         }
 
 
