@@ -31,9 +31,10 @@ int main()
 
     arc::data::Column col(arc::file::read("column.dat"));
 
-    LOG(col);
-
-    //  col.save("column.dat");
+    for (size_t i = 0; i < col.size(); ++i)
+    {
+        VAL(col[i]);
+    }
 
     return (0);
 }

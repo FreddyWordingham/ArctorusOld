@@ -55,7 +55,7 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
             //  -- Access --
             double& operator[](const size_t t_index) { return (m_data[t_index]); }
             const double& operator[](const size_t t_index) const { return (m_data[t_index]); }
