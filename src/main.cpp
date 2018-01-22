@@ -9,6 +9,7 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include <cls/data/column.hpp>
 #include "gen/log.hpp"
 
 //  -- Classes --
@@ -28,9 +29,11 @@ int main()
     LOG("Hello world!");
 
 
-    LOG(arc::file::read("column.dat"));
+    arc::data::Column col(arc::file::read("column.dat"));
 
-//    col.save("column.dat");
+    LOG(col);
+
+    //  col.save("column.dat");
 
     return (0);
 }

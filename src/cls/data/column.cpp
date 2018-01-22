@@ -103,7 +103,13 @@ namespace arc
 
             while (std::getline(stream, line))
             {
-                r_data.push_back(std::stod(line));
+                if (!utl::is_numerical(line))
+                {
+                    ERROR("Unable to construct data::Column object.",
+                          "Unable to parse line:'" << line << "' into a numerical value.");
+                }
+
+                r_data.push_back(utl::str_to<double>(line));
             }
 
             return (r_data);
