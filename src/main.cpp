@@ -23,5 +23,14 @@ int main()
 {
     LOG("Hello world!");
 
+    std::string str = "       ";
+//    std::getline(std::cin, str);
+
+    std::cout << "String reads: \n'" << str << "'\n";
+
+    arc::utl::strip_whitespace(&str);
+    std::cout << "After cull  : \n'" << str << "'\n";
+
+
     return (0);
 }

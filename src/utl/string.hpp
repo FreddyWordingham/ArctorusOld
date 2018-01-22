@@ -36,6 +36,7 @@ namespace arc
         void find_and_replace(std::string* t_source, const std::string& t_find, const std::string& t_replace);
         void filter(std::string* t_source, const std::string& t_comment_start, const std::string& t_comment_end = "\n");
         std::string strip_path(const std::string& t_path);
+        void strip_whitespace(std::string* t_str);
 
         //  -- Properties --
         bool is_numerical(const std::string& t_str);

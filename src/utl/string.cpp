@@ -146,6 +146,23 @@ namespace arc
             return (t_path.substr(last_slash_pos + 1));
         }
 
+        /**
+         *  Strip the leading and trailing whitespace from a given string.
+         *
+         *  @param  t_str   String to be stripped of whitespace.
+         *
+         *  @pre    t_str must not be empty.
+         *  @pre    t_str must contain characters other that whitespace characters.
+         */
+        void strip_whitespace(std::string* t_str)
+        {
+            assert(!t_str->empty());
+            assert(t_str->find_last_not_of(" \t\f\v\n\r") != std::string::npos);
+
+            t_str->erase(0, t_str->find_first_not_of(" \t\f\v\n\r"));
+            t_str->erase(t_str->find_last_not_of(" \t\f\v\n\r"));
+        }
+
 
         //  -- Properties --
         /**
