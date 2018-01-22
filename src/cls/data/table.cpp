@@ -133,5 +133,28 @@ namespace arc
         }
 
 
+
+        //  == METHODS ==
+        //  -- Saving --
+        /**
+         *  Save the state of the table to a given file path.
+         *
+         *  @param  t_path  Path to the save location of the file.
+         */
+        void Table::save(const std::string& t_path) const
+        {
+            file::Handle file(t_path, std::fstream::out);
+
+            file.comment() << "Cols: " << m_col.size() << "\n";
+            if (!m_col.empty())
+            {
+                file.comment() << "Rows: " << m_col.front().size() << "\n";
+            }
+
+            file << (*this);
+        }
+
+
+
     } // namespace data
 } // namespace arc

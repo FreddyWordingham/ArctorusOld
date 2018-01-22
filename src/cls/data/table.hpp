@@ -62,7 +62,9 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Saving --
+            void save(const std::string& t_path) const;
         };
 
 

@@ -34,5 +34,7 @@ int main()
 
     LOG(tab);
 
+    tab.save("table.dat");
+
     return (0);
 }
