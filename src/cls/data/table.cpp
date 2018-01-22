@@ -30,8 +30,7 @@ namespace arc
         /**
          *  Construct an empty data table.
          */
-        Table::Table() :
-            m_col()
+        Table::Table()
         {
         }
 
