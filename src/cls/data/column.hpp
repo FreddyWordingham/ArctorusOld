@@ -63,6 +63,9 @@ namespace arc
 
             //  == METHODS ==
           private:
+            //  -- Getters --
+            size_t size() const { return (m_data.size()); }
+            bool empty() const { return (m_data.empty()); }
         };
 
 
