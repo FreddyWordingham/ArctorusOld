@@ -57,6 +57,9 @@ namespace arc
             Column& operator[](const size_t t_index) { return (m_col[t_index]); }
             const Column& operator[](const size_t t_index) const { return (m_col[t_index]); }
 
+            //  -- Printing --
+            friend std::ostream& operator<<(std::ostream& t_stream, const Table& t_tab);
+
 
             //  == METHODS ==
           private:

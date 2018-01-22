@@ -14,6 +14,13 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <iomanip>
+
+//  -- General --
+#include "gen/log.hpp"
+
+//  -- Classes --
+#include "cls/file/handle.hpp"
 
 
 
@@ -72,6 +79,37 @@ namespace arc
             }
 
             return (r_col);
+        }
+
+
+
+        //  == OPERATORS ==
+        //  -- Printing --
+        /**
+         *  Enable printing of a data table to a given ostream.
+         *
+         *  @param  t_stream    Stream to write to.
+         *  @param  t_tab       Table to be written.
+         *
+         *  @return A reference to the stream post-write.
+         */
+        friend std::ostream& operator<<(std::ostream& t_stream, const Table& t_tab)
+        {
+            if (t_tab.m_col.empty())
+            {
+                WARN("Unable to print data::Table object.", "Table does not contain any data columns.");
+
+                return (t_stream);
+            }
+
+            // Print column titles.
+            for (size_t i = 0; i < (t_tab.m_col.size() - 1); ++i)
+            {
+                t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.get_title() << file::DELIMIT_CHAR;
+            }
+            t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.get_title() << "\n";
+
+            return (t_stream);
         }
 
 

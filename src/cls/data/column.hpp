@@ -67,6 +67,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            std::string get_title() const { return (m_title); }
             size_t size() const { return (m_data.size()); }
             bool empty() const { return (m_data.empty()); }
 
