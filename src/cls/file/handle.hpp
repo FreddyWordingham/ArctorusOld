@@ -88,6 +88,9 @@ namespace arc
             std::string get_filename() const;
             size_t get_file_size() const;
             std::string get_contents() const;
+
+            //  -- Writing --
+            Handle& comment();
         };
 
 

@@ -165,6 +165,20 @@ namespace arc
         }
 
 
+        //  -- Writing --
+        /**
+         *  Enable writing of a comment to the file handle.
+         *
+         *  @return A reference to this file handle.
+         */
+        Handle& Handle::comment()
+        {
+            m_file << COMMENT_CHAR << " ";
+
+            return (*this);
+        }
+
+
 
         //  == FUNCTIONS ==
         //  -- File Contents --
