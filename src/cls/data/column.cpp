@@ -121,7 +121,7 @@ namespace arc
         {
             file::Handle file(t_path, std::fstream::out);
 
-            //file.comment() << "Rows: " << m_data.size() << "\n";
+            file.comment() << "Rows: " << m_data.size() << "\n";
 
             file << (*this);
         }
