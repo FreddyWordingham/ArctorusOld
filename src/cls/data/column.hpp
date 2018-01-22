@@ -44,7 +44,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Column(const std::string& t_readable);
+            explicit Column(const std::string& t_readable);
             Column(const std::string& t_title, const std::vector<double>& t_data);
 
           private:
