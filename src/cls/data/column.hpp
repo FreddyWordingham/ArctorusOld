@@ -53,6 +53,10 @@ namespace arc
 
             //  == OPERATORS ==
           private:
+            //  -- Access --
+            double& operator[](const size_t t_index) { return (m_data[t_index]); }
+            const double& operator[](const size_t t_index) const { return (m_data[t_index]); }
+
             //  -- Printing --
             friend std::ostream& operator<<(std::ostream& t_stream, const Column& t_col);
 
