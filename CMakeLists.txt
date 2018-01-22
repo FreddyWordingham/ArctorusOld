@@ -130,17 +130,8 @@ add_executable(arctorus ${SOURCE_FILES} ${HEADER_FILES})
 target_include_directories(arctorus PUBLIC ${ARCTORUS_SRC_DIR})
 
 #   -- Locate Packages --
-find_package(OpenGL REQUIRED)
-find_package(SDL2 REQUIRED)
-find_package(GLEW REQUIRED)
-find_package(glfw3 3.2.1 REQUIRED)
-
-#   -- Include System Directories --
-target_include_directories(arctorus SYSTEM PUBLIC ${OpenGL_INCLUDE_DIR})
-target_include_directories(arctorus SYSTEM PUBLIC ${SDL2_INCLUDE_DIR})
+find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
 
 #   -- Link Libraries --
-target_link_libraries(arctorus ${OPENGL_LIBRARIES})
-target_link_libraries(arctorus ${SDL2_LIBRARIES})
-target_link_libraries(arctorus GLEW)
-target_link_libraries(arctorus glfw)
+target_link_libraries(arctorus ${VTK_LIBRARIES})

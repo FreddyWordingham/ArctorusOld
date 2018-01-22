@@ -48,6 +48,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
+            std::string init_title(const std::string& t_title) const;
 
 
             //  == OPERATORS ==
