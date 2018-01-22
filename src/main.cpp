@@ -12,7 +12,8 @@
 #include "gen/log.hpp"
 
 //  -- Classes --
-#include "cls/data/column.hpp"
+
+#include "cls/file/handle.hpp"
 
 
 
@@ -27,11 +28,9 @@ int main()
     LOG("Hello world!");
 
 
-    arc::data::Column col("String", {0.0, 1.0, 4.0, 9.0, 16.0});
+    LOG(arc::file::read("column.dat"));
 
-    LOG(col);
-
-    col.save("column.dat");
+//    col.save("column.dat");
 
     return (0);
 }

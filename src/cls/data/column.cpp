@@ -38,6 +38,17 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
+         *  Construct a data column from a given readable string.
+         *
+         *  @param  t_readable  Data column as a readable string.
+         */
+        Column::Column(const std::string& t_readable) :
+            m_title(init_title_from_readable(t_readable)),
+            m_data(init_data_from_readable(t_readable))
+        {
+        }
+
+        /**
          *  Construct a data column from a given title and data vector.
          *
          *  @param  t_title Column title.
@@ -52,6 +63,53 @@ namespace arc
 
         //  -- Initialisation --
         /**
+         *  Initialise the title string from the readable string.
+         *
+         *  @param  t_readable  Data column as a readable string.
+         *
+         *  @pre    t_readable must not be empty.
+         *
+         *  @return The initialised column title string.
+         */
+        std::string Column::init_title_from_readable(const std::string& t_readable) const
+        {
+            assert(!t_readable.empty());
+
+            std::stringstream stream(t_readable);
+
+            std::string line;
+            std::getline(stream, line);
+
+            return (init_title(line));
+        }
+
+        /**
+         *  Initialise the data vector from the readable string.
+         *
+         *  @param  t_readable  Data column as a readable string.
+         *
+         *  @pre    t_readable must not be empty.
+         *
+         *  @return The initialised data column vector.
+         */
+        std::vector<double> Column::init_data_from_readable(const std::string& t_readable) const
+        {
+            std::vector<double> r_data;
+
+            std::stringstream stream(t_readable);
+
+            std::string line;
+            std::getline(stream, line);
+
+            while (std::getline(stream, line))
+            {
+                r_data.push_back(std::stod(line));
+            }
+
+            return (r_data);
+        }
+
+        /**
          *  Initialise the title string.
          *  If the title string exceeds the file print width, cut it down to size.
          *  Remove any leading or trailing whitespace.
@@ -61,6 +119,8 @@ namespace arc
          *  @pre    t_title must not be empty after removing whitespace.
          *  @pre    t_title must not be numerical.
          *
+         *  @pre    r_title must not be empty.
+         *  @pre    r_title must not be numerical.
          *  @post   r_title must not exceed the file::PRINT_WIDTH.
          *
          *  @return The initialised column title string.
@@ -79,6 +139,8 @@ namespace arc
                                         << file::PRINT_WIDTH << ".");
             }
 
+            assert(!r_title.empty());
+            assert(!utl::is_numerical(r_title));
             assert(r_title.size() <= file::PRINT_WIDTH);
 
             return (r_title);
