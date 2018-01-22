@@ -123,7 +123,7 @@ namespace arc
                 }
                 t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.back()[i] << "\n";
             }
-            for (size_t i = 0; i < (t_tab.m_col.front().size() - 1); ++i)
+            for (size_t i = 0; i < (t_tab.m_col.size() - 1); ++i)
             {
                 t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col[i].back() << file::DELIMIT_CHAR;
             }

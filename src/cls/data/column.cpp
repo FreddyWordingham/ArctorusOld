@@ -137,6 +137,8 @@ namespace arc
                 WARN("data::Column title string must be resized.",
                      "Title width of '" << t_title.size() << "' must be resized to fit within the allocated print width of: '"
                                         << file::PRINT_WIDTH << "'.");
+
+                r_title.erase(file::PRINT_WIDTH);
             }
 
             assert(!r_title.empty());
