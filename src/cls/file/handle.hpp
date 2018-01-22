@@ -33,7 +33,7 @@ namespace arc
         //  -- Formatting --
         constexpr const char COMMENT_CHAR = '#';    //! Character used to comment file lines.
         constexpr const char DELIMIT_CHAR = ',';    //! Character used to delimit file data.
-        constexpr const int  PRINT_WIDTH  = 16;     //! Space allocated to each data print.
+        constexpr const int  PRINT_WIDTH  = 15;     //! Space allocated to each data print.
 
 
 
