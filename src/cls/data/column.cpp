@@ -118,9 +118,10 @@ namespace arc
          *  @pre    t_title must not be empty after removing whitespace.
          *  @pre    t_title must not be numerical.
          *
-         *  @pre    r_title must not be empty.
-         *  @pre    r_title must not be numerical.
+         *  @post   r_title must not be empty.
+         *  @post   r_title must not be numerical.
          *  @post   r_title must not exceed the file::PRINT_WIDTH.
+         *  @post   r_title must not contain the file::DELIMIT_CHAR character.
          *
          *  @return The initialised column title string.
          */
@@ -141,6 +142,7 @@ namespace arc
             assert(!r_title.empty());
             assert(!utl::is_numerical(r_title));
             assert(r_title.size() <= file::PRINT_WIDTH);
+            assert(r_title.find_first_of(file::DELIMIT_CHAR) == std::string::npos);
 
             return (r_title);
         }
