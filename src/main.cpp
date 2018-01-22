@@ -31,5 +31,7 @@ int main()
 
     LOG(col);
 
+    col.save("column.dat");
+
     return (0);
 }

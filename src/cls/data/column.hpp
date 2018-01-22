@@ -62,13 +62,16 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
             //  -- Getters --
             size_t size() const { return (m_data.size()); }
             bool empty() const { return (m_data.empty()); }
 
             //  -- Manipulation --
             void push_back(const double t_element) { m_data.push_back(t_element); }
+
+            //  -- Saving --
+            void save(const std::string& t_path) const;
         };
 
 

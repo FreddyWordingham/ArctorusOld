@@ -110,5 +110,23 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Saving --
+        /**
+         *  Save the state of the column to a given file path.
+         *
+         *  @param  t_path  Path to the save location of the file.
+         */
+        void Column::save(const std::string& t_path) const
+        {
+            file::Handle file(t_path, std::fstream::out);
+
+            //file.comment() << "Rows: " << m_data.size() << "\n";
+
+            file << (*this);
+        }
+
+
+
     } // namespace data
 } // namespace arc
