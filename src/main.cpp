@@ -11,6 +11,9 @@
 //  -- General --
 #include "gen/log.hpp"
 
+//  -- Classes --
+#include "cls/data/column.hpp"
+
 
 
 //  == MAIN ==
@@ -23,14 +26,10 @@ int main()
 {
     LOG("Hello world!");
 
-    std::string str = "       ";
-//    std::getline(std::cin, str);
 
-    std::cout << "String reads: \n'" << str << "'\n";
+    arc::data::Column col("String", {0.0, 1.0, 4.0, 9.0, 16.0});
 
-    arc::utl::strip_whitespace(&str);
-    std::cout << "After cull  : \n'" << str << "'\n";
-
+    LOG(col);
 
     return (0);
 }

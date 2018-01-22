@@ -15,6 +15,12 @@
 //  == INCLUDES ==
 //  -- System --
 #include <cassert>
+#include <iomanip>
+
+//  -- General --
+#include "gen/log.hpp"
+
+//  -- Utility --
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -53,6 +59,7 @@ namespace arc
          *  @param  t_title Column title.
          *
          *  @pre    t_title must not be empty after removing whitespace.
+         *  @pre    t_title must not be numerical.
          *
          *  @post   r_title must not exceed the file::PRINT_WIDTH.
          *
@@ -61,17 +68,44 @@ namespace arc
         std::string Column::init_title(const std::string& t_title) const
         {
             assert(!t_title.empty());
+            assert(!utl::is_numerical(t_title));
 
             std::string r_title(t_title);
 
             if (r_title.size() > file::PRINT_WIDTH)
             {
-                // TODO
+                WARN("data::Column title string must be resized.",
+                     "Title width of '" << t_title.size() << "' must be resized to fit within the allocated print width of: '"
+                                        << file::PRINT_WIDTH << ".");
             }
 
             assert(r_title.size() <= file::PRINT_WIDTH);
 
             return (r_title);
+        }
+
+
+
+        //  == OPERATORS ==
+        //  -- Printing --
+        /**
+         *  Enable printing of a data column to a given ostream.
+         *
+         *  @param  t_stream    Stream to write to.
+         *  @param  t_col       Column to be written.
+         *
+         *  @return A reference to the stream post-write.
+         */
+        std::ostream& operator<<(std::ostream& t_stream, const Column& t_col)
+        {
+            t_stream << std::setw(file::PRINT_WIDTH) << t_col.m_title;
+
+            for (size_t i = 0; i < t_col.m_data.size(); ++i)
+            {
+                t_stream << "\n" << std::setw(file::PRINT_WIDTH) << t_col.m_data[i];
+            }
+
+            return (t_stream);
         }
 
 
