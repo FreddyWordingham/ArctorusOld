@@ -52,7 +52,10 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
+            //  -- Access --
+            Column& operator[](const size_t t_index) { return (m_col[t_index]); }
+            const Column& operator[](const size_t t_index) const { return (m_col[t_index]); }
 
 
             //  == METHODS ==
