@@ -8,13 +8,16 @@
 
 
 //  == HEADER ==
-#include <cls/file/handle.hpp>
 #include "cls/data/column.hpp"
 
 
 
 //  == INCLUDES ==
 //  -- System --
+#include <cassert>
+
+//  -- Classes --
+#include "cls/file/handle.hpp"
 
 
 
@@ -28,6 +31,12 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Construct a data column from a given title and data vector.
+         *
+         *  @param  t_title Column title.
+         *  @param  t_data  Column data.
+         */
         Column::Column(const std::string& t_title, const std::vector<double>& t_data) :
             m_title(init_title(t_title)),
             m_data(t_data)
@@ -41,7 +50,7 @@ namespace arc
          *  If the title string exceeds the file print width, cut it down to size.
          *  Remove any leading or trailing whitespace.
          *
-         *  @param  t_title The desired column title.
+         *  @param  t_title Column title.
          *
          *  @pre    t_title must not be empty after removing whitespace.
          *
