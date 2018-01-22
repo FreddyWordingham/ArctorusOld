@@ -36,16 +36,19 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            std::vector <Column> m_col;  //! Vector of data columns.
+            std::vector<Column> m_col;  //! Vector of data columns.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Table();
+            Table() = default;
+            Table(const std::vector<std::string>& t_col_title, const std::vector<std::vector<double>>& t_col_data);
 
           private:
             //  -- Initialisation --
+            std::vector<Column> init_col(const std::vector<std::string>& t_col_title,
+                                         const std::vector<std::vector<double>>& t_col_data) const;
 
 
             //  == OPERATORS ==

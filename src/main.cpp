@@ -9,12 +9,10 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include <cls/data/column.hpp>
 #include "gen/log.hpp"
 
 //  -- Classes --
-
-#include "cls/file/handle.hpp"
+#include "cls/data/table.hpp"
 
 
 
@@ -29,12 +27,10 @@ int main()
     LOG("Hello world!");
 
 
-    arc::data::Column col(arc::file::read("column.dat"));
-
-    for (size_t i = 0; i < col.size(); ++i)
-    {
-        VAL(col[i]);
-    }
+    arc::data::Table tab({"one", "two", "three", "four things"}, {{0.0, 1.0, 2,   3,  4,   5.0},
+                                                                  {0.0, 1.0, 4.0, 9,  16,  25},
+                                                                  {0,   1,   8,   27, 64,  125},
+                                                                  {0,   1,   16,  81, 256, 625}});
 
     return (0);
 }
