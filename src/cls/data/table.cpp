@@ -93,7 +93,7 @@ namespace arc
          *
          *  @return A reference to the stream post-write.
          */
-        friend std::ostream& operator<<(std::ostream& t_stream, const Table& t_tab)
+        std::ostream& operator<<(std::ostream& t_stream, const Table& t_tab)
         {
             if (t_tab.m_col.empty())
             {
@@ -105,9 +105,9 @@ namespace arc
             // Print column titles.
             for (size_t i = 0; i < (t_tab.m_col.size() - 1); ++i)
             {
-                t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.get_title() << file::DELIMIT_CHAR;
+                t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col[i].get_title() << file::DELIMIT_CHAR;
             }
-            t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.get_title() << "\n";
+            t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.back().get_title() << "\n";
 
             return (t_stream);
         }

@@ -27,10 +27,12 @@ int main()
     LOG("Hello world!");
 
 
-    arc::data::Table tab({"one", "two", "three", "four things"}, {{0.0, 1.0, 2,   3,  4,   5.0},
-                                                                  {0.0, 1.0, 4.0, 9,  16,  25},
-                                                                  {0,   1,   8,   27, 64,  125},
-                                                                  {0,   1,   16,  81, 256, 625}});
+    arc::data::Table tab({"one", "two", "three", "four longer things"}, {{0.0, 1.0, 2,   3,  4,   5.0},
+                                                                         {0.0, 1.0, 4.0, 9,  16,  25},
+                                                                         {0,   1,   8,   27, 64,  125},
+                                                                         {0,   1,   16,  81, 256, 625}});
+
+    LOG(tab);
 
     return (0);
 }
