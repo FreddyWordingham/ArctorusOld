@@ -13,7 +13,7 @@
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
-#include "cls/data/table.hpp"
+#include "cls/data/histogram.hpp"
 
 
 
@@ -27,20 +27,10 @@ int main()
 {
     LOG("Hello world!");
 
-//    LOG(arc::file::read("table.dat"));
+    arc::data::Histogram hist(0.0, 1.0, 10);
 
-    arc::data::Table tab;
+    LOG(hist);
 
-    LOG(tab);
-
-    tab.append_col(arc::data::Column("Col title", {0.0, 1.0, 2.0, 3.0}));
-    LOG(tab);
-    tab.append_col(arc::data::Column("Col title B", {0.0, 1.0, 4.0, 360.5}));
-    LOG(tab);
-    tab.append_col(arc::data::Column("C", {-3.0, -3.0, -2.0, 77.5}));
-    LOG(tab);
-    tab.append_row({-88, -22, -343});
-    LOG(tab);
 
     return (0);
 }

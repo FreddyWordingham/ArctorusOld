@@ -44,7 +44,7 @@ namespace arc
             //  -- Constructors --
             Table() = default;
             explicit Table(const std::string& t_readable);
-            Table(const std::vector<Column>& t_col);
+            explicit Table(const std::vector<Column>& t_col);
             Table(const std::vector<std::string>& t_col_title, const std::vector<std::vector<double>>& t_col_data);
 
           private:

@@ -60,9 +60,32 @@ namespace arc
          *
          *  @return A reference to the stream post-write.
          */
-        std::ostream& Histogram::operator<<(std::ostream& t_stream, const Histogram& t_hist)
+        std::ostream& operator<<(std::ostream& t_stream, const Histogram& t_hist)
         {
-            t_stream << Table({});
+            t_stream << Table(std::vector<Column>({Column("bin", t_hist.get_bin_pos()), Column("count", t_hist.m_data)}));
+
+            return (t_stream);
+        }
+
+
+
+        //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Create a vector of bin positions.
+         *
+         *  @return A vector of bin positions.
+         */
+        std::vector<double> Histogram::get_bin_pos() const
+        {
+            std::vector<double> r_pos(m_data.size());
+
+            for (size_t i = 0; i < r_pos.size(); ++i)
+            {
+                r_pos[i] = m_min_bound + (i * m_bin_width);
+            }
+
+            return (r_pos);
         }
 
 

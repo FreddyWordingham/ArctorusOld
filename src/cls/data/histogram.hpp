@@ -58,6 +58,8 @@ namespace arc
 
             //  == METHODS ==
           private:
+            //  -- Getters --
+            std::vector<double> get_bin_pos() const;
         };
 
 
