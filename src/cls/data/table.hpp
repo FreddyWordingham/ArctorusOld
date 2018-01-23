@@ -65,6 +65,10 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Getters --
+            size_t get_num_cols() const { return (m_col.size()); }
+            size_t get_num_rows() const { return (m_col.empty() ? 0 : m_col.front().size()); }
+
             //  -- Saving --
             void save(const std::string& t_path) const;
         };

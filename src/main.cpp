@@ -33,5 +33,16 @@ int main()
 
     VAL(tab);
 
+    VAL(tab.get_num_cols());
+    VAL(tab.get_num_rows());
+
+    for (size_t i = 0; i < 4; ++i)
+    {
+        tab[i][i]     = 0.0;
+        tab[i][i + 1] = 1.0;
+    }
+
+    VAL(tab);
+
     return (0);
 }
