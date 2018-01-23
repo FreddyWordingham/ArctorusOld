@@ -51,7 +51,10 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
+            //  -- Collection --
+            void operator()(const double t_val, const double t_weight = 1.0);
+
             //  -- Printing --
             friend std::ostream& operator<<(std::ostream& t_stream, const Histogram& t_hist);
 
