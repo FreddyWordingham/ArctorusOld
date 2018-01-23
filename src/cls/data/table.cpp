@@ -219,7 +219,7 @@ namespace arc
          *  Append a data column to the data table.
          *  The size of the column must match that of any columns that are already stored within the table.
          *
-         *  @param  t_col   Data column to be appeneded to the table.
+         *  @param  t_col   Data column to be appended to the table.
          *
          *  @pre    t_col size must match that of existing data columns.
          */
@@ -228,6 +228,24 @@ namespace arc
             assert(!t_col.empty() || (t_col.size() == m_col.front().size()));
 
             m_col.push_back(t_col);
+        }
+
+        /**
+         *  Append a data row to the data table.
+         *  The size of the row must match the number of columns already stored within the table.
+         *
+         *  @param  t_row   Data column to be appended to the table.
+         *
+         *  @pre    t_row size must match the number of data columns.
+         */
+        void Table::append_row(const std::vector<double>& t_row)
+        {
+            assert(t_row.size() == m_col.size());
+
+            for (size_t i = 0; i < t_row.size(); ++i)
+            {
+                m_col[i].push_back(t_row[i]);
+            }
         }
 
 

@@ -71,6 +71,7 @@ namespace arc
 
             //  -- Setters --
             void append_col(const Column& t_col);
+            void append_row(const std::vector<double>& t_row);
 
             //  -- Saving --
             void save(const std::string& t_path) const;
