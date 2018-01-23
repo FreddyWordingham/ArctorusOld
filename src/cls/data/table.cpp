@@ -214,6 +214,23 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Setters --
+        /**
+         *  Append a data column to the data table.
+         *  The size of the column must match that of any columns that are already stored within the table.
+         *
+         *  @param  t_col   Data column to be appeneded to the table.
+         *
+         *  @pre    t_col size must match that of existing data columns.
+         */
+        void Table::append_col(const Column& t_col)
+        {
+            assert(!t_col.empty() || (t_col.size() == m_col.front().size()));
+
+            m_col.push_back(t_col);
+        }
+
+
         //  -- Saving --
         /**
          *  Save the state of the table to a given file path.
