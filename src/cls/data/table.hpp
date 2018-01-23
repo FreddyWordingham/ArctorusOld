@@ -43,10 +43,12 @@ namespace arc
           public:
             //  -- Constructors --
             Table() = default;
+            explicit Table(const std::string& t_readable);
             Table(const std::vector<std::string>& t_col_title, const std::vector<std::vector<double>>& t_col_data);
 
           private:
             //  -- Initialisation --
+            std::vector<Column> init_col(const std::string& t_readable) const;
             std::vector<Column> init_col(const std::vector<std::string>& t_col_title,
                                          const std::vector<std::vector<double>>& t_col_data) const;
 

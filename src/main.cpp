@@ -12,6 +12,7 @@
 #include "gen/log.hpp"
 
 //  -- Classes --
+#include "cls/file/handle.hpp"
 #include "cls/data/table.hpp"
 
 
@@ -26,12 +27,11 @@ int main()
 {
     LOG("Hello world!");
 
+//    LOG(arc::file::read("table.dat"));
 
-    arc::data::Table tab;
+    arc::data::Table tab(arc::file::read("table.dat"));
 
-//    LOG(tab);
-
-    tab.save("table.dat");
+    VAL(tab);
 
     return (0);
 }

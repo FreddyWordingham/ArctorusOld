@@ -18,6 +18,7 @@
 
 //  -- General --
 #include "gen/log.hpp"
+#include "gen/math.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -35,6 +36,16 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
+         *  Construct a data table from a given readable string.
+         *
+         *  @param  t_readable  Data table as a readable string.
+         */
+        Table::Table(const std::string& t_readable) :
+            m_col(init_col(t_readable))
+        {
+        }
+
+        /**
          *  Construct a populated data table by forming the given column titles and data vectors into data columns.
          *
          *  @param  t_col_title Vector of column titles.
@@ -48,6 +59,91 @@ namespace arc
 
         //  -- Initialisation --
         /**
+         *  Initialise the vector of data columns from the readable string.
+         *
+         *  @param  t_readable  Data table as a readable string.
+         *
+         *  @pre    t_readable must not be empty.
+         *
+         *  @return The initialised vector of data columns.
+         */
+        std::vector<Column> Table::init_col(const std::string& t_readable) const
+        {
+            assert(!t_readable.empty());
+
+            std::vector<std::string>         title;
+            std::vector<std::vector<double>> data;
+
+            std::stringstream stream(t_readable);
+
+            // Read column titles.
+            std::string line;
+            if (!std::getline(stream, line))
+            {
+                ERROR("Unable to construct data::Table from readable string.",
+                      "Readable string does not contain a row of titles.");
+            }
+
+            std::stringstream title_stream(line);
+            std::string       word;
+            while (std::getline(title_stream, word, file::DELIMIT_CHAR))
+            {
+                title.push_back(word);
+            }
+
+            // Read column data.
+            if (!std::getline(stream, line))
+            {
+                ERROR("Unable to construct data::Table from readable string.",
+                      "Readable string does not contain a row of data.");
+            }
+
+            std::stringstream first_row_stream(line);
+            while (std::getline(first_row_stream, word, file::DELIMIT_CHAR))
+            {
+                data.push_back(std::vector<double>({math::str_to<double>(word)}));
+            }
+
+            if (title.size() != data.size())
+            {
+                ERROR("Unable to construct data::Table from readable string.",
+                      "Number of column titles does not match the number of data columns.");
+            }
+
+            while (std::getline(stream, line))
+            {
+                std::stringstream row_stream(line);
+
+                for (size_t i = 0; i < data.size(); ++i)
+                {
+                    if (!std::getline(row_stream, word, file::DELIMIT_CHAR))
+                    {
+                        ERROR("Unable to construct data::Table from readable string.", "Row is missing data value.");
+                    }
+
+                    data[i].push_back(math::str_to<double>(word));
+                }
+            }
+
+            const size_t rows     = data.front().size();
+            for (size_t  i        = 0; i < data.size(); ++i)
+            {
+                if (data[i].size() != rows)
+                {
+                    ERROR("Unable to construct data::Table from readable string.", "Number of data columns is not consistent.");
+                }
+            }
+
+            std::vector<Column> r_col;
+            for (size_t         i = 0; i < title.size(); ++i)
+            {
+                r_col.push_back(Column(title[i], data[i]));
+            }
+
+            return (r_col);
+        }
+
+        /**
          *  Construct a populated data table by forming the given column titles and data vectors into data columns.
          *
          *  @param  t_col_title Vector of column titles.
@@ -57,6 +153,8 @@ namespace arc
          *  @pre    t_col_data must not be empty.
          *  @pre    t_col_title size must match the t_col_data size.
          *  @pre    t_col_data vectors must all be of the same length.
+         *
+         *  @return The initialised vector of data columns.
          */
         std::vector<Column> Table::init_col(const std::vector<std::string>& t_col_title,
                                             const std::vector<std::vector<double>>& t_col_data) const
