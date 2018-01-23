@@ -52,6 +52,8 @@ namespace arc
 
             //  == OPERATORS ==
           private:
+            //  -- Printing --
+            friend std::ostream& operator<<(std::ostream& t_stream, const Histogram& t_hist);
 
 
             //  == METHODS ==

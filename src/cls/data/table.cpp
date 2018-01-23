@@ -46,6 +46,25 @@ namespace arc
         }
 
         /**
+         *  Construct a populated data table using a vector of data columns.
+         *
+         *  @param  t_col   Vector of data columns.
+         *
+         *  @pre    t_col must not be empty.
+         *  @pre    t_col columns must all be the same size.
+         */
+        Table::Table(const std::vector<Column>& t_col)
+        {
+            assert(!t_col.empty());
+
+            const size_t num_rows = t_col.front().size();
+            for (size_t  i        = 1; i < t_col.size(); ++i)
+            {
+                assert(t_col[i].size() == num_rows);
+            }
+        }
+
+        /**
          *  Construct a populated data table by forming the given column titles and data vectors into data columns.
          *
          *  @param  t_col_title Vector of column titles.

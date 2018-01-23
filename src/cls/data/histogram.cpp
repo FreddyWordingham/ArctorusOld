@@ -13,7 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/data/table.hpp"
 
 
 
@@ -45,6 +46,23 @@ namespace arc
         {
             assert(t_max_bound > t_min_bound);
             assert(t_num_bins > 0);
+        }
+
+
+
+        //  == OPERATORS ==
+        //  -- Printing --
+        /**
+         *  Enable printing of a histogram to a given ostream.
+         *
+         *  @param  t_stream    Stream to write to.
+         *  @param  t_hist      Histogram to be written.
+         *
+         *  @return A reference to the stream post-write.
+         */
+        std::ostream& Histogram::operator<<(std::ostream& t_stream, const Histogram& t_hist)
+        {
+            t_stream << Table({});
         }
 
 
