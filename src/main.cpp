@@ -29,20 +29,18 @@ int main()
 
 //    LOG(arc::file::read("table.dat"));
 
-    arc::data::Table tab(arc::file::read("table.dat"));
+    arc::data::Table tab;
 
-    VAL(tab);
+    LOG(tab);
 
-    VAL(tab.get_num_cols());
-    VAL(tab.get_num_rows());
-
-    for (size_t i = 0; i < 4; ++i)
-    {
-        tab[i][i]     = 0.0;
-        tab[i][i + 1] = 1.0;
-    }
-
-    VAL(tab);
+    tab.append_col(arc::data::Column("Col title", {0.0, 1.0, 2.0, 3.0}));
+    LOG(tab);
+    tab.append_col(arc::data::Column("Col title B", {0.0, 1.0, 4.0, 360.5}));
+    LOG(tab);
+    tab.append_col(arc::data::Column("C", {-3.0, -3.0, -2.0, 77.5}));
+    LOG(tab);
+    tab.append_row({-88, -22, -343});
+    LOG(tab);
 
     return (0);
 }

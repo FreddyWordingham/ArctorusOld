@@ -144,13 +144,9 @@ namespace arc
          *  Log a standard message.
          *
          *  @param  t_text  Message text to be logged.
-         *
-         *  @pre    t_text must not be empty.
          */
         void Logger::log(const std::string& t_text) const
         {
-            assert(!t_text.empty());
-
             print_text(CYAN, LOG, t_text);
         }
 
@@ -158,13 +154,9 @@ namespace arc
          *  Log a verbose message.
          *
          *  @param  t_text  Message text to be logged.
-         *
-         *  @pre    t_text must not be empty.
          */
         void Logger::verb(const std::string& t_text) const
         {
-            assert(!t_text.empty());
-
             if (config::VERBOSE_LOG)
             {
                 print_text(CYAN, LOG, t_text);
@@ -282,13 +274,11 @@ namespace arc
          *
          *  @pre    t_col must be a valid cols enumeration.
          *  @pre    t_type must be a valid types enumeration.
-         *  @pre    t_text must not be empty.
          */
         void Logger::print_text(const size_t t_col, const size_t t_type, const std::string& t_text) const
         {
             assert(t_col < TOTAL_COLS);
             assert(t_type < TOTAL_TYPES);
-            assert(!t_text.empty());
 
             std::vector<std::string> lines     = form_lines(t_text);
             std::string              timestamp = "[" + utl::create_timestamp() + "]";
@@ -309,13 +299,10 @@ namespace arc
          *
          *  @param  t_text  Text string to be formatted.
          *
-         *  @pre    t_text must not be empty.
-         *
          *  @return Vector of text lines.
          */
         std::vector<std::string> Logger::form_lines(std::string t_text) const
         {
-            assert(!t_text.empty());
             t_text += '\n';
 
             utl::find_and_replace(&t_text, "\t", "    ");
