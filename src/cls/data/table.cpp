@@ -92,12 +92,29 @@ namespace arc
 
             // Read column data.
             std::vector<std::vector<double>> data(title.size());
-
             while (std::getline(stream, line))
             {
+                std::stringstream data_stream(line);
 
+                for (size_t i = 0; i < title.size(); ++i)
+                {
+                    if (!std::getline(data_stream, word, file::DELIMIT_CHAR))
+                    {
+                        ERROR("Unable to construct data::Table from readable string.",
+                              "Line: '" << line << "', does not contain: '" << title.size() << "' values as required.");
+                    }
+
+                    data[i].push_back(math::str_to<double>(word));
+                }
+
+                if (data_stream.rdbuf()->in_avail() != 0)
+                {
+                    ERROR("Unable to construct data::Table from readable string.",
+                          "Line: '" << line << "', does not contain: '" << title.size() << "' values as required.");
+                }
             }
 
+            // Form data columns.
             std::vector<Column> r_col;
             for (size_t         i = 0; i < title.size(); ++i)
             {
@@ -127,15 +144,14 @@ namespace arc
             assert(!t_col_data.empty());
             assert(t_col_title.size() == t_col_data.size());
 
-            const size_t rows = t_col_data.front().size();
-            for (size_t  i    = 1; i < t_col_data.size(); ++i)
+            const size_t rows     = t_col_data.front().size();
+            for (size_t  i        = 1; i < t_col_data.size(); ++i)
             {
                 assert(t_col_data[i].size() == rows);
             }
 
             std::vector<Column> r_col;
-
-            for (size_t i = 0; i < t_col_title.size(); ++i)
+            for (size_t         i = 0; i < t_col_title.size(); ++i)
             {
                 r_col.emplace_back(Column(t_col_title[i], t_col_data[i]));
             }
