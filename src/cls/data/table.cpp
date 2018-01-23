@@ -194,7 +194,7 @@ namespace arc
         {
             if (t_tab.m_col.empty())
             {
-                WARN("Unable to print data::Table object.", "Table does not contain any data columns.");
+                WARN("No data to print in data::Table object.", "Table does not contain any data columns.");
 
                 return (t_stream);
             }
