@@ -13,8 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-#include <cmath>
+//  -- General --
+#include "gen/log.hpp"
 
 //  -- Classes --
 #include "cls/data/table.hpp"
@@ -44,7 +44,7 @@ namespace arc
         Histogram::Histogram(const double t_min_bound, const double t_max_bound, const size_t t_num_bins) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
-            m_bin_width(m_max_bound - m_min_bound / (t_num_bins - 1)),
+            m_bin_width((m_max_bound - m_min_bound) / (t_num_bins - 1)),
             m_data(t_num_bins)
         {
             assert(t_max_bound > t_min_bound);
@@ -69,15 +69,16 @@ namespace arc
             assert((t_val >= m_min_bound) && (t_val <= m_max_bound));
             assert(t_weight > 0.0);
 
-            const auto bin = static_cast<size_t>(std::floor(t_val - m_min_bound / m_bin_width));
+            const auto bin = static_cast<size_t>(std::floor((t_val - m_min_bound) / m_bin_width));
 
-            bin == m_data.size() ? m_data[bin - 1] += t_weight : m_data[bin] += t_weight;
+            (bin == m_data.size()) ? m_data[bin - 1] += t_weight : m_data[bin] += t_weight;
         }
 
 
         //  -- Printing --
         /**
          *  Enable printing of a histogram to a given ostream.
+         *  Histogram is converted to a table before printing.
          *
          *  @param  t_stream    Stream to write to.
          *  @param  t_hist      Histogram to be written.

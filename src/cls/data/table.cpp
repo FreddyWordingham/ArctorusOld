@@ -50,17 +50,18 @@ namespace arc
          *
          *  @param  t_col   Vector of data columns.
          *
-         *  @pre    t_col must not be empty.
-         *  @pre    t_col columns must all be the same size.
+         *  @post   m_col must not be empty.
+         *  @post   m_col columns must all be the same size.
          */
-        Table::Table(const std::vector<Column>& t_col)
+        Table::Table(const std::vector<Column>& t_col) :
+            m_col(t_col)
         {
-            assert(!t_col.empty());
+            assert(!m_col.empty());
 
-            const size_t num_rows = t_col.front().size();
-            for (size_t  i        = 1; i < t_col.size(); ++i)
+            const size_t num_rows = m_col.front().size();
+            for (size_t  i        = 1; i < m_col.size(); ++i)
             {
-                assert(t_col[i].size() == num_rows);
+                assert(m_col[i].size() == num_rows);
             }
         }
 

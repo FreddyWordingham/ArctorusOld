@@ -32,9 +32,6 @@ int main()
     for (size_t i = 0; i < 100; ++i)
     {
         double x = static_cast<double>(rand()) / RAND_MAX;
-        x = 0.5;
-
-        LOG(x);
 
         hist(x);
     }
