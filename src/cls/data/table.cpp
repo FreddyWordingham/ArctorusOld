@@ -71,12 +71,11 @@ namespace arc
         {
             assert(!t_readable.empty());
 
-            std::vector<std::string>         title;
-            std::vector<std::vector<double>> data;
-
             std::stringstream stream(t_readable);
 
             // Read column titles.
+            std::vector<std::string> title;
+
             std::string line;
             if (!std::getline(stream, line))
             {
@@ -92,52 +91,17 @@ namespace arc
             }
 
             // Read column data.
-            if (!std::getline(stream, line))
-            {
-                ERROR("Unable to construct data::Table from readable string.",
-                      "Readable string does not contain a row of data.");
-            }
-
-            std::stringstream first_row_stream(line);
-            while (std::getline(first_row_stream, word, file::DELIMIT_CHAR))
-            {
-                data.push_back(std::vector<double>({math::str_to<double>(word)}));
-            }
-
-            if (title.size() != data.size())
-            {
-                ERROR("Unable to construct data::Table from readable string.",
-                      "Number of column titles does not match the number of data columns.");
-            }
+            std::vector<std::vector<double>> data(title.size());
 
             while (std::getline(stream, line))
             {
-                std::stringstream row_stream(line);
 
-                for (size_t i = 0; i < data.size(); ++i)
-                {
-                    if (!std::getline(row_stream, word, file::DELIMIT_CHAR))
-                    {
-                        ERROR("Unable to construct data::Table from readable string.", "Row is missing data value.");
-                    }
-
-                    data[i].push_back(math::str_to<double>(word));
-                }
-            }
-
-            const size_t rows     = data.front().size();
-            for (size_t  i        = 0; i < data.size(); ++i)
-            {
-                if (data[i].size() != rows)
-                {
-                    ERROR("Unable to construct data::Table from readable string.", "Number of data columns is not consistent.");
-                }
             }
 
             std::vector<Column> r_col;
             for (size_t         i = 0; i < title.size(); ++i)
             {
-                r_col.push_back(Column(title[i], data[i]));
+                r_col.emplace_back(Column(title[i], data[i]));
             }
 
             return (r_col);
@@ -205,7 +169,7 @@ namespace arc
             {
                 t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col[i].get_title() << file::DELIMIT_CHAR;
             }
-            t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.back().get_title() << "\n";
+            t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.back().get_title();
 
             // Print column data.
             if (t_tab.m_col.front().empty())
@@ -213,6 +177,7 @@ namespace arc
                 return (t_stream);
             }
 
+            t_stream << "\n";
             for (size_t i = 0; i < (t_tab.m_col.front().size() - 1); ++i)
             {
                 for (size_t j = 0; j < (t_tab.m_col.size() - 1); ++j)
