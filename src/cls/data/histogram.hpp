@@ -40,16 +40,14 @@ namespace arc
             const double m_max_bound;   //! Minimum bound of the histogram range.
 
             //  -- Data --
-            const size_t        m_num_bins;    //! Number of histogram bins.
-            const size_t        m_bin_width;   //! Width of the histogram bins.
-            std::vector<double> m_data; //! Histogram bin data.
+            const double        m_bin_width;    //! Width of the histogram bins.
+            std::vector<double> m_data;         //! Histogram bin data.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Histogram(const std::vector<double>& t_data);
-//            Histogram(const double t_min_bound, const double t_max_bound, const size_t t_num_bins);
+            Histogram(double t_min_bound, double t_max_bound, size_t t_num_bins);
 
 
             //  == OPERATORS ==
