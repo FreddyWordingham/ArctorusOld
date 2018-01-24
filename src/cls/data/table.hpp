@@ -74,6 +74,9 @@ namespace arc
             void append_col(const Column& t_col);
             void append_row(const std::vector<double>& t_row);
 
+            //  -- Serialisation --
+            std::string serialise() const;
+
             //  -- Saving --
             void save(const std::string& t_path) const;
         };

@@ -193,40 +193,7 @@ namespace arc
          */
         std::ostream& operator<<(std::ostream& t_stream, const Table& t_tab)
         {
-            if (t_tab.m_col.empty())
-            {
-                WARN("No data to print in data::Table object.", "Table does not contain any data columns.");
-
-                return (t_stream);
-            }
-
-            // Print column titles.
-            for (size_t i = 0; i < (t_tab.m_col.size() - 1); ++i)
-            {
-                t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col[i].get_title() << file::DELIMIT_CHAR;
-            }
-            t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.back().get_title();
-
-            // Print column data.
-            if (t_tab.m_col.front().empty())
-            {
-                return (t_stream);
-            }
-
-            t_stream << "\n";
-            for (size_t i = 0; i < (t_tab.m_col.front().size() - 1); ++i)
-            {
-                for (size_t j = 0; j < (t_tab.m_col.size() - 1); ++j)
-                {
-                    t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col[j][i] << file::DELIMIT_CHAR;
-                }
-                t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.back()[i] << "\n";
-            }
-            for (size_t i = 0; i < (t_tab.m_col.size() - 1); ++i)
-            {
-                t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col[i].back() << file::DELIMIT_CHAR;
-            }
-            t_stream << std::setw(file::PRINT_WIDTH) << t_tab.m_col.back().back();
+            t_stream << t_tab.serialise();
 
             return (t_stream);
         }
@@ -269,6 +236,55 @@ namespace arc
         }
 
 
+        //  -- Serialisation --
+        /**
+         *  Create a string representation of the table.
+         *
+         *  @return A string representation of the table.
+         */
+        std::string Table::serialise() const
+        {
+            std::stringstream stream;
+
+            if (m_col.empty())
+            {
+                WARN("No data to print in data::Table object.", "Table does not contain any data columns.");
+
+                return (stream.str());
+            }
+
+            // Print column titles.
+            for (size_t i = 0; i < (m_col.size() - 1); ++i)
+            {
+                stream << std::setw(file::PRINT_WIDTH) << m_col[i].get_title() << file::DELIMIT_CHAR;
+            }
+            stream << std::setw(file::PRINT_WIDTH) << m_col.back().get_title();
+
+            // Print column data.
+            if (m_col.front().empty())
+            {
+                return (stream.str());
+            }
+
+            stream << "\n";
+            for (size_t i = 0; i < (m_col.front().size() - 1); ++i)
+            {
+                for (size_t j = 0; j < (m_col.size() - 1); ++j)
+                {
+                    stream << std::setw(file::PRINT_WIDTH) << m_col[j][i] << file::DELIMIT_CHAR;
+                }
+                stream << std::setw(file::PRINT_WIDTH) << m_col.back()[i] << "\n";
+            }
+            for (size_t i = 0; i < (m_col.size() - 1); ++i)
+            {
+                stream << std::setw(file::PRINT_WIDTH) << m_col[i].back() << file::DELIMIT_CHAR;
+            }
+            stream << std::setw(file::PRINT_WIDTH) << m_col.back().back();
+
+            return (stream.str());
+        }
+
+
         //  -- Saving --
         /**
          *  Save the state of the table to a given file path.
@@ -289,7 +305,7 @@ namespace arc
                 file.comment() << "Rows: 0\n";
             }
 
-            file << (*this);
+            file << serialise();
         }
 
 
