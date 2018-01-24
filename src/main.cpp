@@ -11,9 +11,6 @@
 //  -- General --
 #include "gen/log.hpp"
 
-//  -- Utility --
-#include "utl/vector.hpp"
-
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/data/histogram.hpp"
@@ -36,16 +33,21 @@ int main()
 
     arc::data::Histogram hist(0.0, 10.0, 10);
 
-/*    for (size_t i = 0; i < 100; ++i)
+    VAL(hist.get_bin_width());
+    VAL(hist.get_num_bin());
+    VAL(hist.get_bin_pos(arc::data::Histogram::align::LEFT));
+    VAL(hist.get_bin_pos(arc::data::Histogram::align::MID));
+    VAL(hist.get_bin_pos(arc::data::Histogram::align::RIGHT));
+
+    for (size_t i = 0; i < 100; ++i)
     {
-        double x = static_cast<double>(rand()) / RAND_MAX;
+        double x = 10.0 * (static_cast<double>(rand()) / RAND_MAX);
 
         hist(x);
-    }*/
+    }
 
-    std::vector<double> vec({0.0, 1.0, 2.0, 3.0});
+    LOG(hist);
 
-    LOG(hist.get_bin_pos(arc::data::Histogram::align::LEFT));
 
 
     return (0);

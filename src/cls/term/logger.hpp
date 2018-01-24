@@ -28,6 +28,7 @@
 
 //  -- Utility --
 #include "utl/string.hpp"
+#include "utl/vector.hpp"
 
 
 

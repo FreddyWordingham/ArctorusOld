@@ -44,7 +44,7 @@ namespace arc
         Histogram::Histogram(const double t_min_bound, const double t_max_bound, const size_t t_num_bins) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
-            m_bin_width((m_max_bound - m_min_bound) / (t_num_bins - 1)),
+            m_bin_width((m_max_bound - m_min_bound) / t_num_bins),
             m_data(t_num_bins)
         {
             assert(t_max_bound > t_min_bound);
