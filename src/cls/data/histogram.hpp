@@ -41,7 +41,7 @@ namespace arc
             enum class align
             {
                 LEFT,   //! Save bin left position.
-                MID,    //! Save bin center position.
+                CENTER, //! Save bin center position.
                 RIGHT   //! Save bin right position.
             };
 
@@ -77,13 +77,13 @@ namespace arc
             //  -- Getters --
             double get_bin_width() const { return (m_bin_width); }
             size_t get_num_bin() const { return (m_data.size()); }
-            std::vector<double> get_bin_pos(align t_align = align::MID) const;
+            std::vector<double> get_bin_pos(align t_align = align::CENTER) const;
 
             //  -- Serialisation --
-            std::string serialise(const align t_align, const bool t_normalise) const;
+            std::string serialise(const align t_align = align::CENTER, const bool t_normalise = false) const;
 
             //  -- Saving --
-            void save(const std::string& t_path, bool t_normalise) const;
+            void save(const std::string& t_path, const align t_align = align::CENTER, const bool t_normalise = false) const;
         };
 
 

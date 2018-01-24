@@ -598,7 +598,7 @@ namespace arc
     template <typename T, typename S>
     constexpr std::vector<T> operator+(const std::vector<T>& t_lhs, const S t_rhs)
     {
-        std::vector<T> r_vec;
+        std::vector<T> r_vec(t_lhs.size());
 
         for (size_t i = 0; i < t_lhs.size(); ++i)
         {
@@ -622,7 +622,7 @@ namespace arc
     template <typename T, typename S>
     constexpr std::vector<T> operator-(const std::vector<T>& t_lhs, const S t_rhs)
     {
-        std::vector<T> r_vec;
+        std::vector<T> r_vec(t_lhs.size());
 
         for (size_t i = 0; i < t_lhs.size(); ++i)
         {
@@ -646,7 +646,7 @@ namespace arc
     template <typename T, typename S>
     constexpr std::vector<T> operator*(const std::vector<T>& t_lhs, const S t_rhs)
     {
-        std::vector<T> r_vec;
+        std::vector<T> r_vec(t_lhs.size());
 
         for (size_t i = 0; i < t_lhs.size(); ++i)
         {
@@ -670,7 +670,7 @@ namespace arc
     template <typename T, typename S>
     constexpr std::vector<T> operator/(const std::vector<T>& t_lhs, const S t_rhs)
     {
-        std::vector<T> r_vec;
+        std::vector<T> r_vec(t_lhs.size());
 
         for (size_t i = 0; i < t_lhs.size(); ++i)
         {

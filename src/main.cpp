@@ -36,7 +36,7 @@ int main()
     VAL(hist.get_bin_width());
     VAL(hist.get_num_bin());
     VAL(hist.get_bin_pos(arc::data::Histogram::align::LEFT));
-    VAL(hist.get_bin_pos(arc::data::Histogram::align::MID));
+    VAL(hist.get_bin_pos(arc::data::Histogram::align::CENTER));
     VAL(hist.get_bin_pos(arc::data::Histogram::align::RIGHT));
 
     for (size_t i = 0; i < 100; ++i)
@@ -47,6 +47,8 @@ int main()
     }
 
     LOG(hist);
+
+    hist.save("hist.dat", arc::data::Histogram::align::LEFT, true);
 
 
 

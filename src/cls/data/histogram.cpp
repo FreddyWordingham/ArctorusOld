@@ -88,7 +88,7 @@ namespace arc
          */
         std::ostream& operator<<(std::ostream& t_stream, const Histogram& t_hist)
         {
-            t_stream << Table(std::vector<Column>({Column("bin", t_hist.get_bin_pos()), Column("count", t_hist.m_data)}));
+            t_stream << t_hist.serialise();
 
             return (t_stream);
         }
@@ -114,7 +114,7 @@ namespace arc
                 case align::LEFT:
                     offset = 0.0;
                     break;
-                case align::MID:
+                case align::CENTER:
                     offset = 0.5;
                     break;
                 case align::RIGHT:
@@ -129,6 +129,7 @@ namespace arc
 
             return (r_pos);
         }
+
 
         //  -- Serialisation --
         /**
@@ -147,6 +148,36 @@ namespace arc
                 {Column("bin", get_bin_pos(t_align)), Column("count", (t_normalise ? (m_data / utl::max(m_data)) : m_data))}));
 
             return (stream.str());
+        }
+
+
+        //  -- Saving --
+        /**
+         *  Save the state of the histogram to a given file path.
+         *
+         *  @param  t_path      Path to the save location of the file.
+         *  @param  t_align     Alignment position of the bin.
+         *  @param  t_normalise When true, normalise the count data to a maximum of unity.
+         */
+        void Histogram::save(const std::string& t_path, const align t_align, const bool t_normalise) const
+        {
+            file::Handle file(t_path, std::fstream::out);
+
+            switch (t_align)
+            {
+                case align::LEFT:
+                    file.comment() << "Bin alignment: left.\n";
+                    break;
+                case align::CENTER:
+                    file.comment() << "Bin alignment: center.\n";
+                    break;
+                case align::RIGHT:
+                    file.comment() << "Bin alignment: right.\n";
+                    break;
+            }
+            file.comment() << "Normalised: " << std::boolalpha << t_normalise << "\n";
+
+            file << serialise(t_align, t_normalise);
         }
 
 
