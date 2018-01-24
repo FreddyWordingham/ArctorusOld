@@ -48,7 +48,7 @@ int main()
 
     LOG(hist);
 
-    hist.save("hist.dat", arc::data::Histogram::align::LEFT, true);
+    hist.save("hist.dat", false, arc::data::Histogram::align::LEFT);
 
 
 

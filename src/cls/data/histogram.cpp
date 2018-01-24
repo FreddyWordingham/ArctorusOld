@@ -135,12 +135,12 @@ namespace arc
         /**
          *  Create a string representation of the histogram.
          *
-         *  @param  t_align     Alignment position of the bin.
          *  @param  t_normalise When true, normalise the count data to a maximum of unity.
+         *  @param  t_align     Alignment position of the bin.
          *
          *  @return A string representation of the histogram.
          */
-        std::string Histogram::serialise(const align t_align, const bool t_normalise) const
+        std::string Histogram::serialise(const bool t_normalise, const align t_align) const
         {
             std::stringstream stream;
 
@@ -156,10 +156,10 @@ namespace arc
          *  Save the state of the histogram to a given file path.
          *
          *  @param  t_path      Path to the save location of the file.
-         *  @param  t_align     Alignment position of the bin.
          *  @param  t_normalise When true, normalise the count data to a maximum of unity.
+         *  @param  t_align     Alignment position of the bin.
          */
-        void Histogram::save(const std::string& t_path, const align t_align, const bool t_normalise) const
+        void Histogram::save(const std::string& t_path, const bool t_normalise, const align t_align) const
         {
             file::Handle file(t_path, std::fstream::out);
 
@@ -175,9 +175,11 @@ namespace arc
                     file.comment() << "Bin alignment: right.\n";
                     break;
             }
+
+            file.comment() << "Total counts: " << utl::total(m_data) << "\n";
             file.comment() << "Normalised: " << std::boolalpha << t_normalise << "\n";
 
-            file << serialise(t_align, t_normalise);
+            file << serialise(t_normalise, t_align);
         }
 
 
