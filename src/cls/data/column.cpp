@@ -163,12 +163,7 @@ namespace arc
          */
         std::ostream& operator<<(std::ostream& t_stream, const Column& t_col)
         {
-            t_stream << std::setw(file::PRINT_WIDTH) << t_col.m_title;
-
-            for (size_t i = 0; i < t_col.m_data.size(); ++i)
-            {
-                t_stream << "\n" << std::setw(file::PRINT_WIDTH) << t_col.m_data[i];
-            }
+            t_stream << t_col.serialise();
 
             return (t_stream);
         }
@@ -176,6 +171,27 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Serialisation --
+        /**
+         *  Create a string representation of the column.
+         *
+         *  @return A string representation of the column.
+         */
+        std::string Column::serialise() const
+        {
+            std::stringstream stream;
+
+            stream << std::setw(file::PRINT_WIDTH) << m_title;
+
+            for (size_t i = 0; i < m_data.size(); ++i)
+            {
+                stream << "\n" << std::setw(file::PRINT_WIDTH) << m_data[i];
+            }
+
+            return (stream.str());
+        }
+
+
         //  -- Saving --
         /**
          *  Save the state of the column to a given file path.

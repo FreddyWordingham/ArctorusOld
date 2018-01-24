@@ -78,6 +78,9 @@ namespace arc
             //  -- Manipulation --
             void push_back(const double t_element) { m_data.push_back(t_element); }
 
+            //  -- Serialisation --
+            std::string serialise() const;
+
             //  -- Saving --
             void save(const std::string& t_path) const;
         };
