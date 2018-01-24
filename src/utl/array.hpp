@@ -580,6 +580,16 @@ namespace arc
 
 
     //  == OPERATORS PROTOTYPES ==
+    //  -- Mathematical --
+    template <typename T, size_t N, typename S>
+    constexpr std::array<T, N> operator+(const std::array<T, N>& t_lhs, S t_rhs);
+    template <typename T, size_t N, typename S>
+    constexpr std::array<T, N> operator-(const std::array<T, N>& t_lhs, S t_rhs);
+    template <typename T, size_t N, typename S>
+    constexpr std::array<T, N> operator*(const std::array<T, N>& t_lhs, S t_rhs);
+    template <typename T, size_t N, typename S>
+    constexpr std::array<T, N> operator/(const std::array<T, N>& t_lhs, S t_rhs);
+
     //  -- Printing --
     template <typename T, size_t N>
     std::ostream& operator<<(std::ostream& t_stream, const std::array<T, N>& t_arr);
@@ -587,6 +597,108 @@ namespace arc
 
 
     //  == OPERATORS ==
+    //  -- Mathematical --
+    /**
+     *  Create a new array by adding a given value to the elements of a given array.
+     *
+     *  @tparam T   Type stored by the array.
+     *  @tparam N   Size of the array.
+     *  @tparam S   Type being added to the elements of the array.
+     *
+     *  @param  t_lhs   Left hand side array operand.
+     *  @param  t_rhs   Right hand side value operand.
+     *
+     *  @return The created array.
+     */
+    template <typename T, size_t N, typename S>
+    constexpr std::array<T, N> operator+(const std::array<T, N>& t_lhs, const S t_rhs)
+    {
+        std::array<T, N> r_arr;
+
+        for (size_t i = 0; i < N; ++i)
+        {
+            r_arr[i] = t_lhs[i] + t_rhs;
+        }
+
+        return (r_arr);
+    }
+
+    /**
+     *  Create a new array by subtracting a given value form the elements of a given array.
+     *
+     *  @tparam T   Type stored by the array.
+     *  @tparam N   Size of the array.
+     *  @tparam S   Type being subtracted from the elements of the array.
+     *
+     *  @param  t_lhs   Left hand side array operand.
+     *  @param  t_rhs   Right hand side value operand.
+     *
+     *  @return The created array.
+     */
+    template <typename T, size_t N, typename S>
+    constexpr std::array<T, N> operator-(const std::array<T, N>& t_lhs, const S t_rhs)
+    {
+        std::array<T, N> r_arr;
+
+        for (size_t i = 0; i < N; ++i)
+        {
+            r_arr[i] = t_lhs[i] - t_rhs;
+        }
+
+        return (r_arr);
+    }
+
+    /**
+     *  Create a new array by multiplying the elements of a given array by a value.
+     *
+     *  @tparam T   Type stored by the array.
+     *  @tparam N   Size of the array.
+     *  @tparam S   Type multiplying the elements of array.
+     *
+     *  @param  t_lhs   Left hand side array operand.
+     *  @param  t_rhs   Right hand side value operand.
+     *
+     *  @return The created array.
+     */
+    template <typename T, size_t N, typename S>
+    constexpr std::array<T, N> operator*(const std::array<T, N>& t_lhs, const S t_rhs)
+    {
+        std::array<T, N> r_arr;
+
+        for (size_t i = 0; i < N; ++i)
+        {
+            r_arr[i] = t_lhs[i] * t_rhs;
+        }
+
+        return (r_arr);
+    }
+
+    /**
+     *  Create a new array by dividing the elements of a given array by a value.
+     *
+     *  @tparam T   Type stored by the array.
+     *  @tparam N   Size of the array.
+     *  @tparam S   Type dividing the elements of the array.
+     *
+     *  @param  t_lhs   Left hand side array operand.
+     *  @param  t_rhs   Right hand side value operand.
+     *
+     *  @return The created array.
+     */
+    template <typename T, size_t N, typename S>
+    constexpr std::array<T, N> operator/(const std::array<T, N>& t_lhs, const S t_rhs)
+    {
+        std::array<T, N> r_arr;
+
+        for (size_t i = 0; i < N; ++i)
+        {
+            r_arr[i] = t_lhs[i] / t_rhs;
+        }
+
+        return (r_arr);
+    }
+
+
     //  -- Printing --
     /**
      *  Enable writing of an array to a given ostream.
