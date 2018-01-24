@@ -37,13 +37,13 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a data column from a given readable string.
+         *  Construct a data column from a given serialised string.
          *
-         *  @param  t_readable  Data column as a readable string.
+         *  @param  t_serial  Data column as a serialised string.
          */
-        Column::Column(const std::string& t_readable) :
-            m_title(init_title_from_readable(t_readable)),
-            m_data(init_data_from_readable(t_readable))
+        Column::Column(const std::string& t_serial) :
+            m_title(init_title_from_serial(t_serial)),
+            m_data(init_data_from_serial(t_serial))
         {
         }
 
@@ -62,19 +62,19 @@ namespace arc
 
         //  -- Initialisation --
         /**
-         *  Initialise the title string from the readable string.
+         *  Initialise the title string from the serialised string.
          *
-         *  @param  t_readable  Data column as a readable string.
+         *  @param  t_serial  Data column as a serialised string.
          *
-         *  @pre    t_readable must not be empty.
+         *  @pre    t_serial must not be empty.
          *
          *  @return The initialised column title string.
          */
-        std::string Column::init_title_from_readable(const std::string& t_readable) const
+        std::string Column::init_title_from_serial(const std::string& t_serial) const
         {
-            assert(!t_readable.empty());
+            assert(!t_serial.empty());
 
-            std::stringstream stream(t_readable);
+            std::stringstream stream(t_serial);
 
             std::string line;
             std::getline(stream, line);
@@ -83,19 +83,19 @@ namespace arc
         }
 
         /**
-         *  Initialise the data vector from the readable string.
+         *  Initialise the data vector from the serialised string.
          *
-         *  @param  t_readable  Data column as a readable string.
+         *  @param  t_serial  Data column as a serialised string.
          *
-         *  @pre    t_readable must not be empty.
+         *  @pre    t_serial must not be empty.
          *
          *  @return The initialised data column vector.
          */
-        std::vector<double> Column::init_data_from_readable(const std::string& t_readable) const
+        std::vector<double> Column::init_data_from_serial(const std::string& t_serial) const
         {
             std::vector<double> r_data;
 
-            std::stringstream stream(t_readable);
+            std::stringstream stream(t_serial);
 
             std::string line;
             std::getline(stream, line);

@@ -44,13 +44,13 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            explicit Column(const std::string& t_readable);
+            explicit Column(const std::string& t_serial);
             Column(const std::string& t_title, const std::vector<double>& t_data);
 
           private:
             //  -- Initialisation --
-            std::string init_title_from_readable(const std::string& t_readable) const;
-            std::vector<double> init_data_from_readable(const std::string& t_readable) const;
+            std::string init_title_from_serial(const std::string& t_serial) const;
+            std::vector<double> init_data_from_serial(const std::string& t_serial) const;
             std::string init_title(const std::string& t_title) const;
 
 
