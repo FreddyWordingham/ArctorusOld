@@ -585,7 +585,7 @@ namespace arc
     //  == OPERATORS ==
     //  -- Mathematical --
     /**
-     *  Create a new vec by adding a given value to the elements of a given vector.
+     *  Create a new vector by adding a given value to the elements of a given vector.
      *
      *  @tparam T   Type stored by the vector.
      *  @tparam S   Type being added to the elements of the vector.
@@ -609,7 +609,7 @@ namespace arc
     }
 
     /**
-     *  Create a new vec by subtracting a given value form the elements of a given vector.
+     *  Create a new vector by subtracting a given value form the elements of a given vector.
      *
      *  @tparam T   Type stored by the vector.
      *  @tparam S   Type being subtracted from the elements of the vector.
