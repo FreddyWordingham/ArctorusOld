@@ -75,6 +75,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            size_t get_bin_width() const { return (m_bin_width); }
+            size_t get_num_bin() const { return (m_data.size()); }
             std::vector<double> get_bin_pos(const align t_align = align::MID) const;
         };
 
