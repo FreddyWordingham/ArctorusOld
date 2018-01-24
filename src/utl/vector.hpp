@@ -566,6 +566,16 @@ namespace arc
 
 
     //  == OPERATORS PROTOTYPES ==
+    //  -- Mathematical --
+    template <typename T, typename S>
+    constexpr std::vector<T> operator+(const std::vector<T>& t_lhs, S t_rhs);
+    template <typename T, typename S>
+    constexpr std::vector<T> operator-(const std::vector<T>& t_lhs, S t_rhs);
+    template <typename T, typename S>
+    constexpr std::vector<T> operator*(const std::vector<T>& t_lhs, S t_rhs);
+    template <typename T, typename S>
+    constexpr std::vector<T> operator/(const std::vector<T>& t_lhs, S t_rhs);
+
     //  -- Printing --
     template <typename T>
     std::ostream& operator<<(std::ostream& t_stream, const std::vector<T>& t_vec);
@@ -573,6 +583,104 @@ namespace arc
 
 
     //  == OPERATORS ==
+    //  -- Mathematical --
+    /**
+     *  Create a new vec by adding a given value to the elements of a given vector.
+     *
+     *  @tparam T   Type stored by the vector.
+     *  @tparam S   Type being added to the elements of the vector.
+     *
+     *  @param  t_lhs   Left hand side vector operand.
+     *  @param  t_rhs   Right hand side value operand.
+     *
+     *  @return The created vector.
+     */
+    template <typename T, typename S>
+    constexpr std::vector<T> operator+(const std::vector<T>& t_lhs, const S t_rhs)
+    {
+        std::vector<T> r_vec;
+
+        for (size_t i = 0; i < t_lhs.size(); ++i)
+        {
+            r_vec[i] = t_lhs[i] + t_rhs;
+        }
+
+        return (r_vec);
+    }
+
+    /**
+     *  Create a new vec by subtracting a given value form the elements of a given vector.
+     *
+     *  @tparam T   Type stored by the vector.
+     *  @tparam S   Type being subtracted from the elements of the vector.
+     *
+     *  @param  t_lhs   Left hand side vector operand.
+     *  @param  t_rhs   Right hand side value operand.
+     *
+     *  @return The created vector.
+     */
+    template <typename T, typename S>
+    constexpr std::vector<T> operator-(const std::vector<T>& t_lhs, const S t_rhs)
+    {
+        std::vector<T> r_vec;
+
+        for (size_t i = 0; i < t_lhs.size(); ++i)
+        {
+            r_vec[i] = t_lhs[i] - t_rhs;
+        }
+
+        return (r_vec);
+    }
+
+    /**
+     *  Create a new vector by multiplying the elements of a given vector by a value.
+     *
+     *  @tparam T   Type stored by the vector.
+     *  @tparam S   Type multiplying the elements of the vector.
+     *
+     *  @param  t_lhs   Left hand side vector operand.
+     *  @param  t_rhs   Right hand side value operand.
+     *
+     *  @return The created vector.
+     */
+    template <typename T, typename S>
+    constexpr std::vector<T> operator*(const std::vector<T>& t_lhs, const S t_rhs)
+    {
+        std::vector<T> r_vec;
+
+        for (size_t i = 0; i < t_lhs.size(); ++i)
+        {
+            r_vec[i] = t_lhs[i] * t_rhs;
+        }
+
+        return (r_vec);
+    }
+
+    /**
+     *  Create a new vector by dividing the elements of a given vector by a value.
+     *
+     *  @tparam T   Type stored by the vector.
+     *  @tparam S   Type dividing the elements of the vector.
+     *
+     *  @param  t_lhs   Left hand side vector operand.
+     *  @param  t_rhs   Right hand side value operand.
+     *
+     *  @return The created vector.
+     */
+    template <typename T, typename S>
+    constexpr std::vector<T> operator/(const std::vector<T>& t_lhs, const S t_rhs)
+    {
+        std::vector<T> r_vec;
+
+        for (size_t i = 0; i < t_lhs.size(); ++i)
+        {
+            r_vec[i] = t_lhs[i] / t_rhs;
+        }
+
+        return (r_vec);
+    }
+
+
     //  -- Printing --
     /**
      *  Enable writing of a vector to a given ostream.
