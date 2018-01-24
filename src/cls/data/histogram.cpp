@@ -18,6 +18,7 @@
 
 //  -- Classes --
 #include "cls/data/table.hpp"
+#include "cls/file/handle.hpp"
 
 
 
@@ -127,6 +128,25 @@ namespace arc
             }
 
             return (r_pos);
+        }
+
+        //  -- Serialisation --
+        /**
+         *  Create a string representation of the histogram.
+         *
+         *  @param  t_align     Alignment position of the bin.
+         *  @param  t_normalise When true, normalise the count data to a maximum of unity.
+         *
+         *  @return A string representation of the histogram.
+         */
+        std::string Histogram::serialise(const align t_align, const bool t_normalise) const
+        {
+            std::stringstream stream;
+
+            stream << Table(std::vector<Column>(
+                {Column("bin", get_bin_pos(t_align)), Column("count", (t_normalise ? (m_data / utl::max(m_data)) : m_data))}));
+
+            return (stream.str());
         }
 
 
