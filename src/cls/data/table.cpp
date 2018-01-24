@@ -36,12 +36,12 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a data table from a given readable string.
+         *  Construct a data table from a given serialised string.
          *
-         *  @param  t_readable  Data table as a readable string.
+         *  @param  t_serial  Data table as a serialised string.
          */
-        Table::Table(const std::string& t_readable) :
-            m_col(init_col(t_readable))
+        Table::Table(const std::string& t_serial) :
+            m_col(init_col(t_serial))
         {
         }
 
@@ -79,19 +79,19 @@ namespace arc
 
         //  -- Initialisation --
         /**
-         *  Initialise the vector of data columns from the readable string.
+         *  Initialise the vector of data columns from the serialised string.
          *
-         *  @param  t_readable  Data table as a readable string.
+         *  @param  t_serial  Data table as a serialised string.
          *
-         *  @pre    t_readable must not be empty.
+         *  @pre    t_serial must not be empty.
          *
          *  @return The initialised vector of data columns.
          */
-        std::vector<Column> Table::init_col(const std::string& t_readable) const
+        std::vector<Column> Table::init_col(const std::string& t_serial) const
         {
-            assert(!t_readable.empty());
+            assert(!t_serial.empty());
 
-            std::stringstream stream(t_readable);
+            std::stringstream stream(t_serial);
 
             // Read column titles.
             std::vector<std::string> title;
@@ -99,7 +99,7 @@ namespace arc
             std::string line;
             if (!std::getline(stream, line))
             {
-                ERROR("Unable to construct data::Table from readable string.",
+                ERROR("Unable to construct data::Table from serialised string.",
                       "Readable string does not contain a row of titles.");
             }
 
@@ -120,7 +120,7 @@ namespace arc
                 {
                     if (!std::getline(data_stream, word, file::DELIMIT_CHAR))
                     {
-                        ERROR("Unable to construct data::Table from readable string.",
+                        ERROR("Unable to construct data::Table from serialised string.",
                               "Line: '" << line << "', does not contain: '" << title.size() << "' values as required.");
                     }
 
@@ -129,7 +129,7 @@ namespace arc
 
                 if (data_stream.rdbuf()->in_avail() != 0)
                 {
-                    ERROR("Unable to construct data::Table from readable string.",
+                    ERROR("Unable to construct data::Table from serialised string.",
                           "Line: '" << line << "', does not contain: '" << title.size() << "' values as required.");
                 }
             }
