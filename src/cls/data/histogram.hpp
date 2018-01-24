@@ -33,6 +33,19 @@ namespace arc
          */
         class Histogram
         {
+            //  == ENUMERATIONS ==
+          public:
+            /**
+             *  Enumeration of the bin alignment positions which may be set when calling get_bin_pos.
+             */
+            enum class align
+            {
+                LEFT,   //! Save bin left position.
+                MID,    //! Save bin center position.
+                RIGHT   //! Save bin right position.
+            };
+
+
             //  == FIELDS ==
           private:
             //  -- Bounds --
@@ -60,9 +73,9 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
             //  -- Getters --
-            std::vector<double> get_bin_pos() const;
+            std::vector<double> get_bin_pos(const align t_align = align::MID) const;
         };
 
 

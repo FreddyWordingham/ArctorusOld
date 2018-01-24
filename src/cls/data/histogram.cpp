@@ -69,7 +69,7 @@ namespace arc
             assert((t_val >= m_min_bound) && (t_val <= m_max_bound));
             assert(t_weight > 0.0);
 
-            const auto bin = static_cast<size_t>(std::floor((t_val - m_min_bound) / m_bin_width));
+            const auto bin = static_cast<size_t>((t_val - m_min_bound) / m_bin_width);
 
             (bin == m_data.size()) ? m_data[bin - 1] += t_weight : m_data[bin] += t_weight;
         }
@@ -99,15 +99,31 @@ namespace arc
         /**
          *  Create a vector of bin positions.
          *
+         *  @param  t_align Set bin alignment position to the left, middle, or right of the bin.
+         *
          *  @return A vector of bin positions.
          */
-        std::vector<double> Histogram::get_bin_pos() const
+        std::vector<double> Histogram::get_bin_pos(const align t_align) const
         {
             std::vector<double> r_pos(m_data.size());
 
+            double offset;
+            switch (t_align)
+            {
+                case align::LEFT:
+                    offset = 0.0;
+                    break;
+                case align::MID:
+                    offset = 0.5;
+                    break;
+                case align::RIGHT:
+                    offset = 1.0;
+                    break;
+            }
+
             for (size_t i = 0; i < r_pos.size(); ++i)
             {
-                r_pos[i] = m_min_bound + (i * m_bin_width);
+                r_pos[i] = m_min_bound + ((i + offset) * m_bin_width);
             }
 
             return (r_pos);
