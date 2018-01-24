@@ -80,10 +80,10 @@ namespace arc
             std::vector<double> get_bin_pos(align t_align = align::CENTER) const;
 
             //  -- Serialisation --
-            std::string serialise(const bool t_normalise = false, const align t_align = align::CENTER) const;
+            std::string serialise(bool t_normalise = false, align t_align = align::CENTER) const;
 
             //  -- Saving --
-            void save(const std::string& t_path, const bool t_normalise = false, const align t_align = align::CENTER) const;
+            void save(const std::string& t_path, bool t_normalise = false, align t_align = align::CENTER) const;
         };
 
 

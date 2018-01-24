@@ -908,7 +908,8 @@ namespace arc
         //  -- Searching --
         /**
          *  Determine the lower index of the data element pair which encapsulates the given value.
-         *  If the value is equal to an data element of the vec then the lower index is that index, unless it is the last data element.
+         *  If the value is equal to an data element of the vec then the lower index is that index, unless it is the last data
+         *  element.
          *
          *  @tparam S   Type of the value to be found within the array.
          *
@@ -937,7 +938,8 @@ namespace arc
 
         /**
          *  Determine the upper index of the data element pair which encapsulates the given value.
-         *  If the value is equal to an data element of the vec then the upper index is that index, unless it is the first data element.
+         *  If the value is equal to an data element of the vec then the upper index is that index, unless it is the first data
+         *  element.
          *
          *  @tparam S   Type of the value to be found within the array.
          *
