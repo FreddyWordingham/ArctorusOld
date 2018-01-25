@@ -105,6 +105,23 @@ namespace arc
         }
 
 
+        //  -- Printing --
+        /**
+         *  Enable printing of a linear interpolator to a given ostream.
+         *
+         *  @param  t_stream    Stream to write to.
+         *  @param  t_lin       Linear interpolator to be written.
+         *
+         *  @return A reference to the stream post-write.
+         */
+        std::ostream& operator<<(std::ostream& t_stream, const Linear& t_lin)
+        {
+            t_stream << t_lin.serialise();
+
+            return (t_stream);
+        }
+
+
 
         //  == METHODS ==
         //  -- Serialisation --

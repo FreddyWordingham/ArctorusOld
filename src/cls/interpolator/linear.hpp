@@ -61,11 +61,14 @@ namespace arc
             //  -- Interpolation --
             double operator()(double t_val) const;
 
+            //  -- Printing --
+            friend std::ostream& operator<<(std::ostream& t_stream, const Linear& t_lin);
+
 
             //  == METHODS ==
           public:
             //  -- Serialisation --
-            std::string serialise(size_t t_samples) const;
+            std::string serialise(size_t t_samples = 1E3) const;
         };
 
 
