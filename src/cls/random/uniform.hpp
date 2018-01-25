@@ -58,7 +58,7 @@ namespace arc
 
           private:
             //  -- Constructors --
-            Uniform(const base t_seed);
+            Uniform(base t_seed);
 
             //  -- Initialisation --
             void init_genaration_variables();
