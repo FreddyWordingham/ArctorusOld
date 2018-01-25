@@ -39,5 +39,7 @@ int main()
         LOG(x << "\t" << lin(x));
     }
 
+    LOG(lin.serialise(10));
+
     return (0);
 }

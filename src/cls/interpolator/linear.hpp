@@ -59,13 +59,13 @@ namespace arc
             //  == OPERATORS ==
           public:
             //  -- Interpolation --
-            double operator()(const double t_val) const;
+            double operator()(double t_val) const;
 
 
             //  == METHODS ==
           public:
             //  -- Serialisation --
-            std::string serialise(const size_t t_intermediates) const;
+            std::string serialise(size_t t_samples) const;
         };
 
 

@@ -19,6 +19,10 @@
 //  -- Utility --
 #include "utl/vector.hpp"
 
+//  -- Classes --
+#include "cls/data/column.hpp"
+#include "cls/data/table.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -106,17 +110,30 @@ namespace arc
         //  -- Serialisation --
         /**
          *  Create a string representation of the linear interpolator.
+         *  A number of uniformly distributed samples are interpolated.
          *
-         *  @param  t_intermediates Number of samples to take between nodes.
+         *  @param  t_samples Number of samples to take between nodes.
+         *
+         *  @pre    t_samples must be greater than one.
          *
          *  @return A string representation of the linear interpolator.
          */
-        std::string serialise(const size_t t_intermediates) const
+        std::string Linear::serialise(const size_t t_samples) const
         {
+            assert(t_samples > 1);
+
             std::stringstream stream;
 
-//            data::Column x("x", t_samples), y("y", std)
+            data::Column x("x", t_samples), y("y", t_samples);
 
+            const double delta = (m_max_bound - m_min_bound) / (t_samples - 1);
+            for (size_t  i     = 0; i < t_samples; ++i)
+            {
+                x[i] = m_min_bound + (i * delta);
+                y[i] = (*this)(x[i]);
+            }
+
+            stream << data::Table(std::vector<data::Column>({x, y}));
 
             return (stream.str());
         }
