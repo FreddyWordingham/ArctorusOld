@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <vector>
 
 
 
@@ -28,20 +29,31 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  TODO
+         *  A linear interpolator class.
+         *  Uses a given set of nodes to calculate intermediate values.
          */
         class Linear
         {
             //  == FIELDS ==
           private:
+            //  -- Bounds --
+            const double m_min_bound;   //! Minimum bound of the interpolation range.
+            const double m_max_bound;   //! Maximum bound of the interpolation range.
+
+            //  -- Data --
+            const std::vector<double> m_x;      //! Vector of X positions of the nodes.
+            const std::vector<double> m_y;      //! Vector of Y positions of the nodes.
+            const std::vector<double> m_grad;   //! Vector of intermediate gradients.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Linear(const std::vector<double>& t_x, const std::vector<double>& t_y);
 
           private:
             //  -- Initialisation --
+            std::vector<double> init_grad() const;
 
 
             //  == OPERATORS ==
