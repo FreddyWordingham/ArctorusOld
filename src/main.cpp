@@ -12,10 +12,8 @@
 #include "gen/log.hpp"
 
 //  -- Classes --
-#include "cls/file/handle.hpp"
+#include "cls/interpolator/linear.hpp"
 
-#include "cls/data/histogram.hpp"
-#include "gen/rng.hpp"
 
 
 //  == NAMESPACE ==
@@ -33,24 +31,13 @@ int main()
 {
     LOG("Hello world!");
 
-    rng::seed();
+    interpolator::Linear lin({0.0, 1.0, 2.0, 4.0}, {0.0, 1.0, 4.0, -4.0});
 
-    arc::data::Histogram hist(0.0, 10.0, 10);
 
-    for (size_t i = 0; i < 1E8; ++i)
+    for (double x = 0.0; x <= 4.0; x += 0.01)
     {
-        TEMP("test", i / 1e6);
-
-        double x = rng::random(0.0, 10.0);
-
-        hist(x);
+        LOG(x << "\t" << lin(x));
     }
-
-    LOG(hist);
-
-    hist.save("hist.dat", false, arc::data::Histogram::align::LEFT);
-
-
 
     return (0);
 }
