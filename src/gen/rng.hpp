@@ -15,23 +15,21 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <ctime>
+
+//  -- Classes --
+#include "cls/random/uniform.hpp"
 
 
 
-//  == NAMESPACE ==
-namespace arc
-{
-    namespace gen
-    {
+//  == MACROS ==
+//  -- Generation --
+/**
+ *  Macro used to access an instance of the uniform random number generator class.
+ */
+//#define SEED(t_seed) arc::random::Uniform::get_instance((t_seed))
 
-
-
-        //  == FUNCTION PROTOTYPES ==
-
-
-
-    } // namespace gen
-} // namespace arc
+constexpr const SEED = static_cast<arc::random::Uniform::base>(time(nullptr));
 
 
 

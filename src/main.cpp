@@ -13,7 +13,8 @@
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
-#include "cls/data/histogram.hpp"
+
+#include "gen/rng.hpp"
 
 
 //  == NAMESPACE ==
@@ -31,6 +32,9 @@ int main()
 {
     LOG("Hello world!");
 
+    SEED(130);
+
+/*
     arc::data::Histogram hist(0.0, 10.0, 10);
 
     VAL(hist.get_bin_width());
@@ -49,7 +53,7 @@ int main()
     LOG(hist);
 
     hist.save("hist.dat", false, arc::data::Histogram::align::LEFT);
-
+*/
 
 
     return (0);
