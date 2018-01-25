@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <cstdint>
 
 
 
@@ -35,6 +36,13 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Seed --
+            const uint64_t m_seed;  //! Seed used to initialise the generator.
+
+            //  -- Generation Variables --
+            uint64_t m_u;   //! First value used in the generation of random values.
+            uint64_t m_v;   //! Second value used in the generation of random values.
+            uint64_t m_w;   //! Third value used in the generation of random values.
 
 
             //  == INSTANTIATION ==
