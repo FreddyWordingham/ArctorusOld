@@ -13,6 +13,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <sstream>
+
 //  -- Utility --
 #include "utl/vector.hpp"
 
@@ -95,6 +98,27 @@ namespace arc
             index = utl::lower_index(m_x, t_val, index);
 
             return (m_y[index] + ((t_val - m_x[index]) * m_grad[index]));
+        }
+
+
+
+        //  == METHODS ==
+        //  -- Serialisation --
+        /**
+         *  Create a string representation of the linear interpolator.
+         *
+         *  @param  t_intermediates Number of samples to take between nodes.
+         *
+         *  @return A string representation of the linear interpolator.
+         */
+        std::string serialise(const size_t t_intermediates) const
+        {
+            std::stringstream stream;
+
+//            data::Column x("x", t_samples), y("y", std)
+
+
+            return (stream.str());
         }
 
 

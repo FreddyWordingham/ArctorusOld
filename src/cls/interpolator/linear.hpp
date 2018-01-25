@@ -63,7 +63,9 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Serialisation --
+            std::string serialise(const size_t t_intermediates) const;
         };
 
 
