@@ -47,10 +47,15 @@ namespace arc
 
             //  == INSTANTIATION ==
           public:
-            //  -- Constructors --
+            //  -- Singleton --
+            static Uniform& get_instance(const uint64_t t_seed = 0);
 
           private:
+            //  -- Constructors --
+            Uniform(const uint64_t t_seed);
+
             //  -- Initialisation --
+            void init_genaration_variables();
 
 
             //  == OPERATORS ==
@@ -59,6 +64,8 @@ namespace arc
 
             //  == METHODS ==
           private:
+            //  -- Generation --
+            uint64_t gen_base();
         };
 
 
