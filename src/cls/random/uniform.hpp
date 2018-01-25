@@ -15,7 +15,9 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <cassert>
 #include <cstdint>
+#include <limits>
 
 
 
@@ -54,11 +56,11 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Singleton --
-            static Uniform& get_instance(const base t_seed = 0);
+            static Uniform& get_instance(base t_seed = 0);
 
           private:
             //  -- Constructors --
-            Uniform(base t_seed);
+            explicit Uniform(base t_seed);
 
             //  -- Initialisation --
             void init_genaration_variables();
@@ -66,6 +68,8 @@ namespace arc
 
             //  == OPERATORS ==
           private:
+            //  -- Generation --
+            inline double operator()(double t_min = 0.0, double t_max = 1.0);
 
 
             //  == METHODS ==
@@ -73,6 +77,29 @@ namespace arc
             //  -- Generation --
             base gen_base();
         };
+
+
+
+        //  == OPERATORS ==
+        //  -- Generation --
+        /**
+         *  Generate a random double value between the given minimum and maximum bound.
+         *  Values within the range have a uniform probability of generation over time.
+         *
+         *  @param  t_min   Minimum bound for the generated value.
+         *  @param  t_max   Maximum bound for the generated value.
+         *
+         *  @pre    t_min must be less than t_max.
+         *
+         *  @return A random double between the given bounds.
+         */
+        double Uniform::operator()(const double t_min, const double t_max)
+        {
+            assert(t_min < t_max);
+
+            return (t_min + ((t_max - t_min) * (static_cast<double>(gen_base()) / static_cast<double>(std::numeric_limits<
+                base>::max()))));
+        }
 
 
 
