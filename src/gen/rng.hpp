@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <cmath>
 #include <ctime>
 
 //  -- Classes --
@@ -36,6 +37,7 @@ namespace arc
 
         //  -- Generation --
         inline double random(double t_min = 0.0, double t_max = 1.0);
+        double gaussian(double t_mu, double t_sigma);
 
 
 
@@ -64,6 +66,40 @@ namespace arc
         inline double random(const double t_min, const double t_max)
         {
             return (random::Uniform::get_instance()(t_min, t_max));
+        }
+
+        /**
+         *  Generate a random double from a gaussian with a given average and standard deviation.
+         *
+         *  @param  t_mu    Average of the gaussian distribution.
+         *  @param  t_sigma Standard deviation of the distribution.
+         *
+         *  @return A random double from the specified gaussian distribution.
+         */
+        double gaussian(const double t_mu, const double t_sigma)
+        {
+            // Only generate a new pair of numbers every other call.
+            static bool generate = false;
+            generate = !generate;
+
+            static double r;
+
+            if (!generate)
+            {
+                return ((r * t_sigma) + t_mu);
+            }
+
+            double u1, u2;
+            do
+            {
+                u1 = random();
+                u2 = random();
+            }
+            while (u1 <= std::numeric_limits<double>::min());
+
+            r = std::sqrt(-2.0 * std::log(u1)) * sin(2.0 * M_PI * u2);
+
+            return (std::sqrt(-2.0 * std::log(u1)) * cos(2.0 * M_PI * u2));
         }
 
 
