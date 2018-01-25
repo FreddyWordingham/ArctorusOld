@@ -12,7 +12,7 @@
 #include "gen/log.hpp"
 
 //  -- Classes --
-#include "cls/interpolator/linear.hpp"
+#include "cls/data/histogram.hpp"
 
 
 
@@ -31,15 +31,12 @@ int main()
 {
     LOG("Hello world!");
 
-    interpolator::Linear lin({0.0, 1.0, 2.0, 4.0}, {0.0, 1.0, 4.0, -4.0});
+    data::Histogram hist(-10.0, +10.0, 200);
 
-
-    for (double x = 0.0; x <= 4.0; x += 0.01)
+    for (size_t i = 0; i < 1E3; ++i)
     {
-        LOG(x << "\t" << lin(x));
+        hist(gaussian())
     }
-
-    LOG(lin);
 
 
     lin.save("interpolated.dat");

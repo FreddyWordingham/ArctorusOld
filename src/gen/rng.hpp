@@ -37,7 +37,7 @@ namespace arc
 
         //  -- Generation --
         inline double random(double t_min = 0.0, double t_max = 1.0);
-        double gaussian(double t_mu, double t_sigma);
+        double gaussian(double t_mu = 0.0, double t_sigma = 1.0);
 
 
 
