@@ -22,6 +22,7 @@
 //  -- Classes --
 #include "cls/data/column.hpp"
 #include "cls/data/table.hpp"
+#include "cls/file/handle.hpp"
 
 
 
@@ -153,6 +154,28 @@ namespace arc
             stream << data::Table(std::vector<data::Column>({x, y}));
 
             return (stream.str());
+        }
+
+
+        //  -- Saving --
+        /**
+         *  Save the state of the linear interpolator to a given file path.
+         *
+         *  @param  t_path      Path to the save location of the file.
+         *  @param  t_samples Number of samples to take between nodes.
+         *
+         *  @pre    t_samples must be greater than one.
+         */
+        void Linear::save(const std::string& t_path, size_t t_samples) const
+        {
+            assert(t_samples > 1);
+
+            file::Handle file(t_path, std::fstream::out);
+
+            file.comment() << "Nodes: " << m_x.size() << "\n";
+            file.comment() << "Samples: " << t_samples << "\n";
+
+            file << serialise(t_samples);
         }
 
 

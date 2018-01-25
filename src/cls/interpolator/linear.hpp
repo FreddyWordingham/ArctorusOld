@@ -69,6 +69,9 @@ namespace arc
           public:
             //  -- Serialisation --
             std::string serialise(size_t t_samples = 1E3) const;
+
+            //  -- Saving --
+            void save(const std::string& t_path, size_t t_samples = 1E3) const;
         };
 
 
