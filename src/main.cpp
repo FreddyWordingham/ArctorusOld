@@ -41,5 +41,8 @@ int main()
 
     LOG(lin);
 
+
+    lin.save("interpolated.dat");
+
     return (0);
 }
