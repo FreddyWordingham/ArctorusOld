@@ -37,11 +37,11 @@ int main()
 
     arc::data::Histogram hist(0.0, 10.0, 10);
 
-    for (size_t i = 0; i < 1E9; ++i)
+    for (size_t i = 0; i < 1E8; ++i)
     {
-        TEMP("test", i / 1e7);
+        TEMP("test", i / 1e6);
 
-        double x = RANDOM(0.0, 10.0);
+        double x = rng::random(0.0, 10.0);
 
         hist(x);
     }

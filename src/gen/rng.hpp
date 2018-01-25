@@ -22,20 +22,6 @@
 
 
 
-//  == MACROS ==
-//  -- Access --
-/**
- *  Call the random number generator.
- *
- *  @param  t_min   Minimum bound for the generated value.
- *  @param  t_max   Maximum bound for the generated value.
- *
- *  @return A random double between the given bounds.
- */
-#define RANDOM(t_min, t_max) random::Uniform::get_instance()((t_min), (t_max))
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -47,6 +33,9 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Seeding --
         void seed(random::Uniform::base t_seed = static_cast<random::Uniform::base>(time(nullptr)));
+
+        //  -- Generation --
+        inline double random(const double t_min = 0.0, const double t_max = 1.0);
 
 
 
@@ -60,6 +49,21 @@ namespace arc
         void seed(const random::Uniform::base t_seed)
         {
             random::Uniform::get_instance(t_seed);
+        }
+
+
+        //  -- Generation --
+        /**
+         *  Retrieve a random number from the uniform generator.
+         *
+         *  @param  t_min   Minimum bound for the generated value.
+         *  @param  t_max   Maximum bound for the generated value.
+         *
+         *  @return A random double between the given bounds.
+         */
+        inline double random(const double t_min, const double t_max)
+        {
+            return (random::Uniform::get_instance()(t_min, t_max));
         }
 
 
