@@ -32,7 +32,7 @@
  *
  *  @return A random double between the given bounds.
  */
-#define RANDOM(t_min, t_max) random::Uniform::get_instance()(t_min, t_max)
+#define RANDOM(t_min, t_max) random::Uniform::get_instance()((t_min), (t_max))
 
 
 
