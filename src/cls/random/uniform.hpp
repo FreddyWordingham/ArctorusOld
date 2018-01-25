@@ -67,7 +67,7 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
             //  -- Generation --
             inline double operator()(double t_min = 0.0, double t_max = 1.0);
 
@@ -93,7 +93,7 @@ namespace arc
          *
          *  @return A random double between the given bounds.
          */
-        double Uniform::operator()(const double t_min, const double t_max)
+        inline double Uniform::operator()(const double t_min, const double t_max)
         {
             assert(t_min < t_max);
 

@@ -33,6 +33,7 @@ int main()
     LOG("Hello world!");
 
     rng::seed(130);
+    VAL(RANDOM(0.0, 1.0));
 
 /*
     arc::data::Histogram hist(0.0, 10.0, 10);
