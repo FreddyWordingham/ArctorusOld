@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/log.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -55,6 +61,8 @@ namespace arc
             m_w(static_cast<base>(1))
         {
             init_genaration_variables();
+
+            LOG("Seed: " << m_seed);
         }
 
 
