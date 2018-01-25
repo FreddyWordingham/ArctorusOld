@@ -32,7 +32,7 @@ int main()
 {
     LOG("Hello world!");
 
-    SEED(130);
+    rng::seed(130);
 
 /*
     arc::data::Histogram hist(0.0, 10.0, 10);

@@ -22,14 +22,36 @@
 
 
 
-//  == MACROS ==
-//  -- Generation --
-/**
- *  Macro used to access an instance of the uniform random number generator class.
- */
-//#define SEED(t_seed) arc::random::Uniform::get_instance((t_seed))
+//  == NAMESPACE ==
+namespace arc
+{
+    namespace rng
+    {
 
-constexpr const SEED = static_cast<arc::random::Uniform::base>(time(nullptr));
+
+
+        //  == FUNCTION PROTOTYPES ==
+        //  -- Seeding --
+        void seed(arc::random::Uniform::base t_seed = static_cast<arc::random::Uniform::base>(time(nullptr)));
+
+
+
+        //  == FUNCTIONS ==
+        //  -- Seeding --
+        /**
+         *  Seed the random number generator.
+         *
+         *  @param  t_seed  Value of the seed.
+         */
+        void seed(const arc::random::Uniform::base t_seed)
+        {
+            arc::random::Uniform::get_instance(t_seed);
+        }
+
+
+
+    } // namespace rng
+} // namespace arc
 
 
 
