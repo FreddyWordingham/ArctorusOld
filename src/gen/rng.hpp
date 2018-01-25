@@ -35,7 +35,7 @@ namespace arc
         void seed(random::Uniform::base t_seed = static_cast<random::Uniform::base>(time(nullptr)));
 
         //  -- Generation --
-        inline double random(const double t_min = 0.0, const double t_max = 1.0);
+        inline double random(double t_min = 0.0, double t_max = 1.0);
 
 
 
