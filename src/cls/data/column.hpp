@@ -45,6 +45,7 @@ namespace arc
           public:
             //  -- Constructors --
             explicit Column(const std::string& t_serial);
+            Column(const std::string& t_title, const size_t t_size);
             Column(const std::string& t_title, const std::vector<double>& t_data);
 
           private:

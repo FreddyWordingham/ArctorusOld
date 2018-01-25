@@ -48,6 +48,18 @@ namespace arc
         }
 
         /**
+         *  Construct a data column with a given title and size.
+         *
+         *  @param  t_title Column title.
+         *  @param  t_size  Initial size of the data column.
+         */
+        Column::Column(const std::string& t_title, const size_t t_size) :
+            m_title(init_title(t_title)),
+            m_data(t_size)
+        {
+        }
+
+        /**
          *  Construct a data column from a given title and data vector.
          *
          *  @param  t_title Column title.
