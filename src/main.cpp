@@ -14,6 +14,7 @@
 //  -- Classes --
 #include "cls/file/handle.hpp"
 
+#include "cls/data/histogram.hpp"
 #include "gen/rng.hpp"
 
 
@@ -32,21 +33,15 @@ int main()
 {
     LOG("Hello world!");
 
-    rng::seed(130);
-    VAL(RANDOM(0.0, 1.0));
+    rng::seed();
 
-/*
     arc::data::Histogram hist(0.0, 10.0, 10);
 
-    VAL(hist.get_bin_width());
-    VAL(hist.get_num_bin());
-    VAL(hist.get_bin_pos(arc::data::Histogram::align::LEFT));
-    VAL(hist.get_bin_pos(arc::data::Histogram::align::CENTER));
-    VAL(hist.get_bin_pos(arc::data::Histogram::align::RIGHT));
-
-    for (size_t i = 0; i < 100; ++i)
+    for (size_t i = 0; i < 1E9; ++i)
     {
-        double x = 10.0 * (static_cast<double>(rand()) / RAND_MAX);
+        TEMP("test", i / 1e7);
+
+        double x = RANDOM(0.0, 10.0);
 
         hist(x);
     }
@@ -54,7 +49,7 @@ int main()
     LOG(hist);
 
     hist.save("hist.dat", false, arc::data::Histogram::align::LEFT);
-*/
+
 
 
     return (0);
