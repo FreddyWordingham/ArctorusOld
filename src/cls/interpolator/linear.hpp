@@ -57,7 +57,9 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
+            //  -- Interpolation --
+            double operator()(const double t_val) const;
 
 
             //  == METHODS ==

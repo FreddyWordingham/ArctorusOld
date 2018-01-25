@@ -54,7 +54,6 @@ namespace arc
          *  @pre    m_x and m_y data vectors must be the same size.
          *  @pre    m_x size must be greater than one.
          *  @pre    m_y size must be greater than one.
-         *  @pre    m_x data must be uniform.
          *  @pre    m_x data must be ascending.
          *
          *  @return The initialised vector of node gradients.
@@ -64,7 +63,6 @@ namespace arc
             assert(m_x.size() == m_y.size());
             assert(m_x.size() > 1);
             assert(m_y.size() > 1);
-            assert(utl::is_uniform(m_x));
             assert(utl::is_ascending(m_x));
 
             std::vector<double> r_grad(m_x.size() - 1);
@@ -74,6 +72,29 @@ namespace arc
             }
 
             return (r_grad);
+        }
+
+
+
+        //  == OPERATORS ==
+        //  -- Interpolation --
+        /**
+         *  Interpolate a value from between the data nodes.
+         *
+         *  @param  t_val   X value to be interpolated.
+         *
+         *  @pre    t_val must be greater than or equal to m_min_bound and less than or equal to m_max_bound.
+         *
+         *  @return The interpolated y value.
+         */
+        double Linear::operator()(const double t_val) const
+        {
+            assert((t_val >= m_min_bound) && (t_val <= m_max_bound));
+
+            static size_t index = 0;
+            index = utl::lower_index(m_x, t_val, index);
+
+            return (m_y[index] + ((t_val - m_x[index]) * m_grad[index]));
         }
 
 
