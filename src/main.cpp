@@ -10,14 +10,28 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/log.hpp"
+#include "gen/rng.hpp"
 
 //  -- Classes --
-#include "cls/data/histogram.hpp"
 
 
 
 //  == NAMESPACE ==
 using namespace arc;
+
+
+int count()
+{
+    int    count = 0;
+    double total = 0.0;
+    while (total < 1.0)
+    {
+        total += rng::random();
+        ++count;
+    }
+
+    return (count);
+}
 
 
 
@@ -31,15 +45,17 @@ int main()
 {
     LOG("Hello world!");
 
-    data::Histogram hist(-10.0, +10.0, 200);
+    const size_t samples = 1E8;
 
-    for (size_t i = 0; i < 1E3; ++i)
+    int         total_count = 0;
+    for (size_t i           = 0; i < samples; ++i)
     {
-        hist(gaussian())
+        TEMP("Norm gen", 100.0 * i / samples);
+
+        total_count += count();
     }
 
-
-    lin.save("interpolated.dat");
+    VAL(static_cast<double>(total_count) / samples);
 
     return (0);
 }
