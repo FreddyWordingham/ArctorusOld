@@ -34,6 +34,11 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            const std::vector<double> m_x;      //! Vector of X positions.
+            const std::vector<double> m_p;      //! Vector of corresponding probabilities.
+            const std::vector<double> m_cdf;    //! The normalised cumulative distribution of the probabilities.
+            const std::vector<double> m_frac;   //! Vector of the fractions of the triangular interpolation range.
 
 
             //  == INSTANTIATION ==
