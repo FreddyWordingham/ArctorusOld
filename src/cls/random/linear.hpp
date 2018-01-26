@@ -44,9 +44,12 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Linear(const std::vector<double>& t_x, const std::vector<double>& t_p);
 
           private:
             //  -- Initialisation --
+            std::vector<double> init_csf() const;
+            std::vector<double> init_frac() const;
 
 
             //  == OPERATORS ==
