@@ -16,6 +16,9 @@
 //  == INCLUDES ==
 //  -- System --
 
+//  -- Classes --
+#include "cls/math/vec.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -34,6 +37,12 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Vertices --
+            const std::array<math::Vec<3>, 3> m_pos;    //! Vertex positions.
+            const std::array<math::Vec<3>, 3> m_norm;   //! Vertex normals.
+
+            //  -- Data --
+            const double m_area;    //! Area of the triangle.
 
 
             //  == INSTANTIATION ==
