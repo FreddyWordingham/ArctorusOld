@@ -41,7 +41,7 @@ int main()
     random::Linear lin(x, p);
 
 
-    for (size_t i = 0; i < 1E3; ++i)
+    for (size_t i = 0; i < 10; ++i)
     {
         LOG(lin());
     }

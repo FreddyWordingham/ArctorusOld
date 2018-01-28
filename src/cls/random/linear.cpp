@@ -15,9 +15,9 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/rng.hpp"
+#include "gen/log.hpp"
 
 //  -- Utility --
-#include "utl/vector.hpp"
 
 
 
@@ -75,7 +75,7 @@ namespace arc
             // Calculate the values of the cdf.
             std::vector<double> r_cdf(m_x.size());
             r_cdf[0] = 0.0;
-            for (size_t i = 0; i < r_cdf.size(); ++i)
+            for (size_t i = 1; i < r_cdf.size(); ++i)
             {
                 r_cdf[i] = r_cdf[i - 1] + base[i - 1];
             }
