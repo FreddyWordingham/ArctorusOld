@@ -13,7 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- General --
+#include "gen/rng.hpp"
 
 //  -- Utility --
 #include "utl/vector.hpp"
@@ -107,6 +108,34 @@ namespace arc
             }
 
             return (r_frac);
+        }
+
+
+
+        //  == OPERATORS ==
+        //  -- Generation --
+        /**
+         *  Generate a random number from the probability distribution.
+         *
+         *  @return A randomly generated value from the probability distribution.
+         */
+        double Linear::operator()() const
+        {
+            const double  r           = rng::random();
+            static size_t lower_index = 0;
+            lower_index = utl::lower_index(m_cdf, r, lower_index);
+
+            const double f = rng::random();
+            if (f <= m_frac[lower_index])
+            {
+                if (m_p[lower_index] < m_p[lower_index + 1])
+                {
+                    return (m_x[lower_index] + (std::sqrt(rng::random()) * (m_x[lower_index + 1] - m_x[lower_index])));
+                }
+                return (m_x[lower_index + 1] - (std::sqrt(rng::random()) * (m_x[lower_index + 1] - m_x[lower_index])));
+            }
+
+            return (m_x[lower_index] + (rng::random() * (m_x[lower_index + 1] - m_x[lower_index])));
         }
 
 
