@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <iostream>
 
 
 
@@ -48,8 +49,8 @@ namespace arc
         inline void rewind(T& t_stream)
         {
             t_stream.clear();
-            t_stream.seekg(0);
-            t_stream.seekp(0);
+            t_stream.seekg(std::ios::beg);
+            t_stream.seekp(std::ios::beg);
         }
 
 
