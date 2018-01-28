@@ -27,6 +27,30 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Manipulation --
+        template <typename T>
+        inline void rewind(T& t_stream);
+
+
+
+        //  == FUNCTIONS ==
+        //  -- Manipulation --
+        /**
+         *  Rewind a given stream.
+         *  Clear the state of the stream.
+         *  Place the get an put pointers to the start of the stream.
+         *
+         *  @tparam T   Type of stream to be rewound.
+         *
+         *  @param  t_stream    Stream to be rewound.
+         */
+        template <typename T>
+        inline void rewind(T& t_stream)
+        {
+            t_stream.clear();
+            t_stream.seekg(0);
+            t_stream.seekp(0);
+        }
 
 
 
