@@ -63,7 +63,7 @@ namespace arc
             assert(m_x.size() == m_p.size());
             assert(m_x.size() > 1);
             assert(utl::is_ascending(m_x));
-            assert(utl::is_always_less_than_or_equal_to(m_p, 0.0));
+            assert(utl::is_always_greater_than_or_equal_to(m_p, 0.0));
 
             // Calculate the area of each trapezium.
             std::vector<double> base(m_x.size() - 1);
