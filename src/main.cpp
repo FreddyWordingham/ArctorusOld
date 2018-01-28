@@ -10,7 +10,6 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/log.hpp"
-#include "gen/rng.hpp"
 
 //  -- Classes --
 
@@ -18,20 +17,6 @@
 
 //  == NAMESPACE ==
 using namespace arc;
-
-
-int count()
-{
-    int    count = 0;
-    double total = 0.0;
-    while (total < 1.0)
-    {
-        total += rng::random();
-        ++count;
-    }
-
-    return (count);
-}
 
 
 
@@ -44,18 +29,6 @@ int count()
 int main()
 {
     LOG("Hello world!");
-
-    const size_t samples = 1E8;
-
-    int         total_count = 0;
-    for (size_t i           = 0; i < samples; ++i)
-    {
-        TEMP("Norm gen", 100.0 * i / samples);
-
-        total_count += count();
-    }
-
-    VAL(static_cast<double>(total_count) / samples);
 
     return (0);
 }

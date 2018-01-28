@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <vector>
 
 
 
@@ -48,7 +49,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
-            std::vector<double> init_csf() const;
+            std::vector<double> init_cdf() const;
             std::vector<double> init_frac() const;
 
 
