@@ -54,10 +54,6 @@ namespace arc
 
             //  == OPERATORS ==
           private:
-
-
-            //  == METHODS ==
-          private:
         };
 
 
