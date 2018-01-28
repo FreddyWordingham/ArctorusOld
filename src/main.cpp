@@ -8,10 +8,12 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-
 //  -- General --
 #include "gen/log.hpp"
+
+//  -- Classes --
+#include "cls/geom/mesh.hpp"
+#include "cls/file/handle.hpp"
 
 
 
@@ -29,6 +31,10 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
+
+
+    geom::Mesh mesh(file::read("cube.obj"));
+
 
     return (0);
 }

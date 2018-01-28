@@ -30,6 +30,14 @@ namespace arc
 
 
 
+        //  == SETTINGS ==
+        //  -- Wavefront Keywords --
+        constexpr const char* POS_KEYWORD  = "v";   //! Wavefront file keyword identifying vertex positions.
+        constexpr const char* NORM_KEYWORD = "vn";  //! Wavefront file keyword identifying vertex normals.
+        constexpr const char* FACE_KEYWORD = "f";   //! Wavefront file keyword identifying a face.
+
+
+
         //  == CLASS ==
         /**
          *  Triangular mesh class used to form the boundary of objects.
@@ -50,13 +58,12 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            explicit Mesh(const std::string& t_serial);
 
           private:
             //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
+            size_t init_num(const std::string& t_serial, const std::string& t_type_string) const;
+            std::vector<geom::Triangle> init_tri(const std::string& t_serial) const;
 
 
             //  == METHODS ==
