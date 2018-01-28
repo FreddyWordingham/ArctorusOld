@@ -39,7 +39,10 @@ namespace arc
             m_norm(t_norm),
             m_area(math::area(t_pos))
         {
-
+            for (size_t i = 0; i < 3; ++i)
+            {
+                assert(t_norm[i].is_normalised());
+            }
         }
 
 
