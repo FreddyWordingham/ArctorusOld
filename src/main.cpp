@@ -12,6 +12,7 @@
 #include "gen/log.hpp"
 
 //  -- Classes --
+#include "cls/data/histogram.hpp"
 #include "cls/random/linear.hpp"
 
 
@@ -41,10 +42,14 @@ int main()
     random::Linear lin(x, p);
 
 
-    for (size_t i = 0; i < 10; ++i)
+    data::Histogram hist(-10.0, +10.0, 200);
+
+    for (size_t i = 0; i < 1E6; ++i)
     {
-        LOG(lin());
+        hist(lin());
     }
+
+    LOG(hist);
 
     return (0);
 }
