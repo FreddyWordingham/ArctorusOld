@@ -54,7 +54,7 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
             //  -- Generation --
             double operator()() const;
         };

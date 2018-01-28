@@ -12,6 +12,7 @@
 #include "gen/log.hpp"
 
 //  -- Classes --
+#include "cls/random/linear.hpp"
 
 
 
@@ -29,6 +30,21 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
+
+    std::vector<double> x, p;
+    for (int            i = -5; i <= 5; ++i)
+    {
+        x.push_back(i);
+        p.push_back(i * i);
+    }
+
+    random::Linear lin(x, p);
+
+
+    for (size_t i = 0; i < 1E3; ++i)
+    {
+        LOG(lin());
+    }
 
     return (0);
 }
