@@ -34,6 +34,13 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Properties --
+            const size_t m_num_verts;   //! Number of vertex positions.
+            const size_t m_num_norms;   //! Number of vertex normals.
+            const size_t m_num_tris;    //! Number of triangle faces.
+
+            //  -- Triangle Data --
+            const std::vector <geom::Triangle> m_tri;    //! List of triangles forming the mesh.
 
 
             //  == INSTANTIATION ==

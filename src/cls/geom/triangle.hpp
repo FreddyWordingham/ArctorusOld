@@ -41,7 +41,7 @@ namespace arc
             const std::array<math::Vec<3>, 3> m_pos;    //! Vertex positions.
             const std::array<math::Vec<3>, 3> m_norm;   //! Vertex normals.
 
-            //  -- Data --
+            //  -- Properties --
             const double m_area;    //! Area of the triangle.
 
 
