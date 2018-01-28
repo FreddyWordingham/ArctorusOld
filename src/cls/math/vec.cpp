@@ -29,7 +29,7 @@ namespace arc
          *
          *  @return The area described by the three points.
          */
-        inline double area(const std::array<math::Vec<3>, 3>& t_pos)
+        double area(const std::array<math::Vec<3>, 3>& t_pos)
         {
             const double alpha_beta  = dist(t_pos[ALPHA], t_pos[BETA]);
             const double beta_gamma  = dist(t_pos[BETA], t_pos[GAMMA]);
