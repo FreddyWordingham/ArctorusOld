@@ -140,9 +140,11 @@ namespace arc
          *  Retrieve the contents of the open file as a string.
          *  Commented lines are filtered out.
          *
+         *  @param  t_filter    If true filter the file when reading its contents.
+         *
          *  @return A string of the open file's contents.
          */
-        std::string Handle::get_contents() const
+        std::string Handle::get_contents(const bool t_filter) const
         {
             const std::streampos get_pos = m_file.tellg();
 
@@ -154,7 +156,10 @@ namespace arc
             m_file.seekg(get_pos);
 
             std::string r_contents = contents_stream.str();
-            utl::filter(&r_contents, std::string(1, COMMENT_CHAR));
+            if (t_filter)
+            {
+                utl::filter(&r_contents, std::string(1, COMMENT_CHAR));
+            }
 
             if (r_contents.back() == '\n')
             {
@@ -186,12 +191,13 @@ namespace arc
          *  Read the contents of the given file into a string.
          *
          *  @param  t_file_path Path to the file to retrieve the contents from.
+         *  @param  t_filter    If true filter the file when reading its contents.
          *
          *  @return A string of the file's contents.
          */
-        std::string read(const std::string& t_file_path)
+        std::string read(const std::string& t_file_path, const bool t_filter)
         {
-            return (arc::file::Handle(t_file_path, std::fstream::in).get_contents());
+            return (arc::file::Handle(t_file_path, std::fstream::in).get_contents(t_filter));
         }
 
 
