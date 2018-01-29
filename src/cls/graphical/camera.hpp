@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <glm/glm.hpp>
 
 
 
@@ -23,6 +24,18 @@ namespace arc
 {
     namespace graphical
     {
+
+
+
+        //  == SETTINGS ==
+        //  -- Defaults --
+        constexpr const float CAM_SPEED          = 1.0f;    //! Default speed multiplier for the camera.
+        constexpr const float CAM_FOV            = 45.0f;   //! Default field of view for the camera.
+
+        //  -- Camera Properties --
+        constexpr const glm::vec3 UP_DIR({0.0f, 0.0f, 1.0f});   //! Camera up direction.
+        constexpr const float     NEAR_CULL_DIST = 1E-3f;       //! Near culling distance.
+        constexpr const float     FAR_CULL_DIST  = 1E-3f;       //! Far culling distance.
 
 
 
