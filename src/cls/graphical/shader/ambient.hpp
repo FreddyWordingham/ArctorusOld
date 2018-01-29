@@ -41,6 +41,8 @@ namespace arc
             {
                 //  == FIELDS ==
               private:
+                //  -- Uniforms --
+                const GLint m_prop_col; //! Prop colour uniform handle.
 
 
                 //  == INSTANTIATION ==
