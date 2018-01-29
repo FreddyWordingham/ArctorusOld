@@ -58,6 +58,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
+            GLuint init_handle(const std::string& t_vert_serial, const std::string& t_frag_serial) const;
 
 
             //  == METHODS ==
