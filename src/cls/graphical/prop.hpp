@@ -15,6 +15,8 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <GL/glew.h>
+#include <glm/glm.hpp>
 
 
 
@@ -32,10 +34,21 @@ namespace arc
          */
         class Prop
         {
+            //  == ENUMERATIONS ==
+          public:
+            /**
+             *  Enumeration of the types of shapes the Prop class can construct a vertex list of.
+             */
+            enum class shape
+            {
+                CUBE    //! Simple cube.
+            };
+
+
             //  == FIELDS ==
           private:
             //  -- Properties --
-            const GLsizei   m_num_vert;   //! Total number of vertices.
+            const GLsizei   m_num_vert; //! Total number of vertices.
             const glm::vec3 m_col;      //! Render colour of the object.
 
             //  -- Vertex Data --
@@ -46,6 +59,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale = 1.0);
 
           private:
             //  -- Initialisation --
