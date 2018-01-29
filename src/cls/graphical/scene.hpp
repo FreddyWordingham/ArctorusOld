@@ -28,7 +28,8 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  TODO
+         *  Graphical scene class.
+         *  Used to display graphical simulation data.
          */
         class Scene
         {
