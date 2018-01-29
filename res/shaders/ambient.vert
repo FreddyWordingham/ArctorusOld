@@ -19,7 +19,7 @@ layout(location = 1) in vec3 norm;  //! Vertex normals.
 
 //  -- Uniforms --
 uniform mat4 mvp;       //! Model-view-projection matrix.
-uniform vec3 obj_col;   //! Object colour.
+uniform vec3 prop_col;  //! Prop colour.
 
 
 
@@ -37,5 +37,5 @@ void main()
 {
     gl_Position = mvp * vec4(pos, 1.0);
 
-    vert_col = obj_col;
+    vert_col = prop_col;
 }
