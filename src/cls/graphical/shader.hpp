@@ -30,8 +30,7 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Uniforms --
-        constexpr const char* MVP_UNIFORM_NAME      = "mvp";        //! Name of the mvp matrix uniform within the shader.
-        constexpr const char* PROP_COL_UNIFORM_NAME = "prop_col";   //! Name of the prop colour uniform within the shader.
+        constexpr const char* MVP_UNIFORM_NAME = "mvp";    //! Name of the mvp matrix uniform within the shader.
 
 
 
@@ -59,13 +58,14 @@ namespace arc
           private:
             //  -- Initialisation --
             GLuint init_handle(const std::string& t_vert_serial, const std::string& t_frag_serial) const;
+            GLint init_uniform(const std::string& t_uni_name) const;
 
 
             //  == METHODS ==
           private:
             //  -- Getters --
             GLuint get_handle() const { return (m_handle); }
-            GLuint get_mvp() const { return (m_mvp); }
+            GLint get_mvp() const { return (m_mvp); }
         };
 
 
