@@ -44,7 +44,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-
+                Fly(const glm::vec3& t_pos, float t_aspect_ratio, float t_fov = 45.0f);
 
 
                 //  == METHODS ==
