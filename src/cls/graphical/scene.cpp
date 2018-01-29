@@ -41,7 +41,7 @@ namespace arc
         Scene::Scene() :
             m_window(init_window()),
             m_primary_cam(std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
-            m_ambient_shader(file::read(AMBIENT_VERT_SHADER), file::read(AMBIENT_FRAG_SHADER))
+            m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_FRAG_SHADER, false))
         {
         }
 
