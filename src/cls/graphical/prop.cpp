@@ -60,7 +60,7 @@ namespace arc
          *  @param  t_col   Colour of the shape.
          *  @param  t_scale Scaling to be applied to the shape.
          */
-        Prop::Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale = 1.0) :
+        Prop::Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale) :
             Prop(init_vert(t_shape, t_scale), t_col) {}
 
 
@@ -101,12 +101,12 @@ namespace arc
          *
          *  @return The initialised vector of vertices for the simple shape.
          */
-        std::vector<Vertex> Prop::init_vert(const shape t_shape, const float t_size) const
+        std::vector<Vertex> Prop::init_vert(const shape t_shape, const float t_scale) const
         {
             switch (t_shape)
             {
                 case shape::CUBE:
-                    return (init_vert_cube(t_size));
+                    return (init_vert_cube(t_scale));
             }
         }
 
