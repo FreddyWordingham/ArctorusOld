@@ -53,7 +53,10 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            float get_pos(const size_t t_index) const { return (m_pos[t_index]); }
+            float get_norm(const size_t t_index) const { return (m_norm[t_index]); }
         };
 
 
