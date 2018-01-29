@@ -19,6 +19,9 @@
 #include "gen/control.hpp"
 #include "gen/log.hpp"
 
+//  -- Classes --
+#include "cls/graphical/camera/fly.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -32,7 +35,8 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         Scene::Scene() :
-            m_window(init_window())
+            m_window(init_window()),
+            m_primary_cam(std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT)))
         {
         }
 
@@ -92,7 +96,7 @@ namespace arc
             glfwSetInputMode(r_window, GLFW_STICKY_KEYS, GL_TRUE);
 
             // Set background colour.
-            glClearColor(0.7f, 0.1f, 0.5f, 1.0f);
+            glClearColor(CLEAR_COLOUR_RED, CLEAR_COLOUR_GREEN, CLEAR_COLOUR_BLUE, CLEAR_COLOUR_ALPHA);
 
             return (r_window);
         }

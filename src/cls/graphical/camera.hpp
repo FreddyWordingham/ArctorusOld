@@ -53,7 +53,6 @@ namespace arc
             glm::mat4 n_proj;   //! Projection transformation matrix.
 
 
-
             //  == INSTANTIATION ==
           protected:
             //  -- Constructors --
