@@ -15,6 +15,8 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <GL/glew.h>
+#include <string>
 
 
 
@@ -23,6 +25,13 @@ namespace arc
 {
     namespace graphical
     {
+
+
+
+        //  == SETTINGS ==
+        //  -- Uniforms --
+        constexpr const char* MVP_UNIFORM_NAME      = "mvp";        //! Name of the mvp matrix uniform within the shader.
+        constexpr const char* PROP_COL_UNIFORM_NAME = "prop_col";   //! Name of the prop colour uniform within the shader.
 
 
 
