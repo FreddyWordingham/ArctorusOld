@@ -160,6 +160,9 @@ namespace arc
             // Setup the shaders.
             setup_ambient_shader();
 
+            // Drawing.
+            draw_spotlights();
+
             // Swap to the new buffer.
             glfwSwapBuffers(m_window);
         }
@@ -172,6 +175,23 @@ namespace arc
             glUseProgram(m_ambient_shader.get_handle());
 
             glUniformMatrix4fv(m_ambient_shader.get_mvp(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+        }
+
+
+        //  -- Drawing --
+        /**
+         *  Draw the spotlights within a scene.
+         */
+        void Scene::draw_spotlights() const
+        {
+            // Use the ambient shader.
+            glUseProgram(m_ambient_shader.get_handle());
+
+            // Set drawing mode.
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            // Draw each spotlight.
+
         }
 
 

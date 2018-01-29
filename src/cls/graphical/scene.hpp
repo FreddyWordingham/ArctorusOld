@@ -96,10 +96,12 @@ namespace arc
             //  -- Render --
             void render() const;
 
-
           private:
             //  -- Render --
             void setup_ambient_shader() const;
+
+            //  -- Drawing --
+            void draw_spotlights() const;
         };
 
 
