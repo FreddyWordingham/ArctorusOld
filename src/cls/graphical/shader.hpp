@@ -38,6 +38,9 @@ namespace arc
             //  -- Program --
             const GLuint m_handle;  //! Handle to the compiled shader program.
 
+            //  -- Uniforms --
+            const GLint m_mvp;  //! Model-view-projection uniform handle.
+
 
             //  == INSTANTIATION ==
           public:
