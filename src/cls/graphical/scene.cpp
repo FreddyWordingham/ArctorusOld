@@ -171,7 +171,7 @@ namespace arc
         {
             glUseProgram(m_ambient_shader.get_handle());
 
-            glUniformMatrix4fv(m_ambient_shader.get_mvp(), 1, GL_FALSE, &m_primary_cam->find_mvp()[0][0]);
+            glUniformMatrix4fv(m_ambient_shader.get_mvp(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
         }
 
 
