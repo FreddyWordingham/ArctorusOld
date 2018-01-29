@@ -45,17 +45,17 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Shader(const std::string& t_vert_serial, const std::string& t_frag_serial);
 
           private:
             //  -- Initialisation --
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
           private:
+            //  -- Getters --
+            GLuint get_handle() const { return (m_handle); }
+            GLuint get_mvp() const { return (m_mvp); }
         };
 
 
