@@ -18,11 +18,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -37,22 +32,19 @@ namespace arc
             /**
              *  A specialised camera with fly controls.
              */
-            class Fly
+            class Fly : public Camera
             {
                 //  == FIELDS ==
               private:
+                //  -- Orientation --
+                float m_azi;    //! Rotation of the camera around its local z-axis.
+                float m_dec;    //! Declination of the camera form its local z-axis.
 
 
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
 
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
 
 
                 //  == METHODS ==
