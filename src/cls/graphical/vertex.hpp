@@ -43,13 +43,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-
-          private:
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
+            Vertex(const std::array<float, 3>& t_pos, const std::array<float, 3>& t_norm);
 
 
             //  == METHODS ==
