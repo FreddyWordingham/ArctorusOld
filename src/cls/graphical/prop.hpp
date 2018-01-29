@@ -34,6 +34,13 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Properties --
+            const GLsizei   m_num_vert;   //! Total number of vertices.
+            const glm::vec3 m_col;      //! Render colour of the object.
+
+            //  -- Vertex Data --
+            const GLuint m_vao; //! Vertex array object handle.
+            const GLuint m_vbo; //! Vertex buffer object handle.
 
 
             //  == INSTANTIATION ==
