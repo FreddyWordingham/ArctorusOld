@@ -18,6 +18,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <memory>
+#include <cls/graphical/shader/ambient.hpp>
 
 //  -- Classes --
 #include "cls/graphical/camera.hpp"
@@ -68,6 +69,9 @@ namespace arc
 
             //  -- Cameras --
             std::unique_ptr<Camera> m_primary_cam;  //! Primary camera used to view the scene.
+
+            //  -- Shaders --
+            shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
 
 
             //  == INSTANTIATION ==

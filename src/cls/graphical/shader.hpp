@@ -55,7 +55,7 @@ namespace arc
             //  -- Constructors --
             Shader(const std::string& t_vert_serial, const std::string& t_frag_serial);
 
-          private:
+          protected:
             //  -- Initialisation --
             GLuint init_handle(const std::string& t_vert_serial, const std::string& t_frag_serial) const;
             GLint init_uniform(const std::string& t_uni_name) const;

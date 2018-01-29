@@ -20,6 +20,7 @@
 #include "gen/log.hpp"
 
 //  -- Classes --
+#include "cls/file/handle.hpp"
 #include "cls/graphical/camera/fly.hpp"
 
 
@@ -34,9 +35,13 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Construct a graphical scene.
+         */
         Scene::Scene() :
             m_window(init_window()),
-            m_primary_cam(std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT)))
+            m_primary_cam(std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
+            m_ambient_shader(file::read(AMBIENT_VERT_SHADER), file::read(AMBIENT_FRAG_SHADER))
         {
         }
 

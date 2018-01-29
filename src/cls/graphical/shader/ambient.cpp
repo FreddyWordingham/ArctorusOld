@@ -39,7 +39,6 @@ namespace arc
                 Shader(t_vert_serial, t_frag_serial),
                 m_prop_col(init_uniform(PROP_COL_UNIFORM_NAME))
             {
-
             }
 
 
