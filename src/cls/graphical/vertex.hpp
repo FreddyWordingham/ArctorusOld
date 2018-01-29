@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <array>
 
 
 
@@ -34,6 +35,9 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            std::array<float, 3> m_pos;     //! Vertex position.
+            std::array<float, 3> m_norm;    //! Vertex normal.
 
 
             //  == INSTANTIATION ==
