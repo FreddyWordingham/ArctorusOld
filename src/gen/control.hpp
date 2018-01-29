@@ -21,16 +21,18 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace gen
+    namespace control
     {
 
 
 
-        //  == FUNCTION PROTOTYPES ==
+        //  == SETTINGS ==
+        //  -- Window --
+        const int QUIT = GLFW_KEY_ESCAPE;   //! Quit and close the graphical window.
 
 
 
-    } // namespace gen
+    } // namespace control
 } // namespace arc
 
 
