@@ -15,6 +15,8 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 
 
@@ -23,6 +25,15 @@ namespace arc
 {
     namespace graphical
     {
+
+
+
+        //  == SETTINGS ==
+        //  -- Window --
+        constexpr const int WIDTH  = 800;           //! Width of the window in pixels.
+        constexpr const int HEIGHT = 600;           //! Height of the window in pixels.
+        constexpr const char* TITLE = "Arctorus";   //! Window title.
+        constexpr const int AA_SAMPLES = 4;         //! Number of anti-aliasing samples.
 
 
 
@@ -36,15 +47,20 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Window Handle --
-            GLFWwindow m_window;    //! Handle to the main graphical window.
+            GLFWwindow* m_window;   //! Handle to the main graphical window.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Scene();
+
+            //  -- Destructors --
+            ~Scene();
 
           private:
             //  -- Initialisation --
+            GLFWwindow* init_window() const;
 
 
             //  == OPERATORS ==
