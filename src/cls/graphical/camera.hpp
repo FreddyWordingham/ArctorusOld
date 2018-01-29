@@ -55,19 +55,13 @@ namespace arc
 
 
             //  == INSTANTIATION ==
-          public:
+          protected:
             //  -- Constructors --
-            Camera(const glm::vec3& t_pos, const float t_aspect_ratio, const float t_fov = 45.0f);
+            Camera(const glm::vec3& t_pos, float t_aspect_ratio, float t_fov = 45.0f);
 
+          public:
             //  -- Destructors --
             virtual ~Camera() = default;
-
-          private:
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
 
 
             //  == METHODS ==
