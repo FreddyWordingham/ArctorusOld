@@ -49,16 +49,12 @@ namespace arc
               public:
                 //  -- Constructors --
 
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
 
 
                 //  == METHODS ==
-              private:
+              public:
+                //  -- Getters --
+                GLint get_prop_col() const { return (m_prop_col); }
             };
 
 
