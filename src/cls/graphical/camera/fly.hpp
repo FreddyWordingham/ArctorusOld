@@ -48,7 +48,9 @@ namespace arc
 
 
                 //  == METHODS ==
-              private:
+              public:
+                //  -- Control --
+                void move(const glm::vec3& t_trans, const glm::vec2& t_rot) override;
             };
 
 
