@@ -60,7 +60,8 @@ namespace arc
          *  @param  t_col   Colour of the shape.
          *  @param  t_scale Scaling to be applied to the shape.
          */
-//        Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale = 1.0) : Prop(init_er)
+        Prop::Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale = 1.0) :
+            Prop(init_vert(t_shape, t_scale), t_col) {}
 
 
         //  -- Initialisation --
@@ -91,6 +92,81 @@ namespace arc
 
             return (r_vbo);
         }
+
+        /**
+         *  Initialise the vertices for a simple prop shape.
+         *
+         *  @param  t_shape Type of shape to be created.
+         *  @param  t_scale Scaling to be applied to the shape.
+         *
+         *  @return The initialised vector of vertices for the simple shape.
+         */
+        std::vector<Vertex> Prop::init_vert(const shape t_shape, const float t_size) const
+        {
+            switch (t_shape)
+            {
+                case shape::CUBE:
+                    return (init_vert_cube(t_size));
+            }
+        }
+
+        /**
+         *  Initialise the vertices for a simple cube prop shape.
+         *
+         *  @param  t_scale Size multiplier of the shape.
+         *
+         *  @return The initialised vector of vertices for a simple cube.
+         */
+        std::vector<Vertex> Prop::init_vert_cube(const float t_scale) const
+        {
+            std::vector<Vertex> r_vert;
+            r_vert.reserve(36);
+
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+
+            return (r_vert);
+        }
+
 
 
     } // namespace graphical

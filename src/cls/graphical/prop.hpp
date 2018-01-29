@@ -64,12 +64,14 @@ namespace arc
           public:
             //  -- Constructors --
             Prop(const std::vector<Vertex>& t_vert, const glm::vec3& t_col);
-//            Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale = 1.0);
+            Prop(shape t_shape, const glm::vec3& t_col, float t_scale = 1.0);
 
           private:
             //  -- Initialisation --
             GLuint init_vao() const;
             GLuint init_vbo() const;
+            std::vector<Vertex> init_vert(shape t_shape, float t_size) const;
+            std::vector<Vertex> init_vert_cube(float t_scale) const;
 
 
             //  == METHODS ==
