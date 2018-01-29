@@ -63,12 +63,10 @@ namespace arc
             GLFWwindow* init_window() const;
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
-          private:
+          public:
+            //  -- Render --
+            void render() const;
         };
 
 

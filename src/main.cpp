@@ -13,6 +13,8 @@
 //  -- General --
 #include "gen/log.hpp"
 
+//  -- Classes --
+#include "cls/graphical/scene.hpp"
 
 
 
@@ -30,6 +32,12 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
+
+
+    graphical::Scene scene;
+
+
+    scene.render();
 
     return (0);
 }

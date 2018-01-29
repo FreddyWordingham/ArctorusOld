@@ -98,5 +98,40 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Render --
+        /**
+         *  Render control function.
+         *  Call sub-functions to render the objects within scene.
+         */
+        void Scene::render() const
+        {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            glBegin(GL_POLYGON);
+            glColor3f(0.50, 1.0, 0.0);
+            glVertex2f(-1.0, -1.0);
+
+            glVertex2f(-1.0, 10.0);
+
+            glColor3f(01.01, 0.50, 1.0);
+            glVertex2f(10.0, 10.0);
+
+            glVertex2f(10.0, -1.0);
+
+            glEnd();
+
+            glBegin(GL_LINES);
+            glColor3f(0.0, 0.0, 1.0);
+            glVertex2f(1.0, 1.0);
+
+            glVertex2f(7.0, 7.0);
+            glEnd();
+
+            glFlush();
+        }
+
+
+
     } // namespace graphical
 } // namespace arc
