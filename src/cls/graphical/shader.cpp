@@ -31,7 +31,7 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a shader object from
+         *  Construct a shader object from a vertex and a fragment shader.
          *
          *  @param  t_vert_serial   Serialised source code of the vertex shader.
          *  @param  t_frag_serial   Serialised source code of the fragment shader.

@@ -33,6 +33,12 @@ namespace arc
 
 
 
+            //  == SETTINGS ==
+            //  -- Uniforms --
+            constexpr const char* PROP_COL_UNIFORM_NAME = "prop_col";   //! Name of the prop colour uniform within the shader.
+
+
+
             //  == CLASS ==
             /**
              *  Specialisation of the shader class for ambient lighting.
@@ -48,7 +54,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-
+                Ambient(const std::string& t_vert_serial, const std::string& t_frag_serial);
 
 
                 //  == METHODS ==
