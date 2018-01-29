@@ -37,11 +37,9 @@ namespace arc
             m_num_vert(static_cast<GLsizei>(t_vert.size())),
             m_col(t_col),
             m_vao(init_vao()),
-            m_vao(init_vbo())
+            m_vbo(init_vbo())
         {
-
         }
-
 
         /**
          *  Construct a basic prop using a given shape type, colour and scale.
