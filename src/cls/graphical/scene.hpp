@@ -67,7 +67,7 @@ namespace arc
           public:
             //  -- Input --
             bool should_close() const;
-            bool handle_input();
+            void handle_input();
 
             //  -- Render --
             void render() const;

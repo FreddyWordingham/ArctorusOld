@@ -37,7 +37,11 @@ int main()
     graphical::Scene scene;
 
 
-    scene.render();
+    while (!scene.should_close())
+    {
+        scene.handle_input();
+        scene.render();
+    }
 
     return (0);
 }
