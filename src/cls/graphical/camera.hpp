@@ -28,10 +28,6 @@ namespace arc
 
 
         //  == SETTINGS ==
-        //  -- Defaults --
-        constexpr const float CAM_SPEED          = 1.0f;    //! Default speed multiplier for the camera.
-        constexpr const float CAM_FOV            = 45.0f;   //! Default field of view for the camera.
-
         //  -- Camera Properties --
         constexpr const glm::vec3 UP_DIR({0.0f, 0.0f, 1.0f});   //! Camera up direction.
         constexpr const float     NEAR_CULL_DIST = 1E-3f;       //! Near culling distance.
@@ -47,11 +43,24 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Positioning --
+            glm::vec3 n_pos;    //! Position of the camera.
+            glm::vec3 n_dir;    //! Direction of the camera.
+
+            //  -- View --
+            glm::mat4 n_model;  //! Model transformation matrix.
+            glm::mat4 n_view;   //! View transformation matrix.
+            glm::mat4 n_proj;   //! Projection transformation matrix.
+
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Camera(const glm::vec3& t_pos, const float t_aspect_ratio, const float t_fov = 45.0f);
+
+            //  -- Destructors --
+            virtual ~Camera() = default;
 
           private:
             //  -- Initialisation --
