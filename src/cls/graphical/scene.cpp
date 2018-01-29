@@ -121,6 +121,19 @@ namespace arc
             return (false);
         }
 
+        /**
+         *  Poll the window events and call specialised functions to handle sets of controls.
+         */
+        void Scene::handle_input()
+        {
+            static auto last_time  = static_cast<float>(glfwGetTime());
+            auto        cur_time   = static_cast<float>(glfwGetTime());
+            float       time_delta = cur_time - last_time;
+            last_time = cur_time;
+
+            glfwPollEvents();
+        }
+
 
         //  -- Render --
         /**
