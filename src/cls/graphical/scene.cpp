@@ -99,6 +99,29 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Input --
+        /**
+         *  Check if the window should close.
+         *  This is triggered by either the escape key being pressed, or the red cross being clicked.
+         *
+         *  @return True if the window should close.
+         */
+        bool Scene::should_close() const
+        {
+/*            if (glfwGetKey(m_window, control::QUIT) == GLFW_PRESS)
+            {
+                return (true);
+            }*/
+
+            if (glfwWindowShouldClose(m_window) != 0)
+            {
+                return (true);
+            }
+
+            return (false);
+        }
+
+
         //  -- Render --
         /**
          *  Render control function.

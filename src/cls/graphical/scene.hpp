@@ -65,6 +65,9 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Input --
+            bool should_close() const;
+
             //  -- Render --
             void render() const;
         };
