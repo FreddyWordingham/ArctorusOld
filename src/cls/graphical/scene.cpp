@@ -16,6 +16,7 @@
 //  -- System --
 
 //  -- General --
+#include "gen/control.hpp"
 #include "gen/log.hpp"
 
 
@@ -108,11 +109,13 @@ namespace arc
          */
         bool Scene::should_close() const
         {
-/*            if (glfwGetKey(m_window, control::QUIT) == GLFW_PRESS)
+            // Esc key has been pressed.
+            if (glfwGetKey(m_window, control::QUIT) == GLFW_PRESS)
             {
                 return (true);
-            }*/
+            }
 
+            // Red cross has been clicked.
             if (glfwWindowShouldClose(m_window) != 0)
             {
                 return (true);
