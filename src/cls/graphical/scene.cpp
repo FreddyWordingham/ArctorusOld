@@ -297,7 +297,7 @@ namespace arc
 
                 glBindVertexArray(m_spotlight[i].get_vao());
 
-                glDrawArrays(GL_LINE_LOOP, 0, m_spotlight[i].get_num_vert());
+                glDrawArrays(GL_LINES, 0, m_spotlight[i].get_num_vert());
 
                 glBindVertexArray(0);
             }

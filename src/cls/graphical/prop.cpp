@@ -164,5 +164,53 @@ namespace arc
 
 
 
+        //  == FUNCTIONS ==
+        //  -- Prop Creation --
+        /**
+         *  Initialise the vertices for a spotlight prop shape.
+         *
+         *  @param  t_scale     Radius of the spotlight base.
+         *  @param  t_aperture  Numerical aperture of the spotlight.
+         *  @param  t_power     Power of the spotlight.
+         *
+         *  @return The initialised vector of vertices for a spotlight.
+         */
+        Prop create_spotlight_prop(const float t_scale, const float t_aperture, const float t_power)
+        {
+            std::vector<Vertex> vert;
+            vert.reserve(SPOTLIGHT_RES * 2);
+
+            for (int i = 0; i < SPOTLIGHT_RES; ++i)
+            {
+                const float theta = i * ((static_cast<float>(M_PI) * 2.0f) / SPOTLIGHT_RES);
+
+                vert.push_back(Vertex({{t_scale * std::cosf(theta), t_scale * std::sinf(theta), 0.0f}}, {{0.0, 0.0, 1.0}}));
+            }
+
+            for (int i = 0; i < SPOTLIGHT_RES; ++i)
+            {
+                const float theta = i * ((static_cast<float>(M_PI) * 2.0f) / SPOTLIGHT_RES);
+
+                vert.push_back(Vertex(
+                    {{(t_scale + (t_power * std::sinf(t_aperture))) * std::cosf(theta), (t_scale + (t_power * std::sinf(
+                        t_aperture))) * std::sinf(theta), t_power * std::cosf(t_aperture)}}, {{0.0, 0.0, 1.0}}));
+            }
+
+            for (int i = 0; i < SPOTLIGHT_RES; ++i)
+            {
+                const float theta = i * ((static_cast<float>(M_PI) * 2.0f) / SPOTLIGHT_RES);
+
+                vert.push_back(Vertex({{t_scale * std::cosf(theta), t_scale * std::sinf(theta), 0.0f}}, {{0.0, 0.0, 1.0}}));
+
+                vert.push_back(Vertex(
+                    {{(t_scale + (t_power * std::sinf(t_aperture))) * std::cosf(theta), (t_scale + (t_power * std::sinf(
+                        t_aperture))) * std::sinf(theta), t_power * std::cosf(t_aperture)}}, {{0.0, 0.0, 1.0}}));
+            }
+
+            return (Prop(vert, glm::vec3({1.0f, 0.0f, 0.0f})));
+        }
+
+
+
     } // namespace graphical
 } // namespace arc
