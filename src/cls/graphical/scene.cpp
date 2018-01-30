@@ -133,12 +133,17 @@ namespace arc
          */
         void Scene::handle_input()
         {
+            // Calculate elapsed time since last update.
             static auto last_time  = static_cast<float>(glfwGetTime());
             auto        cur_time   = static_cast<float>(glfwGetTime());
             float       time_delta = cur_time - last_time;
             last_time = cur_time;
 
+            // Poll the window events.
             glfwPollEvents();
+
+            // Control the camera.
+            move_camera(time_delta);
         }
 
 
@@ -173,6 +178,76 @@ namespace arc
             glUseProgram(m_ambient_shader.get_handle());
 
             glUniformMatrix4fv(m_ambient_shader.get_mvp(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+        }
+
+
+        //  -- Movement --
+        /**
+         *  Control the movement of the camera.
+         *
+         *  @param  t_time_delta    Time elapsed since the last rendering.
+         */
+        void Scene::move_camera(const float t_time_delta)
+        {
+            glm::vec3 translate;
+            glm::vec2 rotate;
+            float     speed_multiplier = 1.0f;
+
+            // Speed multipliers.
+            if (glfwGetKey(m_window, control::DECREASE_SPEED) == GLFW_PRESS)
+            {
+                speed_multiplier /= 10.0f;
+            }
+            if (glfwGetKey(m_window, control::INCREASE_SPEED) == GLFW_PRESS)
+            {
+                speed_multiplier *= 10.0f;
+            }
+
+            // Translation.
+            if (glfwGetKey(m_window, control::MOVE_CAM_FORWARD) == GLFW_PRESS)
+            {
+                translate[0] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_CAM_BACKWARD) == GLFW_PRESS)
+            {
+                translate[0] -= speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_CAM_LEFT) == GLFW_PRESS)
+            {
+                translate[1] -= speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_CAM_RIGHT) == GLFW_PRESS)
+            {
+                translate[1] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_CAM_UP) == GLFW_PRESS)
+            {
+                translate[2] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_CAM_DOWN) == GLFW_PRESS)
+            {
+                translate[2] -= speed_multiplier * t_time_delta;
+            }
+
+            // Rotation.
+            if (glfwGetKey(m_window, control::ROT_CAM_LEFT) == GLFW_PRESS)
+            {
+                rotate[0] += t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::ROT_CAM_RIGHT) == GLFW_PRESS)
+            {
+                rotate[0] -= t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::ROT_CAM_UP) == GLFW_PRESS)
+            {
+                rotate[1] += t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::ROT_CAM_DOWN) == GLFW_PRESS)
+            {
+                rotate[1] -= t_time_delta;
+            }
+
+            m_primary_cam->move(translate, rotate);
         }
 
 

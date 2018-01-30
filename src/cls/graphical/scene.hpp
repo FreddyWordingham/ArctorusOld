@@ -104,6 +104,9 @@ namespace arc
             //  -- Render --
             void setup_ambient_shader() const;
 
+            //  -- Movement --
+            void move_camera(const float t_time_delta);
+
             //  -- Drawing --
             void draw_spotlights() const;
         };
