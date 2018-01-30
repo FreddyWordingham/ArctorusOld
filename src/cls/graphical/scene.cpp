@@ -147,7 +147,26 @@ namespace arc
             glfwPollEvents();
 
             // Control the camera.
+            swap_camera();
             move_camera(time_delta);
+        }
+
+        /**
+         *  Swap the primary and secondary cameras if the camera swap key has been pressed.
+         */
+        void Scene::swap_camera()
+        {
+            static int old_state = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::SWAP_CAM) != old_state)
+            {
+                old_state = glfwGetKey(m_window, control::SWAP_CAM);
+
+                if (old_state == GLFW_PRESS)
+                {
+                    std::swap(m_primary_cam, m_secondary_cam);
+                }
+            }
         }
 
 

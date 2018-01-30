@@ -106,7 +106,8 @@ namespace arc
             void setup_ambient_shader() const;
 
             //  -- Movement --
-            void move_camera(const float t_time_delta);
+            void swap_camera();
+            void move_camera(float t_time_delta);
 
             //  -- Drawing --
             void draw_spotlights() const;
