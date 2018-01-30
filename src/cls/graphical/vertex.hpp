@@ -45,6 +45,13 @@ namespace arc
           public:
             //  -- Constructors --
             Vertex(const glm::vec3& t_pos, const glm::vec3& t_norm);
+
+
+
+            //  == METHODS ==
+          public:
+            //  -- Transformations --
+            void translate(const std::array<float, 3>& t_trans);
         };
 
 

@@ -117,47 +117,47 @@ namespace arc
             std::vector<Vertex> r_vert;
             r_vert.reserve(36);
 
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, +t_scale}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, +t_scale}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, -t_scale}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, -t_scale}, {+0.0f, +0.0f, -1.0f}));
 
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, +t_scale}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, -t_scale}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, -t_scale}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, -t_scale}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {+0.0f, +0.0f, -1.0f}));
 
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, +t_scale}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, -t_scale}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, +t_scale}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, +t_scale}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {+0.0f, -1.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({-t_scale, -t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, +t_scale}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, -t_scale}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, -t_scale}, {+1.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, -t_scale}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, +t_scale}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, +t_scale}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, +t_scale}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, -t_scale}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, -t_scale}, {+0.0f, +1.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
-            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
-            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, +t_scale}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, -t_scale}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, +t_scale}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({-t_scale, +t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({+t_scale, -t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
 
             return (r_vert);
         }
@@ -169,42 +169,47 @@ namespace arc
         /**
          *  Initialise the vertices for a spotlight prop shape.
          *
+         *  @param  t_trans     Translations to be applied to the spotlight.
+         *  @param  t_rot       Rotations to be applied to the spotlight.
          *  @param  t_scale     Radius of the spotlight base.
          *  @param  t_aperture  Numerical aperture of the spotlight.
          *  @param  t_power     Power of the spotlight.
          *
          *  @return The initialised vector of vertices for a spotlight.
          */
-        Prop create_spotlight_prop(const float t_scale, const float t_aperture, const float t_power)
+        Prop create_spotlight_prop(const std::array<float, 3>& t_trans, const std::array<float, 3>& t_rot, const float t_scale,
+                                   const float t_aperture, const float t_power)
         {
             std::vector<Vertex> vert;
             vert.reserve(SPOTLIGHT_RES * 2);
 
+            // Create base mesh.
             for (int i = 0; i < SPOTLIGHT_RES; ++i)
             {
                 const float theta_0 = i * ((static_cast<float>(M_PI) * 2.0f) / SPOTLIGHT_RES);
                 const float theta_1 = (i + 1) * ((static_cast<float>(M_PI) * 2.0f) / SPOTLIGHT_RES);
 
-                vert.push_back(
-                    Vertex({{t_scale * std::cosf(theta_0), t_scale * std::sinf(theta_0), 0.0f}}, {{0.0f, 0.0f, 1.0f}}));
-                vert.push_back(
-                    Vertex({{t_scale * std::cosf(theta_1), t_scale * std::sinf(theta_1), 0.0f}}, {{0.0f, 0.0f, 1.0f}}));
+                vert.push_back(Vertex({t_scale * std::cosf(theta_0), t_scale * std::sinf(theta_0), 0.0f}, {0.0f, 0.0f, 1.0f}));
+                vert.push_back(Vertex({t_scale * std::cosf(theta_1), t_scale * std::sinf(theta_1), 0.0f}, {0.0f, 0.0f, 1.0f}));
 
-                vert.push_back(
-                    Vertex({{t_scale * std::cosf(theta_0), t_scale * std::sinf(theta_0), 0.0f}}, {{0.0f, 0.0f, 1.0f}}));
-                vert.push_back(Vertex(
-                    {{(t_scale + (t_power * std::sinf(t_aperture))) * std::cosf(theta_0), (t_scale + (t_power * std::sinf(
-                        t_aperture))) * std::sinf(theta_0), t_power * std::cosf(t_aperture)}}, {{0.0f, 0.0f, 1.0f}}));
+                vert.push_back(Vertex({t_scale * std::cosf(theta_0), t_scale * std::sinf(theta_0), 0.0f}, {0.0f, 0.0f, 1.0f}));
+                vert.push_back(Vertex({(t_scale + (t_power * std::sinf(t_aperture))) * std::cosf(theta_0),
+                                       (t_scale + (t_power * std::sinf(t_aperture))) * std::sinf(theta_0),
+                                       t_power * std::cosf(t_aperture)}, {0.0f, 0.0f, 1.0f}));
 
-                vert.push_back(Vertex(
-                    {{(t_scale + (t_power * std::sinf(t_aperture))) * std::cosf(theta_0), (t_scale + (t_power * std::sinf(
-                        t_aperture))) * std::sinf(theta_0), t_power * std::cosf(t_aperture)}}, {{0.0f, 0.0f, 1.0f}}));
-                vert.push_back(Vertex(
-                    {{(t_scale + (t_power * std::sinf(t_aperture))) * std::cosf(theta_1), (t_scale + (t_power * std::sinf(
-                        t_aperture))) * std::sinf(theta_1), t_power * std::cosf(t_aperture)}}, {{0.0f, 0.0f, 1.0f}}));
+                vert.push_back(Vertex({(t_scale + (t_power * std::sinf(t_aperture))) * std::cosf(theta_0),
+                                       (t_scale + (t_power * std::sinf(t_aperture))) * std::sinf(theta_0),
+                                       t_power * std::cosf(t_aperture)}, {0.0f, 0.0f, 1.0f}));
+                vert.push_back(Vertex({(t_scale + (t_power * std::sinf(t_aperture))) * std::cosf(theta_1),
+                                       (t_scale + (t_power * std::sinf(t_aperture))) * std::sinf(theta_1),
+                                       t_power * std::cosf(t_aperture)}, {0.0f, 0.0f, 1.0f}));
             }
 
-
+            // Apply transformations.
+            for (int i = 0; i < vert.size(); ++i)
+            {
+                vert[i].translate(t_trans);
+            }
 
             return (Prop(vert, glm::vec3({1.0f, 0.0f, 0.0f})));
         }

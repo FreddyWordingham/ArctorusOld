@@ -36,5 +36,22 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Transformations --
+        /**
+         *  Apply a translation to the vertex.
+         *
+         *  @param  t_trans Translations to be applied in each dimension.
+         */
+        void Vertex::translate(const std::array<float, 3>& t_trans)
+        {
+            for (size_t i = 0; i < 3; ++i)
+            {
+                m_pos[static_cast<int>(i)] += t_trans[i];
+            }
+        }
+
+
+
     } // namespace graphical
 } // namespace arc
