@@ -21,6 +21,7 @@
 
 //  -- Classes --
 #include "cls/graphical/vertex.hpp"
+#include "cls/math/vec.hpp"
 
 
 
@@ -93,7 +94,7 @@ namespace arc
 
         //  == FUNCTIONS ==
         //  -- Prop Creation --
-        Prop create_spotlight_prop(const std::array<float, 3>& t_pos, const std::array<float, 3>& t_dir, float t_scale,
+        Prop create_spotlight_prop(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, float t_scale,
                                    float t_aperture, float t_power, const glm::vec3& t_col);
 
 

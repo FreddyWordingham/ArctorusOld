@@ -10,7 +10,12 @@
 //  == HEADER ==
 #include "cls/graphical/prop.hpp"
 
-#include "gen/log.hpp"
+
+
+//  == INCLUDES ==
+//  -- General --
+
+
 
 //  == NAMESPACE ==
 namespace arc
@@ -178,7 +183,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for a spotlight.
          */
-        Prop create_spotlight_prop(const std::array<float, 3>& t_pos, const std::array<float, 3>& t_dir, const float t_scale,
+        Prop create_spotlight_prop(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const float t_scale,
                                    const float t_aperture, const float t_power, const glm::vec3& t_col)
         {
             std::vector<Vertex> vert;
@@ -207,6 +212,7 @@ namespace arc
             }
 
             // Apply transformations.
+            std::array<float, 3> t_rot({{0.0, t_dir.get_}};);
             for (size_t i = 0; i < vert.size(); ++i)
             {
                 vert[i].rotate(t_dir);
