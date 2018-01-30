@@ -54,10 +54,9 @@ namespace arc
          */
         void Vertex::translate(const std::array<float, 3>& t_trans)
         {
-            for (size_t i = 0; i < 3; ++i)
-            {
-                m_pos[static_cast<int>(i)] += t_trans[i];
-            }
+            m_pos.x += t_trans[X];
+            m_pos.y += t_trans[Y];
+            m_pos.z += t_trans[Z];
         }
 
         /**

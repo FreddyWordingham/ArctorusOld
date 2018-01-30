@@ -37,6 +37,13 @@ int main()
     graphical::Scene scene;
 
 
+//    scene.add_light(math::Vec<3>({{0.0, 0.0, 4.0}}), math::Vec<3>({{0.75 * M_PI, 0.0, 0.75*M_PI}}), 0.1, 0.01, 5.0);
+    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 0.0}}), 1.0, 0.1, 1.0);
+    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.1}}), math::Vec<3>({{0.0, 0.0, 0.0}}), 1.0, 0.1, 1.0);
+    scene.add_light(math::Vec<3>({{0.0, 0.0, 2.0}}), math::Vec<3>({{0.0, 0.0, 0.0}}), 1.0, 0.1, 1.0);
+    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 0.0}}), 0.1, 0.1, 5.0);
+    scene.add_light(math::Vec<3>({{3.0, 3.0, 3.0}}), math::Vec<3>({{0.75 * M_PI, 0.0, 0.25 * M_PI}}), 0.01, 0.0, 5.0);
+
     while (!scene.should_close())
     {
         scene.handle_input();

@@ -17,8 +17,8 @@
 
 //  -- General --
 #include "gen/control.hpp"
-#include "gen/enum.hpp"
 #include "gen/log.hpp"
+#include "gen/rng.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -48,8 +48,6 @@ namespace arc
                 std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_FRAG_SHADER, false))
         {
-            m_spotlight.push_back(
-                create_spotlight_prop({{0.5f, 0.5f, 0.5f}}, {{0.1f, 0.2f, 0.3f}}, 0.5, static_cast<float>(M_PI) / 4.0f, 1.0));
         }
 
 
@@ -153,22 +151,25 @@ namespace arc
             move_camera(time_delta);
         }
 
+
+        //  -- Additions --
         /**
-         *  Swap the primary and secondary cameras if the camera swap key has been pressed.
+         *  Add a light to the scene.
+         *
+         *  @param  t_pos       Position of the light source.
+         *  @param  t_rot       Rotations applied to the light source.
+         *  @param  t_rad       Radius of the light source.
+         *  @param  t_aperture  Numerical aperture of the light source.
+         *  @param  t_power     power of the light source.
          */
-        void Scene::swap_camera()
+        void Scene::add_light(const math::Vec<3>& t_pos, const math::Vec<3>& t_rot, const double t_rad, const double t_aperture,
+                              const double t_power)
         {
-            static int old_state = GLFW_RELEASE;
-
-            if (glfwGetKey(m_window, control::SWAP_CAM) != old_state)
-            {
-                old_state = glfwGetKey(m_window, control::SWAP_CAM);
-
-                if (old_state == GLFW_PRESS)
-                {
-                    std::swap(m_primary_cam, m_secondary_cam);
-                }
-            }
+            m_spotlight.push_back(create_spotlight_prop(
+                {{static_cast<float>(t_pos[X]), static_cast<float>(t_pos[Y]), static_cast<float>(t_pos[Z])}},
+                {{static_cast<float>(t_rot[X]), static_cast<float>(t_rot[Y]), static_cast<float>(t_rot[Z])}},
+                static_cast<float>(t_rad), static_cast<float>(t_aperture), static_cast<float>(t_power),
+                {rng::random(0.0, 1.0), rng::random(0.0, 1.0), rng::random(0.0, 1.0)}));
         }
 
 
@@ -205,8 +206,53 @@ namespace arc
             glUniformMatrix4fv(m_ambient_shader.get_mvp(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
         }
 
+        /**
+         *  Draw the spotlights within a scene.
+         */
+        void Scene::draw_spotlights() const
+        {
+            // Use the ambient shader.
+            glUseProgram(m_ambient_shader.get_handle());
 
-        //  -- Movement --
+            // Set drawing mode.
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+            // Draw each spotlight.
+            for (size_t i = 0; i < m_spotlight.size(); ++i)
+            {
+                glUniform3f(m_ambient_shader.get_prop_col(), m_spotlight[i].get_col()[R], m_spotlight[i].get_col()[G],
+                            m_spotlight[i].get_col()[B]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_spotlight[i].get_vao());
+
+                glDrawArrays(GL_LINES, 0, m_spotlight[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+        }
+
+
+        //  -- Control --
+        /**
+         *  Swap the primary and secondary cameras if the camera swap key has been pressed.
+         */
+        void Scene::swap_camera()
+        {
+            static int old_state = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::SWAP_CAM) != old_state)
+            {
+                old_state = glfwGetKey(m_window, control::SWAP_CAM);
+
+                if (old_state == GLFW_PRESS)
+                {
+                    std::swap(m_primary_cam, m_secondary_cam);
+                }
+            }
+        }
+
         /**
          *  Control the movement of the camera.
          *
@@ -273,35 +319,6 @@ namespace arc
             }
 
             m_primary_cam->move(translate, rotate);
-        }
-
-
-        //  -- Drawing --
-        /**
-         *  Draw the spotlights within a scene.
-         */
-        void Scene::draw_spotlights() const
-        {
-            // Use the ambient shader.
-            glUseProgram(m_ambient_shader.get_handle());
-
-            // Set drawing mode.
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-            // Draw each spotlight.
-            for (size_t i = 0; i < m_spotlight.size(); ++i)
-            {
-                glUniform3f(m_ambient_shader.get_prop_col(), m_spotlight[i].get_col()[R], m_spotlight[i].get_col()[G],
-                            m_spotlight[i].get_col()[B]);
-
-                glEnableVertexAttribArray(0);
-
-                glBindVertexArray(m_spotlight[i].get_vao());
-
-                glDrawArrays(GL_LINES, 0, m_spotlight[i].get_num_vert());
-
-                glBindVertexArray(0);
-            }
         }
 
 

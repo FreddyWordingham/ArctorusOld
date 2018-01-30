@@ -23,6 +23,7 @@
 //  -- Classes --
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/prop.hpp"
+#include "cls/math/vec.hpp"
 
 
 
@@ -98,19 +99,21 @@ namespace arc
             bool should_close() const;
             void handle_input();
 
+            //  -- Additions --
+            void add_light(const math::Vec<3>& t_pos, const math::Vec<3>& t_rot, double t_rad, double t_aperture,
+                           double t_power);
+
             //  -- Render --
             void render() const;
 
           private:
             //  -- Render --
             void setup_ambient_shader() const;
+            void draw_spotlights() const;
 
-            //  -- Movement --
+            //  -- Control --
             void swap_camera();
             void move_camera(float t_time_delta);
-
-            //  -- Drawing --
-            void draw_spotlights() const;
         };
 
 

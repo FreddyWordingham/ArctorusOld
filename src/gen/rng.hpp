@@ -33,11 +33,11 @@ namespace arc
 
         //  == FUNCTION PROTOTYPES ==
         //  -- Seeding --
-        void seed(random::Uniform::base t_seed = static_cast<random::Uniform::base>(time(nullptr)));
+        inline void seed(random::Uniform::base t_seed = static_cast<random::Uniform::base>(time(nullptr)));
 
         //  -- Generation --
         inline double random(double t_min = 0.0, double t_max = 1.0);
-        double gaussian(double t_mu = 0.0, double t_sigma = 1.0);
+        inline double gaussian(double t_mu = 0.0, double t_sigma = 1.0);
 
 
 
@@ -48,7 +48,7 @@ namespace arc
          *
          *  @param  t_seed  Value of the seed.
          */
-        void seed(const random::Uniform::base t_seed)
+        inline void seed(const random::Uniform::base t_seed)
         {
             random::Uniform::get_instance(t_seed);
         }
@@ -76,7 +76,7 @@ namespace arc
          *
          *  @return A random double from the specified gaussian distribution.
          */
-        double gaussian(const double t_mu, const double t_sigma)
+        inline double gaussian(const double t_mu, const double t_sigma)
         {
             // Only generate a new pair of numbers every other call.
             static bool generate = false;
