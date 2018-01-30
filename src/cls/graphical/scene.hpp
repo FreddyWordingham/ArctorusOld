@@ -69,7 +69,8 @@ namespace arc
             GLFWwindow* m_window;   //! Handle to the main graphical window.
 
             //  -- Cameras --
-            std::unique_ptr<Camera> m_primary_cam;  //! Primary camera used to view the scene.
+            std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
+            std::unique_ptr<Camera> m_secondary_cam;    //! Secondary camera to be swapped with the primary camera.
 
             //  -- Shaders --
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
