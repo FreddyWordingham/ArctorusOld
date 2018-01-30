@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <glm/gtx/transform.hpp>
 
 //  -- General --
 #include "gen/enum.hpp"
@@ -54,24 +55,18 @@ namespace arc
             //  == METHODS ==
             //  -- Control --
             /**
-             *  Fly the camera around the scene using window input.
+             *  Orbit the camera around the scene using window input.
              *
              *  @param  t_trans Translation to be applied to the camera.
              *  @param  t_rot   Translation to be applied to the camera.
              */
             void Orbit::move(const glm::vec3& t_trans, const glm::vec2& t_rot)
             {
-                n_dir[X] = sinf(m_dec) * cosf(m_azi);
-                n_dir[Y] = sinf(m_dec) * sinf(m_azi);
-                n_dir[Z] = cosf(m_dec);
+                m_spin_rate += (t_rot[0] * 0.01f);
 
-                glm::vec3 right(glm::normalize(glm::cross(n_dir, UP_DIR)));
-                glm::vec3 up(glm::normalize(glm::cross(right, n_dir)));
-
-                n_pos += (t_trans[0] * n_dir) + (t_trans[1] * right) + (t_trans[2] * up);
-
-                m_azi += t_rot[0];
-                m_dec -= t_rot[1];
+                m_azi += t_trans[1] + m_spin_rate;
+                m_dec += t_trans[0];
+                m_rho -= t_trans[2];
 
                 if (m_dec < 0.0f)
                 {
@@ -79,8 +74,14 @@ namespace arc
                 }
                 else if (m_dec > 3.14f)
                 {
-                    m_dec = 3.141f;
+                    m_dec = 3.14f;
                 }
+
+                n_pos[X] = m_rho * sinf(m_dec) * cosf(m_azi);
+                n_pos[Y] = m_rho * sinf(m_dec) * sinf(m_azi);
+                n_pos[Z] = m_rho * cosf(m_dec);
+
+                n_dir = -glm::normalize(n_pos);
 
                 n_view = glm::lookAt(n_pos, n_pos + n_dir, UP_DIR);
             }
