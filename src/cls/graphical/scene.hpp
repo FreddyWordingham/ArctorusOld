@@ -36,8 +36,8 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Window --
-        constexpr const int WIDTH  = 800;                   //! Width of the window in pixels.
-        constexpr const int HEIGHT = 600;                   //! Height of the window in pixels.
+        constexpr const int WIDTH  = 1600;                  //! Width of the window in pixels.
+        constexpr const int HEIGHT = 1200;                  //! Height of the window in pixels.
         constexpr const char* TITLE = "Arctorus";           //! Window title.
         constexpr const int   AA_SAMPLES         = 4;       //! Number of anti-aliasing samples.
         constexpr const float CLEAR_COLOUR_RED   = 0.2f;    //! Window red clear colour.
