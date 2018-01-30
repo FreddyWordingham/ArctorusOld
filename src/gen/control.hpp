@@ -32,6 +32,7 @@ namespace arc
         constexpr const int QUIT = GLFW_KEY_ESCAPE; //! Quit and close the graphical window.
 
         //  -- Camera --
+        constexpr const int SWAP_CAM          = GLFW_KEY_TAB;           //! Swap the primary and secondary cameras.
         constexpr const int DECREASE_SPEED    = GLFW_KEY_LEFT_CONTROL;  //! Decrease camera speed.
         constexpr const int INCREASE_SPEED    = GLFW_KEY_LEFT_SHIFT;    //! Increase camera speed.
         constexpr const int MOVE_CAM_FORWARD  = GLFW_KEY_W;             //! Move the camera forward.
