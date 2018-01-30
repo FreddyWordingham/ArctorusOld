@@ -45,7 +45,8 @@ namespace arc
              */
             enum class shape
             {
-                CUBE    //! Simple cube.
+                CUBE,       //! Simple cube.
+                SPOTLIGHT   //! Spotlight.
             };
 
 
@@ -64,14 +65,15 @@ namespace arc
           public:
             //  -- Constructors --
             Prop(const std::vector<Vertex>& t_vert, const glm::vec3& t_col);
-            Prop(shape t_shape, const glm::vec3& t_col, float t_scale = 1.0);
+            Prop(shape t_shape, const glm::vec3& t_col, float t_scale = 1.0, float t_aperture = 0.0);
 
           private:
             //  -- Initialisation --
             GLuint init_vao() const;
             GLuint init_vbo() const;
-            std::vector<Vertex> init_vert(shape t_shape, float t_size) const;
+            std::vector<Vertex> init_vert(shape t_shape, float t_size, float t_aperture) const;
             std::vector<Vertex> init_vert_cube(float t_scale) const;
+            std::vector<Vertex> init_vert_spotlight(float t_scale, float t_aperture) const;
 
 
             //  == METHODS ==

@@ -17,6 +17,7 @@
 
 //  -- General --
 #include "gen/control.hpp"
+#include "gen/enum.hpp"
 #include "gen/log.hpp"
 
 //  -- Classes --
@@ -47,7 +48,7 @@ namespace arc
                 std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_FRAG_SHADER, false))
         {
-            m_spotlight.push_back(Prop(Prop::shape::CUBE, glm::vec3({1.0, 0.0, 1.0}), 0.5));
+            m_spotlight.push_back(Prop(Prop::shape::SPOTLIGHT, glm::vec3({1.0, 0.0, 0.0}), 1.5, M_PI / 4.0));
         }
 
 
@@ -183,8 +184,8 @@ namespace arc
             // Setup the shaders.
             setup_ambient_shader();
 
-            glEnable(GL_DEPTH_TEST);
-            glDepthFunc(GL_LESS);
+//            glEnable(GL_DEPTH_TEST);
+            //          glDepthFunc(GL_LESS);
 
             // Drawing.
             draw_spotlights();
@@ -284,18 +285,19 @@ namespace arc
             glUseProgram(m_ambient_shader.get_handle());
 
             // Set drawing mode.
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
             // Draw each spotlight.
             for (size_t i = 0; i < m_spotlight.size(); ++i)
             {
-                glUniform3f(m_ambient_shader.get_prop_col(), 1.0f, 1.0f, 0.0f);
+                glUniform3f(m_ambient_shader.get_prop_col(), m_spotlight[i].get_col()[R], m_spotlight[i].get_col()[G],
+                            m_spotlight[i].get_col()[B]);
 
                 glEnableVertexAttribArray(0);
 
                 glBindVertexArray(m_spotlight[i].get_vao());
 
-                glDrawArrays(GL_TRIANGLES, 0, m_spotlight[i].get_num_vert());
+                glDrawArrays(GL_LINE_LOOP, 0, m_spotlight[i].get_num_vert());
 
                 glBindVertexArray(0);
             }

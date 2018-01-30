@@ -51,12 +51,13 @@ namespace arc
         /**
          *  Construct a basic prop using a given shape type, colour and scale.
          *
-         *  @param  t_shape Type of shape to be created.
-         *  @param  t_col   Colour of the shape.
-         *  @param  t_scale Scaling to be applied to the shape.
+         *  @param  t_shape     Type of shape to be created.
+         *  @param  t_col       Colour of the shape.
+         *  @param  t_scale     Scaling to be applied to the shape.
+         *  @param  t_aperture  Aperture used by some shapes.
          */
-        Prop::Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale) :
-            Prop(init_vert(t_shape, t_scale), t_col) {}
+        Prop::Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale, const float t_aperture) :
+            Prop(init_vert(t_shape, t_scale, t_aperture), t_col) {}
 
 
         //  -- Initialisation --
@@ -91,17 +92,20 @@ namespace arc
         /**
          *  Initialise the vertices for a simple prop shape.
          *
-         *  @param  t_shape Type of shape to be created.
-         *  @param  t_scale Scaling to be applied to the shape.
+         *  @param  t_shape     Type of shape to be created.
+         *  @param  t_scale     Scaling to be applied to the shape.
+         *  @param  t_aperture  Aperture used by some shapes.
          *
          *  @return The initialised vector of vertices for the simple shape.
          */
-        std::vector<Vertex> Prop::init_vert(const shape t_shape, const float t_scale) const
+        std::vector<Vertex> Prop::init_vert(const shape t_shape, const float t_scale, const float t_aperture) const
         {
             switch (t_shape)
             {
                 case shape::CUBE:
                     return (init_vert_cube(t_scale));
+                case shape::SPOTLIGHT:
+                    return (init_vert_spotlight(t_scale, t_aperture));
             }
         }
 
@@ -113,6 +117,64 @@ namespace arc
          *  @return The initialised vector of vertices for a simple cube.
          */
         std::vector<Vertex> Prop::init_vert_cube(const float t_scale) const
+        {
+            std::vector<Vertex> r_vert;
+            r_vert.reserve(36);
+
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, +0.0f, -1.0f}}));
+
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{-1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, -t_scale}}, {{+0.0f, -1.0f, +0.0f}}));
+
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, -t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+1.0f, +0.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, -t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +1.0f, +0.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{-t_scale, +t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+            r_vert.push_back(Vertex({{+t_scale, -t_scale, +t_scale}}, {{+0.0f, +0.0f, +1.0f}}));
+
+            return (r_vert);
+        }
+
+        /**
+         *  Initialise the vertices for a spotlight prop shape.
+         *
+         *  @param  t_scale     Radius of the spotlight base.
+         *  @param  t_aperture  Numerical aperture of the spotlight.
+         *
+         *  @return The initialised vector of vertices for a spotlight.
+         */
+        std::vector<Vertex> Prop::init_vert_spotlight(float t_scale, float t_aperture) const
         {
             std::vector<Vertex> r_vert;
             r_vert.reserve(36);
