@@ -16,7 +16,7 @@
 //  -- System --
 #include <glm/gtx/transform.hpp>
 
-#include "gen/log.hpp"
+
 
 //  == NAMESPACE ==
 namespace arc
@@ -42,10 +42,6 @@ namespace arc
             n_view(glm::lookAt(n_pos, n_pos + n_dir, UP_DIR)),
             n_proj(glm::perspective(glm::radians(t_fov), t_aspect_ratio, NEAR_CULL_DIST, FAR_CULL_DIST))
         {
-            VAL(t_fov);
-            VAL(t_aspect_ratio);
-            VAL(NEAR_CULL_DIST);
-            VAL(FAR_CULL_DIST);
         }
 
 
