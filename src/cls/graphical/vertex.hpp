@@ -52,6 +52,7 @@ namespace arc
           public:
             //  -- Transformations --
             void translate(const std::array<float, 3>& t_trans);
+            void rotate(const std::array<float, 3>& t_trans);
         };
 
 

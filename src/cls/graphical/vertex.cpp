@@ -12,6 +12,15 @@
 
 
 
+//  == INCLUDES ==
+//  -- System --
+#include <glm/gtx/rotate_vector.hpp>
+
+//  -- General --
+#include "gen/enum.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -49,6 +58,23 @@ namespace arc
             {
                 m_pos[static_cast<int>(i)] += t_trans[i];
             }
+        }
+
+        /**
+         *  Apply a rotation to the vertex.
+         *  Rotations are performed in the order x-axis, y-axis, z-axis.
+         *
+         *  @param  t_rot   Rotation to be applied in each dimension.
+         */
+        void Vertex::rotate(const std::array<float, 3>& t_rot)
+        {
+            m_pos = glm::rotateX(m_pos, t_rot[X]);
+            m_pos = glm::rotateY(m_pos, t_rot[Y]);
+            m_pos = glm::rotateZ(m_pos, t_rot[Z]);
+
+            m_norm = glm::rotateX(m_norm, t_rot[X]);
+            m_norm = glm::rotateY(m_norm, t_rot[Y]);
+            m_norm = glm::rotateZ(m_norm, t_rot[Z]);
         }
 
 
