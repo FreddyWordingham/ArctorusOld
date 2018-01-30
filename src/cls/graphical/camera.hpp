@@ -31,7 +31,7 @@ namespace arc
         //  -- Camera Properties --
         constexpr const glm::vec3 UP_DIR({0.0f, 0.0f, 1.0f});   //! Camera up direction.
         constexpr const float     NEAR_CULL_DIST = 1E-3f;       //! Near culling distance.
-        constexpr const float     FAR_CULL_DIST  = 1E-3f;       //! Far culling distance.
+        constexpr const float     FAR_CULL_DIST  = 1E+3f;       //! Far culling distance.
 
 
 

@@ -43,6 +43,7 @@ namespace arc
             m_primary_cam(std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_FRAG_SHADER, false))
         {
+            m_spotlight.push_back(Prop(Prop::shape::CUBE, glm::vec3({1.0, 0.0, 1.0}), 0.5));
         }
 
 
@@ -124,13 +125,7 @@ namespace arc
                 return (true);
             }
 
-            // Red cross has been clicked.
-            if (glfwWindowShouldClose(m_window) != 0)
-            {
-                return (true);
-            }
-
-            return (false);
+            return (glfwWindowShouldClose(m_window) != 0);
         }
 
         /**
@@ -159,6 +154,9 @@ namespace arc
 
             // Setup the shaders.
             setup_ambient_shader();
+
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LESS);
 
             // Drawing.
             draw_spotlights();
@@ -191,7 +189,18 @@ namespace arc
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
             // Draw each spotlight.
+            for (size_t i = 0; i < m_spotlight.size(); ++i)
+            {
+                glUniform3f(m_ambient_shader.get_prop_col(), 1.0f, 1.0f, 0.0f);
 
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_spotlight[i].get_vao());
+
+                glDrawArrays(GL_TRIANGLES, 0, m_spotlight[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
         }
 
 

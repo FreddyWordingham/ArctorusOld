@@ -17,11 +17,12 @@
 //  -- System --
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <memory>
 #include <cls/graphical/shader/ambient.hpp>
+#include <memory>
 
 //  -- Classes --
 #include "cls/graphical/camera.hpp"
+#include "cls/graphical/prop.hpp"
 
 
 
@@ -39,10 +40,10 @@ namespace arc
         constexpr const int HEIGHT = 600;                   //! Height of the window in pixels.
         constexpr const char* TITLE = "Arctorus";           //! Window title.
         constexpr const int   AA_SAMPLES         = 4;       //! Number of anti-aliasing samples.
-        constexpr const float CLEAR_COLOUR_RED   = 0.0f;    //! Window red clear colour.
-        constexpr const float CLEAR_COLOUR_GREEN = 0.0f;    //! Window green clear colour.
-        constexpr const float CLEAR_COLOUR_BLUE  = 0.0f;    //! Window blue clear colour.
-        constexpr const float CLEAR_COLOUR_ALPHA = 0.0f;    //! Window alpha clear colour.
+        constexpr const float CLEAR_COLOUR_RED   = 0.2f;    //! Window red clear colour.
+        constexpr const float CLEAR_COLOUR_GREEN = 0.2f;    //! Window green clear colour.
+        constexpr const float CLEAR_COLOUR_BLUE  = 0.2f;    //! Window blue clear colour.
+        constexpr const float CLEAR_COLOUR_ALPHA = 0.2f;    //! Window alpha clear colour.
 
         //  -- Camera --
         constexpr const glm::vec3 INIT_CAM_POS({+10.0f, +10.0f, +10.0f});   //! Initial position of the camera.
@@ -72,6 +73,9 @@ namespace arc
 
             //  -- Shaders --
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
+
+            //  -- Props --
+            std::vector<Prop> m_spotlight;  //! Vector of spotlight props.
 
 
             //  == INSTANTIATION ==
