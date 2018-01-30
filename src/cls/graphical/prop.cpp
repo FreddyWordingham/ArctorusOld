@@ -170,7 +170,7 @@ namespace arc
          *  Initialise the vertices for a spotlight prop shape.
          *
          *  @param  t_pos       Translations to be applied to the spotlight.
-         *  @param  t_rot       Rotations to be applied to the spotlight.
+         *  @param  t_dir       Direction of the spotlight.
          *  @param  t_scale     Radius of the spotlight base.
          *  @param  t_aperture  Numerical aperture of the spotlight.
          *  @param  t_power     Power of the spotlight.
@@ -178,7 +178,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for a spotlight.
          */
-        Prop create_spotlight_prop(const std::array<float, 3>& t_pos, const std::array<float, 3>& t_rot, const float t_scale,
+        Prop create_spotlight_prop(const std::array<float, 3>& t_pos, const std::array<float, 3>& t_dir, const float t_scale,
                                    const float t_aperture, const float t_power, const glm::vec3& t_col)
         {
             std::vector<Vertex> vert;
@@ -205,14 +205,16 @@ namespace arc
                                        (t_scale + (t_power * std::sinf(t_aperture))) * std::sinf(theta_1),
                                        t_power * std::cosf(t_aperture)}, {0.0f, 0.0f, 1.0f}));
             }
-            VAL(t_rot);
-            VAL(t_pos);
+
             // Apply transformations.
             for (size_t i = 0; i < vert.size(); ++i)
             {
-                vert[i].rotate(t_rot);
+                vert[i].rotate(t_dir);
                 vert[i].translate(t_pos);
             }
+
+            Vertex v({1.0, 0.0, 0.0}, {0.0, 0.0, 0.0});
+            VAL(v.get_pos());
 
             return (Prop(vert, t_col));
         }

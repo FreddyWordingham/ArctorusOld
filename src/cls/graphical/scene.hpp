@@ -100,7 +100,7 @@ namespace arc
             void handle_input();
 
             //  -- Additions --
-            void add_light(const math::Vec<3>& t_pos, const math::Vec<3>& t_rot, double t_rad, double t_aperture,
+            void add_light(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_rad, double t_aperture,
                            double t_power);
 
             //  -- Render --

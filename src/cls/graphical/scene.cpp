@@ -157,17 +157,17 @@ namespace arc
          *  Add a light to the scene.
          *
          *  @param  t_pos       Position of the light source.
-         *  @param  t_rot       Rotations applied to the light source.
+         *  @param  t_dir       Direction vector of the light source.
          *  @param  t_rad       Radius of the light source.
          *  @param  t_aperture  Numerical aperture of the light source.
          *  @param  t_power     power of the light source.
          */
-        void Scene::add_light(const math::Vec<3>& t_pos, const math::Vec<3>& t_rot, const double t_rad, const double t_aperture,
+        void Scene::add_light(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_rad, const double t_aperture,
                               const double t_power)
         {
             m_spotlight.push_back(create_spotlight_prop(
                 {{static_cast<float>(t_pos[X]), static_cast<float>(t_pos[Y]), static_cast<float>(t_pos[Z])}},
-                {{static_cast<float>(t_rot[X]), static_cast<float>(t_rot[Y]), static_cast<float>(t_rot[Z])}},
+                {{static_cast<float>(t_dir[X]), static_cast<float>(t_dir[Y]), static_cast<float>(t_dir[Z])}},
                 static_cast<float>(t_rad), static_cast<float>(t_aperture), static_cast<float>(t_power),
                 {rng::random(0.0, 1.0), rng::random(0.0, 1.0), rng::random(0.0, 1.0)}));
         }

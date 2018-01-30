@@ -47,9 +47,12 @@ namespace arc
             Vertex(const glm::vec3& t_pos, const glm::vec3& t_norm);
 
 
-
             //  == METHODS ==
           public:
+            //  -- Getters --
+            glm::vec3& get_pos() const { return (m_pos); }
+            glm::vec3& get_dir() const { return (m_dir); }
+
             //  -- Transformations --
             void translate(const std::array<float, 3>& t_trans);
             void rotate(const std::array<float, 3>& t_trans);
