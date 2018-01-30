@@ -22,7 +22,6 @@
 
 
 
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -56,9 +55,10 @@ namespace arc
                 Orbit(const glm::vec3& t_pos, float t_aspect_ratio, float t_fov = 45.0f);
 
 
-
                 //  == METHODS ==
-              private:
+              public:
+                //  -- Control --
+                void move(const glm::vec3& t_trans, const glm::vec2& t_rot) override;
             };
 
 

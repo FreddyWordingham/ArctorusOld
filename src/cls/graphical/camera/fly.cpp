@@ -59,7 +59,7 @@ namespace arc
              *  Fly the camera around the scene using window input.
              *
              *  @param  t_trans Translation to be applied to the camera.
-             *  @param  t_rot   Translation to be applied to the camera.
+             *  @param  t_rot   Rotation to be applied to the camera.
              */
             void Fly::move(const glm::vec3& t_trans, const glm::vec2& t_rot)
             {
