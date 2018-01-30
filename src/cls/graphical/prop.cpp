@@ -10,7 +10,7 @@
 //  == HEADER ==
 #include "cls/graphical/prop.hpp"
 
-
+#include "gen/log.hpp"
 
 //  == NAMESPACE ==
 namespace arc
@@ -205,7 +205,8 @@ namespace arc
                                        (t_scale + (t_power * std::sinf(t_aperture))) * std::sinf(theta_1),
                                        t_power * std::cosf(t_aperture)}, {0.0f, 0.0f, 1.0f}));
             }
-
+            VAL(t_rot);
+            VAL(t_pos);
             // Apply transformations.
             for (size_t i = 0; i < vert.size(); ++i)
             {

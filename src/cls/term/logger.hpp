@@ -27,6 +27,7 @@
 #include "gen/config.hpp"
 
 //  -- Utility --
+#include "utl/array.hpp"
 #include "utl/string.hpp"
 #include "utl/vector.hpp"
 
