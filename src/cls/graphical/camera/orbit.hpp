@@ -34,6 +34,13 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Orientation --
+            float m_azi;    //! Rotation of the camera around the global z-axis.
+            float m_dec;    //! Declination of the camera form the global z-axis.
+            float m_rho;    //! Distance of the camera from the origin.
+
+            //  -- Travel --
+            float m_spin_rate;  //! Rate of continuous rotation of the camera about the global z-axis.
 
 
             //  == INSTANTIATION ==
