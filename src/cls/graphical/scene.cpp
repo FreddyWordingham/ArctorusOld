@@ -48,7 +48,7 @@ namespace arc
                 std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_FRAG_SHADER, false))
         {
-            m_spotlight.push_back(Prop(Prop::shape::SPOTLIGHT, glm::vec3({1.0, 0.0, 0.0}), 1.5, M_PI / 4.0));
+            m_spotlight.push_back(create_spotlight_prop(0.5, static_cast<float>(M_PI) / 4.0f, 1.0));
         }
 
 

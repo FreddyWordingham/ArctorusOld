@@ -32,6 +32,12 @@ namespace arc
 
 
 
+        //  == SETTINGS ==
+        //  -- Shapes --
+        constexpr const int SPOTLIGHT_RES = 8;  //! Resolution of created spotlight props.
+
+
+
         //  == CLASS ==
         /**
          *  A class containing all information required to draw an object.
@@ -45,8 +51,7 @@ namespace arc
              */
             enum class shape
             {
-                CUBE,       //! Simple cube.
-                SPOTLIGHT   //! Spotlight.
+                CUBE    //! Simple cube.
             };
 
 
@@ -65,15 +70,14 @@ namespace arc
           public:
             //  -- Constructors --
             Prop(const std::vector<Vertex>& t_vert, const glm::vec3& t_col);
-            Prop(shape t_shape, const glm::vec3& t_col, float t_scale = 1.0, float t_aperture = 0.0);
+            Prop(shape t_shape, const glm::vec3& t_col, float t_scale = 1.0);
 
           private:
             //  -- Initialisation --
             GLuint init_vao() const;
             GLuint init_vbo() const;
-            std::vector<Vertex> init_vert(shape t_shape, float t_size, float t_aperture) const;
+            std::vector<Vertex> init_vert(shape t_shape, float t_size) const;
             std::vector<Vertex> init_vert_cube(float t_scale) const;
-            std::vector<Vertex> init_vert_spotlight(float t_scale, float t_aperture) const;
 
 
             //  == METHODS ==
@@ -84,6 +88,48 @@ namespace arc
             GLuint get_vao() const { return (m_vao); }
             GLuint get_vbo() const { return (m_vbo); }
         };
+
+
+
+        //  == FUNCTIONS ==
+        //  -- Prop Creation --
+        /**
+         *  Initialise the vertices for a spotlight prop shape.
+         *
+         *  @param  t_scale     Radius of the spotlight base.
+         *  @param  t_aperture  Numerical aperture of the spotlight.
+         *  @param  t_power     Power of the spotlight.
+         *
+         *  @return The initialised vector of vertices for a spotlight.
+         */
+        Prop create_spotlight_prop(const float t_scale, const float t_aperture, const float t_power)
+        {
+            std::vector<Vertex> vert;
+            vert.reserve(SPOTLIGHT_RES * 2);
+
+            for (int i = 0; i < SPOTLIGHT_RES; ++i)
+            {
+                const float theta = i * ((static_cast<float>(M_PI) * 2.0f) / SPOTLIGHT_RES);
+
+                const float x = t_scale * std::cosf(theta);
+                const float y = t_scale * std::sinf(theta);
+
+                vert.push_back(Vertex({{x, y, 0.0f}}, {{0.0, 0.0, 1.0}}));
+            }
+
+            for (int i = 0; i < SPOTLIGHT_RES; ++i)
+            {
+                const float theta = i * ((static_cast<float>(M_PI) * 2.0f) / SPOTLIGHT_RES);
+
+                const float x = t_scale * std::cosf(theta);
+                const float y = t_scale * std::sinf(theta);
+
+                vert.push_back(Vertex({{x, y, t_power * std::cosf(t_aperture)}}, {{0.0, 0.0, 1.0}}));
+            }
+
+            return (Prop(vert, glm::vec3({1.0f, 0.0f, 0.0f})));
+        }
+
 
 
 
