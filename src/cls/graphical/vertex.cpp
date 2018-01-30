@@ -28,7 +28,7 @@ namespace arc
          *  @param  t_pos   Vertex position.
          *  @param  t_norm  Vertex normal.
          */
-        Vertex::Vertex(const std::array<float, 3>& t_pos, const std::array<float, 3>& t_norm) :
+        Vertex::Vertex(const glm::vec3& t_pos, const glm::vec3& t_norm) :
             m_pos(t_pos),
             m_norm(t_norm)
         {

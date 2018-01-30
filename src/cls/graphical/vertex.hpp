@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <array>
+#include <glm/vec3.hpp>
 
 
 
@@ -29,28 +30,21 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  Class containing the information about a single vertex.
+         *  Class containing the information about a single graphical vertex.
          */
         class Vertex
         {
             //  == FIELDS ==
           private:
             //  -- Data --
-            std::array<float, 3> m_pos;     //! Vertex position.
-            std::array<float, 3> m_norm;    //! Vertex normal.
+            glm::vec3 m_pos;  //! Vertex position.
+            glm::vec3 m_norm; //! Vertex normal.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Vertex(const std::array<float, 3>& t_pos, const std::array<float, 3>& t_norm);
-
-
-            //  == METHODS ==
-          public:
-            //  -- Getters --
-            float get_pos(const size_t t_index) const { return (m_pos[t_index]); }
-            float get_norm(const size_t t_index) const { return (m_norm[t_index]); }
+            Vertex(const glm::vec3& t_pos, const glm::vec3& t_norm);
         };
 
 
