@@ -206,9 +206,10 @@ namespace arc
             }
 
             // Apply transformations.
-            for (int i = 0; i < vert.size(); ++i)
+            for (size_t i = 0; i < vert.size(); ++i)
             {
                 vert[i].translate(t_trans);
+                vert[i].rotate(t_rot);
             }
 
             return (Prop(vert, glm::vec3({1.0f, 0.0f, 0.0f})));
