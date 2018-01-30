@@ -120,6 +120,9 @@ namespace arc
             constexpr double total() const;
             constexpr double magnitude() const;
             constexpr void normalise();
+            double get_rho() const;
+            double get_theta() const;
+            double get_phi() const;
 
             //  -- Properties --
             constexpr bool is_normalised(double t_tol = std::numeric_limits<double>::epsilon()) const;
@@ -757,6 +760,8 @@ namespace arc
 
             assert(is_normalised());
         }
+
+
 
 
         //  -- Properties --

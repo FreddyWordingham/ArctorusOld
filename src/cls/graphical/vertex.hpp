@@ -50,8 +50,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
-            glm::vec3& get_pos() const { return (m_pos); }
-            glm::vec3& get_dir() const { return (m_dir); }
+            glm::vec3 get_pos() const { return (m_pos); }
+            glm::vec3 get_norm() const { return (m_norm); }
 
             //  -- Transformations --
             void translate(const std::array<float, 3>& t_trans);

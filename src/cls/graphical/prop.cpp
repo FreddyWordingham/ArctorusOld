@@ -213,8 +213,15 @@ namespace arc
                 vert[i].translate(t_pos);
             }
 
-            Vertex v({1.0, 0.0, 0.0}, {0.0, 0.0, 0.0});
-            VAL(v.get_pos());
+            Vertex v({0.0, 0.0, 1.0}, {0.0, 0.0, 0.0});
+            LOG("---");
+            VAL(v.get_pos().x);
+            VAL(v.get_pos().y);
+            VAL(v.get_pos().z);
+            v.rotate({{0.75 * M_PI, 0.0, M_PI * 0.25}});
+            VAL(v.get_pos().x);
+            VAL(v.get_pos().y);
+            VAL(v.get_pos().z);
 
             return (Prop(vert, t_col));
         }
