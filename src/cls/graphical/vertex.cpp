@@ -17,7 +17,6 @@
 #include <glm/gtx/rotate_vector.hpp>
 
 //  -- General --
-#include "gen/enum.hpp"
 
 
 
@@ -52,7 +51,7 @@ namespace arc
          *
          *  @param  t_trans Translations to be applied in each dimension.
          */
-        void Vertex::translate(const std::array<float, 3>& t_trans)
+        void Vertex::translate(const math::Vec<3>& t_trans)
         {
             m_pos.x += t_trans[X];
             m_pos.y += t_trans[Y];
@@ -65,15 +64,15 @@ namespace arc
          *
          *  @param  t_rot   Rotation to be applied in each dimension.
          */
-        void Vertex::rotate(const std::array<float, 3>& t_rot)
+        void Vertex::rotate(const math::Vec<3>& t_rot)
         {
-            m_pos = glm::rotateX(m_pos, t_rot[X]);
-            m_pos = glm::rotateY(m_pos, t_rot[Y]);
-            m_pos = glm::rotateZ(m_pos, t_rot[Z]);
+            m_pos = glm::rotateX(m_pos, static_cast<float>(t_rot[X]));
+            m_pos = glm::rotateY(m_pos, static_cast<float>(t_rot[Y]));
+            m_pos = glm::rotateZ(m_pos, static_cast<float>(t_rot[Z]));
 
-            m_norm = glm::rotateX(m_norm, t_rot[X]);
-            m_norm = glm::rotateY(m_norm, t_rot[Y]);
-            m_norm = glm::rotateZ(m_norm, t_rot[Z]);
+            m_norm = glm::rotateX(m_norm, static_cast<float>(t_rot[X]));
+            m_norm = glm::rotateY(m_norm, static_cast<float>(t_rot[Y]));
+            m_norm = glm::rotateZ(m_norm, static_cast<float>(t_rot[Z]));
         }
 
 

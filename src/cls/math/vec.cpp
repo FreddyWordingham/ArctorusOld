@@ -85,12 +85,7 @@ namespace arc
         template <>
         double Vec<3>::get_phi() const
         {
-            if (m_data[X] == 0.0)
-            {
-                return (0.0);
-            }
-
-            const double r_phi = std::atan(m_data[Y] / m_data[X]);
+            const double r_phi = std::atan2(m_data[Y], m_data[X]);
 
             assert((r_phi >= 0.0) && (r_phi <= (2.0 * M_PI)));
 

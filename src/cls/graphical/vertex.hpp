@@ -18,6 +18,9 @@
 #include <array>
 #include <glm/vec3.hpp>
 
+//  -- Classes --
+#include "cls/math/vec.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -54,8 +57,8 @@ namespace arc
             glm::vec3 get_norm() const { return (m_norm); }
 
             //  -- Transformations --
-            void translate(const std::array<float, 3>& t_trans);
-            void rotate(const std::array<float, 3>& t_trans);
+            void translate(const math::Vec<3>& t_trans);
+            void rotate(const math::Vec<3>& t_rot);
         };
 
 

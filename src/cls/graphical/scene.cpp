@@ -165,11 +165,9 @@ namespace arc
         void Scene::add_light(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_rad, const double t_aperture,
                               const double t_power)
         {
-            m_spotlight.push_back(create_spotlight_prop(
-                {{static_cast<float>(t_pos[X]), static_cast<float>(t_pos[Y]), static_cast<float>(t_pos[Z])}},
-                {{static_cast<float>(t_dir[X]), static_cast<float>(t_dir[Y]), static_cast<float>(t_dir[Z])}},
-                static_cast<float>(t_rad), static_cast<float>(t_aperture), static_cast<float>(t_power),
-                {rng::random(0.0, 1.0), rng::random(0.0, 1.0), rng::random(0.0, 1.0)}));
+            m_spotlight.push_back(create_spotlight_prop(t_pos, t_dir, static_cast<float>(t_rad), static_cast<float>(t_aperture),
+                                                        static_cast<float>(t_power),
+                                                        {rng::random(0.0, 1.0), rng::random(0.0, 1.0), rng::random(0.0, 1.0)}));
         }
 
 

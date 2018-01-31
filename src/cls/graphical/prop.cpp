@@ -11,11 +11,7 @@
 #include "cls/graphical/prop.hpp"
 
 
-
-//  == INCLUDES ==
-//  -- General --
-
-
+#include "gen/log.hpp"
 
 //  == NAMESPACE ==
 namespace arc
@@ -212,22 +208,29 @@ namespace arc
             }
 
             // Apply transformations.
-            std::array<float, 3> t_rot({{0.0, t_dir.get_}};);
-            for (size_t i = 0; i < vert.size(); ++i)
+            math::Vec<3> t_rot({{0.0, t_dir.get_theta(), t_dir.get_phi()}});
+            for (size_t  i = 0; i < vert.size(); ++i)
             {
-                vert[i].rotate(t_dir);
+                vert[i].rotate(t_rot);
                 vert[i].translate(t_pos);
             }
 
+
+            math::Vec<3> end({{0.0, 1.0, 0.0}});
             Vertex v({0.0, 0.0, 1.0}, {0.0, 0.0, 0.0});
             LOG("---");
-            VAL(v.get_pos().x);
-            VAL(v.get_pos().y);
-            VAL(v.get_pos().z);
-            v.rotate({{0.75 * M_PI, 0.0, M_PI * 0.25}});
-            VAL(v.get_pos().x);
-            VAL(v.get_pos().y);
-            VAL(v.get_pos().z);
+            VAL(end);
+            VAL(end.get_theta());
+            VAL(end.get_phi());
+            LOG("");
+
+            VAL(v.get_pos()[X]);
+            VAL(v.get_pos()[Y]);
+            VAL(v.get_pos()[Z]);
+            v.rotate(math::Vec<3>({{0.0, end.get_theta(), end.get_phi()}}));
+            VAL(v.get_pos()[X]);
+            VAL(v.get_pos()[Y]);
+            VAL(v.get_pos()[Z]);
 
             return (Prop(vert, t_col));
         }
