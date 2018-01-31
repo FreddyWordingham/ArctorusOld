@@ -68,10 +68,10 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Serialisation --
-            std::string serialise(size_t t_samples) const;
+            std::string serialise(size_t t_samples = static_cast<size_t>(1E3)) const;
 
             //  -- Saving --
-            void save(const std::string& t_path, size_t t_samples) const;
+            void save(const std::string& t_path, size_t t_samples = static_cast<size_t>(1E3)) const;
         };
 
 
