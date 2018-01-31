@@ -27,10 +27,10 @@ uniform vec3 light_pos; //! Light position.
 
 //  == OUTPUT ==
 //  -- Passed --
-out vec3 vert_col;              //! Colour to draw the vertex with.
-out vec3 cam_space_norm;        //! Camera-space light normal.
-out vec3 cam_space_light_norm;  //! Camera-space light direction.
-out float dist;                 //! Distance between the light and the vertex.
+in vec3 vert_col;               //! Colour to draw the vertex with.
+in vec3 cam_space_norm;         //! Camera-space light normal.
+in vec3 cam_space_light_norm;   //! Camera-space light direction.
+in float dist;                  //! Distance between the light and the vertex.
 
 
 
