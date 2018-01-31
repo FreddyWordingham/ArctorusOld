@@ -12,6 +12,7 @@
 
 //  -- General --
 #include "gen/log.hpp"
+#include "gen/rng.hpp"
 
 //  -- Classes --
 #include "cls/graphical/scene.hpp"
@@ -32,19 +33,11 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
+    rng::seed();
 
     graphical::Scene scene;
 
-    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0, M_PI / 4.0, 5.0);
-    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0, M_PI / 4.0, 5.0);
-    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0, M_PI / 4.0, 5.0);
-
-    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.125, 0.0, 10.0);
-    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}), 0.125, 0.0, 10.0);
-    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.125, 0.0, 10.0);
-    scene.add_light(math::Vec<3>({{3.0, 3.0, 3.0}}), math::Vec<3>({{-1.0, -1.0, -1.0}}), 0.01, 0.0, 5.0);
-    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{1.0, 0.0, 1.0}}), 0.01, 0.0, 7.0);
-    scene.add_light(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 1.0, 1.0}}), 0.01, 0.0, 7.0);
+    scene.add_light(math::Vec<3>({{+5.0, -5.0, +5.0}}), math::Vec<3>({{-1.0, +1.0, -1.0}}), 0.5, M_PI / 8.0, 5.0);
 
     while (!scene.should_close())
     {
