@@ -14,10 +14,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-
 //  -- Classes --
-#include "cls/math/vec.hpp"
+#include "cls/geom/vertex.hpp"
 
 
 
@@ -38,8 +36,7 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Vertices --
-            const std::array<math::Vec<3>, 3> m_pos;    //! Vertex positions.
-            const std::array<math::Vec<3>, 3> m_norm;   //! Vertex normals.
+            const std::array<Vertex, 3> m_vert; //! Vertices of the triangle.
 
             //  -- Properties --
             const double m_area;    //! Area of the triangle.
