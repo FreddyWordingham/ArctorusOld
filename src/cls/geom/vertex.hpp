@@ -37,8 +37,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            math::Vec<3> m_pos;     //! Position of the vertex.
-            math::Vec<3> m_norm;    //! Normal associated with the vertex. Should always be normalised.
+            const math::Vec<3> m_pos;   //! Position of the vertex.
+            const math::Vec<3> m_norm;  //! Normal associated with the vertex. Should always be normalised.
 
 
             //  == INSTANTIATION ==
