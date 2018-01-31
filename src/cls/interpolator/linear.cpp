@@ -166,7 +166,7 @@ namespace arc
          *
          *  @pre    t_samples must be greater than one.
          */
-        void Linear::save(const std::string& t_path, size_t t_samples) const
+        void Linear::save(const std::string& t_path, const size_t t_samples) const
         {
             assert(t_samples > 1);
 
