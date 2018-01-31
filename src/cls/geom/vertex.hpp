@@ -45,6 +45,13 @@ namespace arc
           public:
             //  -- Constructors --
             explicit Vertex(const math::Vec<3>& t_pos, const math::Vec<3>& t_norm = math::Vec<3>({{0.0, 0.0, 1.0}}));
+
+
+            //  == METHODS ==
+          public:
+            //  -- Getters --
+            const math::Vec<3>& get_pos() const { return (m_pos); }
+            const math::Vec<3>& get_norm() const { return (m_norm); }
         };
 
 

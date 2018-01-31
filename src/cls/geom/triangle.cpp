@@ -28,7 +28,8 @@ namespace arc
          *  @param  t_vert  Array of three vertices forming the triangle.
          */
         Triangle::Triangle(const std::array<Vertex, 3>& t_vert) :
-            m_vert(t_vert)
+            m_vert(t_vert),
+            m_area(math::area({{t_vert[ALPHA].get_pos()}}))
         {
         }
 

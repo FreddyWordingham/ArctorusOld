@@ -51,8 +51,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
-            inline const Vertex& get_vert(size_t t_index) const;
             double get_area() const { return (m_area); }
+            inline const Vertex& get_vert(size_t t_index) const;
         };
 
 
