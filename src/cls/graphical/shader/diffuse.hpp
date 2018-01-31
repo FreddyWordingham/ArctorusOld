@@ -64,7 +64,9 @@ namespace arc
                 //  == METHODS ==
               public:
                 //  -- Getters --
+                GLint get_view() const { return (m_view); }
                 GLint get_prop_col() const { return (m_prop_col); }
+                GLint get_light_pos() const { return (m_light_pos); }
             };
 
 
