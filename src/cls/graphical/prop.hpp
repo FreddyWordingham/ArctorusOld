@@ -92,10 +92,8 @@ namespace arc
 
 
 
-        //  == FUNCTIONS ==
-        //  -- Prop Creation --
-        Prop create_spotlight_prop(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, float t_scale,
-                                   float t_aperture, float t_power, const glm::vec3& t_col);
+        Prop create_spotlight_prop(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const float t_scale,
+                                   const float t_aperture, const float t_power, const glm::vec3& t_col);
 
 
 

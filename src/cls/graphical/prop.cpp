@@ -165,20 +165,6 @@ namespace arc
 
 
 
-        //  == FUNCTIONS ==
-        //  -- Prop Creation --
-        /**
-         *  Initialise the vertices for a spotlight prop shape.
-         *
-         *  @param  t_pos       Translations to be applied to the spotlight.
-         *  @param  t_dir       Direction of the spotlight.
-         *  @param  t_scale     Radius of the spotlight base.
-         *  @param  t_aperture  Numerical aperture of the spotlight.
-         *  @param  t_power     Power of the spotlight.
-         *  @param  t_col       Colour of the spotlight.
-         *
-         *  @return The initialised vector of vertices for a spotlight.
-         */
         Prop create_spotlight_prop(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const float t_scale,
                                    const float t_aperture, const float t_power, const glm::vec3& t_col)
         {
@@ -217,7 +203,6 @@ namespace arc
 
             return (Prop(vert, t_col));
         }
-
 
 
     } // namespace graphical
