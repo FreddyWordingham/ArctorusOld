@@ -37,20 +37,8 @@ int main()
     LOG("Hello world!");
     rng::seed();
 
-    geom::Mesh cube(file::read("cube.obj"));
+//    geom::Mesh cube(file::read("cube.obj"));
 
-
-    graphical::Scene scene;
-
-    scene.add_light(math::Vec<3>({{+5.0, -5.0, +5.0}}), math::Vec<3>({{-1.0, +1.0, -1.0}}), 0.5, M_PI / 8.0, 5.0);
-
-    scene.add_entity(cube);
-
-    while (!scene.should_close())
-    {
-        scene.handle_input();
-        scene.render();
-    }
 
     return (0);
 }
