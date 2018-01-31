@@ -8,13 +8,18 @@
 
 
 //  == GUARD ==
-#ifndef ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_AMBIENT_HPP
-#define ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_AMBIENT_HPP
+#ifndef ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_DIFFUSE_HPP
+#define ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_DIFFUSE_HPP
 
 
 
 //  == BASE CLASS ==
 #include "cls/graphical/shader.hpp"
+
+
+
+//  == INCLUDES ==
+//  -- System --
 
 
 
@@ -36,9 +41,9 @@ namespace arc
 
             //  == CLASS ==
             /**
-             *  Specialisation of the shader class for ambient lighting.
+             *  Specialisation of the shader class for diffuse spotlight lighting.
              */
-            class Ambient : public Shader
+            class Diffuse : public Shader
             {
                 //  == FIELDS ==
               private:
@@ -49,7 +54,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Ambient(const std::string& t_vert_serial, const std::string& t_frag_serial);
+                Diffuse(const std::string& t_vert_serial, const std::string& t_frag_serial);
 
 
                 //  == METHODS ==
@@ -67,4 +72,4 @@ namespace arc
 
 
 //  == GUARD END ==
-#endif // ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_AMBIENT_HPP
+#endif // ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_DIFFUSE_HPP
