@@ -36,7 +36,6 @@ namespace arc
             //  == SETTINGS ==
             //  -- Uniforms --
             constexpr const char* VIEW_MAT_UNIFORM_NAME  = "view";       //! Name of the view matrix uniform.
-            constexpr const char* PROP_COL_UNIFORM_NAME  = "prop_col";   //! Name of the prop colour uniform.
             constexpr const char* LIGHT_POS_UNIFORM_NAME = "light_pos";  //! Name of the light position uniform.
 
 
@@ -51,7 +50,6 @@ namespace arc
               private:
                 //  -- Uniforms --
                 const GLint m_view;         //! View matrix uniform handle.
-                const GLint m_prop_col;     //! Prop colour uniform handle.
                 const GLint m_light_pos;    //! Light position uniform handle.
 
 
@@ -65,7 +63,6 @@ namespace arc
               public:
                 //  -- Getters --
                 GLint get_view() const { return (m_view); }
-                GLint get_prop_col() const { return (m_prop_col); }
                 GLint get_light_pos() const { return (m_light_pos); }
             };
 

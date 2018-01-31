@@ -38,7 +38,8 @@ namespace arc
          */
         Shader::Shader(const std::string& t_vert_serial, const std::string& t_frag_serial) :
             m_handle(init_handle(t_vert_serial, t_frag_serial)),
-            m_mvp(init_uniform(MVP_UNIFORM_NAME))
+            m_mvp(init_uniform(MVP_MAT_UNIFORM_NAME)),
+            m_prop_col(init_uniform(PROP_COL_UNIFORM_NAME))
         {
         }
 

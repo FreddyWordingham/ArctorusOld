@@ -12,11 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -36,8 +31,7 @@ namespace arc
              *  @param  t_frag_serial   Serialised source code of the fragment shader.
              */
             Ambient::Ambient(const std::string& t_vert_serial, const std::string& t_frag_serial) :
-                Shader(t_vert_serial, t_frag_serial),
-                m_prop_col(init_uniform(PROP_COL_UNIFORM_NAME))
+                Shader(t_vert_serial, t_frag_serial)
             {
             }
 
