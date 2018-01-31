@@ -114,6 +114,7 @@ namespace arc
           private:
             //  -- Render --
             void setup_ambient_shader() const;
+            void setup_diffuse_shader() const;
             void draw_spotlights() const;
 
             //  -- Control --

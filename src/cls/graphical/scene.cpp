@@ -210,9 +210,10 @@ namespace arc
 
             // Setup the shaders.
             setup_ambient_shader();
+            setup_diffuse_shader();
 
-//            glEnable(GL_DEPTH_TEST);
-            //          glDepthFunc(GL_LESS);
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LESS);
 
             // Drawing.
             draw_spotlights();
@@ -229,6 +230,18 @@ namespace arc
             glUseProgram(m_ambient_shader.get_handle());
 
             glUniformMatrix4fv(m_ambient_shader.get_mvp(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+        }
+
+        /**
+         *  Setup the diffuse shader ready for rendering.
+         */
+        void Scene::setup_diffuse_shader() const
+        {
+            glUseProgram(m_diffuse_shader.get_handle());
+
+            glUniformMatrix4fv(m_diffuse_shader.get_mvp(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+            glUniformMatrix4fv(m_diffuse_shader.get_view(), 1, GL_FALSE, &m_primary_cam->get_view()[0][0]);
+            glUniform3f(m_diffuse_shader.get_light_pos(), 2.0, 2.0, 2.0);
         }
 
         /**
