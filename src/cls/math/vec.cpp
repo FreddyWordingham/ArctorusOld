@@ -78,7 +78,7 @@ namespace arc
         /**
          *  Determine the spherical value of phi for the vec.
          *
-         *  @post   r_phi must be between zero and 2*pi.
+         *  @post   r_phi must be between -pi and pi.
          *
          *  @return The value of phi in spherical coordinates.
          */
@@ -87,7 +87,7 @@ namespace arc
         {
             const double r_phi = std::atan2(m_data[Y], m_data[X]);
 
-            assert((r_phi >= 0.0) && (r_phi <= (2.0 * M_PI)));
+            assert((r_phi >= M_PI) && (r_phi <= M_PI));
 
             return (r_phi);
         }
