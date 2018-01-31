@@ -40,13 +40,15 @@ namespace arc
                 //  -- Properties --
                 const glm::vec3 m_pos;      //! Position of the light.
                 const glm::vec3 m_dir;      //! Direction of the light.
+                const float     m_radius;   //! Radius of the light.
                 const float     m_aperture; //! Numerical aperture of the light.
+                const float     m_power;    //! Power of the light.
 
 
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Light(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, float t_scale, float t_aperture, float t_power,
+                Light(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, float t_rad, float t_aperture, float t_power,
                       const glm::vec3& t_col);
             };
 
