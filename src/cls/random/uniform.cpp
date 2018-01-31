@@ -60,7 +60,7 @@ namespace arc
             m_v(static_cast<base>(4101842887655102017)),
             m_w(static_cast<base>(1))
         {
-            init_genaration_variables();
+            init_generation_variables();
 
             LOG("Seed: " << m_seed);
         }
@@ -70,7 +70,7 @@ namespace arc
         /**
          *  Initialise the generation variables through bit shifting and calls to the generator method.
          */
-        void Uniform::init_genaration_variables()
+        void Uniform::init_generation_variables()
         {
             m_u = m_seed ^ m_v;
             gen_base();

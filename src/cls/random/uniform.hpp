@@ -63,7 +63,7 @@ namespace arc
             explicit Uniform(base t_seed);
 
             //  -- Initialisation --
-            void init_genaration_variables();
+            void init_generation_variables();
 
 
             //  == OPERATORS ==
