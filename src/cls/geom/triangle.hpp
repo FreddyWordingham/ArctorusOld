@@ -51,8 +51,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
-            inline const math::Vec<3>& get_pos(size_t t_index) const;
-            inline const math::Vec<3>& get_norm(size_t t_index) const;
+            inline const Vertex& get_vert(size_t t_index) const;
             double get_area() const { return (m_area); }
         };
 
@@ -61,35 +60,17 @@ namespace arc
         //  == METHODS ==
         //  -- Getters --
         /**
-         *  Get a vertex position of the triangle.
+         *  Retrieve a const reference to a vertex of the triangle,
          *
-         *  @param  t_index Index of the vertex position to retrieve.
+         *  @param  t_index Index of the vertex to retrieve.
          *
-         *  @pre    t_index must be less than three.
-         *
-         *  @return A const reference to the triangle vertex position.
+         *  @return A const reference to a vertex of the triangle.
          */
-        inline const math::Vec<3>& Triangle::get_pos(const size_t t_index) const
+        inline const Vertex& Triangle::get_vert(const size_t t_index) const
         {
-            assert(t_index < 3);
+            assert(t_index < m_vert.size());
 
-            return (m_pos[t_index]);
-        }
-
-        /**
-         *  Get a vertex normal of the triangle.
-         *
-         *  @param  t_index Index of the vertex normal to retrieve.
-         *
-         *  @pre    t_index must be less than three.
-         *
-         *  @return A const reference to the triangle vertex normal.
-         */
-        inline const math::Vec<3>& Triangle::get_norm(const size_t t_index) const
-        {
-            assert(t_index < 3);
-
-            return (m_norm[t_index]);
+            return (m_vert[t_index]);
         }
 
 
