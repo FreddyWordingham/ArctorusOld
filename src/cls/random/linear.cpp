@@ -14,10 +14,8 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/rng.hpp"
 #include "gen/log.hpp"
-
-//  -- Utility --
+#include "gen/rng.hpp"
 
 
 
