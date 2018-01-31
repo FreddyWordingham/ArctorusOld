@@ -36,7 +36,7 @@ out float dist;                 //! Distance between the light and the vertex.
 
 //  == MAIN ==
 /**
- *  Illuminate objects with uniform ambient lighting.
+ *  Illuminate objects with diffuse, directed lighting.
  */
 void main()
 {
