@@ -17,12 +17,13 @@
 //  -- System --
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <cls/graphical/shader/ambient.hpp>
 #include <memory>
 
 //  -- Classes --
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/prop.hpp"
+#include "cls/graphical/shader/ambient.hpp"
+#include "cls/graphical/shader/diffuse.hpp"
 #include "cls/math/vec.hpp"
 
 
@@ -75,6 +76,7 @@ namespace arc
 
             //  -- Shaders --
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
+            shader::Diffuse m_diffuse_shader;   //! Diffuse lighting shader.
 
             //  -- Props --
             std::vector<Prop> m_spotlight;  //! Vector of spotlight props.

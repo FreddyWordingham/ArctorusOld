@@ -46,7 +46,8 @@ namespace arc
                 std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(
                 std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
-            m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_FRAG_SHADER, false))
+            m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_FRAG_SHADER, false)),
+            m_diffuse_shader(file::read(DIFFUSE_VERT_SHADER, false), file::read(DIFFUSE_FRAG_SHADER, false))
         {
         }
 
