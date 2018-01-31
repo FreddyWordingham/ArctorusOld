@@ -23,7 +23,7 @@ const float light_pow   = 5.0f; //! Power of the light source (arbitrary).
 //  -- Passed --
 in vec3 vert_col;               //! Colour to draw the vertex with.
 in vec3 cam_space_norm;         //! Camera-space light normal.
-in vec3 cam_space_light_norm;   //! Camera-space light direction.
+in vec3 cam_space_light_dir;    //! Camera-space light direction.
 in float dist;                  //! Distance between the light and the vertex.
 
 
