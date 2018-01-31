@@ -217,6 +217,7 @@ namespace arc
 
             // Drawing.
             draw_spotlights();
+            draw_entities();
 
             // Swap to the new buffer.
             glfwSwapBuffers(m_window);
@@ -266,6 +267,33 @@ namespace arc
                 glBindVertexArray(m_spotlight[i].get_vao());
 
                 glDrawArrays(GL_LINES, 0, m_spotlight[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+        }
+
+        /**
+         *  Draw the entities within a scene.
+         */
+        void Scene::draw_entities() const
+        {
+            // Use the diffuse shader.
+            glUseProgram(m_diffuse_shader.get_handle());
+
+            // Set drawing mode.
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            // Draw each entity.
+            for (size_t i = 0; i < m_entity.size(); ++i)
+            {
+                glUniform3f(m_diffuse_shader.get_prop_col(), m_entity[i].get_col()[R], m_entity[i].get_col()[G],
+                            m_entity[i].get_col()[B]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_entity[i].get_vao());
+
+                glDrawArrays(GL_TRIANGLES, 0, m_entity[i].get_num_vert());
 
                 glBindVertexArray(0);
             }
