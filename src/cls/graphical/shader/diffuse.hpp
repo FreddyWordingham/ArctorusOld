@@ -50,9 +50,9 @@ namespace arc
                 //  == FIELDS ==
               private:
                 //  -- Uniforms --
-                const GLint m_prop_col; //! Prop colour uniform handle.
-                const GLint m_prop_col; //! Prop colour uniform handle.
-                const GLint m_prop_col; //! Prop colour uniform handle.
+                const GLint m_view;         //! View matrix uniform handle.
+                const GLint m_prop_col;     //! Prop colour uniform handle.
+                const GLint m_light_pos;    //! Light position uniform handle.
 
 
                 //  == INSTANTIATION ==
