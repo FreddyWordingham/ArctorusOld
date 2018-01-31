@@ -171,6 +171,16 @@ namespace arc
                                                         {rng::random(0.0, 1.0), rng::random(0.0, 1.0), rng::random(0.0, 1.0)}));
         }
 
+        /**
+         *  Add an entity to the scene.
+         *
+         *  @param  t_mesh  Mesh of the entity to be added.
+         */
+        void Scene::add_entity(const geom::Mesh& t_mesh)
+        {
+            LOG("Added mesh.");
+        }
+
 
         //  -- Render --
         /**

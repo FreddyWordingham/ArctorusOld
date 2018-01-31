@@ -20,6 +20,7 @@
 #include <memory>
 
 //  -- Classes --
+#include "cls/geom/mesh.hpp"
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/prop.hpp"
 #include "cls/graphical/shader/ambient.hpp"
@@ -80,6 +81,7 @@ namespace arc
 
             //  -- Props --
             std::vector<Prop> m_spotlight;  //! Vector of spotlight props.
+            std::vector<Prop> m_entity;     //! Vector of entity props.
 
 
             //  == INSTANTIATION ==
@@ -104,6 +106,7 @@ namespace arc
             //  -- Additions --
             void add_light(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_rad, double t_aperture,
                            double t_power);
+            void add_entity(const geom::Mesh& t_mesh);
 
             //  -- Render --
             void render() const;
