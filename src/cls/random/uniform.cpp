@@ -35,7 +35,7 @@ namespace arc
          *
          *  @param  t_seed  Seed used to initialise the random number generator.
          *
-         *  @return The initalised uniform object.
+         *  @return The initialised uniform object.
          */
         Uniform& Uniform::get_instance(const base t_seed)
         {
@@ -52,7 +52,7 @@ namespace arc
         /**
          *  Construct a uniform random number generator using a given seed.
          *
-         *  @param  t_seed  Seed used to initalise the random number generator.
+         *  @param  t_seed  Seed used to initialise the random number generator.
          */
         Uniform::Uniform(const base t_seed) :
             m_seed(t_seed),

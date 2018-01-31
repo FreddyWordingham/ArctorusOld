@@ -172,7 +172,7 @@ namespace arc
                         if (pos.fail() || norm.fail())
                         {
                             ERROR("Unable to construct geom::Mesh object.",
-                                  "Unable to parse stringified wavefront object line: '" << line << "'.");
+                                  "Unable to parse serialised wavefront object line: '" << line << "'.");
                         }
                     }
 
