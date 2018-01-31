@@ -215,23 +215,6 @@ namespace arc
                 vert[i].translate(t_pos);
             }
 
-
-            math::Vec<3> end({{0.0, 1.0, 0.0}});
-            Vertex v({0.0, 0.0, 1.0}, {0.0, 0.0, 0.0});
-            LOG("---");
-            VAL(end);
-            VAL(end.get_theta());
-            VAL(end.get_phi());
-            LOG("");
-
-            VAL(v.get_pos()[X]);
-            VAL(v.get_pos()[Y]);
-            VAL(v.get_pos()[Z]);
-            v.rotate(math::Vec<3>({{0.0, end.get_theta(), end.get_phi()}}));
-            VAL(v.get_pos()[X]);
-            VAL(v.get_pos()[Y]);
-            VAL(v.get_pos()[Z]);
-
             return (Prop(vert, t_col));
         }
 
