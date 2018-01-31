@@ -29,7 +29,7 @@ namespace arc
          */
         Triangle::Triangle(const std::array<Vertex, 3>& t_vert) :
             m_vert(t_vert),
-            m_area(math::area({{t_vert[ALPHA].get_pos()}}))
+            m_area(math::area({{t_vert[ALPHA].get_pos(), t_vert[BETA].get_pos(), t_vert[GAMMA].get_pos()}}))
         {
         }
 
