@@ -8,16 +8,12 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-
 //  -- General --
-#include <cls/geom/mesh.hpp>
-#include <cls/file/handle.hpp>
 #include "gen/log.hpp"
 #include "gen/rng.hpp"
 
 //  -- Classes --
-#include "cls/graphical/scene.hpp"
+#include "cls/file/handle.hpp"
 
 
 

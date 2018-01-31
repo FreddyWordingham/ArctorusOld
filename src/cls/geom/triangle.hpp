@@ -45,7 +45,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm);
+            Triangle(const std::array<Vertex, 3>& t_vert);
 
 
             //  == METHODS ==

@@ -12,11 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -28,21 +23,13 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a triangle from a list of given positions and normals.
-         *  Triangle normals must be normalised.
+         *  Construct a triangle from three vertices.
          *
-         *  @param  t_pos   Vertex positions of the triangle.
-         *  @param  t_norm  Vertex normals of the triangle.
+         *  @param  t_vert  Array of three vertices forming the triangle.
          */
-        Triangle::Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm) :
-            m_pos(t_pos),
-            m_norm(t_norm),
-            m_area(math::area(t_pos))
+        Triangle::Triangle(const std::array<Vertex, 3>& t_vert) :
+            m_vert(t_vert)
         {
-            for (size_t i = 0; i < 3; ++i)
-            {
-                assert(t_norm[i].is_normalised());
-            }
         }
 
 
