@@ -44,17 +44,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-
-          private:
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
-
-
-            //  == METHODS ==
-          private:
+            Vertex(const math::Vec<3>& t_pos, const math::Vec<3>& t_norm = math::Vec<3>({{0.0, 0.0, 1.0}}));
         };
 
 

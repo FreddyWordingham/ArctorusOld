@@ -12,11 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -27,10 +22,20 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-
-
-
-        //  -- Initialisation --
+        /**
+         *  Construct a vertex from a given position and normal.
+         *
+         *  @param  t_pos   Position of the vertex.
+         *  @param  t_norm  Normal direction associated with the vertex.
+         *
+         *  @post   t_norm must be normalised.
+         */
+        Vertex::Vertex(const math::Vec<3>& t_pos, const math::Vec<3>& t_norm) :
+            m_pos(t_pos),
+            m_norm(t_norm)
+        {
+            assert(t_norm.is_normalised());
+        }
 
 
 
