@@ -87,7 +87,7 @@ namespace arc
             //  -- Getters --
             std::string get_filename() const;
             size_t get_file_size() const;
-            std::string get_contents(const bool t_filter = true) const;
+            std::string get_contents(bool t_filter = true) const;
 
             //  -- Writing --
             Handle& comment();
@@ -97,7 +97,7 @@ namespace arc
 
         //  == FUNCTION PROTOTYPES ==
         //  -- File Contents --
-        std::string read(const std::string& t_file_path, const bool t_filter = true);
+        std::string read(const std::string& t_file_path, bool t_filter = true);
 
 
 

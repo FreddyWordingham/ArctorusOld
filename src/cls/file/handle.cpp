@@ -195,7 +195,7 @@ namespace arc
          *
          *  @return A string of the file's contents.
          */
-        std::string read(const std::string& t_file_path, const bool t_filter)
+        std::string read(const std::string& t_file_path, bool t_filter)
         {
             return (arc::file::Handle(t_file_path, std::fstream::in).get_contents(t_filter));
         }
