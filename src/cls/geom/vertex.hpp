@@ -44,7 +44,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Vertex(const math::Vec<3>& t_pos, const math::Vec<3>& t_norm = math::Vec<3>({{0.0, 0.0, 1.0}}));
+            explicit Vertex(const math::Vec<3>& t_pos, const math::Vec<3>& t_norm = math::Vec<3>({{0.0, 0.0, 1.0}}));
         };
 
 
