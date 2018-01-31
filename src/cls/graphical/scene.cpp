@@ -178,7 +178,23 @@ namespace arc
          */
         void Scene::add_entity(const geom::Mesh& t_mesh)
         {
-            LOG("Added mesh.");
+            std::vector<Vertex> vert;
+            vert.reserve(t_mesh.get_num_tri() * 3);
+
+            for (size_t i = 0; i < t_mesh.get_num_tri(); ++i)
+            {
+                for (size_t j = 0; j < 3; ++j)
+                {
+                    vert.emplace_back(Vertex(glm::vec3({static_cast<float>(t_mesh.get_tri(i).get_pos(j)[X]),
+                                                        static_cast<float>(t_mesh.get_tri(i).get_pos(j)[Y]),
+                                                        static_cast<float>(t_mesh.get_tri(i).get_pos(j)[Z])}), glm::vec3(
+                        {static_cast<float>(t_mesh.get_tri(i).get_norm(j)[X]),
+                         static_cast<float>(t_mesh.get_tri(i).get_norm(j)[Y]),
+                         static_cast<float>(t_mesh.get_tri(i).get_norm(j)[Z])})));
+                }
+            }
+
+            m_entity.emplace_back(Prop(vert, glm::vec3({1.0, 0.0, 0.0})));
         }
 
 
