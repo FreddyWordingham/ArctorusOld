@@ -40,5 +40,7 @@ out vec3 col;   //! Output fragment colour.
  */
 void main()
 {
-    col = vert_col;
+    float cos_theta = clamp(dot(cam_space_norm, cam_space_light_dir), 0.0, 1.0);
+
+    col = vert_col * (amb_pow + ((light_pow * cos_theta) / (dist * dist)));
 }
