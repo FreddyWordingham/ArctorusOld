@@ -87,7 +87,7 @@ namespace arc
         {
             const double r_phi = std::atan2(m_data[Y], m_data[X]);
 
-            assert((r_phi >= M_PI) && (r_phi <= M_PI));
+            assert((r_phi >= -M_PI) && (r_phi <= M_PI));
 
             return (r_phi);
         }
