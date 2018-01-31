@@ -35,7 +35,9 @@ namespace arc
 
             //  == SETTINGS ==
             //  -- Uniforms --
-            constexpr const char* PROP_COL_UNIFORM_NAME = "prop_col";   //! Name of the prop colour uniform within the shader.
+            constexpr const char* VIEW_MAT_UNIFORM_NAME  = "view";       //! Name of the view matrix uniform.
+            constexpr const char* PROP_COL_UNIFORM_NAME  = "prop_col";   //! Name of the prop colour uniform.
+            constexpr const char* LIGHT_POS_UNIFORM_NAME = "light_pos";  //! Name of the light position uniform.
 
 
 
@@ -48,6 +50,8 @@ namespace arc
                 //  == FIELDS ==
               private:
                 //  -- Uniforms --
+                const GLint m_prop_col; //! Prop colour uniform handle.
+                const GLint m_prop_col; //! Prop colour uniform handle.
                 const GLint m_prop_col; //! Prop colour uniform handle.
 
 
