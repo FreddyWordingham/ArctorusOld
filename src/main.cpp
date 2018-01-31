@@ -10,10 +10,6 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/log.hpp"
-#include "gen/rng.hpp"
-
-//  -- Classes --
-#include "cls/file/handle.hpp"
 
 
 
@@ -31,10 +27,6 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
-    rng::seed();
-
-//    geom::Mesh cube(file::read("cube.obj"));
-
 
     return (0);
 }
