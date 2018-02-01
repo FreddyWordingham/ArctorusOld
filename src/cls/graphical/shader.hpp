@@ -15,6 +15,8 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <GL/glew.h>
+#include <string>
 
 
 
@@ -35,6 +37,8 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Program --
+            const GLuint m_handle;  //! Handle to the compiled shader program.
 
 
             //  == INSTANTIATION ==
