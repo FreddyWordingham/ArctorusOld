@@ -150,6 +150,26 @@ namespace arc
             return (r_handle);
         }
 
+        /**
+         *  Initialise a handle to a shader uniform using its name.
+         *
+         *  @param  t_uni_name  Name of the uniform to initialise.
+         *
+         *  @return The handle to the initialised shader uniform.
+         */
+        GLint Shader::init_uniform(const std::string& t_uni_name) const
+        {
+            GLint r_uniform = glGetUniformLocation(m_handle, t_uni_name.c_str());
+
+            if (r_uniform < 0)
+            {
+                ERROR("Unable to construct graphical::Shader object.",
+                      "Failed to determine the uniform location of: '" << t_uni_name << "' within the shader.");
+            }
+
+            return (r_uniform);
+        }
+
 
     } // namespace graphical
 } // namespace arc
