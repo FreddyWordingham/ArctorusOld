@@ -12,18 +12,31 @@
 
 
 
+//  == CONSTANTS ==
+//  -- Drawing --
+uniform float length = 1.0; //! Length to draw normal lines.
+
+
+
 //  == INPUT ==
-//  -- Layout --
+//  -- Vertex --
 layout(triangles) in;
 
 //  -- Passed --
-in vec4 vert_col[]; //! Colour to draw the vertex with.
+in Vertex
+{
+    vec3 norm;
+    vec4 col;
+}   vertex[];
+
+//  -- Uniforms --
+uniform mat4 mvp;   //! Model-view-projection matrix.
 
 
 
 //  == OUTPUT ==
 //  -- Layout --
-layout(triangle_strip, max_vertices = 1) out;
+layout(line_strip, max_vertices=6) out;
 
 //  -- Passed --
 out vec4 geom_col;  //! Colour to draw the vertex with.
@@ -36,9 +49,19 @@ out vec4 geom_col;  //! Colour to draw the vertex with.
  */
 void main()
 {
-    gl_Position = gl_in[0].gl_Position;
-    geom_col = vert_col[0];
+    for(int i = 0; i < gl_in.length(); i++)
+    {
+        vec3 P = gl_in[i].gl_Position.xyz;
+        vec3 N = vertex[i].norm.xyz;
 
-    EmitVertex();
-    EndPrimitive();
+        gl_Position = mvp * vec4(P, 1.0);
+        geom_col = vertex[i].col;
+        EmitVertex();
+
+        gl_Position = mvp * vec4(P + (N * length), 1.0);
+        geom_col = vertex[i].col;
+        EmitVertex();
+
+        EndPrimitive();
+    }
 }
