@@ -13,7 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- General --
+#include "gen/log.hpp"
 
 
 
@@ -41,7 +42,113 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Compile the full shader program and return the handle to it.
+         *
+         *  @param  t_geom_serial   Serialised source code of the geometry shader.
+         *  @param  t_vert_serial   Serialised source code of the vertex shader.
+         *  @param  t_frag_serial   Serialised source code of the fragment shader.
+         *
+         *  @return The handle to the initialised shader program.
+         */
+        GLuint Shader::init_handle(const std::string& t_geom_serial, const std::string& t_vert_serial,
+                                   const std::string& t_frag_serial) const
+        {
+            // Track if compilation was successful.
+            GLint success;
 
+            // Compile the geometry shader.
+            const char* geom_code = t_geom_serial.c_str();
+            GLuint geom_shader = glCreateShader(GL_GEOMETRY_SHADER);
+            glShaderSource(geom_shader, 1, &geom_code, nullptr);
+            glCompileShader(geom_shader);
+
+            // Check that the vertex shader compiled successfully.
+            glGetShaderiv(geom_shader, GL_COMPILE_STATUS, &success);
+            if (success == GL_FALSE)
+            {
+                GLint log_length;
+                glGetShaderiv(geom_shader, GL_INFO_LOG_LENGTH, &log_length);
+                std::vector<char> error_log(static_cast<size_t>(log_length));
+
+                glGetShaderInfoLog(geom_shader, log_length, nullptr, error_log.data());
+                std::string error_text(begin(error_log), end(error_log));
+
+                ERROR("Unable to construct graphical::Shader object.",
+                      "Vertex shader compilation failed with error: '" << error_text << "'.");
+            }
+
+            // Compile the vertex shader.
+            const char* vert_code = t_vert_serial.c_str();
+            GLuint vert_shader = glCreateShader(GL_VERTEX_SHADER);
+            glShaderSource(vert_shader, 1, &vert_code, nullptr);
+            glCompileShader(vert_shader);
+
+            // Check that the vertex shader compiled successfully.
+            glGetShaderiv(vert_shader, GL_COMPILE_STATUS, &success);
+            if (success == GL_FALSE)
+            {
+                GLint log_length;
+                glGetShaderiv(vert_shader, GL_INFO_LOG_LENGTH, &log_length);
+                std::vector<char> error_log(static_cast<size_t>(log_length));
+
+                glGetShaderInfoLog(vert_shader, log_length, nullptr, error_log.data());
+                std::string error_text(begin(error_log), end(error_log));
+
+                ERROR("Unable to construct graphical::Shader object.",
+                      "Vertex shader compilation failed with error: '" << error_text << "'.");
+            }
+
+            // Compile the fragment shader.
+            const char* frag_code = t_frag_serial.c_str();
+            GLuint frag_shader = glCreateShader(GL_FRAGMENT_SHADER);
+            glShaderSource(frag_shader, 1, &frag_code, nullptr);
+            glCompileShader(frag_shader);
+
+            // Check that the fragment shader compiled successfully.
+            glGetShaderiv(frag_shader, GL_COMPILE_STATUS, &success);
+            if (success == GL_FALSE)
+            {
+                GLint log_length;
+                glGetShaderiv(frag_shader, GL_INFO_LOG_LENGTH, &log_length);
+                std::vector<char> error_log(static_cast<size_t>(log_length));
+
+                glGetShaderInfoLog(frag_shader, log_length, nullptr, error_log.data());
+                std::string error_text(begin(error_log), end(error_log));
+
+                ERROR("Unable to construct graphical::Shader object.",
+                      "Fragment shader compilation failed with error: '" << error_text << "'.");
+            }
+
+            // Compile the complete shader.
+            GLuint r_handle = glCreateProgram();
+            glAttachShader(r_handle, geom_shader);
+            glAttachShader(r_handle, vert_shader);
+            glAttachShader(r_handle, frag_shader);
+            glLinkProgram(r_handle);
+
+            // Check that the complete shader compiled successfully.
+            glGetProgramiv(r_handle, GL_LINK_STATUS, &success);
+            if (success == GL_FALSE)
+            {
+                GLint log_length;
+                glGetProgramiv(r_handle, GL_INFO_LOG_LENGTH, &log_length);
+                std::vector<char> error_log(static_cast<size_t>(log_length));
+
+                glGetProgramInfoLog(r_handle, log_length, nullptr, error_log.data());
+                std::string error_text(begin(error_log), end(error_log));
+
+                ERROR("Unable to construct graphical::Shader object.",
+                      "Shader linking failed with error: '" << error_text << "'.");
+            }
+
+            // Clean up temporary shaders.
+            glDeleteShader(geom_shader);
+            glDeleteShader(vert_shader);
+            glDeleteShader(frag_shader);
+
+            return (r_handle);
+        }
 
 
     } // namespace graphical
