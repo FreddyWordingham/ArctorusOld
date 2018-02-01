@@ -13,14 +13,14 @@
 
 
 //  == INPUT ==
-//  -- Passed --
-in vec3 vert_col;   //! Colour to draw the vertex with.
+//  -- Layout --
+layout(triangles) in;
 
 
 
 //  == OUTPUT ==
-//  -- Passed --
-out vec3 vert_col;  //! Colour to draw the vertex with.
+//  -- Layout --
+layout(triangles, max_vertices = 1) out;
 
 
 
@@ -30,4 +30,7 @@ out vec3 vert_col;  //! Colour to draw the vertex with.
  */
 void main()
 {
+    gl_Position = gl_in[0].gl_Position;
+    EmitVertex();
+    EndPrimitive();
 }

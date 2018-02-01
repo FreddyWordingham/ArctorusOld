@@ -14,18 +14,18 @@
 
 //  == INPUT ==
 //  -- Layout --
-layout(location = 0) in vec3 pos;   //! Vertex positions.
-layout(location = 1) in vec3 norm;  //! Vertex normals.
+in vec3 pos;    //! Vertex positions.
+in vec3 norm;   //! Vertex normals.
 
 //  -- Uniforms --
-uniform mat4 mvp;       //! Model-view-projection matrix.
-uniform vec3 prop_col;  //! Prop colour.
+//uniform mat4 mvp;       //! Model-view-projection matrix.
+//uniform vec3 prop_col;  //! Prop colour.
 
 
 
 //  == OUTPUT ==
 //  -- Passed --
-out vec3 vert_col;  //! Colour to draw the vertex with.
+out vec4 vert_col;  //! Colour to draw the vertex with.
 
 
 
@@ -35,7 +35,7 @@ out vec3 vert_col;  //! Colour to draw the vertex with.
  */
 void main()
 {
-    gl_Position = mvp * vec4(pos, 1.0);
+    gl_Position = /*mvp **/ vec4(pos, 1.0);
 
-    vert_col = prop_col;
+    vert_col = vec4(1.0, 0.0, 0.0, 1.0);//prop_col;
 }

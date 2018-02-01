@@ -12,15 +12,9 @@
 
 
 
-//  == INPUT ==
-//  -- Passed --
-in vec3 vert_col;   //! Colour to draw the vertex with.
-
-
-
 //  == OUTPUT ==
 //  -- Passed --
-out vec3 col;   //! Output fragment colour.
+vec4 out_color; //! Output fragment colour.
 
 
 
@@ -30,5 +24,5 @@ out vec3 col;   //! Output fragment colour.
  */
 void main()
 {
-    col = vert_col;
+    out_color = vec4(1.0, 0.0, 0.0, 1.0);
 }

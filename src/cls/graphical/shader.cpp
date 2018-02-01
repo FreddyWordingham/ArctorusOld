@@ -95,7 +95,7 @@ namespace arc
                 std::string error_text(begin(error_log), end(error_log));
 
                 ERROR("Unable to construct graphical::Shader object.",
-                      "Vertex shader compilation failed with error: '" << error_text << "'.");
+                      "Geometry shader compilation failed with error: '" << error_text << "'.");
             }
 
             // Compile the fragment shader.
