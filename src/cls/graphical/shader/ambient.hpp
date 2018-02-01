@@ -50,6 +50,8 @@ namespace arc
                 //  == METHODS ==
               private:
                 //  -- Getters --
+                GLint get_mvp() const { return (m_mvp); }
+                GLint gem_prop_col() const { return (m_prop_col); }
             };
 
 
