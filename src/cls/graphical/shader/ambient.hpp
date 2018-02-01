@@ -38,20 +38,21 @@ namespace arc
                 //  == FIELDS ==
               private:
                 //  -- Uniforms --
-                const GLint m_mvp;      //! Model-view-projection uniform handle.
-                const GLint m_prop_col; //! Prop colour uniform handle.
+                const GLint m_mvp_uni;      //! Model-view-projection uniform handle.
+                const GLint m_prop_col_uni; //! Prop colour uniform handle.
 
 
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
+                Ambient(const std::string& t_geom_serial, const std::string& t_vert_serial, const std::string& t_frag_serial);
 
 
                 //  == METHODS ==
               private:
                 //  -- Getters --
-                GLint get_mvp() const { return (m_mvp); }
-                GLint gem_prop_col() const { return (m_prop_col); }
+                GLint get_mvp_uni() const { return (m_mvp_uni); }
+                GLint gem_prop_col_uni() const { return (m_prop_col_uni); }
             };
 
 
