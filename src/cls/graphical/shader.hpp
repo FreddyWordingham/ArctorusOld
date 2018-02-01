@@ -53,7 +53,9 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            GLuint get_handle() const { return (m_handle); }
         };
 
 
