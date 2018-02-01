@@ -147,7 +147,3 @@ target_link_libraries(arctorus ${OPENGL_LIBRARIES})
 target_link_libraries(arctorus ${SDL2_LIBRARIES})
 target_link_libraries(arctorus GLEW)
 target_link_libraries(arctorus glfw)
-find_package(wxWidgets REQUIRED net gl core base)
-include(${wxWidgets_USE_FILE})
-# and for each of your dependent executable/library targets:
-target_link_libraries(arctorus ${wxWidgets_LIBRARIES})
