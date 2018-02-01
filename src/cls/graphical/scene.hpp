@@ -35,6 +35,9 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Window Handle --
+            GLFWwindow* m_window;   //! Handle to the main graphical window.
+
 
 
             //  == INSTANTIATION ==
