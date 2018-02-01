@@ -19,6 +19,9 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
+//  -- Classes --
+#include <cls/graphical/shader/ambient.hpp>
+
 
 
 //  == NAMESPACE ==
@@ -44,6 +47,7 @@ namespace arc
         constexpr const glm::vec3 INIT_CAM_POS({+10.0f, +10.0f, +10.0f});   //! Initial position of the camera.
 
         //  -- Shaders --
+        constexpr const char* AMBIENT_GEOM_SHADER = "res/shaders/ambient.geom"; //! Path to ambient geometry shader.
         constexpr const char* AMBIENT_VERT_SHADER = "res/shaders/ambient.vert"; //! Path to ambient vertex shader.
         constexpr const char* AMBIENT_FRAG_SHADER = "res/shaders/ambient.frag"; //! Path to ambient fragment shader.
         constexpr const char* DIFFUSE_VERT_SHADER = "res/shaders/diffuse.vert"; //! Path to diffuse vertex shader.
@@ -64,6 +68,7 @@ namespace arc
             GLFWwindow* m_window;   //! Handle to the main graphical window.
 
             //  -- Shaders --
+            shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
 
 
             //  == INSTANTIATION ==

@@ -16,6 +16,9 @@
 //  -- General --
 #include "gen/log.hpp"
 
+//  -- Classes --
+#include "cls/file/handle.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -32,7 +35,8 @@ namespace arc
          *  Construct a three-dimensional scene.
          */
         Scene::Scene() :
-            m_window(init_window())
+            m_window(init_window()),
+            m_ambient_shader(file::read(AMBIENT_GEOM_SHADER), file::read(AMBIENT_VERT_SHADER), file::read(AMBIENT_FRAG_SHADER))
         {
         }
 
