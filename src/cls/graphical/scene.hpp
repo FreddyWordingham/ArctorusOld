@@ -43,6 +43,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Scene();
 
           private:
             //  -- Initialisation --
