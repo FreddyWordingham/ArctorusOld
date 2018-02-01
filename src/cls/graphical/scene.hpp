@@ -77,12 +77,11 @@ namespace arc
             GLFWwindow* init_window() const;
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
-          private:
+          public:
+            //  -- Input --
+            bool should_close() const;
+            void handle_input();
         };
 
 

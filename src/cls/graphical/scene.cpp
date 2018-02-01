@@ -99,5 +99,45 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Input --
+        /**
+         *  Check if the window should close.
+         *  This is triggered by either the escape key being pressed, or the red cross being clicked.
+         *
+         *  @return True if the window should close.
+         */
+        bool Scene::should_close() const
+        {
+            // Esc key has been pressed.
+            /*if (glfwGetKey(m_window, control::QUIT) == GLFW_PRESS)
+            {
+                return (true);
+            }*/
+
+            return (glfwWindowShouldClose(m_window) != 0);
+        }
+
+        /**
+         *  Poll the window events and call specialised functions to handle sets of controls.
+         */
+        void Scene::handle_input()
+        {
+            // Calculate elapsed time since last update.
+            static auto last_time  = static_cast<float>(glfwGetTime());
+            auto        cur_time   = static_cast<float>(glfwGetTime());
+            float       time_delta = cur_time - last_time;
+            last_time = cur_time;
+
+            // Poll the window events.
+            glfwPollEvents();
+
+            // Control the camera.
+//            swap_camera();
+//            move_camera(time_delta);
+        }
+
+
+
     } // namespace graphical
 } // namespace arc
