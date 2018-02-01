@@ -20,7 +20,7 @@ layout(triangles) in;
 
 //  == OUTPUT ==
 //  -- Layout --
-layout(triangles, max_vertices = 1) out;
+layout(triangle_strip, max_vertices = 1) out;
 
 
 
