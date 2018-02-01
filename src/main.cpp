@@ -11,6 +11,9 @@
 //  -- General --
 #include "gen/log.hpp"
 
+//  -- Classes --
+#include "cls/graphical/scene.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -27,6 +30,13 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
+
+    graphical::Scene scene;
+
+    while (!scene.should_close())
+    {
+        scene.handle_input();
+    }
 
     return (0);
 }
