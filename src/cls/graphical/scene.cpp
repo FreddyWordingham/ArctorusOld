@@ -13,7 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- General --
+#include "gen/log.hpp"
 
 
 
@@ -33,6 +34,17 @@ namespace arc
         Scene::Scene() :
             m_window(init_window())
         {
+        }
+
+
+        //  -- Destructors --
+        /**
+         *  Destruct the scene object.
+         *  Terminate the glfw operations.
+         */
+        Scene::~Scene()
+        {
+            glfwTerminate();
         }
 
 
@@ -84,6 +96,7 @@ namespace arc
 
             return (r_window);
         }
+
 
 
     } // namespace graphical

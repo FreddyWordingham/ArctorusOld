@@ -17,6 +17,7 @@
 //  -- System --
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 
 
@@ -63,14 +64,17 @@ namespace arc
             GLFWwindow* m_window;   //! Handle to the main graphical window.
 
 
-
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
             Scene();
 
+            //  -- Destructors --
+            ~Scene();
+
           private:
             //  -- Initialisation --
+            GLFWwindow* init_window() const;
 
 
             //  == OPERATORS ==
