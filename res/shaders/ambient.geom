@@ -11,9 +11,17 @@
 #version 330 core
 
 
-//  -- Layout --
-layout(location = 0) in vec3 pos;   //! Vertex positions.
-layout(location = 1) in vec3 norm;  //! Vertex normals.
+
+//  == INPUT ==
+//  -- Passed --
+in vec3 vert_col;   //! Colour to draw the vertex with.
+
+
+
+//  == OUTPUT ==
+//  -- Passed --
+out vec3 vert_col;  //! Colour to draw the vertex with.
+
 
 
 //  == MAIN ==

@@ -13,6 +13,10 @@
 
 
 //  == INPUT ==
+//  -- Layout --
+layout(location = 0) in vec3 pos;   //! Vertex positions.
+layout(location = 1) in vec3 norm;  //! Vertex normals.
+
 //  -- Uniforms --
 uniform mat4 mvp;       //! Model-view-projection matrix.
 uniform vec3 prop_col;  //! Prop colour.

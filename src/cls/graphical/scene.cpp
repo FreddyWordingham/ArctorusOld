@@ -36,7 +36,8 @@ namespace arc
          */
         Scene::Scene() :
             m_window(init_window()),
-            m_ambient_shader(file::read(AMBIENT_GEOM_SHADER), file::read(AMBIENT_VERT_SHADER), file::read(AMBIENT_FRAG_SHADER))
+            m_ambient_shader(file::read(AMBIENT_GEOM_SHADER, false), file::read(AMBIENT_VERT_SHADER, false),
+                             file::read(AMBIENT_FRAG_SHADER, false))
         {
         }
 
