@@ -37,22 +37,19 @@ namespace arc
             {
                 //  == FIELDS ==
               private:
+                //  -- Uniforms --
+                const GLint m_mvp;      //! Model-view-projection uniform handle.
+                const GLint m_prop_col; //! Prop colour uniform handle.
 
 
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
 
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
-
 
                 //  == METHODS ==
               private:
+                //  -- Getters --
             };
 
 
