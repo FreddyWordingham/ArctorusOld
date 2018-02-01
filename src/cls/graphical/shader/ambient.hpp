@@ -52,7 +52,7 @@ namespace arc
               private:
                 //  -- Getters --
                 GLint get_mvp_uni() const { return (m_mvp_uni); }
-                GLint gem_prop_col_uni() const { return (m_prop_col_uni); }
+                GLint gem_col_uni() const { return (m_col_uni); }
             };
 
 
