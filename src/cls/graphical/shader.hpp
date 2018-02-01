@@ -44,11 +44,11 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Shader(const std::string& t_geom_serial, const std::string& t_vert_serial, const std::string& t_frag_serial);
+            Shader(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial);
 
           private:
             //  -- Initialisation --
-            GLuint init_handle(const std::string& t_geom_serial, const std::string& t_vert_serial, const std::string& t_frag_serial) const;
+            GLuint init_handle(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial) const;
 
           protected:
             //  -- Initialisation --

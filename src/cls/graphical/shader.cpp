@@ -31,11 +31,11 @@ namespace arc
         /**
          *  Construct a shader object from individual geometry, vertex and fragment serialised shader codes.
          *
-         *  @param  t_geom_serial   Serialised source code of the geometry shader.
          *  @param  t_vert_serial   Serialised source code of the vertex shader.
+         *  @param  t_geom_serial   Serialised source code of the geometry shader.
          *  @param  t_frag_serial   Serialised source code of the fragment shader.
          */
-        Shader::Shader(const std::string& t_geom_serial, const std::string& t_vert_serial, const std::string& t_frag_serial) :
+        Shader::Shader(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial) :
             m_handle(init_handle(t_geom_serial, t_vert_serial, t_frag_serial))
         {
         }
@@ -45,38 +45,16 @@ namespace arc
         /**
          *  Compile the full shader program and return the handle to it.
          *
-         *  @param  t_geom_serial   Serialised source code of the geometry shader.
          *  @param  t_vert_serial   Serialised source code of the vertex shader.
+         *  @param  t_geom_serial   Serialised source code of the geometry shader.
          *  @param  t_frag_serial   Serialised source code of the fragment shader.
          *
          *  @return The handle to the initialised shader program.
          */
-        GLuint Shader::init_handle(const std::string& t_geom_serial, const std::string& t_vert_serial,
-                                   const std::string& t_frag_serial) const
+        GLuint Shader::init_handle(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial) const
         {
             // Track if compilation was successful.
             GLint success;
-
-            // Compile the geometry shader.
-            const char* geom_code = t_geom_serial.c_str();
-            GLuint geom_shader = glCreateShader(GL_GEOMETRY_SHADER);
-            glShaderSource(geom_shader, 1, &geom_code, nullptr);
-            glCompileShader(geom_shader);
-
-            // Check that the vertex shader compiled successfully.
-            glGetShaderiv(geom_shader, GL_COMPILE_STATUS, &success);
-            if (success == GL_FALSE)
-            {
-                GLint log_length;
-                glGetShaderiv(geom_shader, GL_INFO_LOG_LENGTH, &log_length);
-                std::vector<char> error_log(static_cast<size_t>(log_length));
-
-                glGetShaderInfoLog(geom_shader, log_length, nullptr, error_log.data());
-                std::string error_text(begin(error_log), end(error_log));
-
-                ERROR("Unable to construct graphical::Shader object.",
-                      "Vertex shader compilation failed with error: '" << error_text << "'.");
-            }
 
             // Compile the vertex shader.
             const char* vert_code = t_vert_serial.c_str();
@@ -93,6 +71,27 @@ namespace arc
                 std::vector<char> error_log(static_cast<size_t>(log_length));
 
                 glGetShaderInfoLog(vert_shader, log_length, nullptr, error_log.data());
+                std::string error_text(begin(error_log), end(error_log));
+
+                ERROR("Unable to construct graphical::Shader object.",
+                      "Vertex shader compilation failed with error: '" << error_text << "'.");
+            }
+
+            // Compile the geometry shader.
+            const char* geom_code = t_geom_serial.c_str();
+            GLuint geom_shader = glCreateShader(GL_GEOMETRY_SHADER);
+            glShaderSource(geom_shader, 1, &geom_code, nullptr);
+            glCompileShader(geom_shader);
+
+            // Check that the vertex shader compiled successfully.
+            glGetShaderiv(geom_shader, GL_COMPILE_STATUS, &success);
+            if (success == GL_FALSE)
+            {
+                GLint log_length;
+                glGetShaderiv(geom_shader, GL_INFO_LOG_LENGTH, &log_length);
+                std::vector<char> error_log(static_cast<size_t>(log_length));
+
+                glGetShaderInfoLog(geom_shader, log_length, nullptr, error_log.data());
                 std::string error_text(begin(error_log), end(error_log));
 
                 ERROR("Unable to construct graphical::Shader object.",
@@ -122,8 +121,8 @@ namespace arc
 
             // Compile the complete shader.
             GLuint r_handle = glCreateProgram();
-            glAttachShader(r_handle, geom_shader);
             glAttachShader(r_handle, vert_shader);
+            glAttachShader(r_handle, geom_shader);
             glAttachShader(r_handle, frag_shader);
             glLinkProgram(r_handle);
 
@@ -143,8 +142,8 @@ namespace arc
             }
 
             // Clean up temporary shaders.
-            glDeleteShader(geom_shader);
             glDeleteShader(vert_shader);
+            glDeleteShader(geom_shader);
             glDeleteShader(frag_shader);
 
             return (r_handle);
