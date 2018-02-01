@@ -63,6 +63,8 @@ namespace arc
             //  -- Window Handle --
             GLFWwindow* m_window;   //! Handle to the main graphical window.
 
+            //  -- Shaders --
+
 
             //  == INSTANTIATION ==
           public:
