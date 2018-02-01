@@ -12,9 +12,15 @@
 
 
 
+//  == INPUT ==
+//  -- Passed --
+in vec4 geom_col;   //! Colour of the geometry vertex.
+
+
+
 //  == OUTPUT ==
 //  -- Passed --
-vec4 out_color; //! Output fragment colour.
+out vec4 frag_col;  //! Output fragment colour.
 
 
 
@@ -24,5 +30,5 @@ vec4 out_color; //! Output fragment colour.
  */
 void main()
 {
-    out_color = vec4(1.0, 0.0, 0.0, 1.0);
+    frag_col = geom_col;
 }
