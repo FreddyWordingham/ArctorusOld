@@ -53,6 +53,7 @@ namespace arc
                 //  -- Getters --
                 GLint get_mvp_uni() const { return (m_mvp_uni); }
                 GLint get_col_uni() const { return (m_col_uni); }
+                GLint get_light_power_uni() const { return (m_light_power_uni); }
             };
 
 
