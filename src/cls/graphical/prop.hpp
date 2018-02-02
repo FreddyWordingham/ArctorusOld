@@ -17,6 +17,7 @@
 //  -- System --
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <vector>
 
 //  -- Classes --
 #include "cls/graphical/vertex.hpp"
@@ -63,6 +64,7 @@ namespace arc
           public:
             //  -- Constructors --
             Prop(const std::vector<Vertex>& t_vert, const glm::vec3& t_col);
+            Prop(shape t_shape, const glm::vec3& t_col, float t_scale = 1.0);
 
           private:
             //  -- Initialisation --

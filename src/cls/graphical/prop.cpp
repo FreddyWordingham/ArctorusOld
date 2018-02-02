@@ -48,6 +48,18 @@ namespace arc
             glBindVertexArray(0);
         }
 
+        /**
+         *  Construct a basic prop using a given shape type, colour and scale.
+         *
+         *  @param  t_shape Type of shape to be created.
+         *  @param  t_col   Colour of the shape.
+         *  @param  t_scale Scaling to be applied to the shape.
+         */
+        Prop::Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale) :
+            Prop(init_vert(t_shape, t_scale), t_col)
+        {
+        }
+
 
         //  -- Initialisation --
         /**
