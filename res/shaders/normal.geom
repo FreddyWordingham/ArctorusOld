@@ -21,9 +21,9 @@ in vec3 vert_pos[];
 in vec3 vert_norm[];
 
 //  -- Uniforms --
-uniform mat4 mvp;       //! Model-view-projection matrix.
-uniform vec4 prop_col;  //! Prop colour.
-uniform float power;    //! Length to draw normal lines.
+uniform mat4 mvp;           //! Model-view-projection matrix.
+uniform vec4 prop_col;      //! Prop colour.
+uniform float light_power;  //! Length to draw normal lines.
 
 
 
@@ -47,7 +47,7 @@ void main()
         geom_col = prop_col;
         EmitVertex();
 
-        vec4 v1     = v0 + vec4(vert_norm[0] * power, 0.0);
+        vec4 v1     = v0 + vec4(vert_norm[0] * light_power, 0.0);
         gl_Position = mvp * v1;
         geom_col = vec4(0.0, 0.0, 0.0, 1.0);
         EmitVertex();
