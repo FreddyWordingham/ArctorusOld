@@ -68,6 +68,8 @@ namespace arc
             //  -- Initialisation --
             GLuint init_vao() const;
             GLuint init_vbo() const;
+            std::vector<Vertex> init_vert(shape t_shape, float t_size) const;
+            std::vector<Vertex> init_vert_cube(float t_scale) const;
 
 
             //  == METHODS ==
