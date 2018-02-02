@@ -54,6 +54,7 @@ namespace arc
             m_sun_pos(INIT_SUN_POS),
             m_sun(Prop(Prop::shape::CUBE, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
+            m_lights.push_back(Prop(Prop::shape::CUBE, {1.0, 0.0, 0.0, 1.0}, 1.0));
         }
 
 
@@ -136,7 +137,7 @@ namespace arc
             glDepthFunc(GL_LESS);
 
 //            draw_ents();
-//            draw_lights();
+            draw_lights();
             draw_sun();
 
             glfwSwapBuffers(m_window);
@@ -289,6 +290,31 @@ namespace arc
 
 
         //  -- Drawing --
+        /**
+         *  Draw the scene's light sources.
+         */
+        void Scene::draw_lights() const
+        {
+            glUseProgram(m_diffuse_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), LIGHT_AMB_POW);
+
+            for (size_t i = 0; i < m_lights.size(); ++i)
+            {
+                glUniform4f(m_diffuse_shader.get_col_uni(), m_lights[i].get_col()[R], m_lights[i].get_col()[G],
+                            m_lights[i].get_col()[B], m_lights[i].get_col()[A]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_lights[i].get_vao());
+
+                glDrawArrays(GL_TRIANGLES, 0, m_lights[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+        }
+
         /**
          *  Draw the global illuminator object.
          */

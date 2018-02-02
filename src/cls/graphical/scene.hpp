@@ -122,6 +122,7 @@ namespace arc
             void setup_diffuse_shader() const;
 
             //  -- Drawing --
+            void draw_lights() const;
             void draw_sun() const;
         };
 
