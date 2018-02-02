@@ -15,6 +15,8 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <array>
+#include <glm/glm.hpp>
 
 
 
@@ -42,6 +44,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Vertex(const glm::vec3& t_pos, const glm::vec3& t_norm);
 
 
             //  == METHODS ==
