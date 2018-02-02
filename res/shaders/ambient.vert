@@ -19,13 +19,13 @@ in vec3 norm;   //! Vertex normals.
 
 //  -- Uniforms --
 uniform mat4 mvp;       //! Model-view-projection matrix.
-uniform vec3 prop_col;  //! Object colour.
+uniform vec4 prop_col;  //! Object colour.
 
 
 
 //  == OUTPUT ==
 //  -- Passed --
-out vec3 vert_col;  //! Colour to draw the vertex with.
+out vec4 vert_col;  //! Colour to draw the vertex with.
 
 
 

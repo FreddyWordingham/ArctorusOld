@@ -1,3 +1,12 @@
+/**
+ *  @author Freddy Wordingham
+ *  @email  fjmw201@exeter.ac.uk
+ *
+ *  @date   02/02/2018.
+ */
+
+
+
 //  == VERSION ==
 #version 330 core
 
@@ -5,13 +14,13 @@
 
 //  == INPUT ==
 //  -- Passed --
-in vec3 vert_col; //! Colour to draw the vertex with.
+in vec4 vert_col;   //! Colour of the geometry vertex.
 
 
 
 //  == OUTPUT ==
 //  -- Passed --
-out vec3 col; //! Output fragment colour.
+out vec4 frag_col;  //! Output fragment colour.
 
 
 
@@ -21,5 +30,5 @@ out vec3 col; //! Output fragment colour.
  */
 void main()
 {
-    col = vert_col;
+    frag_col = vert_col;
 }

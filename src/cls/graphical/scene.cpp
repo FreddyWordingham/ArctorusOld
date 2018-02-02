@@ -286,7 +286,7 @@ namespace arc
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
             glUniformMatrix4fv(m_ambient_shader.get_mvp_uni(), 1, GL_FALSE, &mvp[0][0]);
-            glUniform3f(m_ambient_shader.get_col_uni(), m_sun.get_col()[R], m_sun.get_col()[G], m_sun.get_col()[B]);
+            glUniform4f(m_ambient_shader.get_col_uni(), m_sun.get_col()[R], m_sun.get_col()[G], m_sun.get_col()[B], m_sun.get_col()[A]);
 
             glEnableVertexAttribArray(0);
 
