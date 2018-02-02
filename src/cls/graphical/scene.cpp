@@ -264,6 +264,50 @@ namespace arc
             m_primary_cam->move(translate, rotate);
         }
 
+        /**
+         *  Control the movement of the sun global illuminator object.
+         *
+         *  @param  t_time_delta    Time elapsed since the last rendering.
+         */
+        void Scene::move_sun(const float t_time_delta)
+        {
+            float speed_multiplier = 1.0f;
+
+            if (glfwGetKey(m_window, control::DECREASE_SPEED) == GLFW_PRESS)
+            {
+                speed_multiplier /= 10.0f;
+            }
+            if (glfwGetKey(m_window, control::INCREASE_SPEED) == GLFW_PRESS)
+            {
+                speed_multiplier *= 10.0f;
+            }
+
+            if (glfwGetKey(m_window, control::MOVE_SUN_FORWARD) == GLFW_PRESS)
+            {
+                m_sun_pos[X] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_SUN_BACKWARD) == GLFW_PRESS)
+            {
+                m_sun_pos[X] -= speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_SUN_LEFT) == GLFW_PRESS)
+            {
+                m_sun_pos[Y] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_SUN_RIGHT) == GLFW_PRESS)
+            {
+                m_sun_pos[Y] -= speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_SUN_UP) == GLFW_PRESS)
+            {
+                m_sun_pos[Z] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::MOVE_SUN_DOWN) == GLFW_PRESS)
+            {
+                m_sun_pos[Z] -= speed_multiplier * t_time_delta;
+            }
+        }
+
 
         //  -- Shader Setup --
         /**
