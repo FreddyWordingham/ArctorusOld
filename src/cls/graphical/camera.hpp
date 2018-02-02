@@ -57,12 +57,13 @@ namespace arc
             virtual ~Camera() = default;
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            glm::vec3 get_pos() const { return (n_pos); }
+            glm::vec3 get_dir() const { return (n_dir); }
+            glm::mat4 get_view() const { return (n_view); }
+            glm::mat4 get_mvp() const { return (n_proj * n_view * n_model); }
         };
 
 
