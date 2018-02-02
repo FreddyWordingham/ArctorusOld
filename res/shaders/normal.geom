@@ -12,12 +12,6 @@
 
 
 
-//  == CONSTANTS ==
-//  -- Drawing --
-const float length = 1.0; //! Length to draw normal lines.
-
-
-
 //  == INPUT ==
 //  -- Vertex --
 layout(points) in;
@@ -27,8 +21,10 @@ in vec3 vert_pos[];
 in vec3 vert_norm[];
 
 //  -- Uniforms --
-uniform mat4 mvp;   //! Model-view-projection matrix.
+uniform mat4 mvp;       //! Model-view-projection matrix.
 uniform vec4 prop_col;  //! Prop colour.
+uniform float power;    //! Length to draw normal lines.
+
 
 
 //  == OUTPUT ==
@@ -51,7 +47,7 @@ void main()
         geom_col = prop_col;
         EmitVertex();
 
-        vec4 v1     = v0 + vec4(vert_norm[0] * length, 0.0);
+        vec4 v1     = v0 + vec4(vert_norm[0] * power, 0.0);
         gl_Position = mvp * v1;
         geom_col = vec4(0.0, 0.0, 0.0, 1.0);
         EmitVertex();
