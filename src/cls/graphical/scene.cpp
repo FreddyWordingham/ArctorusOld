@@ -118,7 +118,30 @@ namespace arc
 
 
         //  == METHODS ==
-        //  -- Input --
+        //  -- Render --
+        /**
+         *  Render control function.
+         *  Call sub-functions to render objects within the scene.
+         */
+        void Scene::render() const
+        {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            setup_ambient_shader();
+//            setup_diffuse_shader();
+
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LESS);
+
+//            draw_ents();
+//            draw_lights();
+            draw_sun();
+
+            glfwSwapBuffers(m_window);
+        }
+
+
+        //  -- Control --
         /**
          *  Check if the window should close.
          *  This is triggered by either the escape key being pressed, or the red cross being clicked.
@@ -128,10 +151,10 @@ namespace arc
         bool Scene::should_close() const
         {
             // Esc key has been pressed.
-            /*if (glfwGetKey(m_window, control::QUIT) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::QUIT) == GLFW_PRESS)
             {
                 return (true);
-            }*/
+            }
 
             return (glfwWindowShouldClose(m_window) != 0);
         }
@@ -173,29 +196,73 @@ namespace arc
             }
         }
 
-
-        //  -- Render --
         /**
-         *  Render control function.
-         *  Call sub-functions to render objects within the scene.
+         *  Control the movement of the camera.
+         *
+         *  @param  t_time_delta    Time elapsed since the last rendering.
          */
-        void Scene::render() const
+        void Scene::move_camera(const float t_time_delta)
         {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glm::vec3 translate;
+            glm::vec2 rotate;
+            float     speed_multiplier = 1.0f;
 
-            setup_ambient_shader();
-//            setup_diffuse_shader();
+            if (glfwGetKey(m_window, control::DECREASE_CAM_SPEED) == GLFW_PRESS)
+            {
+                speed_multiplier /= 10.0f;
+            }
+            if (glfwGetKey(m_window, control::INCREASE_CAM_SPEED) == GLFW_PRESS)
+            {
+                speed_multiplier *= 10.0f;
+            }
 
-            glEnable(GL_DEPTH_TEST);
-            glDepthFunc(GL_LESS);
+            if (glfwGetKey(m_window, control::TRANS_CAM_FORWARD) == GLFW_PRESS)
+            {
+                translate[0] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::TRANS_CAM_BACKWARD) == GLFW_PRESS)
+            {
+                translate[0] -= speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::TRANS_CAM_LEFT) == GLFW_PRESS)
+            {
+                translate[1] -= speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::TRANS_CAM_RIGHT) == GLFW_PRESS)
+            {
+                translate[1] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::TRANS_CAM_UP) == GLFW_PRESS)
+            {
+                translate[2] += speed_multiplier * t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::TRANS_CAM_DOWN) == GLFW_PRESS)
+            {
+                translate[2] -= speed_multiplier * t_time_delta;
+            }
 
-//            draw_ents();
-//            draw_lights();
-            draw_sun();
+            if (glfwGetKey(m_window, control::ROT_CAM_LEFT) == GLFW_PRESS)
+            {
+                rotate[0] += t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::ROT_CAM_RIGHT) == GLFW_PRESS)
+            {
+                rotate[0] -= t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::ROT_CAM_UP) == GLFW_PRESS)
+            {
+                rotate[1] += t_time_delta;
+            }
+            if (glfwGetKey(m_window, control::ROT_CAM_DOWN) == GLFW_PRESS)
+            {
+                rotate[1] -= t_time_delta;
+            }
 
-            glfwSwapBuffers(m_window);
+            m_primary_cam->move(translate, rotate);
         }
 
+
+        //  -- Shader Setup --
         /**
          *  Setup the ambient shader ready for rendering.
          */

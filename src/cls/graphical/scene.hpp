@@ -99,16 +99,17 @@ namespace arc
 
             //  == METHODS ==
           public:
-            //  -- Input --
-            bool should_close() const;
-            void handle_input();
-
             //  -- Render --
             void render() const;
 
+            //  -- Control --
+            bool should_close() const;
+            void handle_input();
+
           private:
-            //  -- Movement --
+            //  -- Control --
             void swap_camera();
+            void move_camera(const float t_time_delta);
 
             //  -- Shader Setup --
             void setup_ambient_shader() const;
