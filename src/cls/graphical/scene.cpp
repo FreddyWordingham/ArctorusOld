@@ -411,6 +411,7 @@ namespace arc
             {
                 glUniform4f(m_normal_shader.get_col_uni(), m_lights[i].get_col()[R], m_lights[i].get_col()[G],
                             m_lights[i].get_col()[B], m_lights[i].get_col()[A]);
+                glUniform1f(m_normal_shader.get_light_power_uni(), m_lights[i].get_power());
 
                 glEnableVertexAttribArray(0);
 
