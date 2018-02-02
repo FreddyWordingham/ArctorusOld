@@ -75,6 +75,9 @@ namespace arc
             std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
             std::unique_ptr<Camera> m_secondary_cam;    //! Secondary camera to be swapped with the primary camera.
 
+            //  -- Illumination --
+            glm::vec3 m_sun_pos;    //! Position of the global illuminator object.
+
 
             //  == INSTANTIATION ==
           public:
