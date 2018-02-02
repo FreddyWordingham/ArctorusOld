@@ -20,6 +20,7 @@
 #include <glm/glm.hpp>
 
 //  -- Classes --
+#include "cls/geom/mesh.hpp"
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/prop.hpp"
 #include "cls/graphical/shader/ambient.hpp"
@@ -112,6 +113,9 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Additions --
+            void add_light(const geom::Mesh& t_mesh);
+
             //  -- Render --
             void render() const;
 

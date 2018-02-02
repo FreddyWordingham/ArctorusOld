@@ -123,6 +123,34 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Additions --
+        /**
+         *  Add a renderable light prop to the scene.
+         *
+         *  @param  t_mesh  Light source mesh to be added to the scene.
+         */
+        void Scene::add_light(const geom::Mesh& t_mesh)
+        {
+            std::vector<Vertex> vertices;
+            vertices.reserve(t_mesh.get_num_tri() * 3);
+
+            for (size_t i = 0; i < t_mesh.get_num_tri(); ++i)
+            {
+                for (size_t j = 0; j < 3; ++j)
+                {
+                    vertices.push_back(Vertex({static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[X]),
+                                                   static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Y]),
+                                                   static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Z])},
+                                              {static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[X]),
+                                                   static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Y]),
+                                                   static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Z])}));
+                }
+            }
+
+            m_lights.emplace_back(Prop(vertices, glm::vec4({0.0, 1.0, 1.0, 1.0})));
+        }
+
+
         //  -- Render --
         /**
          *  Render control function.
