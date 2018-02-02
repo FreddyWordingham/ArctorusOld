@@ -56,7 +56,6 @@ namespace arc
             m_sun_pos(INIT_SUN_POS),
             m_sun(Prop(Prop::shape::CUBE, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
-            m_lights.push_back(Prop(Prop::shape::CUBE, {1.0, 0.0, 0.0, 1.0}, 1.0));
         }
 
 
@@ -385,7 +384,7 @@ namespace arc
             glUseProgram(m_diffuse_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), LIGHT_AMB_POW);
+            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), 0.1);
 
             for (size_t i = 0; i < m_lights.size(); ++i)
             {

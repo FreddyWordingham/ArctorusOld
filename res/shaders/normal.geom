@@ -23,15 +23,12 @@ const float length = 1.0; //! Length to draw normal lines.
 layout(points) in;
 
 //  -- Passed --
-in Vertex
-{
-    vec3 norm;
-    vec4 col;
-}   vertex[];
+in vec3 vert_pos[];
+in vec3 vert_norm[];
 
 //  -- Uniforms --
 uniform mat4 mvp;   //! Model-view-projection matrix.
-
+uniform vec4 prop_col;  //! Prop colour.
 
 
 //  == OUTPUT ==
@@ -49,15 +46,14 @@ out vec4 geom_col;  //! Colour to draw the vertex with.
  */
 void main()
 {
-        vec4 v0     = gl_in[0].gl_Position;
+        vec4 v0     = vec4(vert_norm[0], 1.0);
         gl_Position = mvp * v0;
-        geom_col = vertex[0].col;
+        geom_col = prop_col;
         EmitVertex();
 
-        // we calculate v1 of our line segment
-        vec4 v1     = v0 + vec4(vertex[0].norm * length, 0);
-        gl_Position = mvp * (v0 + vec4(vertex[0].norm * length, 0));
-        geom_col = vertex[0].col;
+        vec4 v1     = v0 + vec4(vert_pos[0] * length, 0.0);
+        gl_Position = mvp * v1;
+        geom_col = vec4(1.0, 0.0, 0.0, 1.0);
         EmitVertex();
 
         EndPrimitive();
