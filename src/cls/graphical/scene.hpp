@@ -56,6 +56,9 @@ namespace arc
         constexpr const char* DIFFUSE_VERT_SHADER = "res/shaders/diffuse.vert"; //! Path to diffuse vertex shader.
         constexpr const char* DIFFUSE_GEOM_SHADER = "res/shaders/diffuse.geom"; //! Path to diffuse geometry shader.
         constexpr const char* DIFFUSE_FRAG_SHADER = "res/shaders/diffuse.frag"; //! Path to diffuse fragment shader.
+        constexpr const char* NORMAL_VERT_SHADER  = "res/shaders/normal.vert";  //! Path to normal vertex shader.
+        constexpr const char* NORMAL_GEOM_SHADER  = "res/shaders/normal.geom";  //! Path to normal geometry shader.
+        constexpr const char* NORMAL_FRAG_SHADER  = "res/shaders/normal.frag";  //! Path to normal fragment shader.
 
         //  -- Lighting --
         constexpr const glm::vec3 INIT_SUN_POS({+3.0f, +0.0f, +3.0f});      //! Initial position of the global illuminator.
