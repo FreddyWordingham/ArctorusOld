@@ -115,7 +115,7 @@ namespace arc
           private:
             //  -- Control --
             void swap_camera();
-            void move_camera(const float t_time_delta);
+            void move_camera(float t_time_delta);
 
             //  -- Shader Setup --
             void setup_ambient_shader() const;
