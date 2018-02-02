@@ -46,6 +46,13 @@ namespace arc
         constexpr const int ROT_CAM_UP         = GLFW_KEY_I;            //! Rotate the camera upwards.
         constexpr const int ROT_CAM_DOWN       = GLFW_KEY_K;            //! Rotate the camera downwards.
 
+        //  -- Illuminator --
+        const int TRANS_SUN_FORWARD  = GLFW_KEY_T;  //! Move the sun global illuminator forward.
+        const int TRANS_SUN_BACKWARD = GLFW_KEY_G;  //! Move the sun global illuminator backward.
+        const int TRANS_SUN_LEFT     = GLFW_KEY_F;  //! Move the sun global illuminator left.
+        const int TRANS_SUN_RIGHT    = GLFW_KEY_H;  //! Move the sun global illuminator right.
+        const int TRANS_SUN_UP       = GLFW_KEY_Y;  //! Move the sun global illuminator upwards.
+        const int TRANS_SUN_DOWN     = GLFW_KEY_R;  //! Move the sun global illuminator downwards.
 
 
     } // namespace control
