@@ -34,6 +34,17 @@ namespace arc
          */
         class Prop
         {
+            //  == ENUMERATIONS ==
+          public:
+            /**
+             *  Enumeration of the types of shapes the Prop class can construct a vertex list of.
+             */
+            enum class shape
+            {
+                CUBE    //! Simple cube.
+            };
+
+
             //  == FIELDS ==
           private:
             //  -- Properties --
