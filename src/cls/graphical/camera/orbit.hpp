@@ -20,6 +20,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <glm/glm.hpp>
 
 
 
@@ -46,17 +47,15 @@ namespace arc
                 float m_dec;    //! Declination of the camera from the global z-axis.
                 float m_rho;    //! Distance of the camera from the origin z-axis.
 
+                //  -- Movement --
+                float m_azi_spin;   //! Rate of continuous rotation of the camera around the global z-axis.
+
 
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
+                Orbit(const glm::vec3& t_pos, float t_aspect_ratio, float t_speed = DEFAULT_SPEED,
+                      float t_fov = DEFAULT_FOV);
 
 
                 //  == METHODS ==
