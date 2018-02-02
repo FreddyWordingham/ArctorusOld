@@ -20,7 +20,8 @@
 #include <glm/glm.hpp>
 
 //  -- Classes --
-#include <cls/graphical/shader/ambient.hpp>
+#include "cls/graphical/camera.hpp"
+#include "cls/graphical/shader/ambient.hpp"
 
 
 
@@ -69,6 +70,10 @@ namespace arc
 
             //  -- Shaders --
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
+
+            //  -- Cameras --
+            std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
+            std::unique_ptr<Camera> m_secondary_cam;    //! Secondary camera to be swapped with the primary camera.
 
 
             //  == INSTANTIATION ==
