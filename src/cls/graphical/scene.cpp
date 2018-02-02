@@ -179,6 +179,7 @@ namespace arc
             // Control the camera.
             swap_camera();
             move_camera(time_delta);
+            move_sun(time_delta);
         }
 
         /**
@@ -273,36 +274,36 @@ namespace arc
         {
             float speed_multiplier = 1.0f;
 
-            if (glfwGetKey(m_window, control::DECREASE_SPEED) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::DECREASE_CAM_SPEED) == GLFW_PRESS)
             {
                 speed_multiplier /= 10.0f;
             }
-            if (glfwGetKey(m_window, control::INCREASE_SPEED) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::INCREASE_CAM_SPEED) == GLFW_PRESS)
             {
                 speed_multiplier *= 10.0f;
             }
 
-            if (glfwGetKey(m_window, control::MOVE_SUN_FORWARD) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::TRANS_SUN_FORWARD) == GLFW_PRESS)
             {
                 m_sun_pos[X] += speed_multiplier * t_time_delta;
             }
-            if (glfwGetKey(m_window, control::MOVE_SUN_BACKWARD) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::TRANS_SUN_BACKWARD) == GLFW_PRESS)
             {
                 m_sun_pos[X] -= speed_multiplier * t_time_delta;
             }
-            if (glfwGetKey(m_window, control::MOVE_SUN_LEFT) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::TRANS_SUN_LEFT) == GLFW_PRESS)
             {
                 m_sun_pos[Y] += speed_multiplier * t_time_delta;
             }
-            if (glfwGetKey(m_window, control::MOVE_SUN_RIGHT) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::TRANS_SUN_RIGHT) == GLFW_PRESS)
             {
                 m_sun_pos[Y] -= speed_multiplier * t_time_delta;
             }
-            if (glfwGetKey(m_window, control::MOVE_SUN_UP) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::TRANS_SUN_UP) == GLFW_PRESS)
             {
                 m_sun_pos[Z] += speed_multiplier * t_time_delta;
             }
-            if (glfwGetKey(m_window, control::MOVE_SUN_DOWN) == GLFW_PRESS)
+            if (glfwGetKey(m_window, control::TRANS_SUN_DOWN) == GLFW_PRESS)
             {
                 m_sun_pos[Z] -= speed_multiplier * t_time_delta;
             }
