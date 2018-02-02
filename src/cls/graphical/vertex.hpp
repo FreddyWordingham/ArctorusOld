@@ -43,13 +43,6 @@ namespace arc
           public:
             //  -- Constructors --
 
-          private:
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
-
 
             //  == METHODS ==
           private:
