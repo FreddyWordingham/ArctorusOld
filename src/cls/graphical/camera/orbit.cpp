@@ -14,6 +14,9 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <glm/gtx/transform.hpp>
+
+//  -- General --
 #include "gen/enum.hpp"
 #include "gen/math.hpp"
 
