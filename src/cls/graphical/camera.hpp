@@ -64,6 +64,9 @@ namespace arc
             glm::vec3 get_dir() const { return (n_dir); }
             glm::mat4 get_view() const { return (n_view); }
             glm::mat4 get_mvp() const { return (n_proj * n_view * n_model); }
+
+            //  -- Movement --
+            virtual void move(const glm::vec3& t_translate, const glm::vec2& t_rotate) = 0;
         };
 
 
