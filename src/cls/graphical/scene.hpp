@@ -128,6 +128,7 @@ namespace arc
             //  -- Shader Setup --
             void setup_ambient_shader() const;
             void setup_diffuse_shader() const;
+            void setup_normal_shader() const;
 
             //  -- Drawing --
             void draw_lights() const;
