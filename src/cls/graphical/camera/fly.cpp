@@ -50,7 +50,40 @@ namespace arc
             }
 
 
-            //  -- Initialisation --
+            //  == METHODS ==
+            //  -- Movement --
+            /**
+             *  Fly the camera around the scene using window input.
+             *
+             *  @param  t_translate Translation to be applied to the camera.
+             *  @param  t_rotate    Translation to be applied to the camera.
+             */
+            void Fly::move(const glm::vec3& t_translate, const glm::vec2& t_rotate)
+            {
+                n_dir[X] = sinf(m_dec) * cosf(m_azi);
+                n_dir[Y] = sinf(m_dec) * sinf(m_azi);
+                n_dir[Z] = cosf(m_dec);
+
+                glm::vec3 right(glm::normalize(glm::cross(n_dir, UP_DIR)));
+                glm::vec3 up(glm::normalize(glm::cross(right, n_dir)));
+
+                n_pos += ((t_translate[0] * n_dir) + (t_translate[1] * right) + (t_translate[2] * up)) * n_speed;
+
+                m_azi += t_rotate[0];
+                m_dec -= t_rotate[1];
+
+                if (m_dec < 0.0f)
+                {
+                    m_dec = 0.01f;
+                }
+                else if (m_dec > 3.141f)
+                {
+                    m_dec = 3.141f;
+                }
+
+                n_view = glm::lookAt(n_pos, n_pos + n_dir, UP_DIR);
+            }
+
 
 
 
