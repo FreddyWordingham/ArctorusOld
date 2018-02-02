@@ -110,6 +110,9 @@ namespace arc
           private:
             //  -- Shader Setup --
             void setup_ambient_shader() const;
+
+            //  -- Drawing --
+            void Scene::draw_sun() const;
         };
 
 
