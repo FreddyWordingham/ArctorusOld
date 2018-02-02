@@ -50,7 +50,19 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the handle to the prop's vao.
+         *
+         *  @return Handle to the prop's vao.
+         */
+        GLuint Prop::init_vao() const
+        {
+            GLuint r_vao;
 
+            glGenVertexArrays(1, &r_vao);
+
+            return (r_vao);
+        }
 
 
     } // namespace graphical
