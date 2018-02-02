@@ -130,7 +130,7 @@ namespace arc
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             setup_ambient_shader();
-//            setup_diffuse_shader();
+            setup_diffuse_shader();
 
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);
@@ -273,6 +273,18 @@ namespace arc
             glUseProgram(m_ambient_shader.get_handle());
 
             glUniformMatrix4fv(m_ambient_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+        }
+
+        /**
+         *  Setup the diffuse shader ready for rendering.
+         */
+        void Scene::setup_diffuse_shader() const
+        {
+            glUseProgram(m_diffuse_shader.get_handle());
+
+            glUniformMatrix4fv(m_diffuse_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+            glUniformMatrix4fv(m_diffuse_shader.get_view_uni(), 1, GL_FALSE, &m_primary_cam->get_view()[0][0]);
+            glUniform3f(m_diffuse_shader.get_sun_pos_uni(), m_sun_pos[X], m_sun_pos[Y], m_sun_pos[Z]);
         }
 
 
