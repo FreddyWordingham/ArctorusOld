@@ -184,6 +184,30 @@ namespace arc
         }
 
 
+        //  -- Drawing --
+        /**
+         *  Draw the global illuminator object.
+         */
+        void Scene::draw_sun() const
+        {
+            glm::mat4 mvp = m_primary_cam->find_mvp() * glm::translate(m_sun_pos);
+
+            glUseProgram(m_ambient_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            glUniformMatrix4fv(m_ambient_shader.get_mvp(), 1, GL_FALSE, &mvp[0][0]);
+            glUniform3f(m_ambient_shader.get_obj_col(), m_sun.get_col()[R], m_sun.get_col()[G], m_sun.get_col()[B]);
+
+            glEnableVertexAttribArray(0);
+
+            glBindVertexArray(m_sun.get_vao());
+
+            glDrawArrays(GL_TRIANGLES, 0, m_sun.get_num_vert());
+
+            glBindVertexArray(0);
+        }
+
+
 
 
     } // namespace graphical
