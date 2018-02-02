@@ -161,7 +161,7 @@ namespace arc
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             setup_ambient_shader();
-            setup_diffuse_shader();
+//            setup_diffuse_shader();
 
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);
@@ -172,6 +172,17 @@ namespace arc
 
             glfwSwapBuffers(m_window);
         }
+
+        /**
+         *  Setup the ambient shader ready for rendering.
+         */
+        void Scene::setup_ambient_shader() const
+        {
+            glUseProgram(m_ambient_shader.get_handle());
+
+            glUniformMatrix4fv(m_ambient_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->find_mvp()[0][0]);
+        }
+
 
 
 

@@ -105,6 +105,10 @@ namespace arc
 
             //  -- Render --
             void render() const;
+
+          private:
+            //  -- Shader Setup --
+            void setup_ambient_shader() const;
         };
 
 
