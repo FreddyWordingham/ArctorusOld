@@ -24,6 +24,7 @@
 #include "cls/graphical/prop.hpp"
 #include "cls/graphical/shader/ambient.hpp"
 #include "cls/graphical/shader/diffuse.hpp"
+#include "cls/graphical/shader/normal.hpp"
 
 
 
@@ -82,7 +83,7 @@ namespace arc
             //  -- Shaders --
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
             shader::Diffuse m_diffuse_shader;   //! Diffuse lighting shader.
-            shader::Diffuse m_normal_shader;    //! Normal shader.
+            shader::Normal  m_normal_shader;    //! Normal shader.
 
             //  -- Cameras --
             std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
