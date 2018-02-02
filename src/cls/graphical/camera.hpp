@@ -28,6 +28,10 @@ namespace arc
 
 
         //  == SETTINGS ==
+        //  -- Defaults --
+        constexpr const float DEFAULT_SPEED = 1.0f;     //! Default speed multiplier for the camera.
+        constexpr const float DEFAULT_FOV   = 90.0f;    //! Default field of view for the camera.
+
         //  -- Camera Properties --
         constexpr const glm::vec3 UP_DIR({0.0f, 0.0f, 1.0f});   //! Camera up direction.
         constexpr const float     NEAR_CULL_DIST = 1E-3f;       //! Near culling distance.
@@ -59,7 +63,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Camera(const glm::vec3& t_pos, float t_aspect_ratio, float t_speed = 1.0, float t_fov = 90.0f);
+            Camera(const glm::vec3& t_pos, float t_aspect_ratio, float t_speed = DEFAULT_SPEED, float t_fov = DEFAULT_FOV);
 
           public:
             //  -- Destructors --

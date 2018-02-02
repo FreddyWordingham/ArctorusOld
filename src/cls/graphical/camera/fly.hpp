@@ -44,13 +44,8 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
+                Fly(const glm::vec3& t_pos, float t_aspect_ratio, float t_speed = DEFAULT_SPEED,
+                    float t_fov = DEFAULT_FOV);
 
 
                 //  == METHODS ==
