@@ -23,6 +23,7 @@
 #include "cls/geom/mesh.hpp"
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/prop.hpp"
+#include "cls/graphical/prop/light.hpp"
 #include "cls/graphical/shader/ambient.hpp"
 #include "cls/graphical/shader/diffuse.hpp"
 #include "cls/graphical/shader/normal.hpp"
@@ -95,7 +96,7 @@ namespace arc
             const Prop m_sun;       //! Drawable sun illuminator object.
 
             //  -- Props --
-            std::vector<Prop> m_lights; //! Vector of light source props.
+            std::vector<prop::Light> m_lights;    //! Vector of light source props.
 
 
             //  == INSTANTIATION ==
@@ -114,7 +115,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Additions --
-            void add_light(const geom::Mesh& t_mesh);
+            void add_light(const geom::Mesh& t_mesh, float t_power, const glm::vec4& t_col);
 
             //  -- Render --
             void render() const;

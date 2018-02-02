@@ -48,7 +48,7 @@ namespace arc
             m_diffuse_shader(file::read(DIFFUSE_VERT_SHADER, false), file::read(DIFFUSE_GEOM_SHADER, false),
                              file::read(DIFFUSE_FRAG_SHADER, false)),
             m_normal_shader(file::read(NORMAL_VERT_SHADER, false), file::read(NORMAL_GEOM_SHADER, false),
-                             file::read(NORMAL_FRAG_SHADER, false)),
+                            file::read(NORMAL_FRAG_SHADER, false)),
             m_primary_cam(
                 std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(
@@ -127,8 +127,10 @@ namespace arc
          *  Add a renderable light prop to the scene.
          *
          *  @param  t_mesh  Light source mesh to be added to the scene.
+         *  @param  t_power Power of the light source.
+         *  @param  t_col   Colour to render the light with.
          */
-        void Scene::add_light(const geom::Mesh& t_mesh)
+        void Scene::add_light(const geom::Mesh& t_mesh, const float t_power, const glm::vec4& t_col)
         {
             std::vector<Vertex> vertices;
             vertices.reserve(t_mesh.get_num_tri() * 3);
@@ -138,15 +140,15 @@ namespace arc
                 for (size_t j = 0; j < 3; ++j)
                 {
                     vertices.push_back(Vertex({static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[X]),
-                                                   static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Y]),
-                                                   static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Z])},
+                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Y]),
+                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Z])},
                                               {static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[X]),
-                                                   static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Y]),
-                                                   static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Z])}));
+                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Y]),
+                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Z])}));
                 }
             }
 
-            m_lights.emplace_back(Prop(vertices, glm::vec4({0.0, 1.0, 1.0, 1.0})));
+            m_lights.emplace_back(prop::Light(vertices, t_col, t_power));
         }
 
 
@@ -431,7 +433,8 @@ namespace arc
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
             glUniformMatrix4fv(m_ambient_shader.get_mvp_uni(), 1, GL_FALSE, &mvp[0][0]);
-            glUniform4f(m_ambient_shader.get_col_uni(), m_sun.get_col()[R], m_sun.get_col()[G], m_sun.get_col()[B], m_sun.get_col()[A]);
+            glUniform4f(m_ambient_shader.get_col_uni(), m_sun.get_col()[R], m_sun.get_col()[G], m_sun.get_col()[B],
+                        m_sun.get_col()[A]);
 
             glEnableVertexAttribArray(0);
 
@@ -441,7 +444,6 @@ namespace arc
 
             glBindVertexArray(0);
         }
-
 
 
 
