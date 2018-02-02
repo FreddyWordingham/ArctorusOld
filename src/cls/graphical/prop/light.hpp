@@ -52,7 +52,9 @@ namespace arc
 
 
                 //  == METHODS ==
-              private:
+              public:
+                //  -- Getters --
+                float get_float() const { return (m_pow); }
             };
 
 
