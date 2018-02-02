@@ -107,6 +107,9 @@ namespace arc
             void render() const;
 
           private:
+            //  -- Movement --
+            void swap_camera();
+
             //  -- Shader Setup --
             void setup_ambient_shader() const;
 
