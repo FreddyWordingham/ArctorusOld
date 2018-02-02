@@ -22,6 +22,7 @@
 //  -- Classes --
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/shader/ambient.hpp"
+#include "cls/graphical/prop.hpp"
 
 
 
@@ -80,8 +81,8 @@ namespace arc
             std::unique_ptr<Camera> m_secondary_cam;    //! Secondary camera to be swapped with the primary camera.
 
             //  -- Illumination --
-            glm::vec3 m_sun_pos;    //! Position of the global illuminator object.
-
+            glm::vec3  m_sun_pos;   //! Position of the global illuminator object.
+            const Prop m_sun;       //! Drawable sun illuminator object.
 
             //  == INSTANTIATION ==
           public:

@@ -44,7 +44,8 @@ namespace arc
                 std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(
                 std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
-            m_sun_pos(INIT_SUN_POS)
+            m_sun_pos(INIT_SUN_POS),
+            m_sun(Prop(Prop::shape::CUBE, SUN_COL, SUN_SIZE))
         {
         }
 
