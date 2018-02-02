@@ -86,6 +86,9 @@ namespace arc
             glm::vec3  m_sun_pos;   //! Position of the global illuminator object.
             const Prop m_sun;       //! Drawable sun illuminator object.
 
+            //  -- Props --
+            std::vector<Prop> m_lights; //! Vector of light source props.
+
 
             //  == INSTANTIATION ==
           public:

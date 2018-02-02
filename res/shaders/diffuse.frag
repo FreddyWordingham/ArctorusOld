@@ -14,8 +14,8 @@
 
 //  == CONSTANTS --
 //  -- Uniforms --
-uniform float amb_pow;  //! Ambient lighting power.
-uniform vec3 sun_pos;   //! Sun position.
+uniform float amb_pow;          //! Ambient lighting power.
+uniform vec3 sun_pos;           //! Sun position.
 const float light_pow   = 5.0f; //! Power of the light source (arbitrary).
 
 
