@@ -175,7 +175,7 @@ namespace arc
 
             // Control the camera.
             swap_camera();
-//            move_camera(time_delta);
+            move_camera(time_delta);
         }
 
         /**
