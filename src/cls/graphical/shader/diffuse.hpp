@@ -63,6 +63,12 @@ namespace arc
 
                 //  == METHODS ==
               private:
+                //  -- Getters --
+                GLint get_mvp_uni() const { return (m_mvp_uni); }
+                GLint get_view_uni() const { return (m_view_uni); }
+                GLint get_col_uni() const { return (m_col_uni); }
+                GLint get_sun_pos_uni() const { return (m_sun_pos_uni); }
+                GLint get_amb_pow_uni() const { return (m_amb_pow_uni); }
             };
 
 
