@@ -19,6 +19,8 @@ in vec3 norm;   //! Vertex normals.
 
 //  -- Uniforms --
 uniform vec4 prop_col;  //! Prop colour.
+uniform mat4 model;     //! Model matrix.
+uniform mat4 proj;      //! Projection matrix.
 
 
 

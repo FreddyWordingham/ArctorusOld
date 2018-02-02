@@ -20,7 +20,7 @@ const float length = 1.0; //! Length to draw normal lines.
 
 //  == INPUT ==
 //  -- Vertex --
-layout(triangles) in;
+layout(points) in;
 
 //  -- Passed --
 in Vertex
@@ -36,7 +36,7 @@ uniform mat4 mvp;   //! Model-view-projection matrix.
 
 //  == OUTPUT ==
 //  -- Layout --
-layout(line_strip, max_vertices=6) out;
+layout(line_strip, max_vertices = 2) out;
 
 //  -- Passed --
 out vec4 geom_col;  //! Colour to draw the vertex with.
@@ -49,19 +49,16 @@ out vec4 geom_col;  //! Colour to draw the vertex with.
  */
 void main()
 {
-    for(int i = 0; i < gl_in.length(); i++)
-    {
-        vec3 P = gl_in[i].gl_Position.xyz;
-        vec3 N = vertex[i].norm.xyz;
-
-        gl_Position = mvp * vec4(P, 1.0);
-        geom_col = vertex[i].col;
+        vec4 v0     = gl_in[0].gl_Position;
+        gl_Position = mvp * v0;
+        geom_col = vertex[0].col;
         EmitVertex();
 
-        gl_Position = mvp * vec4(P + (N * length), 1.0);
-        geom_col = vertex[i].col;
+        // we calculate v1 of our line segment
+        vec4 v1     = v0 + vec4(vertex[0].norm * length, 0);
+        gl_Position = mvp * (v0 + vec4(vertex[0].norm * length, 0));
+        geom_col = vertex[0].col;
         EmitVertex();
 
         EndPrimitive();
-    }
 }

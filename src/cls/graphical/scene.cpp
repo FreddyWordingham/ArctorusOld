@@ -353,8 +353,9 @@ namespace arc
          */
         void Scene::draw_lights() const
         {
+            // Draw diffusely lit prop mesh.
             glUseProgram(m_diffuse_shader.get_handle());
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
             glUniform1f(m_diffuse_shader.get_amb_pow_uni(), LIGHT_AMB_POW);
 
@@ -368,6 +369,25 @@ namespace arc
                 glBindVertexArray(m_lights[i].get_vao());
 
                 glDrawArrays(GL_TRIANGLES, 0, m_lights[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+
+
+            // Draw normals.
+            glUseProgram(m_normal_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            for (size_t i = 0; i < m_lights.size(); ++i)
+            {
+                glUniform4f(m_normal_shader.get_col_uni(), m_lights[i].get_col()[R], m_lights[i].get_col()[G],
+                            m_lights[i].get_col()[B], m_lights[i].get_col()[A]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_lights[i].get_vao());
+
+                glDrawArrays(GL_POINTS, 0, m_lights[i].get_num_vert());
 
                 glBindVertexArray(0);
             }
