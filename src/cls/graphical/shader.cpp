@@ -36,7 +36,7 @@ namespace arc
          *  @param  t_frag_serial   Serialised source code of the fragment shader.
          */
         Shader::Shader(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial) :
-            m_handle(init_handle(t_geom_serial, t_vert_serial, t_frag_serial))
+            m_handle(init_handle(t_vert_serial, t_geom_serial, t_frag_serial))
         {
         }
 
