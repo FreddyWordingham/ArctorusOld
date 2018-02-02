@@ -41,18 +41,14 @@ namespace arc
             {
                 //  == FIELDS ==
               private:
+                //  -- Properties --
+                const float m_pow;  //! Power of the light source.
 
 
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
+                Prop(const std::vector<Vertex>& t_vert, const glm::vec4& t_col, const float t_power);
 
 
                 //  == METHODS ==
