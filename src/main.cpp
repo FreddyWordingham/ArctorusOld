@@ -12,6 +12,7 @@
 #include "gen/log.hpp"
 
 //  -- Classes --
+#include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
 
 
@@ -32,6 +33,10 @@ int main()
     LOG("Hello world!");
 
     graphical::Scene scene;
+
+
+    geom::Mesh mesh(file::read("test/torus.obj"));
+    scene.add_light(mesh);
 
     while (!scene.should_close())
     {
