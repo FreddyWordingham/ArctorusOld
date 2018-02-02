@@ -64,6 +64,20 @@ namespace arc
             return (r_vao);
         }
 
+        /**
+         *  Initialise the handle to the prop's vbo.
+         *
+         *  @return Handle to the prop's vbo.
+         */
+        GLuint Prop::init_vbo() const
+        {
+            GLuint r_vbo;
+
+            glGenBuffers(1, &r_vbo);
+
+            return (r_vbo);
+        }
+
 
     } // namespace graphical
 } // namespace arc

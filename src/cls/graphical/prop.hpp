@@ -67,6 +67,7 @@ namespace arc
           private:
             //  -- Initialisation --
             GLuint init_vao() const;
+            GLuint init_vbo() const;
 
 
             //  == METHODS ==
