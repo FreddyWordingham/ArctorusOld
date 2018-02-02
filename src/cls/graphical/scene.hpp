@@ -54,6 +54,10 @@ namespace arc
         constexpr const char* DIFFUSE_VERT_SHADER = "res/shaders/diffuse.vert"; //! Path to diffuse vertex shader.
         constexpr const char* DIFFUSE_FRAG_SHADER = "res/shaders/diffuse.frag"; //! Path to diffuse fragment shader.
 
+        //  -- Lighting --
+        constexpr const glm::vec3 INIT_SUN_POS({-2.0f, -2.0f, +2.0f});  //! Initial position of the global illuminator.
+        constexpr const glm::vec3 SUN_COL({+1.0f, +1.0f, +1.0f});       //! Colour of the global illuminator.
+        constexpr const float     SUN_SIZE        = 0.1f;               //! Size of the sun.
 
 
         //  == CLASS ==
