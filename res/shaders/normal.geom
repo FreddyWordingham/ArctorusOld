@@ -14,7 +14,7 @@
 
 //  == CONSTANTS ==
 //  -- Drawing --
-uniform float length = 1.0; //! Length to draw normal lines.
+const float length = 1.0; //! Length to draw normal lines.
 
 
 
