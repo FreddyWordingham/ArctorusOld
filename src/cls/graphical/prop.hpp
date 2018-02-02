@@ -69,7 +69,12 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            GLsizei get_num_vert() const { return (m_num_vert); }
+            const glm::vec3& get_col() const { return (m_col); }
+            GLuint get_vao() const { return (m_vao); }
+            GLuint get_vbo() const { return (m_vbo); }
         };
 
 
