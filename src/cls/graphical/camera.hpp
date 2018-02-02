@@ -46,7 +46,7 @@ namespace arc
         class Camera
         {
             //  == FIELDS ==
-          private:
+          protected:
             //  -- Positioning --
             glm::vec3 n_pos;    //! Position of the camera.
             glm::vec3 n_dir;    //! Direction of the camera.
