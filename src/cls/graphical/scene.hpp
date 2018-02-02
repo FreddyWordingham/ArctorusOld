@@ -21,8 +21,9 @@
 
 //  -- Classes --
 #include "cls/graphical/camera.hpp"
-#include "cls/graphical/shader/ambient.hpp"
 #include "cls/graphical/prop.hpp"
+#include "cls/graphical/shader/ambient.hpp"
+#include "cls/graphical/shader/diffuse.hpp"
 
 
 
@@ -49,10 +50,11 @@ namespace arc
         constexpr const glm::vec3 INIT_CAM_POS({+10.0f, +10.0f, +10.0f});   //! Initial position of the camera.
 
         //  -- Shaders --
-        constexpr const char* AMBIENT_GEOM_SHADER = "res/shaders/ambient.geom"; //! Path to ambient geometry shader.
         constexpr const char* AMBIENT_VERT_SHADER = "res/shaders/ambient.vert"; //! Path to ambient vertex shader.
+        constexpr const char* AMBIENT_GEOM_SHADER = "res/shaders/ambient.geom"; //! Path to ambient geometry shader.
         constexpr const char* AMBIENT_FRAG_SHADER = "res/shaders/ambient.frag"; //! Path to ambient fragment shader.
         constexpr const char* DIFFUSE_VERT_SHADER = "res/shaders/diffuse.vert"; //! Path to diffuse vertex shader.
+        constexpr const char* DIFFUSE_GEOM_SHADER = "res/shaders/diffuse.geom"; //! Path to diffuse geometry shader.
         constexpr const char* DIFFUSE_FRAG_SHADER = "res/shaders/diffuse.frag"; //! Path to diffuse fragment shader.
 
         //  -- Lighting --
@@ -74,6 +76,7 @@ namespace arc
 
             //  -- Shaders --
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
+            shader::Diffuse m_diffuse_shader;   //! Diffuse lighting shader.
 
             //  -- Cameras --
             std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
