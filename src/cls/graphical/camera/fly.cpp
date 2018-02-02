@@ -45,7 +45,7 @@ namespace arc
             Fly::Fly(const glm::vec3& t_pos, const float t_aspect_ratio, float t_speed, float t_fov) :
                 Camera(t_pos, t_aspect_ratio, t_speed, t_fov),
                 m_azi(atan2f(n_dir[Y], n_dir[X])),
-                m_dec(acosf(n_dir[Z] / sqrtf(square(n_dir[X]) + square(n_dir[Y]) + square(n_dir[Z]))))
+                m_dec(acosf(n_dir[Z] / sqrtf(math::square(n_dir[X]) + math::square(n_dir[Y]) + math::square(n_dir[Z]))))
             {
             }
 
