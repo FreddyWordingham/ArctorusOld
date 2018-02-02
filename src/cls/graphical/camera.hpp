@@ -34,14 +34,23 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Positioning --
+            glm::vec3 n_pos;    //! Position of the camera.
+            glm::vec3 n_dir;    //! Direction of the camera.
+
+            //  -- View --
+            glm::mat4 n_model;  //! Model transformation matrix.
+            glm::mat4 n_view;   //! View transformation matrix.
+            glm::mat4 n_proj;   //! Projection transformation matrix.
+
+            //  -- Properties --
+            float n_speed;  //! Camera translation speed.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-
-          private:
-            //  -- Initialisation --
+            Camera(const glm::vec3& t_pos, const float t_aspect_ratio, const float t_speed = 1.0, const float t_fov = 90.0f);
 
 
             //  == OPERATORS ==
