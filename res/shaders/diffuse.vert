@@ -20,8 +20,8 @@ layout(location = 1) in vec3 norm;  //! Vertex normals.
 //  -- Uniforms --
 uniform mat4 mvp;       //! Model-view-projection matrix.
 uniform mat4 view;      //! View matrix.
-uniform vec3 prop_col;  //! Prop colour.
-uniform vec3 light_pos; //! Light position.
+uniform vec3 col;       //! Prop colour.
+uniform vec3 sun_pos;   //! Sun position.
 
 
 
@@ -42,10 +42,10 @@ void main()
 {
     gl_Position = mvp * vec4(pos, 1.0);
 
-    cam_space_light_dir = normalize((view * vec4(light_pos, 1.0)).xyz - (view * vec4(pos, 1.0)).xyz);
+    cam_space_light_dir = normalize((view * vec4(sun_pos, 1.0)).xyz - (view * vec4(pos, 1.0)).xyz);
     cam_space_norm      = normalize((view * vec4(norm, 0.0)).xyz);
 
-    vert_col = prop_col;
+    vert_col = col;
 
-    dist = length(light_pos - pos);
+    dist = length(sun_pos - pos);
 }
