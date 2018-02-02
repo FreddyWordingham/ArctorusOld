@@ -28,7 +28,7 @@ namespace arc
          *  @param  t_vert  Vector of vertices forming the prop.
          *  @param  t_col   Colour of the prop.
          */
-        Prop::Prop(const std::vector<Vertex>& t_vert, const glm::vec3& t_col) :
+        Prop::Prop(const std::vector<Vertex>& t_vert, const glm::vec4& t_col) :
             m_num_vert(static_cast<GLsizei>(t_vert.size())),
             m_col(t_col),
             m_vao(init_vao()),
@@ -55,7 +55,7 @@ namespace arc
          *  @param  t_col   Colour of the shape.
          *  @param  t_scale Scaling to be applied to the shape.
          */
-        Prop::Prop(const shape t_shape, const glm::vec3& t_col, const float t_scale) :
+        Prop::Prop(const shape t_shape, const glm::vec4& t_col, const float t_scale) :
             Prop(init_vert(t_shape, t_scale), t_col)
         {
         }

@@ -53,7 +53,7 @@ namespace arc
           private:
             //  -- Properties --
             const GLsizei   m_num_vert; //! Total number of vertices.
-            const glm::vec3 m_col;      //! Render colour of the object.
+            const glm::vec4 m_col;      //! Render colour of the object.
 
             //  -- Vertex Data --
             const GLuint m_vao; //! Vertex array object handle.
@@ -63,8 +63,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Prop(const std::vector<Vertex>& t_vert, const glm::vec3& t_col);
-            Prop(shape t_shape, const glm::vec3& t_col, float t_scale = 1.0);
+            Prop(const std::vector<Vertex>& t_vert, const glm::vec4& t_col);
+            Prop(shape t_shape, const glm::vec4& t_col, float t_scale = 1.0);
 
           private:
             //  -- Initialisation --
@@ -78,7 +78,7 @@ namespace arc
           public:
             //  -- Getters --
             GLsizei get_num_vert() const { return (m_num_vert); }
-            const glm::vec3& get_col() const { return (m_col); }
+            const glm::vec4& get_col() const { return (m_col); }
             GLuint get_vao() const { return (m_vao); }
             GLuint get_vbo() const { return (m_vbo); }
         };
