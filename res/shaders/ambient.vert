@@ -1,34 +1,22 @@
-/**
- *  @author Freddy Wordingham
- *  @email  fjmw201@exeter.ac.uk
- *
- *  @date   02/02/2018.
- */
-
-
-
 //  == VERSION ==
 #version 330 core
 
 
 
 //  == INPUT ==
-//  -- Arctorus --
-in vec3 pos;    //! Vertex positions.
-in vec3 norm;   //! Vertex normals.
+//  -- Layout --
+layout(location = 0) in vec3 pos;
+layout(location = 1) in vec3 norm;
 
 //  -- Uniforms --
-uniform vec4 col;   //! Prop colour.
+uniform mat4 mvp;     //! Model-view-projection matrix.
+uniform vec3 obj_col; //! Object colour.
 
 
 
 //  == OUTPUT ==
 //  -- Passed --
-out Vertex
-{
-    vec3 norm;
-    vec4 col;
-}   vertex;
+out vec3 vert_col; //! Colour to draw the vertex with.
 
 
 
@@ -38,8 +26,7 @@ out Vertex
  */
 void main()
 {
-    gl_Position = vec4(pos, 1.0);
+    gl_Position = mvp * vec4(pos, 1.0);
 
-    vertex.norm = norm;
-    vertex.col  = col;
+    vert_col = obj_col;
 }

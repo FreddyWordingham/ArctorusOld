@@ -78,24 +78,28 @@ namespace arc
             }
 
             // Compile the geometry shader.
-            const char* geom_code = t_geom_serial.c_str();
-            GLuint geom_shader = glCreateShader(GL_GEOMETRY_SHADER);
-            glShaderSource(geom_shader, 1, &geom_code, nullptr);
-            glCompileShader(geom_shader);
-
-            // Check that the vertex shader compiled successfully.
-            glGetShaderiv(geom_shader, GL_COMPILE_STATUS, &success);
-            if (success == GL_FALSE)
+            GLuint geom_shader = 0;
+            if (!t_geom_serial.empty())
             {
-                GLint log_length;
-                glGetShaderiv(geom_shader, GL_INFO_LOG_LENGTH, &log_length);
-                std::vector<char> error_log(static_cast<size_t>(log_length));
+                const char* geom_code = t_geom_serial.c_str();
+                geom_shader = glCreateShader(GL_GEOMETRY_SHADER);
+                glShaderSource(geom_shader, 1, &geom_code, nullptr);
+                glCompileShader(geom_shader);
 
-                glGetShaderInfoLog(geom_shader, log_length, nullptr, error_log.data());
-                std::string error_text(begin(error_log), end(error_log));
+                // Check that the vertex shader compiled successfully.
+                glGetShaderiv(geom_shader, GL_COMPILE_STATUS, &success);
+                if (success == GL_FALSE)
+                {
+                    GLint log_length;
+                    glGetShaderiv(geom_shader, GL_INFO_LOG_LENGTH, &log_length);
+                    std::vector<char> error_log(static_cast<size_t>(log_length));
 
-                ERROR("Unable to construct graphical::Shader object.",
-                      "Geometry shader compilation failed with error: '" << error_text << "'.");
+                    glGetShaderInfoLog(geom_shader, log_length, nullptr, error_log.data());
+                    std::string error_text(begin(error_log), end(error_log));
+
+                    ERROR("Unable to construct graphical::Shader object.",
+                          "Geometry shader compilation failed with error: '" << error_text << "'.");
+                }
             }
 
             // Compile the fragment shader.
@@ -122,7 +126,10 @@ namespace arc
             // Compile the complete shader.
             GLuint r_handle = glCreateProgram();
             glAttachShader(r_handle, vert_shader);
-            glAttachShader(r_handle, geom_shader);
+            if (!t_geom_serial.empty())
+            {
+                glAttachShader(r_handle, geom_shader);
+            }
             glAttachShader(r_handle, frag_shader);
             glLinkProgram(r_handle);
 
@@ -143,7 +150,10 @@ namespace arc
 
             // Clean up temporary shaders.
             glDeleteShader(vert_shader);
-            glDeleteShader(geom_shader);
+            if (!t_geom_serial.empty())
+            {
+                glDeleteShader(geom_shader);
+            }
             glDeleteShader(frag_shader);
 
             return (r_handle);
