@@ -84,6 +84,7 @@ namespace arc
             glm::vec3  m_sun_pos;   //! Position of the global illuminator object.
             const Prop m_sun;       //! Drawable sun illuminator object.
 
+
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
