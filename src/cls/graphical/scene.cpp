@@ -151,6 +151,29 @@ namespace arc
         }
 
 
+        //  -- Render --
+        /**
+         *  Render control function.
+         *  Call sub-functions to render objects within the scene.
+         */
+        void Scene::render() const
+        {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            setup_ambient_shader();
+            setup_diffuse_shader();
+
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LESS);
+
+//            draw_ents();
+//            draw_lights();
+            draw_sun();
+
+            glfwSwapBuffers(m_window);
+        }
+
+
 
     } // namespace graphical
 } // namespace arc

@@ -102,6 +102,9 @@ namespace arc
             //  -- Input --
             bool should_close() const;
             void handle_input();
+
+            //  -- Render --
+            void render() const;
         };
 
 
