@@ -46,14 +46,14 @@ out vec4 geom_col;  //! Colour to draw the vertex with.
  */
 void main()
 {
-        vec4 v0     = vec4(vert_norm[0], 1.0);
+        vec4 v0     = vec4(vert_pos[0], 1.0);
         gl_Position = mvp * v0;
         geom_col = prop_col;
         EmitVertex();
 
-        vec4 v1     = v0 + vec4(vert_pos[0] * length, 0.0);
+        vec4 v1     = v0 + vec4(vert_norm[0] * length, 0.0);
         gl_Position = mvp * v1;
-        geom_col = vec4(1.0, 0.0, 0.0, 1.0);
+        geom_col = vec4(0.0, 0.0, 0.0, 1.0);
         EmitVertex();
 
         EndPrimitive();
