@@ -36,7 +36,7 @@ int main()
 
 
     geom::Mesh mesh(file::read("test/torus.obj"));
-    scene.add_light(mesh);
+    scene.add_light(mesh, 2.0, {1.0f, 1.0f, 1.0f, 1.0f});
 
     while (!scene.should_close())
     {
