@@ -57,7 +57,6 @@ namespace arc
 
         //  -- Lighting --
         constexpr const glm::vec3 INIT_SUN_POS({-0.0f, -0.0f, +0.0f});      //! Initial position of the global illuminator.
-        constexpr const glm::vec4 SUN_COL({+1.0f, +1.0f, +1.0f, +1.0f});    //! Colour of the global illuminator.
         constexpr const float     SUN_SIZE        = 0.1f;                   //! Size of the sun.
 
 
