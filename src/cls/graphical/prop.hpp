@@ -18,6 +18,9 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
+//  -- Classes --
+#include "cls/graphical/vertex.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -59,13 +62,10 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Prop(const std::vector<Vertex>& t_vert, const glm::vec3& t_col);
 
           private:
             //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
 
 
             //  == METHODS ==
