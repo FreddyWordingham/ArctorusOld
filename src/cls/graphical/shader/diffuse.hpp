@@ -56,7 +56,7 @@ namespace arc
 
 
                 //  == METHODS ==
-              private:
+              public:
                 //  -- Getters --
                 GLint get_mvp_uni() const { return (m_mvp_uni); }
                 GLint get_view_uni() const { return (m_view_uni); }
