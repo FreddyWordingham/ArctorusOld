@@ -20,14 +20,14 @@ layout(location = 1) in vec3 norm;  //! Vertex normals.
 //  -- Uniforms --
 uniform mat4 mvp;       //! Model-view-projection matrix.
 uniform mat4 view;      //! View matrix.
-uniform vec3 col;       //! Prop colour.
+uniform vec4 col;       //! Prop colour.
 uniform vec3 sun_pos;   //! Sun position.
 
 
 
 //  == OUTPUT ==
 //  -- Passed --
-out vec3 vert_col;              //! Colour to draw the vertex with.
+out vec4 vert_col;              //! Colour to draw the vertex with.
 out vec3 cam_space_norm;        //! Camera-space light normal.
 out vec3 cam_space_light_dir;   //! Camera-space light direction.
 out float dist;                 //! Distance between the light and the vertex.

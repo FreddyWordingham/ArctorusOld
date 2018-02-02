@@ -22,7 +22,7 @@ const float light_pow   = 5.0f; //! Power of the light source (arbitrary).
 
 //  == INPUT ==
 //  -- Passed --
-in vec3 vert_col;               //! Colour to draw the vertex with.
+in vec4 vert_col;               //! Colour to draw the vertex with.
 in vec3 cam_space_norm;         //! Camera-space light normal.
 in vec3 cam_space_light_dir;    //! Camera-space light direction.
 in float dist;                  //! Distance between the light and the vertex.
@@ -31,7 +31,7 @@ in float dist;                  //! Distance between the light and the vertex.
 
 //  == OUTPUT ==
 //  -- Passed --
-out vec3 col;   //! Output fragment colour.
+out vec4 col;   //! Output fragment colour.
 
 
 
