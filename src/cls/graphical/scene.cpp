@@ -40,8 +40,11 @@ namespace arc
             m_window(init_window()),
             m_ambient_shader(file::read(AMBIENT_GEOM_SHADER, false), file::read(AMBIENT_VERT_SHADER, false),
                              file::read(AMBIENT_FRAG_SHADER, false)),
-            m_primary_cam(std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
-            m_secondary_cam(std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT)))
+            m_primary_cam(
+                std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
+            m_secondary_cam(
+                std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
+            m_sun_pos(INIT_SUN_POS)
         {
         }
 
