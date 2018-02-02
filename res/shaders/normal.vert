@@ -18,7 +18,7 @@ in vec3 pos;    //! Vertex positions.
 in vec3 norm;   //! Vertex normals.
 
 //  -- Uniforms --
-uniform vec4 col;   //! Prop colour.
+uniform vec4 prop_col;  //! Prop colour.
 
 
 
@@ -41,5 +41,5 @@ void main()
     gl_Position = vec4(pos, 1.0);
 
     vertex.norm = norm;
-    vertex.col  = col;
+    vertex.col  = prop_col;
 }
