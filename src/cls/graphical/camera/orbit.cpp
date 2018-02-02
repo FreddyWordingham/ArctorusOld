@@ -50,6 +50,42 @@ namespace arc
 
 
 
+            //  == METHODS ==
+            //  -- Movement --
+            /**
+             *  Orbit the camera around the scene using window input.
+             *
+             *  @param  t_translate Translation to be applied to the camera.
+             *  @param  t_rotate    Translation to be applied to the camera.
+             */
+            void Orbit::move(const glm::vec3& t_translate, const glm::vec2& t_rotate)
+            {
+                m_azi_spin += (t_rotate[0] * 0.01f);
+
+                m_azi += t_translate[1] + m_azi_spin;
+                m_dec += t_translate[0];
+                m_rho -= t_translate[2];
+
+                if (m_dec < 0.0f)
+                {
+                    m_dec = 0.01f;
+                }
+                else if (m_dec > 3.141f)
+                {
+                    m_dec = 3.141f;
+                }
+
+                n_pos[X] = m_rho * sinf(m_dec) * cosf(m_azi);
+                n_pos[Y] = m_rho * sinf(m_dec) * sinf(m_azi);
+                n_pos[Z] = m_rho * cosf(m_dec);
+
+                n_dir = -glm::normalize(n_pos);
+
+                n_view = glm::lookAt(n_pos, n_pos + n_dir, UP_DIR);
+            }
+
+
+
         } // namespace camera
     } // namespace graphical
 } // namespace arc
