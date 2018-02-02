@@ -47,7 +47,7 @@ namespace arc
         constexpr const float CLEAR_COLOUR_ALPHA = 0.2f;    //! Window alpha clear colour.
 
         //  -- Camera --
-        constexpr const glm::vec3 INIT_CAM_POS({+10.0f, +10.0f, +10.0f});   //! Initial position of the camera.
+        constexpr const glm::vec3 INIT_CAM_POS({+5.0f, +5.0f, +5.0f});  //! Initial position of the camera.
 
         //  -- Shaders --
         constexpr const char* AMBIENT_VERT_SHADER = "res/shaders/ambient.vert"; //! Path to ambient vertex shader.
@@ -58,7 +58,7 @@ namespace arc
         constexpr const char* DIFFUSE_FRAG_SHADER = "res/shaders/diffuse.frag"; //! Path to diffuse fragment shader.
 
         //  -- Lighting --
-        constexpr const glm::vec3 INIT_SUN_POS({-0.0f, -0.0f, +0.0f});      //! Initial position of the global illuminator.
+        constexpr const glm::vec3 INIT_SUN_POS({+1.0f, +1.0f, +1.0f});      //! Initial position of the global illuminator.
         constexpr const float     SUN_SIZE        = 0.1f;                   //! Size of the sun.
 
 
