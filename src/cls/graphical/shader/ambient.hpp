@@ -49,7 +49,7 @@ namespace arc
 
 
                 //  == METHODS ==
-              private:
+              public:
                 //  -- Getters --
                 GLint get_mvp_uni() const { return (m_mvp_uni); }
                 GLint gem_col_uni() const { return (m_col_uni); }
