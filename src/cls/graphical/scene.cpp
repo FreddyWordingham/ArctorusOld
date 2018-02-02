@@ -355,7 +355,7 @@ namespace arc
         {
             // Draw diffusely lit prop mesh.
             glUseProgram(m_diffuse_shader.get_handle());
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
             glUniform1f(m_diffuse_shader.get_amb_pow_uni(), LIGHT_AMB_POW);
 
