@@ -47,21 +47,17 @@ namespace arc
                 const GLint m_skybox_uni;   //! Skybox uniform handle.
 
 
-
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
 
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
-
 
                 //  == METHODS ==
-              private:
+              public:
+                //  -- Getters --
+                GLint get_view_uni() const { return (m_view_uni); }
+                GLint get_proj_uni() const { return (m_proj_uni); }
+                GLint get_skybox_uni() const { return (m_skybox_uni); }
             };
 
 
