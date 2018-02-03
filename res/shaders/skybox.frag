@@ -1,31 +1,11 @@
-/**
- *  @author Freddy Wordingham
- *  @email  fjmw201@exeter.ac.uk
- *
- *  @date   03/02/2018.
- */
-
-
-
-//  == VERSION ==
 #version 330 core
+out vec4 FragColor;
 
+in vec3 TexCoords;
 
+uniform samplerCube skybox;
 
-//  == INPUT ==
-//  -- Passed --
-
-
-
-//  == OUTPUT ==
-//  -- Passed --
-
-
-
-//  == MAIN ==
-/**
- *  Skybox fragment shader.
- */
 void main()
 {
+    FragColor = texture(skybox, TexCoords);
 }
