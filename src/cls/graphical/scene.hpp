@@ -99,6 +99,7 @@ namespace arc
             std::vector<prop::Light> m_light;   //! Vector of light source props.
 
             //  -- Toggles --
+            bool m_toggle_filled_tris  = true;  //! When true render triangles as filled.
             bool m_toggle_light_normal = false; //! When true render light prop normals.
 
 
