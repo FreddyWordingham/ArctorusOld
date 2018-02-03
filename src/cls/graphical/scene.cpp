@@ -439,7 +439,6 @@ namespace arc
                 glBindVertexArray(0);
             }
 
-
             // Draw normals if toggle is on.
             if (m_toggle_light_normal)
             {
