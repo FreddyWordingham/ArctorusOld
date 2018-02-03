@@ -8,7 +8,7 @@
 
 
 //  == HEADER ==
-#include "cls/graphical/data/point.hpp"
+#include "cls/graphical/data/photon.hpp"
 
 
 
