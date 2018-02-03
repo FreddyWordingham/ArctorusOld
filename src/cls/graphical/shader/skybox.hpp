@@ -41,6 +41,11 @@ namespace arc
             {
                 //  == FIELDS ==
               private:
+                //  -- Uniforms --
+                const GLint m_view_uni;     //! View matrix uniform handle.
+                const GLint m_proj_uni;     //! Projetion matrix uniform handle.
+                const GLint m_skybox_uni;   //! Skybox uniform handle.
+
 
 
                 //  == INSTANTIATION ==
