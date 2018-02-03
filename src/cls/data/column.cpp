@@ -146,7 +146,7 @@ namespace arc
 
             if (r_title.size() > file::PRINT_WIDTH)
             {
-                WARN("data::Column title string must be resized.",
+                WARN("point::Column title string must be resized.",
                      "Title width of '" << t_title.size() << "' must be resized to fit within the allocated print width of: '"
                                         << file::PRINT_WIDTH << "'.");
 
@@ -221,5 +221,5 @@ namespace arc
 
 
 
-    } // namespace data
+    } // namespace point
 } // namespace arc

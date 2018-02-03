@@ -78,7 +78,7 @@ namespace arc
                 r_cdf[i] = r_cdf[i - 1] + base[i - 1];
             }
 
-            // Normalise the cdf data.
+            // Normalise the cdf point.
             for (size_t i = 0; i < r_cdf.size(); ++i)
             {
                 r_cdf[i] /= r_cdf.back();

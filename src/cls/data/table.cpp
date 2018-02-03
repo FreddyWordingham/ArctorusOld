@@ -99,7 +99,7 @@ namespace arc
             std::string line;
             if (!std::getline(stream, line))
             {
-                ERROR("Unable to construct data::Table from serialised string.",
+                ERROR("Unable to construct point::Table from serialised string.",
                       "Readable string does not contain a row of titles.");
             }
 
@@ -110,7 +110,7 @@ namespace arc
                 title.push_back(word);
             }
 
-            // Read column data.
+            // Read column point.
             std::vector<std::vector<double>> data(title.size());
             while (std::getline(stream, line))
             {
@@ -120,7 +120,7 @@ namespace arc
                 {
                     if (!std::getline(data_stream, word, file::DELIMIT_CHAR))
                     {
-                        ERROR("Unable to construct data::Table from serialised string.",
+                        ERROR("Unable to construct point::Table from serialised string.",
                               "Line: '" << line << "', does not contain: '" << title.size() << "' values as required.");
                     }
 
@@ -129,12 +129,12 @@ namespace arc
 
                 if (data_stream.rdbuf()->in_avail() != 0)
                 {
-                    ERROR("Unable to construct data::Table from serialised string.",
+                    ERROR("Unable to construct point::Table from serialised string.",
                           "Line: '" << line << "', does not contain: '" << title.size() << "' values as required.");
                 }
             }
 
-            // Form data columns.
+            // Form point columns.
             std::vector<Column> r_col;
             for (size_t         i = 0; i < title.size(); ++i)
             {
@@ -248,7 +248,7 @@ namespace arc
 
             if (m_col.empty())
             {
-                WARN("No data to print in data::Table object.", "Table does not contain any data columns.");
+                WARN("No point to print in point::Table object.", "Table does not contain any point columns.");
 
                 return (stream.str());
             }
@@ -260,7 +260,7 @@ namespace arc
             }
             stream << std::setw(file::PRINT_WIDTH) << m_col.back().get_title();
 
-            // Print column data.
+            // Print column point.
             if (m_col.front().empty())
             {
                 return (stream.str());
@@ -310,5 +310,5 @@ namespace arc
 
 
 
-    } // namespace data
+    } // namespace point
 } // namespace arc

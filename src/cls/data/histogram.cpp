@@ -184,5 +184,5 @@ namespace arc
 
 
 
-    } // namespace data
+    } // namespace point
 } // namespace arc
