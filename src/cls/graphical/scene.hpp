@@ -96,7 +96,7 @@ namespace arc
             const Prop m_sun;       //! Drawable sun illuminator object.
 
             //  -- Props --
-            std::vector<prop::Light> m_lights;    //! Vector of light source props.
+            std::vector<prop::Light> m_light;   //! Vector of light source props.
 
 
             //  == INSTANTIATION ==

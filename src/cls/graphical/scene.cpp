@@ -148,7 +148,7 @@ namespace arc
                 }
             }
 
-            m_lights.emplace_back(prop::Light(vertices, t_col, t_power));
+            m_light.emplace_back(prop::Light(vertices, t_col, t_power));
         }
 
 
@@ -388,16 +388,16 @@ namespace arc
 
             glUniform1f(m_diffuse_shader.get_amb_pow_uni(), 0.1);
 
-            for (size_t i = 0; i < m_lights.size(); ++i)
+            for (size_t i = 0; i < m_light.size(); ++i)
             {
-                glUniform4f(m_diffuse_shader.get_col_uni(), m_lights[i].get_col()[R], m_lights[i].get_col()[G],
-                            m_lights[i].get_col()[B], m_lights[i].get_col()[A]);
+                glUniform4f(m_diffuse_shader.get_col_uni(), m_light[i].get_col()[R], m_light[i].get_col()[G],
+                            m_light[i].get_col()[B], m_light[i].get_col()[A]);
 
                 glEnableVertexAttribArray(0);
 
-                glBindVertexArray(m_lights[i].get_vao());
+                glBindVertexArray(m_light[i].get_vao());
 
-                glDrawArrays(GL_TRIANGLES, 0, m_lights[i].get_num_vert());
+                glDrawArrays(GL_TRIANGLES, 0, m_light[i].get_num_vert());
 
                 glBindVertexArray(0);
             }
@@ -407,17 +407,17 @@ namespace arc
             glUseProgram(m_normal_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-            for (size_t i = 0; i < m_lights.size(); ++i)
+            for (size_t i = 0; i < m_light.size(); ++i)
             {
-                glUniform4f(m_normal_shader.get_col_uni(), m_lights[i].get_col()[R], m_lights[i].get_col()[G],
-                            m_lights[i].get_col()[B], m_lights[i].get_col()[A]);
-                glUniform1f(m_normal_shader.get_light_power_uni(), m_lights[i].get_power());
+                glUniform4f(m_normal_shader.get_col_uni(), m_light[i].get_col()[R], m_light[i].get_col()[G],
+                            m_light[i].get_col()[B], m_light[i].get_col()[A]);
+                glUniform1f(m_normal_shader.get_light_power_uni(), m_light[i].get_power());
 
                 glEnableVertexAttribArray(0);
 
-                glBindVertexArray(m_lights[i].get_vao());
+                glBindVertexArray(m_light[i].get_vao());
 
-                glDrawArrays(GL_POINTS, 0, m_lights[i].get_num_vert());
+                glDrawArrays(GL_POINTS, 0, m_light[i].get_num_vert());
 
                 glBindVertexArray(0);
             }
