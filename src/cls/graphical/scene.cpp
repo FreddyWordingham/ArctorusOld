@@ -56,7 +56,7 @@ namespace arc
             m_normal_shader(file::read(NORMAL_VERT_SHADER, false), file::read(NORMAL_GEOM_SHADER, false),
                             file::read(NORMAL_FRAG_SHADER, false)),
             m_cubemap(init_cubemap()),
-            m_cube_box(Prop(Prop::shape::CUBE, {1.0, 1.0, 1.0, 1.0}, 10.0)),
+            m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 1.0, 1.0, 1.0}, 10.0)),
             m_primary_cam(
                 std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(
@@ -215,7 +215,7 @@ namespace arc
             setup_normal_shader();
 
             glEnable(GL_DEPTH_TEST);
-            glDepthFunc(GL_LESS);
+            glDepthFunc(GL_LEQUAL);
 
 //            draw_ents();
             draw_lights();
