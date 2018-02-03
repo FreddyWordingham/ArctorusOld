@@ -35,7 +35,7 @@ namespace arc
 
             //  == CLASS ==
             /**
-             *  Data about a single renderable point.
+             *  Data about a single renderable photon point.
              */
             class Photon : public Point
             {
