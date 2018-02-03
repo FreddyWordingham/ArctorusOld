@@ -51,12 +51,12 @@ namespace arc
         constexpr const float CLEAR_COLOUR_ALPHA = 0.2f;    //! Window alpha clear colour.
 
         //  -- Skybox --
-        constexpr const char* SKYBOX_BACK   = "../res/skybox/nebula/back.tga";      //! Skybox back image.
-        constexpr const char* SKYBOX_BOTTOM = "../res/skybox/nebula/bottom.tga";    //! Skybox bottom image.
-        constexpr const char* SKYBOX_FRONT  = "../res/skybox/nebula/front.tga";     //! Skybox front image.
-        constexpr const char* SKYBOX_LEFT   = "../res/skybox/nebula/left.tga";      //! Skybox left image.
-        constexpr const char* SKYBOX_RIGHT  = "../res/skybox/nebula/right.tga";     //! Skybox right image.
-        constexpr const char* SKYBOX_TOP    = "../res/skybox/nebula/top.tga";       //! Skybox top image.
+        constexpr const char* SKYBOX_BACK   = "res/skybox/nebula/back.tga";     //! Skybox back image.
+        constexpr const char* SKYBOX_BOTTOM = "res/skybox/nebula/bottom.tga";   //! Skybox bottom image.
+        constexpr const char* SKYBOX_FRONT  = "res/skybox/nebula/front.tga";    //! Skybox front image.
+        constexpr const char* SKYBOX_LEFT   = "res/skybox/nebula/left.tga";     //! Skybox left image.
+        constexpr const char* SKYBOX_RIGHT  = "res/skybox/nebula/right.tga";    //! Skybox right image.
+        constexpr const char* SKYBOX_TOP    = "res/skybox/nebula/top.tga";      //! Skybox top image.
 
         //  -- Shaders --
         constexpr const char* SKYBOX_VERT_SHADER  = "res/shaders/skybox.vert";  //! Path to skybox vertex shader.
