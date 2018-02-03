@@ -56,6 +56,7 @@ namespace arc
             m_normal_shader(file::read(NORMAL_VERT_SHADER, false), file::read(NORMAL_GEOM_SHADER, false),
                             file::read(NORMAL_FRAG_SHADER, false)),
             m_cubemap(init_cubemap()),
+            m_cube_box(Prop(Prop::shape::CUBE, {1.0, 1.0, 1.0, 1.0}, 10.0)),
             m_primary_cam(
                 std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(
@@ -208,6 +209,7 @@ namespace arc
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+            setup_skybox_shader();
             setup_ambient_shader();
             setup_diffuse_shader();
             setup_normal_shader();
@@ -429,6 +431,16 @@ namespace arc
 
         //  -- Shader Setup --
         /**
+         *  Setup the skybox shader ready for rendering.
+         */
+        void Scene::setup_skybox_shader() const
+        {
+            glUseProgram(m_skybox_shader.get_handle());
+
+            glUniformMatrix4fv(m_skybox_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+        }
+
+        /**
          *  Setup the ambient shader ready for rendering.
          */
         void Scene::setup_ambient_shader() const
@@ -470,13 +482,23 @@ namespace arc
             // Turn depth mask off.
             glDepthMask(GL_FALSE);
 
+            // Load the shader.
             glUseProgram(m_skybox_shader.get_handle());
 
-            glBindVertexArray(skyboxVAO);
+            // Set drawing mode.
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            // Pass uniforms.
+            glUniform1f
+
+            // Pass the cubemap.
+            glBindVertexArray(m_cube_box.get_vao());
             glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemap);
 
             // Draw the skybox.
             glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            glBindVertexArray(0);
 
             // Turn depth mask on.
             glDepthMask(GL_TRUE);

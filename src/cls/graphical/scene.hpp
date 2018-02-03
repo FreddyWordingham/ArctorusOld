@@ -146,6 +146,7 @@ namespace arc
             void toggle();
 
             //  -- Shader Setup --
+            void setup_skybox_shader() const;
             void setup_ambient_shader() const;
             void setup_diffuse_shader() const;
             void setup_normal_shader() const;
