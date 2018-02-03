@@ -92,6 +92,9 @@ namespace arc
             shader::Diffuse m_diffuse_shader;   //! Diffuse lighting shader.
             shader::Normal  m_normal_shader;    //! Normal shader.
 
+            //  -- Cubemap --
+            const GLuint m_cubemap_texture; //! Handle to the loaded cubemap texture.
+
             //  -- Cameras --
             std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
             std::unique_ptr<Camera> m_secondary_cam;    //! Secondary camera to be swapped with the primary camera.
@@ -146,6 +149,7 @@ namespace arc
             void setup_normal_shader() const;
 
             //  -- Drawing --
+            void draw_skybox() const;
             void draw_lights() const;
             void draw_sun() const;
         };

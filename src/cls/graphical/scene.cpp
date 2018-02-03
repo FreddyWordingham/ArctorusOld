@@ -205,6 +205,7 @@ namespace arc
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);
 
+            draw_skybox();
 //            draw_ents();
             draw_lights();
             draw_sun();
@@ -451,6 +452,27 @@ namespace arc
 
 
         //  -- Drawing --
+        /**
+         *  Draw the skybox.
+         */
+        void Scene::draw_skybox() const
+        {
+            // Turn depth mask off.
+            glDepthMask(GL_FALSE);
+
+            glUseProgram(m_skybox_shader.get_handle());
+
+            glBindVertexArray(skyboxVAO);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+
+            // Draw the skybox.
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            // Turn depth mask on.
+            glDepthMask(GL_TRUE);
+        }
+
+
         /**
          *  Draw the scene's light sources.
          */
