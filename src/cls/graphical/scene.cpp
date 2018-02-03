@@ -351,6 +351,20 @@ namespace arc
          */
         void Scene::toggle()
         {
+            // Filled triangle rendering.
+            static int old_state_toggle_filled_tris = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::TOGGLE_FILLED_TRIS) != old_state_toggle_filled_tris)
+            {
+                old_state_toggle_filled_tris = glfwGetKey(m_window, control::TOGGLE_FILLED_TRIS);
+
+                if (old_state_toggle_filled_tris == GLFW_PRESS)
+                {
+                    m_toggle_filled_tris = !m_toggle_filled_tris;
+                }
+            }
+
+            // Light normal rendering.
             static int old_state_toggle_light_normal = GLFW_RELEASE;
 
             if (glfwGetKey(m_window, control::TOGGLE_LIGHT_NORMAL) != old_state_toggle_light_normal)
@@ -407,7 +421,7 @@ namespace arc
         {
             // Draw diffusely lit prop mesh.
             glUseProgram(m_diffuse_shader.get_handle());
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 
             glUniform1f(m_diffuse_shader.get_amb_pow_uni(), 0.1);
 
