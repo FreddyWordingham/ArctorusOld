@@ -211,7 +211,12 @@ namespace arc
             // Control the camera.
             swap_camera();
             move_camera(time_delta);
+
+            // Control the sun.
             move_sun(time_delta);
+
+            // Control toggles.
+            toggle();
         }
 
         /**
@@ -338,6 +343,24 @@ namespace arc
             if (glfwGetKey(m_window, control::TRANS_SUN_DOWN) == GLFW_PRESS)
             {
                 m_sun_pos[Z] -= speed_multiplier * t_time_delta;
+            }
+        }
+
+        /**
+         *  Control the toggle values.
+         */
+        void Scene::toggle()
+        {
+            static int old_state_toggle_light_normal = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::TOGGLE_LIGHT_NORMAL) != old_state_toggle_light_normal)
+            {
+                old_state_toggle_light_normal = glfwGetKey(m_window, control::TOGGLE_LIGHT_NORMAL);
+
+                if (old_state_toggle_light_normal == GLFW_PRESS)
+                {
+                    m_toggle_light_normal = !m_toggle_light_normal;
+                }
             }
         }
 

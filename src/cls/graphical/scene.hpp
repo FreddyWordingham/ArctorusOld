@@ -132,6 +132,7 @@ namespace arc
             void swap_camera();
             void move_camera(float t_time_delta);
             void move_sun(float t_time_delta);
+            void toggle();
 
             //  -- Shader Setup --
             void setup_ambient_shader() const;
