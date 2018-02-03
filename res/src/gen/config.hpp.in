@@ -21,15 +21,15 @@ namespace arc
 
 
 
-    //  == SETTINGS ==
-    //  -- Build Info --
-    constexpr const char* ARCTORUS_DIR = "@ARCTORUS_DIR@/";     //! Arctorus directory path.
-    constexpr const char* BUILD_INFO   = "@BUILD_BRANCH@-@BUILD_HASH@-@BUILD_PATCH@"
-        " : @BUILD_COMPILER@ : @BUILD_TYPE@ : @BUILD_DATE@";    //! Arctorus build information.
+        //  == SETTINGS ==
+        //  -- Build Info --
+        constexpr const char* ARCTORUS_DIR = "@ARCTORUS_DIR@/";     //! Arctorus directory path.
+        constexpr const char* BUILD_INFO   = "@BUILD_BRANCH@-@BUILD_HASH@-@BUILD_PATCH@"
+            " : @BUILD_COMPILER@ : @BUILD_TYPE@ : @BUILD_DATE@";    //! Arctorus build information.
 
-    //  -- Logging --
-    constexpr const bool COLOUR_LOG  = @COLOUR@;    //! When true, colour the message log if possible.
-    constexpr const bool VERBOSE_LOG = @VERBOSE@;   //! When true, log verbose messages.
+        //  -- Logging --
+        constexpr const bool COLOUR_LOG  = @COLOUR@;    //! When true, colour the message log if possible.
+        constexpr const bool VERBOSE_LOG = @VERBOSE@;   //! When true, log verbose messages.
 
 
 
