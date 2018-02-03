@@ -54,6 +54,10 @@ namespace arc
         constexpr const int TRANS_SUN_UP       = GLFW_KEY_Y;    //! Move the sun global illuminator upwards.
         constexpr const int TRANS_SUN_DOWN     = GLFW_KEY_R;    //! Move the sun global illuminator downwards.
 
+        //  -- Toggles --
+        constexpr const int TOGGLE_LIGHT_NORMAL = GLFW_KEY_N;   //! Toggle light normal rendering on and off.
+
+
 
     } // namespace control
 } // namespace arc
