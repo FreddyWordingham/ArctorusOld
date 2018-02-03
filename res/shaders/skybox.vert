@@ -1,33 +1,13 @@
-/**
- *  @author Freddy Wordingham
- *  @email  fjmw201@exeter.ac.uk
- *
- *  @date   03/02/2018.
- */
-
-
-
-//  == VERSION ==
 #version 330 core
+layout (location = 0) in vec3 aPos;
 
+out vec3 TexCoords;
 
+uniform mat4 projection;
+uniform mat4 view;
 
-//  == INPUT ==
-//  -- Layout --
-
-//  -- Uniforms --
-
-
-
-//  == OUTPUT ==
-//  -- Passed --
-
-
-
-//  == MAIN ==
-/**
- *  Skybox vertex shader.
- */
 void main()
 {
+    TexCoords = aPos;
+    gl_Position = projection * view * vec4(aPos, 1.0);
 }
