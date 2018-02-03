@@ -55,6 +55,7 @@ namespace arc
                              file::read(DIFFUSE_FRAG_SHADER, false)),
             m_normal_shader(file::read(NORMAL_VERT_SHADER, false), file::read(NORMAL_GEOM_SHADER, false),
                             file::read(NORMAL_FRAG_SHADER, false)),
+            m_cubemap(init_cubemap()),
             m_primary_cam(
                 std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(
@@ -62,37 +63,6 @@ namespace arc
             m_sun_pos(INIT_SUN_POS),
             m_sun(Prop(Prop::shape::CUBE, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
-            std::vector<std::string> faces({"../res/skybox/lake/right.jpg", "../res/skybox/lake/left.jpg",
-                                            "../res/skybox/lake/top.jpg", "../res/skybox/lake/bottom.jpg",
-                                            "../res/skybox/lake/front.jpg", "../res/skybox/lake/back.jpg"});
-
-            unsigned int textureID;
-            glGenTextures(1, &textureID);
-            glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
-
-            int               width, height, nrChannels;
-            for (unsigned int i = 0; i < faces.size(); i++)
-            {
-                unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
-                if (data)
-                {
-                    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                                 data);
-                    stbi_image_free(data);
-                }
-                else
-                {
-                    std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
-                    stbi_image_free(data);
-                }
-            }
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
-            textureID;
         }
 
 
@@ -154,6 +124,46 @@ namespace arc
             glClearColor(CLEAR_COLOUR_RED, CLEAR_COLOUR_GREEN, CLEAR_COLOUR_BLUE, CLEAR_COLOUR_ALPHA);
 
             return (r_window);
+        }
+
+        /**
+         *  Initialise the cubemap texture.
+         *
+         *  @return A handle to the loaded cubemap texture.
+         */
+        GLuint Scene::init_cubemap() const
+        {
+            std::vector<std::string> faces({"../res/skybox/lake/right.jpg", "../res/skybox/lake/left.jpg",
+                                            "../res/skybox/lake/top.jpg", "../res/skybox/lake/bottom.jpg",
+                                            "../res/skybox/lake/front.jpg", "../res/skybox/lake/back.jpg"});
+
+            unsigned int textureID;
+            glGenTextures(1, &textureID);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+            int               width, height, nrChannels;
+            for (unsigned int i = 0; i < faces.size(); i++)
+            {
+                unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+                if (data)
+                {
+                    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                                 data);
+                    stbi_image_free(data);
+                }
+                else
+                {
+                    std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+                    stbi_image_free(data);
+                }
+            }
+            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+            return(textureID);
         }
 
 

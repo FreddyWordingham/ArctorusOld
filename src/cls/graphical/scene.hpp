@@ -93,7 +93,7 @@ namespace arc
             shader::Normal  m_normal_shader;    //! Normal shader.
 
             //  -- Cubemap --
-            const GLuint m_cubemap_texture; //! Handle to the loaded cubemap texture.
+            const GLuint m_cubemap; //! Handle to the loaded cubemap texture.
 
             //  -- Cameras --
             std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
@@ -122,6 +122,7 @@ namespace arc
           private:
             //  -- Initialisation --
             GLFWwindow* init_window() const;
+            GLuint init_cubemap() const;
 
 
             //  == METHODS ==
