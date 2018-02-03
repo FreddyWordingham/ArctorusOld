@@ -27,6 +27,7 @@
 #include "cls/graphical/shader/ambient.hpp"
 #include "cls/graphical/shader/diffuse.hpp"
 #include "cls/graphical/shader/normal.hpp"
+#include "cls/graphical/shader/skybox.hpp"
 
 
 
@@ -83,6 +84,7 @@ namespace arc
             GLFWwindow* m_window;   //! Handle to the main graphical window.
 
             //  -- Shaders --
+            shader::Skybox  m_skybox_shader;    //! Skybox shader.
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
             shader::Diffuse m_diffuse_shader;   //! Diffuse lighting shader.
             shader::Normal  m_normal_shader;    //! Normal shader.
