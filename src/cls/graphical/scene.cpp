@@ -47,6 +47,8 @@ namespace arc
          */
         Scene::Scene() :
             m_window(init_window()),
+            m_skybox_shader(file::read(SKYBOX_VERT_SHADER, false), file::read(SKYBOX_GEOM_SHADER, false),
+                             file::read(SKYBOX_FRAG_SHADER, false)),
             m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_GEOM_SHADER, false),
                              file::read(AMBIENT_FRAG_SHADER, false)),
             m_diffuse_shader(file::read(DIFFUSE_VERT_SHADER, false), file::read(DIFFUSE_GEOM_SHADER, false),
