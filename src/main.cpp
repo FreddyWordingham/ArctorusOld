@@ -34,7 +34,6 @@ int main()
 
     graphical::Scene scene;
 
-
     geom::Mesh mesh(file::read("test/monkey.obj"));
     scene.add_light(mesh, 2.0, {1.0f, 1.0f, 1.0f, 1.0f});
 
