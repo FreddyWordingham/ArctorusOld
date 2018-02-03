@@ -8,7 +8,7 @@
 
 
 //  == HEADER ==
-#include "cls/graphical/data/photon.hpp"
+#include "cls/graphical/point/photon.hpp"
 
 
 
@@ -22,7 +22,7 @@ namespace arc
 {
     namespace graphical
     {
-        namespace data
+        namespace point
         {
 
 
@@ -36,6 +36,6 @@ namespace arc
 
 
 
-        } // namespace data
+        } // namespace point
     } // namespace graphical
 } // namespace arc
