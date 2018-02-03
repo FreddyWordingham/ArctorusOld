@@ -403,23 +403,26 @@ namespace arc
             }
 
 
-            // Draw normals.
-            glUseProgram(m_normal_shader.get_handle());
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-            for (size_t i = 0; i < m_light.size(); ++i)
+            // Draw normals if toggle is on.
+            if (m_toggle_light_normal)
             {
-                glUniform4f(m_normal_shader.get_col_uni(), m_light[i].get_col()[R], m_light[i].get_col()[G],
-                            m_light[i].get_col()[B], m_light[i].get_col()[A]);
-                glUniform1f(m_normal_shader.get_light_power_uni(), m_light[i].get_power());
+                glUseProgram(m_normal_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-                glEnableVertexAttribArray(0);
+                for (size_t i = 0; i < m_light.size(); ++i)
+                {
+                    glUniform4f(m_normal_shader.get_col_uni(), m_light[i].get_col()[R], m_light[i].get_col()[G],
+                                m_light[i].get_col()[B], m_light[i].get_col()[A]);
+                    glUniform1f(m_normal_shader.get_light_power_uni(), m_light[i].get_power());
 
-                glBindVertexArray(m_light[i].get_vao());
+                    glEnableVertexAttribArray(0);
 
-                glDrawArrays(GL_POINTS, 0, m_light[i].get_num_vert());
+                    glBindVertexArray(m_light[i].get_vao());
 
-                glBindVertexArray(0);
+                    glDrawArrays(GL_POINTS, 0, m_light[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
             }
         }
 

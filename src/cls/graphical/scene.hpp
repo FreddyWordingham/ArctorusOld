@@ -98,8 +98,8 @@ namespace arc
             //  -- Props --
             std::vector<prop::Light> m_light;   //! Vector of light source props.
 
-            //  -- Toggels --
-            bool light_normal_render = false;   //! When true render light prop normals.
+            //  -- Toggles --
+            bool m_toggle_light_normal = false; //! When true render light prop normals.
 
 
             //  == INSTANTIATION ==
