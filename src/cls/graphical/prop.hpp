@@ -45,7 +45,8 @@ namespace arc
              */
             enum class shape
             {
-                CUBE    //! Simple cube.
+                CUBE,   //! Simple cube.
+                SKYBOX  //! Skybox.
             };
 
 
