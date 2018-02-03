@@ -437,7 +437,8 @@ namespace arc
         {
             glUseProgram(m_skybox_shader.get_handle());
 
-            glUniformMatrix4fv(m_skybox_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+            glUniformMatrix4fv(m_skybox_shader.get_view_uni(), 1, GL_FALSE, &m_primary_cam->get_view()[0][0]);
+            glUniformMatrix4fv(m_skybox_shader.get_proj_uni(), 1, GL_FALSE, &m_primary_cam->get_proj()[0][0]);
         }
 
         /**
