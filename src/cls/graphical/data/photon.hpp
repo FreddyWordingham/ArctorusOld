@@ -37,7 +37,7 @@ namespace arc
             /**
              *  Data about a single renderable point.
              */
-            class Point : public Data
+            class Photon : public Data
             {
                 //  == FIELDS ==
               private:
