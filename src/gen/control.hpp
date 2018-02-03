@@ -55,6 +55,7 @@ namespace arc
         constexpr const int TRANS_SUN_DOWN     = GLFW_KEY_R;    //! Move the sun global illuminator downwards.
 
         //  -- Toggles --
+        constexpr const int TOGGLE_FILLED_TRIS  = GLFW_KEY_M;   //! Toggle filled triangle rendering on and off.
         constexpr const int TOGGLE_LIGHT_NORMAL = GLFW_KEY_N;   //! Toggle light normal rendering on and off.
 
 
