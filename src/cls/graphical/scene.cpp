@@ -217,10 +217,10 @@ namespace arc
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);
 
-            draw_skybox();
 //            draw_ents();
             draw_lights();
             draw_sun();
+            draw_skybox();
 
             glfwSwapBuffers(m_window);
         }
@@ -478,34 +478,6 @@ namespace arc
 
         //  -- Drawing --
         /**
-         *  Draw the skybox.
-         */
-        void Scene::draw_skybox() const
-        {
-            // Turn depth mask off.
-            glDepthMask(GL_FALSE);
-
-            // Load the shader.
-            glUseProgram(m_skybox_shader.get_handle());
-
-            // Set drawing mode.
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-            // Pass the cubemap.
-            glBindVertexArray(m_cube_box.get_vao());
-            glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemap);
-
-            // Draw the skybox.
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-
-            glBindVertexArray(0);
-
-            // Turn depth mask on.
-            glDepthMask(GL_TRUE);
-        }
-
-
-        /**
          *  Draw the scene's light sources.
          */
         void Scene::draw_lights() const
@@ -572,6 +544,27 @@ namespace arc
             glBindVertexArray(m_sun.get_vao());
 
             glDrawArrays(GL_TRIANGLES, 0, m_sun.get_num_vert());
+
+            glBindVertexArray(0);
+        }
+
+        /**
+         *  Draw the skybox.
+         */
+        void Scene::draw_skybox() const
+        {
+            // Load the shader.
+            glUseProgram(m_skybox_shader.get_handle());
+
+            // Set drawing mode.
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            // Pass the cubemap.
+            glBindVertexArray(m_cube_box.get_vao());
+            glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemap);
+
+            // Draw the skybox.
+            glDrawArrays(GL_TRIANGLES, 0, 36);
 
             glBindVertexArray(0);
         }

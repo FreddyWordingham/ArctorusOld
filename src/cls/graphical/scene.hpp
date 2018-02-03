@@ -152,9 +152,9 @@ namespace arc
             void setup_normal_shader() const;
 
             //  -- Drawing --
-            void draw_skybox() const;
             void draw_lights() const;
             void draw_sun() const;
+            void draw_skybox() const;
         };
 
 
