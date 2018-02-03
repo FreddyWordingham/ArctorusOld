@@ -473,7 +473,7 @@ namespace arc
             glUseProgram(m_skybox_shader.get_handle());
 
             glBindVertexArray(skyboxVAO);
-            glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemap);
 
             // Draw the skybox.
             glDrawArrays(GL_TRIANGLES, 0, 36);

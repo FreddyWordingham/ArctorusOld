@@ -94,6 +94,7 @@ namespace arc
 
             //  -- Cubemap --
             const GLuint m_cubemap; //! Handle to the loaded cubemap texture.
+            const Prop m_cube_box;  //! Prop holding the cubemap box.
 
             //  -- Cameras --
             std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
