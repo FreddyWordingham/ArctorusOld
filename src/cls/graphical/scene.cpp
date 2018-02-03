@@ -16,6 +16,10 @@
 //  -- System --
 #include <glm/gtx/transform.hpp>
 
+//  -- Library --
+#define STB_IMAGE_IMPLEMENTATION
+#include "lib/stb_image.h"
+
 //  -- General --
 #include "gen/control.hpp"
 #include "gen/enum.hpp"
@@ -56,7 +60,9 @@ namespace arc
             m_sun_pos(INIT_SUN_POS),
             m_sun(Prop(Prop::shape::CUBE, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
-            std::vector<std::string> faces({"right.jpg", "left.jpg", "top.jpg", "bottom.jpg", "front.jpg", "back.jpg"});
+            std::vector<std::string> faces({"../res/skybox/lake/right.jpg", "../res/skybox/lake/left.jpg",
+                                            "../res/skybox/lake/top.jpg", "../res/skybox/lake/bottom.jpg",
+                                            "../res/skybox/lake/front.jpg", "../res/skybox/lake/back.jpg"});
 
             unsigned int textureID;
             glGenTextures(1, &textureID);
@@ -83,6 +89,8 @@ namespace arc
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+            textureID;
         }
 
 
