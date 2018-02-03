@@ -50,8 +50,13 @@ namespace arc
         constexpr const float CLEAR_COLOUR_BLUE  = 0.2f;    //! Window blue clear colour.
         constexpr const float CLEAR_COLOUR_ALPHA = 0.2f;    //! Window alpha clear colour.
 
-        //  -- Camera --
-        constexpr const glm::vec3 INIT_CAM_POS({+0.0f, -5.0f, +5.0f});  //! Initial position of the camera.
+        //  -- Skybox --
+        constexpr const char* SKYBOX_BACK   = "res/skybox/nebula/back.tga";     //! Skybox back image.
+        constexpr const char* SKYBOX_BOTTOM = "res/skybox/nebula/bottom.tga";   //! Skybox bottom image.
+        constexpr const char* SKYBOX_FRONT  = "res/skybox/nebula/front.tga";    //! Skybox front image.
+        constexpr const char* SKYBOX_LEFT   = "res/skybox/nebula/left.tga";     //! Skybox left image.
+        constexpr const char* SKYBOX_RIGHT  = "res/skybox/nebula/right.tga";    //! Skybox right image.
+        constexpr const char* SKYBOX_TOP    = "res/skybox/nebula/top.tga";      //! Skybox top image.
 
         //  -- Shaders --
         constexpr const char* SKYBOX_VERT_SHADER  = "res/shaders/skybox.vert";  //! Path to skybox vertex shader.
@@ -66,6 +71,9 @@ namespace arc
         constexpr const char* NORMAL_VERT_SHADER  = "res/shaders/normal.vert";  //! Path to normal vertex shader.
         constexpr const char* NORMAL_GEOM_SHADER  = "res/shaders/normal.geom";  //! Path to normal geometry shader.
         constexpr const char* NORMAL_FRAG_SHADER  = "res/shaders/normal.frag";  //! Path to normal fragment shader.
+
+        //  -- Camera --
+        constexpr const glm::vec3 INIT_CAM_POS({+0.0f, -5.0f, +5.0f});  //! Initial position of the camera.
 
         //  -- Lighting --
         constexpr const glm::vec3 INIT_SUN_POS({+3.0f, +0.0f, +3.0f});      //! Initial position of the global illuminator.
@@ -94,7 +102,7 @@ namespace arc
 
             //  -- Cubemap --
             const GLuint m_cubemap; //! Handle to the loaded cubemap texture.
-            const Prop m_cube_box;  //! Prop holding the cubemap box.
+            const Prop   m_cube_box;  //! Prop holding the cubemap box.
 
             //  -- Cameras --
             std::unique_ptr<Camera> m_primary_cam;      //! Primary camera used to view the scene.
