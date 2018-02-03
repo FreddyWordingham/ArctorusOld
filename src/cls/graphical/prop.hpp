@@ -73,6 +73,7 @@ namespace arc
             GLuint init_vbo() const;
             std::vector<Vertex> init_vert(shape t_shape, float t_size) const;
             std::vector<Vertex> init_vert_cube(float t_scale) const;
+            std::vector<Vertex> init_vert_skybox(float t_scale) const;
 
 
             //  == METHODS ==
