@@ -437,7 +437,9 @@ namespace arc
         {
             glUseProgram(m_skybox_shader.get_handle());
 
-            glUniformMatrix4fv(m_skybox_shader.get_view_uni(), 1, GL_FALSE, &m_primary_cam->get_view()[0][0]);
+            glm::mat4 view = glm::mat4(glm::mat3(m_primary_cam->get_view()));
+
+            glUniformMatrix4fv(m_skybox_shader.get_view_uni(), 1, GL_FALSE, &view[0][0]);
             glUniformMatrix4fv(m_skybox_shader.get_proj_uni(), 1, GL_FALSE, &m_primary_cam->get_proj()[0][0]);
         }
 
@@ -488,9 +490,6 @@ namespace arc
 
             // Set drawing mode.
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-            // Pass uniforms.
-            glUniform1f
 
             // Pass the cubemap.
             glBindVertexArray(m_cube_box.get_vao());
