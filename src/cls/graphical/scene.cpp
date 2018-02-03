@@ -48,7 +48,7 @@ namespace arc
         Scene::Scene() :
             m_window(init_window()),
             m_skybox_shader(file::read(SKYBOX_VERT_SHADER, false), file::read(SKYBOX_GEOM_SHADER, false),
-                             file::read(SKYBOX_FRAG_SHADER, false)),
+                            file::read(SKYBOX_FRAG_SHADER, false)),
             m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_GEOM_SHADER, false),
                              file::read(AMBIENT_FRAG_SHADER, false)),
             m_diffuse_shader(file::read(DIFFUSE_VERT_SHADER, false), file::read(DIFFUSE_GEOM_SHADER, false),
@@ -134,9 +134,7 @@ namespace arc
          */
         GLuint Scene::init_cubemap() const
         {
-            std::vector<std::string> faces({"../res/skybox/lake/right.jpg", "../res/skybox/lake/left.jpg",
-                                            "../res/skybox/lake/top.jpg", "../res/skybox/lake/bottom.jpg",
-                                            "../res/skybox/lake/front.jpg", "../res/skybox/lake/back.jpg"});
+            std::vector<std::string> faces({SKYBOX_RIGHT, SKYBOX_LEFT, SKYBOX_TOP, SKYBOX_BOTTOM, SKYBOX_FRONT, SKYBOX_BACK});
 
             unsigned int textureID;
             glGenTextures(1, &textureID);
@@ -164,7 +162,7 @@ namespace arc
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-            return(textureID);
+            return (textureID);
         }
 
 
