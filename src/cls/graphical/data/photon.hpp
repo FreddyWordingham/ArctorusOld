@@ -8,18 +8,13 @@
 
 
 //  == GUARD ==
-#ifndef ARCTORUS_SRC_CLS_GRAPHICAL_DATA_POINT_HPP
-#define ARCTORUS_SRC_CLS_GRAPHICAL_DATA_POINT_HPP
+#ifndef ARCTORUS_SRC_CLS_GRAPHICAL_POINT_PHOTON_HPP
+#define ARCTORUS_SRC_CLS_GRAPHICAL_POINT_PHOTON_HPP
 
 
 
 //  == BASE CLASS ==
-#include "cls/graphical/data.hpp"
-
-
-
-//  == INCLUDES ==
-//  -- System --
+#include "cls/graphical/point.hpp"
 
 
 
@@ -28,7 +23,7 @@ namespace arc
 {
     namespace graphical
     {
-        namespace data
+        namespace point
         {
 
 
@@ -61,11 +56,11 @@ namespace arc
 
 
 
-        } // namespace data
+        } // namespace point
     } // namespace graphical
 } // namespace arc
 
 
 
 //  == GUARD END ==
-#endif // ARCTORUS_SRC_CLS_GRAPHICAL_DATA_POINT_HPP
+#endif // ARCTORUS_SRC_CLS_GRAPHICAL_POINT_PHOTON_HPP
