@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <glm/glm.hpp>
 
 
 
@@ -34,18 +35,13 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            const glm::vec3 m_pos;  //! Position of the point.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-
-          private:
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
 
 
             //  == METHODS ==
