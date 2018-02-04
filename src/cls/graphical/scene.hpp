@@ -169,6 +169,7 @@ namespace arc
 
             //  -- Drawing --
             void draw_lights() const;
+            void draw_phots() const;
             void draw_sun() const;
             void draw_skybox() const;
         };

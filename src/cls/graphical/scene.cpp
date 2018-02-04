@@ -231,6 +231,7 @@ namespace arc
 
 //            draw_ents();
             draw_lights();
+            draw_phots();
             draw_sun();
             draw_skybox();
 
