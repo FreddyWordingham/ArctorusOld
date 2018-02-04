@@ -80,13 +80,13 @@ namespace arc
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) 0);
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) sizeof(GLfloat));
+            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (3 * sizeof(GLfloat)));
             glEnableVertexAttribArray(1);
 
-            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) sizeof(GLfloat));
+            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (4 * sizeof(GLfloat)));
             glEnableVertexAttribArray(2);
 
-            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) sizeof(GLfloat));
+            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (5 * sizeof(GLfloat)));
             glEnableVertexAttribArray(3);
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);

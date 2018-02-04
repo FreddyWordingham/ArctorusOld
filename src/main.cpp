@@ -8,6 +8,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <vector>
+
 //  -- General --
 #include "gen/log.hpp"
 
@@ -31,6 +34,12 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
+
+    std::vector<graphical::point::Photon> path;
+    path.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
+    path.push_back(graphical::point::Photon({0.0f, 0.0f, 1.0f}, 400E-9f, 1.0f, 1.0));
+    path.push_back(graphical::point::Photon({0.0f, 1.0f, 1.0f}, 400E-9f, 1.0f, 2.0));
+
 
     graphical::Scene scene;
 
