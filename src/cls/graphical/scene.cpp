@@ -56,6 +56,8 @@ namespace arc
                              file::read(DIFFUSE_FRAG_SHADER, false)),
             m_normal_shader(file::read(NORMAL_VERT_SHADER, false), file::read(NORMAL_GEOM_SHADER, false),
                             file::read(NORMAL_FRAG_SHADER, false)),
+            m_photon_shader(file::read(PHOTON_VERT_SHADER, false), file::read(PHOTON_GEOM_SHADER, false),
+                            file::read(PHOTON_FRAG_SHADER, false)),
             m_cubemap(init_cubemap()),
             m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 1.0, 1.0, 1.0}, 10.0)),
             m_primary_cam(
