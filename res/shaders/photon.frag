@@ -24,7 +24,7 @@ in vec4 vert_col;   //! Colour to draw the vertex with.
 
 //  == MAIN ==
 /**
- *  TODO
+ *  Photon packet path rendering shader.
  */
 void main()
 {
