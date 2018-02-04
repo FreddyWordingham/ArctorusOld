@@ -198,6 +198,16 @@ namespace arc
             m_light.emplace_back(prop::Light(vertices, t_col, t_power));
         }
 
+        /**
+         *  Add a renderable photon packet path prop to the scene.
+         *
+         *  @param  t_phot  Photon packet path prop to be added.
+         */
+        void Scene::add_photon(const std::vector<point::Photon>& t_phot)
+        {
+            m_phot.emplace_back(Prop(t_phot, glm::vec4({1.0, 0.0, 0.0, 1.0})));
+        }
+
 
         //  -- Render --
         /**
