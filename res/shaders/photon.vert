@@ -41,7 +41,7 @@ out vec4 vert_col;  //! Colour to draw the vertex with.
 void main()
 {
     // Set position.
-    gl_Position = mvp * vec(pos, 1.0);
+    gl_Position = mvp * vec4(pos, 1.0);
 
     // Set vertex colour.
     vert_col = col;
