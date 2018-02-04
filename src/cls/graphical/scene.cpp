@@ -127,6 +127,16 @@ namespace arc
             // Set background colour.
             glClearColor(CLEAR_COLOUR_RED, CLEAR_COLOUR_GREEN, CLEAR_COLOUR_BLUE, CLEAR_COLOUR_ALPHA);
 
+
+            // Enable the depth buffer.
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LEQUAL);
+
+            // Enable transparency.
+            glEnable (GL_BLEND);
+            glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
             return (r_window);
         }
 
@@ -226,14 +236,11 @@ namespace arc
             setup_normal_shader();
             setup_photon_shader();
 
-            glEnable(GL_DEPTH_TEST);
-            glDepthFunc(GL_LEQUAL);
-
 //            draw_ents();
+            draw_skybox();
             draw_lights();
             draw_phots();
             draw_sun();
-            draw_skybox();
 
             glfwSwapBuffers(m_window);
         }
@@ -280,6 +287,7 @@ namespace arc
 
             // Control toggles.
             toggle();
+            m_render_dist += 0.01f;
         }
 
         /**

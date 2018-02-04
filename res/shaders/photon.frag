@@ -37,6 +37,7 @@ void main()
     // Set fragment colour.
     col = vert_col;
 
-    col *= 1.0 - clamp(abs(render_dist - vert_dist), 0.0, 1.0);
-    col *= 1.0 - clamp(abs(render_dist - vert_dist), 0.0, 1.0);
+    float close = 1.0 - clamp(abs(render_dist - vert_dist), 0.0, 1.0);
+    col.a = close * close * close;
+    float unused = render_dist;
 }

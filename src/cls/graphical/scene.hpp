@@ -46,10 +46,10 @@ namespace arc
         constexpr const int HEIGHT = 1200;                  //! Height of the window in pixels.
         constexpr const char* TITLE = "Arctorus";           //! Window title.
         constexpr const int   AA_SAMPLES         = 4;       //! Number of anti-aliasing samples.
-        constexpr const float CLEAR_COLOUR_RED   = 0.2f;    //! Window red clear colour.
+        constexpr const float CLEAR_COLOUR_RED   = 1.0f;    //! Window red clear colour.
         constexpr const float CLEAR_COLOUR_GREEN = 0.2f;    //! Window green clear colour.
-        constexpr const float CLEAR_COLOUR_BLUE  = 0.2f;    //! Window blue clear colour.
-        constexpr const float CLEAR_COLOUR_ALPHA = 0.2f;    //! Window alpha clear colour.
+        constexpr const float CLEAR_COLOUR_BLUE  = 1.0f;    //! Window blue clear colour.
+        constexpr const float CLEAR_COLOUR_ALPHA = 1.0f;    //! Window alpha clear colour.
 
         //  -- Skybox --
         constexpr const char* SKYBOX_BACK   = "res/skybox/nebula/back.tga";     //! Skybox back image.
