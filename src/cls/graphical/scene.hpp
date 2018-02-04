@@ -114,6 +114,7 @@ namespace arc
 
             //  -- Props --
             std::vector<prop::Light> m_light;   //! Vector of light source props.
+            std::vector<Prop>        m_phot;    //! Vector of photon packet path props.
 
             //  -- Toggles --
             bool m_toggle_filled_tris  = true;  //! When true render triangles as filled.
