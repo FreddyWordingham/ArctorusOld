@@ -125,6 +125,9 @@ namespace arc
             bool m_toggle_filled_tris  = true;  //! When true render triangles as filled.
             bool m_toggle_light_normal = false; //! When true render light prop normals.
 
+            //  -- Rendering --
+            float m_render_dist = 0.0f; //! Photon rendering distance.
+
 
             //  == INSTANTIATION ==
           public:
