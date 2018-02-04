@@ -18,7 +18,7 @@ in vec4 vert_col;   //! Colour to draw the vertex with.
 in float vert_dist;
 
 //  -- Constants --
-const float render_dist = 0.5;  //! Distance to render photons at.
+uniform float render_dist = 0.5;  //! Distance to render photons at.
 
 
 
