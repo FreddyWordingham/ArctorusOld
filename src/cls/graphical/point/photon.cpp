@@ -34,7 +34,7 @@ namespace arc
              *
              *  @post   m_wavelength must be greater than zero.
              *  @post   m_weight must be greater than zero.
-             *  @post   m_dist must be greater than zero.
+             *  @post   m_dist must be greater than or equal to zero.
              */
             Photon::Photon(const glm::vec3& t_pos, const float t_wavelength, const float t_weight, const float t_dist) :
                 Point(t_pos),
@@ -44,7 +44,7 @@ namespace arc
             {
                 assert(m_wavelength > 0.0f);
                 assert(m_weight > 0.0f);
-                assert(m_dist > 0.0f);
+                assert(m_dist >= 0.0f);
             }
 
 
