@@ -289,7 +289,6 @@ namespace arc
 
             // Control toggles.
             toggle();
-            m_render_dist += 0.01f;
         }
 
         /**
