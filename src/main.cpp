@@ -46,6 +46,8 @@ int main()
     geom::Mesh mesh(file::read("test/monkey.obj"));
     scene.add_light(mesh, 2.0, {1.0f, 1.0f, 1.0f, 1.0f});
 
+    scene.add_photon(path);
+
     while (!scene.should_close())
     {
         scene.handle_input();
