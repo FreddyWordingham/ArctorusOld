@@ -42,6 +42,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Point(const glm::vec3 &t_pos);
 
 
             //  == METHODS ==
