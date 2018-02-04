@@ -30,12 +30,16 @@ namespace arc
 
             //  == CLASS ==
             /**
-             *  Data about a single renderable photon point.
+             *  Data about a single renderable photon packet at a point.
              */
             class Photon : public Point
             {
                 //  == FIELDS ==
               private:
+                //  -- Data --
+                const float m_wavelength;   //! Wavelength the packet.
+                const float m_weight;       //! Statistical weight of the packet.
+                const float m_dist;         //! Distance traveled so far by the packet.
 
 
                 //  == INSTANTIATION ==
