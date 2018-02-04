@@ -169,7 +169,29 @@ namespace arc
          */
         GLuint Shader::init_sub_shader(const std::string& t_serial, const GLenum t_type) const
         {
+            // Compile the vertex shader.
+            const char* code = t_serial.c_str();
+            GLuint r_sub_shader = glCreateShader(t_type);
+            glShaderSource(r_sub_shader, 1, &code, nullptr);
+            glCompileShader(r_sub_shader);
 
+            // Check that the vertex shader compiled successfully.
+            GLint success;
+            glGetShaderiv(r_sub_shader, GL_COMPILE_STATUS, &success);
+            if (success == GL_FALSE)
+            {
+                GLint log_length;
+                glGetShaderiv(r_sub_shader, GL_INFO_LOG_LENGTH, &log_length);
+                std::vector<char> error_log(static_cast<size_t>(log_length));
+
+                glGetShaderInfoLog(r_sub_shader, log_length, nullptr, error_log.data());
+                std::string error_text(begin(error_log), end(error_log));
+
+                ERROR("Unable to construct graphical::Shader object.",
+                      "Shader type: '" << t_type << "', compilation failed with error: '" << error_text << "'.");
+            }
+
+            return (r_sub_shader);
         }
 
         /**
