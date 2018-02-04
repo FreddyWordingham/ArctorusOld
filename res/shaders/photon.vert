@@ -24,7 +24,7 @@ uniform mat4 mvp;           //! Model-view-projection matrix.
 uniform vec4 col;           //! Prop colour.
 
 //  -- Constants --
-const float render_dist;    //! Distance to render photons at.
+const float render_dist = 0.5;  //! Distance to render photons at.
 
 
 
