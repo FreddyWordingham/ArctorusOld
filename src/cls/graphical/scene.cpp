@@ -496,6 +496,7 @@ namespace arc
             glUseProgram(m_photon_shader.get_handle());
 
             glUniformMatrix4fv(m_photon_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+            glUniform1f(m_photon_shader.get_render_dist_uni(), m_render_dist);
         }
 
 
