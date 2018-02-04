@@ -46,7 +46,7 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
             //  -- Getters --
             glm::vec3& get_pos() const { return (m_pos); }
         };
