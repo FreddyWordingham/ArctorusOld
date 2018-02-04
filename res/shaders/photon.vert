@@ -35,7 +35,7 @@ const float render_dist;    //! Distance to render photons at.
 
 //  == MAIN ==
 /**
- *  TODO
+ *  Photon packet path rendering shader.
  */
 void main()
 {
