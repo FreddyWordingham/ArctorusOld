@@ -549,6 +549,29 @@ namespace arc
         }
 
         /**
+         *  Draw the scene's photon packet paths.
+         */
+        void Scene::draw_phots() const
+        {
+            glUseProgram(m_photon_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
+
+            for (size_t i = 0; i < m_phot.size(); ++i)
+            {
+                glUniform4f(m_photon_shader.get_col_uni(), m_phot[i].get_col()[R], m_phot[i].get_col()[G],
+                            m_phot[i].get_col()[B], m_phot[i].get_col()[A]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_phot[i].get_vao());
+
+                glDrawArrays(GL_LINE_STRIP, 0, m_phot[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+        }
+
+        /**
          *  Draw the global illuminator object.
          */
         void Scene::draw_sun() const
