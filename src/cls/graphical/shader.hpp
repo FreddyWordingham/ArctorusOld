@@ -49,6 +49,7 @@ namespace arc
           private:
             //  -- Initialisation --
             GLuint init_handle(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial) const;
+            GLuint init_sub_shader(const std::string& t_serial, const GLenum t_type) const;
 
           protected:
             //  -- Initialisation --

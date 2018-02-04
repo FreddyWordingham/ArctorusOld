@@ -160,6 +160,19 @@ namespace arc
         }
 
         /**
+         *  Initialise a sub-shader.
+         *
+         *  @param  t_serial    Serialised source code of the sub-shader.
+         *  @param  t_type      Type of sub-shader to be initialised.
+         *
+         *  @return The handle to the initialised sub-shader program.
+         */
+        GLuint Shader::init_sub_shader(const std::string& t_serial, const GLenum t_type) const
+        {
+
+        }
+
+        /**
          *  Initialise a handle to a shader uniform using its name.
          *
          *  @param  t_uni_name  Name of the uniform to initialise.
