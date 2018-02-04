@@ -20,7 +20,8 @@ layout(location = 2) in float weight;       //! Photon packet weight.
 layout(location = 3) in float dist;         //! Photon packet travelled dist.
 
 //  -- Uniforms --
-
+uniform mat4 mvp;           //! Model-view-projection matrix.
+uniform vec4 col;           //! Prop colour.
 
 
 //  == OUTPUT ==
