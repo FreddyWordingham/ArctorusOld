@@ -42,11 +42,13 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Point(const glm::vec3 &t_pos);
+            explicit Point(const glm::vec3& t_pos);
 
 
             //  == METHODS ==
           private:
+            //  -- Getters --
+            glm::vec3& get_pos() const { return (m_pos); }
         };
 
 
