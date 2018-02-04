@@ -29,4 +29,6 @@ out vec4 col;
  */
 void main()
 {
+    // Set fragment colour.
+    col = vert_col;
 }
