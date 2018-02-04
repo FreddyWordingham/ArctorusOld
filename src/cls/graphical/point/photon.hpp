@@ -45,6 +45,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
+                Photon(const glm::vec3& t_pos, const float t_wavelength, const float t_weight, const float t_dist);
 
               private:
                 //  -- Initialisation --
