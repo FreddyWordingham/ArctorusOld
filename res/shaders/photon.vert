@@ -30,6 +30,7 @@ const float render_dist;    //! Distance to render photons at.
 
 //  == OUTPUT ==
 //  -- Passed --
+out vec4 vert_col;  //! Colour to draw the vertex with.
 
 
 
