@@ -154,7 +154,8 @@ namespace arc
             int               width, height, nrChannels;
             for (unsigned int i = 0; i < faces.size(); i++)
             {
-                unsigned char* data = stbi_load((std::string(config::ARCTORUS_DIR) + faces[i]).c_str(), &width, &height, &nrChannels, 0);
+                unsigned char* data = stbi_load((std::string(config::ARCTORUS_DIR) + faces[i]).c_str(), &width, &height,
+                                                &nrChannels, 0);
                 if (data)
                 {
                     glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
@@ -289,6 +290,9 @@ namespace arc
 
             // Control toggles.
             toggle();
+
+            // Propagate photons.
+            propagate_photons(time_delta);
         }
 
         /**
@@ -447,6 +451,39 @@ namespace arc
                 {
                     m_toggle_light_normal = !m_toggle_light_normal;
                 }
+            }
+        }
+
+        /**
+         *  Initiate or hault the rendering of photon packet paths.
+         *
+         *  @param  t_time_delta    Time elapsed since the last rendering.
+         */
+        void Scene::propagate_photons(float t_time_delta)
+        {
+            static int old_state_propagate_photons = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::INIT_PHOTON_TRANSPORT) != old_state_propagate_photons)
+            {
+                old_state_propagate_photons = glfwGetKey(m_window, control::INIT_PHOTON_TRANSPORT);
+
+                if (old_state_propagate_photons == GLFW_PRESS)
+                {
+                    if (m_render_dist > 0.0)
+                    {
+                        m_render_dist = 0.0;
+                    }
+                    else
+                    {
+                        m_render_dist = 0.01;
+                    }
+                }
+            }
+
+            // Increase render distance if dynamic rendering is active.
+            if (m_render_dist > 0.0)
+            {
+                m_render_dist += t_time_delta;
             }
         }
 

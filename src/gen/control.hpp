@@ -59,7 +59,7 @@ namespace arc
         constexpr const int TOGGLE_LIGHT_NORMAL = GLFW_KEY_N;   //! Toggle light normal rendering on and off.
 
         //  -- Rendering --
-        constexpr const int INITIATE_PHOTON_TRANSPORT = GLFW_KEY_SPACE; //! Initiate photon transport rendering.
+        constexpr const int INIT_PHOTON_TRANSPORT = GLFW_KEY_SPACE; //! Initiate photon transport rendering.
 
 
 

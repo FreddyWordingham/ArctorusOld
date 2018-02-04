@@ -162,6 +162,7 @@ namespace arc
             void move_camera(float t_time_delta);
             void move_sun(float t_time_delta);
             void toggle();
+            void propagate_photons(float t_time_delta);
 
             //  -- Shader Setup --
             void setup_skybox_shader() const;
