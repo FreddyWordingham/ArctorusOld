@@ -19,6 +19,7 @@ in vec4 vert_col;   //! Colour to draw the vertex with.
 
 //  == OUTPUT ==
 //  -- Passed --
+out vec4 col;
 
 
 
