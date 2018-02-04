@@ -57,7 +57,7 @@ namespace arc
             GLint success;
 
             // Compile the vertex shader.
-            const char* vert_code = t_vert_serial.c_str();
+            /*const char* vert_code = t_vert_serial.c_str();
             GLuint vert_shader = glCreateShader(GL_VERTEX_SHADER);
             glShaderSource(vert_shader, 1, &vert_code, nullptr);
             glCompileShader(vert_shader);
@@ -75,7 +75,9 @@ namespace arc
 
                 ERROR("Unable to construct graphical::Shader object.",
                       "Vertex shader compilation failed with error: '" << error_text << "'.");
-            }
+            }*/
+
+            const GLuint vert_shader = init_sub_shader(t_vert_serial, GL_VERTEX_SHADER);
 
             // Compile the geometry shader.
             GLuint geom_shader = 0;
