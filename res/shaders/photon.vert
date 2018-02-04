@@ -23,15 +23,12 @@ layout(location = 3) in float dist;         //! Photon packet travelled dist.
 uniform mat4 mvp;       //! Model-view-projection matrix.
 uniform vec4 prop_col;  //! Prop colour.
 
-//  -- Constants --
-const float render_dist = 0.5;  //! Distance to render photons at.
-
 
 
 //  == OUTPUT ==
 //  -- Passed --
 out vec4 vert_col;  //! Colour to draw the vertex with.
-
+out float vert_dist;
 
 
 //  == MAIN ==
@@ -45,4 +42,6 @@ void main()
 
     // Set vertex colour.
     vert_col = prop_col;
+
+    vert_dist = dist;
 }
