@@ -20,8 +20,8 @@ layout(location = 2) in float weight;       //! Photon packet weight.
 layout(location = 3) in float dist;         //! Photon packet travelled dist.
 
 //  -- Uniforms --
-uniform mat4 mvp;           //! Model-view-projection matrix.
-uniform vec4 col;           //! Prop colour.
+uniform mat4 mvp;   //! Model-view-projection matrix.
+uniform vec4 col;   //! Prop colour.
 
 //  -- Constants --
 const float render_dist = 0.5;  //! Distance to render photons at.
