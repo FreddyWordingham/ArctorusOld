@@ -23,6 +23,10 @@ layout(location = 3) in float dist;         //! Photon packet travelled dist.
 uniform mat4 mvp;           //! Model-view-projection matrix.
 uniform vec4 col;           //! Prop colour.
 
+//  -- Constants --
+const float render_dist;    //! Distance to render photons at.
+
+
 
 //  == OUTPUT ==
 //  -- Passed --
