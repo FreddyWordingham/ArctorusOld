@@ -49,13 +49,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
+                Photon(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial);
 
 
                 //  == METHODS ==
