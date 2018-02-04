@@ -27,6 +27,7 @@
 #include "cls/graphical/shader/ambient.hpp"
 #include "cls/graphical/shader/diffuse.hpp"
 #include "cls/graphical/shader/normal.hpp"
+#include "cls/graphical/shader/photon.hpp"
 #include "cls/graphical/shader/skybox.hpp"
 
 
