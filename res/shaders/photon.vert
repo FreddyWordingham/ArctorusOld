@@ -44,5 +44,5 @@ void main()
     gl_Position = mvp * vec4(pos, 1.0);
 
     // Set vertex colour.
-    vert_col = col;
+    vert_col = prop_col;
 }
