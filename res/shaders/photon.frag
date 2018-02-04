@@ -14,7 +14,7 @@
 
 //  == INPUT ==
 //  -- Passed --
-
+in vec4 vert_col;   //! Colour to draw the vertex with.
 
 
 //  == OUTPUT ==
