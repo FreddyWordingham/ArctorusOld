@@ -224,6 +224,7 @@ namespace arc
             setup_ambient_shader();
             setup_diffuse_shader();
             setup_normal_shader();
+            setup_photon_shader();
 
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LEQUAL);
@@ -484,6 +485,16 @@ namespace arc
             glUseProgram(m_normal_shader.get_handle());
 
             glUniformMatrix4fv(m_normal_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+        }
+
+        /**
+         *  Setup the photon shader ready for rendering.
+         */
+        void Scene::setup_photon_shader() const
+        {
+            glUseProgram(m_photon_shader.get_handle());
+
+            glUniformMatrix4fv(m_photon_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
         }
 
 
