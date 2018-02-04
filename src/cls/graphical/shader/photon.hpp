@@ -42,8 +42,9 @@ namespace arc
                 //  == FIELDS ==
               private:
                 //  -- Uniforms --
-                const GLint m_mvp_uni;  //! Model-view-projection uniform handle.
-                const GLint m_col_uni;  //! Colour uniform handle.
+                const GLint m_mvp_uni;          //! Model-view-projection uniform handle.
+                const GLint m_col_uni;          //! Colour uniform handle.
+                const GLint m_render_dist_uni;  //! Render distance uniform handle.
 
 
                 //  == INSTANTIATION ==
