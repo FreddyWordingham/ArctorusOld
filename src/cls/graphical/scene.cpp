@@ -127,15 +127,13 @@ namespace arc
             // Set background colour.
             glClearColor(CLEAR_COLOUR_RED, CLEAR_COLOUR_GREEN, CLEAR_COLOUR_BLUE, CLEAR_COLOUR_ALPHA);
 
-
             // Enable the depth buffer.
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LEQUAL);
 
             // Enable transparency.
-            glEnable (GL_BLEND);
-            glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
             return (r_window);
         }
@@ -237,10 +235,14 @@ namespace arc
             setup_photon_shader();
 
 //            draw_ents();
+
+            // Draw opaque objects.
             draw_skybox();
             draw_lights();
-            draw_phots();
             draw_sun();
+
+            // Draw potentially transparent objects.
+            draw_phots();
 
             glfwSwapBuffers(m_window);
         }
