@@ -60,6 +60,39 @@ namespace arc
         {
         }
 
+        /**
+         *  Construct a photon packet path prop from a vector of photon positions.
+         *
+         *  @param  t_phot  Vector of photon point paths.
+         *  @param  t_col   Default colour of the photon path.
+         */
+        Prop::Prop(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col) :
+            m_num_vert(static_cast<GLsizei>(t_phot.size())),
+            m_col(t_col),
+            m_vao(init_vao()),
+            m_vbo(init_vbo())
+        {
+            glBindVertexArray(m_vao);
+            glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+            glBufferData(GL_ARRAY_BUFFER, static_cast<size_t>(m_num_vert) * sizeof(point::Photon), &t_phot.front(),
+                         GL_STATIC_DRAW);
+
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) 0);
+            glEnableVertexAttribArray(0);
+
+            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) sizeof(GLfloat));
+            glEnableVertexAttribArray(1);
+
+            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) sizeof(GLfloat));
+            glEnableVertexAttribArray(2);
+
+            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) sizeof(GLfloat));
+            glEnableVertexAttribArray(3);
+
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glBindVertexArray(0);
+        }
+
 
         //  -- Initialisation --
         /**
