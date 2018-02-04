@@ -49,7 +49,7 @@ namespace arc
 
 
                 //  == METHODS ==
-              private:
+              public:
                 //  -- Getters --
                 float get_wavelength() const { return (m_wavelength); }
                 float get_weight() const { return (m_weight); }
