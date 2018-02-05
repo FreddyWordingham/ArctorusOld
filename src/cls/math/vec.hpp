@@ -78,6 +78,7 @@ namespace arc
             constexpr Vec<N>& operator-=(double t_rhs);
             constexpr Vec<N>& operator-=(const Vec<N>& t_rhs);
             constexpr Vec<N>& operator*=(double t_rhs);
+            constexpr Vec<N>& operator*=(const Mat<N, N>& t_lhs);
             constexpr Vec<N>& operator/=(double t_rhs);
             constexpr Vec<N>& operator^=(const Vec<3>& t_rhs);
             constexpr Vec<N>& operator++();
@@ -307,6 +308,32 @@ namespace arc
             for (size_t i = 0; i < N; ++i)
             {
                 m_data[i] *= t_rhs;
+            }
+
+            return (*this);
+        }
+
+        /**
+         *  Determine the matrix-vector vector product of this vector and a square matrix of the same size.
+         *  Note that unlike all other assignment operators, this vector is treated as the right hand side operand.
+         *
+         *  @param  t_lhs   Matrix to the form the lhs of the matrix-vector calculation.
+         *
+         *  @return A reference to this vec post-multiplication.
+         */
+        template <size_t N>
+        constexpr Vec<N>& Vec<N>::operator*=(const Mat<N, N>& t_lhs)
+        {
+            std::array<N> t_rhs = m_data;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                m_data[i] = 0.0;
+
+                for (size_t j = 0; j < N; ++j)
+                {
+                    m_data[i] += t_lhs[i][j] * t_rhs[j];
+                }
             }
 
             return (*this);
