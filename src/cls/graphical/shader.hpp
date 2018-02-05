@@ -29,6 +29,9 @@ namespace arc
 
 
         //  == SETTINGS ==
+        //  -- Directories --
+        constexpr const char* SHADER_DIR = "res/shaders/"   //! Path to the resource directory holding shader files.
+
         //  -- Filenames --
         constexpr const char* VERT_SHADER_FILENAME = "vertex.vert";   //! Name of the vertex sub-shader file.
         constexpr const char* GEOM_SHADER_FILENAME = "geometry.geom"; //! Name of the geometry sub-shader file.
