@@ -157,6 +157,7 @@ namespace arc
             void setup_photon_shader() const;
 
             //  -- Drawing --
+            void draw_entities() const;
             void draw_lights() const;
             void draw_phots() const;
             void draw_sun() const;
