@@ -459,19 +459,19 @@ namespace arc
 
                 if (old_state_propagate_photons == GLFW_PRESS)
                 {
-                    if (m_render_dist > 0.0)
+                    if (m_render_dist > 0.0f)
                     {
-                        m_render_dist = 0.0;
+                        m_render_dist = 0.0f;
                     }
                     else
                     {
-                        m_render_dist = 0.01;
+                        m_render_dist = 0.01f;
                     }
                 }
             }
 
             // Increase render distance if dynamic rendering is active.
-            if (m_render_dist > 0.0)
+            if (m_render_dist > 0.0f)
             {
                 m_render_dist += t_time_delta;
             }
