@@ -135,7 +135,7 @@ namespace arc
          */
         GLuint Scene::init_cubemap() const
         {
-            std::vector<std::string> faces({SKYBOX_RIGHT, SKYBOX_LEFT, SKYBOX_TOP, SKYBOX_BOTTOM, SKYBOX_FRONT, SKYBOX_BACK});
+            std::vector<std::string> faces({"right", "left", "top", "bottom", "front", "back"});
 
             unsigned int textureID;
             glGenTextures(1, &textureID);
