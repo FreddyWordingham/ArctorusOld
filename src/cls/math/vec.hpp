@@ -324,7 +324,7 @@ namespace arc
         template <size_t N>
         constexpr Vec<N>& Vec<N>::operator*=(const Mat<N, N>& t_lhs)
         {
-            std::array<N> t_rhs = m_data;
+            std::array<double, N> t_rhs = m_data;
 
             for (size_t i = 0; i < N; ++i)
             {
