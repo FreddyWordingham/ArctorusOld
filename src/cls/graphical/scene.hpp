@@ -55,13 +55,6 @@ namespace arc
         constexpr const char* SKYBOX_DIR      = "res/skybox/nebula/";   //! Directory containing skybox images.
         constexpr const char* SKYBOX_FILE_EXT = ".tga";                 //! File extension used by skybox images.
 
-        constexpr const char* SKYBOX_BACK   = "res/skybox/nebula/back.tga";     //! Skybox back image.
-        constexpr const char* SKYBOX_BOTTOM = "res/skybox/nebula/bottom.tga";   //! Skybox bottom image.
-        constexpr const char* SKYBOX_FRONT  = "res/skybox/nebula/front.tga";    //! Skybox front image.
-        constexpr const char* SKYBOX_LEFT   = "res/skybox/nebula/left.tga";     //! Skybox left image.
-        constexpr const char* SKYBOX_RIGHT  = "res/skybox/nebula/right.tga";    //! Skybox right image.
-        constexpr const char* SKYBOX_TOP    = "res/skybox/nebula/top.tga";      //! Skybox top image.
-
         //  -- Camera --
         constexpr const float INIT_CAM_POS_X = +0.0f;   //! Initial x-axis displacement of the camera.
         constexpr const float INIT_CAM_POS_Y = -5.0f;   //! Initial y-axis displacement of the camera.
