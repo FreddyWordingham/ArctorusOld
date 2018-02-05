@@ -30,7 +30,7 @@ namespace arc
 
             //  == SETTINGS ==
             //  -- Directories --
-            constexpr const char* PATH_SHADER_DIR = "res/shaders/path/";    //! Path to path shader directory.
+            constexpr const char* PATH_SHADER_DIR = "res/shaders/path/";    //! Path to the path shader directory.
 
 
 
