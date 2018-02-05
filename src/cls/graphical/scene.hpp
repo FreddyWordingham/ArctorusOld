@@ -52,6 +52,7 @@ namespace arc
         constexpr const float CLEAR_COLOUR_ALPHA = 1.0f;    //! Window alpha clear colour.
 
         //  -- Skybox --
+        constexpr const char* SKYBOX_DIR    = "res/skybox/";    //! Directory containing skybox images.
         constexpr const char* SKYBOX_BACK   = "res/skybox/nebula/back.tga";     //! Skybox back image.
         constexpr const char* SKYBOX_BOTTOM = "res/skybox/nebula/bottom.tga";   //! Skybox bottom image.
         constexpr const char* SKYBOX_FRONT  = "res/skybox/nebula/front.tga";    //! Skybox front image.
