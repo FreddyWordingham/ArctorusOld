@@ -40,7 +40,7 @@ int main()
     path.push_back(graphical::point::Photon({0.0f, 0.0f, 1.0f}, 400E-9f, 1.0f, 1.0));
     path.push_back(graphical::point::Photon({0.0f, 1.0f, 1.0f}, 400E-9f, 1.0f, 2.0));
     path.push_back(graphical::point::Photon({2.0f, 1.0f, 1.0f}, 400E-9f, 1.0f, 4.0));
-    path.push_back(graphical::point::Photon({2.0f, 1.0f, 11.0f}, 400E-9f, 1.0f, 10.0));
+    path.push_back(graphical::point::Photon({2.0f, 1.0f, 5.0f}, 400E-9f, 1.0f, 8.0));
 
     graphical::Scene scene;
 
