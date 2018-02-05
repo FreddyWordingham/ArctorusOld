@@ -93,7 +93,7 @@ namespace arc
             template <size_t U, size_t V, size_t W>
             friend constexpr Mat<U, W> operator*(const Mat<U, V>& t_lhs, const Mat<V, W>& t_rhs);
             template <size_t U, size_t V>
-            constexpr Vec<U> operator*(const Mat<U, V>& t_lhs, const Vec<V>& t_rhs);
+            friend constexpr Vec<U> operator*(const Mat<U, V>& t_lhs, const Vec<V>& t_rhs);
             template <size_t U, size_t V>
             friend constexpr Mat<U, V> operator/(const Mat<U, V>& t_lhs, double t_rhs);
 
