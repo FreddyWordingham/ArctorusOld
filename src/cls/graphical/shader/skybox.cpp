@@ -22,12 +22,6 @@ namespace arc
 
 
 
-            //  == SETTINGS ==
-            //  -- Directories --
-            constexpr const char* SKYBOX_SHADER_DIR = "res/shaders/skybox/";    //! Path to skybox shader directory.
-
-
-
             //  == INSTANTIATION ==
             //  -- Constructors --
             /**
