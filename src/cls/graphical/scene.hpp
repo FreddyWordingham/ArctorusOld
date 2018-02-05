@@ -27,7 +27,7 @@
 #include "cls/graphical/shader/ambient.hpp"
 #include "cls/graphical/shader/diffuse.hpp"
 #include "cls/graphical/shader/normal.hpp"
-#include "cls/graphical/shader/photon.hpp"
+#include "cls/graphical/shader/path.hpp"
 #include "cls/graphical/shader/skybox.hpp"
 
 
@@ -103,7 +103,7 @@ namespace arc
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
             shader::Diffuse m_diffuse_shader;   //! Diffuse lighting shader.
             shader::Normal  m_normal_shader;    //! Normal shader.
-            shader::Photon  m_photon_shader;    //! Photon shader.
+            shader::Path  m_photon_shader;    //! Photon shader.
 
             //  -- Cubemap --
             const GLuint m_cubemap; //! Handle to the loaded cubemap texture.

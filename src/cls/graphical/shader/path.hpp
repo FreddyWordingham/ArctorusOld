@@ -8,18 +8,13 @@
 
 
 //  == GUARD ==
-#ifndef ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_PHOTON_HPP
-#define ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_PHOTON_HPP
+#ifndef ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_PATH_HPP
+#define ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_PATH_HPP
 
 
 
 //  == BASE CLASS ==
 #include "cls/graphical/shader.hpp"
-
-
-
-//  == INCLUDES ==
-//  -- System --
 
 
 
@@ -35,9 +30,9 @@ namespace arc
 
             //  == CLASS ==
             /**
-             *  Photon packet path shader.
+             *  Path shader.
              */
-            class Photon : public Shader
+            class Path : public Shader
             {
                 //  == FIELDS ==
               private:
@@ -50,7 +45,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                explicit Photon(const std::string& t_path);
+                explicit Path(const std::string& t_path);
 
 
                 //  == METHODS ==
@@ -70,4 +65,4 @@ namespace arc
 
 
 //  == GUARD END ==
-#endif // ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_PHOTON_HPP
+#endif // ARCTORUS_SRC_CLS_GRAPHICAL_SHADER_PATH_HPP

@@ -8,7 +8,7 @@
 
 
 //  == HEADER ==
-#include "cls/graphical/shader/photon.hpp"
+#include "cls/graphical/shader/path.hpp"
 
 
 
@@ -25,11 +25,11 @@ namespace arc
             //  == INSTANTIATION ==
             //  -- Constructors --
             /**
-             *  Construct a photon shader.
+             *  Construct a path shader.
              *
              *  @param  t_path  Path to the directory containing the diffuse sub-shader programs.
              */
-            Photon::Photon(const std::string& t_path) :
+            Path::Path(const std::string& t_path) :
                 Shader(t_path, false),
                 m_mvp_uni(init_uniform("mvp")),
                 m_col_uni(init_uniform("prop_col")),
