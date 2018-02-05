@@ -55,6 +55,38 @@ namespace arc
                 {{{{1.0, 0.0, 0.0, t_trans[X]}}, {{0.0, 1.0, 0.0, t_trans[Y]}}, {{0.0, 0.0, 1.0, t_trans[Z]}}, {{0.0, 0.0, 0.0, 1.0}}}}));
         }
 
+        /**
+         *  Create an orientation matrix.
+         *
+         *  @param  t_theta Angle to rotate around the global  y-axis.
+         *  @param  t_phi   Angle to then rotate around  the global z-axis.
+         *  @param  t_spin  Angle to then rotate around the local z-axis.
+         *
+         *  @return The created orientation matrix.
+         */
+        Mat<4, 4> create_rot_mat(const double t_theta, const double t_phi, const double t_spin)
+        {
+            return (Mat<4, 4>({{{{cos(t_phi), sin(t_phi), 0.0, 0.0}}, {{-sin(t_phi), cos(
+                t_phi), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}) * Mat<4, 4>(
+                {{{{cos(t_theta), 0.0, -sin(t_theta), 0.0}}, {{0.0, 1.0, 0.0, 0.0}}, {{sin(t_theta), 0.0, cos(
+                    t_theta), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}) * Mat<4, 4>(
+                {{{{cos(t_spin), sin(t_spin), 0.0, 0.0}}, {{-sin(t_spin), cos(
+                    t_spin), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
+        }
+
+        /**
+         *  Create an orientation matrix.
+         *
+         *  @param  t_dir   Direction to face.
+         *  @param  t_spin  Spin angle.
+         *
+         *  @return The created orientation matrix.
+         */
+        Mat<4, 4> create_rot_mat(const Vec<3>& t_dir, const double t_spin)
+        {
+
+        }
+
 
 
     } // namespace math

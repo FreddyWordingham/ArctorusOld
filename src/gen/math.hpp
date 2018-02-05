@@ -62,6 +62,8 @@ namespace arc
 
         //  -- Transformation --
         Mat<4, 4> create_trans_mat(const Vec<3>& t_trans);
+        Mat<4, 4> create_rot_mat(double t_theta, double t_phi, double t_spin = 0.0);
+        Mat<4, 4> create_rot_mat(const Vec<3>& t_dir, double t_spin = 0.0);
 
 
 

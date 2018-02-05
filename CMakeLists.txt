@@ -147,3 +147,7 @@ target_link_libraries(arctorus ${OPENGL_LIBRARIES})
 target_link_libraries(arctorus ${SDL2_LIBRARIES})
 target_link_libraries(arctorus GLEW)
 target_link_libraries(arctorus glfw)
+
+message("Glew inc dir: ${GLEW_INCLUDE_DIRS}")
+message("Glew lib: ${GLEW_LIBRARIES}")
+message("Glew found: ${GLEW_FOUND}")
