@@ -134,37 +134,44 @@ namespace arc
          */
         GLuint Scene::init_cubemap() const
         {
+            // Individual image names.
             std::vector<std::string> faces({"right", "left", "top", "bottom", "front", "back"});
 
-            unsigned int textureID;
-            glGenTextures(1, &textureID);
-            glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+            // Create and bind texture id.
+            GLuint r_texture_id;
+            glGenTextures(1, &r_texture_id);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, r_texture_id);
 
-            int               width, height, nrChannels;
+            // Load each face texture.
+            int               width, height, num_channels;
             for (unsigned int i = 0; i < faces.size(); i++)
             {
                 unsigned char* data = stbi_load(
                     (std::string(config::ARCTORUS_DIR) + SKYBOX_DIR + faces[i] + SKYBOX_FILE_EXT).c_str(), &width, &height,
-                    &nrChannels, 0);
-                if (data)
+                    &num_channels, 0);
+                if (data == nullptr)
+                {
+                    WARN("Unable to load cubemap face.",
+                         "Cubemap image: '" << (std::string(config::ARCTORUS_DIR) + SKYBOX_DIR + faces[i] + SKYBOX_FILE_EXT)
+                                            << "', could not be loaded.");
+                    stbi_image_free(data);
+                }
+                else
                 {
                     glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
                                  data);
                     stbi_image_free(data);
                 }
-                else
-                {
-                    std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
-                    stbi_image_free(data);
-                }
             }
+
+            // Set texture settings.
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-            return (textureID);
+            return (r_texture_id);
         }
 
 
