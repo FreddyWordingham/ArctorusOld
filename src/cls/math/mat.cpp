@@ -22,18 +22,6 @@ namespace arc
 
         //  == FUNCTIONS ==
         //  -- Matrix --
-        /**
-         *  Create a translation transformation matrix.
-         *
-         *  @param  t_trans Vector of translation.
-         *
-         *  @return The created translation matrix.
-         */
-        Mat<4, 4> create_trans_mat(const Vec<3>& t_trans)
-        {
-            return (Mat<4, 4>(
-                {{{{1.0, 0.0, 0.0, t_trans[X]}}, {{0.0, 1.0, 0.0, t_trans[Y]}}, {{0.0, 0.0, 1.0, t_trans[Z]}}, {{0.0, 0.0, 0.0, 1.0}}}}));
-        }
 
 
         /**
