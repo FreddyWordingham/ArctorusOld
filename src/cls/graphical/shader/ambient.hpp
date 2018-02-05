@@ -28,6 +28,12 @@ namespace arc
 
 
 
+            //  == SETTINGS ==
+            //  -- Directories --
+            constexpr const char* AMBIENT_SHADER_DIR = "res/shaders/ambient/";  //! Path to the ambient shader directory.
+
+
+
             //  == CLASS ==
             /**
              *  Ambient lighting shader.
