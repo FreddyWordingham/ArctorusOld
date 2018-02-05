@@ -111,7 +111,7 @@ namespace arc
             const char* code = serial.c_str();
 
             // Compile the vertex shader.
-            GLuint r_sub_shader = glCreateShader(t_type);
+            const GLuint r_sub_shader = glCreateShader(t_type);
             glShaderSource(r_sub_shader, 1, &code, nullptr);
             glCompileShader(r_sub_shader);
 
@@ -125,7 +125,7 @@ namespace arc
                 std::vector<char> error_log(static_cast<size_t>(log_length));
 
                 glGetShaderInfoLog(r_sub_shader, log_length, nullptr, error_log.data());
-                std::string error_text(begin(error_log), end(error_log));
+                const std::string error_text(begin(error_log), end(error_log));
 
                 ERROR("Unable to construct graphical::Shader object.",
                       "Shader: '" << t_path << "', compilation failed with error: '" << error_text << "'.");
