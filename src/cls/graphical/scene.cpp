@@ -48,12 +48,6 @@ namespace arc
          */
         Scene::Scene() :
             m_window(init_window()),
-            m_skybox_shader(file::read(SKYBOX_VERT_SHADER, false), file::read(SKYBOX_FRAG_SHADER, false)),
-            m_ambient_shader(file::read(AMBIENT_VERT_SHADER, false), file::read(AMBIENT_FRAG_SHADER, false)),
-            m_diffuse_shader(file::read(DIFFUSE_VERT_SHADER, false), file::read(DIFFUSE_FRAG_SHADER, false)),
-            m_normal_shader(file::read(NORMAL_VERT_SHADER, false), file::read(NORMAL_GEOM_SHADER, false),
-                            file::read(NORMAL_FRAG_SHADER, false)),
-            m_path_shader(file::read(PHOTON_VERT_SHADER, false), file::read(PHOTON_FRAG_SHADER, false)),
             m_cubemap(init_cubemap()),
             m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 1.0, 1.0, 1.0}, 10.0)),
             m_primary_cam(
