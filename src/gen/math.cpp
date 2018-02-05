@@ -66,11 +66,11 @@ namespace arc
          */
         Mat<4, 4> create_rot_mat(const double t_theta, const double t_phi, const double t_spin)
         {
-            return (Mat<4, 4>({{{{cos(t_phi), sin(t_phi), 0.0, 0.0}}, {{-sin(t_phi), cos(
+            return (Mat<4, 4>({{{{std::cos(t_phi), sin(t_phi), 0.0, 0.0}}, {{-std::sin(t_phi), cos(
                 t_phi), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}) * Mat<4, 4>(
-                {{{{cos(t_theta), 0.0, -sin(t_theta), 0.0}}, {{0.0, 1.0, 0.0, 0.0}}, {{sin(t_theta), 0.0, cos(
-                    t_theta), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}) * Mat<4, 4>(
-                {{{{cos(t_spin), sin(t_spin), 0.0, 0.0}}, {{-sin(t_spin), cos(
+                {{{{std::cos(t_theta), 0.0, -std::sin(t_theta), 0.0}}, {{0.0, 1.0, 0.0, 0.0}}, {{std::sin(
+                    t_theta), 0.0, std::cos(t_theta), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}) * Mat<4, 4>(
+                {{{{std::cos(t_spin), std::sin(t_spin), 0.0, 0.0}}, {{-std::sin(t_spin), std::cos(
                     t_spin), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
         }
 
@@ -84,7 +84,9 @@ namespace arc
          */
         Mat<4, 4> create_rot_mat(const Vec<3>& t_dir, const double t_spin)
         {
-
+            return (create_rot_mat(
+                acos(t_dir[Z] / std::sqrt(math::square(t_dir[X]) + math::square(t_dir[Y]) + math::square(t_dir[Z]))),
+                atan2(t_dir[Y], t_dir[X]), t_spin));
         }
 
 
