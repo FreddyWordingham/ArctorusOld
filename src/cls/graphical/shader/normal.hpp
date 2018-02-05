@@ -28,6 +28,12 @@ namespace arc
 
 
 
+            //  == SETTINGS ==
+            //  -- Directories --
+            constexpr const char* NORMAL_SHADER_DIR = "res/shaders/normal/";    //! Path to normal shader directory.
+
+
+
             //  == CLASS ==
             /**
              *  Specialised shader drawing prop normals.
