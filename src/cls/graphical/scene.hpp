@@ -130,6 +130,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Additions --
+            void add_entity(const geom::Mesh& t_mesh, const glm::vec4& t_col);
             void add_light(const geom::Mesh& t_mesh, float t_power, const glm::vec4& t_col);
             void add_photon(const std::vector<point::Photon>& t_phot);
 

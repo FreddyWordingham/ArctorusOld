@@ -179,6 +179,36 @@ namespace arc
         //  == METHODS ==
         //  -- Additions --
         /**
+         *  Add a render-able entity prop to the scene.
+         *
+         *  @param  t_mesh  Entity mesh to be added to the scene.
+         *  @param  t_col   Colour to render the entity with.
+         */
+        void Scene::add_entity(const geom::Mesh& t_mesh, const glm::vec4& t_col)
+        {
+            // Create vector of vertices.
+            std::vector<Vertex> vertices;
+            vertices.reserve(t_mesh.get_num_tri() * 3);
+
+            // Add vertices into list from mesh.
+            for (size_t i = 0; i < t_mesh.get_num_tri(); ++i)
+            {
+                for (size_t j = 0; j < 3; ++j)
+                {
+                    vertices.push_back(Vertex({static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[X]),
+                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Y]),
+                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Z])},
+                                              {static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[X]),
+                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Y]),
+                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Z])}));
+                }
+            }
+
+            // Add the entity into the list of render-able props.
+            m_light.emplace_back(Prop(vertices, t_col));
+        }
+
+        /**
          *  Add a render-able light prop to the scene.
          *
          *  @param  t_mesh  Light source mesh to be added to the scene.
