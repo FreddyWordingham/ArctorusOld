@@ -546,7 +546,7 @@ namespace arc
             glUseProgram(m_diffuse_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 
-            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), 0.1);
+            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), LIGHT_AMB_POW);
 
             for (size_t i = 0; i < m_light.size(); ++i)
             {
