@@ -26,11 +26,9 @@ namespace arc
             //  -- Constructors --
             /**
              *  Construct a diffuse shader.
-             *
-             *  @param  t_path  Path to the directory containing the diffuse sub-shader programs.
              */
-            Diffuse::Diffuse(const std::string& t_path) :
-                Shader(t_path, false),
+            Diffuse::Diffuse() :
+                Shader(DIFFUSE_SHADER_DIR, false),
                 m_mvp_uni(init_uniform("mvp")),
                 m_view_uni(init_uniform("view")),
                 m_col_uni(init_uniform("col")),

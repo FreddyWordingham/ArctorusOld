@@ -53,7 +53,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                explicit Diffuse(const std::string& t_path);
+                Diffuse();
 
 
                 //  == METHODS ==
