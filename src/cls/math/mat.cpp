@@ -23,6 +23,20 @@ namespace arc
         //  == FUNCTIONS ==
         //  -- Matrix --
         /**
+         *  Create a translation transformation matrix.
+         *
+         *  @param  t_trans Vector of translation.
+         *
+         *  @return The created translation matrix.
+         */
+        Mat<4, 4> create_trans_mat(const Vec<3>& t_trans)
+        {
+            return (Mat<4, 4>(
+                {{{{1.0, 0.0, 0.0, t_trans[X]}}, {{0.0, 1.0, 0.0, t_trans[Y]}}, {{0.0, 0.0, 1.0, t_trans[Z]}}, {{0.0, 0.0, 0.0, 1.0}}}}));
+        }
+
+
+        /**
          *  Create a position transformation matrix.
          *  Transformation matrix is constructed from the individual transformations given.
          *  Rotations are performed in the order x, y, z-axis.
@@ -33,6 +47,7 @@ namespace arc
          *
          *  @return The position transformation matrix.
          */
+        /*
         Mat<4, 4> pos_trans(const Vec<3>& t_scale, const Vec<3>& t_rot, const Vec<3>& t_trans)
         {
             Mat<4, 4> scale(
@@ -50,7 +65,7 @@ namespace arc
                 {{{{1.0, 0.0, 0.0, t_trans[X]}}, {{1.0, 0.0, 0.0, t_trans[Y]}}, {{1.0, 0.0, 0.0, t_trans[Z]}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
             return (trans * rot * scale);
-        }
+        }*/
 
         /**
          *  Create a direction transformation matrix.
@@ -62,6 +77,7 @@ namespace arc
          *
          *  @return The rotation transformation matrix.
          */
+        /*
         Mat<4, 4> dir_trans(const Vec<3>& t_scale, const Vec<3>& t_rot)
         {
             Mat<4, 4> scale(
@@ -76,7 +92,7 @@ namespace arc
                     t_rot[Y]), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
 
             return (rot * scale);
-        }
+        }*/
 
 
 
