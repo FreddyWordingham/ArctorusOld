@@ -142,7 +142,7 @@ namespace arc
          */
         Mat<4, 4> create_dir_mat(const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
         {
-            return (create_scale_pos_mat(t_scale) * create_orient_mat(t_dir, t_spin));
+            return (create_scale_dir_mat(t_scale) * create_orient_mat(t_dir, t_spin));
         }
 
 
