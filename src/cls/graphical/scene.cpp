@@ -205,7 +205,7 @@ namespace arc
             }
 
             // Add the entity into the list of render-able props.
-            m_light.emplace_back(Prop(vertices, t_col));
+            m_entity.emplace_back(Prop(vertices, t_col));
         }
 
         /**
