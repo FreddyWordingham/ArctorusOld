@@ -446,7 +446,7 @@ namespace arc
         }
 
         /**
-         *  Initiate or hault the rendering of photon packet paths.
+         *  Initiate or halt the rendering of photon packet paths.
          *
          *  @param  t_time_delta    Time elapsed since the last rendering.
          */
