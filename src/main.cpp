@@ -43,7 +43,7 @@ int main()
     math::Vec<4> vec({{0.0, 0.0, 1.0, 1.0}});
 
     VAL(vec);
-    vec = trans * vec;
+    vec *= trans;
 
     VAL(vec);
 /*
