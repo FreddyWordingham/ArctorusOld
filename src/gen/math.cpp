@@ -64,7 +64,7 @@ namespace arc
          *
          *  @return The created orientation matrix.
          */
-        Mat<4, 4> create_rot_mat(const double t_theta, const double t_phi, const double t_spin)
+        Mat<4, 4> create_orient_mat(const double t_theta, const double t_phi, const double t_spin)
         {
             return (Mat<4, 4>({{{{std::cos(t_phi), sin(t_phi), 0.0, 0.0}}, {{-std::sin(t_phi), cos(
                 t_phi), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}) * Mat<4, 4>(
@@ -84,7 +84,7 @@ namespace arc
          */
         Mat<4, 4> create_rot_mat(const Vec<3>& t_dir, const double t_spin)
         {
-            return (create_rot_mat(
+            return (create_orient_mat(
                 acos(t_dir[Z] / std::sqrt(math::square(t_dir[X]) + math::square(t_dir[Y]) + math::square(t_dir[Z]))),
                 atan2(t_dir[Y], t_dir[X]), t_spin));
         }
