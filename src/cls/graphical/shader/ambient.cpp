@@ -26,11 +26,9 @@ namespace arc
             //  -- Constructors --
             /**
              *  Construct an ambient shader.
-             *
-             *  @param  t_path  Path to the directory containing the ambient sub-shader programs.
              */
-            Ambient::Ambient(const std::string& t_path) :
-                Shader(t_path, false),
+            Ambient::Ambient() :
+                Shader(AMBIENT_SHADER_DIR, false),
                 m_mvp_uni(init_uniform("mvp")),
                 m_col_uni(init_uniform("prop_col"))
             {
