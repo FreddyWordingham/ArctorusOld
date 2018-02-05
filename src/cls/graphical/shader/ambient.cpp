@@ -27,11 +27,10 @@ namespace arc
             /**
              *  Construct an ambient shader.
              *
-             *  @param  t_vert_serial   Serialised source code of the vertex shader.
-             *  @param  t_frag_serial   Serialised source code of the fragment shader.
+             *  @param  t_path  Path to the directory containing the ambient sub-shader programs.
              */
-            Ambient::Ambient(const std::string& t_vert_serial, const std::string& t_frag_serial) :
-                Shader(t_vert_serial, t_frag_serial),
+            Ambient::Ambient(const std::string& t_path) :
+                Shader(t_path, false),
                 m_mvp_uni(init_uniform("mvp")),
                 m_col_uni(init_uniform("prop_col"))
             {
