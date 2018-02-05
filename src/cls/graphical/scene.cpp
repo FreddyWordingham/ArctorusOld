@@ -227,24 +227,23 @@ namespace arc
          */
         void Scene::render() const
         {
+            // Clear the buffer.
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+            // Setup the shaders.
             setup_skybox_shader();
             setup_ambient_shader();
             setup_diffuse_shader();
             setup_normal_shader();
             setup_photon_shader();
 
-//            draw_ents();
-
-            // Draw opaque objects.
+            // Draw props.
             draw_skybox();
             draw_lights();
             draw_sun();
-
-            // Draw potentially transparent objects.
             draw_phots();
 
+            // Swap the buffers.
             glfwSwapBuffers(m_window);
         }
 
