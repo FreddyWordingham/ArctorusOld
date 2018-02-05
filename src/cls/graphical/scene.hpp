@@ -59,20 +59,6 @@ namespace arc
         constexpr const char* SKYBOX_RIGHT  = "res/skybox/nebula/right.tga";    //! Skybox right image.
         constexpr const char* SKYBOX_TOP    = "res/skybox/nebula/top.tga";      //! Skybox top image.
 
-        //  -- Shaders --
-        constexpr const char* AMBIENT_VERT_SHADER = "res/shaders/vertex.vert"; //! Path to ambient vertex shader.
-        constexpr const char* AMBIENT_GEOM_SHADER = "res/shaders/geometry.geom"; //! Path to ambient geometry shader.
-        constexpr const char* AMBIENT_FRAG_SHADER = "res/shaders/fragment.frag"; //! Path to ambient fragment shader.
-        constexpr const char* DIFFUSE_VERT_SHADER = "res/shaders/vertex.vert"; //! Path to diffuse vertex shader.
-        constexpr const char* DIFFUSE_GEOM_SHADER = "res/shaders/geometry.geom"; //! Path to diffuse geometry shader.
-        constexpr const char* DIFFUSE_FRAG_SHADER = "res/shaders/fragment.frag"; //! Path to diffuse fragment shader.
-        constexpr const char* NORMAL_VERT_SHADER  = "res/shaders/vertex.vert";  //! Path to normal vertex shader.
-        constexpr const char* NORMAL_GEOM_SHADER  = "res/shaders/geometry.geom";  //! Path to normal geometry shader.
-        constexpr const char* NORMAL_FRAG_SHADER  = "res/shaders/fragment.frag";  //! Path to normal fragment shader.
-        constexpr const char* PHOTON_VERT_SHADER  = "res/shaders/vertex.vert";  //! Path to photon vertex shader.
-        constexpr const char* PHOTON_GEOM_SHADER  = "res/shaders/geometry.geom";  //! Path to photon geometry shader.
-        constexpr const char* PHOTON_FRAG_SHADER  = "res/shaders/fragment.frag";  //! Path to photon fragment shader.
-
         //  -- Camera --
         constexpr const glm::vec3 INIT_CAM_POS({+0.0f, -5.0f, +5.0f});  //! Initial position of the camera.
 
