@@ -30,7 +30,7 @@ namespace arc
 
             //  == SETTINGS ==
             //  -- Directories --
-            constexpr const char* DIFFUSE_SHADER_DIR = "res/shaders/diffuse/";  //! Path to the diffuse shader directory.
+            constexpr const char* DIFFUSE_SHADER_DIR = "diffuse/";  //! Path to the diffuse shader directory.
 
 
 
