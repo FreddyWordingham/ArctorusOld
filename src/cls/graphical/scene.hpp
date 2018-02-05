@@ -60,7 +60,9 @@ namespace arc
         constexpr const char* SKYBOX_TOP    = "res/skybox/nebula/top.tga";      //! Skybox top image.
 
         //  -- Camera --
-        constexpr const glm::vec3 INIT_CAM_POS({+0.0f, -5.0f, +5.0f});  //! Initial position of the camera.
+        constexpr const float INIT_CAM_POS_X = +0.0f;   //! Initial x-axis displacement of the camera.
+        constexpr const float INIT_CAM_POS_Y = -5.0f;   //! Initial y-axis displacement of the camera.
+        constexpr const float INIT_CAM_POS_Z = +5.0f;   //! Initial z-axis displacement of the camera.
 
         //  -- Lighting --
         constexpr const glm::vec3 INIT_SUN_POS({+3.0f, +0.0f, +3.0f});      //! Initial position of the global illuminator.
