@@ -43,7 +43,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Light(const std::vector<Vertex>& t_vert, const glm::vec4& t_col, const float t_power);
+                Light(const std::vector<Vertex>& t_vert, const glm::vec4& t_col, float t_power);
 
 
                 //  == METHODS ==
