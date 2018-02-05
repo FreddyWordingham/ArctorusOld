@@ -45,7 +45,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Normal(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial);
+                explicit Normal(const std::string& t_path);
 
 
                 //  == METHODS ==
