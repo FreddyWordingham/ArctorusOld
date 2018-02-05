@@ -51,7 +51,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                explicit Path(const std::string& t_path);
+                Path();
 
 
                 //  == METHODS ==
