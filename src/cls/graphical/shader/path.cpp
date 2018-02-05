@@ -22,6 +22,12 @@ namespace arc
 
 
 
+            //  == SETTINGS ==
+            //  -- Directories --
+            constexpr const char* PATH_SHADER_DIR = "res/shaders/path/";    //! Path to path shader directory.
+
+
+
             //  == INSTANTIATION ==
             //  -- Constructors --
             /**
