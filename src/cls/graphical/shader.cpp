@@ -16,6 +16,9 @@
 //  -- General --
 #include "gen/log.hpp"
 
+//  -- Classes --
+#include "cls/file/handle.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -96,15 +99,18 @@ namespace arc
         /**
          *  Initialise a sub-shader.
          *
-         *  @param  t_serial    Serialised source code of the sub-shader.
-         *  @param  t_type      Type of sub-shader to be initialised.
+         *  @param  t_path  Complete path to the sub-shader source file.
+         *  @param  t_type  Type of sub-shader to be initialised.
          *
          *  @return The handle to the initialised sub-shader program.
          */
-        GLuint Shader::init_sub_shader(const std::string& t_serial, const GLenum t_type) const
+        GLuint Shader::init_sub_shader(const std::string& t_path, const GLenum t_type) const
         {
+            // Load the shader source code.
+            const std::string serial = file::read(t_path, false);
+            const char* code = serial.c_str();
+
             // Compile the vertex shader.
-            const char* code = t_serial.c_str();
             GLuint r_sub_shader = glCreateShader(t_type);
             glShaderSource(r_sub_shader, 1, &code, nullptr);
             glCompileShader(r_sub_shader);
