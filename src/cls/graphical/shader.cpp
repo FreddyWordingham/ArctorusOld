@@ -128,7 +128,7 @@ namespace arc
                 std::string error_text(begin(error_log), end(error_log));
 
                 ERROR("Unable to construct graphical::Shader object.",
-                      "Shader type: '" << t_type << "', compilation failed with error: '" << error_text << "'.");
+                      "Shader: '" << t_path << "', compilation failed with error: '" << error_text << "'.");
             }
 
             return (r_sub_shader);
