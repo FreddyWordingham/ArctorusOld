@@ -74,7 +74,7 @@ namespace arc
         constexpr const char* NORMAL_FRAG_SHADER  = "res/shaders/fragment.frag";  //! Path to normal fragment shader.
         constexpr const char* PHOTON_VERT_SHADER  = "res/shaders/photon.vert";  //! Path to photon vertex shader.
         constexpr const char* PHOTON_GEOM_SHADER  = "res/shaders/photon.geom";  //! Path to photon geometry shader.
-        constexpr const char* PHOTON_FRAG_SHADER  = "res/shaders/photon.frag";  //! Path to photon fragment shader.
+        constexpr const char* PHOTON_FRAG_SHADER  = "res/shaders/fragment.frag";  //! Path to photon fragment shader.
 
         //  -- Camera --
         constexpr const glm::vec3 INIT_CAM_POS({+0.0f, -5.0f, +5.0f});  //! Initial position of the camera.
