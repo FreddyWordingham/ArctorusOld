@@ -30,7 +30,7 @@ namespace arc
 
             //  == SETTINGS ==
             //  -- Directories --
-            constexpr const char* NORMAL_SHADER_DIR = "res/shaders/normal/";    //! Path to the normal shader directory.
+            constexpr const char* NORMAL_SHADER_DIR = "normal/";    //! Path to the normal shader directory.
 
 
 
