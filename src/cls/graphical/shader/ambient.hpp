@@ -45,7 +45,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Ambient(const std::string& t_path);
+                explicit Ambient(const std::string& t_path);
 
 
                 //  == METHODS ==
