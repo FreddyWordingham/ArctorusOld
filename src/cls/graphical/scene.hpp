@@ -103,7 +103,7 @@ namespace arc
             shader::Ambient m_ambient_shader;   //! Ambient lighting shader.
             shader::Diffuse m_diffuse_shader;   //! Diffuse lighting shader.
             shader::Normal  m_normal_shader;    //! Normal shader.
-            shader::Path  m_photon_shader;    //! Photon shader.
+            shader::Path    m_path_shader;      //! Path shader.
 
             //  -- Cubemap --
             const GLuint m_cubemap; //! Handle to the loaded cubemap texture.

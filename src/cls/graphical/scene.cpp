@@ -53,7 +53,7 @@ namespace arc
             m_diffuse_shader(file::read(DIFFUSE_VERT_SHADER, false), file::read(DIFFUSE_FRAG_SHADER, false)),
             m_normal_shader(file::read(NORMAL_VERT_SHADER, false), file::read(NORMAL_GEOM_SHADER, false),
                             file::read(NORMAL_FRAG_SHADER, false)),
-            m_photon_shader(file::read(PHOTON_VERT_SHADER, false), file::read(PHOTON_FRAG_SHADER, false)),
+            m_path_shader(file::read(PHOTON_VERT_SHADER, false), file::read(PHOTON_FRAG_SHADER, false)),
             m_cubemap(init_cubemap()),
             m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 1.0, 1.0, 1.0}, 10.0)),
             m_primary_cam(
@@ -535,10 +535,10 @@ namespace arc
          */
         void Scene::setup_photon_shader() const
         {
-            glUseProgram(m_photon_shader.get_handle());
+            glUseProgram(m_path_shader.get_handle());
 
-            glUniformMatrix4fv(m_photon_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
-            glUniform1f(m_photon_shader.get_render_dist_uni(), m_render_dist);
+            glUniformMatrix4fv(m_path_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
+            glUniform1f(m_path_shader.get_render_dist_uni(), m_render_dist);
         }
 
 
@@ -596,12 +596,12 @@ namespace arc
          */
         void Scene::draw_phots() const
         {
-            glUseProgram(m_photon_shader.get_handle());
+            glUseProgram(m_path_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 
             for (size_t i = 0; i < m_phot.size(); ++i)
             {
-                glUniform4f(m_photon_shader.get_col_uni(), m_phot[i].get_col()[R], m_phot[i].get_col()[G],
+                glUniform4f(m_path_shader.get_col_uni(), m_phot[i].get_col()[R], m_phot[i].get_col()[G],
                             m_phot[i].get_col()[B], m_phot[i].get_col()[A]);
 
                 glEnableVertexAttribArray(0);
