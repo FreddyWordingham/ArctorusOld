@@ -144,7 +144,7 @@ namespace arc
             int               width, height, nrChannels;
             for (unsigned int i = 0; i < faces.size(); i++)
             {
-                unsigned char* data = stbi_load((std::string(config::ARCTORUS_DIR) + faces[i]).c_str(), &width, &height,
+                unsigned char* data = stbi_load((std::string(config::ARCTORUS_DIR) +  + faces[i]).c_str(), &width, &height,
                                                 &nrChannels, 0);
                 if (data)
                 {
