@@ -23,7 +23,6 @@
 //  -- General --
 #include "gen/config.hpp"
 #include "gen/control.hpp"
-#include "gen/enum.hpp"
 #include "gen/log.hpp"
 
 //  -- Classes --
