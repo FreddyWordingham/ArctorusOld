@@ -54,6 +54,12 @@ namespace arc
         template <typename T>
         T str_to(const std::string& t_str);
 
+        //  -- Geometry --
+        template <size_t N>
+        constexpr double dist(const math::Vec<N>& t_start, const math::Vec<N>& t_end);
+        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos);
+        double area(const std::array<math::Vec<3>, 3>& t_pos);
+
         //  -- Transformation --
         Mat<4, 4> create_trans_mat(const Vec<3>& t_trans);
 
@@ -148,6 +154,37 @@ namespace arc
             }
 
             return (x);
+        }
+
+        //  -- Geometry --
+        /**
+         *  Determine the distance between two points.
+         *
+         *  @tparam N   Size of the vecs.
+         *
+         *  @param  t_start Start point.
+         *  @param  t_end   End point.
+         *
+         *  @return The distance between the two points.
+         */
+        template <size_t N>
+        constexpr double dist(const math::Vec<N>& t_start, const math::Vec<N>& t_end)
+        {
+            return ((t_start - t_end).magnitude());
+        }
+
+        /**
+         *  Determine the normal of a plane described by three points.
+         *
+         *  @param  t_pos   Array of the three positional points lying within the plane.
+         *
+         *  @return The normal vector of the plane.
+         */
+        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos)
+        {
+            math::Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^(t_pos[GAMMA] - t_pos[ALPHA]);
+
+            return (r_norm);
         }
 
 
