@@ -100,12 +100,6 @@ namespace arc
 
 
 
-        //  == FUNCTION PROTOTYPES ==
-        //  -- Transformation --
-        Mat<4, 4> create_trans_mat(const Vec<3>& t_trans);
-
-
-
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**

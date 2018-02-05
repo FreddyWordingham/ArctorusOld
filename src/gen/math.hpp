@@ -54,6 +54,9 @@ namespace arc
         template <typename T>
         inline T str_to(const std::string& t_str);
 
+        //  -- Transformation --
+        Mat<4, 4> create_trans_mat(const Vec<3>& t_trans);
+
 
 
         //  == FUNCTIONS ==
