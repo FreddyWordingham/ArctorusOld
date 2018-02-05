@@ -52,10 +52,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Shader(const std::string& t_vert_serial, const std::string& t_frag_serial);
-            Shader(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial);
-
-            Shader(const std::string& t_path, const bool t_geom_shader);
+            Shader(const std::string& t_path, bool t_geom_shader);
 
           private:
             //  -- Initialisation --

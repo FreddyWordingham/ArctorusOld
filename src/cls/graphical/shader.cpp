@@ -29,25 +29,13 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a shader object from individual vertex and fragment serialised shader codes.
+         *  Construct a shader object from individual sub-shader codes.
          *
-         *  @param  t_vert_serial   Serialised source code of the vertex shader.
-         *  @param  t_frag_serial   Serialised source code of the fragment shader.
+         *  @param  t_path          Path to the directory containing the sub-shader programs.
+         *  @param  t_geom_shader   When true also load a geometry sub-shader.
          */
-        Shader::Shader(const std::string& t_vert_serial, const std::string& t_frag_serial) :
-            m_handle(init_handle(t_vert_serial, t_frag_serial))
-        {
-        }
-
-        /**
-         *  Construct a shader object from individual geometry, vertex and fragment serialised shader codes.
-         *
-         *  @param  t_vert_serial   Serialised source code of the vertex shader.
-         *  @param  t_geom_serial   Serialised source code of the geometry shader.
-         *  @param  t_frag_serial   Serialised source code of the fragment shader.
-         */
-        Shader::Shader(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial) :
-            m_handle(init_handle(t_vert_serial, t_geom_serial, t_frag_serial))
+        Shader::Shader(const std::string& t_path, const bool t_geom_shader) :
+            m_handle(init_handle(t_path, t_geom_shader))
         {
         }
 
