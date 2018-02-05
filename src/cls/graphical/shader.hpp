@@ -28,6 +28,14 @@ namespace arc
 
 
 
+        //  == SETTINGS ==
+        //  -- Filenames --
+        constexpr const char* VERT_SHADER_FILENAME = "vertex.vert";   //! Name of the vertex sub-shader file.
+        constexpr const char* GEOM_SHADER_FILENAME = "geometry.geom"; //! Name of the geometry sub-shader file.
+        constexpr const char* FRAG_SHADER_FILENAME = "fragment.frag"; //! Name of the fragment sub-shader file.
+
+
+
         //  == CLASS ==
         /**
          *  Base shader class.
@@ -47,10 +55,13 @@ namespace arc
             Shader(const std::string& t_vert_serial, const std::string& t_frag_serial);
             Shader(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial);
 
+            Shader(const std::string& t_path, const bool t_geom_shader);
+
           private:
             //  -- Initialisation --
             GLuint init_handle(const std::string& t_vert_serial, const std::string& t_frag_serial) const;
-            GLuint init_handle(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial) const;
+            GLuint init_handle(const std::string& t_vert_serial, const std::string& t_geom_serial,
+                               const std::string& t_frag_serial) const;
             GLuint init_sub_shader(const std::string& t_serial, GLenum t_type) const;
 
           protected:
