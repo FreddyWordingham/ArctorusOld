@@ -94,12 +94,25 @@ namespace arc
          *
          *  @param  t_scale Vector of scaling values.
          *
-         *  @return The created scaling matrix.
+         *  @return The created position scaling matrix.
          */
         Mat<4, 4> create_scale_pos_mat(const Vec<3>& t_scale)
         {
             return (Mat<4, 4>(
                 {{{{t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
+        }
+
+        /**
+         *  Create a direction scaling transformation matrix.
+         *
+         *  @param  t_scale Vector of scaling values.
+         *
+         *  @return The created direction scaling matrix.
+         */
+        Mat<4, 4> create_scale_dir_mat(const Vec<3>& t_scale)
+        {
+            return (Mat<4, 4>(
+                {{{{1.0/t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0/t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0/t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
         }
 
 
