@@ -51,7 +51,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                explicit Skybox(const std::string& t_path);
+                Skybox();
 
 
                 //  == METHODS ==
