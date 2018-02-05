@@ -62,7 +62,7 @@ namespace arc
         //  -- Shaders --
         constexpr const char* SKYBOX_VERT_SHADER  = "res/shaders/skybox.vert";  //! Path to skybox vertex shader.
         constexpr const char* SKYBOX_GEOM_SHADER  = "res/shaders/skybox.geom";  //! Path to skybox geometry shader.
-        constexpr const char* SKYBOX_FRAG_SHADER  = "res/shaders/skybox.frag";  //! Path to skybox fragment shader.
+        constexpr const char* SKYBOX_FRAG_SHADER  = "res/shaders/fragment.frag";  //! Path to skybox fragment shader.
         constexpr const char* AMBIENT_VERT_SHADER = "res/shaders/vertex.vert"; //! Path to ambient vertex shader.
         constexpr const char* AMBIENT_GEOM_SHADER = "res/shaders/geometry.geom"; //! Path to ambient geometry shader.
         constexpr const char* AMBIENT_FRAG_SHADER = "res/shaders/fragment.frag"; //! Path to ambient fragment shader.
