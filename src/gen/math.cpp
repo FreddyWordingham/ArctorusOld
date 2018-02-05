@@ -56,7 +56,7 @@ namespace arc
         }
 
         /**
-         *  Create an orientation matrix.
+         *  Create an orientation transformation matrix.
          *
          *  @param  t_theta Angle to rotate around the global  y-axis.
          *  @param  t_phi   Angle to then rotate around  the global z-axis.
@@ -75,18 +75,31 @@ namespace arc
         }
 
         /**
-         *  Create an orientation matrix.
+         *  Create an orientation transformation matrix.
          *
          *  @param  t_dir   Direction to face.
          *  @param  t_spin  Spin angle.
          *
          *  @return The created orientation matrix.
          */
-        Mat<4, 4> create_rot_mat(const Vec<3>& t_dir, const double t_spin)
+        Mat<4, 4> create_orient_mat(const Vec<3>& t_dir, const double t_spin)
         {
             return (create_orient_mat(
                 acos(t_dir[Z] / std::sqrt(math::square(t_dir[X]) + math::square(t_dir[Y]) + math::square(t_dir[Z]))),
                 atan2(t_dir[Y], t_dir[X]), t_spin));
+        }
+
+        /**
+         *  Create a position scaling transformation matrix.
+         *
+         *  @param  t_scale Vector of scaling values.
+         *
+         *  @return The created scaling matrix.
+         */
+        Mat<4, 4> create_scale_pos_mat(const Vec<3>& t_scale)
+        {
+            return (Mat<4, 4>(
+                {{{{t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
         }
 
 
