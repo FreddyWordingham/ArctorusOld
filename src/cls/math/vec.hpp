@@ -586,6 +586,30 @@ namespace arc
         }
 
         /**
+         *  Determine the matrix-vector vector product.
+         *
+         *  @param  t_lhs   Left hand side mat operand.
+         *  @param  t_rhs   Right hand side vec operand.
+         *
+         *  @return The matrix-vector vector product.
+         */
+        template <size_t N, size_t M>
+        constexpr Vec<N> operator*(const Mat<N, M>& t_lhs, const Vec<M>& t_rhs)
+        {
+            Vec<N> r_vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    r_vec[i] += t_lhs.m_data[i][j] * t_rhs.m_data[j];
+                }
+            }
+
+            return (r_vec);
+        }
+
+        /**
          *  Create a new vec by dividing data elements of a given vec by a value.
          *
          *  @param  t_lhs   Left hand side vec operand.
