@@ -18,11 +18,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -30,6 +25,12 @@ namespace arc
     {
         namespace shader
         {
+
+
+
+            //  == SETTINGS ==
+            //  -- Directories --
+            constexpr const char* DIFFUSE_SHADER_DIR = "res/shaders/diffuse/";  //! Path to the diffuse shader directory.
 
 
 
