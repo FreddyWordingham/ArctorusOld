@@ -61,11 +61,12 @@ namespace arc
         constexpr const float INIT_CAM_POS_Z = +5.0f;   //! Initial z-axis displacement of the camera.
 
         //  -- Lighting --
-        constexpr const float INIT_SUN_POS_X = +3.0f;   //! Initial x-axis displacement of the global illuminator.
-        constexpr const float INIT_SUN_POS_Y = +0.0f;   //! Initial y-axis displacement of the global illuminator.
-        constexpr const float INIT_SUN_POS_Z = +3.0f;   //! Initial z-axis displacement of the global illuminator.
-        constexpr const float SUN_SIZE       = 0.25f;   //! Size of the sun.
-        constexpr const float LIGHT_AMB_POW  = 0.5f;    //! Ambient lighting of rendered light sources.
+        constexpr const float INIT_SUN_POS_X  = +3.0f;   //! Initial x-axis displacement of the global illuminator.
+        constexpr const float INIT_SUN_POS_Y  = +0.0f;   //! Initial y-axis displacement of the global illuminator.
+        constexpr const float INIT_SUN_POS_Z  = +3.0f;   //! Initial z-axis displacement of the global illuminator.
+        constexpr const float SUN_SIZE        = 0.25f;   //! Size of the sun.
+        constexpr const float LIGHT_AMB_POW   = 0.5f;    //! Ambient lighting of rendered light sources.
+        constexpr const float ENTITIY_AMB_POW = 0.1f;    //! Ambient lighting of rendered entities.
 
 
 
