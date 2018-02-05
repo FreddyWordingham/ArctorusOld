@@ -39,7 +39,7 @@ int main()
     const math::Mat<4, 4> trans = math::create_trans_mat(math::Vec<3>({{1.0, 2.0, 3.0}}));
     VAL(trans);
 
-    math::Vec<3> vec({{0.0, 0.0, 1.0}});
+    math::Vec<4> vec({{0.0, 0.0, 1.0, 1.0}});
 
     VAL(vec);
     vec = trans * vec;
