@@ -28,6 +28,12 @@ namespace arc
 
 
 
+        //  == CLASS PROTOTYPES ==
+        template <size_t N>
+        class Vec;
+
+
+
         //  == CLASS ==
         /**
          *  Mathematical matrix class.
@@ -86,6 +92,8 @@ namespace arc
             friend constexpr Mat<U, V> operator*(const Mat<U, V>& t_lhs, double t_rhs);
             template <size_t U, size_t V, size_t W>
             friend constexpr Mat<U, W> operator*(const Mat<U, V>& t_lhs, const Mat<V, W>& t_rhs);
+            template <size_t N, size_t M>
+            constexpr Vec<N> operator*(const Mat<N, M>& t_lhs, const Vec<M>& t_rhs);
             template <size_t U, size_t V>
             friend constexpr Mat<U, V> operator/(const Mat<U, V>& t_lhs, double t_rhs);
 
