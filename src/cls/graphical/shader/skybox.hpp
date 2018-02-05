@@ -45,7 +45,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Skybox(const std::string& t_vert_serial, const std::string& t_frag_serial);
+                explicit Skybox(const std::string& t_path);
 
 
                 //  == METHODS ==
