@@ -50,12 +50,11 @@ namespace arc
             m_window(init_window()),
             m_cubemap(init_cubemap()),
             m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 1.0, 1.0, 1.0}, 10.0)),
-            m_primary_cam(
-                std::make_unique<camera::Orbit>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
-            m_secondary_cam(
-                std::make_unique<camera::Fly>(INIT_CAM_POS, static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
-            m_sun_pos(INIT_SUN_POS),
-            m_sun(Prop(Prop::shape::CUBE, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
+            m_primary_cam(std::make_unique<camera::Orbit>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
+                                                          static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
+            m_secondary_cam(std::make_unique<camera::Fly>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
+                                                                    static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
+                            m_sun_pos(INIT_SUN_POS), m_sun(Prop(Prop::shape::CUBE, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
         }
 
@@ -595,8 +594,8 @@ namespace arc
 
             for (size_t i = 0; i < m_phot.size(); ++i)
             {
-                glUniform4f(m_path_shader.get_col_uni(), m_phot[i].get_col()[R], m_phot[i].get_col()[G],
-                            m_phot[i].get_col()[B], m_phot[i].get_col()[A]);
+                glUniform4f(m_path_shader.get_col_uni(), m_phot[i].get_col()[R], m_phot[i].get_col()[G], m_phot[i].get_col()[B],
+                            m_phot[i].get_col()[A]);
 
                 glEnableVertexAttribArray(0);
 
