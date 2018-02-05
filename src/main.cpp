@@ -13,6 +13,7 @@
 
 //  -- General --
 #include "gen/log.hpp"
+#include "gen/math.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
