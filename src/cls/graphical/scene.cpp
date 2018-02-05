@@ -257,13 +257,7 @@ namespace arc
          */
         bool Scene::should_close() const
         {
-            // Esc key has been pressed.
-            if (glfwGetKey(m_window, control::QUIT) == GLFW_PRESS)
-            {
-                return (true);
-            }
-
-            return (glfwWindowShouldClose(m_window) != 0);
+            return ((glfwGetKey(m_window, control::QUIT) == GLFW_PRESS) || (glfwWindowShouldClose(m_window) != 0));
         }
 
         /**
