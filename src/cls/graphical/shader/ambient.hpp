@@ -30,7 +30,7 @@ namespace arc
 
             //  == SETTINGS ==
             //  -- Directories --
-            constexpr const char* AMBIENT_SHADER_DIR = "res/shaders/ambient/";  //! Path to the ambient shader directory.
+            constexpr const char* AMBIENT_SHADER_DIR = "ambient/";  //! Path to the ambient shader directory.
 
 
 
