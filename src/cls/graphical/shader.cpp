@@ -102,6 +102,8 @@ namespace arc
          *  @param  t_path  Complete path to the sub-shader source file.
          *  @param  t_type  Type of sub-shader to be initialised.
          *
+         *  @post   r_sub_shader must not equal zero.
+         *
          *  @return The handle to the initialised sub-shader program.
          */
         GLuint Shader::init_sub_shader(const std::string& t_path, const GLenum t_type) const
@@ -130,6 +132,8 @@ namespace arc
                 ERROR("Unable to construct graphical::Shader object.",
                       "Shader: '" << t_path << "', compilation failed with error: '" << error_text << "'.");
             }
+
+            assert(r_sub_shader != 0);
 
             return (r_sub_shader);
         }
