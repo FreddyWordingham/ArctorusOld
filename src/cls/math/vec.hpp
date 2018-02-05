@@ -110,7 +110,6 @@ namespace arc
             friend std::ostream& operator<<(std::ostream& t_stream, const Vec<U>& t_vec);
 
 
-
             //  == METHODS ==
           public:
             //  -- Mathematical --
