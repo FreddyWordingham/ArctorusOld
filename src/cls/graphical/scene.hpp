@@ -72,7 +72,7 @@ namespace arc
         constexpr const char* NORMAL_VERT_SHADER  = "res/shaders/vertex.vert";  //! Path to normal vertex shader.
         constexpr const char* NORMAL_GEOM_SHADER  = "res/shaders/geometry.geom";  //! Path to normal geometry shader.
         constexpr const char* NORMAL_FRAG_SHADER  = "res/shaders/fragment.frag";  //! Path to normal fragment shader.
-        constexpr const char* PHOTON_VERT_SHADER  = "res/shaders/photon.vert";  //! Path to photon vertex shader.
+        constexpr const char* PHOTON_VERT_SHADER  = "res/shaders/vertex.vert";  //! Path to photon vertex shader.
         constexpr const char* PHOTON_GEOM_SHADER  = "res/shaders/geometry.geom";  //! Path to photon geometry shader.
         constexpr const char* PHOTON_FRAG_SHADER  = "res/shaders/fragment.frag";  //! Path to photon fragment shader.
 
