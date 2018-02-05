@@ -49,7 +49,7 @@ namespace arc
         Scene::Scene() :
             m_window(init_window()),
             m_cubemap(init_cubemap()),
-            m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 1.0, 1.0, 1.0}, 10.0)),
+            m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 0.0, 1.0, 1.0}, 10.0)),
             m_primary_cam(std::make_unique<camera::Orbit>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
                                                           static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(std::make_unique<camera::Fly>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),

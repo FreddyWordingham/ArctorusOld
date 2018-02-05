@@ -47,7 +47,7 @@ namespace arc
         constexpr const char* TITLE = "Arctorus";           //! Window title.
         constexpr const int   AA_SAMPLES         = 4;       //! Number of anti-aliasing samples.
         constexpr const float CLEAR_COLOUR_RED   = 1.0f;    //! Window red clear colour.
-        constexpr const float CLEAR_COLOUR_GREEN = 0.2f;    //! Window green clear colour.
+        constexpr const float CLEAR_COLOUR_GREEN = 0.0f;    //! Window green clear colour.
         constexpr const float CLEAR_COLOUR_BLUE  = 1.0f;    //! Window blue clear colour.
         constexpr const float CLEAR_COLOUR_ALPHA = 1.0f;    //! Window alpha clear colour.
 
