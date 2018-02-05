@@ -50,7 +50,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Photon(const std::string& t_vert_serial, const std::string& t_frag_serial);
+                explicit Photon(const std::string& t_path);
 
 
                 //  == METHODS ==
