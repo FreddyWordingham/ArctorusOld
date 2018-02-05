@@ -269,6 +269,7 @@ namespace arc
 
             // Draw props.
             draw_skybox();
+            draw_entities();
             draw_lights();
             draw_sun();
             draw_phots();
