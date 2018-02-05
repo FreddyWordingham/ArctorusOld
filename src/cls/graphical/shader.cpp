@@ -44,20 +44,25 @@ namespace arc
         /**
          *  Compile the full shader program and return the handle to it.
          *
-         *  @param  t_vert_serial   Serialised source code of the vertex shader.
-         *  @param  t_frag_serial   Serialised source code of the fragment shader.
+         *  @param  t_path          Path to the directory containing the sub-shader programs.
+         *  @param  t_geom_shader   When true also load a geometry sub-shader.
          *
          *  @return The handle to the initialised shader program.
          */
-        GLuint Shader::init_handle(const std::string& t_vert_serial, const std::string& t_frag_serial) const
+        GLuint Shader::init_handle(const std::string& t_path, const bool t_geom_shader) const
         {
             // Initialise the sub-shaders.
-            const GLuint vert_shader = init_sub_shader(t_vert_serial, GL_VERTEX_SHADER);
-            const GLuint frag_shader = init_sub_shader(t_frag_serial, GL_FRAGMENT_SHADER);
+            const GLuint vert_shader = init_sub_shader(t_path + VERT_SHADER_FILENAME, GL_VERTEX_SHADER);
+            const GLuint geom_shader = t_geom_shader ? init_sub_shader(t_path + GEOM_SHADER_FILENAME, GL_GEOMETRY_SHADER) : 0;
+            const GLuint frag_shader = init_sub_shader(t_path + FRAG_SHADER_FILENAME, GL_FRAGMENT_SHADER);
 
             // Compile the complete shader.
             const GLuint r_handle = glCreateProgram();
             glAttachShader(r_handle, vert_shader);
+            if (t_geom_shader)
+            {
+                glAttachShader(r_handle, geom_shader);
+            }
             glAttachShader(r_handle, frag_shader);
             glLinkProgram(r_handle);
 
@@ -79,53 +84,10 @@ namespace arc
 
             // Clean up temporary sub-shaders.
             glDeleteShader(vert_shader);
-            glDeleteShader(frag_shader);
-
-            return (r_handle);
-        }
-
-        /**
-         *  Compile the full shader program and return the handle to it.
-         *
-         *  @param  t_vert_serial   Serialised source code of the vertex shader.
-         *  @param  t_geom_serial   Serialised source code of the geometry shader.
-         *  @param  t_frag_serial   Serialised source code of the fragment shader.
-         *
-         *  @return The handle to the initialised shader program.
-         */
-        GLuint Shader::init_handle(const std::string& t_vert_serial, const std::string& t_geom_serial, const std::string& t_frag_serial) const
-        {
-            // Initialise the sub-shaders.
-            const GLuint vert_shader = init_sub_shader(t_vert_serial, GL_VERTEX_SHADER);
-            const GLuint geom_shader = init_sub_shader(t_geom_serial, GL_GEOMETRY_SHADER);
-            const GLuint frag_shader = init_sub_shader(t_frag_serial, GL_FRAGMENT_SHADER);
-
-            // Compile the complete shader.
-            const GLuint r_handle = glCreateProgram();
-            glAttachShader(r_handle, vert_shader);
-            glAttachShader(r_handle, geom_shader);
-            glAttachShader(r_handle, frag_shader);
-            glLinkProgram(r_handle);
-
-            // Check that the complete shader compiled successfully.
-            GLint success;
-            glGetProgramiv(r_handle, GL_LINK_STATUS, &success);
-            if (success == GL_FALSE)
+            if (t_geom_shader)
             {
-                GLint log_length;
-                glGetProgramiv(r_handle, GL_INFO_LOG_LENGTH, &log_length);
-                std::vector<char> error_log(static_cast<size_t>(log_length));
-
-                glGetProgramInfoLog(r_handle, log_length, nullptr, error_log.data());
-                std::string error_text(begin(error_log), end(error_log));
-
-                ERROR("Unable to construct graphical::Shader object.",
-                      "Shader linking failed with error: '" << error_text << "'.");
+                glDeleteShader(geom_shader);
             }
-
-            // Clean up temporary sub-shaders.
-            glDeleteShader(vert_shader);
-            glDeleteShader(geom_shader);
             glDeleteShader(frag_shader);
 
             return (r_handle);
