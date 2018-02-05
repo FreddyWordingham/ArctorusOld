@@ -115,6 +115,21 @@ namespace arc
                 {{{{1.0/t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0/t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0/t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
         }
 
+        /**
+         *  Create position transformation matrix from individual transformations.
+         *
+         *  @param  t_trans Vector of translation.
+         *  @param  t_dir   Direction to face.
+         *  @param  t_spin  Spin angle.
+         *  @param  t_scale Vector of scaling values.
+         *
+         * @return
+         */
+        Mat<4, 4> create_pos_mat(const Vec<3>& t_trans, const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
+        {
+            return (create_scale_pos_mat(t_scale) * create_orient_mat(t_dir, t_spin) * create_trans_mat(t_trans));
+        }
+
 
 
     } // namespace math
