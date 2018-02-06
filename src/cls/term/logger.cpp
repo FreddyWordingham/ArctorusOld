@@ -157,6 +157,7 @@ namespace arc
          */
         void Logger::verb(const std::string& t_text) const
         {
+            // If verbose message printing is enabled print the message.
             if (config::VERBOSE_LOG)
             {
                 print_text(CYAN, LOG, t_text);
