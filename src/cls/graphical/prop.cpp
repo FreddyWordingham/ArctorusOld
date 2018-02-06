@@ -38,10 +38,10 @@ namespace arc
             glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
             glBufferData(GL_ARRAY_BUFFER, static_cast<size_t>(m_num_vert) * sizeof(Vertex), &t_vert.front(), GL_STATIC_DRAW);
 
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) 0);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(0));
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (3 * sizeof(GLfloat)));
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(3 * sizeof(GLfloat)));
             glEnableVertexAttribArray(1);
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -77,16 +77,16 @@ namespace arc
             glBufferData(GL_ARRAY_BUFFER, static_cast<size_t>(m_num_vert) * sizeof(point::Photon), &t_phot.front(),
                          GL_STATIC_DRAW);
 
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) 0);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(0));
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (3 * sizeof(GLfloat)));
+            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(3 * sizeof(GLfloat)));
             glEnableVertexAttribArray(1);
 
-            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (4 * sizeof(GLfloat)));
+            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(4 * sizeof(GLfloat)));
             glEnableVertexAttribArray(2);
 
-            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (5 * sizeof(GLfloat)));
+            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(5 * sizeof(GLfloat)));
             glEnableVertexAttribArray(3);
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);
