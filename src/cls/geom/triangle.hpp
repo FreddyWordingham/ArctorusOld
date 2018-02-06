@@ -36,10 +36,10 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Vertices --
-            const std::array<Vertex, 3> m_vert; //! Vertices of the triangle.
+            std::array<Vertex, 3> m_vert;   //! Vertices of the triangle.
 
             //  -- Properties --
-            const double m_area;    //! Area of the triangle.
+            double m_area;  //! Area of the triangle.
 
 
             //  == INSTANTIATION ==

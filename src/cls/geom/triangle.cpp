@@ -51,9 +51,13 @@ namespace arc
          */
         void Triangle::transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
         {
+            // Transform the vertices.
             m_vert[ALPHA].transform(t_pos_trans_mat, t_dir_trans_mat);
             m_vert[BETA].transform(t_pos_trans_mat, t_dir_trans_mat);
             m_vert[GAMMA].transform(t_pos_trans_mat, t_dir_trans_mat);
+
+            // Recalculate the triangle's area.
+            m_area = math::area({{m_vert[ALPHA].get_pos(), m_vert[BETA].get_pos(), m_vert[GAMMA].get_pos()}});
         }
 
 
