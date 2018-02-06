@@ -74,13 +74,16 @@ namespace arc
          */
         Logger::~Logger()
         {
+            // Print leading horizontal rule.
             print_hr('=');
 
+            // Print number of reported warnings and errors.
             print_text(m_num_warnings == 0 ? GREEN : YELLOW, m_num_warnings == 0 ? LOG : WARN,
                        "Total warnings: " + std::to_string(m_num_warnings));
             print_text(m_num_errors == 0 ? GREEN : RED, m_num_errors == 0 ? LOG : ERROR,
                        "Total errors  : " + std::to_string(m_num_errors));
 
+            // Print leading horizontal rule.
             print_hr('=');
         }
 
