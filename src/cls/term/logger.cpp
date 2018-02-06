@@ -304,10 +304,14 @@ namespace arc
             assert(t_col < TOTAL_COLS);
             assert(t_type < TOTAL_TYPES);
 
+            // Form the text into lines.
             std::vector<std::string> lines     = form_lines(t_text);
+
+            // Create the timestamp string.
             std::string              timestamp = "[" + utl::create_timestamp() + "]";
             timestamp.resize(TIME_WIDTH, ' ');
 
+            // Print the lines.
             m_stream << timestamp << m_text_col[t_col] << m_log_type[t_type] << lines[0];
             for (size_t i = 1; i < lines.size(); ++i)
             {
