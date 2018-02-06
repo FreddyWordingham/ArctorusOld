@@ -53,10 +53,8 @@ int main()
     path_z.push_back(graphical::point::Photon({0.0f, 0.0f, 1.0f}, 400E-9f, 1.0f, 1.0));
     scene.add_photon(path_z);
 
-    geom::Mesh mesh(file::read("test/monkey.obj"));
-
-    mesh.transform(math::Vec<3>({{2.0, 2.0, 2.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}), 0.0,
-                                                         math::Vec<3>({{0.1, 0.1, 0.1}}));
+    geom::Mesh mesh(file::read("test/monkey.obj"), math::Vec<3>({{2.0, 2.0, 2.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}), 0.0,
+                    math::Vec<3>({{0.1, 0.1, 0.1}}));
     scene.add_light(mesh, 2.0, {1.0f, 1.0f, 0.0f, 1.0f});
 
 //    scene.add_entity(mesh, {0.9f, 0.0f, 0.0f, 1.0f});
