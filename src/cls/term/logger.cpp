@@ -124,8 +124,10 @@ namespace arc
          */
         std::array<std::string, Logger::TOTAL_TYPES> Logger::init_log_type() const
         {
+            // Create return array of log type strings.
             std::array<std::string, TOTAL_TYPES> r_log_type;
 
+            // Initialise the log strings using the settings.
             r_log_type[LOG]   = std::string(LOG_TYPE_STRING);
             r_log_type[VERB]  = std::string(VERB_TYPE_STRING);
             r_log_type[VAL]   = std::string(VAL_TYPE_STRING);
@@ -133,6 +135,7 @@ namespace arc
             r_log_type[WARN]  = std::string(WARN_TYPE_STRING);
             r_log_type[ERROR] = std::string(ERROR_TYPE_STRING);
 
+            // Resize the strings to the set width.
             for (size_t i = 0; i < TOTAL_TYPES; ++i)
             {
                 r_log_type[i].resize(TYPE_WIDTH, ' ');
