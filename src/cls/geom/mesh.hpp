@@ -60,7 +60,8 @@ namespace arc
           public:
             //  -- Constructors --
             explicit Mesh(const std::string& t_serial);
-            Mesh(const std::string& t_serial, const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin, const math::Vec<3>& t_scale);
+            Mesh(const std::string& t_serial, const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin,
+                 const math::Vec<3>& t_scale);
 
           private:
             //  -- Initialisation --

@@ -29,8 +29,8 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Defaults --
-        constexpr const float DEFAULT_SPEED = 1.0f;     //! Default speed multiplier for the camera.
-        constexpr const float DEFAULT_FOV   = 90.0f;    //! Default field of view for the camera.
+        constexpr const float DEFAULT_SPEED      = 1.0f;     //! Default speed multiplier for the camera.
+        constexpr const float DEFAULT_FOV        = 90.0f;    //! Default field of view for the camera.
 
         //  -- Camera Properties --
         constexpr const glm::vec3 UP_DIR({0.0f, 0.0f, 1.0f});   //! Camera up direction.

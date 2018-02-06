@@ -86,7 +86,6 @@ namespace arc
 
 
 
-
         } // namespace camera
     } // namespace graphical
 } // namespace arc

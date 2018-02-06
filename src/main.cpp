@@ -18,7 +18,6 @@
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
-#include "cls/geom/vertex.hpp"
 
 
 //  == NAMESPACE ==
@@ -54,7 +53,7 @@ int main()
     scene.add_photon(path_z);
 
     const geom::Mesh mesh(file::read("test/monkey.obj"), math::Vec<3>({{2.0, 2.0, 2.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}), 0.0,
-                    math::Vec<3>({{0.1, 0.1, 0.1}}));
+                          math::Vec<3>({{0.1, 0.1, 0.1}}));
     scene.add_light(mesh, 2.0, {1.0f, 1.0f, 0.0f, 1.0f});
 
     while (!scene.should_close())
