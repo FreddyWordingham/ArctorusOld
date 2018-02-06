@@ -31,10 +31,12 @@ namespace arc
          */
         double area(const std::array<math::Vec<3>, 3>& t_pos)
         {
+            // Calculate the edge lengths.
             const double alpha_beta  = dist(t_pos[ALPHA], t_pos[BETA]);
             const double beta_gamma  = dist(t_pos[BETA], t_pos[GAMMA]);
             const double gamma_alpha = dist(t_pos[GAMMA], t_pos[ALPHA]);
 
+            // Calculate the half perimeter.
             const double half_perim = (alpha_beta + beta_gamma + gamma_alpha) / 2.0;
 
             return (std::sqrt(half_perim * (half_perim - alpha_beta) * (half_perim - beta_gamma) * (half_perim - gamma_alpha)));
