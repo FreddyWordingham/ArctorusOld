@@ -55,11 +55,8 @@ int main()
 
     geom::Mesh mesh(file::read("test/monkey.obj"));
 
-    const math::Mat<4, 4> pos_mat = math::create_pos_mat(math::Vec<3>({{2.0, 2.0, 2.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}), 0.0,
+    mesh.transform(math::Vec<3>({{2.0, 2.0, 2.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}), 0.0,
                                                          math::Vec<3>({{0.1, 0.1, 0.1}}));
-    const math::Mat<4, 4> dir_mat = math::create_dir_mat(math::Vec<3>({{0.0, 0.0, -1.0}}), 0.0,
-                                                         math::Vec<3>({{0.1, 0.1, 0.1}}));
-    mesh.transform(pos_mat, dir_mat);
     scene.add_light(mesh, 2.0, {1.0f, 1.0f, 0.0f, 1.0f});
 
 //    scene.add_entity(mesh, {0.9f, 0.0f, 0.0f, 1.0f});

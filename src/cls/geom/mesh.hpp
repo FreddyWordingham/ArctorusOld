@@ -19,6 +19,7 @@
 
 //  -- Classes --
 #include "cls/geom/triangle.hpp"
+#include "cls/math/vec.hpp"
 
 
 
@@ -75,7 +76,7 @@ namespace arc
             inline const Triangle& get_tri(size_t t_index) const;
 
             //  -- Transformation --
-            void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat);
+            void transform(const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin, const math::Vec<3>& t_scale);
         };
 
 

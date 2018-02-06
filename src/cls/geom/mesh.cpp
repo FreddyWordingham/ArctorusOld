@@ -204,12 +204,15 @@ namespace arc
          *  @param  t_pos_trans_mat Position transformation matrix.
          *  @param  t_dir_trans_mat Normal transformation matrix.
          */
-        void Mesh::transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
+        void Mesh::transform(const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin, const math::Vec<3>& t_scale)
         {
+            // Create transformation matrices.
+            const math::Mat<4, 4> pos_trans_mat = math::create_pos_trans_mat()
+
             // Transform the triangles.
             for (size_t i = 0; i < m_tri.size(); ++i)
             {
-                m_tri[i].transform(t_pos_trans_mat, t_dir_trans_mat);
+                m_tri[i].transform(pos_trans_mat, dir_trans_mat);
             }
         }
 
