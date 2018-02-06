@@ -82,24 +82,28 @@ namespace arc
             static bool generate = false;
             generate = !generate;
 
-            static double r;
+            // Store the second (spare) randomly generated value.
+            static double spare;
 
+            // If a new pair is not required, return the unused previously generated value.
             if (!generate)
             {
-                return ((r * t_sigma) + t_mu);
+                return ((spare * t_sigma) + t_mu);
             }
 
-            double u1, u2;
+            // Generate a pair of uniform random values.
+            double r_0, r_1;
             do
             {
-                u1 = random();
-                u2 = random();
+                r_0 = random();
+                r_1 = random();
             }
-            while (u1 <= std::numeric_limits<double>::min());
+            while (r_0 <= std::numeric_limits<double>::min());
 
-            r = std::sqrt(-2.0 * std::log(u1)) * sin(2.0 * M_PI * u2);
+            // Convert the uniform random values to gaussian values.
+            spare = std::sqrt(-2.0 * std::log(r_0)) * sin(2.0 * M_PI * r_1);
 
-            return (std::sqrt(-2.0 * std::log(u1)) * cos(2.0 * M_PI * u2));
+            return (std::sqrt(-2.0 * std::log(r_0)) * cos(2.0 * M_PI * r_1));
         }
 
 
