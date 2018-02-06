@@ -41,7 +41,7 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  An abstract base class for cameras used to veiw scene data.
+         *  An abstract base class for cameras used to view scene data.
          */
         class Camera
         {
