@@ -35,8 +35,25 @@ namespace arc
          */
         Triangle::Triangle(const std::array<Vertex, 3>& t_vert) :
             m_vert(t_vert),
-            m_area(math::area({{t_vert[ALPHA].get_pos(), t_vert[BETA].get_pos(), t_vert[GAMMA].get_pos()}}))
+            m_area(math::area({{m_vert[ALPHA].get_pos(), m_vert[BETA].get_pos(), m_vert[GAMMA].get_pos()}}))
         {
+        }
+
+
+
+        //  == METHODS ==
+        //  -- Transformation --
+        /**
+         *  Transform a triangle's vertices using a given position and normal transformation matrix.
+         *
+         *  @param  t_pos_trans_mat Position transformation matrix.
+         *  @param  t_dir_trans_mat Normal transformation matrix.
+         */
+        void Triangle::transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
+        {
+            m_vert[ALPHA].transform(t_pos_trans_mat, t_dir_trans_mat);
+            m_vert[BETA].transform(t_pos_trans_mat, t_dir_trans_mat);
+            m_vert[GAMMA].transform(t_pos_trans_mat, t_dir_trans_mat);
         }
 
 

@@ -53,6 +53,9 @@ namespace arc
             //  -- Getters --
             double get_area() const { return (m_area); }
             inline const Vertex& get_vert(size_t t_index) const;
+
+            //  -- Transformation --
+            void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat);
         };
 
 
