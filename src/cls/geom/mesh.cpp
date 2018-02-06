@@ -196,5 +196,24 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Transformation --
+        /**
+         *  Transform a meshes' triangles using a given position and normal transformation matrix.
+         *
+         *  @param  t_pos_trans_mat Position transformation matrix.
+         *  @param  t_dir_trans_mat Normal transformation matrix.
+         */
+        void Mesh::transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
+        {
+            // Transform the triangles.
+            for (size_t i = 0; i < m_tri.size(); ++i)
+            {
+                m_tri[i].transform(t_pos_trans_mat, t_dir_trans_mat);
+            }
+        }
+
+
+
     } // namespace geom
 } // namespace arc
