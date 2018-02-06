@@ -98,10 +98,16 @@ namespace arc
          *
          *  @param  t_scale Vector of scaling values.
          *
+         *  @pre    t_scale elements must all be non-zero.
+         *
          *  @return The created position scaling matrix.
          */
         Mat<4, 4> create_scale_pos_mat(const Vec<3>& t_scale)
         {
+            assert(t_scale[X] != 0.0);
+            assert(t_scale[Y] != 0.0);
+            assert(t_scale[Z] != 0.0);
+
             return (Mat<4, 4>(
                 {{{{t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
         }
@@ -111,10 +117,16 @@ namespace arc
          *
          *  @param  t_scale Vector of scaling values.
          *
+         *  @pre    t_scale elements must all be non-zero.
+         *
          *  @return The created direction scaling matrix.
          */
         Mat<4, 4> create_scale_dir_mat(const Vec<3>& t_scale)
         {
+            assert(t_scale[X] != 0.0);
+            assert(t_scale[Y] != 0.0);
+            assert(t_scale[Z] != 0.0);
+
             return (Mat<4, 4>(
                 {{{{1.0/t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0/t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0/t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
         }
@@ -128,12 +140,16 @@ namespace arc
          *  @param  t_scale Vector of scaling values.
          *
          *  @pre    t_dir's magnitude must be greater than zero.
+         *  @pre    t_scale elements must all be non-zero.
          *
          *  @return The created position transformation matrix.
          */
         Mat<4, 4> create_pos_mat(const Vec<3>& t_trans, const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
         {
             assert(t_dir.magnitude() > 0.0);
+            assert(t_scale[X] != 0.0);
+            assert(t_scale[Y] != 0.0);
+            assert(t_scale[Z] != 0.0);
 
             return (create_scale_pos_mat(t_scale) * create_orient_mat(t_dir, t_spin) * create_trans_mat(t_trans));
         }
@@ -146,12 +162,16 @@ namespace arc
          *  @param  t_scale Vector of scaling values.
          *
          *  @pre    t_dir's magnitude must be greater than zero.
+         *  @pre    t_scale elements must all be non-zero.
          *
          *  @return The created direction transformation matrix.
          */
         Mat<4, 4> create_dir_mat(const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
         {
             assert(t_dir.magnitude() > 0.0);
+            assert(t_scale[X] != 0.0);
+            assert(t_scale[Y] != 0.0);
+            assert(t_scale[Z] != 0.0);
 
             return (create_scale_dir_mat(t_scale) * create_orient_mat(t_dir, t_spin));
         }
