@@ -72,24 +72,35 @@ namespace arc
             m_vao(init_vao()),
             m_vbo(init_vbo())
         {
+            // Create vertex array object and vertex buffer object.
             glBindVertexArray(m_vao);
             glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
             glBufferData(GL_ARRAY_BUFFER, static_cast<size_t>(m_num_vert) * sizeof(point::Photon), &t_phot.front(),
                          GL_STATIC_DRAW);
 
+            // Enable the photon packet position layout location.
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(0));
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(3 * sizeof(GLfloat)));
+            // Enable the photon packet wavelength layout location.
+            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon),
+                                  reinterpret_cast<GLvoid*>(3 * sizeof(GLfloat)));
             glEnableVertexAttribArray(1);
 
-            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(4 * sizeof(GLfloat)));
+            // Enable the photon packet statistical weight layout location.
+            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon),
+                                  reinterpret_cast<GLvoid*>(4 * sizeof(GLfloat)));
             glEnableVertexAttribArray(2);
 
-            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(5 * sizeof(GLfloat)));
+            // Enable the photon packet time travelled layout location.
+            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon),
+                                  reinterpret_cast<GLvoid*>(5 * sizeof(GLfloat)));
             glEnableVertexAttribArray(3);
 
+            // Bind the buffer object.
             glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+            // Clear the active buffer.
             glBindVertexArray(0);
         }
 
