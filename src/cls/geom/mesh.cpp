@@ -45,6 +45,34 @@ namespace arc
         {
         }
 
+        /**
+         *  Construct a mesh from a given serialised string and transformations.
+         *
+         *  @param  t_serial    Mesh as a serialised string.
+         *  @param  t_trans Vector of translation.
+         *  @param  t_dir   Direction to face.
+         *  @param  t_spin  Spin angle.
+         *  @param  t_scale Vector of scaling values.
+         *
+         *  @pre    t_dir's magnitude must be greater than zero.
+         *  @pre    t_scale elements must all be non-zero.
+         */
+        Mesh::Mesh(const std::string& t_serial, const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin,
+                   const math::Vec<3>& t_scale) :
+            m_num_vert(init_num(t_serial, POS_KEYWORD)),
+            m_num_norm(init_num(t_serial, NORM_KEYWORD)),
+            m_num_tri(init_num(t_serial, FACE_KEYWORD)),
+            m_tri(init_tri(t_serial))
+        {
+            assert(t_dir.magnitude() > 0.0);
+            assert(t_scale[X] != 0.0);
+            assert(t_scale[Y] != 0.0);
+            assert(t_scale[Z] != 0.0);
+
+            // Apply the transformations.
+            transform(t_trans, t_dir, t_spin, t_scale);
+        }
+
 
         //  -- Initialisation --
         /**
@@ -209,8 +237,6 @@ namespace arc
          *
          *  @pre    t_dir's magnitude must be greater than zero.
          *  @pre    t_scale elements must all be non-zero.
-         *
-         *  @return The created position transformation matrix.
          */
         void Mesh::transform(const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin, const math::Vec<3>& t_scale)
         {
