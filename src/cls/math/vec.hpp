@@ -25,6 +25,9 @@
 //  -- Utility --
 #include "utl/array.hpp"
 
+//  -- Classes --
+#include "cls/math/mat.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -32,12 +35,6 @@ namespace arc
 {
     namespace math
     {
-
-
-
-        //  == CLASS PROTOTYPES ==
-        template <size_t N, size_t M>
-        class Mat;
 
 
 
