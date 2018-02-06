@@ -46,6 +46,8 @@ namespace arc
          *
          *  @param  t_pos_trans_mat Position transformation matrix.
          *  @param  t_dir_trans_mat Normal transformation matrix.
+         *
+         *  @post   m_norm must be normalised.
          */
         void Vertex::transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
         {
@@ -65,6 +67,8 @@ namespace arc
 
             // Re-normalise the normal vector.
             m_norm.normalise();
+
+            assert(m_norm.is_normalised());
         }
 
 
