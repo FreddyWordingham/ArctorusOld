@@ -118,6 +118,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Scene(const Scene& /*unused*/) = delete;
+            Scene(const Scene&& /*unused*/) = delete;
             Scene();
 
             //  -- Destructors --
