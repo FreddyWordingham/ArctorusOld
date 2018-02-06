@@ -188,7 +188,11 @@ namespace arc
          */
         constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos)
         {
+            // Determine the normal from the cross product.
             math::Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^(t_pos[GAMMA] - t_pos[ALPHA]);
+
+            // Normalise the vector.
+            r_norm.normalise();
 
             return (r_norm);
         }
