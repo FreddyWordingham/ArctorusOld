@@ -83,7 +83,7 @@ namespace arc
             print_text(m_num_errors == 0 ? GREEN : RED, m_num_errors == 0 ? LOG : ERROR,
                        "Total errors  : " + std::to_string(m_num_errors));
 
-            // Print leading horizontal rule.
+            // Print trailing horizontal rule.
             print_hr('=');
         }
 
@@ -246,17 +246,22 @@ namespace arc
          */
         void Logger::print_title_card() const
         {
+            // Print leading horizontal rule.
             print_hr('=');
 
+            // Get title card string and determine the amount of padding required.
             std::string       title = TITLE_CARD;
             const std::string pre_title_pad((LINE_WIDTH - TITLE_WIDTH) / 2, ' ');
             const std::string post_title_pad(LINE_WIDTH - (TITLE_WIDTH + pre_title_pad.size()), ' ');
 
+            // Loop until all lines of the title card have been printed.
             while (!title.empty())
             {
+                // Take a line of the title string.
                 std::string line = title.substr(0, TITLE_WIDTH);
                 title.erase(0, TITLE_WIDTH);
 
+                // Colour and format the printing line string.
                 utl::find_and_replace(&line, "l", m_text_col[CYAN] + "/" + m_text_col[RESET]);
                 utl::find_and_replace(&line, "r", m_text_col[CYAN] + R"(\)" + m_text_col[RESET]);
                 utl::find_and_replace(&line, "M", m_text_col[MAGENTA] + "~" + m_text_col[RESET]);
@@ -265,17 +270,22 @@ namespace arc
                 utl::find_and_replace(&line, "Y", m_text_col[YELLOW] + "~" + m_text_col[RESET]);
                 utl::find_and_replace(&line, "R", m_text_col[RED] + "~" + m_text_col[RESET]);
 
+                // Print the line with padding either side.
                 m_stream << pre_title_pad << line << post_title_pad << "\n";
             }
 
+            // Print middle horizontal rule.
             print_hr('=');
 
+            // Form the build information string.
             std::string       build = config::BUILD_INFO;
             const std::string pre_build_pad((LINE_WIDTH - build.size()) / 2, ' ');
             const std::string post_build_pad(LINE_WIDTH - (build.size() + pre_build_pad.size()), ' ');
 
+            // Print the build information string.
             m_stream << pre_build_pad << build << post_build_pad << "\n";
 
+            // Print trailing horizontal rule.
             print_hr('=');
         }
 
