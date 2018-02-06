@@ -172,9 +172,13 @@ namespace arc
          */
         std::vector<Vertex> Prop::init_vert_cube(const float t_scale) const
         {
+            // Create vertex vector.
             std::vector<Vertex> r_vert;
+
+            // Reserve space for 36 vertices.
             r_vert.reserve(36);
 
+            // Add face vertices into the vertex vector.
             r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {-1.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({-t_scale, -t_scale, +t_scale}, {-1.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({-t_scale, +t_scale, +t_scale}, {-1.0f, +0.0f, +0.0f}));
