@@ -47,8 +47,8 @@ int main()
 
     geom::Mesh mesh(file::read("test/monkey.obj"));
 
-    const math::Mat<4, 4> pos_mat = math::create_pos_mat(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), M_PI/2.0, math::Vec<3>({{1.0, 1.0, 1.0}}));
-    const math::Mat<4, 4> dir_mat = math::create_dir_mat(math::Vec<3>({{0.0, 0.0, 1.0}}), M_PI/2.0, math::Vec<3>({{1.0, 1.0, 1.0}}));
+    const math::Mat<4, 4> pos_mat = math::create_pos_mat(math::Vec<3>({{-2.0, -2.0, -2.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}), M_PI/2.0, math::Vec<3>({{1.0, 2.0, 0.1}}));
+    const math::Mat<4, 4> dir_mat = math::create_dir_mat(math::Vec<3>({{0.0, 0.0, -1.0}}), M_PI/2.0, math::Vec<3>({{1.0, 2.0, 0.1}}));
 
     mesh.transform(pos_mat, dir_mat);
 
