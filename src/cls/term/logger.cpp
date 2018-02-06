@@ -331,17 +331,24 @@ namespace arc
          */
         std::vector<std::string> Logger::form_lines(std::string t_text) const
         {
+            // Append a newline character.
             t_text += '\n';
 
+            // Replace tabs with four spaces.
             utl::find_and_replace(&t_text, "\t", "    ");
 
+            // Create the vector of lines.
             std::vector<std::string> r_line;
+
+            // Form lines while newline characters can still be found within the text string.
             size_t                   newline_pos;
             while ((newline_pos = t_text.find_first_of('\n')) != std::string::npos)
             {
+                // Form the lines by splitting at newline characters.
                 std::string line = t_text.substr(0, newline_pos);
                 t_text.erase(0, newline_pos + 1);
 
+                // Split the lines further if they exceed the text width limit.
                 if (line.size() <= TEXT_WIDTH)
                 {
                     r_line.push_back(line);
