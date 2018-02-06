@@ -12,15 +12,10 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace gen
+    namespace rng
     {
 
 
@@ -29,5 +24,5 @@ namespace arc
 
 
 
-    } // namespace gen
+    } // namespace rng
 } // namespace arc
