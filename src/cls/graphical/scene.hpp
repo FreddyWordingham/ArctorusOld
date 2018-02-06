@@ -129,6 +129,13 @@ namespace arc
             GLuint init_cubemap() const;
 
 
+            //  == OPERATORS ==
+          public:
+            //  -- Copy --
+            Scene& operator=(const Scene& /*unused*/) = delete;
+            Scene& operator=(const Scene&& /*unused*/) = delete;
+
+
             //  == METHODS ==
           public:
             //  -- Additions --
