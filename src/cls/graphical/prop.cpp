@@ -120,7 +120,6 @@ namespace arc
         GLuint Prop::init_vao() const
         {
             GLuint r_vao;
-
             glGenVertexArrays(1, &r_vao);
 
             return (r_vao);
@@ -133,8 +132,10 @@ namespace arc
          */
         GLuint Prop::init_vbo() const
         {
+            // Create vertex buffer object handle.
             GLuint r_vbo;
 
+            // Initialise the vertex buffer object handle.
             glGenBuffers(1, &r_vbo);
 
             return (r_vbo);
