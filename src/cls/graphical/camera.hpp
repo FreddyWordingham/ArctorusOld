@@ -65,6 +65,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Camera(const Camera& /*unused*/) = delete;
+            Camera(const Camera&& /*unused*/) = delete;
             Camera(const glm::vec3& t_pos, float t_aspect_ratio, float t_speed = DEFAULT_SPEED, float t_fov = DEFAULT_FOV);
 
           public:
