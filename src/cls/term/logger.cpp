@@ -187,8 +187,10 @@ namespace arc
             assert(!t_symptom.empty());
             assert(!t_cause.empty());
 
+            // Increment the number of recorded warnings.
             ++m_num_warnings;
 
+            // Create the text string.
             std::string text = t_symptom + "\n" + t_cause;
             print_text(YELLOW, WARN, text);
         }
