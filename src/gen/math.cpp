@@ -57,10 +57,13 @@ namespace arc
 
         /**
          *  Create an orientation transformation matrix.
+         *  Rotate the object around the global z-axis by the spin.
+         *  Then rotate the object around the global y-axis by the theta angle.
+         *  Then rotate the object around the global z-axis by the phi angle.
          *
          *  @param  t_theta Angle to rotate around the global  y-axis.
          *  @param  t_phi   Angle to then rotate around  the global z-axis.
-         *  @param  t_spin  Angle to then rotate around the local z-axis.
+         *  @param  t_spin  Angle to initialy rotate around the global z-axis.
          *
          *  @return The created orientation matrix.
          */
