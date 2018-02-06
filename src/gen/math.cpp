@@ -133,7 +133,6 @@ namespace arc
         /**
          *  Create direction transformation matrix from individual transformations.
          *
-         *  @param  t_trans Vector of translation.
          *  @param  t_dir   Direction to face.
          *  @param  t_spin  Spin angle.
          *  @param  t_scale Vector of scaling values.
