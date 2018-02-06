@@ -57,8 +57,6 @@ int main()
                     math::Vec<3>({{0.1, 0.1, 0.1}}));
     scene.add_light(mesh, 2.0, {1.0f, 1.0f, 0.0f, 1.0f});
 
-//    scene.add_entity(mesh, {0.9f, 0.0f, 0.0f, 1.0f});
-
     while (!scene.should_close())
     {
         scene.handle_input();
