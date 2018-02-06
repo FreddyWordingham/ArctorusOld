@@ -20,8 +20,8 @@
 #include <vector>
 
 //  -- Classes --
-#include "cls/graphical/vertex.hpp"
 #include "cls/graphical/point/photon.hpp"
+#include "cls/graphical/vertex.hpp"
 
 
 
