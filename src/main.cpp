@@ -37,15 +37,10 @@ int main()
 {
     LOG("Hello world!");
 
-    const math::Mat<4, 4> trans = math::create_trans_mat(math::Vec<3>({{1.0, 2.0, 3.0}}));
-    VAL(trans);
 
-    math::Vec<4> vec({{0.0, 0.0, 1.0, 1.0}});
 
-    VAL(vec);
-    vec *= trans;
 
-    VAL(vec);
+
 /*
     std::vector<graphical::point::Photon> path;
     path.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));

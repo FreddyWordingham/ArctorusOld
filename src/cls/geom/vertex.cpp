@@ -62,6 +62,9 @@ namespace arc
             m_norm[X] = norm[X];
             m_norm[Y] = norm[Y];
             m_norm[Z] = norm[Z];
+
+            // Re-normalise the normal vector.
+            m_norm.normalise();
         }
 
 
