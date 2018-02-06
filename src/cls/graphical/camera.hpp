@@ -72,6 +72,13 @@ namespace arc
             virtual ~Camera() = default;
 
 
+            //  == OPERATORS ==
+          public:
+            //  -- Copy --
+            Camera& operator=(const Camera& /*unused*/) = delete;
+            Camera& operator=(const Camera&& /*unused*/) = delete;
+
+
             //  == METHODS ==
           public:
             //  -- Getters --
