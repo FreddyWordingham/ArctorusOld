@@ -80,10 +80,14 @@ namespace arc
          *  @param  t_dir   Direction to face.
          *  @param  t_spin  Spin angle.
          *
+         *  @pre    t_dir must be normalised.
+         *
          *  @return The created orientation matrix.
          */
         Mat<4, 4> create_orient_mat(const Vec<3>& t_dir, const double t_spin)
         {
+            assert(t_dir.is_normalised());
+
             return (create_orient_mat(
                 acos(t_dir[Z] / std::sqrt(math::square(t_dir[X]) + math::square(t_dir[Y]) + math::square(t_dir[Z]))),
                 atan2(t_dir[Y], t_dir[X]), t_spin));

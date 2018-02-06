@@ -18,8 +18,7 @@
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
-#include "cls/math/mat.hpp"
-
+#include "cls/geom/vertex.hpp"
 
 
 //  == NAMESPACE ==
@@ -43,6 +42,13 @@ int main()
     VAL(vert.get_pos());
     VAL(vert.get_norm());
 
+    math::Mat<4, 4> pos_mat = math::create_pos_mat(math::Vec<3>({{0.5, -0.5, 0.1}}), math::Vec<3>({{0.0, 0.0, 0.0}}), M_PI*0.0, math::Vec<3>({{0.0, 0.0, 0.0}}));
+    math::Mat<4, 4> dir_mat = math::create_dir_mat(math::Vec<3>({{0.0, 0.0, 0.0}}), M_PI*0.0, math::Vec<3>({{0.0, 0.0, 0.0}}));
+
+    vert.transform(pos_mat, dir_mat);
+
+    VAL(vert.get_pos());
+    VAL(vert.get_norm());
 
 /*
     std::vector<graphical::point::Photon> path;
