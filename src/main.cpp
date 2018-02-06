@@ -38,7 +38,10 @@ int main()
     LOG("Hello world!");
 
 
+    geom::Vertex vert(math::Vec<3>({{1.0, 1.0, 0.0}}), math::Vec<3>({{1.0, 1.0, 0.0}}));
 
+    VAL(vert.get_pos());
+    VAL(vert.get_norm());
 
 
 /*
