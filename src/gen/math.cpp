@@ -80,13 +80,13 @@ namespace arc
          *  @param  t_dir   Direction to face.
          *  @param  t_spin  Spin angle.
          *
-         *  @pre    t_dir must be normalised.
+         *  @pre    t_dir's magnitude must be greater than zero.
          *
          *  @return The created orientation matrix.
          */
         Mat<4, 4> create_orient_mat(const Vec<3>& t_dir, const double t_spin)
         {
-            assert(t_dir.is_normalised());
+            assert(t_dir.magnitude() > 0.0);
 
             return (create_orient_mat(
                 acos(t_dir[Z] / std::sqrt(math::square(t_dir[X]) + math::square(t_dir[Y]) + math::square(t_dir[Z]))),
@@ -127,10 +127,14 @@ namespace arc
          *  @param  t_spin  Spin angle.
          *  @param  t_scale Vector of scaling values.
          *
+         *  @pre    t_dir's magnitude must be greater than zero.
+         *
          *  @return The created position transformation matrix.
          */
         Mat<4, 4> create_pos_mat(const Vec<3>& t_trans, const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
         {
+            assert(t_dir.magnitude() > 0.0);
+
             return (create_scale_pos_mat(t_scale) * create_orient_mat(t_dir, t_spin) * create_trans_mat(t_trans));
         }
 
@@ -141,10 +145,14 @@ namespace arc
          *  @param  t_spin  Spin angle.
          *  @param  t_scale Vector of scaling values.
          *
+         *  @pre    t_dir's magnitude must be greater than zero.
+         *
          *  @return The created direction transformation matrix.
          */
         Mat<4, 4> create_dir_mat(const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
         {
+            assert(t_dir.magnitude() > 0.0);
+
             return (create_scale_dir_mat(t_scale) * create_orient_mat(t_dir, t_spin));
         }
 
