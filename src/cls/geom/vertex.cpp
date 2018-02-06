@@ -39,5 +39,19 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Transformation --
+        /**
+         *  Transform a vector using a given position and normal transformation matrix.
+         *
+         *  @param  t_pos_trans_mat Position transformation matrix.
+         *  @param  t_dir_trans_mat Normal transformation matrix.
+         */
+        void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
+        {
+        }
+
+
+
     } // namespace geom
 } // namespace arc

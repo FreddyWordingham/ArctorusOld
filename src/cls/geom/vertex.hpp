@@ -52,6 +52,9 @@ namespace arc
             //  -- Getters --
             const math::Vec<3>& get_pos() const { return (m_pos); }
             const math::Vec<3>& get_norm() const { return (m_norm); }
+
+            //  -- Transformation --
+            void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat);
         };
 
 
