@@ -103,7 +103,7 @@ namespace arc
             // Convert the uniform random values to gaussian values.
             spare = std::sqrt(-2.0 * std::log(r_0)) * sin(2.0 * M_PI * r_1);
 
-            return (std::sqrt(-2.0 * std::log(r_0)) * cos(2.0 * M_PI * r_1));
+            return ((std::sqrt(-2.0 * std::log(r_0)) * cos(2.0 * M_PI * r_1) * t_sigma) + t_mu);
         }
 
 
