@@ -128,7 +128,7 @@ namespace arc
             assert(t_scale[Z] != 0.0);
 
             return (Mat<4, 4>(
-                {{{{1.0/t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0/t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0/t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
+                {{{{1.0 / t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0 / t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0 / t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
         }
 
         /**
@@ -151,7 +151,7 @@ namespace arc
             assert(t_scale[Y] != 0.0);
             assert(t_scale[Z] != 0.0);
 
-            return (create_scale_pos_mat(t_scale) * create_orient_mat(t_dir, t_spin) * create_trans_mat(t_trans));
+            return (create_trans_mat(t_trans) * create_orient_mat(t_dir, t_spin) * create_scale_pos_mat(t_scale));
         }
 
         /**
@@ -173,7 +173,7 @@ namespace arc
             assert(t_scale[Y] != 0.0);
             assert(t_scale[Z] != 0.0);
 
-            return (create_scale_dir_mat(t_scale) * create_orient_mat(t_dir, t_spin));
+            return (create_orient_mat(t_dir, t_spin) * create_scale_pos_mat(t_scale));
         }
 
 
