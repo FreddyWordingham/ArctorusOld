@@ -218,11 +218,14 @@ namespace arc
             assert(!t_symptom.empty());
             assert(!t_cause.empty());
 
+            // Increment the number of recorded errors.
             ++m_num_errors;
 
+            // Create the text string.
             std::string text = "File: " + t_file + "\nLine: " + t_line + "\n" + t_symptom + "\n" + t_cause;
             print_text(RED, ERROR, text);
 
+            // Exit the program with an error signal.
             std::exit(1);
         }
 
