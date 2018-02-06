@@ -47,8 +47,21 @@ namespace arc
          *  @param  t_pos_trans_mat Position transformation matrix.
          *  @param  t_dir_trans_mat Normal transformation matrix.
          */
-        void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
+        void Vertex::transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
         {
+            // Calculate the position transform.
+            math::Vec<4> pos({{m_pos[X], m_pos[Y], m_pos[Z], 1.0}});
+            pos *= t_pos_trans_mat;
+            m_pos[X] = pos[X];
+            m_pos[Y] = pos[Y];
+            m_pos[Z] = pos[Z];
+
+            // Calculate the normal transform.
+            math::Vec<4> norm({{m_norm[X], m_norm[Y], m_norm[Z], 1.0}});
+            norm *= t_dir_trans_mat;
+            m_norm[X] = norm[X];
+            m_norm[Y] = norm[Y];
+            m_norm[Z] = norm[Z];
         }
 
 
