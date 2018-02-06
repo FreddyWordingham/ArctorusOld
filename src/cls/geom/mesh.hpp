@@ -52,7 +52,7 @@ namespace arc
             const size_t m_num_tri;     //! Number of triangle faces.
 
             //  -- Triangle Data --
-            const std::vector<geom::Triangle> m_tri;    //! List of triangles forming the mesh.
+            std::vector<geom::Triangle> m_tri;  //! List of triangles forming the mesh.
 
 
             //  == INSTANTIATION ==
