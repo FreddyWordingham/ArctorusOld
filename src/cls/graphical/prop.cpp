@@ -119,7 +119,10 @@ namespace arc
          */
         GLuint Prop::init_vao() const
         {
+            // Create vertex array object handle.
             GLuint r_vao;
+
+            // Initialise the vertex array object handle.
             glGenVertexArrays(1, &r_vao);
 
             return (r_vao);
