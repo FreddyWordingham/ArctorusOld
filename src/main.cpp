@@ -36,20 +36,6 @@ int main()
 {
     LOG("Hello world!");
 
-
-    geom::Vertex vert(math::Vec<3>({{1.0, 1.0, 0.0}}), math::Vec<3>({{1.0/sqrt(2.0), 1.0/sqrt(2.0), 0.0}}));
-
-    VAL(vert.get_pos());
-    VAL(vert.get_norm());
-
-    math::Mat<4, 4> pos_mat = math::create_pos_mat(math::Vec<3>({{0.5, -0.5, 0.1}}), math::Vec<3>({{0.0, 0.0, 1.0}}), M_PI*0.0, math::Vec<3>({{1.0, 1.0, 1.0}}));
-    math::Mat<4, 4> dir_mat = math::create_dir_mat(math::Vec<3>({{0.0, 0.0, 1.0}}), M_PI*0.0, math::Vec<3>({{1.0, 1.0, 1.0}}));
-
-    vert.transform(pos_mat, dir_mat);
-
-    VAL(vert.get_pos());
-    VAL(vert.get_norm());
-
 /*
     std::vector<graphical::point::Photon> path;
     path.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
