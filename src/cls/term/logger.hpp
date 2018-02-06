@@ -225,14 +225,17 @@ namespace arc
         {
             assert(!t_name.empty());
 
+            // Resize the name to the set length and add colon string.
             std::string text = t_name;
             text.resize(VALUE_NAME_WIDTH, ' ');
             text += " : ";
 
+            // Add value to the stream.
             std::stringstream val_stream;
             val_stream << std::boolalpha << t_val;
             text += val_stream.str();
 
+            // Print the value.
             print_text(MAGENTA, VAL, text);
         }
 
