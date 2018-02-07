@@ -28,7 +28,7 @@ uniform vec4 prop_col;  //! Prop colour.
 //  == OUTPUT ==
 //  -- Passed --
 out vec4 vert_col;  //! Colour to draw the vertex with.
-out float vert_dist;
+out float vert_time;
 
 
 //  == MAIN ==
@@ -43,5 +43,5 @@ void main()
     // Set vertex colour.
     vert_col = prop_col;
 
-    vert_dist = dist;
+    vert_time = time;
 }
