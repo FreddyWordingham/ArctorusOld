@@ -12,19 +12,19 @@
 
 
 
-//  == INPUT ==
-//  -- Arctorus --
-in vec3 pos;    //! Vertex positions.
-in vec3 norm;   //! Vertex normals.
+//  == LINKING ==
+//  -- Layout --
+layout(location = 0) in vec3 pos;   //! Vertex positions.
+layout(location = 1) in vec3 norm;  //! Vertex normals.
 
 //  -- Uniforms --
-uniform mat4 mvp;       //! Model-view-projection matrix.
-uniform vec4 prop_col;  //! Object colour.
+uniform mat4 mvp;   //! Model-view-projection matrix.
+uniform vec4 col;   //! Mesh colour.
 
 
 
-//  == OUTPUT ==
-//  -- Passed --
+//  == IN/OUTPUT ==
+//  -- Output --
 out vec4 vert_col;  //! Colour to draw the vertex with.
 
 
@@ -35,7 +35,9 @@ out vec4 vert_col;  //! Colour to draw the vertex with.
  */
 void main()
 {
+    // Set pixel position.
     gl_Position = mvp * vec4(pos, 1.0);
 
-    vert_col = prop_col;
+    // Set vertex properties.
+    vert_col = col;
 }
