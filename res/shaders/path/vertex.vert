@@ -42,6 +42,6 @@ void main()
     gl_Position = mvp * vec4(pos, 1.0);
 
     // Set vertex properties.
-    vert_col = prop_col;
+    vert_col = col;
     vert_time = time;
 }
