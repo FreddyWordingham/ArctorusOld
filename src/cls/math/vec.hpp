@@ -145,6 +145,14 @@ namespace arc
 
 
 
+        //  == TYPE DEFINITIONS ==
+        //  -- Small Vectors --
+        using Vec2 = Vec<2>;    //! Size 2 vec.
+        using Vec3 = Vec<3>;    //! Size 3 vec.
+        using Vec4 = Vec<4>;    //! Size 4 vec.
+
+
+
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
