@@ -20,8 +20,8 @@ layout(location = 2) in float weight;       //! Photon packet weight.
 layout(location = 3) in float time;         //! Photon packet travelled time so far.
 
 //  -- Uniforms --
-uniform mat4 mvp;       //! Model-view-projection matrix.
-uniform vec4 prop_col;  //! Prop colour.
+uniform mat4 mvp;   //! Model-view-projection matrix.
+uniform vec4 col;   //! Path colour.
 
 
 
