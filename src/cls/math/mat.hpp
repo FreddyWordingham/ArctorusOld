@@ -104,6 +104,12 @@ namespace arc
 
 
 
+        //  == TYPE DEFINITIONS ==
+        //  -- Small Matrices --
+        using mat4 = Mat<4, 4>;
+
+
+
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**

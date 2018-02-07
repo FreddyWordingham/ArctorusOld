@@ -35,7 +35,9 @@ int main()
 {
     LOG("Hello world!");
 
-    graphical::Scene scene;
+    VAL(math::mat4({{{{0.0, 1.0, 2.0, 3.0}}, {{4.0, 5.0, 6.0, 7.0}}, {{8.0, 9.0, 10., 11.}}, {{12., 13., 14., 15.}}}}));
+
+    /*graphical::Scene scene;
 
     std::vector<graphical::point::Photon> path_x;
     path_x.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
@@ -60,7 +62,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }
+    }*/
 
     return (0);
 }
