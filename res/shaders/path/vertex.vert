@@ -27,8 +27,8 @@ uniform vec4 col;   //! Path colour.
 
 //  == IN/OUTPUT ==
 //  -- Output --
-out vec4 vert_col;  //! Colour to draw the vertex with.
-out float vert_time;
+out vec4 vert_col;      //! Colour to draw the vertex with.
+out float vert_time;    //! Time associated with the vertex.
 
 
 
