@@ -12,26 +12,27 @@
 
 
 
-//  == INPUT ==
-//  -- Arctorus --
+//  == LINKING ==
+//  -- Layout --
 layout(location = 0) in vec3 pos;   //! Vertex positions.
 layout(location = 1) in vec3 norm;  //! Vertex normals.
 
 
 
-//  == OUTPUT ==
-//  -- Passed --
-out vec3 vert_pos;
-out vec3 vert_norm;
+//  == IN/OUTPUT ==
+//  -- Output --
+out vec3 vert_pos;  //! Position of the vertex with.
+out vec3 vert_norm; //! Normal of the vertex.
 
 
 
 //  == MAIN ==
 /**
- *  Illuminate objects with uniform ambient lighting.
- */
+*  Main function of the normal vertex sub-shader.
+*/
 void main()
 {
+    // Set vertex properties.
     vert_pos = pos;
     vert_norm = norm;
 }
