@@ -31,7 +31,7 @@ out vec4 vert_col;  //! Colour to draw the vertex with.
 
 //  == MAIN ==
 /**
- *  Illuminate objects with uniform ambient lighting.
+ *  Main function of the ambient vertex sub-shader.
  */
 void main()
 {
