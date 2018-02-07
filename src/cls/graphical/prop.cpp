@@ -300,40 +300,66 @@ namespace arc
             std::vector<Vertex> r_vert;
 
             // Reserve space for 24 vertices.
-            r_vert.reserve(24);
+            r_vert.reserve(24 + 18);
 
             // Add face vertices into the vertex vector.
-            r_vert.push_back(Vertex({+t_scale, +0.0, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +t_scale, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +0.0, +t_scale}, {+0.0f, +0.0f, +0.0f}));
+            // Main body.
+            r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({+0.0, +t_scale, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({-t_scale, +0.0, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +0.0, +t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({-t_scale, +0.0, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, -t_scale, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +0.0, +t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({+0.0, -t_scale, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+t_scale, +0.0, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +0.0, +t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({+t_scale, +0.0, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +0.0, -t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +t_scale, +0.0}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, -t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({+0.0, +t_scale, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +0.0, -t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({-t_scale, +0.0, +0.0}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, -t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({-t_scale, +0.0, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +0.0, -t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, -t_scale, +0.0}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, -t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({+0.0, -t_scale, +0.0}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0, +0.0, -t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+t_scale, +0.0, +0.0}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, -t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+
+            // +z point.
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
 
             return (r_vert);
         }
