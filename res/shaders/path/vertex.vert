@@ -12,7 +12,7 @@
 
 
 
-//  == INPUT ==
+//  == LINKING ==
 //  -- Layout --
 layout(location = 0) in vec3 pos;           //! Photon packet position.
 layout(location = 1) in float wavlength;    //! Photon packet wavelength.
@@ -25,23 +25,23 @@ uniform vec4 prop_col;  //! Prop colour.
 
 
 
-//  == OUTPUT ==
-//  -- Passed --
+//  == IN/OUTPUT ==
+//  -- Output --
 out vec4 vert_col;  //! Colour to draw the vertex with.
 out float vert_time;
 
 
+
 //  == MAIN ==
 /**
- *  Photon packet path rendering shader.
+ *  Main function of the path vertex sub-shader.
  */
 void main()
 {
-    // Set position.
+    // Set vertex position.
     gl_Position = mvp * vec4(pos, 1.0);
 
-    // Set vertex colour.
+    // Set vertex properties.
     vert_col = prop_col;
-
     vert_time = time;
 }
