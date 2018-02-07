@@ -35,6 +35,14 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Properties --
+            math::Vec<3> m_pos; //! Position of the particle.
+            math::Vec<3> m_dir; //! Direction of travel.
+            double m_wavelengh; //! Associated wavelength.
+
+            //  -- Simulation --
+            double m_time;      //! Emission time plus current age of the particle.
+            double m_weight;    //! Statistical weight of the particle.
 
 
             //  == INSTANTIATION ==
