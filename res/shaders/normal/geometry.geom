@@ -25,7 +25,7 @@ layout(line_strip, max_vertices = 2) out;   //! End with a line strip.
 
 //  -- Uniforms --
 uniform mat4 mvp;           //! Model-view-projection matrix.
-uniform vec4 prop_col;      //! Normal colour.
+uniform vec4 col;           //! Normal colour.
 uniform float light_power;  //! Length to draw normal lines.
 
 
@@ -49,7 +49,7 @@ void main()
     // Create the start vertex.
     vec4 v0     = vec4(vert_pos[0], 1.0);
     gl_Position = mvp * v0;
-    geom_col = prop_col;
+    geom_col = col;
     EmitVertex();
 
     // Create the end vertex.

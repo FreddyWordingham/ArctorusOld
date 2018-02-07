@@ -12,7 +12,7 @@
 
 
 
-//  == INPUT ==
+//  == LINKING ==
 //  -- Layout --
 layout(location = 0) in vec3 pos;   //! Vertex positions.
 layout(location = 1) in vec3 norm;  //! Vertex normals.
@@ -20,8 +20,29 @@ layout(location = 1) in vec3 norm;  //! Vertex normals.
 //  -- Uniforms --
 uniform mat4 mvp;       //! Model-view-projection matrix.
 uniform mat4 view;      //! View matrix.
-uniform vec4 col;       //! Prop colour.
+uniform vec4 col;       //! Mesh colour.
 uniform vec3 sun_pos;   //! Sun position.
+
+
+
+//  == IN/OUTPUT ==
+//  -- Input --
+
+//  -- Output --
+
+
+
+//  == MAIN ==
+/**
+ *  Main function of the TODO TODO sub-shader.
+ */
+void main()
+{
+}
+
+
+
+
 
 
 
