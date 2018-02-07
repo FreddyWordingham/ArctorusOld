@@ -53,9 +53,20 @@ int main()
     path_z.push_back(graphical::point::Photon({0.0f, 0.0f, 1.0f}, 400E-9f, 1.0f, 1.0));
     scene.add_photon(path_z);
 
-    const geom::Mesh mesh(file::read("test/monkey.obj"), math::Vec<3>({{2.0, 2.0, 2.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}), 0.0,
-                    math::Vec<3>({{0.1, 0.1, 0.1}}));
+    //First vec is translational, second is rotational, double is extra rotation, final vec is scaling.
+    const geom::Mesh mesh(file::read("test/circle.obj"), math::Vec<3>({{5.0, 5.0, 5.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.0,
+                    math::Vec<3>({{0.5, 0.5, 0.5}}));
+    const geom::Mesh cube_One(file::read("test/cube.obj"), math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.0,
+                    math::Vec<3>({{1.0, 1.0, 1.0}}));
+    const geom::Mesh cube_Two (file::read("test/cube.obj"), math::Vec<3>({{2.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.0,
+                    math::Vec<3>({{1.0, 1.0, 1.0}}));
+    const geom::Mesh cube_Three (file::read("test/cube.obj"), math::Vec<3>({{4.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.0,
+                               math::Vec<3>({{1.0, 1.0, 1.0}}));
+
     scene.add_light(mesh, 2.0, {1.0f, 1.0f, 0.0f, 1.0f});
+    scene.add_entity(cube_One, {0.5f, 1.0f, 0.0f, 1.0f});
+    scene.add_entity(cube_Two, {1.0f, 0.5f, 0.0f, 1.0f});
+    scene.add_entity(cube_Three, {1.0f, 0.0f, 1.0f, 1.0f});
 
     while (!scene.should_close())
     {
