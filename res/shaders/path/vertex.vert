@@ -38,7 +38,7 @@ out float vert_time;    //! Time associated with the vertex.
  */
 void main()
 {
-    // Set vertex position.
+    // Set pixel position.
     gl_Position = mvp * vec4(pos, 1.0);
 
     // Set vertex properties.
