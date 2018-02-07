@@ -160,6 +160,8 @@ namespace arc
                     return (init_vert_cube(t_scale));
                 case shape::SKYBOX:
                     return (init_vert_skybox(t_scale));
+                case shape::SUN:
+                    return (init_vert_sun(t_scale));
             }
         }
 
