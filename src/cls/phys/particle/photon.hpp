@@ -43,13 +43,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-
-              private:
-                //  -- Initialisation --
-
-
-                //  == OPERATORS ==
-              private:
+                Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength, double t_weight = 1.0);
 
 
                 //  == METHODS ==
