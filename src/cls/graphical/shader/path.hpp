@@ -43,9 +43,9 @@ namespace arc
                 //  == FIELDS ==
               private:
                 //  -- Uniforms --
-                const GLint m_mvp_uni;  //! Model-view-projection uniform handle.
-                const GLint m_col_uni;  //! Colour uniform handle.
-                const GLint m_time_uni; //! Render distance uniform handle.
+                const GLint m_mvp_uni;      //! Model-view-projection uniform handle.
+                const GLint m_col_uni;      //! Colour uniform handle.
+                const GLint m_render_time;  //! Render distance uniform handle.
 
 
                 //  == INSTANTIATION ==
@@ -59,7 +59,7 @@ namespace arc
                 //  -- Getters --
                 GLint get_mvp_uni() const { return (m_mvp_uni); }
                 GLint get_col_uni() const { return (m_col_uni); }
-                GLint get_time_uni() const { return (m_time_uni); }
+                GLint get_time_uni() const { return (m_render_time); }
             };
 
 

@@ -31,7 +31,7 @@ namespace arc
                 Shader(PATH_SHADER_DIR, false),
                 m_mvp_uni(init_uniform("mvp")),
                 m_col_uni(init_uniform("prop_col")),
-                m_time_uni(init_uniform("time"))
+                m_render_time(init_uniform("time"))
             {
             }
 
