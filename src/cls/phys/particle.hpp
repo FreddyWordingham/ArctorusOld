@@ -38,7 +38,6 @@ namespace arc
             //  -- Properties --
             math::Vec<3> m_pos; //! Position of the particle.
             math::Vec<3> m_dir; //! Direction of travel.
-            double       m_wavelengh; //! Associated wavelength.
 
             //  -- Simulation --
             double m_time;      //! Emission time plus current age of the particle.
@@ -48,7 +47,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Particle(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_wavelength, double t_time, double t_weight = 1.0);
+            Particle(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_weight = 1.0);
 
 
             //  == METHODS ==
@@ -56,7 +55,6 @@ namespace arc
             //  -- Getters --
             math::Vec<3>& get_pos() const { return (m_pos); }
             math::Vec<3>& get_dir() const { return (m_dir); }
-            double get_wavelength() const { return (m_wavelengh); }
             double get_time() const { return (m_time); }
             double get_weight() const { return (m_weight); }
         };
