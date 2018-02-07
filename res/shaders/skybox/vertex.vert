@@ -34,7 +34,7 @@ out vec3 texture_coor;
  */
 void main()
 {
-    // Set vertex position.
+    // Set pixel position.
     gl_Position = (proj * view * vec4(pos, 1.0)).xyww;  // Not a typo. We always want to place the skybox behind everything.
 
     // Set texture position.
