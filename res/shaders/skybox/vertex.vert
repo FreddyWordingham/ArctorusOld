@@ -1,14 +1,42 @@
+/**
+ *  @author Freddy Wordingham
+ *  @email  fjmw201@exeter.ac.uk
+ *
+ *  @date   05/02/2018.
+ */
+
+
+
+//  == VERSION ==
 #version 330 core
+
+
+
+//  == LINKING ==
+//  -- Layout --
 layout(location = 0) in vec3 pos;   //! Vertex positions.
 layout(location = 1) in vec3 norm;  //! Vertex normals.
 
-out vec3 TexCoords;
-
+//  -- Uniforms --
 uniform mat4 proj;
 uniform mat4 view;
 
+
+//  == IN/OUTPUT ==
+//  -- Output --
+out vec3 texture_coor;
+
+
+
+//  == MAIN ==
+/**
+ *  Main function of the skybox vertex sub-shader.
+ */
 void main()
 {
+    // Set vertex position.
+    gl_Position = (proj * view * vec4(pos, 1.0)).xyww;  // Not a typo. We always want to place the skybox behind everything.
+
+    // Set texture position.
     TexCoords = pos;
-    gl_Position = (proj * view * vec4(pos, 1.0)).xyww;
 }
