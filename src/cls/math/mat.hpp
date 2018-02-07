@@ -106,9 +106,9 @@ namespace arc
 
         //  == TYPE DEFINITIONS ==
         //  -- Small Matrices --
-        using mat2 = Mat<2, 2>; //! Size 2 square matrix.
-        using mat3 = Mat<3, 3>; //! Size 3 square matrix.
-        using mat4 = Mat<4, 4>; //! Size 4 square matrix.
+        using Mat2 = Mat<2, 2>; //! Size 2 square matrix.
+        using Mat3 = Mat<3, 3>; //! Size 3 square matrix.
+        using Mat4 = Mat<4, 4>; //! Size 4 square matrix.
 
 
 
