@@ -21,13 +21,11 @@ layout(location = 3) in float time;         //! Photon packet travelled time so 
 
 //  -- Uniforms --
 uniform mat4 mvp;   //! Model-view-projection matrix.
-uniform vec4 col;   //! Path colour.
 
 
 
 //  == IN/OUTPUT ==
 //  -- Output --
-out vec4 vert_col;      //! Colour to draw the vertex with.
 out float vert_time;    //! Time associated with the vertex.
 
 
@@ -42,6 +40,5 @@ void main()
     gl_Position = mvp * vec4(pos, 1.0);
 
     // Set vertex properties.
-    vert_col = col;
     vert_time = time;
 }

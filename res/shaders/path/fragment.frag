@@ -20,6 +20,7 @@ const int time_fade = 16;   //! Power to fade photons away from the render_time.
 
 //  == LINKING ==
 //  -- Uniforms --
+uniform vec4 col;           //! Path colour.
 uniform float render_time;  //! Time to render photons at.
 
 
@@ -41,7 +42,7 @@ out vec4 frag_col;  //! Fragment colour.
 void main()
 {
     // Set fragment colour.
-    frag_col = vert_col;
+    frag_col = col;
 
     // Set fragement alpha if time rendering.
     if (render_time > 0.0)
