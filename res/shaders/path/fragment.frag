@@ -27,10 +27,10 @@ uniform float render_time;  //! Time to render photons at.
 //  == IN/OUTPUT ==
 //  -- Input --
 in vec4 vert_col;   //! Colour to draw the vertex with.
-in float vert_time;
+in float vert_time; //! Timestamp of the vertex.
 
 //  -- Output --
-out vec4 frag_col;
+out vec4 frag_col;  //! Fragment colour.
 
 
 
