@@ -39,13 +39,13 @@ namespace arc
                 //  -- Data --
                 const float m_wavelength;   //! Wavelength the packet.
                 const float m_weight;       //! Statistical weight of the packet.
-                const float m_dist;         //! Distance traveled so far by the packet.
+                const float m_time;         //! Age of the packet.
 
 
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Photon(const glm::vec3& t_pos, float t_wavelength, float t_weight, float t_dist);
+                Photon(const glm::vec3& t_pos, float t_wavelength, float t_weight, float t_time);
 
 
                 //  == METHODS ==
@@ -53,7 +53,7 @@ namespace arc
                 //  -- Getters --
                 float get_wavelength() const { return (m_wavelength); }
                 float get_weight() const { return (m_weight); }
-                float get_dist() const { return (m_dist); }
+                float get_time() const { return (m_time); }
             };
 
 
