@@ -47,7 +47,8 @@ namespace arc
             enum class shape
             {
                 CUBE,   //! Simple cube.
-                SKYBOX  //! Skybox.
+                SKYBOX, //! Skybox.
+                SUN     //! Sun illuminator.
             };
 
 
