@@ -95,8 +95,10 @@ namespace arc
          */
         std::vector<double> Linear::init_frac() const
         {
+            // Create the vector of fractional triangle areas.
             std::vector<double> r_frac(m_x.size() - 1);
 
+            // Calculate the fraction values.
             for (size_t i = 0; i < r_frac.size(); ++i)
             {
                 double above = (std::fabs(m_p[i + 1] - m_p[i]) * (m_x[i + 1] - m_x[i])) / 2.0;
