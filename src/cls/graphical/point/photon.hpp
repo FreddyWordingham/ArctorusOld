@@ -39,7 +39,7 @@ namespace arc
                 //  -- Data --
                 const float m_wavelength;   //! Wavelength the packet.
                 const float m_weight;       //! Statistical weight of the packet.
-                const float m_time;         //! Age of the packet.
+                const float m_time;         //! Time of the packet.
 
 
                 //  == INSTANTIATION ==

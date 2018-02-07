@@ -30,7 +30,7 @@ namespace arc
              *  @param  t_pos           Three dimensional position of the packet.
              *  @param  t_wavelength    Wavelength the packet.
              *  @param  t_weight        Statistical weight of the packet.
-             *  @param  t_time          Age of the packet.
+             *  @param  t_time          Time of the packet.
              *
              *  @post   m_wavelength must be greater than zero.
              *  @post   m_weight must be greater than zero.
