@@ -38,5 +38,5 @@ void main()
     gl_Position = (proj * view * vec4(pos, 1.0)).xyww;  // Not a typo. We always want to place the skybox behind everything.
 
     // Set texture position.
-    TexCoords = pos;
+    texture_coor = pos;
 }
