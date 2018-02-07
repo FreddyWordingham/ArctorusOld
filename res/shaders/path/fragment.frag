@@ -18,7 +18,7 @@ in vec4 vert_col;   //! Colour to draw the vertex with.
 in float vert_time;
 
 //  -- Constants --
-uniform float time;  //! Distance to render photons at.
+uniform float render_time;  //! Time to render photons at.
 
 
 
@@ -37,9 +37,9 @@ void main()
     // Set fragment colour.
     col = vert_col;
 
-    if (time > 0.0)
+    if (render_time > 0.0)
     {
-        float close = 1.0 - clamp(abs(time - vert_time), 0.0, 1.0);
+        float close = 1.0 - clamp(abs(render_time - vert_time), 0.0, 1.0);
         col.a = close * close * close;
     }
 }
