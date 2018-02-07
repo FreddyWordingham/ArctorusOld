@@ -22,6 +22,7 @@ uniform mat4 proj;  //! Propjection matrix.
 uniform mat4 view;  //! View matrix.
 
 
+
 //  == IN/OUTPUT ==
 //  -- Output --
 out vec3 texture_coor;  //! Texture coordintes.
