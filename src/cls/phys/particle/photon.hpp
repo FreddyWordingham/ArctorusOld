@@ -36,6 +36,8 @@ namespace arc
             {
                 //  == FIELDS ==
               private:
+                //  -- Properties --
+                double m_wavelength;    //! Packet wavelength.
 
 
                 //  == INSTANTIATION ==
