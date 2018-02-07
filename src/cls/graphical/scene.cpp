@@ -493,21 +493,21 @@ namespace arc
 
                 if (old_state_propagate_photons == GLFW_PRESS)
                 {
-                    if (m_render_dist > 0.0f)
+                    if (m_render_time > 0.0f)
                     {
-                        m_render_dist = 0.0f;
+                        m_render_time = 0.0f;
                     }
                     else
                     {
-                        m_render_dist = 0.01f;
+                        m_render_time = 0.01f;
                     }
                 }
             }
 
             // Increase render distance if dynamic rendering is active.
-            if (m_render_dist > 0.0f)
+            if (m_render_time > 0.0f)
             {
-                m_render_dist += t_time_delta;
+                m_render_time += t_time_delta;
             }
         }
 
@@ -566,7 +566,7 @@ namespace arc
             glUseProgram(m_path_shader.get_handle());
 
             glUniformMatrix4fv(m_path_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
-            glUniform1f(m_path_shader.get_time_uni(), m_render_dist);
+            glUniform1f(m_path_shader.get_time_uni(), m_render_time);
         }
 
 
