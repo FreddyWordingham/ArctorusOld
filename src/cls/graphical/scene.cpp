@@ -54,7 +54,7 @@ namespace arc
             m_secondary_cam(std::make_unique<camera::Fly>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
                                                           static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_sun_pos(glm::vec3({INIT_SUN_POS_X, INIT_SUN_POS_Y, INIT_SUN_POS_Z})),
-            m_sun(Prop(Prop::shape::CUBE, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
+            m_sun(Prop(Prop::shape::SUN, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
         }
 
