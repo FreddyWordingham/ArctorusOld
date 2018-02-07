@@ -12,6 +12,12 @@
 
 
 
+//  == SETTINGS ==
+//  -- Normal Rendering --
+const vec4 normal_end_col = vec4(0.0, 0.0, 0.0, 1.0);   //! Colour of the end of the normal.
+
+
+
 //  == LINKING ==
 //  -- Layout --
 layout(points) in;                          //! Start with points.
@@ -49,7 +55,7 @@ void main()
     // Create the end vertex.
     vec4 v1     = v0 + vec4(vert_norm[0] * light_power, 0.0);
     gl_Position = mvp * v1;
-    geom_col = vec4(0.0, 0.0, 0.0, 1.0);
+    geom_col = normal_end_col;
     EmitVertex();
 
     // Send the completed line.
