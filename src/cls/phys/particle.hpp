@@ -34,14 +34,14 @@ namespace arc
         class Particle
         {
             //  == FIELDS ==
-          private:
+          protected:
             //  -- Properties --
-            math::Vec<3> m_pos; //! Position of the particle.
-            math::Vec<3> m_dir; //! Direction of travel.
+            math::Vec<3> n_pos; //! Position of the particle.
+            math::Vec<3> n_dir; //! Direction of travel.
 
             //  -- Simulation --
-            double m_time;      //! Emission time plus current age of the particle.
-            double m_weight;    //! Statistical weight of the particle.
+            double n_time;      //! Emission time plus current age of the particle.
+            double n_weight;    //! Statistical weight of the particle.
 
 
             //  == INSTANTIATION ==
@@ -53,10 +53,10 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
-            math::Vec<3>& get_pos() const { return (m_pos); }
-            math::Vec<3>& get_dir() const { return (m_dir); }
-            double get_time() const { return (m_time); }
-            double get_weight() const { return (m_weight); }
+            math::Vec<3>& get_pos() const { return (n_pos); }
+            math::Vec<3>& get_dir() const { return (n_dir); }
+            double get_time() const { return (n_time); }
+            double get_weight() const { return (n_weight); }
         };
 
 

@@ -38,14 +38,14 @@ namespace arc
          */
         Particle::Particle(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_time,
                            const double t_weight) :
-            m_pos(t_pos),
-            m_dir(t_dir),
-            m_time(t_time),
-            m_weight(t_weight)
+            n_pos(t_pos),
+            n_dir(t_dir),
+            n_time(t_time),
+            n_weight(t_weight)
         {
-            assert(m_dir.is_normalised());
-            assert(m_time > 0.0);
-            assert(m_weight > 0.0);
+            assert(n_dir.is_normalised());
+            assert(n_time > 0.0);
+            assert(n_weight > 0.0);
         }
 
 
