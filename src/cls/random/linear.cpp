@@ -98,7 +98,7 @@ namespace arc
             // Create the vector of fractional triangle areas.
             std::vector<double> r_frac(m_x.size() - 1);
 
-            // Calculate the fraction values.
+            // Calculate the fraction of area occupied by the triangle.
             for (size_t i = 0; i < r_frac.size(); ++i)
             {
                 double above = (std::fabs(m_p[i + 1] - m_p[i]) * (m_x[i + 1] - m_x[i])) / 2.0;
@@ -121,10 +121,14 @@ namespace arc
          */
         double Linear::operator()() const
         {
+            // Generate a random double between zero and one.
             const double  r           = rng::random();
+
+            // Determine the lower index of the cdf where the value is found.
             static size_t lower_index = 0;
             lower_index = utl::lower_index(m_cdf, r, lower_index);
 
+            // Generate a value by interpolating the probabilities.
             const double f = rng::random();
             if (f <= m_frac[lower_index])
             {
