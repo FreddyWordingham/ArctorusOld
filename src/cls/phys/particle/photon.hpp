@@ -53,7 +53,9 @@ namespace arc
 
 
                 //  == METHODS ==
-              private:
+              public:
+                //  -- Getters --
+                double get_wavelength() const { return (m_wavelength); }
             };
 
 
