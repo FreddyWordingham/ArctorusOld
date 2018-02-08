@@ -53,8 +53,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
-            math::Vec<3>& get_pos() const { return (n_pos); }
-            math::Vec<3>& get_dir() const { return (n_dir); }
+            const math::Vec<3>& get_pos() const { return (n_pos); }
+            const math::Vec<3>& get_dir() const { return (n_dir); }
             double get_time() const { return (n_time); }
             double get_weight() const { return (n_weight); }
         };
