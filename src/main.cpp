@@ -38,11 +38,12 @@ using namespace arc;
 int main()
 {
 
-    data::Histogram hist(-4.0, +4.0, 80);
+    data::Histogram hist(-4.0, +4.0, 800);
 
-    for (unsigned long int i=0; i<1e6; ++i)
+    for (unsigned long int i=0; i<1e8; ++i)
     {
-        hist(rng::henyey_greenstein(0.0));
+        TEMP("prog", i/1e6)
+        hist(rng::henyey_greenstein(0.5));
     }
 
     hist.save("henyey.dat", true);

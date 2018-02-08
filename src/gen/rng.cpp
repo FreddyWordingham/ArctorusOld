@@ -41,8 +41,8 @@ namespace arc
         {
             assert((t_g > -1.0) && (t_g < 1.0));
 
-            return t_g == 0.0 ? acos(random(-1.0, +1.0)) : acos((0.5 * t_g) * (1.0 + math::square(t_g) - math::square(
-                (1.0 - math::square(t_g)) / (1.0 - t_g + (2.0 * t_g * rng::random())))));
+            return acos((1.0 + math::square(t_g) - math::square(
+                (1.0 - math::square(t_g)) / (1.0 - t_g + (2.0 * t_g * rng::random())))) / (2.0 * t_g));
         }
 
         /**
