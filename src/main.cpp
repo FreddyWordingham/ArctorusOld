@@ -40,12 +40,9 @@ int main()
 
     data::Histogram hist(-4.0, +4.0, 80);
 
-    for (unsigned long int i=0; i<10; ++i)
+    for (unsigned long int i=0; i<1e6; ++i)
     {
-        double x = rng::henyey_greenstein(0.0);
-        VAL(x);
-
-        hist(x);
+        hist(rng::henyey_greenstein(0.0));
     }
 
     hist.save("henyey.dat", true);
