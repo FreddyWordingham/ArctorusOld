@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/math.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -22,6 +28,23 @@ namespace arc
 
         //  == FUNCTIONS ==
         //  -- Generation --
+        /**
+         *  Generate a random double drawn from the henyey-greenstein distribution.
+         *
+         *  @param  t_g Anisotropy value.
+         *
+         *  @pre    t_g must be between -1.0 and 1.0.
+         *
+         *  @return The value drawn from the henyey-greenstein phase function.
+         */
+        double henyey_greenstein(const double t_g)
+        {
+            assert((t_g > -1.0) && (t_g < 1.0));
+
+            return t_g == 0.0 ? acos((0.5 * t_g) * (1.0 + math::square(t_g) - math::square(
+                (1.0 - math::square(t_g)) / (1.0 - t_g + (2.0 * t_g * rng::random()))))) : acos(random(-1.0, +1.0))
+        }
+
         /**
          *  Generate a random double from a gaussian with a given average and standard deviation.
          *
