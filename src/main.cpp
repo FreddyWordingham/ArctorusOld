@@ -14,10 +14,13 @@
 //  -- General --
 #include "gen/log.hpp"
 #include "gen/math.hpp"
+#include "gen/rng.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
+
+#include "cls/data/histogram.hpp"
 
 
 
@@ -34,7 +37,21 @@ using namespace arc;
  */
 int main()
 {
-    LOG("Hello world!");
+
+    data::Histogram hist(-4.0, +4.0, 80);
+
+    for (unsigned long int i=0; i<10; ++i)
+    {
+        double x = rng::henyey_greenstein(0.0);
+        VAL(x);
+
+        hist(x);
+    }
+
+    hist.save("henyey.dat", true);
+
+
+/*    LOG("Hello world!");
 
     graphical::Scene scene;
 
@@ -61,7 +78,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }
+    }*/
 
     return (0);
 }
