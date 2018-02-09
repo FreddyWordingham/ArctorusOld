@@ -47,12 +47,11 @@ namespace arc
             Light(const geom::Mesh& t_mesh, const random::Linear& t_spec);
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            const geom::Mesh& get_mesh() const { return (m_mesh); }
+            const random::Linear& get_spec() const { return (m_spec); }
         };
 
 
