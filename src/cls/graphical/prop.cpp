@@ -58,10 +58,10 @@ namespace arc
             // Clear the active buffer.
             glBindVertexArray(0);
 
-            assert((m_col.r >= 0.0) && (m_col.r <= 1.0));
-            assert((m_col.g >= 0.0) && (m_col.g <= 1.0));
-            assert((m_col.b >= 0.0) && (m_col.b <= 1.0));
-            assert((m_col.a >= 0.0) && (m_col.a <= 1.0));
+            assert((m_col.r >= 0.0f) && (m_col.r <= 1.0f));
+            assert((m_col.g >= 0.0f) && (m_col.g <= 1.0f));
+            assert((m_col.b >= 0.0f) && (m_col.b <= 1.0f));
+            assert((m_col.a >= 0.0f) && (m_col.a <= 1.0f));
         }
 
         /**
