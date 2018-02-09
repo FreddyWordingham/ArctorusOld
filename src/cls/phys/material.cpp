@@ -35,8 +35,26 @@ namespace arc
         Material::Material(const data::Table& t_table) :
             m_min_bound(t_table[WAVELENGTH].front()),
             m_max_bound(t_table[WAVELENGTH].back()),
-
+            m_ref_index(t_table[WAVELENGTH], t_table[REF_INDEX]),
+            m_interaction(init_interation(t_table[WAVELENGTH], t_table[ABS_LENGTH], t_table[SCAT_LENGTH])),
+            m_albedo(init_albedo(t_table[WAVELENGTH], t_table[ABS_LENGTH]), t_table[SCAT_LENGTH]),
+            m_anisotropy(t_table[WAVELENGTH], t_table[ANISOTROPY])
         {
+        }
+
+
+        interpolator::Linear Material::init_interation(const std::vector<double>& t_wavelength,
+                                                       const std::vector<double>& t_abs_length,
+                                                       const std::vector<double>& t_scat_length) const
+        {
+
+        }
+
+        interpolator::Linear Material::init_albedo(const std::vector<double>& t_wavelength,
+                                                   const std::vector<double>& t_abs_length,
+                                                   const std::vector<double>& t_scat_length) const
+        {
+
         }
 
 
