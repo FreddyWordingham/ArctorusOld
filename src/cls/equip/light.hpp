@@ -16,7 +16,7 @@
 //  == INCLUDES ==
 //  -- Classes --
 #include "cls/geom/mesh.hpp"
-#include "cls/random/linear.hpp"
+#include "cls/phys/spectrum.hpp"
 
 
 
@@ -38,20 +38,20 @@ namespace arc
           private:
             //  -- Properties --
             const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
-            const random::Linear m_spec;    //! Linear random generator forming the emission spectrum.
+            const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Light(const geom::Mesh& t_mesh, const random::Linear& t_spec);
+            Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec);
 
 
             //  == METHODS ==
           public:
             //  -- Getters --
             const geom::Mesh& get_mesh() const { return (m_mesh); }
-            const random::Linear& get_spec() const { return (m_spec); }
+            const phys::Spectrum& get_spec() const { return (m_spec); }
         };
 
 

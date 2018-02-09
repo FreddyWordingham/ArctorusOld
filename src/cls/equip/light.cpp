@@ -33,7 +33,7 @@ namespace arc
          *  @param  t_mesh  Mesh to describe the surface of the light.
          *  @param  t_spec  Spectrum distribution.
          */
-        Light::Light(const geom::Mesh& t_mesh, const random::Linear& t_spec) :
+        Light::Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec) :
             m_mesh(t_mesh),
             m_spec(t_spec)
         {
