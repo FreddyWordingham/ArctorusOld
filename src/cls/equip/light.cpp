@@ -27,7 +27,11 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-
+        Light::Light(const geom::Mesh& t_mesh, const random::Linear& t_spec) :
+            m_mesh(t_mesh),
+            m_spec(t_spec)
+        {
+        }
 
 
         //  -- Initialisation --

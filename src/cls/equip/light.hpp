@@ -44,9 +44,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-
-          private:
-            //  -- Initialisation --
+            Light(const geom::Mesh& t_mesh, const random::Linear& t_spec);
 
 
             //  == OPERATORS ==
