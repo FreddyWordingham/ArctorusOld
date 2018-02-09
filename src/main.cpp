@@ -10,15 +10,13 @@
 //  == INCLUDES ==
 //  -- System --
 #include <vector>
+#include <gen/math.hpp>
+#include <cls/phys/material.hpp>
 
 //  -- General --
-#include "gen/log.hpp"
-#include "gen/math.hpp"
-#include "gen/rng.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
-#include "cls/graphical/scene.hpp"
 #include "cls/data/histogram.hpp"
 #include "cls/data/table.hpp"
 
@@ -36,16 +34,11 @@ using namespace arc;
  */
 int main()
 {
+    data::Table tab(file::read("../test/intralipid_10.mat"));
 
-    data::Table mat;
+    LOG(">" << tab[0].get_title() << "<");
 
-    for (double w=400E-9; w<=650E-9; w+=1E-9)
-    {
-        LOG(w);
-    }
-
-    mat.save("intralipid_10.mat");
-
+//    phys::Material intralipid_10(file::read("../test/intralipid_10.mat"));
 
 
 /*    LOG("Hello world!");
