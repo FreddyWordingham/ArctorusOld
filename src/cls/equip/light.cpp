@@ -12,11 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -32,15 +27,14 @@ namespace arc
          *
          *  @param  t_mesh  Mesh to describe the surface of the light.
          *  @param  t_spec  Spectrum distribution.
+         *  @param  t_power Power of the light source.
          */
-        Light::Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec) :
+        Light::Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec, const double t_power) :
+            m_power(t_power),
             m_mesh(t_mesh),
             m_spec(t_spec)
         {
         }
-
-
-        //  -- Initialisation --
 
 
 
