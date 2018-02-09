@@ -34,6 +34,9 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Bounds --
+            const double m_min_bound;   //! Minimum bound of the interpolation range.
+            const double m_max_bound;   //! Maximum bound of the interpolation range.
 
 
             //  == INSTANTIATION ==
