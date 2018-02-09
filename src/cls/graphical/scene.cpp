@@ -211,32 +211,31 @@ namespace arc
         /**
          *  Add a render-able light prop to the scene.
          *
-         *  @param  t_mesh  Light source mesh to be added to the scene.
-         *  @param  t_power Power of the light source.
-         *  @param  t_col   Colour to render the light with.
+         *  @param  t_light Light to be added to the scene.
          */
-        void Scene::add_light(const geom::Mesh& t_mesh, const float t_power, const glm::vec4& t_col)
+        void Scene::add_light(const equip::Light& t_light)
         {
             // Create vector of vertices.
             std::vector<Vertex> vertices;
-            vertices.reserve(t_mesh.get_num_tri() * 3);
+            vertices.reserve(t_light.get_mesh().get_num_tri() * 3);
 
             // Add vertices into list from mesh.
-            for (size_t i = 0; i < t_mesh.get_num_tri(); ++i)
+            for (size_t i = 0; i < t_light.get_mesh().get_num_tri(); ++i)
             {
                 for (size_t j = 0; j < 3; ++j)
                 {
-                    vertices.push_back(Vertex({static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[X]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Y]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Z])},
-                                              {static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[X]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Y]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Z])}));
+                    vertices.push_back(Vertex({static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
+                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
+                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
+                                              {static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
+                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
+                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
                 }
             }
 
             // Add the light prop into the list of render-able light props.
-            m_light.emplace_back(prop::Light(vertices, t_col, t_power));
+            m_light.emplace_back(prop::Light(vertices, t_light.get_power(),
+                                             {0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 0.1, 1.0}));
         }
 
         /**

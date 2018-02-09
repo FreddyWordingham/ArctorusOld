@@ -21,7 +21,7 @@
 
 //  -- Classes --
 #include "cls/equip/entity.hpp"
-#include "cls/geom/mesh.hpp"
+#include "cls/equip/light.hpp"
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/prop.hpp"
 #include "cls/graphical/prop/light.hpp"
@@ -143,7 +143,7 @@ namespace arc
           public:
             //  -- Additions --
             void add_entity(const equip::Entity& t_ent);
-            void add_light(const geom::Mesh& t_mesh, float t_power, const glm::vec4& t_col);
+            void add_light(const equip::Light& t_light);
             void add_photon(const std::vector<point::Photon>& t_phot);
 
             //  -- Render --
