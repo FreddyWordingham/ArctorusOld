@@ -27,9 +27,14 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Construct a material object from a data table.
+         *
+         *  @param  t_table Data table to construct the material from.
+         */
         Material::Material(const data::Table& t_table) :
-            m_min_bound(t_table[WAVELENGTH_TITLE].front()),
-            m_max_bound(t_table[WAVELENGTH_TITLE].back()),
+            m_min_bound(t_table[WAVELENGTH].front()),
+            m_max_bound(t_table[WAVELENGTH].back()),
 
         {
         }
