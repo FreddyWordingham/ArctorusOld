@@ -70,6 +70,7 @@ namespace arc
                      const std::vector<double>& t_abs_length, const std::vector<double>& t_scat_length,
                      const std::vector<double>& t_anisotropy);
             explicit Material(const data::Table& t_tab);
+            explicit Material(const std::string& t_serial);
 
           private:
             //  -- Initialisation --

@@ -94,6 +94,16 @@ namespace arc
             assert(t_tab[ANISOTROPY].get_title() == "g");
         }
 
+        /**
+         *  Construct a material from a serialised material object.
+         *
+         *  @param  t_serial    Serialised form of a material object.
+         */
+        Material::Material(const std::string& t_serial) :
+            Material(data::Table(t_serial))
+        {
+        }
+
 
         //  -- Initialisation --
         /**
