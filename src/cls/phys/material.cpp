@@ -100,10 +100,34 @@ namespace arc
             return (interpolator::Linear(t_wavelength, interaction));
         }
 
+        /**
+         *  Construct the albedo interpolator by calculating the albedo from the absorption and scattering length coefficients.
+         *
+         *  @param  t_wavelength    Vector of wavelength values.
+         *  @param  t_abs_length    Vector of corresponding absorption lengths.
+         *  @param  t_scat_length   Vector of corresponding scattering lengths.
+         *
+         *  @post   t_wavelength size must match t_abs_length size.
+         *  @post   t_wavelength size must match t_scat_length size.
+         *
+         *  @return The initialised interaction linear interpolator.
+         */
         interpolator::Linear Material::init_albedo(const std::vector<double>& t_wavelength,
                                                    const std::vector<double>& t_abs_length,
                                                    const std::vector<double>& t_scat_length) const
         {
+            assert(t_wavelength.size() == t_abs_length.size());
+            assert(t_wavelength.size() == t_scat_length.size());
+
+            // Create albedo value vector.
+            std::vector<double> albedo(t_wavelength.size());
+
+            // Calculate the albedo values.
+            for (size_t i = 0; i < t_wavelength.size(); ++i)
+            {
+                albedo[i] = t_abs_length[i] / (t_abs_length[i] + t_scat_length[i]);
+            }
+
             return (interpolator::Linear(t_wavelength, albedo));
         }
 
