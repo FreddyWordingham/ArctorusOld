@@ -88,6 +88,7 @@ namespace arc
             double get_max_bound() const { return (m_max_bound); }
             double get_ref_index(double t_wavelength) const;
             double get_albedo(double t_wavelength) const;
+            double get_interaction(double t_wavelength) const;
         };
 
 

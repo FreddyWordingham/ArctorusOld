@@ -205,6 +205,24 @@ namespace arc
             return (m_albedo(t_wavelength));
         }
 
+        /**
+         *  Get the interaction length coefficient of the material for the given wavelength.
+         *
+         *  @param  t_wavelength    Wavelength to determine the interaction length coefficient for.
+         *
+         *  @pre    t_wavelength must be greater than, or equal to, the m_min_bound.
+         *  @pre    t_wavelength must be less than, or equal to, the m_max_bound.
+         *
+         *  @return The interaction length coefficient for the given wavelength.
+         */
+        double Material::get_interaction(double t_wavelength) const
+        {
+            assert(t_wavelength >= m_min_bound);
+            assert(t_wavelength <= m_max_bound);
+
+            return (m_interaction(t_wavelength));
+        }
+
 
 
     } // namespace phys
