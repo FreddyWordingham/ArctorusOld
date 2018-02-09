@@ -10,18 +10,19 @@
 //  == INCLUDES ==
 //  -- System --
 #include <vector>
-#include <gen/math.hpp>
-#include <cls/phys/material.hpp>
-#include <cls/equip/entity.hpp>
 
 //  -- General --
+#include <gen/math.hpp>
 
 //  -- Classes --
-#include "cls/file/handle.hpp"
 #include "cls/data/histogram.hpp"
 #include "cls/data/table.hpp"
 #include "cls/equip/entity.hpp"
+#include "cls/equip/light.hpp"
+#include "cls/equip/entity.hpp"
+#include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
+#include "cls/phys/material.hpp"
 
 
 
