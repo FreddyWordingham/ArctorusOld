@@ -20,6 +20,7 @@
 #include <glm/glm.hpp>
 
 //  -- Classes --
+#include "cls/equip/entity.hpp"
 #include "cls/geom/mesh.hpp"
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/prop.hpp"
@@ -141,7 +142,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Additions --
-            void add_entity(const geom::Mesh& t_mesh, const glm::vec4& t_col);
+            void add_entity(const equip::Entity& t_ent, const glm::vec4& t_col);
             void add_light(const geom::Mesh& t_mesh, float t_power, const glm::vec4& t_col);
             void add_photon(const std::vector<point::Photon>& t_phot);
 
