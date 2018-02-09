@@ -69,6 +69,7 @@ namespace arc
             Material(const std::vector<double>& t_wavelength, const std::vector<double>& t_ref_index,
                      const std::vector<double>& t_abs_length, const std::vector<double>& t_scat_length,
                      const std::vector<double>& t_anisotropy);
+            explicit Material(const data::Table& t_tab);
 
           private:
             //  -- Initialisation --
