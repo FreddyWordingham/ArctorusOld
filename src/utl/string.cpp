@@ -160,7 +160,7 @@ namespace arc
             assert(t_str->find_last_not_of(" \t\f\v\n\r") != std::string::npos);
 
             t_str->erase(0, t_str->find_first_not_of(" \t\f\v\n\r"));
-            t_str->erase(t_str->find_last_not_of(" \t\f\v\n\r"));
+            t_str->erase(t_str->find_last_not_of(" \t\f\v\n\r") + 1);
         }
 
 

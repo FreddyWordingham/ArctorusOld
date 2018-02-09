@@ -107,6 +107,9 @@ namespace arc
             std::string       word;
             while (std::getline(title_stream, word, file::DELIMIT_CHAR))
             {
+                LOG(word);
+                utl::strip_whitespace(&word);
+                LOG(word);
                 title.push_back(word);
             }
 
