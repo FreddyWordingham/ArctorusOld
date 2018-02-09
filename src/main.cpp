@@ -40,6 +40,7 @@ using namespace arc;
  */
 int main()
 {
+    equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")));
 /*    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj")), phys::Material(file::read("../test/intralipid_10.mat")));
 
     LOG("Hello world!");
