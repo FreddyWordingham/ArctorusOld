@@ -38,8 +38,6 @@ namespace arc
          *  @param  t_anisotropy    Vector of corresponding anisotropy values.
          *
          *  @post   t_wavelength vector must be in ascending order.
-         *  @post   t_wavelength front element must be greater than zero.
-         *  @post   t_wavelength front element must be smaller than the back element.
          *  @post   t_wavelength size must match t_ref_index size.
          *  @post   t_wavelength size must match t_abs_length size.
          *  @post   t_wavelength size must match t_scat_length size.
@@ -49,6 +47,8 @@ namespace arc
          *  @post   t_scat_length must always be greater than zero.
          *  @post   t_anisotropy must always be greater than, or equal to, minus one.
          *  @post   t_anisotropy must always be less than, or equal to, one.
+         *  @post   m_min_bound must be greater than zero.
+         *  @post   m_min_bound must be smaller than m_max_bound.
          */
         Material::Material(const std::vector<double>& t_wavelength, const std::vector<double>& t_ref_index,
                            const std::vector<double>& t_abs_length, const std::vector<double>& t_scat_length,
@@ -61,8 +61,6 @@ namespace arc
             m_anisotropy(t_wavelength, t_anisotropy)
         {
             assert(utl::is_ascending(t_wavelength));
-            assert(t_wavelength.front() > 0.0);
-            assert(t_wavelength.front() < t_wavelength.back());
             assert(t_wavelength.size() == t_ref_index.size());
             assert(t_wavelength.size() == t_abs_length.size());
             assert(t_wavelength.size() == t_scat_length.size());
@@ -72,6 +70,8 @@ namespace arc
             assert(utl::is_always_greater_than(t_scat_length, 0.0));
             assert(utl::is_always_greater_than_or_equal_to(t_anisotropy, -1.0));
             assert(utl::is_always_less_than_or_equal_to(t_anisotropy, 1.0));
+            assert(m_min_bound > 0.0);
+            assert(m_min_bound < m_max_bound);
         }
 
         /**
