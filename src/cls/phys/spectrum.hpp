@@ -43,9 +43,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-
-          private:
-            //  -- Initialisation --
+            Spectrum(const std::vector<double>& t_wavelength, const std::vector<double>& t_prob);
 
 
             //  == OPERATORS ==
