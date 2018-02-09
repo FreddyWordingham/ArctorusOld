@@ -39,13 +39,19 @@ namespace arc
             //  -- Properties --
             const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
-            const double         m_power;   //! Power of the light source.
+
+            //  -- Sorting --
+            const std::vector<double> m_tri_area;   //! Vector of normalised triangle areas.
+            const double              m_power;      //! Power of the light source.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
             Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec, double t_power);
+
+            //  -- Initialisation --
+            std::vector<double> init_tri_area() const;
 
 
             //  == METHODS ==

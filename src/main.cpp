@@ -12,18 +12,14 @@
 #include <vector>
 
 //  -- General --
-#include <gen/math.hpp>
-#include <cls/phys/spectrum.hpp>
+#include "gen/math.hpp"
 
 //  -- Classes --
-#include "cls/data/histogram.hpp"
 #include "cls/data/table.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
-#include "cls/equip/entity.hpp"
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
-#include "cls/phys/material.hpp"
 
 
 
@@ -40,29 +36,14 @@ using namespace arc;
  */
 int main()
 {
-    equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
-    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj")), phys::Material(file::read("../test/intralipid_10.mat")));
-
     LOG("Hello world!");
 
     graphical::Scene scene;
 
-    std::vector<graphical::point::Photon> path_x;
-    path_x.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
-    path_x.push_back(graphical::point::Photon({1.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 1.0));
-    scene.add_photon(path_x);
-
-    std::vector<graphical::point::Photon> path_y;
-    path_y.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
-    path_y.push_back(graphical::point::Photon({0.0f, 1.0f, 0.0f}, 400E-9f, 1.0f, 1.0));
-    scene.add_photon(path_y);
-
-    std::vector<graphical::point::Photon> path_z;
-    path_z.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
-    path_z.push_back(graphical::point::Photon({0.0f, 0.0f, 1.0f}, 400E-9f, 1.0f, 1.0));
-    scene.add_photon(path_z);
-
+    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj")), phys::Material(file::read("../test/intralipid_10.mat")));
     scene.add_entity(monkey);
+
+    equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
     scene.add_light(led);
 
     while (!scene.should_close())
