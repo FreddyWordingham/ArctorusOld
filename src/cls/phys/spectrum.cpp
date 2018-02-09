@@ -79,9 +79,6 @@ namespace arc
         }
 
 
-        //  -- Initialisation --
-
-
 
     } // namespace phys
 } // namespace arc
