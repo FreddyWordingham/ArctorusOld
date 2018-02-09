@@ -65,12 +65,10 @@ namespace arc
             explicit Spectrum(const std::string& t_serial);
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
-          private:
+          public:
+            //  -- Generation --
+            double gen_wavelength() const { return (m_dist()); }
         };
 
 
