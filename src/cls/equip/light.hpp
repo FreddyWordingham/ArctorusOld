@@ -14,7 +14,9 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/geom/mesh.hpp"
+#include "cls/random/linear.hpp"
 
 
 
@@ -34,6 +36,9 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Properties --
+            const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
+            const random::Linear m_spec;    //! Linear random generator forming the emission spectrum.
 
 
             //  == INSTANTIATION ==
