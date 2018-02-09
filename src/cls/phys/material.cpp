@@ -76,6 +76,9 @@ namespace arc
          *  @param  t_abs_length    Vector of corresponding absorption lengths.
          *  @param  t_scat_length   Vector of corresponding scattering lengths.
          *
+         *  @post   t_wavelength size must match t_abs_length size.
+         *  @post   t_wavelength size must match t_scat_length size.
+         *
          *  @return The initialised interaction linear interpolator.
          */
         interpolator::Linear Material::init_interation(const std::vector<double>& t_wavelength,
