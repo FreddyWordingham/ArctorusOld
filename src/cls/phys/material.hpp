@@ -28,22 +28,25 @@ namespace arc
 
 
 
-        //  == SETTINGS ==
-        //  -- Column Titles --
-        constexpr const char* WAVELENGTH_TITLE  = "w"; //! Title string identifying the wavelength data column.
-        constexpr const char* REF_INDEX_TITLE   = "n"; //! Title string identifying the refractive index data column.
-        constexpr const char* ABS_LENGTH_TITLE  = "a"; //! Title string identifying the absorption length data column.
-        constexpr const char* SCAT_LENGTH_TITLE = "s"; //! Title string identifying the scattering length data column.
-        constexpr const char* ANISOTROPY_TITLE  = "g"; //! Title string identifying the anisotropy data column.
-
-
-
         //  == CLASS ==
         /**
          *  Material class used to store optical properties.
          */
         class Material
         {
+            //  == ENUMERATIONS ==
+          private:
+            //  -- Format --
+            enum mat_column_order
+            {
+                WAVELENGTH,     //! Index of the wavelength data column.
+                REF_INDEX,      //! Index of the refractive index data column.
+                ABS_LENGTH,     //! Index of the absorption length data column.
+                SCAT_LENGTH,    //! Index of the scattering length data column.
+                ANISOTROPY      //! Index of the anisotropy data column.
+            };
+
+
             //  == FIELDS ==
           private:
             //  -- Bounds --

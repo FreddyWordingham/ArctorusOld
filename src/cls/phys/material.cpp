@@ -29,7 +29,8 @@ namespace arc
         //  -- Constructors --
         Material::Material(const data::Table& t_table) :
             m_min_bound(t_table[WAVELENGTH_TITLE].front()),
-            m_max_bound(t_table[WAVELENGTH_TITLE].back())
+            m_max_bound(t_table[WAVELENGTH_TITLE].back()),
+
         {
         }
 
