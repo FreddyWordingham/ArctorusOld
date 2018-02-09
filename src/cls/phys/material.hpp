@@ -58,8 +58,8 @@ namespace arc
 
             //  -- Optical Properties --
             const interpolator::Linear m_ref_index;     //! Refractive index.
-            const interpolator::Linear m_interaction;   //! Interaction coefficient. mu_t = mu_a + mu_s.
             const interpolator::Linear m_albedo;        //! Single scattering albedo. a = mu_a / mu_t.
+            const interpolator::Linear m_interaction;   //! Interaction coefficient. mu_t = mu_a + mu_s.
             const interpolator::Linear m_anisotropy;    //! Anisotropy factor.
 
 
@@ -72,11 +72,11 @@ namespace arc
 
           private:
             //  -- Initialisation --
+            interpolator::Linear init_albedo(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_length,
+                                             const std::vector<double>& t_scat_length) const;
             interpolator::Linear init_interation(const std::vector<double>& t_wavelength,
                                                  const std::vector<double>& t_abs_length,
                                                  const std::vector<double>& t_scat_length) const;
-            interpolator::Linear init_albedo(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_length,
-                                             const std::vector<double>& t_scat_length) const;
 
 
             //  == OPERATORS ==
