@@ -53,7 +53,7 @@ namespace arc
             //  -- Getters --
             const geom::Mesh& get_mesh() const { return (m_mesh); }
             const phys::Spectrum& get_spec() const { return (m_spec); }
-            const double get_power() const { return (m_power); }
+            double get_power() const { return (m_power); }
         };
 
 
