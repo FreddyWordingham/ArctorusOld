@@ -234,7 +234,7 @@ namespace arc
             }
 
             // Add the light prop into the list of render-able light props.
-            m_light.emplace_back(prop::Light(vertices, t_light.get_power(),
+            m_light.emplace_back(prop::Light(vertices, static_cast<float>(t_light.get_power()),
                                              {0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 0.1, 1.0}));
         }
 
