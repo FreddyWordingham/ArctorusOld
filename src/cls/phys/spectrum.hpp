@@ -15,6 +15,8 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include "cls/data/table.hpp"
+#include "cls/random/linear.hpp"
 
 
 
@@ -34,6 +36,8 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            const random::Linear m_dist;    //! Random number distribution generator.
 
 
             //  == INSTANTIATION ==
