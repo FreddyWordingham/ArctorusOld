@@ -10,7 +10,7 @@
 //  == HEADER ==
 #include "cls/graphical/prop.hpp"
 
-
+#include "gen/log.hpp"
 
 //  == NAMESPACE ==
 namespace arc
@@ -58,10 +58,14 @@ namespace arc
             // Clear the active buffer.
             glBindVertexArray(0);
 
-            assert((m_col.r > 0.0) && (m_col.r <= 1.0));
-            assert((m_col.g > 0.0) && (m_col.g <= 1.0));
-            assert((m_col.b > 0.0) && (m_col.b <= 1.0));
-            assert((m_col.a > 0.0) && (m_col.a <= 1.0));
+            VAL(m_col.r);
+            VAL(m_col.g);
+            VAL(m_col.b);
+            VAL(m_col.a);
+            assert((m_col.r >= 0.0) && (m_col.r <= 1.0));
+            assert((m_col.g >= 0.0) && (m_col.g <= 1.0));
+            assert((m_col.b >= 0.0) && (m_col.b <= 1.0));
+            assert((m_col.a >= 0.0) && (m_col.a <= 1.0));
         }
 
         /**
