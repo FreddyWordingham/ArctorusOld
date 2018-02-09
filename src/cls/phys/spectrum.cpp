@@ -13,7 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Utility --
+#include "utl/vector.hpp"
 
 
 
@@ -33,12 +34,22 @@ namespace arc
          *  @param  t_wavelength    Vector of wavelength values.
          *  @param  t_prob          Vector of corresponding probabilities.
          *
+         *  @post   t_wavelength vector must be in ascending order.
+         *  @post   t_wavelength front element must be greater than zero.
+         *  @post   t_wavelength front element must be smaller than the back element.
          *  @post   t_wavelength vector must be the same size as t_prob vector.
+         *  @post   t_prop vector must always be greater than zero.
          */
         Spectrum::Spectrum(const std::vector<double>& t_wavelength, const std::vector<double>& t_prob) :
+            m_min_bound(t_wavelength.front()),
+            m_max_bound(t_wavelength.back()),
             m_dist(t_wavelength, t_prob)
         {
+            assert(utl::is_ascending(t_wavelength));
+            assert(t_wavelength.front() > 0.0);
+            assert(t_wavelength.front() < t_wavelength.back());
             assert(t_wavelength.size() == t_prob.size());
+            assert(utl::is_always_greater_than(t_prob, 0.0));
         }
 
         /**
