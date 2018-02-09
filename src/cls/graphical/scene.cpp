@@ -182,9 +182,8 @@ namespace arc
          *  Add a render-able entity prop to the scene.
          *
          *  @param  t_ent   Entity be added to the scene.
-         *  @param  t_col   Colour to render the entity with.
          */
-        void Scene::add_entity(const equip::Entity& t_ent, const glm::vec4& t_col)
+        void Scene::add_entity(const equip::Entity& t_ent)
         {
             // Create vector of vertices.
             std::vector<Vertex> vertices;
@@ -205,7 +204,7 @@ namespace arc
             }
 
             // Add the entity into the list of render-able props.
-            m_entity.emplace_back(Prop(vertices, t_col));
+            m_entity.emplace_back(Prop(vertices, {0.0, 0.0, 0.0, 1.0}));
         }
 
         /**

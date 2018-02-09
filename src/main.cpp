@@ -59,7 +59,7 @@ int main()
     path_z.push_back(graphical::point::Photon({0.0f, 0.0f, 1.0f}, 400E-9f, 1.0f, 1.0));
     scene.add_photon(path_z);
 
-    scene.add_entity(monkey, {1.0, 0.0, 0.0, 1.0});
+    scene.add_entity(monkey);
 
     while (!scene.should_close())
     {
