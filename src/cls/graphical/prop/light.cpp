@@ -37,7 +37,7 @@ namespace arc
                 Prop(t_vert, t_col),
                 m_power(t_power)
             {
-                assert(t_power > 0.0);
+                assert(t_power > 0.0f);
             }
 
 
