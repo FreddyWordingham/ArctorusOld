@@ -179,7 +179,7 @@ namespace arc
          *
          *  @return The refractive index for the given wavelength.
          */
-        double Material::get_ref_index(double t_wavelength) const
+        double Material::get_ref_index(const double t_wavelength) const
         {
             assert(t_wavelength >= m_min_bound);
             assert(t_wavelength <= m_max_bound);
@@ -197,7 +197,7 @@ namespace arc
          *
          *  @return The single scattering albedo for the given wavelength.
          */
-        double Material::get_albedo(double t_wavelength) const
+        double Material::get_albedo(const double t_wavelength) const
         {
             assert(t_wavelength >= m_min_bound);
             assert(t_wavelength <= m_max_bound);
@@ -215,12 +215,30 @@ namespace arc
          *
          *  @return The interaction length coefficient for the given wavelength.
          */
-        double Material::get_interaction(double t_wavelength) const
+        double Material::get_interaction(const double t_wavelength) const
         {
             assert(t_wavelength >= m_min_bound);
             assert(t_wavelength <= m_max_bound);
 
             return (m_interaction(t_wavelength));
+        }
+
+        /**
+         *  Get the anisotropy value of the material for the given wavelength.
+         *
+         *  @param  t_wavelength    Wavelength to determine the anisotropy value for.
+         *
+         *  @pre    t_wavelength must be greater than, or equal to, the m_min_bound.
+         *  @pre    t_wavelength must be less than, or equal to, the m_max_bound.
+         *
+         *  @return The anisotropy value for the given wavelength.
+         */
+        double Material::get_anisotropy(const double t_wavelength) const
+        {
+            assert(t_wavelength >= m_min_bound);
+            assert(t_wavelength <= m_max_bound);
+
+            return (m_anisotropy(t_wavelength));
         }
 
 

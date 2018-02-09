@@ -89,6 +89,7 @@ namespace arc
             double get_ref_index(double t_wavelength) const;
             double get_albedo(double t_wavelength) const;
             double get_interaction(double t_wavelength) const;
+            double get_anisotropy(double t_wavelength) const;
         };
 
 
