@@ -81,12 +81,11 @@ namespace arc
                                                  const std::vector<double>& t_scat_length) const;
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            double get_min_bound() const { return (m_min_bound); }
+            double get_max_bound() const { return (m_max_bound); }
         };
 
 
