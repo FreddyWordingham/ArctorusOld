@@ -66,12 +66,17 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            explicit Material(const data::Table& t_table);
+            Material(const std::vector<double>& t_wavelength, const std::vector<double>& t_ref_index,
+                     const std::vector<double>& t_abs_length, const std::vector<double>& t_scat_length,
+                     const std::vector<double>& t_anisotropy);
 
           private:
             //  -- Initialisation --
-            interpolator::Linear init_interation(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_length, const std::vector<double>& t_scat_length) const;
-            interpolator::Linear init_albedo(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_length, const std::vector<double>& t_scat_length) const;
+            interpolator::Linear init_interation(const std::vector<double>& t_wavelength,
+                                                 const std::vector<double>& t_abs_length,
+                                                 const std::vector<double>& t_scat_length) const;
+            interpolator::Linear init_albedo(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_length,
+                                             const std::vector<double>& t_scat_length) const;
 
 
             //  == OPERATORS ==
