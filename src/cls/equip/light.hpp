@@ -39,12 +39,13 @@ namespace arc
             //  -- Properties --
             const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
+            const double m_power;           //! Power of the light source.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec);
+            Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec, double t_power);
 
 
             //  == METHODS ==

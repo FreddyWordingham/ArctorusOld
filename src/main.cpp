@@ -40,8 +40,8 @@ using namespace arc;
  */
 int main()
 {
-    equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")));
-/*    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj")), phys::Material(file::read("../test/intralipid_10.mat")));
+    equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
+    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj")), phys::Material(file::read("../test/intralipid_10.mat")));
 
     LOG("Hello world!");
 
@@ -63,12 +63,13 @@ int main()
     scene.add_photon(path_z);
 
     scene.add_entity(monkey);
+    scene.add_light(led);
 
     while (!scene.should_close())
     {
         scene.handle_input();
         scene.render();
-    }*/
+    }
 
     return (0);
 }
