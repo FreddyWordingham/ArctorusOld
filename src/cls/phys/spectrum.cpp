@@ -56,6 +56,16 @@ namespace arc
             assert(t_tab[PROBABILITY].get_title() == "p");
         }
 
+        /**
+         *  Construct a spectrum from a serialised spectrum object.
+         *
+         *  @param  t_serial    Serialised form of a spectrum object.
+         */
+        Spectrum::Spectrum(const std::string& t_serial) :
+            Spectrum(data::Table(t_serial))
+        {
+        }
+
 
         //  -- Initialisation --
 

@@ -58,6 +58,8 @@ namespace arc
             //  -- Constructors --
             Spectrum(const std::vector<double>& t_wavelength, const std::vector<double>& t_prob);
             explicit Spectrum(const data::Table& t_tab);
+            explicit Spectrum(const std::string& t_serial);
+
 
             //  == OPERATORS ==
           private:
