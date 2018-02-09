@@ -37,6 +37,9 @@ namespace arc
          *  @param  t_scat_length   Vector of corresponding scattering lengths.
          *  @param  t_anisotropy    Vector of corresponding anisotropy values.
          *
+         *  @post   t_wavelength vector must be in ascending order.
+         *  @post   t_wavelength front element must be greater than zero.
+         *  @post   t_wavelength front element must be smaller than the back element.
          *  @post   t_wavelength size must match t_ref_index size.
          *  @post   t_wavelength size must match t_abs_length size.
          *  @post   t_wavelength size must match t_scat_length size.
@@ -57,6 +60,9 @@ namespace arc
             m_interaction(init_interation(t_wavelength, t_abs_length, t_scat_length)),
             m_anisotropy(t_wavelength, t_anisotropy)
         {
+            assert(utl::is_ascending(t_wavelength));
+            assert(t_wavelength.front() > 0.0);
+            assert(t_wavelength.front() < t_wavelength.back());
             assert(t_wavelength.size() == t_ref_index.size());
             assert(t_wavelength.size() == t_abs_length.size());
             assert(t_wavelength.size() == t_scat_length.size());
