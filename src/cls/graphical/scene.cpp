@@ -24,6 +24,7 @@
 #include "gen/config.hpp"
 #include "gen/control.hpp"
 #include "gen/log.hpp"
+#include "gen/rng.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -204,7 +205,7 @@ namespace arc
             }
 
             // Add the entity into the list of render-able props.
-            m_entity.emplace_back(Prop(vertices, {0.0, 0.0, 0.0, 1.0}));
+            m_entity.emplace_back(Prop(vertices, {0.1, 0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 1.0}));
         }
 
         /**
