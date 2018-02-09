@@ -39,7 +39,7 @@ namespace arc
             //  -- Properties --
             const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
-            const double m_power;           //! Power of the light source.
+            const double         m_power;   //! Power of the light source.
 
 
             //  == INSTANTIATION ==
@@ -53,6 +53,7 @@ namespace arc
             //  -- Getters --
             const geom::Mesh& get_mesh() const { return (m_mesh); }
             const phys::Spectrum& get_spec() const { return (m_spec); }
+            const double get_power() const { return (m_power); }
         };
 
 
