@@ -68,13 +68,31 @@ namespace arc
             assert(utl::is_always_less_than_or_equal_to(t_anisotropy, 1.0));
         }
 
+        /**
+         *  Construct the interaction interpolator by calculating the interaction length coefficients from the absorption and
+         *  scattering length coefficients.
+         *
+         *  @param  t_wavelength    Vector of wavelength values.
+         *  @param  t_abs_length    Vector of corresponding absorption lengths.
+         *  @param  t_scat_length   Vector of corresponding scattering lengths.
+         *
+         *  @return The initialised interaction linear interpolator.
+         */
         interpolator::Linear Material::init_interation(const std::vector<double>& t_wavelength,
                                                        const std::vector<double>& t_abs_length,
                                                        const std::vector<double>& t_scat_length) const
         {
+            assert(t_wavelength.size() == t_abs_length.size());
+            assert(t_wavelength.size() == t_scat_length.size());
+
             // Create interaction value vector.
             std::vector<double> interaction(t_wavelength.size());
 
+            // Calculate the interaction coefficient values.
+            for (size_t i = 0; i < t_wavelength.size(); ++i)
+            {
+                interaction[i] = t_abs_length[i] + t_scat_length[i];
+            }
 
             return (interpolator::Linear(t_wavelength, interaction));
         }
