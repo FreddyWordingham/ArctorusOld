@@ -14,7 +14,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/interpolator/linear.hpp"
 
 
 
@@ -37,6 +38,12 @@ namespace arc
             //  -- Bounds --
             const double m_min_bound;   //! Minimum bound of the interpolation range.
             const double m_max_bound;   //! Maximum bound of the interpolation range.
+
+            //  -- Optical Properties --
+            const interpolator::Linear m_ref_index;     //! Refractive index.
+            const interpolator::Linear m_interaction;   //! Interaction coefficent. mu_t = mu_a + mu_s.
+            const interpolator::Linear m_albedo;        //! Single scattering albedo. a = mu_a / mu_t.
+            const interpolator::Linear m_anisotropy;    //! Anisotropy factor.
 
 
             //  == INSTANTIATION ==
