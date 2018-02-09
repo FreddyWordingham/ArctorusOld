@@ -8,8 +8,8 @@
 
 
 //  == GUARD ==
-#ifndef ARCTORUS_SRC_CLS_EQUIPMENT_ENTITY_HPP
-#define ARCTORUS_SRC_CLS_EQUIPMENT_ENTITY_HPP
+#ifndef ARCTORUS_SRC_CLS_EQUIP_ENTITY_HPP
+#define ARCTORUS_SRC_CLS_EQUIP_ENTITY_HPP
 
 
 
@@ -21,7 +21,7 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace equipment
+    namespace equip
     {
 
 
@@ -54,10 +54,10 @@ namespace arc
 
 
 
-    } // namespace equipment
+    } // namespace equip
 } // namespace arc
 
 
 
 //  == GUARD END ==
-#endif // ARCTORUS_SRC_CLS_EQUIPMENT_ENTITY_HPP
+#endif // ARCTORUS_SRC_CLS_EQUIP_ENTITY_HPP
