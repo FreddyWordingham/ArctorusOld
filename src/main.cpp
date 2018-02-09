@@ -13,6 +13,7 @@
 
 //  -- General --
 #include <gen/math.hpp>
+#include <cls/phys/spectrum.hpp>
 
 //  -- Classes --
 #include "cls/data/histogram.hpp"
@@ -39,7 +40,7 @@ using namespace arc;
  */
 int main()
 {
-    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj")), phys::Material(file::read("../test/intralipid_10.mat")));
+/*    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj")), phys::Material(file::read("../test/intralipid_10.mat")));
 
     LOG("Hello world!");
 
@@ -66,7 +67,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }
+    }*/
 
     return (0);
 }
