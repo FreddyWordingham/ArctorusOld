@@ -19,9 +19,8 @@
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
-
 #include "cls/data/histogram.hpp"
-
+#include "cls/data/table.hpp"
 
 
 //  == NAMESPACE ==
@@ -38,15 +37,15 @@ using namespace arc;
 int main()
 {
 
-    data::Histogram hist(-4.0, +4.0, 800);
+    data::Table mat;
 
-    for (unsigned long int i=0; i<1e8; ++i)
+    for (double w=400E-9; w<=650E-9; w+=1E-9)
     {
-        TEMP("prog", i/1e6)
-        hist(rng::henyey_greenstein(0.5));
+        LOG(w);
     }
 
-    hist.save("henyey.dat", true);
+    mat.save("intralipid_10.mat");
+
 
 
 /*    LOG("Hello world!");

@@ -71,11 +71,7 @@ namespace arc
         /**
          *  Construct a material from a set of optical property vectors.
          *
-         *  @param  t_wavelength    Vector of wavelength values.
-         *  @param  t_ref_index     Vector of corresponding refractive indices.
-         *  @param  t_abs_length    Vector of corresponding absorption lengths.
-         *  @param  t_scat_length   Vector of corresponding scattering lengths.
-         *  @param  t_anisotropy    Vector of corresponding anisotropy values.
+         *  @param  t_tab   Table of optical properties.
          *
          *  @post   t_wavelength index column must have the correct title.
          *  @post   t_ref_index index column must have the correct title.
