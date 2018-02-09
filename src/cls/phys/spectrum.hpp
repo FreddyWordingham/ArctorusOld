@@ -34,6 +34,19 @@ namespace arc
          */
         class Spectrum
         {
+            //  == ENUMERATIONS ==
+          private:
+            //  -- Format --
+            /**
+             *  Layout of the data columns within a spectral data table file.
+             */
+            enum spec_column_order
+            {
+                WAVELENGTH,     //! Index of the wavelength data column.
+                PROBABILITY     //! Index of the probability data column.
+            };
+
+
             //  == FIELDS ==
           private:
             //  -- Data --
