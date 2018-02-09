@@ -34,11 +34,7 @@ using namespace arc;
  */
 int main()
 {
-    data::Table tab(file::read("../test/intralipid_10.mat"));
-
-    LOG(">" << tab[0].get_title() << "<");
-
-//    phys::Material intralipid_10(file::read("../test/intralipid_10.mat"));
+    phys::Material intralipid_10(file::read("../test/intralipid_10.mat"));
 
 
 /*    LOG("Hello world!");
