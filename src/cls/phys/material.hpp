@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/data/table.hpp"
 #include "cls/interpolator/linear.hpp"
 
 
@@ -24,6 +25,16 @@ namespace arc
 {
     namespace phys
     {
+
+
+
+        //  == SETTINGS ==
+        //  -- Column Titles --
+        constexpr const char* WAVELENGTH_TITLE  = "w"; //! Title string identifying the wavelength data column.
+        constexpr const char* REF_INDEX_TITLE   = "n"; //! Title string identifying the refractive index data column.
+        constexpr const char* ABS_LENGTH_TITLE  = "a"; //! Title string identifying the absorption length data column.
+        constexpr const char* SCAT_LENGTH_TITLE = "s"; //! Title string identifying the scattering length data column.
+        constexpr const char* ANISOTROPY_TITLE  = "g"; //! Title string identifying the anisotropy data column.
 
 
 
@@ -49,6 +60,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            explicit Material(const data::Table& t_table);
 
           private:
             //  -- Initialisation --
