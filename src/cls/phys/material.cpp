@@ -167,5 +167,27 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Get the refractive index of the material for the given wavelength.
+         *
+         *  @param  t_wavelength    Wavelength to determine the refractive index for.
+         *
+         *  @pre    t_wavelength must be greater than, or equal to, the m_min_bound.
+         *  @pre    t_wavelength must be less than, or equal to, the m_max_bound.
+         *
+         *  @return The refractive index for the given wavelength.
+         */
+        double Material::get_ref_index(double t_wavelength) const
+        {
+            assert(t_wavelength >= m_min_bound);
+            assert(t_wavelength <= m_max_bound);
+
+            return (m_ref_index(t_wavelength));
+        }
+
+
+
     } // namespace phys
 } // namespace arc
