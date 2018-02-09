@@ -69,7 +69,7 @@ namespace arc
         }
 
         /**
-         *  Construct a material from a set of optical property vectors.
+         *  Construct a material from a set of a table of optical properties.
          *
          *  @param  t_tab   Table of optical properties.
          *

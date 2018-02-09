@@ -44,7 +44,7 @@ namespace arc
           public:
             //  -- Constructors --
             Spectrum(const std::vector<double>& t_wavelength, const std::vector<double>& t_prob);
-
+            explicit Spectrum(const data::Table& t_tab);
 
             //  == OPERATORS ==
           private:
