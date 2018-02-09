@@ -13,7 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Utility --
+#include "utl/vector.hpp"
 
 
 
@@ -56,6 +57,15 @@ namespace arc
             m_interaction(init_interation(t_wavelength, t_abs_length, t_scat_length)),
             m_anisotropy(t_wavelength, t_anisotropy)
         {
+            assert(t_wavelength.size() == t_ref_index.size());
+            assert(t_wavelength.size() == t_abs_length.size());
+            assert(t_wavelength.size() == t_scat_length.size());
+            assert(t_wavelength.size() == t_anisotropy.size());
+            assert(utl::is_always_greater_than(t_ref_index, 0.0));
+            assert(utl::is_always_greater_than(t_abs_length, 0.0));
+            assert(utl::is_always_greater_than(t_scat_length, 0.0));
+            assert(utl::is_always_greater_than_or_equal_to(t_anisotropy, -1.0));
+            assert(utl::is_always_less_than_or_equal_to(t_anisotropy, 1.0));
         }
 
         interpolator::Linear Material::init_interation(const std::vector<double>& t_wavelength,
