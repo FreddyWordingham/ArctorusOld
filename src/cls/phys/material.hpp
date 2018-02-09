@@ -37,6 +37,9 @@ namespace arc
             //  == ENUMERATIONS ==
           private:
             //  -- Format --
+            /**
+             *  Layout of the data columns within a material data table file.
+             */
             enum mat_column_order
             {
                 WAVELENGTH,     //! Index of the wavelength data column.
