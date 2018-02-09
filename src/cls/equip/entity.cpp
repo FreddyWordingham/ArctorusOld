@@ -8,12 +8,7 @@
 
 
 //  == HEADER ==
-#include "equip/entity.hpp"
-
-
-
-//  == INCLUDES ==
-//  -- System --
+#include "cls/equip/entity.hpp"
 
 
 
@@ -25,7 +20,19 @@ namespace arc
 
 
 
-        //  == FUNCTIONS ==
+        //  == INSTANTIATION ==
+        //  -- Constructors --
+        /**
+         *  Construct an entity from a given mesh and material.
+         *
+         *  @param  t_mesh  Mesh to describe the boundaries of the entity.
+         *  @param  t_mat   Material describing the optical properties of the entity.
+         */
+        Entity::Entity(const geom::Mesh& t_mesh, const phys::Material& t_mat) :
+            m_mesh(t_mesh),
+            m_mat(t_mat)
+        {
+        }
 
 
 
