@@ -46,21 +46,14 @@ namespace arc
          *
          *  @param  t_tab   Table of spectral data.
          *
-         *  @post   t_wavelength index column must have the correct title.
-         *  @post   t_ref_index index column must have the correct title.
-         *  @post   t_abs_length index column must have the correct title.
-         *  @post   t_scat_length index column must have the correct title.
-         *  @post   t_anisotropy index column must have the correct title.
+         *  @post   WAVELENGTH index column must have the correct title.
+         *  @post   PROBABILITY index column must have the correct title.
          */
-        Material::Material(const data::Table& t_tab) :
-            Material(t_tab[WAVELENGTH].get_data(), t_tab[REF_INDEX].get_data(), t_tab[ABS_LENGTH].get_data(),
-                     t_tab[SCAT_LENGTH].get_data(), t_tab[ANISOTROPY].get_data())
+        Spectrum::Spectrum(const data::Table& t_tab) :
+            Spectrum(t_tab[WAVELENGTH].get_data(), t_tab[PROBABILITY].get_data())
         {
             assert(t_tab[WAVELENGTH].get_title() == "w");
-            assert(t_tab[REF_INDEX].get_title() == "n");
-            assert(t_tab[ABS_LENGTH].get_title() == "a");
-            assert(t_tab[SCAT_LENGTH].get_title() == "s");
-            assert(t_tab[ANISOTROPY].get_title() == "g");
+            assert(t_tab[PROBABILITY].get_title() == "p");
         }
 
 
