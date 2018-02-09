@@ -32,9 +32,9 @@ namespace arc
          *  @post   m_power must be greater than zero.
          */
         Light::Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec, const double t_power) :
-            m_power(t_power),
             m_mesh(t_mesh),
-            m_spec(t_spec)
+            m_spec(t_spec),
+            m_power(t_power)
         {
             assert(m_power > 0.0);
         }
