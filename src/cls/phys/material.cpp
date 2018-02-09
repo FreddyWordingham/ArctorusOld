@@ -73,11 +73,11 @@ namespace arc
          *
          *  @param  t_tab   Table of optical properties.
          *
-         *  @post   t_wavelength index column must have the correct title.
-         *  @post   t_ref_index index column must have the correct title.
-         *  @post   t_abs_length index column must have the correct title.
-         *  @post   t_scat_length index column must have the correct title.
-         *  @post   t_anisotropy index column must have the correct title.
+         *  @post   WAVELENGTH index column must have the correct title.
+         *  @post   REF_INDEX index column must have the correct title.
+         *  @post   ABS_LENGTH index column must have the correct title.
+         *  @post   SCAT_LENGTH index column must have the correct title.
+         *  @post   ANISOTROPY index column must have the correct title.
          */
         Material::Material(const data::Table& t_tab) :
             Material(t_tab[WAVELENGTH].get_data(), t_tab[REF_INDEX].get_data(), t_tab[ABS_LENGTH].get_data(),

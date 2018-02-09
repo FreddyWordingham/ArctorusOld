@@ -42,9 +42,9 @@ namespace arc
         }
 
         /**
-         *  Construct a spectrum from a set of optical property vectors.
+         *  Construct a spectrum from a set of a table of spectral data.
          *
-         *  @param  t_tab   Table of optical properties.
+         *  @param  t_tab   Table of spectral data.
          *
          *  @post   t_wavelength index column must have the correct title.
          *  @post   t_ref_index index column must have the correct title.
