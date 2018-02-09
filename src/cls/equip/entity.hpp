@@ -44,11 +44,13 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Entity(const geom::Mesh &t_mesh, const phys::Material &t_mat);
+            Entity(const geom::Mesh& t_mesh, const phys::Material& t_mat);
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            const geom::Mesh& get_mesh() const { return (m_mesh); }
         };
 
 
