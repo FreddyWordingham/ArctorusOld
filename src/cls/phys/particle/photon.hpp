@@ -18,6 +18,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- Classes --
+#include "cls/graphical/point/photon.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -44,6 +50,9 @@ namespace arc
                 double m_albedo;        //! Current albedo.
                 double m_interaction;   //! Current interaction coefficient.
                 double m_anisotropy;    //! Current anisotropy value.
+
+                //  -- Path --
+                std::vector<graphical::point::Photon>   m_path; //! Path data of the photon.
 
 
                 //  == INSTANTIATION ==
