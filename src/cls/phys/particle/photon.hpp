@@ -19,6 +19,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <vector>
+
 //  -- Classes --
 #include "cls/graphical/point/photon.hpp"
 
