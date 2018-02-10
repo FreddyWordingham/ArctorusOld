@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <glm/glm.hpp>
 
 
 
@@ -28,7 +29,7 @@ namespace arc
 
         //  == FUNCTION PROTOTYPES ==
         //  -- Colour --
-        glm::vec3 wavelength_to_rgb(const double t_wavelength);
+        glm::vec3 wavelength_to_rgb(double t_wavelength);
 
 
 
