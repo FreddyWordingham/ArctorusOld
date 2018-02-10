@@ -40,6 +40,34 @@ namespace arc
         }
 
 
+        //  -- Initialisation --
+        /**
+         *  Initialise the vector of triangle areas by determining the area of each triangle and normalising the result.
+         *
+         *  @return The vector of normalised triangle areas.
+         */
+        std::vector<double> Light::init_tri_area() const
+        {
+            // Create the return vector.
+            std::vector<double> r_tri_area(m_mesh.get_num_tri());
+
+            // Compile the vector of areas and the total area.
+            r_tri_area[0] = m_mesh.get_tri(0).get_area();
+            for (size_t i = 1; i < m_mesh.get_num_tri(); ++i)
+            {
+                r_tri_area[i] = r_tri_area[i - 1] + m_mesh.get_tri(i).get_area();
+            }
+
+            // Normalise the areas.
+            for (size_t i=0; i<m_tri_area.size(); ++i)
+            {
+                r_tri_area[i] /= r_tri_area.back();
+            }
+
+            return (r_tri_area);
+        }
+
+
 
     } // namespace equip
 } // namespace arc
