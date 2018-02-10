@@ -40,7 +40,7 @@ int main()
 
     graphical::Scene scene;
 
-    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj")), phys::Material(file::read("../test/intralipid_10.mat")));
+    equip::Entity monkey(geom::Mesh(file::read("../test/monkey.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0, math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/intralipid_10.mat")));
     scene.add_entity(monkey);
 
     equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
