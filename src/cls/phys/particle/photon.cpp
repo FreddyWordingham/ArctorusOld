@@ -71,6 +71,9 @@ namespace arc
                 assert(m_albedo >= 0.0);
                 assert(m_interaction > 0.0);
                 assert((m_anisotropy >= -1.0) && (m_anisotropy <= 1.0));
+
+                // Record the initial position of the photon.
+                record_path();
             }
 
 
@@ -95,6 +98,9 @@ namespace arc
 
                 // Update the time.
                 n_time += (t_dist * m_ref_index) / SPEED_OF_LIGHT;
+
+                // Record the new position of the photon.
+                record_path();
             }
 
 
