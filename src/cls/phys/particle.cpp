@@ -33,7 +33,7 @@ namespace arc
          *
          *  @post   m_dir must be normalised.
          *  @post   m_wavelength must be positive.
-         *  @post   m_time must be positive.
+         *  @post   m_time must be greater than, or equal to, zero.
          *  @post   m_weight must be positive.
          */
         Particle::Particle(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_time,
@@ -44,7 +44,7 @@ namespace arc
             n_weight(t_weight)
         {
             assert(n_dir.is_normalised());
-            assert(n_time > 0.0);
+            assert(n_time >= 0.0);
             assert(n_weight > 0.0);
         }
 
