@@ -60,6 +60,9 @@ namespace arc
                 double get_albedo() const { return (m_albedo); }
                 double get_interaction() const { return (m_interaction); }
                 double gem_anisotropy() const { return (m_anisotropy); }
+
+                //  -- Simulation --
+                void move(double t_dist);
             };
 
 

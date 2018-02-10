@@ -69,6 +69,30 @@ namespace arc
 
 
 
+            //  == METHODS ==
+            //  -- Simulation --
+            /**
+             *  Move the photon a given distance.
+             *
+             *  @param  t_dist  Distance to move the photon.
+             *
+             *  @pre    t_dist must be greater than zero.
+             */
+            void Photon::move(const double t_dist)
+            {
+                assert(t_dist > 0.0);
+
+                // Move the photons position.
+                n_pos[X] += n_dir[X]*t_dist;
+                n_pos[Y] += n_dir[Y]*t_dist;
+                n_pos[Z] += n_dir[Z]*t_dist;
+
+                // Update the time.
+                n_time += (t_dist * m_ref_index) / SPEED_OF_LIGHT;
+            }
+
+
+
         } // namespace particle
     } // namespace phys
 } // namespace arc
