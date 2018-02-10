@@ -58,7 +58,7 @@ namespace arc
             double get_time() const { return (n_time); }
             double get_weight() const { return (n_weight); }
 
-          private:
+          protected:
             //  -- Simulation --
             void rotate(double t_dec, double t_azi);
         };

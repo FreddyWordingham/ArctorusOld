@@ -77,6 +77,7 @@ namespace arc
 
                 //  -- Simulation --
                 void move(double t_dist);
+                void scatter();
 
               private:
                 //  -- Data --

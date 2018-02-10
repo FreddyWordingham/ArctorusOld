@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/constants.hpp"
+#include "gen/rng.hpp"
 
 
 
@@ -101,6 +102,18 @@ namespace arc
 
                 // Record the new position of the photon.
                 record_path();
+            }
+
+            /**
+             *  Determine a new direction for the photon using the current anisotropy value.
+             */
+            void Photon::scatter()
+            {
+                // Determine the random declination and azimuthal rotation angles.
+                const double dec = rng::random(0.0, M_PI);
+                const double azi = rng::random(0.0, 2.0*M_PI);
+
+                rotate(dec, azi);
             }
 
 
