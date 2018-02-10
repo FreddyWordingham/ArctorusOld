@@ -110,8 +110,7 @@ namespace arc
             void Photon::scatter()
             {
                 // Determine the random declination and azimuthal rotation angles.
-                const double dec = rng::random(0.0, M_PI);
-
+                const double dec = rng::henyey_greenstein(m_anisotropy);
                 const double azi = rng::random(0.0, 2.0*M_PI);
 
                 rotate(dec, azi);
