@@ -55,13 +55,14 @@ namespace arc
                 double m_anisotropy;    //! Current anisotropy value.
 
                 //  -- Path --
-                std::vector<graphical::point::Photon>   m_path; //! Path data of the photon.
+                std::vector<graphical::point::Photon> m_path; //! Path data of the photon.
 
 
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength, double t_weight, double t_ref_index, double t_albedo, double t_interaction, double t_anisotropy);
+                Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength,
+                       double t_weight, double t_ref_index, double t_albedo, double t_interaction, double t_anisotropy);
 
 
                 //  == METHODS ==
@@ -72,6 +73,7 @@ namespace arc
                 double get_albedo() const { return (m_albedo); }
                 double get_interaction() const { return (m_interaction); }
                 double gem_anisotropy() const { return (m_anisotropy); }
+                const std::vector<graphical::point::Photon>& get_path() const { return (m_path); }
 
                 //  -- Simulation --
                 void move(double t_dist);
