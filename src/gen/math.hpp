@@ -49,6 +49,8 @@ namespace arc
 
         //  -- Comparison --
         inline bool equal(double t_lhs, double t_rhs, double t_tol = DEFAULT_EQUAL_TOL);
+        template <typename T>
+        constexpr int sign(T val);
 
         //  -- Conversion --
         template <typename T>
@@ -118,6 +120,21 @@ namespace arc
         inline bool equal(const double t_lhs, const double t_rhs, const double t_tol)
         {
             return (std::fabs(t_lhs - t_rhs) <= t_tol);
+        }
+
+        /**
+         *  Determine the sign of a given value.
+         *
+         *  @tparam T   Type to determine the sign of.
+         *
+         *  @param  val Value to determine the sign of.
+         *
+         *  @return The sign of the given value.
+         */
+        template <typename T>
+        constexpr int sign(const T val)
+        {
+            return (T(0) < val) - (val < T(0));
         }
 
 
