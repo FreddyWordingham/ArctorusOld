@@ -498,7 +498,7 @@ namespace arc
                     }
                     else
                     {
-                        m_render_time = 0.01f;
+                        m_render_time = t_time_delta * PHOTON_TRAVEL_SPEED;
                     }
                 }
             }
@@ -506,7 +506,7 @@ namespace arc
             // Increase render time if dynamic rendering is active.
             if (m_render_time > 0.0f)
             {
-                m_render_time += t_time_delta * 1e-6;
+                m_render_time += t_time_delta * PHOTON_TRAVEL_SPEED;
             }
         }
 

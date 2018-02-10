@@ -39,7 +39,7 @@ int main()
     LOG("Hello world!");
 
 
-    phys::particle::Photon phot_a(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
+    phys::particle::Photon phot_a(math::Vec<3>({{0.0, 0.0, 1.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
     0.0, 550E-9, 1.0, 1.5, 0.99, 1.0, 0.5);
 
     for (int i=0; i<100; ++i)
@@ -47,6 +47,8 @@ int main()
         phot_a.move(1.0);
         phot_a.scatter();
     }
+
+    VAL(phot_a.get_time());
 
     graphical::Scene scene;
 

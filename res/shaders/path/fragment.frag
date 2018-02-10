@@ -14,7 +14,7 @@
 
 //  == SETTINGS ==
 //  -- Time Rendering --
-const int time_fade = 16;   //! Power to fade photons away from the render_time.
+const int time_fade = 128;   //! Power to fade photons away from the render_time.
 
 
 
@@ -44,11 +44,15 @@ void main()
     // Set fragment colour.
     frag_col = col;
 
-    // Set fragement alpha if time rendering.
-    if (render_time > 0.0)
+    float cur_time = render_time;
+    float delta_time = abs(vert_time - cur_time);
+
+    if (delta_time > 1e-8)
     {
-        // Reduce the fragment alpha value if it is far from the render time.
-        float delta_time = 1.0 - clamp(abs(render_time - vert_time), 0.0, 1.0);
-        frag_col.a = pow(delta_time, time_fade);
+        frag_col.a = 0;
+    }
+    else
+    {
+        frag_col.a = 1.0 - (delta_time / 1e-8);
     }
 }

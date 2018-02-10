@@ -70,6 +70,9 @@ namespace arc
         constexpr const float ENTITIY_AMB_POW      = 0.1f;  //! Ambient lighting of rendered entities.
         constexpr const float ENTITY_NORMAL_LENGTH = 0.5f;  //! Length to draw entity normals.
 
+        //  -- Rendering --
+        constexpr const float PHOTON_TRAVEL_SPEED = 1e-8f;  //! Photon travel speed when rendering path data.
+
 
 
         //  == CLASS ==
