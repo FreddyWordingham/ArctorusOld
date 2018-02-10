@@ -37,7 +37,9 @@ namespace arc
                 //  == FIELDS ==
               private:
                 //  -- Properties --
-                double m_wavelength;    //! Packet wavelength.
+                const double m_wavelength;  //! Packet wavelength.
+
+                //  -- Optical --
 
 
                 //  == INSTANTIATION ==
