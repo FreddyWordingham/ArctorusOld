@@ -111,6 +111,7 @@ namespace arc
             {
                 // Determine the random declination and azimuthal rotation angles.
                 const double dec = rng::random(0.0, M_PI);
+
                 const double azi = rng::random(0.0, 2.0*M_PI);
 
                 rotate(dec, azi);
