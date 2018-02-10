@@ -89,12 +89,23 @@ namespace arc
                 assert(t_dist > 0.0);
 
                 // Move the photons position.
-                n_pos[X] += n_dir[X]*t_dist;
-                n_pos[Y] += n_dir[Y]*t_dist;
-                n_pos[Z] += n_dir[Z]*t_dist;
+                n_pos[X] += n_dir[X] * t_dist;
+                n_pos[Y] += n_dir[Y] * t_dist;
+                n_pos[Z] += n_dir[Z] * t_dist;
 
                 // Update the time.
                 n_time += (t_dist * m_ref_index) / SPEED_OF_LIGHT;
+            }
+
+
+            //  -- Data --
+            /**
+             *  Record the current properties of the photon to the path data.
+             */
+            void Photon::record_path()
+            {
+                m_path.emplace_back(graphical::point::Photon({n_pos[X], n_pos[Y], n_pos[Z]}, static_cast<float>(m_wavelength),
+                                                             static_cast<float>(n_weight), static_cast<float>(n_time)));
             }
 
 
