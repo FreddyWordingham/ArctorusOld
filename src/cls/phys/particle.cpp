@@ -95,6 +95,8 @@ namespace arc
                     1.0 - math::square(prev_dir[Z]))) + (prev_dir[Z] * std::cos(t_dec));
             }
 
+            n_dir.normalise();
+
             assert(n_dir.is_normalised());
         }
 

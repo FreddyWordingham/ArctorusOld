@@ -41,28 +41,12 @@ int main()
 
     phys::particle::Photon phot_a(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
     0.0, 550E-9, 1.0, 1.5, 0.99, 1.0, 0.5);
-    phot_a.move(1.0);
-    phot_a.rotate(0.1, 0.0);
-    phot_a.move(1.0);
-    phot_a.rotate(0.1, 0.0);
-    phot_a.move(1.0);
-    phot_a.rotate(0.1, 0.0);
-    phot_a.move(1.0);
-    phot_a.rotate(0.1, 0.0);
-    phot_a.move(1.0);
 
-    phys::particle::Photon phot_b(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{-1.0, 0.0, 0.0}}),
-    0.0, 550E-9, 1.0, 1.5, 0.99, 1.0, 0.5);
-    phot_b.move(1.0);
-    phot_b.rotate(0.1, 0.0);
-    phot_b.move(1.0);
-    phot_b.rotate(0.1, 0.0);
-    phot_b.move(1.0);
-    phot_b.rotate(0.1, 0.0);
-    phot_b.move(1.0);
-    phot_b.rotate(0.1, 0.0);
-    phot_b.move(1.0);
-
+    for (int i=0; i<100; ++i)
+    {
+        phot_a.move(1.0);
+        phot_a.scatter();
+    }
 
     graphical::Scene scene;
 
@@ -75,7 +59,6 @@ int main()
     scene.add_light(led);
 
     scene.add_photon(phot_a.get_path());
-    scene.add_photon(phot_b.get_path());
 
     while (!scene.should_close())
     {
