@@ -59,12 +59,16 @@ namespace arc
          *  @param  t_azi   Azimuthal rotation around current direction vector.
          *
          *  @pre    n_dir must be normalised.
+         *  @pre    t_dec must be between zero and pi.
+         *  @pre    t_azi must be between zero and two pi.
+         *
          *  @post   n_dir must be normalised.
          */
         void Particle::rotate(double t_dec, double t_azi)
         {
             assert(n_dir.is_normalised());
-
+            assert((t_dec >= 0.0) && (t_dec <= M_PI));
+            assert((t_azi >= 0.0) && (t_azi <= 2.0*M_PI));
 
 
             assert(n_dir.is_normalised());

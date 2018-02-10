@@ -43,6 +43,7 @@ int main()
     0.0, 550E-9, 1.0, 1.5, 0.99, 1.0, 0.5);
 
     phot.move(1.0);
+    phot.rotate(0.0, 2.0);
 
     graphical::Scene scene;
 
