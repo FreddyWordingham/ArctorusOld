@@ -85,17 +85,16 @@ namespace arc
             {
                 const math::Vec<3> prev_dir = n_dir;
 
-                n_dir[X] = (std::sin(t_dec) / std::sqrt(
-                    1.0 - math::square(prev_dir[Z]))) * ((prev_dir[X] * prev_dir[Z] * std::cos(
-                    t_azi)) - (prev_dir[Y] * std::sin(t_azi))) + (prev_dir[X] * std::cos(t_dec));
-                n_dir[Y] = (std::sin(t_dec) / std::sqrt(
-                    1.0 - math::square(prev_dir[Z]))) * ((prev_dir[Y] * prev_dir[Z] * std::cos(
-                    t_azi)) - (prev_dir[X] * std::sin(t_azi))) + (prev_dir[Y] * std::cos(t_dec));
-                n_dir[Z] = (-std::sin(t_dec) * std::cos(t_azi) * std::sqrt(
-                    1.0 - math::square(prev_dir[Z]))) + (prev_dir[Z] * std::cos(t_dec));
-            }
+                const double a         = std::sqrt(1.0 - math::square(prev_dir[Z]));
+                const double sin_theta = std::sin(t_dec);
+                const double cos_theta = std::cos(t_dec);
+                const double sin_phi   = std::sin(t_azi);
+                const double cos_phi   = std::cos(t_azi);
 
-            n_dir.normalise();
+                n_dir[X] = ((sin_theta / a) * ((prev_dir[X] * prev_dir[Z] * cos_phi) - (prev_dir[Y] * sin_phi))) + (prev_dir[X] * cos_theta);
+                n_dir[Y] = ((sin_theta / a) * ((prev_dir[Y] * prev_dir[Z] * cos_phi) + (prev_dir[X] * sin_phi))) + (prev_dir[Y] * cos_theta);
+                n_dir[Z] = (prev_dir[Z] * cos_theta) - (sin_theta * cos_phi * a);
+            }
 
             assert(n_dir.is_normalised());
         }

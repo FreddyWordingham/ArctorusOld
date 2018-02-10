@@ -20,7 +20,7 @@
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
 #include "cls/phys/particle/photon.hpp"
-
+#include "gen/rng.hpp"
 
 
 //  == NAMESPACE ==
@@ -38,17 +38,20 @@ int main()
 {
     LOG("Hello world!");
 
-
-    phys::particle::Photon phot_a(math::Vec<3>({{0.0, 0.0, 1.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
-    0.0, 550E-9, 1.0, 1.5, 0.99, 1.0, 0.5);
-
-    for (int i=0; i<100; ++i)
+    std::vector<phys::particle::Photon> phots;
+    for (int i=0; i<1000; ++i)
     {
-        phot_a.move(1.0);
-        phot_a.scatter();
-    }
+        phys::particle::Photon phot(math::Vec<3>({{0.0, 0.0, 1.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
+        0.0, 550E-9, 1.0, 1.5, 0.99, 1.0, 0.5);
 
-    VAL(phot_a.get_time());
+        for (int j=0; j<100; ++j)
+        {
+            phot.move(-std::log(rng::random(0.0, 1.0))/phot.get_interaction());
+            phot.scatter();
+        }
+
+        phots.push_back(phot);
+    }
 
     graphical::Scene scene;
 
@@ -60,7 +63,10 @@ int main()
     equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
     scene.add_light(led);
 
-    scene.add_photon(phot_a.get_path());
+    for (size_t i=0; i<phots.size(); ++i)
+    {
+        scene.add_photon(phots[i].get_path());
+    }
 
     while (!scene.should_close())
     {
