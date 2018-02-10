@@ -26,6 +26,9 @@
 #include "gen/log.hpp"
 #include "gen/rng.hpp"
 
+//  -- Utility --
+#include "utl/conversion.hpp"
+
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/graphical/camera/fly.hpp"
@@ -245,7 +248,7 @@ namespace arc
          */
         void Scene::add_photon(const std::vector<point::Photon>& t_phot)
         {
-            m_phot.emplace_back(Prop(t_phot, glm::vec4({1.0, 1.0, 1.0, 1.0})));
+            m_phot.emplace_back(Prop(t_phot, glm::vec4(utl::wavelength_to_rgb(static_cast<double>(t_phot.front().get_wavelength())), 1.0)));
         }
 
 
