@@ -39,14 +39,14 @@ int main()
     LOG("Hello world!");
 
     std::vector<phys::particle::Photon> phots;
-    for (int i=0; i<1000; ++i)
+    for (int                            i = 0; i < 10000; ++i)
     {
         phys::particle::Photon phot(math::Vec<3>({{0.0, 0.0, 1.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
-        0.0, 550E-9, 1.0, 1.5, 0.99, 1.0, 0.99);
+        0.0, rng::random(300E-9, 800E-9), 1.0, 1.5, 0.99, 1.0, 0.99);
 
-        for (int j=0; j<100; ++j)
+        for (int j = 0; j < 100; ++j)
         {
-            phot.move(-std::log(rng::random(0.0, 1.0))/phot.get_interaction());
+            phot.move(-std::log(rng::random(0.0, 1.0)) / phot.get_interaction());
             phot.scatter();
         }
 
@@ -63,7 +63,7 @@ int main()
     equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
     scene.add_light(led);
 
-    for (size_t i=0; i<phots.size(); ++i)
+    for (size_t i = 0; i < phots.size(); ++i)
     {
         scene.add_photon(phots[i].get_path());
     }
