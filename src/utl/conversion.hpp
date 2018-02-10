@@ -27,6 +27,8 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Colour --
+        glm::vec3 wavelength_to_rgb(const double t_wavelength);
 
 
 
