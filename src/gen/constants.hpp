@@ -20,6 +20,8 @@ namespace arc
 
 
     //  == CONSTANTS ==
+    //  -- Physical --
+    constexpr const double SPEED_OF_LIGHT = 2.99E8; //! Speed of light (m/s).
 
 
 
