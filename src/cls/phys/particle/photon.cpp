@@ -45,7 +45,7 @@ namespace arc
              *  @param  t_anisotropy    Initial anisotropy value.
              *
              *  @post   n_dir must be normalised.
-             *  @post   n_time must be positive.
+             *  @post   m_time must be greater than, or equal to, zero
              *  @post   m_wavelength must be positive.
              *  @post   n_weight must be positive.
              *  @post   m_ref_index must be positive.
@@ -64,7 +64,7 @@ namespace arc
                 m_anisotropy(t_anisotropy)
             {
                 assert(n_dir.is_normalised());
-                assert(n_time > 0.0);
+                assert(n_time >= 0.0);
                 assert(m_wavelength > 0.0);
                 assert(n_weight > 0.0);
                 assert(m_ref_index > 0.0);
