@@ -103,24 +103,6 @@ namespace arc
                 record_path();
             }
 
-            /**
-             *  Rotate a photon by a given declination and then a given azimuthal rotation.
-             *
-             *  @param  t_dec   Declination angle away from current direction vector.
-             *  @param  t_azi   Azimuthal rotation around current direction vector.
-             *
-             *  @pre    n_dir must be normalised.
-             *  @post   n_dir must be normalised.
-             */
-            void Photon::rotate(double t_dec, double t_azi)
-            {
-                assert(n_dir.is_normalised());
-
-
-
-                assert(n_dir.is_normalised());
-            }
-
 
             //  -- Data --
             /**

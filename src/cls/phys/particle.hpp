@@ -57,6 +57,9 @@ namespace arc
             const math::Vec<3>& get_dir() const { return (n_dir); }
             double get_time() const { return (n_time); }
             double get_weight() const { return (n_weight); }
+
+            //  -- Simulation --
+            void rotate(double t_dec, double t_azi);
         };
 
 
