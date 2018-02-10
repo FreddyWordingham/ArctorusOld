@@ -245,7 +245,7 @@ namespace arc
          */
         void Scene::add_photon(const std::vector<point::Photon>& t_phot)
         {
-            m_phot.emplace_back(Prop(t_phot, glm::vec4({1.0, 0.0, 0.0, 1.0})));
+            m_phot.emplace_back(Prop(t_phot, glm::vec4({1.0, 1.0, 1.0, 1.0})));
         }
 
 
