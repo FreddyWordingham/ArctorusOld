@@ -56,6 +56,10 @@ namespace arc
               public:
                 //  -- Getters --
                 double get_wavelength() const { return (m_wavelength); }
+                double get_ref_index() const { return (m_ref_index); }
+                double get_albedo() const { return (m_albedo); }
+                double get_interaction() const { return (m_interaction); }
+                double gem_anisotropy() const { return (m_anisotropy); }
             };
 
 
