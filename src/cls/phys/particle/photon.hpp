@@ -76,6 +76,7 @@ namespace arc
                 //  -- Simulation --
                 void move(double t_dist);
 
+              private:
                 //  -- Data --
                 void record_path();
             };
