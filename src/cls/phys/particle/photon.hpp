@@ -40,6 +40,10 @@ namespace arc
                 const double m_wavelength;  //! Packet wavelength.
 
                 //  -- Optical --
+                double m_ref_index;     //! Current refractive index.
+                double m_albedo;        //! Current albedo.
+                double m_interation;    //! Current interaction coefficent.
+                double m_anisotropy;    //! Current ansiotropy value.
 
 
                 //  == INSTANTIATION ==
