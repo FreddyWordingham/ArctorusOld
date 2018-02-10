@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/constants.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
