@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/math.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -36,8 +42,7 @@ namespace arc
          *  @post   m_time must be greater than, or equal to, zero.
          *  @post   m_weight must be positive.
          */
-        Particle::Particle(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_time,
-                           const double t_weight) :
+        Particle::Particle(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_time, const double t_weight) :
             n_pos(t_pos),
             n_dir(t_dir),
             n_time(t_time),
@@ -68,17 +73,26 @@ namespace arc
         {
             assert(n_dir.is_normalised());
             assert((t_dec >= 0.0) && (t_dec <= M_PI));
-            assert((t_azi >= 0.0) && (t_azi <= 2.0*M_PI));
+            assert((t_azi >= 0.0) && (t_azi <= 2.0 * M_PI));
 
             if (std::fabs(n_dir[Z]) > 0.99999)
             {
                 n_dir[X] = std::sin(t_dec) * std::cos(t_azi);
                 n_dir[Y] = std::sin(t_dec) * std::sin(t_azi);
-                n_dir[Z] = std::sign(n_dir[Z])
+                n_dir[Z] = math::sign(n_dir[Z]) * std::cos(t_dec);
             }
             else
             {
+                const math::Vec<3> prev_dir = n_dir;
 
+                n_dir[X] = (std::sin(t_dec) / std::sqrt(
+                    1.0 - math::square(prev_dir[Z]))) * ((prev_dir[X] * prev_dir[Z] * std::cos(
+                    t_azi)) - (prev_dir[Y] * std::sin(t_azi))) + (prev_dir[X] * std::cos(t_dec));
+                n_dir[Y] = (std::sin(t_dec) / std::sqrt(
+                    1.0 - math::square(prev_dir[Z]))) * ((prev_dir[Y] * prev_dir[Z] * std::cos(
+                    t_azi)) - (prev_dir[X] * std::sin(t_azi))) + (prev_dir[Y] * std::cos(t_dec));
+                n_dir[Z] = (-std::sin(t_dec) * std::cos(t_azi) * std::sqrt(
+                    1.0 - math::square(prev_dir[Z]))) + (prev_dir[Z] * std::cos(t_dec));
             }
 
             assert(n_dir.is_normalised());
