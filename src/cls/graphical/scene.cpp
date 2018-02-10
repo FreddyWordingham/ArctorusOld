@@ -506,7 +506,7 @@ namespace arc
             // Increase render time if dynamic rendering is active.
             if (m_render_time > 0.0f)
             {
-                m_render_time += t_time_delta;
+                m_render_time += t_time_delta * 1e-6;
             }
         }
 
