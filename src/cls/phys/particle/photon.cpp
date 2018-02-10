@@ -33,21 +33,38 @@ namespace arc
              *  @param  t_time          Emission time of the photon packet.
              *  @param  t_wavelength    Initial wavelength of the photon packet.
              *  @param  t_weight        Initial statistical weight of the photon packet.
+             *  @param  t_ref_index     Initial refractive index.
+             *  @param  t_albedo        Initial albedo.
+             *  @param  t_interaction   Initial interaction coefficient.
+             *  @param  t_anisotropy    Initial anisotropy value.
              *
              *  @post   n_dir must be normalised.
              *  @post   n_time must be positive.
              *  @post   m_wavelength must be positive.
              *  @post   n_weight must be positive.
+             *  @post   m_ref_index must be positive.
+             *  @post   m_albedo must be greater than, or equal to, zero.
+             *  @post   m_interaction must be greater than zero.
+             *  @post   m_anisotropy must be greater than, or equal to, minus one and must be less than, or equal to, one.
              */
-            Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_time,
-                               const double t_wavelength, const double t_weight) :
+            Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_time, const double t_wavelength,
+                           const double t_weight, const double t_ref_index, const double t_albedo, const double t_interaction,
+                           const double t_anisotropy) :
                 Particle(t_pos, t_dir, t_time, t_weight),
-                m_wavelength(t_wavelength)
+                m_wavelength(t_wavelength),
+                m_ref_index(t_ref_index),
+                m_albedo(t_albedo),
+                m_interaction(t_interaction),
+                m_anisotropy(t_anisotropy)
             {
                 assert(n_dir.is_normalised());
                 assert(n_time > 0.0);
                 assert(m_wavelength > 0.0);
                 assert(n_weight > 0.0);
+                assert(m_ref_index > 0.0);
+                assert(m_albedo >= 0.0);
+                assert(m_interaction > 0.0);
+                assert((m_anisotropy >= -1.0) && (m_anisotropy <= 1.0));
             }
 
 
