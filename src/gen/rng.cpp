@@ -39,7 +39,7 @@ namespace arc
          */
         double henyey_greenstein(const double t_g)
         {
-            assert((t_g > -1.0) && (t_g < 1.0));
+            assert((t_g >= -1.0) && (t_g <= 1.0));
 
             return acos((1.0 + math::square(t_g) - math::square(
                 (1.0 - math::square(t_g)) / (1.0 - t_g + (2.0 * t_g * rng::random())))) / (2.0 * t_g));
