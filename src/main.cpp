@@ -48,7 +48,7 @@ int main()
         double w = 400E-9 + ((300E-9 / N)*i);
 
         phys::particle::Photon phot(math::Vec<3>({{0.0, y, 1.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
-        0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
+        0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0 - (y));
 
         for (int j = 0; j < 100; ++j)
         {

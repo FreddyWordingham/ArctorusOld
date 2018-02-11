@@ -75,7 +75,7 @@ namespace arc
             assert((t_dec >= 0.0) && (t_dec <= M_PI));
             assert((t_azi >= 0.0) && (t_azi <= 2.0 * M_PI));
 
-            if (std::fabs(n_dir[Z]) > 0.99999)
+            if (std::fabs(1.0 - std::fabs(n_dir[Z])) < 1E-10)
             {
                 n_dir[X] = std::sin(t_dec) * std::cos(t_azi);
                 n_dir[Y] = std::sin(t_dec) * std::sin(t_azi);
