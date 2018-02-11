@@ -101,9 +101,55 @@ namespace arc
 
             // Gamma correction.
             double gamma = 0.8;
-            red = std::pow(red * factor, gamma);
+            red   = std::pow(red * factor, gamma);
             green = std::pow(green * factor, gamma);
-            blue = std::pow(blue * factor, gamma);
+            blue  = std::pow(blue * factor, gamma);
+
+            return (glm::vec3(red, green, blue));
+        }
+
+        glm::vec3 colour_chart(const double t_x)
+        {
+            assert(t_x >= 0.0);
+            assert(t_x <= 1.0);
+
+            double red, green, blue;
+            if (t_x <= (2.0 / 12.0))
+            {
+                red   = 1.0;
+                green = 1.0;
+                blue  = 1.0;
+            }
+            else if ((t_x > (2.0 / 12.0)) && (t_x <= (4.0 / 12.0)))
+            {
+                red   = 1.0;
+                green = 1.0;
+                blue  = 1.0;
+            }
+            else if ((t_x > (4.0 / 12.0)) && (t_x <= (6.0 / 12.0)))
+            {
+                red   = 1.0;
+                green = 1.0;
+                blue  = 1.0;
+            }
+            else if ((t_x > (6.0 / 12.0)) && (t_x <= (8.0 / 12.0)))
+            {
+                red   = 1.0;
+                green = 1.0;
+                blue  = 1.0;
+            }
+            else if ((t_x > (8.0 / 12.0)) && (t_x <= (10.0 / 12.0)))
+            {
+                red   = 1.0;
+                green = 1.0;
+                blue  = 1.0;
+            }
+            else
+            {
+                red   = 1.0;
+                green = 1.0;
+                blue  = 1.0;
+            }
 
             return (glm::vec3(red, green, blue));
         }

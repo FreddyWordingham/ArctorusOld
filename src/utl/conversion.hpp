@@ -30,7 +30,7 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Colour --
         glm::vec3 wavelength_to_rgb(double t_wavelength);
-
+        glm::vec3 colour_chart(double t_x);
 
 
     } // namespace utl

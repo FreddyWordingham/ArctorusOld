@@ -39,10 +39,15 @@ int main()
     LOG("Hello world!");
 
     std::vector<phys::particle::Photon> phots;
-    for (int                            i = 0; i < 10000; ++i)
+
+    const int N = 1E4;
+    for (int                            i = 0; i < N; ++i)
     {
-        phys::particle::Photon phot(math::Vec<3>({{0.0, 0.0, 1.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
-        0.0, rng::random(300E-9, 800E-9), 1.0, 1.5, 0.99, 1.0, 0.99);
+        double y = (1.0*i)/N;
+        double w = 400E-9 + ((300E-9 / N)*i);
+
+        phys::particle::Photon phot(math::Vec<3>({{0.0, y, 1.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
+        0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0 - (y / 10.0));
 
         for (int j = 0; j < 100; ++j)
         {
