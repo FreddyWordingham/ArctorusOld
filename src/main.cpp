@@ -20,7 +20,6 @@
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
 #include "cls/phys/particle/photon.hpp"
-#include "gen/rng.hpp"
 
 
 
@@ -39,16 +38,28 @@ int main()
 {
     LOG("Hello world!");
 
+    math::Vec<3> a({{0.0, 1.0/std::sqrt(2.0), 1.0/std::sqrt(2.0)}});
+    a.normalise();
+    math::Vec<3> b({{-0.612372, -0.353553, 0.707107}});
+    b.normalise();
+    math::Vec<3> c({{0.612372, -0.353553, 0.707107}});
+    c.normalise();
+
+    geom::Triangle tri({{geom::Vertex(math::Vec<3>({{0.0, 1.0, 0.0}}), a), geom::Vertex(
+        math::Vec<3>({{std::sqrt(3.0) / 2.0, -0.5, 0.0}}), c), geom::Vertex(
+        math::Vec<3>({{-std::sqrt(3.0) / 2.0, -0.5, 0.0}}), b)}});
+
     std::vector<phys::particle::Photon> phots;
 
-    /*const int N = 1E4;
-    for (int                            i = 0; i < N; ++i)
+    const int N = 1E4;
+    for (int  i = 0; i < N; ++i)
     {
-        double y = (1.0*i)/N;
-        double w = 400E-9 + ((300E-9 / N)*i);
+        double y = (1.0 * i) / N;
+        double w = 400E-9 + ((300E-9 / N) * i);
 
-        phys::particle::Photon phot(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}),
-        0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0 - (y));
+        std::array<math::Vec<3>, 2> pos_norm = tri.get_random_pos_and_norm();
+
+        phys::particle::Photon phot(pos_norm[0], pos_norm[1], 0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
 
         for (int j = 0; j < 100; ++j)
         {
@@ -57,7 +68,7 @@ int main()
         }
 
         phots.push_back(phot);
-    }*/
+    }
 
     graphical::Scene scene;
 
@@ -66,7 +77,8 @@ int main()
                    math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/intralipid_10.mat")));
     scene.add_entity(monkey);
 
-    equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
+    equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
+                     phys::Spectrum(file::read("../test/laser.spc")), 1.0);
     scene.add_light(led);
 
     for (size_t i = 0; i < phots.size(); ++i)

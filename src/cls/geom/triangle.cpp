@@ -69,6 +69,7 @@ namespace arc
                 .get_pos() - m_vert[GAMMA].get_pos()) * b);
             r_vec[1] = (m_vert[ALPHA].get_norm() * a) + (m_vert[BETA].get_norm() * b) + (m_vert[GAMMA]
                 .get_norm() * (1.0 - a - b));
+            r_vec[1].normalise();
 
             return (r_vec);
         }
