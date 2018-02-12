@@ -51,21 +51,28 @@ namespace arc
         std::array<math::Vec<3>, 2> Triangle::get_random_pos_and_norm() const
         {
             // Create return array.
-            std::array<math::Vec<3>, 2> r_vec{};
+            std::array<math::Vec<3>, 2> r_vec;
 
             // Generate a pair of random barycentric coordinates.
-            const double x = rng::random();
-            const double y = rng::random();
+            double a = rng::random();
+            double b = rng::random();
 
             // If the generated coordinate falls beyond the triangle, mirror it back inside.
-            if ((x + y) > 1.0)
+            if ((a + b) > 1.0)
             {
-                x = 1.0 - x;
-                y  = 1.0 - y;
+                a = 1.0 - a;
+                b = 1.0 - b;
             }
+
+            // Generate the world-space cartesian coordinates from the barycentric coordinates.
+            r_vec[0] = m_vert[GAMMA].get_pos() + ((m_vert[ALPHA].get_pos() - m_vert[GAMMA].get_pos()) * a) + ((m_vert[BETA]
+                .get_pos() - m_vert[GAMMA].get_pos()) * b);
+            r_vec[1] = (m_vert[ALPHA].get_norm() * a) + (m_vert[BETA].get_norm() * b) + (m_vert[GAMMA]
+                .get_norm() * (1.0 - a - b));
 
             return (r_vec);
         }
+
 
         //  -- Transformation --
         /**
