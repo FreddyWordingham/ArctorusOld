@@ -96,6 +96,8 @@ namespace arc
                 n_dir[Z] = (prev_dir[Z] * cos_theta) - (sin_theta * cos_phi * a);
             }
 
+            n_dir.normalise();
+
             assert(n_dir.is_normalised());
         }
 

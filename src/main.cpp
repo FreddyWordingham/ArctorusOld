@@ -41,13 +41,13 @@ int main()
 
     std::vector<phys::particle::Photon> phots;
 
-    const int N = 1E4;
+    /*const int N = 1E4;
     for (int                            i = 0; i < N; ++i)
     {
         double y = (1.0*i)/N;
         double w = 400E-9 + ((300E-9 / N)*i);
 
-        phys::particle::Photon phot(math::Vec<3>({{0.0, y, 1.0}}), math::Vec<3>({{1.0, 0.0, 0.0}}),
+        phys::particle::Photon phot(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, -1.0}}),
         0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0 - (y));
 
         for (int j = 0; j < 100; ++j)
@@ -57,12 +57,12 @@ int main()
         }
 
         phots.push_back(phot);
-    }
+    }*/
 
     graphical::Scene scene;
 
     equip::Entity monkey(
-        geom::Mesh(file::read("../test/monkey.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
+        geom::Mesh(file::read("../test/cube.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
                    math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/intralipid_10.mat")));
     scene.add_entity(monkey);
 

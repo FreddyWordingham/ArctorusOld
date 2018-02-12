@@ -208,7 +208,7 @@ namespace arc
             }
 
             // Add the entity into the list of render-able props.
-            m_entity.emplace_back(Prop(vertices, {0.1, 0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 1.0}));
+            m_entity.emplace_back(Prop(vertices, {0.1, 0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 0.5}));
         }
 
         /**
@@ -238,7 +238,7 @@ namespace arc
 
             // Add the light prop into the list of render-able light props.
             m_light.emplace_back(prop::Light(vertices, static_cast<float>(t_light.get_power()),
-                                             {0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 0.1, 1.0}));
+                                             {0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 0.1, 0.5}));
         }
 
         /**
