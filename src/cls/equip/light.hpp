@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- Classes --
 #include "cls/geom/mesh.hpp"
+#include "cls/phys/material.hpp"
 #include "cls/phys/spectrum.hpp"
 
 
@@ -38,6 +39,7 @@ namespace arc
           private:
             //  -- Properties --
             const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
+            const phys::Material m_mat;     //! Material describing the created photons optical properties.
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
 
             //  -- Sorting --
