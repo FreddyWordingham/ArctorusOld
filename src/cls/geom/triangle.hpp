@@ -14,6 +14,9 @@
 
 
 //  == INCLUDES ==
+//  -- General --
+#include "gen/rng.hpp"
+
 //  -- Classes --
 #include "cls/geom/vertex.hpp"
 
@@ -77,17 +80,6 @@ namespace arc
             assert(t_index < m_vert.size());
 
             return (m_vert[t_index]);
-        }
-
-        /**
-         *  Generate a random position on the triangle's surface and determine the associated normal.
-         *
-         *  @return A random position and associated normal on the triangle's surface.
-         */
-        std::array<math::Vec<3>, 2> Triangle::get_random_pos_and_norm() const
-        {
-            // Create return array.
-            std::array<math::Vec<3>, 2> r_vec{};
         }
 
 
