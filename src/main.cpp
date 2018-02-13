@@ -47,9 +47,6 @@ int main()
     const int N = 1E4;
     for (int  i = 0; i < N; ++i)
     {
-        double y = (1.0 * i) / N;
-        double w = 400E-9 + ((300E-9 / N) * i);
-
 //        phys::particle::Photon phot(pos_norm[0], pos_norm[1], 0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
         phys::particle::Photon phot = led.gen_photon();
 
