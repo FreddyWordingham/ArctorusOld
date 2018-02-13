@@ -18,8 +18,7 @@
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/file/handle.hpp"
-#include "cls/graphical/scene.hpp"
-#include "cls/phys/particle/photon.hpp"
+#include "cls/random/step.hpp"
 
 
 
@@ -38,7 +37,17 @@ int main()
 {
     LOG("Hello world!");
 
-    math::Vec<3> a({{0.0, 1.0/std::sqrt(2.0), 1.0/std::sqrt(2.0)}});
+    random::Step step({0.0, 1.0, 2.0}, {20.0, 50.0, 30.0});
+
+    for (int i = 0; i < 10; ++i)
+    {
+        LOG(step());
+    }
+
+
+
+
+/*    math::Vec<3> a({{0.0, 1.0/std::sqrt(2.0), 1.0/std::sqrt(2.0)}});
     a.normalise();
     math::Vec<3> b({{-0.612372, -0.353553, 0.707107}});
     b.normalise();
@@ -90,7 +99,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }
+    }*/
 
     return (0);
 }

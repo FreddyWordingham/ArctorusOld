@@ -20,7 +20,7 @@
 #include "utl/vector.hpp"
 
 
-
+#include "gen/log.hpp"
 //  == NAMESPACE ==
 namespace arc
 {
@@ -66,13 +66,13 @@ namespace arc
             assert(utl::is_always_greater_than_or_equal_to(t_p, 0.0));
 
             // Create return vector.
-            std::vector<double> r_cdf(t_p.size());
+            std::vector<double> r_cdf(t_p.size() + 1);
 
             // Initialise the cdf values.
-            r_cdf[0] = t_p[0];
-            for (size_t i = 1; i < t_p.size(); ++i)
+            r_cdf[0] = 0.0;
+            for (size_t i = 0; i < t_p[i]; ++i)
             {
-                r_cdf[i] = r_cdf[i - 1] + t_p[i];
+                r_cdf[i + 1] = r_cdf[i] + t_p[i];
             }
 
             // Normalise the cdf values.
