@@ -43,7 +43,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Linear(const std::vector<double>& t_x, const std::vector<double>& t_p);
+            Step(const std::vector<double>& t_x, const std::vector<double>& t_p);
 
           private:
             //  -- Initialisation --
