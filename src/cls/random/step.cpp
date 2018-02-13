@@ -34,7 +34,7 @@ namespace arc
          *  @param  t_x Vector of values.
          *  @param  t_p Vector of corresponding probabilities.
          *
-         *  @post   t_p must always be greater than, or equal to, zero.
+         *  @pre    m_p data must always be non-negative.
          */
         Step::Step(const std::vector<double>& t_x, const std::vector<double>& t_p) :
             m_x(t_x),
@@ -45,7 +45,26 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the cumulative distribution frequency of the probability data.
+         *
+         *  @param  t_p Vector of corresponding probabilities.
+         *
+         *  @pre    m_x vector size must match t_p vector size.
+         *  @pre    m_x size must be greater than one.
+         *  @pre    m_p data must always be non-negative.
+         *
+         *  @return The initialised cumulative distribution frequency vector.
+         */
+        std::vector<double> Step::init_cdf(const std::vector<double> &t_p) const
+        {
+            assert(m_x.size() == t_p.size());
+            assert(m_x.size() > 1);
+            assert(utl::is_always_greater_than_or_equal_to(t_p, 0.0));
 
+            // Create return vector.
+            std::vector<double> r_cdf(t_p.size());
+        }
 
 
     } // namespace random
