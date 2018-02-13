@@ -37,16 +37,6 @@ int main()
 {
     LOG("Hello world!");
 
-    random::Step step({0.0, 1.0, 2.0}, {20.0, 50.0, 30.0});
-
-    for (int i = 0; i < 10; ++i)
-    {
-        LOG(step());
-    }
-
-
-
-
 /*    math::Vec<3> a({{0.0, 1.0/std::sqrt(2.0), 1.0/std::sqrt(2.0)}});
     a.normalise();
     math::Vec<3> b({{-0.612372, -0.353553, 0.707107}});
