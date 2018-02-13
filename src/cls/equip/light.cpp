@@ -82,8 +82,8 @@ namespace arc
          */
         phys::particle::Photon Light::gen_photon() const
         {
-            return (phys::particle::Photon(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
-                                           400E-9, 1.0, m_mat));
+            return (phys::particle::Photon(math::Vec<3>({{rng::random(-1.0, 1.0), rng::random(-1.0, 1.0), 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
+                                           rng::random(400E-9, 800E-9), 1.0, 2.0, 0.99, 1.0, 1.0));
         }
 
 

@@ -78,5 +78,5 @@ void main()
     vert_time = time;
 
     // Colour the vertex according to wavelength.
-    vert_col = colormap((600E-9 - 400E-9) / 400E-9);
+    vert_col = colormap((wavelength - 400E-9) / 400E-9);
 }
