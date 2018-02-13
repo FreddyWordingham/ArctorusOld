@@ -31,7 +31,17 @@ namespace arc
 
             //  == INSTANTIATION ==
             //  -- Constructors --
-
+            /**
+             *  Construct a photon packet at a given position with an initial direction at an emission time and
+             *  initial statistical weight and wavelength using a given material.
+             *
+             *  @param  t_pos           Initial position of the photon packet.
+             *  @param  t_dir           Initial direction of the photon packet.
+             *  @param  t_time          Emission time of the photon packet.
+             *  @param  t_wavelength    Initial wavelength of the photon packet.
+             *  @param  t_weight        Initial statistical weight of the photon packet.
+             *  @param  t_mat           Material from which to inherit initial optical properties.
+             */
             Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength,
                            double t_weight, const phys::Material& t_mat) :
                 Photon(t_pos, t_dir, t_time, t_weight, t_wavelength, t_mat.get_ref_index(t_wavelength),
@@ -41,7 +51,7 @@ namespace arc
 
             /**
              *  Construct a photon packet at a given position with an initial direction at an emission time and
-             *  initial statistical weight and wavelength.
+             *  initial statistical weight and wavelength using given optical properties.
              *
              *  @param  t_pos           Initial position of the photon packet.
              *  @param  t_dir           Initial direction of the photon packet.
