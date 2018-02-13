@@ -24,6 +24,7 @@
 
 //  -- Classes --
 #include "cls/graphical/point/photon.hpp"
+#include "cls/phys/material.hpp"
 
 
 
@@ -61,6 +62,8 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
+                Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength,
+                       double t_weight, const phys::Material& t_mat);
                 Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength,
                        double t_weight, double t_ref_index, double t_albedo, double t_interaction, double t_anisotropy);
 

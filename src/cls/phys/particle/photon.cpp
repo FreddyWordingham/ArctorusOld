@@ -31,6 +31,18 @@ namespace arc
 
             //  == INSTANTIATION ==
             //  -- Constructors --
+
+            Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength,
+                           double t_weight, const phys::Material& t_mat) :
+                Particle(t_pos, t_dir, t_time, t_weight),
+                m_wavelength(t_wavelength),
+                m_ref_index(t_mat.get_ref_index(m_wavelength)),
+                m_albedo(t_mat.get_albedo(m_wavelength)),
+                m_interaction(t_mat.get_interaction(m_wavelength)),
+                m_anisotropy(t_mat.get_anisotropy(m_wavelength))
+            {
+            }
+
             /**
              *  Construct a photon packet at a given position with an initial direction at an emission time and
              *  initial statistical weight and wavelength.
@@ -111,7 +123,7 @@ namespace arc
             {
                 // Determine the random declination and azimuthal rotation angles.
                 const double dec = rng::henyey_greenstein(m_anisotropy);
-                const double azi = rng::random(0.0, 2.0*M_PI);
+                const double azi = rng::random(0.0, 2.0 * M_PI);
 
                 rotate(dec, azi);
             }
