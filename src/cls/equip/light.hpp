@@ -17,6 +17,7 @@
 //  -- Classes --
 #include "cls/geom/mesh.hpp"
 #include "cls/phys/material.hpp"
+#include "cls/phys/particle/photon.hpp"
 #include "cls/phys/spectrum.hpp"
 
 
@@ -62,6 +63,9 @@ namespace arc
             const geom::Mesh& get_mesh() const { return (m_mesh); }
             const phys::Spectrum& get_spec() const { return (m_spec); }
             double get_power() const { return (m_power); }
+
+            //  -- Generation --
+            phys::particle::Photon gen_photon() const;
         };
 
 

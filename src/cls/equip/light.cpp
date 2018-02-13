@@ -32,7 +32,8 @@ namespace arc
          *
          *  @post   m_power must be greater than zero.
          */
-        Light::Light(const geom::Mesh& t_mesh, const phys::Material& t_mat, const phys::Spectrum& t_spec, const double t_power) :
+        Light::Light(const geom::Mesh& t_mesh, const phys::Material& t_mat, const phys::Spectrum& t_spec,
+                     const double t_power) :
             m_mesh(t_mesh),
             m_mat(t_mat),
             m_spec(t_spec),
@@ -61,12 +62,28 @@ namespace arc
             }
 
             // Normalise the areas.
-            for (size_t i=0; i<m_tri_area.size(); ++i)
+            for (size_t i = 0; i < m_tri_area.size(); ++i)
             {
                 r_tri_area[i] /= r_tri_area.back();
             }
 
             return (r_tri_area);
+        }
+
+
+
+        //  == METHODS ==
+        //  -- Generation --
+        /**
+         *  Generate a photon at a random point on the light's surface with optical properties determined by the light's
+         *  material.
+         *
+         *  @return The newly generated photon.
+         */
+        phys::particle::Photon Light::gen_photon() const
+        {
+            return (phys::particle::Photon(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0, 500E-9, 1.0,
+                                           1.5, 0.99, 1.0, 1.0));
         }
 
 
