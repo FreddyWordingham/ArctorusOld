@@ -36,14 +36,13 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            const std::vector<size_t> m_index;  //! Vector of index values
             const std::vector<double> m_cdf;    //! The normalised cumulative distribution of the probabilities.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Index(const std::vector<size_t>& t_x, const std::vector<double>& t_p);
+            Index(const std::vector<double>& t_p);
 
           private:
             //  -- Initialisation --

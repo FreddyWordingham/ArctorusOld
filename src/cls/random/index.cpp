@@ -20,7 +20,7 @@
 #include "utl/vector.hpp"
 
 
-#include "gen/log.hpp"
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -32,15 +32,13 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a step random number generator from a given probability distribution.
+         *  Construct a index generator from a given probability distribution.
          *
-         *  @param  t_x Vector of indices.
-         *  @param  t_p Vector of corresponding probabilities.
+         *  @param  t_p Vector of index probabilities.
          *
          *  @post   m_p data must always be non-negative.
          */
-        Index::Index(const std::vector<size_t>& t_x, const std::vector<double>& t_p) :
-            m_x(t_x),
+        Index::Index(const std::vector<double>& t_p) :
             m_cdf(init_cdf(t_p))
         {
             assert(utl::is_always_greater_than_or_equal_to(t_p, 0.0));
@@ -53,16 +51,12 @@ namespace arc
          *
          *  @param  t_p Vector of corresponding probabilities.
          *
-         *  @pre    m_x vector size must match t_p vector size.
-         *  @pre    m_x size must be greater than one.
          *  @pre    m_p data must always be non-negative.
          *
          *  @return The initialised cumulative distribution frequency vector.
          */
         std::vector<double> Index::init_cdf(const std::vector<double>& t_p) const
         {
-            assert(m_x.size() == t_p.size());
-            assert(m_x.size() > 1);
             assert(utl::is_always_greater_than_or_equal_to(t_p, 0.0));
 
             // Create return vector.
@@ -89,13 +83,13 @@ namespace arc
         //  == OPERATORS ==
         //  -- Generation --
         /**
-         *  Generate a random number from the step probability distribution.
+         *  Generate a random index from the step probability distribution.
          *
          *  @return A randomly generated value from the step probability distribution.
          */
-        double Index::operator()() const
+        size_t Index::operator()() const
         {
-            return (m_x[utl::lower_index(m_cdf, rng::random())]);
+            return (utl::lower_index(m_cdf, rng::random()));
         }
 
 
