@@ -19,6 +19,7 @@
 #include "cls/phys/material.hpp"
 #include "cls/phys/particle/photon.hpp"
 #include "cls/phys/spectrum.hpp"
+#include "cls/random/index.hpp"
 
 
 
@@ -44,8 +45,8 @@ namespace arc
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
 
             //  -- Sorting --
-            const std::vector<double> m_tri_area;   //! Vector of normalised triangle areas.
-            const double              m_power;      //! Power of the light source.
+            const random::Index m_rand_tri; //! Random triangle index selector.
+            const double        m_power;    //! Power of the light source.
 
 
             //  == INSTANTIATION ==
@@ -54,7 +55,7 @@ namespace arc
             Light(const geom::Mesh& t_mesh, const phys::Material& t_mat, const phys::Spectrum& t_spec, double t_power);
 
             //  -- Initialisation --
-            std::vector<double> init_tri_area() const;
+            random::Index init_rand_tri() const;
 
 
             //  == METHODS ==

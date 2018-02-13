@@ -43,8 +43,6 @@ void main()
     // Set fragment colour.
     frag_col = vert_col;
 
-    float delta_time = abs(vert_time - render_time);
-/*
     if (render_time > 0.0)
     {
         float delta_time = abs(vert_time - render_time);
@@ -55,7 +53,7 @@ void main()
         }
         else
         {
-            frag_col.a = 1.0 - (delta_time / 1e-10);
+            frag_col.a = 1.0;
         }
-    }*/
+    }
 }

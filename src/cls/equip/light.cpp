@@ -37,6 +37,7 @@ namespace arc
             m_mesh(t_mesh),
             m_mat(t_mat),
             m_spec(t_spec),
+            m_rand_tri(init_rand_tri()),
             m_power(t_power)
         {
             assert(m_power > 0.0);
@@ -45,29 +46,22 @@ namespace arc
 
         //  -- Initialisation --
         /**
-         *  Initialise the vector of triangle areas by determining the area of each triangle and normalising the result.
+         *  Initialise the random triangle index generator.
          *
-         *  @return The vector of normalised triangle areas.
+         *  @return The random triangle index generator.
          */
-        std::vector<double> Light::init_tri_area() const
+        random::Index Light::init_rand_tri() const
         {
-            // Create the return vector.
+            // Create vector of triangle areas.
             std::vector<double> r_tri_area(m_mesh.get_num_tri());
 
-            // Compile the vector of areas and the total area.
-            r_tri_area[0] = m_mesh.get_tri(0).get_area();
-            for (size_t i = 1; i < m_mesh.get_num_tri(); ++i)
+            // Get areas of each triangle.
+            for (size_t i = 0; i < m_mesh.get_num_tri(); ++i)
             {
-                r_tri_area[i] = r_tri_area[i - 1] + m_mesh.get_tri(i).get_area();
+                r_tri_area[i] = m_mesh.get_tri(i).get_area();
             }
 
-            // Normalise the areas.
-            for (size_t i = 0; i < m_tri_area.size(); ++i)
-            {
-                r_tri_area[i] /= r_tri_area.back();
-            }
-
-            return (r_tri_area);
+            return (random::Index(r_tri_area));
         }
 
 
@@ -82,6 +76,9 @@ namespace arc
          */
         phys::particle::Photon Light::gen_photon() const
         {
+//            const std::array<math::Vec<3>, 2> tri_pos_norm =
+
+
             return (phys::particle::Photon(math::Vec<3>({{rng::random(-1.0, 1.0), rng::random(-1.0, 1.0), 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
                                            rng::random(400E-9, 800E-9), 1.0, 2.0, 0.99, 1.0, 1.0));
         }
