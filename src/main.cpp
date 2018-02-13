@@ -39,6 +39,18 @@ int main()
 {
     LOG("Hello world!");
 
+    const random::Index index({0.0, 30.0, 40.0, 5.0, 25.0});
+
+    std::array<int, 5> count;
+
+    for (size_t i=0; i<1e6; ++i)
+    {
+        ++count[index()];
+    }
+
+    VAL(count);
+
+/*
     equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
                      phys::Spectrum(file::read("../test/laser.spc")), 1.0);
 
@@ -78,6 +90,6 @@ int main()
         scene.handle_input();
         scene.render();
     }
-
+*/
     return (0);
 }
