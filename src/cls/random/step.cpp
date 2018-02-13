@@ -70,9 +70,9 @@ namespace arc
 
             // Initialise the cdf values.
             r_cdf[0] = 0.0;
-            for (size_t i = 0; i < t_p[i]; ++i)
+            for (size_t i = 1; i < r_cdf.size(); ++i)
             {
-                r_cdf[i + 1] = r_cdf[i] + t_p[i];
+                r_cdf[i] = r_cdf[i - 1] + t_p[i - 1];
             }
 
             // Normalise the cdf values.
