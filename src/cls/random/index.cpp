@@ -8,7 +8,7 @@
 
 
 //  == HEADER ==
-#include "cls/random/step.hpp"
+#include "cls/random/index.hpp"
 
 
 
@@ -34,12 +34,12 @@ namespace arc
         /**
          *  Construct a step random number generator from a given probability distribution.
          *
-         *  @param  t_x Vector of values.
+         *  @param  t_x Vector of indices.
          *  @param  t_p Vector of corresponding probabilities.
          *
          *  @post   m_p data must always be non-negative.
          */
-        Step::Step(const std::vector<double>& t_x, const std::vector<double>& t_p) :
+        Step::Step(const std::vector<size_t>& t_x, const std::vector<double>& t_p) :
             m_x(t_x),
             m_cdf(init_cdf(t_p))
         {

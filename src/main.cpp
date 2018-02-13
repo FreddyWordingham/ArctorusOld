@@ -18,7 +18,7 @@
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/file/handle.hpp"
-#include "cls/random/step.hpp"
+#include "cls/random/index.hpp"
 #include "cls/phys/particle/photon.hpp"
 #include "cls/graphical/scene.hpp"
 
