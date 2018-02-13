@@ -30,7 +30,6 @@ namespace arc
             Path::Path() :
                 Shader(PATH_SHADER_DIR, false),
                 m_mvp_uni(init_uniform("mvp")),
-                m_col_uni(init_uniform("col")),
                 m_render_time(init_uniform("render_time"))
             {
             }
