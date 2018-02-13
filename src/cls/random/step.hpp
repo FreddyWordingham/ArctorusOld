@@ -34,6 +34,10 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            const std::vector<double> m_x;      //! Vector of values
+            const std::vector<double> m_p;      //! Vector of corresponding probabilities.
+            const std::vector<double> m_cdf;    //! The normalised cumulative distribution of the probabilities.
 
 
             //  == INSTANTIATION ==
