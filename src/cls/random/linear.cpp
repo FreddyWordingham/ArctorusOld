@@ -41,7 +41,6 @@ namespace arc
             m_cdf(init_cdf()),
             m_frac(init_frac())
         {
-
         }
 
 
