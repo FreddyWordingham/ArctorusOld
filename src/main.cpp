@@ -37,7 +37,7 @@ int main()
 {
     LOG("Hello world!");
 
-    equip::Light led(geom::Mesh(file::read("../test/circle.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
+    equip::Light led(geom::Mesh(file::read("../test/isohedron.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
                      phys::Spectrum(file::read("../test/laser.spc")), 1.0);
 
     std::vector<phys::particle::Photon> phots;
