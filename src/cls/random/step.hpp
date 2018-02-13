@@ -29,21 +29,21 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  A generator class which generates random numbers according to a given step probability distribution.
+         *  A generator class which generates random indices according to a given step probability distribution.
          */
         class Step
         {
             //  == FIELDS ==
           private:
             //  -- Data --
-            const std::vector<double> m_x;      //! Vector of values
+            const std::vector<size_t> m_index;  //! Vector of index values
             const std::vector<double> m_cdf;    //! The normalised cumulative distribution of the probabilities.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Step(const std::vector<double>& t_x, const std::vector<double>& t_p);
+            Step(const std::vector<size_t>& t_x, const std::vector<double>& t_p);
 
           private:
             //  -- Initialisation --
@@ -53,7 +53,7 @@ namespace arc
             //  == OPERATORS ==
           public:
             //  -- Generation --
-            double operator()() const;
+            size_t operator()() const;
         };
 
 

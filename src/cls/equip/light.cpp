@@ -83,7 +83,7 @@ namespace arc
         phys::particle::Photon Light::gen_photon() const
         {
             return (phys::particle::Photon(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
-                                           m_spec.gen_wavelength(), 1.0, m_mat));
+                                           400E-9, 1.0, m_mat));
         }
 
 
