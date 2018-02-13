@@ -13,6 +13,9 @@
 
 
 //  == INCLUDES ==
+//  -- General --
+#include "gen/rng.hpp"
+
 //  -- Utility --
 #include "utl/vector.hpp"
 
@@ -80,6 +83,21 @@ namespace arc
 
             return (r_cdf);
         }
+
+
+
+        //  == OPERATORS ==
+        //  -- Generation --
+        /**
+         *  Generate a random number from the step probability distribution.
+         *
+         *  @return A randomly generated value from the step probability distribution.
+         */
+        double Step::operator()() const
+        {
+            return (m_x[utl::lower_index(m_cdf, rng::random())]);
+        }
+
 
 
     } // namespace random
