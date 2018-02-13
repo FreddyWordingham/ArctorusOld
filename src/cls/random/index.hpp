@@ -8,8 +8,8 @@
 
 
 //  == GUARD ==
-#ifndef ARCTORUS_SRC_CLS_RANDOM_STEP_HPP
-#define ARCTORUS_SRC_CLS_RANDOM_STEP_HPP
+#ifndef ARCTORUS_SRC_CLS_RANDOM_INDEX_HPP
+#define ARCTORUS_SRC_CLS_RANDOM_INDEX_HPP
 
 
 
@@ -31,7 +31,7 @@ namespace arc
         /**
          *  A generator class which generates random indices according to a given step probability distribution.
          */
-        class Step
+        class Index
         {
             //  == FIELDS ==
           private:
@@ -43,7 +43,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Step(const std::vector<size_t>& t_x, const std::vector<double>& t_p);
+            Index(const std::vector<size_t>& t_x, const std::vector<double>& t_p);
 
           private:
             //  -- Initialisation --
@@ -64,4 +64,4 @@ namespace arc
 
 
 //  == GUARD END ==
-#endif // ARCTORUS_SRC_CLS_RANDOM_STEP_HPP
+#endif // ARCTORUS_SRC_CLS_RANDOM_INDEX_HPP

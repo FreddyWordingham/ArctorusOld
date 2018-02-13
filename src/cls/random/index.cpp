@@ -39,7 +39,7 @@ namespace arc
          *
          *  @post   m_p data must always be non-negative.
          */
-        Step::Step(const std::vector<size_t>& t_x, const std::vector<double>& t_p) :
+        Index::Index(const std::vector<size_t>& t_x, const std::vector<double>& t_p) :
             m_x(t_x),
             m_cdf(init_cdf(t_p))
         {
@@ -59,7 +59,7 @@ namespace arc
          *
          *  @return The initialised cumulative distribution frequency vector.
          */
-        std::vector<double> Step::init_cdf(const std::vector<double>& t_p) const
+        std::vector<double> Index::init_cdf(const std::vector<double>& t_p) const
         {
             assert(m_x.size() == t_p.size());
             assert(m_x.size() > 1);
@@ -93,7 +93,7 @@ namespace arc
          *
          *  @return A randomly generated value from the step probability distribution.
          */
-        double Step::operator()() const
+        double Index::operator()() const
         {
             return (m_x[utl::lower_index(m_cdf, rng::random())]);
         }
