@@ -168,8 +168,9 @@ namespace arc
 
             do
             {
+                r_val = (*this)();
             }
-            while ((r_val < t_min) || (r_val > t_max))
+            while ((r_val < t_min) || (r_val > t_max));
 
             assert((r_val >= t_min) && (r_val <= t_max));
 
