@@ -72,7 +72,7 @@ namespace arc
             double get_power() const { return (m_power); }
 
             //  -- Generation --
-            phys::particle::Photon gen_photon() const;
+            phys::particle::Photon gen_photon(double t_min, double t_max) const;
         };
 
 
