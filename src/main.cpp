@@ -38,8 +38,8 @@ int main()
 {
     LOG("Hello world!");
 
-/*    std::vector<double> x({-4.0, -2.0, -1.0, 0.0, +1.0, +2.0, +4.0});
-    std::vector<double> y({15.0, 10.0, 8.0, 7.5, 7.0, 5.0, 0.0});
+    std::vector<double> x({-4.0, -2.0, -1.0, 0.0, +1.0, +2.0, +4.0});
+    std::vector<double> y({15.0/60.0, 10.0/60.0, 8.0/60.0, 7.5/60.0, 7.0/60.0, 5.0/60.0, 0.0/60.0});
 
     random::Linear lin(x, y);
 
@@ -51,20 +51,7 @@ int main()
 //        hist(lin());
     }
 
-    hist.save("hist.dat");*/
-
-    std::vector<double> x({0.0, 2.0, 3.0, 5.0, 6.0});
-    std::vector<double> p({0.0, 0.2, 0.2, 0.1, 0.5});
-
-    random::Linear lin(x, p);
-
-    VAL(lin.get_cdf(0.0));
-    VAL(lin.get_cdf(1.0));
-    VAL(lin.get_cdf(2.0));
-    VAL(lin.get_cdf(3.0));
-    VAL(lin.get_cdf(4.0));
-    VAL(lin.get_cdf(5.0));
-    VAL(lin.get_cdf(6.0));
+    hist.save("hist.dat");
 
 
 /*

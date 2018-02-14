@@ -224,7 +224,12 @@ namespace arc
                 return (m_x[lower_index + 1] - (std::sqrt(rng::random()) * (m_x[lower_index + 1] - m_x[lower_index])));
             }
 
-            return (m_x[lower_index] + (rng::random() * (m_x[lower_index + 1] - m_x[lower_index])));
+            // Calculate the generated value.
+            const double r_val = m_x[lower_index] + (rng::random() * (m_x[lower_index + 1] - m_x[lower_index]));
+
+            assert((r_val >= t_min) && (r_val <= t_max));
+
+            return (r_val);
         }
 
 
