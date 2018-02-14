@@ -37,6 +37,7 @@ namespace arc
          *  @post   m_p data must always be non-negative.
          */
         Index::Index(const std::vector<double>& t_p) :
+            m_max_bound(t_p.size() - 1),
             m_cdf(init_cdf(t_p))
         {
             assert(utl::is_always_greater_than_or_equal_to(t_p, 0.0));
