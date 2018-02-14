@@ -127,7 +127,7 @@ namespace arc
             if (r_cdf.back() != 1.0)
             {
                 ERROR("Unable to construct random::Linear object.",
-                      "Total probability: '" << r_cdf.back() << "', but is required to be one.");
+                      "Total probability: '" << r_cdf.back() << "', but is required to be unity.");
             }
 
             return (r_cdf);
