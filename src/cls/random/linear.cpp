@@ -43,6 +43,7 @@ namespace arc
             m_x(t_x),
             m_p(t_p),
             m_grad(init_grad()),
+            m_inter(init_inter()),
             m_cdf(init_cdf()),
             m_frac(init_frac())
         {
@@ -51,7 +52,11 @@ namespace arc
 
 
         //  -- Initialisation --
-
+        /**
+         *  Initialise the vector of probability gradients.
+         *
+         *  @return The initialised vector of probability gradients.
+         */
         std::vector<double> Linear::init_grad() const
         {
             // Create the return vector;
@@ -64,6 +69,25 @@ namespace arc
             }
 
             return (r_grad);
+        }
+
+        /**
+         *  Initialise the vector of probability y-axis intersections.
+         *
+         *  @return The initialised vector of probability y-axis intersections.
+         */
+        std::vector<double> Linear::init_inter() const
+        {
+            // Create the return vector;
+            std::vector<double> r_inter(m_x.size() - 1);
+
+            // Calculate the gradients.
+            for (size_t i = 0; i < r_inter.size(); ++i)
+            {
+                r_inter[i] = m_p[i] - (m_grad[i] * m_x[i]);
+            }
+
+            return (r_inter);
         }
 
         /**
