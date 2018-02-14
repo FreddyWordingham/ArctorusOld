@@ -44,16 +44,11 @@ namespace arc
             //  -- Constructors --
             LightList(const std::vector<equip::Light>& t_light);
 
-          private:
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
-
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            const equip::Light& get_light(const size_t t_index) const { return (m_light[t_index]); }
         };
 
 
