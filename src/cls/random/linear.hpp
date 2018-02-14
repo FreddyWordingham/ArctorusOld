@@ -55,6 +55,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
+            std::vector<double> init_grad() const;
             std::vector<double> init_cdf() const;
             std::vector<double> init_frac() const;
 

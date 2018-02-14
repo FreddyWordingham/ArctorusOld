@@ -42,6 +42,7 @@ namespace arc
             m_max_bound(t_x.back()),
             m_x(t_x),
             m_p(t_p),
+            m_grad(init_grad()),
             m_cdf(init_cdf()),
             m_frac(init_frac())
         {
@@ -50,6 +51,21 @@ namespace arc
 
 
         //  -- Initialisation --
+
+        std::vector<double> Linear::init_grad() const
+        {
+            // Create the return vector;
+            std::vector<double> r_grad(m_x.size() - 1);
+
+            // Calculate the gradients.
+            for (size_t i = 0; i < r_grad.size(); ++i)
+            {
+                r_grad[i] = (m_p[i + 1] - m_p[i]) / (m_x[i + 1] - m_x[i]);
+            }
+
+            return (r_grad);
+        }
+
         /**
          *  Initialise the cumulative distribution vector of the probability distribution.
          *
@@ -126,7 +142,7 @@ namespace arc
         double Linear::operator()() const
         {
             // Generate a random double between zero and one.
-            const double  r           = rng::random();
+            const double r = rng::random();
 
             // Determine the lower index of the cdf where the value is found.
             static size_t lower_index = 0;
