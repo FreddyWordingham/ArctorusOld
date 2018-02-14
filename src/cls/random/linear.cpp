@@ -72,7 +72,7 @@ namespace arc
             double      total_area = 0.0;
             for (size_t i          = 0; i < (t_p.size() - 1); ++i)
             {
-                total_area += ((m_p[i] + m_p[i + 1]) * (m_x[i + 1] - m_x[i])) / 2.0;
+                total_area += ((t_p[i] + t_p[i + 1]) * (m_x[i + 1] - m_x[i])) / 2.0;
             }
 
             // Create the return probability values.
