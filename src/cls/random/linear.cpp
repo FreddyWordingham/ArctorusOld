@@ -64,7 +64,23 @@ namespace arc
          */
         std::vector<double> Linear::init_p(const std::vector<double>& t_p) const
         {
+            // Sum the area of each trapezium.
+            double      total_area = 0.0;
+            for (size_t i          = 0; i < (t_p.size() - 1); ++i)
+            {
+                total_area += ((m_p[i] + m_p[i + 1]) * (m_x[i + 1] - m_x[i])) / 2.0;
+            }
 
+            // Create the return probability values.
+            std::vector<double> r_p(t_p.size());
+
+            // Calculate the normalised probability values.
+            for (size_t i          = 0; i < (t_p.size() - 1); ++i)
+            {
+                r_p[i] = t_p[i] / total_area;
+            }
+
+            return (r_p);
         }
 
         /**
