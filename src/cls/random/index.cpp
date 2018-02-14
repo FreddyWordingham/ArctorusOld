@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/log.hpp"
 #include "gen/rng.hpp"
 
 //  -- Utility --
@@ -69,12 +70,12 @@ namespace arc
                 r_cdf[i] = r_cdf[i - 1] + t_p[i - 1];
             }
 
-            // Normalise the cdf values.
-            for (size_t i = 0; i < t_p.size(); ++i)
+            // Check that the total probability is equal to unity.
+            if (r_cdf.back() != 1.0)
             {
-                r_cdf[i] /= r_cdf.back();
+                ERROR("Unable to construct random::Index object.",
+                      "Total probability: '" << r_cdf.back() << "', but is required to be unity.");
             }
-
             return (r_cdf);
         }
 
