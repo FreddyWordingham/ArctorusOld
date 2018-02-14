@@ -90,7 +90,7 @@ namespace arc
              */
             Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength,
                            double t_weight, const phys::Material& t_mat) :
-                Photon(t_pos, t_dir, t_time, t_weight, t_wavelength, t_mat.get_ref_index(t_wavelength),
+                Photon(t_pos, t_dir, t_time, t_wavelength, t_weight, t_mat.get_ref_index(t_wavelength),
                        t_mat.get_albedo(t_wavelength), t_mat.get_interaction(t_wavelength), t_mat.get_anisotropy(t_wavelength))
             {
             }
