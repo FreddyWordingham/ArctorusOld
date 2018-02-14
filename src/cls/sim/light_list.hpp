@@ -57,6 +57,12 @@ namespace arc
             double get_min_bound() const;
             double get_max_bound() const;
             const equip::Light& get_light(const size_t t_index) const { return (m_light[t_index]); }
+
+            //  -- Generation --
+            phys::particle::Photon gen_photon(double t_min, double t_max) const
+            {
+                return (m_light[m_light_select()].gen_photon(t_min, t_max));
+            }
         };
 
 
