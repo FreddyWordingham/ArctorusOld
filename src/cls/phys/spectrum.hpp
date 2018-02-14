@@ -63,6 +63,10 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Getters --
+            double get_min_bound() const { return (m_dist.get_min_bound()); }
+            double get_max_bound() const { return (m_dist.get_max_bound()); }
+
             //  -- Generation --
             double gen_wavelength() const { return (m_dist()); }
         };
