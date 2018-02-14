@@ -206,17 +206,25 @@ namespace arc
             assert((t_min >= m_min_bound) && (t_min < m_max_bound));
             assert((t_max > m_min_bound) && (t_min <= m_max_bound));
 
-            double r_val;
+            // Generate a random double between the interpolated cdf values.
+            const double r = rng::random(get_cdf(t_min), get_cdf(t_max));
 
-            do
+            // Determine the lower index of the cdf where the value is found.
+            static size_t lower_index = 0;
+            lower_index = utl::lower_index(m_cdf, r, lower_index);
+
+            // Generate a value by interpolating the probabilities.
+            const double f = rng::random();
+            if (f <= m_frac[lower_index])
             {
-                r_val = (*this)();
+                if (m_p[lower_index] < m_p[lower_index + 1])
+                {
+                    return (m_x[lower_index] + (std::sqrt(rng::random()) * (m_x[lower_index + 1] - m_x[lower_index])));
+                }
+                return (m_x[lower_index + 1] - (std::sqrt(rng::random()) * (m_x[lower_index + 1] - m_x[lower_index])));
             }
-            while ((r_val < t_min) || (r_val > t_max));
 
-            assert((r_val >= t_min) && (r_val <= t_max));
-
-            return (r_val);
+            return (m_x[lower_index] + (rng::random() * (m_x[lower_index + 1] - m_x[lower_index])));
         }
 
 
