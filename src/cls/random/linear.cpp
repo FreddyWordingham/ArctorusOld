@@ -243,7 +243,7 @@ namespace arc
             const double r_cdf = m_cdf[lower_index] + ((m_grad[lower_index] / 2.0) * (math::square(t_x) - math::square(
                 m_x[lower_index]))) + (m_inter[lower_index] * (t_x - m_x[lower_index]));
 
-            //assert((r_cdf >= 0.0) && (r_cdf <= 1.0));
+            assert((r_cdf >= 0.0) && (r_cdf <= 1.0));
 
             return (r_cdf);
         }

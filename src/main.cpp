@@ -54,7 +54,7 @@ int main()
     hist.save("hist.dat");*/
 
     std::vector<double> x({0.0, 2.0, 3.0, 5.0, 6.0});
-    std::vector<double> p({0.0, 2.0, 2.0, 1.0, 5.0});
+    std::vector<double> p({0.0, 0.2, 0.2, 0.1, 0.5});
 
     random::Linear lin(x, p);
 
