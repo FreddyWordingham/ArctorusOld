@@ -38,24 +38,6 @@ int main()
 {
     LOG("Hello world!");
 
-    std::vector<double> x({-4.0, -2.0, -1.0, 0.0, +1.0, +2.0, +4.0});
-    std::vector<double> y({15.0/60.0, 10.0/60.0, 8.0/60.0, 7.5/60.0, 7.0/60.0, 5.0/60.0, 0.0/60.0});
-
-    random::Linear lin(x, y);
-
-    data::Histogram hist(-5.0, +5.0, 100);
-
-    for (size_t i = 0; i < 1e6; ++i)
-    {
-        hist(lin(-2.0, +2.0));
-//        hist(lin());
-    }
-
-    hist.save("hist.dat");
-
-
-/*
-
     equip::Light led(geom::Mesh(file::read("../test/isohedron.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
                      phys::Spectrum(file::read("../test/laser.spc")), 1.0);
 
@@ -94,7 +76,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }*/
+    }
 
     return (0);
 }
