@@ -152,7 +152,8 @@ namespace arc
          *  @param  t_min   Minimum value that may be returned.
          *  @param  t_max   Maximum value that may be returned.
          *
-         *  @pre    t_min must be greater than, or equal to, m_lower_bound
+         *  @pre    t_min must be greater than, or equal to, m_lower_bound and less than m_upper_bound.
+         *  @pre    t_max must be greater than m_lower_bound and less than, or equal to, the m_upper_bound.
          *
          *  @post   r_val must be between the limits of t_min and t_max.
          *
@@ -160,6 +161,8 @@ namespace arc
          */
         double Linear::operator()(const double t_min, const double t_max) const
         {
+            assert((t_min >= m_min_bound) && (t_min < m_max_bound));
+            assert((t_max > m_min_bound) && (t_min <= m_max_bound));
 
             double r_val;
 
