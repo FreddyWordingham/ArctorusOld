@@ -47,6 +47,7 @@ int main()
     for (size_t i = 0; i < 1e6; ++i)
     {
         hist(lin(-2.0, +2.0));
+//        hist(lin());
     }
 
     hist.save("hist.dat");
