@@ -38,8 +38,8 @@ namespace arc
              *  @param  t_pos           Initial position of the photon packet.
              *  @param  t_dir           Initial direction of the photon packet.
              *  @param  t_time          Emission time of the photon packet.
-             *  @param  t_wavelength    Initial wavelength of the photon packet.
              *  @param  t_weight        Initial statistical weight of the photon packet.
+             *  @param  t_wavelength    Initial wavelength of the photon packet.
              *  @param  t_ref_index     Initial refractive index.
              *  @param  t_albedo        Initial albedo.
              *  @param  t_interaction   Initial interaction coefficient.
@@ -47,15 +47,15 @@ namespace arc
              *
              *  @post   n_dir must be normalised.
              *  @post   m_time must be greater than, or equal to, zero
-             *  @post   m_wavelength must be positive.
              *  @post   n_weight must be positive.
+             *  @post   m_wavelength must be positive.
              *  @post   m_ref_index must be positive.
              *  @post   m_albedo must be greater than, or equal to, zero.
              *  @post   m_interaction must be greater than zero.
              *  @post   m_anisotropy must be greater than, or equal to, minus one and must be less than, or equal to, one.
              */
-            Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_time, const double t_wavelength,
-                           const double t_weight, const double t_ref_index, const double t_albedo, const double t_interaction,
+            Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_time, const double t_weight,
+                           const double t_wavelength, const double t_ref_index, const double t_albedo, const double t_interaction,
                            const double t_anisotropy) :
                 Particle(t_pos, t_dir, t_time, t_weight),
                 m_wavelength(t_wavelength),
@@ -66,8 +66,8 @@ namespace arc
             {
                 assert(n_dir.is_normalised());
                 assert(n_time >= 0.0);
-                assert(m_wavelength > 0.0);
                 assert(n_weight > 0.0);
+                assert(m_wavelength > 0.0);
                 assert(m_ref_index > 0.0);
                 assert(m_albedo >= 0.0);
                 assert(m_interaction > 0.0);
@@ -84,13 +84,13 @@ namespace arc
              *  @param  t_pos           Initial position of the photon packet.
              *  @param  t_dir           Initial direction of the photon packet.
              *  @param  t_time          Emission time of the photon packet.
-             *  @param  t_wavelength    Initial wavelength of the photon packet.
              *  @param  t_weight        Initial statistical weight of the photon packet.
+             *  @param  t_wavelength    Initial wavelength of the photon packet.
              *  @param  t_mat           Material from which to inherit initial optical properties.
              */
-            Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_wavelength,
-                           double t_weight, const phys::Material& t_mat) :
-                Photon(t_pos, t_dir, t_time, t_wavelength, t_weight, t_mat.get_ref_index(t_wavelength),
+            Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_time, double t_weight,
+                           double t_wavelength, const phys::Material& t_mat) :
+                Photon(t_pos, t_dir, t_time, t_weight, t_wavelength, t_mat.get_ref_index(t_wavelength),
                        t_mat.get_albedo(t_wavelength), t_mat.get_interaction(t_wavelength), t_mat.get_anisotropy(t_wavelength))
             {
             }
