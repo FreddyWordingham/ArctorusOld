@@ -27,6 +27,11 @@ namespace arc
          *
          *  @param  t_vert  Vector of vertices forming the prop.
          *  @param  t_col   Colour of the prop.
+         *
+         *  @post   m_col.r must be greater than, or equal to, zero and less than, or equal to, one.
+         *  @post   m_col.g must be greater than, or equal to, zero and less than, or equal to, one.
+         *  @post   m_col.b must be greater than, or equal to, zero and less than, or equal to, one.
+         *  @post   m_col.a must be greater than, or equal to, zero and less than, or equal to, one.
          */
         Prop::Prop(const std::vector<Vertex>& t_vert, const glm::vec4& t_col) :
             m_num_vert(static_cast<GLsizei>(t_vert.size())),
@@ -34,18 +39,29 @@ namespace arc
             m_vao(init_vao()),
             m_vbo(init_vbo())
         {
+            // Create vertex array object and vertex buffer object.
             glBindVertexArray(m_vao);
             glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
             glBufferData(GL_ARRAY_BUFFER, static_cast<size_t>(m_num_vert) * sizeof(Vertex), &t_vert.front(), GL_STATIC_DRAW);
 
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) 0);
+            // Enable the vertex position layout location.
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(0));
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (3 * sizeof(GLfloat)));
+            // Enable the vertex normal layout location.
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(3 * sizeof(GLfloat)));
             glEnableVertexAttribArray(1);
 
+            // Bind the buffer object.
             glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+            // Clear the active buffer.
             glBindVertexArray(0);
+
+            assert((m_col.r >= 0.0f) && (m_col.r <= 1.0f));
+            assert((m_col.g >= 0.0f) && (m_col.g <= 1.0f));
+            assert((m_col.b >= 0.0f) && (m_col.b <= 1.0f));
+            assert((m_col.a >= 0.0f) && (m_col.a <= 1.0f));
         }
 
         /**
@@ -72,24 +88,35 @@ namespace arc
             m_vao(init_vao()),
             m_vbo(init_vbo())
         {
+            // Create vertex array object and vertex buffer object.
             glBindVertexArray(m_vao);
             glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
             glBufferData(GL_ARRAY_BUFFER, static_cast<size_t>(m_num_vert) * sizeof(point::Photon), &t_phot.front(),
                          GL_STATIC_DRAW);
 
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) 0);
+            // Enable the photon packet position layout location.
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(point::Photon), reinterpret_cast<GLvoid*>(0));
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (3 * sizeof(GLfloat)));
+            // Enable the photon packet wavelength layout location.
+            glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon),
+                                  reinterpret_cast<GLvoid*>(3 * sizeof(GLfloat)));
             glEnableVertexAttribArray(1);
 
-            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (4 * sizeof(GLfloat)));
+            // Enable the photon packet statistical weight layout location.
+            glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon),
+                                  reinterpret_cast<GLvoid*>(4 * sizeof(GLfloat)));
             glEnableVertexAttribArray(2);
 
-            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon), (GLvoid*) (5 * sizeof(GLfloat)));
+            // Enable the photon packet time travelled layout location.
+            glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(point::Photon),
+                                  reinterpret_cast<GLvoid*>(5 * sizeof(GLfloat)));
             glEnableVertexAttribArray(3);
 
+            // Bind the buffer object.
             glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+            // Clear the active buffer.
             glBindVertexArray(0);
         }
 
@@ -102,8 +129,10 @@ namespace arc
          */
         GLuint Prop::init_vao() const
         {
+            // Create vertex array object handle.
             GLuint r_vao;
 
+            // Initialise the vertex array object handle.
             glGenVertexArrays(1, &r_vao);
 
             return (r_vao);
@@ -116,8 +145,10 @@ namespace arc
          */
         GLuint Prop::init_vbo() const
         {
+            // Create vertex buffer object handle.
             GLuint r_vbo;
 
+            // Initialise the vertex buffer object handle.
             glGenBuffers(1, &r_vbo);
 
             return (r_vbo);
@@ -139,6 +170,8 @@ namespace arc
                     return (init_vert_cube(t_scale));
                 case shape::SKYBOX:
                     return (init_vert_skybox(t_scale));
+                case shape::SUN:
+                    return (init_vert_sun(t_scale));
             }
         }
 
@@ -151,9 +184,13 @@ namespace arc
          */
         std::vector<Vertex> Prop::init_vert_cube(const float t_scale) const
         {
+            // Create vertex vector.
             std::vector<Vertex> r_vert;
+
+            // Reserve space for 36 vertices.
             r_vert.reserve(36);
 
+            // Add face vertices into the vertex vector.
             r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {-1.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({-t_scale, -t_scale, +t_scale}, {-1.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({-t_scale, +t_scale, +t_scale}, {-1.0f, +0.0f, +0.0f}));
@@ -208,9 +245,13 @@ namespace arc
          */
         std::vector<Vertex> Prop::init_vert_skybox(const float t_scale) const
         {
+            // Create vertex vector.
             std::vector<Vertex> r_vert;
+
+            // Reserve space for 36 vertices.
             r_vert.reserve(36);
 
+            // Add face vertices into the vertex vector.
             r_vert.push_back(Vertex({-t_scale, +t_scale, -t_scale}, {+0.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({-t_scale, -t_scale, -t_scale}, {+0.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({+t_scale, -t_scale, -t_scale}, {+0.0f, +0.0f, +0.0f}));
@@ -255,6 +296,84 @@ namespace arc
 
             return (r_vert);
         }
+
+        /**
+         *  Initialise the vertices for a sun prop shape.
+         *
+         *  @param  t_scale Size multiplier of the shape.
+         *
+         *  @return The initialised vector of vertices for a sun.
+         */
+        std::vector<Vertex> Prop::init_vert_sun(const float t_scale) const
+        {
+            // Create vertex vector.
+            std::vector<Vertex> r_vert;
+
+            // Reserve space for 24 vertices.
+            r_vert.reserve(24 + 18);
+
+            // Add face vertices into the vertex vector.
+            // Main body.
+            r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.0f, +t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({-t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.0f, -t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, -t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.0f, +t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, -t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({-t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, -t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.0f, -t_scale, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, -t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
+
+            // +z point.
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            return (r_vert);
+        }
+
 
 
     } // namespace graphical

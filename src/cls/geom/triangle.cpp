@@ -42,6 +42,39 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Generate a random position on the triangle's surface and determine the associated normal.
+         *
+         *  @return A random position and associated normal on the triangle's surface.
+         */
+        std::array<math::Vec<3>, 2> Triangle::get_random_pos_and_norm() const
+        {
+            // Create return array.
+            std::array<math::Vec<3>, 2> r_vec;
+
+            // Generate a pair of random barycentric coordinates.
+            double a = rng::random();
+            double b = rng::random();
+
+            // If the generated coordinate falls beyond the triangle, mirror it back inside.
+            if ((a + b) > 1.0)
+            {
+                a = 1.0 - a;
+                b = 1.0 - b;
+            }
+
+            // Generate the world-space cartesian coordinates from the barycentric coordinates.
+            r_vec[0] = m_vert[GAMMA].get_pos() + ((m_vert[ALPHA].get_pos() - m_vert[GAMMA].get_pos()) * a) + ((m_vert[BETA]
+                .get_pos() - m_vert[GAMMA].get_pos()) * b);
+            r_vec[1] = (m_vert[ALPHA].get_norm() * a) + (m_vert[BETA].get_norm() * b) + (m_vert[GAMMA]
+                .get_norm() * (1.0 - a - b));
+            r_vec[1].normalise();
+
+            return (r_vec);
+        }
+
+
         //  -- Transformation --
         /**
          *  Transform a triangle's vertices using a given position and normal transformation matrix.

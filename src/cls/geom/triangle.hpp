@@ -14,6 +14,9 @@
 
 
 //  == INCLUDES ==
+//  -- General --
+#include "gen/rng.hpp"
+
 //  -- Classes --
 #include "cls/geom/vertex.hpp"
 
@@ -53,6 +56,7 @@ namespace arc
             //  -- Getters --
             double get_area() const { return (m_area); }
             inline const Vertex& get_vert(size_t t_index) const;
+            std::array<math::Vec<3>, 2> get_random_pos_and_norm() const;
 
             //  -- Transformation --
             void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat);

@@ -69,6 +69,7 @@ namespace arc
           public:
             //  -- Getters --
             std::string get_title() const { return (m_title); }
+            const std::vector<double>& get_data() const { return (m_data); }
             double& front() { return (m_data.front()); }
             const double& front() const { return (m_data.front()); }
             double& back() { return (m_data.back()); }
@@ -88,7 +89,7 @@ namespace arc
 
 
 
-    } // namespace point
+    } // namespace data
 } // namespace arc
 
 

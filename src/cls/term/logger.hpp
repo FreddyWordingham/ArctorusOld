@@ -225,14 +225,17 @@ namespace arc
         {
             assert(!t_name.empty());
 
+            // Resize the name to the set length and add colon string.
             std::string text = t_name;
             text.resize(VALUE_NAME_WIDTH, ' ');
             text += " : ";
 
+            // Add value to the stream.
             std::stringstream val_stream;
             val_stream << std::boolalpha << t_val;
             text += val_stream.str();
 
+            // Print the value.
             print_text(MAGENTA, VAL, text);
         }
 
@@ -252,12 +255,14 @@ namespace arc
         {
             assert(!t_name.empty());
 
+            // If printing to a
             static const bool s_term                              = (&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0);
             if (!s_term)
             {
                 return;
             }
 
+            // Return if minimum update time has not yet passed.
             static std::chrono::steady_clock::time_point last_update;
             const std::chrono::steady_clock::time_point  cur_time = std::chrono::steady_clock::now();
             if (std::chrono::duration_cast<std::chrono::duration<double>>(cur_time - last_update).count() < MIN_UPDATE_DELAY)
@@ -266,18 +271,22 @@ namespace arc
             }
             last_update = cur_time;
 
+            // Resize the name to the set length and add colon string.
             std::string text = t_name;
             text.resize(VALUE_NAME_WIDTH, ' ');
             text += " : ";
 
+            // Store the value as a string and resize it to the set length.
             std::stringstream val_stream;
             val_stream << std::boolalpha << t_val;
             text += val_stream.str();
             text.resize(static_cast<size_t>(TEXT_WIDTH), ' ');
 
+            // Create the timestamp.
             std::string timestamp = "[" + utl::create_timestamp() + "]";
             timestamp.resize(TIME_WIDTH, ' ');
 
+            // Print the temporary message.
             m_stream << timestamp << m_text_col[YELLOW] << m_log_type[TEMP] << text << m_text_col[RESET] << "\r";
         }
 

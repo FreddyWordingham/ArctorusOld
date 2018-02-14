@@ -54,8 +54,7 @@ namespace arc
                 //  == INSTANTIATION ==
               public:
                 //  -- Constructors --
-                Orbit(const glm::vec3& t_pos, float t_aspect_ratio, float t_speed = DEFAULT_SPEED,
-                      float t_fov = DEFAULT_FOV);
+                Orbit(const glm::vec3& t_pos, float t_aspect_ratio, float t_speed = DEFAULT_SPEED, float t_fov = DEFAULT_FOV);
 
 
                 //  == METHODS ==

@@ -12,23 +12,21 @@
 
 
 
-//  == INPUT ==
-//  -- Passed --
-in vec4 vert_col;   //! Colour of the geometry vertex.
+//  == IN/OUTPUT ==
+//  -- Input --
+in vec4 vert_col;   //! Colour of the vertex.
 
-
-
-//  == OUTPUT ==
-//  -- Passed --
+//  -- Output --
 out vec4 frag_col;  //! Output fragment colour.
 
 
 
 //  == MAIN ==
 /**
- *  Illuminate objects with uniform ambient lighting.
+ *  Main function of the ambient fragment sub-shader.
  */
 void main()
 {
+    // Set the fragment colour.
     frag_col = vert_col;
 }

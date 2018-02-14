@@ -64,7 +64,7 @@ namespace arc
                 n_dir[Y] = sinf(m_dec) * sinf(m_azi);
                 n_dir[Z] = cosf(m_dec);
 
-                glm::vec3 right(glm::normalize(glm::cross(n_dir, UP_DIR)));
+                glm::vec3 right(glm::normalize(glm::cross(n_dir, glm::vec3(UP_DIR_X, UP_DIR_Y, UP_DIR_Z))));
                 glm::vec3 up(glm::normalize(glm::cross(right, n_dir)));
 
                 n_pos += ((t_translate[0] * n_dir) + (t_translate[1] * right) + (t_translate[2] * up)) * n_speed;
@@ -81,9 +81,8 @@ namespace arc
                     m_dec = 3.141f;
                 }
 
-                n_view = glm::lookAt(n_pos, n_pos + n_dir, UP_DIR);
+                n_view = glm::lookAt(n_pos, n_pos + n_dir, glm::vec3(UP_DIR_X, UP_DIR_Y, UP_DIR_Z));
             }
-
 
 
 

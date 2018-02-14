@@ -10,15 +10,17 @@
 //  == INCLUDES ==
 //  -- System --
 #include <vector>
+#include <cls/data/histogram.hpp>
 
 //  -- General --
-#include "gen/log.hpp"
 #include "gen/math.hpp"
 
 //  -- Classes --
+#include "cls/equip/entity.hpp"
+#include "cls/equip/light.hpp"
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
-#include "cls/geom/vertex.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -35,38 +37,58 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
+/*
+    std::vector<double> x({-4.0, -2.0, -1.0, 0.0, +1.0, +2.0, +4.0});
+    std::vector<double> y({15.0, 10.0, 8.0, 7.5, 7.0, 5.0, 0.0});
+
+    random::Linear lin(x, y);
+
+    data::Histogram hist(-5.0, +5.0, 100);
+
+    for (size_t i = 0; i < 1e6; ++i)
+    {
+        hist(lin(-2.0, +2.0));
+//        hist(lin());
+    }
+
+    hist.save("hist.dat");*/
+
+
+
+
+    equip::Light led(geom::Mesh(file::read("../test/isohedron.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
+                     phys::Spectrum(file::read("../test/laser.spc")), 1.0);
+
+    std::vector<phys::particle::Photon> phots;
+
+    const int N = 1E4;
+    for (int  i = 0; i < N; ++i)
+    {
+//        phys::particle::Photon phot(pos_norm[0], pos_norm[1], 0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
+        phys::particle::Photon phot = led.gen_photon();
+
+        for (int j = 0; j < 100; ++j)
+        {
+            phot.move(-std::log(rng::random(0.0, 1.0)) / phot.get_interaction());
+            phot.scatter();
+        }
+
+        phots.push_back(phot);
+    }
 
     graphical::Scene scene;
 
-    std::vector<graphical::point::Photon> path_x;
-    path_x.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
-    path_x.push_back(graphical::point::Photon({1.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 1.0));
-    scene.add_photon(path_x);
+    equip::Entity monkey(
+        geom::Mesh(file::read("../test/cube.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
+                   math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/intralipid_10.mat")));
+    scene.add_entity(monkey);
 
-    std::vector<graphical::point::Photon> path_y;
-    path_y.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
-    path_y.push_back(graphical::point::Photon({0.0f, 1.0f, 0.0f}, 400E-9f, 1.0f, 1.0));
-    scene.add_photon(path_y);
+    scene.add_light(led);
 
-    std::vector<graphical::point::Photon> path_z;
-    path_z.push_back(graphical::point::Photon({0.0f, 0.0f, 0.0f}, 400E-9f, 1.0f, 0.0));
-    path_z.push_back(graphical::point::Photon({0.0f, 0.0f, 1.0f}, 400E-9f, 1.0f, 1.0));
-    scene.add_photon(path_z);
-
-    //First vec is translational, second is rotational, double is extra rotation, final vec is scaling.
-    const geom::Mesh mesh(file::read("test/circle.obj"), math::Vec<3>({{5.0, 5.0, 5.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.0,
-                    math::Vec<3>({{0.5, 0.5, 0.5}}));
-    const geom::Mesh cube_One(file::read("test/cube.obj"), math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.0,
-                    math::Vec<3>({{1.0, 1.0, 1.0}}));
-    const geom::Mesh cube_Two (file::read("test/cube.obj"), math::Vec<3>({{2.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.0,
-                    math::Vec<3>({{1.0, 1.0, 1.0}}));
-    const geom::Mesh cube_Three (file::read("test/cube.obj"), math::Vec<3>({{4.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 1.0, 0.0}}), 0.0,
-                               math::Vec<3>({{1.0, 1.0, 1.0}}));
-
-    scene.add_light(mesh, 2.0, {1.0f, 1.0f, 0.0f, 1.0f});
-    scene.add_entity(cube_One, {0.5f, 1.0f, 0.0f, 1.0f});
-    scene.add_entity(cube_Two, {1.0f, 0.5f, 0.0f, 1.0f});
-    scene.add_entity(cube_Three, {1.0f, 0.0f, 1.0f, 1.0f});
+    for (size_t i = 0; i < phots.size(); ++i)
+    {
+        scene.add_photon(phots[i].get_path());
+    }
 
     while (!scene.should_close())
     {

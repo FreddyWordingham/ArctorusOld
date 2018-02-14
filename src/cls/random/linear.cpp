@@ -34,18 +34,62 @@ namespace arc
          *
          *  @param  t_x Vector of X positions.
          *  @param  t_p Vector of corresponding probabilities.
+         *
+         *  @post   t_min_bound must be less than m_max_bound.
          */
         Linear::Linear(const std::vector<double>& t_x, const std::vector<double>& t_p) :
+            m_min_bound(t_x.front()),
+            m_max_bound(t_x.back()),
             m_x(t_x),
             m_p(t_p),
+            m_grad(init_grad()),
+            m_inter(init_inter()),
             m_cdf(init_cdf()),
             m_frac(init_frac())
         {
-
+            assert(m_min_bound < m_max_bound);
         }
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the vector of probability gradients.
+         *
+         *  @return The initialised vector of probability gradients.
+         */
+        std::vector<double> Linear::init_grad() const
+        {
+            // Create the return vector;
+            std::vector<double> r_grad(m_x.size() - 1);
+
+            // Calculate the gradients.
+            for (size_t i = 0; i < r_grad.size(); ++i)
+            {
+                r_grad[i] = (m_p[i + 1] - m_p[i]) / (m_x[i + 1] - m_x[i]);
+            }
+
+            return (r_grad);
+        }
+
+        /**
+         *  Initialise the vector of probability y-axis intersections.
+         *
+         *  @return The initialised vector of probability y-axis intersections.
+         */
+        std::vector<double> Linear::init_inter() const
+        {
+            // Create the return vector;
+            std::vector<double> r_inter(m_x.size() - 1);
+
+            // Calculate the gradients.
+            for (size_t i = 0; i < r_inter.size(); ++i)
+            {
+                r_inter[i] = m_p[i] - (m_grad[i] * m_x[i]);
+            }
+
+            return (r_inter);
+        }
+
         /**
          *  Initialise the cumulative distribution vector of the probability distribution.
          *
@@ -95,8 +139,10 @@ namespace arc
          */
         std::vector<double> Linear::init_frac() const
         {
+            // Create the vector of fractional triangle areas.
             std::vector<double> r_frac(m_x.size() - 1);
 
+            // Calculate the fraction of area occupied by the triangle.
             for (size_t i = 0; i < r_frac.size(); ++i)
             {
                 double above = (std::fabs(m_p[i + 1] - m_p[i]) * (m_x[i + 1] - m_x[i])) / 2.0;
@@ -119,10 +165,14 @@ namespace arc
          */
         double Linear::operator()() const
         {
-            const double  r           = rng::random();
+            // Generate a random double between zero and one.
+            const double r = rng::random();
+
+            // Determine the lower index of the cdf where the value is found.
             static size_t lower_index = 0;
             lower_index = utl::lower_index(m_cdf, r, lower_index);
 
+            // Generate a value by interpolating the probabilities.
             const double f = rng::random();
             if (f <= m_frac[lower_index])
             {
@@ -134,6 +184,37 @@ namespace arc
             }
 
             return (m_x[lower_index] + (rng::random() * (m_x[lower_index + 1] - m_x[lower_index])));
+        }
+
+        /**
+         *  Generate a random number from the probability distribution between the given limits.
+         *
+         *  @param  t_min   Minimum value that may be returned.
+         *  @param  t_max   Maximum value that may be returned.
+         *
+         *  @pre    t_min must be greater than, or equal to, m_lower_bound and less than m_upper_bound.
+         *  @pre    t_max must be greater than m_lower_bound and less than, or equal to, the m_upper_bound.
+         *
+         *  @post   r_val must be between the limits of t_min and t_max.
+         *
+         *  @return A randomly generated value from the probability distribution between the limits.
+         */
+        double Linear::operator()(const double t_min, const double t_max) const
+        {
+            assert((t_min >= m_min_bound) && (t_min < m_max_bound));
+            assert((t_max > m_min_bound) && (t_min <= m_max_bound));
+
+            double r_val;
+
+            do
+            {
+                r_val = (*this)();
+            }
+            while ((r_val < t_min) || (r_val > t_max));
+
+            assert((r_val >= t_min) && (r_val <= t_max));
+
+            return (r_val);
         }
 
 

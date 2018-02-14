@@ -24,6 +24,10 @@
 #include "gen/config.hpp"
 #include "gen/control.hpp"
 #include "gen/log.hpp"
+#include "gen/rng.hpp"
+
+//  -- Utility --
+#include "utl/conversion.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -54,7 +58,7 @@ namespace arc
             m_secondary_cam(std::make_unique<camera::Fly>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
                                                           static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_sun_pos(glm::vec3({INIT_SUN_POS_X, INIT_SUN_POS_Y, INIT_SUN_POS_Z})),
-            m_sun(Prop(Prop::shape::CUBE, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
+            m_sun(Prop(Prop::shape::SUN, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
         }
 
@@ -181,62 +185,60 @@ namespace arc
         /**
          *  Add a render-able entity prop to the scene.
          *
-         *  @param  t_mesh  Entity mesh to be added to the scene.
-         *  @param  t_col   Colour to render the entity with.
+         *  @param  t_ent   Entity be added to the scene.
          */
-        void Scene::add_entity(const geom::Mesh& t_mesh, const glm::vec4& t_col)
+        void Scene::add_entity(const equip::Entity& t_ent)
         {
             // Create vector of vertices.
             std::vector<Vertex> vertices;
-            vertices.reserve(t_mesh.get_num_tri() * 3);
+            vertices.reserve(t_ent.get_mesh().get_num_tri() * 3);
 
             // Add vertices into list from mesh.
-            for (size_t i = 0; i < t_mesh.get_num_tri(); ++i)
+            for (size_t i = 0; i < t_ent.get_mesh().get_num_tri(); ++i)
             {
                 for (size_t j = 0; j < 3; ++j)
                 {
-                    vertices.push_back(Vertex({static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[X]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Y]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Z])},
-                                              {static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[X]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Y]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Z])}));
+                    vertices.push_back(Vertex({static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
+                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
+                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
+                                              {static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
+                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
+                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
                 }
             }
 
             // Add the entity into the list of render-able props.
-            m_entity.emplace_back(Prop(vertices, t_col));
+            m_entity.emplace_back(Prop(vertices, {0.1, 0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 1.0}));
         }
 
         /**
          *  Add a render-able light prop to the scene.
          *
-         *  @param  t_mesh  Light source mesh to be added to the scene.
-         *  @param  t_power Power of the light source.
-         *  @param  t_col   Colour to render the light with.
+         *  @param  t_light Light to be added to the scene.
          */
-        void Scene::add_light(const geom::Mesh& t_mesh, const float t_power, const glm::vec4& t_col)
+        void Scene::add_light(const equip::Light& t_light)
         {
             // Create vector of vertices.
             std::vector<Vertex> vertices;
-            vertices.reserve(t_mesh.get_num_tri() * 3);
+            vertices.reserve(t_light.get_mesh().get_num_tri() * 3);
 
             // Add vertices into list from mesh.
-            for (size_t i = 0; i < t_mesh.get_num_tri(); ++i)
+            for (size_t i = 0; i < t_light.get_mesh().get_num_tri(); ++i)
             {
                 for (size_t j = 0; j < 3; ++j)
                 {
-                    vertices.push_back(Vertex({static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[X]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Y]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_pos()[Z])},
-                                              {static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[X]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Y]),
-                                               static_cast<float>(t_mesh.get_tri(i).get_vert(j).get_norm()[Z])}));
+                    vertices.push_back(Vertex({static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
+                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
+                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
+                                              {static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
+                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
+                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
                 }
             }
 
             // Add the light prop into the list of render-able light props.
-            m_light.emplace_back(prop::Light(vertices, t_col, t_power));
+            m_light.emplace_back(prop::Light(vertices, static_cast<float>(t_light.get_power()),
+                                             {0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 0.1, 1.0}));
         }
 
         /**
@@ -246,7 +248,8 @@ namespace arc
          */
         void Scene::add_photon(const std::vector<point::Photon>& t_phot)
         {
-            m_phot.emplace_back(Prop(t_phot, glm::vec4({1.0, 0.0, 0.0, 1.0})));
+            m_phot.emplace_back(
+                Prop(t_phot, glm::vec4(utl::wavelength_to_rgb(static_cast<double>(t_phot.front().get_wavelength())), 1.0)));
         }
 
 
@@ -493,21 +496,21 @@ namespace arc
 
                 if (old_state_propagate_photons == GLFW_PRESS)
                 {
-                    if (m_render_dist > 0.0f)
+                    if (m_render_time > 0.0f)
                     {
-                        m_render_dist = 0.0f;
+                        m_render_time = 0.0f;
                     }
                     else
                     {
-                        m_render_dist = 0.01f;
+                        m_render_time = t_time_delta * PHOTON_TRAVEL_SPEED;
                     }
                 }
             }
 
-            // Increase render distance if dynamic rendering is active.
-            if (m_render_dist > 0.0f)
+            // Increase render time if dynamic rendering is active.
+            if (m_render_time > 0.0f)
             {
-                m_render_dist += t_time_delta;
+                m_render_time += t_time_delta * PHOTON_TRAVEL_SPEED;
             }
         }
 
@@ -566,7 +569,7 @@ namespace arc
             glUseProgram(m_path_shader.get_handle());
 
             glUniformMatrix4fv(m_path_shader.get_mvp_uni(), 1, GL_FALSE, &m_primary_cam->get_mvp()[0][0]);
-            glUniform1f(m_path_shader.get_render_dist_uni(), m_render_dist);
+            glUniform1f(m_path_shader.get_time_uni(), m_render_time);
         }
 
 
@@ -677,9 +680,6 @@ namespace arc
 
             for (size_t i = 0; i < m_phot.size(); ++i)
             {
-                glUniform4f(m_path_shader.get_col_uni(), m_phot[i].get_col()[R], m_phot[i].get_col()[G], m_phot[i].get_col()[B],
-                            m_phot[i].get_col()[A]);
-
                 glEnableVertexAttribArray(0);
 
                 glBindVertexArray(m_phot[i].get_vao());

@@ -56,7 +56,8 @@ namespace arc
         {
             // Initialise the sub-shaders.
             const GLuint vert_shader = init_sub_shader(SHADER_DIR + t_path + VERT_SHADER_FILENAME, GL_VERTEX_SHADER);
-            const GLuint geom_shader = t_geom_shader ? init_sub_shader(SHADER_DIR + t_path + GEOM_SHADER_FILENAME, GL_GEOMETRY_SHADER) : 0;
+            const GLuint geom_shader = t_geom_shader ? init_sub_shader(SHADER_DIR + t_path + GEOM_SHADER_FILENAME,
+                                                                       GL_GEOMETRY_SHADER) : 0;
             const GLuint frag_shader = init_sub_shader(SHADER_DIR + t_path + FRAG_SHADER_FILENAME, GL_FRAGMENT_SHADER);
 
             // Compile the complete shader.

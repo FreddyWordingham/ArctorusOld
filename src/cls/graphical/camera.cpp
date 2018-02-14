@@ -40,7 +40,7 @@ namespace arc
             n_pos(t_pos),
             n_dir(-glm::normalize(t_pos)),
             n_model(glm::mat4(1.0f)),
-            n_view(glm::lookAt(n_pos, n_pos + n_dir, UP_DIR)),
+            n_view(glm::lookAt(n_pos, n_pos + n_dir, glm::vec3(UP_DIR_X, UP_DIR_Y, UP_DIR_Z))),
             n_proj(glm::perspective(glm::radians(t_fov), t_aspect_ratio, NEAR_CULL_DIST, FAR_CULL_DIST)),
             n_speed(t_speed)
         {

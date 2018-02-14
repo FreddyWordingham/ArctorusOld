@@ -32,7 +32,7 @@
 #define LOG(t_text)                                             \
 {                                                               \
     std::stringstream text_stream;                              \
-    text_stream << std::boolalpha << t_text;  /*NOLINT*/        \
+    text_stream << std::boolalpha << t_text;                    \
     arc::term::Logger::get_instance().log(text_stream.str());   \
 }                                                               \
 
@@ -44,7 +44,7 @@
 #define VERB(t_text)                                            \
 {                                                               \
     std::stringstream text_stream;                              \
-    text_stream << std::boolalpha << t_text;  /*NOLINT*/        \
+    text_stream << std::boolalpha << t_text;                    \
     arc::term::Logger::get_instance().log(text_stream.str());   \
 }                                                               \
 
@@ -78,8 +78,8 @@
 #define WARN(t_symptom, t_cause)                                                        \
 {                                                                                       \
     std::stringstream symptom_stream, cause_stream;                                     \
-    symptom_stream << std::boolalpha << t_symptom;    /*NOLINT*/                        \
-    cause_stream << std::boolalpha << t_cause;      /*NOLINT*/                          \
+    symptom_stream << std::boolalpha << t_symptom;                                      \
+    cause_stream << std::boolalpha << t_cause;                                          \
     arc::term::Logger::get_instance().warn(symptom_stream.str(), cause_stream.str());   \
 }                                                                                       \
 
@@ -92,8 +92,8 @@
 #define ERROR(t_symptom, t_cause)                                                                                           \
 {                                                                                                                           \
     std::stringstream symptom_stream, cause_stream;                                                                         \
-    symptom_stream << std::boolalpha << t_symptom;  /*NOLINT*/                                                              \
-    cause_stream << std::boolalpha << t_cause;      /*NOLINT*/                                                              \
+    symptom_stream << std::boolalpha << t_symptom;                                                                          \
+    cause_stream << std::boolalpha << t_cause;                                                                              \
     arc::term::Logger::get_instance().error(__FILE__, std::to_string(__LINE__), symptom_stream.str(), cause_stream.str());  \
 }                                                                                                                           \
 

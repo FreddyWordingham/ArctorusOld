@@ -33,15 +33,17 @@ namespace arc
         constexpr const float DEFAULT_FOV   = 90.0f;    //! Default field of view for the camera.
 
         //  -- Camera Properties --
-        constexpr const glm::vec3 UP_DIR({0.0f, 0.0f, 1.0f});   //! Camera up direction.
-        constexpr const float     NEAR_CULL_DIST = 1E-3f;       //! Near culling distance.
-        constexpr const float     FAR_CULL_DIST  = 1E+3f;       //! Far culling distance.
+        constexpr const float UP_DIR_X       = 0.0f;    //! Camera up direction x component.
+        constexpr const float UP_DIR_Y       = 0.0f;    //! Camera up direction y component.
+        constexpr const float UP_DIR_Z       = 1.0f;    //! Camera up direction z component.
+        constexpr const float NEAR_CULL_DIST = 1E-3f;   //! Near culling distance.
+        constexpr const float FAR_CULL_DIST  = 1E+3f;   //! Far culling distance.
 
 
 
         //  == CLASS ==
         /**
-         *  An abstract base class for cameras used to veiw scene data.
+         *  An abstract base class for cameras used to view scene data.
          */
         class Camera
         {
@@ -63,11 +65,20 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Camera(const Camera& /*unused*/) = delete;
+            Camera(const Camera&& /*unused*/) = delete;
             Camera(const glm::vec3& t_pos, float t_aspect_ratio, float t_speed = DEFAULT_SPEED, float t_fov = DEFAULT_FOV);
 
           public:
             //  -- Destructors --
             virtual ~Camera() = default;
+
+
+            //  == OPERATORS ==
+          public:
+            //  -- Copy --
+            Camera& operator=(const Camera& /*unused*/) = delete;
+            Camera& operator=(const Camera&& /*unused*/) = delete;
 
 
             //  == METHODS ==

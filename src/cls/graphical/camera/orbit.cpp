@@ -84,7 +84,7 @@ namespace arc
 
                 n_dir = -glm::normalize(n_pos);
 
-                n_view = glm::lookAt(n_pos, n_pos + n_dir, UP_DIR);
+                n_view = glm::lookAt(n_pos, n_pos + n_dir, glm::vec3(UP_DIR_X, UP_DIR_Y, UP_DIR_Z));
             }
 
 

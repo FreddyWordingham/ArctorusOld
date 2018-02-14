@@ -20,7 +20,8 @@
 #include <glm/glm.hpp>
 
 //  -- Classes --
-#include "cls/geom/mesh.hpp"
+#include "cls/equip/entity.hpp"
+#include "cls/equip/light.hpp"
 #include "cls/graphical/camera.hpp"
 #include "cls/graphical/prop.hpp"
 #include "cls/graphical/prop/light.hpp"
@@ -69,6 +70,9 @@ namespace arc
         constexpr const float ENTITIY_AMB_POW      = 0.1f;  //! Ambient lighting of rendered entities.
         constexpr const float ENTITY_NORMAL_LENGTH = 0.5f;  //! Length to draw entity normals.
 
+        //  -- Rendering --
+        constexpr const float PHOTON_TRAVEL_SPEED = 1e-8f;  //! Photon travel speed when rendering path data.
+
 
 
         //  == CLASS ==
@@ -112,12 +116,14 @@ namespace arc
             bool m_toggle_light_normal = false; //! When true render light prop normals.
 
             //  -- Rendering --
-            float m_render_dist = 0.0f; //! Photon rendering distance.
+            float m_render_time = 0.0f; //! Photon rendering time.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Scene(const Scene& /*unused*/) = delete;
+            Scene(const Scene&& /*unused*/) = delete;
             Scene();
 
             //  -- Destructors --
@@ -129,11 +135,18 @@ namespace arc
             GLuint init_cubemap() const;
 
 
+            //  == OPERATORS ==
+          public:
+            //  -- Copy --
+            Scene& operator=(const Scene& /*unused*/) = delete;
+            Scene& operator=(const Scene&& /*unused*/) = delete;
+
+
             //  == METHODS ==
           public:
             //  -- Additions --
-            void add_entity(const geom::Mesh& t_mesh, const glm::vec4& t_col);
-            void add_light(const geom::Mesh& t_mesh, float t_power, const glm::vec4& t_col);
+            void add_entity(const equip::Entity& t_ent);
+            void add_light(const equip::Light& t_light);
             void add_photon(const std::vector<point::Photon>& t_phot);
 
             //  -- Render --

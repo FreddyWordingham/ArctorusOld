@@ -49,6 +49,8 @@ namespace arc
 
         //  -- Comparison --
         inline bool equal(double t_lhs, double t_rhs, double t_tol = DEFAULT_EQUAL_TOL);
+        template <typename T>
+        constexpr int sign(T val);
 
         //  -- Conversion --
         template <typename T>
@@ -120,6 +122,21 @@ namespace arc
             return (std::fabs(t_lhs - t_rhs) <= t_tol);
         }
 
+        /**
+         *  Determine the sign of a given value.
+         *
+         *  @tparam T   Type to determine the sign of.
+         *
+         *  @param  val Value to determine the sign of.
+         *
+         *  @return The sign of the given value.
+         */
+        template <typename T>
+        constexpr int sign(const T val)
+        {
+            return (T(0) < val) - (val < T(0));
+        }
+
 
         //  -- Conversion --
         /**
@@ -141,17 +158,21 @@ namespace arc
         {
             assert(!t_str.empty());
 
+            // Convert string to a stringstream.
             std::stringstream string_stream(t_str);
 
+            // Attempt to pass the value into the stringstream.
             T x;
             string_stream >> x;
 
+            // Report error if parsing failed.
             if (string_stream.fail())
             {
                 ERROR("Unable to parse string to type.",
                       "String: '" << t_str << "' can not be parsed to type: '" << typeid(T).name() << "'.");
             }
 
+            // Report error if there are characters left over in the stream.
             if (string_stream.rdbuf()->in_avail() != 0)
             {
                 ERROR("Unable to parse string to type.",
@@ -188,7 +209,11 @@ namespace arc
          */
         constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos)
         {
-            math::Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^(t_pos[GAMMA] - t_pos[ALPHA]);
+            // Determine the normal from the cross product.
+            math::Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^ (t_pos[GAMMA] - t_pos[ALPHA]);
+
+            // Normalise the vector.
+            r_norm.normalise();
 
             return (r_norm);
         }
