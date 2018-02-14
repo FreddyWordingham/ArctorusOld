@@ -19,6 +19,7 @@
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/file/handle.hpp"
+#include "cls/graphical/scene.hpp"
 
 
 
@@ -36,7 +37,7 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
-
+/*
     std::vector<double> x({-4.0, -2.0, -1.0, 0.0, +1.0, +2.0, +4.0});
     std::vector<double> y({15.0, 10.0, 8.0, 7.5, 7.0, 5.0, 0.0});
 
@@ -50,11 +51,11 @@ int main()
 //        hist(lin());
     }
 
-    hist.save("hist.dat");
+    hist.save("hist.dat");*/
 
 
 
-    /*
+
     equip::Light led(geom::Mesh(file::read("../test/isohedron.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
                      phys::Spectrum(file::read("../test/laser.spc")), 1.0);
 
@@ -93,7 +94,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }*/
+    }
 
     return (0);
 }

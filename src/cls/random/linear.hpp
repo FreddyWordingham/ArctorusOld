@@ -66,6 +66,11 @@ namespace arc
             //  -- Generation --
             double operator()() const;
             double operator()(double t_min, double t_max) const;
+
+
+
+            //  == METHODS ==
+
         };
 
 
