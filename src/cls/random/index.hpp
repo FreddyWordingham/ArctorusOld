@@ -46,7 +46,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Index(const std::vector<double>& t_p);
+            explicit Index(const std::vector<double>& t_p);
 
           private:
             //  -- Initialisation --
