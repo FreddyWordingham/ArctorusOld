@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/log.hpp"
+#include "gen/math.hpp"
 #include "gen/rng.hpp"
 
 
@@ -122,10 +123,11 @@ namespace arc
                 r_cdf[i] = r_cdf[i - 1] + base[i - 1];
             }
 
-            // Normalise the cdf point.
-            for (size_t i = 0; i < r_cdf.size(); ++i)
+            // Check that the total probability is equal to one.
+            if (r_cdf.back() != 1.0)
             {
-                r_cdf[i] /= r_cdf.back();
+                ERROR("Unable to construct random::Linear object.",
+                      "Total probability: '" << r_cdf.back() << "', but is required to be one.");
             }
 
             return (r_cdf);
@@ -215,6 +217,35 @@ namespace arc
             assert((r_val >= t_min) && (r_val <= t_max));
 
             return (r_val);
+        }
+
+
+
+        //  == METHODS ==
+        //  -- Interpolation --
+        /**
+         *  Calculate the cdf for the given value of x.
+         *
+         *  @param  t_x Value of x to calculate the cdf of.
+         *
+         *  @pre    t_x must fall within the bounds.
+         *
+         *  @post   r_cdf must be between zero and one.
+         *
+         *  @return The cdf for the given value.
+         */
+        double Linear::get_cdf(const double t_x) const
+        {
+            assert((t_x >= m_min_bound) && (t_x <= m_max_bound));
+
+            const size_t lower_index = utl::lower_index(m_x, t_x);
+
+            const double r_cdf = m_cdf[lower_index] + ((m_grad[lower_index] / 2.0) * (math::square(t_x) - math::square(
+                m_x[lower_index]))) + (m_inter[lower_index] * (t_x - m_x[lower_index]));
+
+            //assert((r_cdf >= 0.0) && (r_cdf <= 1.0));
+
+            return (r_cdf);
         }
 
 

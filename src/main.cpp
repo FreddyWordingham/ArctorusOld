@@ -37,8 +37,8 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
-/*
-    std::vector<double> x({-4.0, -2.0, -1.0, 0.0, +1.0, +2.0, +4.0});
+
+/*    std::vector<double> x({-4.0, -2.0, -1.0, 0.0, +1.0, +2.0, +4.0});
     std::vector<double> y({15.0, 10.0, 8.0, 7.5, 7.0, 5.0, 0.0});
 
     random::Linear lin(x, y);
@@ -53,8 +53,21 @@ int main()
 
     hist.save("hist.dat");*/
 
+    std::vector<double> x({0.0, 2.0, 3.0, 5.0, 6.0});
+    std::vector<double> p({0.0, 2.0, 2.0, 1.0, 5.0});
+
+    random::Linear lin(x, p);
+
+    VAL(lin.get_cdf(0.0));
+    VAL(lin.get_cdf(1.0));
+    VAL(lin.get_cdf(2.0));
+    VAL(lin.get_cdf(3.0));
+    VAL(lin.get_cdf(4.0));
+    VAL(lin.get_cdf(5.0));
+    VAL(lin.get_cdf(6.0));
 
 
+/*
 
     equip::Light led(geom::Mesh(file::read("../test/isohedron.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
                      phys::Spectrum(file::read("../test/laser.spc")), 1.0);
@@ -94,7 +107,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }
+    }*/
 
     return (0);
 }

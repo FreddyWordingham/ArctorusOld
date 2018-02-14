@@ -70,7 +70,9 @@ namespace arc
 
 
             //  == METHODS ==
-
+          public:
+            //  -- Interpolation --
+            double get_cdf(double t_x) const;
         };
 
 
