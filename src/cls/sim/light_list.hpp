@@ -38,16 +38,24 @@ namespace arc
             //  -- Data --
             std::vector<equip::Light> m_light;  //! Vector of light objects.
 
+            //  -- Pickers --
+            random::Index m_light_select;   //! Light index selector.
+
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
             explicit LightList(const std::vector<equip::Light>& t_light);
 
+            //  -- Initialisation --
+            random::Index init_light_select() const;
+
 
             //  == METHODS ==
           public:
             //  -- Getters --
+            double get_lower_bound() const;
+            double get_upper_bound() const;
             const equip::Light& get_light(const size_t t_index) const { return (m_light[t_index]); }
         };
 
