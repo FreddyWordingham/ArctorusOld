@@ -238,6 +238,15 @@ namespace arc
         {
             assert((t_x >= m_min_bound) && (t_x <= m_max_bound));
 
+            if (math::equal(t_x, m_min_bound))
+            {
+                return (0.0);
+            }
+            else if (math::equal(t_x, m_max_bound))
+            {
+                return (1.0);
+            }
+
             const size_t lower_index = utl::lower_index(m_x, t_x);
 
             const double r_cdf = m_cdf[lower_index] + ((m_grad[lower_index] / 2.0) * (math::square(t_x) - math::square(
