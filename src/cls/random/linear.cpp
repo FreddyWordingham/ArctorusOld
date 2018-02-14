@@ -43,7 +43,7 @@ namespace arc
             m_min_bound(t_x.front()),
             m_max_bound(t_x.back()),
             m_x(t_x),
-            m_p(t_p),
+            m_p(init_p(t_p)),
             m_grad(init_grad()),
             m_inter(init_inter()),
             m_cdf(init_cdf()),
@@ -58,12 +58,16 @@ namespace arc
         /**
          *  Initialise the probability vector by normalising the area.
          *
+         *  @pre    t_p size must equal m_x size.
          *  @pre    t_p must always be greater than zero.
          *
          *  @return Initialise the probability values.
          */
         std::vector<double> Linear::init_p(const std::vector<double>& t_p) const
         {
+            assert(t_p.size() == m_x.size());
+            assert(utl::is_always_greater_than_or_equal_to(t_p, 0.0));
+
             // Sum the area of each trapezium.
             double      total_area = 0.0;
             for (size_t i          = 0; i < (t_p.size() - 1); ++i)
