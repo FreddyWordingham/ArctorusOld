@@ -17,9 +17,6 @@
 #include "gen/log.hpp"
 #include "gen/rng.hpp"
 
-//  -- Utility --
-#include "utl/vector.hpp"
-
 
 
 //  == NAMESPACE ==
