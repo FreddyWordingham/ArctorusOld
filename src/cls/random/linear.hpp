@@ -70,6 +70,11 @@ namespace arc
 
 
             //  == METHODS ==
+          public:
+            //  -- Getters --
+            double get_min_bound() const { return (m_min_bound); }
+            double get_max_bound() const { return (m_max_bound); }
+
           private:
             //  -- Interpolation --
             double get_cdf(double t_x) const;
