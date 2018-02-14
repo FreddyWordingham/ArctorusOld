@@ -30,7 +30,7 @@ namespace arc
         /**
          *  A class holding all of a simulation's entity objects.
          */
-        class Entity_list
+        class EntityList
         {
             //  == FIELDS ==
           private:
