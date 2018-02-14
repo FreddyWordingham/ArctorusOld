@@ -36,6 +36,7 @@ namespace arc
          *  @param  t_x Vector of X positions.
          *  @param  t_p Vector of corresponding probabilities.
          *
+         *  @post   t_x must be sorted into ascending order.
          *  @post   t_min_bound must be less than m_max_bound.
          */
         Linear::Linear(const std::vector<double>& t_x, const std::vector<double>& t_p) :
@@ -48,11 +49,24 @@ namespace arc
             m_cdf(init_cdf()),
             m_frac(init_frac())
         {
+            assert(utl::is_ascending(t_x));
             assert(m_min_bound < m_max_bound);
         }
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the probability vector by normalising the area.
+         *
+         *  @pre    t_p must always be greater than zero.
+         *
+         *  @return Initialise the probability values.
+         */
+        std::vector<double> Linear::init_p(const std::vector<double>& t_p) const
+        {
+
+        }
+
         /**
          *  Initialise the vector of probability gradients.
          *
@@ -99,6 +113,8 @@ namespace arc
          *  @pre    m_x data must be in ascending order.
          *  @pre    m_p data must always be non-negative.
          *
+         *  @post   m_cdf final value must be unity.
+         *
          *  @return The initialised cdf data vector.
          */
         std::vector<double> Linear::init_cdf() const
@@ -123,12 +139,7 @@ namespace arc
                 r_cdf[i] = r_cdf[i - 1] + base[i - 1];
             }
 
-            // Check that the total probability is equal to unity.
-            if (r_cdf.back() != 1.0)
-            {
-                ERROR("Unable to construct random::Linear object.",
-                      "Total probability: '" << r_cdf.back() << "', but is required to be unity.");
-            }
+            assert(m_cdf.back() == 1.0);
 
             return (r_cdf);
         }
