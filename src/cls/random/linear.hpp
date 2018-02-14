@@ -68,7 +68,6 @@ namespace arc
             double operator()(double t_min, double t_max) const;
 
 
-
             //  == METHODS ==
           public:
             //  -- Interpolation --
