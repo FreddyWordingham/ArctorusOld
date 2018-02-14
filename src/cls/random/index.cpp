@@ -51,6 +51,8 @@ namespace arc
          *
          *  @pre    m_p data must always be non-negative.
          *
+         *  @post   m_cdf final value must be unity.
+         *
          *  @return The initialised cumulative distribution frequency vector.
          */
         std::vector<double> Index::init_cdf(const std::vector<double>& t_p) const
@@ -67,12 +69,14 @@ namespace arc
                 r_cdf[i] = r_cdf[i - 1] + t_p[i - 1];
             }
 
-            // Check that the total probability is equal to unity.
-            if (r_cdf.back() != 1.0)
+            // Normalise the cdf values.
+            for (size_t i=0; i<r_cdf.size(); ++i)
             {
-                ERROR("Unable to construct random::Index object.",
-                      "Total probability: '" << r_cdf.back() << "', but is required to be unity.");
+                r_cdf[i] /= r_cdf.back();
             }
+
+            assert(m_cdf.back() == 1.0);
+
             return (r_cdf);
         }
 
