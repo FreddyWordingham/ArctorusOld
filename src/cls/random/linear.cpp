@@ -58,6 +58,8 @@ namespace arc
         /**
          *  Initialise the probability vector by normalising the area.
          *
+         *  @param  t_p Vector of corresponding probabilities.
+         *
          *  @pre    t_p size must equal m_x size.
          *  @pre    t_p must always be greater than zero.
          *
@@ -79,7 +81,7 @@ namespace arc
             std::vector<double> r_p(t_p.size());
 
             // Calculate the normalised probability values.
-            for (size_t i          = 0; i < (t_p.size() - 1); ++i)
+            for (size_t i = 0; i < t_p.size(); ++i)
             {
                 r_p[i] = t_p[i] / total_area;
             }
@@ -128,10 +130,8 @@ namespace arc
         /**
          *  Initialise the cumulative distribution vector of the probability distribution.
          *
-         *  @pre    m_x size must match m_p size.
          *  @pre    m_x size must be greater than one.
          *  @pre    m_x data must be in ascending order.
-         *  @pre    m_p data must always be non-negative.
          *
          *  @post   m_cdf final value must be unity.
          *
@@ -139,10 +139,8 @@ namespace arc
          */
         std::vector<double> Linear::init_cdf() const
         {
-            assert(m_x.size() == m_p.size());
             assert(m_x.size() > 1);
             assert(utl::is_ascending(m_x));
-            assert(utl::is_always_greater_than_or_equal_to(m_p, 0.0));
 
             // Calculate the area of each trapezium.
             std::vector<double> base(m_x.size() - 1);
