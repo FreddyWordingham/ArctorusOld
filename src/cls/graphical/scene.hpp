@@ -71,7 +71,7 @@ namespace arc
         constexpr const float ENTITY_NORMAL_LENGTH = 0.5f;  //! Length to draw entity normals.
 
         //  -- Rendering --
-        constexpr const float PHOTON_TRAVEL_SPEED = 1e-8f;  //! Photon travel speed when rendering path data.
+        constexpr const float PHOTON_TRAVEL_SPEED = 1e-9f;  //! Photon travel speed when rendering path data.
 
 
 
