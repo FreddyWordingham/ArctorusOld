@@ -35,6 +35,10 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Bounds --
+            const double m_min_bound = 0;   //! Minimum index of the generation range.
+            const double m_max_bound;       //! Maximum index of the generation range.
+
             //  -- Data --
             const std::vector<double> m_cdf;    //! The normalised cumulative distribution of the probabilities.
 
