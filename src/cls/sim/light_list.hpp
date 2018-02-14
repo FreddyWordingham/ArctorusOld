@@ -54,8 +54,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
-            double get_lower_bound() const;
-            double get_upper_bound() const;
+            double get_min_bound() const;
+            double get_max_bound() const;
             const equip::Light& get_light(const size_t t_index) const { return (m_light[t_index]); }
         };
 

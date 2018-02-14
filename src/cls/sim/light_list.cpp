@@ -59,43 +59,43 @@ namespace arc
         //  == METHODS ==
         //  -- Getters --
         /**
-         *  Get the lower bound of wavelengths created by the lights.
+         *  Get the min bound of wavelengths created by the lights.
          *
-         *  @return The lower bound of wavelengths created by the lights.
+         *  @return The min bound of wavelengths created by the lights.
          */
-        double LightList::get_lower_bound() const
+        double LightList::get_min_bound() const
         {
-            // Determine the value of the lower bound.
-            double r_lower_bound = m_light[0].get_lower_bound();
+            // Determine the value of the min bound.
+            double r_min_bound = m_light[0].get_min_bound();
             for (size_t i=1; i<m_light.size(); ++i)
             {
-                if (m_light[i].get_lower_bound() < r_lower_bound)
+                if (m_light[i].get_min_bound() < r_min_bound)
                 {
-                    r_lower_bound = m_light[i].get_lower_bound();
+                    r_min_bound = m_light[i].get_min_bound();
                 }
             }
 
-            return (r_lower_bound);
+            return (r_min_bound);
         }
 
         /**
-         *  Get the upper bound of wavelengths created by the lights.
+         *  Get the max bound of wavelengths created by the lights.
          *
-         *  @return The upper bound of wavelengths created by the lights.
+         *  @return The max bound of wavelengths created by the lights.
          */
-        double LightList::get_upper_bound() const
+        double LightList::get_max_bound() const
         {
-            // Determine the value of the upper bound.
-            double r_upper_bound = m_light[0].get_upper_bound();
+            // Determine the value of the max bound.
+            double r_max_bound = m_light[0].get_max_bound();
             for (size_t i=1; i<m_light.size(); ++i)
             {
-                if (m_light[i].get_upper_bound() < r_upper_bound)
+                if (m_light[i].get_max_bound() < r_max_bound)
                 {
-                    r_upper_bound = m_light[i].get_upper_bound();
+                    r_max_bound = m_light[i].get_max_bound();
                 }
             }
 
-            return (r_upper_bound);
+            return (r_max_bound);
         }
 
 
