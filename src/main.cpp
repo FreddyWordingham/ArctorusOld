@@ -44,6 +44,10 @@ int main()
     VAL(mat.get_interaction(500e-9));
     VAL(mat.get_anisotropy(500e-9));*/
 
+    std::vector<equip::Light> light_list;
+    light_list.emplace_back(equip::Light(geom::Mesh(file::read("../test/sphere.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
+        phys::Spectrum(file::read("../test/laser.spc")), 1.0));
+
     equip::Light led(geom::Mesh(file::read("../test/sphere.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
                      phys::Spectrum(file::read("../test/laser.spc")), 1.0);
 
