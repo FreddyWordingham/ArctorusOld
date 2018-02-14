@@ -56,7 +56,8 @@ namespace arc
             //  == OPERATORS ==
           public:
             //  -- Getters --
-
+            size_t get_min_bound() const { return (m_min_bound); }
+            size_t get_max_bound() const { return (m_max_bound); }
 
             //  -- Generation --
             size_t operator()() const;
