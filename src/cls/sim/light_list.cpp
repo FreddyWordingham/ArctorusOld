@@ -12,11 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -27,10 +22,15 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-
-
-
-        //  -- Initialisation --
+        /**
+         *  Construct a light-list object from a vector of lights.
+         *
+         *  @param  t_light Vector of light objects.
+         */
+        LightList::LightList(const std::vector<equip::Light>& t_light) :
+            m_light(t_light)
+        {
+        }
 
 
 

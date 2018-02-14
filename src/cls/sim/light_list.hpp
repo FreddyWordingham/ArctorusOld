@@ -42,6 +42,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            LightList(const std::vector<equip::Light>& t_light);
 
           private:
             //  -- Initialisation --
