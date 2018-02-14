@@ -123,7 +123,7 @@ namespace arc
                 r_cdf[i] = r_cdf[i - 1] + base[i - 1];
             }
 
-            // Check that the total probability is equal to one.
+            // Check that the total probability is equal to unity.
             if (r_cdf.back() != 1.0)
             {
                 ERROR("Unable to construct random::Linear object.",
