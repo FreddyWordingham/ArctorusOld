@@ -28,7 +28,7 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  A class holding all of a simulations light objects.
+         *  A class holding all of a simulation's light objects.
          */
         class LightList
         {
