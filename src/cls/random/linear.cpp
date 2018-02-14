@@ -45,7 +45,7 @@ namespace arc
             m_cdf(init_cdf()),
             m_frac(init_frac())
         {
-
+            assert(m_min_bound < m_max_bound);
         }
 
 
