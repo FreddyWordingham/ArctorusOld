@@ -34,13 +34,18 @@ namespace arc
          *
          *  @param  t_x Vector of X positions.
          *  @param  t_p Vector of corresponding probabilities.
+         *
+         *  @post   t_min_bound must be less than m_max_bound.
          */
         Linear::Linear(const std::vector<double>& t_x, const std::vector<double>& t_p) :
+            m_min_bound(t_x.front()),
+            m_max_bound(t_x.back()),
             m_x(t_x),
             m_p(t_p),
             m_cdf(init_cdf()),
             m_frac(init_frac())
         {
+
         }
 
 
@@ -139,6 +144,33 @@ namespace arc
             }
 
             return (m_x[lower_index] + (rng::random() * (m_x[lower_index + 1] - m_x[lower_index])));
+        }
+
+        /**
+         *  Generate a random number from the probability distribution between the given limits.
+         *
+         *  @param  t_min   Minimum value that may be returned.
+         *  @param  t_max   Maximum value that may be returned.
+         *
+         *  @pre    t_min must be greater than, or equal to, m_lower_bound
+         *
+         *  @post   r_val must be between the limits of t_min and t_max.
+         *
+         *  @return A randomly generated value from the probability distribution between the limits.
+         */
+        double Linear::operator()(const double t_min, const double t_max) const
+        {
+
+            double r_val;
+
+            do
+            {
+            }
+            while ((r_val < t_min) || (r_val > t_max))
+
+            assert((r_val >= t_min) && (r_val <= t_max));
+
+            return (r_val);
         }
 
 

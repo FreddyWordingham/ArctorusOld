@@ -35,6 +35,10 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Bounds --
+            const double m_min_bound;   //! Minimum bound of the generation range.
+            const double m_max_bound;   //! Maximum bound of the generation range.
+
             //  -- Data --
             const std::vector<double> m_x;      //! Vector of X positions.
             const std::vector<double> m_p;      //! Vector of corresponding probabilities.
@@ -57,6 +61,7 @@ namespace arc
           public:
             //  -- Generation --
             double operator()() const;
+            double operator()(double t_min, double t_max) const;
         };
 
 
