@@ -284,7 +284,7 @@ namespace arc
             {
                 return (0.0);
             }
-            else if (math::equal(t_x, m_max_bound))
+            if (math::equal(t_x, m_max_bound))
             {
                 return (1.0);
             }
