@@ -14,7 +14,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/equip/light.hpp"
 
 
 
@@ -34,6 +35,8 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            std::vector<equip::Light> m_light;  //! Vector of light objects.
 
 
             //  == INSTANTIATION ==
