@@ -50,6 +50,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
+
             std::vector<equip::Light> init_light(const data::Json& t_param) const;
             std::vector<equip::Entity> init_entity(const data::Json& t_param) const;
 

@@ -8,7 +8,11 @@
 
 
 //  == INCLUDES ==
+//  -- General --
+#include "gen/rng.hpp"
+
 //  -- Classes --
+#include "cls/data/json.hpp"
 #include "cls/file/handle.hpp"
 #include "cls/setup/sim.hpp"
 
@@ -35,8 +39,14 @@ int main(const int t_argc, const char** t_argv)
     std::string parameters_filepath(t_argv[1]);
     LOG("Setup file: '" << parameters_filepath << "'.");
 
+    // Create the setup json file.
+    const arc::data::Json setup("setup_file", arc::file::read(parameters_filepath));
+
+    // Set the program seed.
+    arc::rng::seed(setup.parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
+
     // Construct the simulation object.
-    arc::setup::Sim pdt(arc::file::read(parameters_filepath));
+    arc::setup::Sim pdt(setup);
 
     // Render the simulation scene.
     pdt.render();
