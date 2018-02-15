@@ -61,7 +61,7 @@ namespace arc
 
 
             //  == OPERATORS ==
-          private:
+          public:
             //  -- Access --
             Json operator[](const std::string& t_child) const;
 

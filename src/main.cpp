@@ -41,6 +41,8 @@ int main()
 
     parser::Json param("parameters", file::read("../test/parameters.json"));
 
+    VAL(param["light_sources"]["led"]["dist"].parse<std::string>());
+
 /*    phys::Material mat(file::read("../test/intralipid_10.mat"));
     VAL(mat.get_ref_index(500e-9));
     VAL(mat.get_albedo(500e-9));
