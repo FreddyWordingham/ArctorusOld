@@ -36,7 +36,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            const std::string m_name;   //! Name of the base object.
+            const std::string    m_name;    //! Name of the base object.
+            const nlohmann::json m_data;    //! Base json data object to parse from.
 
 
             //  == INSTANTIATION ==
