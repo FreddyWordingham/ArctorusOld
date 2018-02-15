@@ -71,9 +71,9 @@ namespace arc
         constexpr const float ENTITY_NORMAL_LENGTH = 0.5f;  //! Length to draw entity normals.
 
         //  -- Rendering --
-        constexpr const float PHOTON_TRAVEL_SPEED = 1e-9f;  //! Photon travel speed when rendering path data.
-        constexpr const float LIGHT_START_HUE     = 240.0f; //! Light prop start hue.
-        constexpr const float LIGHT_END_HUE       = 300.0f; //! Light prop end hue.
+        constexpr const float  PHOTON_TRAVEL_SPEED = 1e-9f; //! Photon travel speed when rendering path data.
+        constexpr const double LIGHT_START_HUE     = 240.0; //! Light prop start hue.
+        constexpr const double LIGHT_END_HUE       = 300.0; //! Light prop end hue.
 
 
 

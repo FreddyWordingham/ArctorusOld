@@ -181,25 +181,26 @@ namespace arc
          *  Add a vector of render-able light props to the scene.
          *
          *  @param  t_light Vector of lights to be added to the scene.
+         *
+         *  @pre    LIGHT_START_HUE must be less than LIGHT_END_HUE.
          */
         void Scene::add_light_vector(const std::vector<equip::Light>& t_light)
         {
+            static_assert(LIGHT_START_HUE < LIGHT_END_HUE);
+
             // Return if there are no lights.
             if (t_light.empty())
             {
                 return;
             }
 
-            const float start_hue = 240.0f;
-            const float end_hue   = 300.0f;
-            const float hue_delta = (t_light.size() == 1) ? 0.0f : ((end_hue - start_hue) / static_cast<float>(t_light
-                .size() - 1));
+            const double hue_delta = (t_light.size() == 1) ? 0.0 : ((LIGHT_END_HUE - LIGHT_START_HUE) / t_light.size() - 1);
 
             for (size_t i = 0; i < t_light.size(); ++i)
             {
-                const float hue = start_hue + (i * hue_delta);
+                const auto hue = static_cast<float>(math::deg_to_rad(LIGHT_START_HUE + (i * hue_delta)));
 
-                add_light(t_light[i], glm::vec4(hsv_to_rgb(static_cast<float>(math::deg_to_rad(180.0)), 1.0f, 1.0f), 1.0));
+                add_light(t_light[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
             }
         }
 
