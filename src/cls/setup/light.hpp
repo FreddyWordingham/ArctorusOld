@@ -49,6 +49,7 @@ namespace arc
             const math::Vec<3> m_scale; //! Scaling to apply to the mesh.
 
             //  -- Properties --
+            const double m_power;   //! Power of the light.
 
 
             //  == INSTANTIATION ==
