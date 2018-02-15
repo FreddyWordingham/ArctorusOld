@@ -21,10 +21,7 @@
 #include "lib/stb_image.h"
 
 //  -- General --
-#include "gen/config.hpp"
 #include "gen/control.hpp"
-#include "gen/log.hpp"
-#include "gen/rng.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -186,7 +183,7 @@ namespace arc
          */
         void Scene::add_light_vector(const std::vector<equip::Light>& t_light)
         {
-            for (size_t i=0; i<t_light.size(); ++i)
+            for (size_t i = 0; i < t_light.size(); ++i)
             {
                 add_light(t_light[i], glm::vec4(1.0, 0.0, 1.0, 1.0));
             }
@@ -219,7 +216,7 @@ namespace arc
             }
 
             // Add the entity into the list of render-able props.
-            m_entity.emplace_back(Prop(vertices, {0.1, 0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 1.0}));
+            m_entity.emplace_back(Prop(vertices, t_col));
         }
 
         /**
@@ -249,8 +246,7 @@ namespace arc
             }
 
             // Add the light prop into the list of render-able light props.
-            m_light.emplace_back(prop::Light(vertices, static_cast<float>(t_light.get_power()),
-                                             {0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 0.1, 1.0}));
+            m_light.emplace_back(prop::Light(vertices, static_cast<float>(t_light.get_power()), t_col));
         }
 
         /**
@@ -260,8 +256,7 @@ namespace arc
          */
         void Scene::add_photon(const std::vector<point::Photon>& t_phot)
         {
-            m_phot.emplace_back(
-                Prop(t_phot, glm::vec4(1.0, 1.0, 1.0, 1.0)));
+            m_phot.emplace_back(Prop(t_phot, glm::vec4(1.0, 1.0, 1.0, 1.0)));
         }
 
 
