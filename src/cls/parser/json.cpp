@@ -8,7 +8,7 @@
 
 
 //  == HEADER ==
-#include "cls/reader/json.hpp"
+#include "cls/parser/json.hpp"
 
 
 
@@ -21,7 +21,7 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace reader
+    namespace parser
     {
 
 

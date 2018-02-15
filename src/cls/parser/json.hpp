@@ -8,8 +8,8 @@
 
 
 //  == GUARD ==
-#ifndef ARCTORUS_SRC_CLS_READER_JSON_HPP
-#define ARCTORUS_SRC_CLS_READER_JSON_HPP
+#ifndef ARCTORUS_SRC_CLS_PARSER_JSON_HPP
+#define ARCTORUS_SRC_CLS_PARSER_JSON_HPP
 
 
 
@@ -22,7 +22,7 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace reader
+    namespace parser
     {
 
 
@@ -67,4 +67,4 @@ namespace arc
 
 
 //  == GUARD END ==
-#endif // ARCTORUS_SRC_CLS_READER_JSON_HPP
+#endif // ARCTORUS_SRC_CLS_PARSER_JSON_HPP
