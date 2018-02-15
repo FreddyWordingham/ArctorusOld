@@ -1,3 +1,11 @@
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#pragma clang diagnostic ignored "-Wcovered-switch-default"
+#pragma clang diagnostic ignored "-Wdocumentation-unknown-command"
+#pragma clang diagnostic ignored "-Wswitch-enum"
+
+
+
 /*
     __ _____ _____ _____
  __|  |   __|     |   | |  JSON for Modern C++
@@ -17188,3 +17196,7 @@ return nlohmann::json::json_pointer(std::string(s, n));
 
 
 #endif
+
+
+
+#pragma clang diagnostic pop
