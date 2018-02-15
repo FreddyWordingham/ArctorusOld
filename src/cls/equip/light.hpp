@@ -49,8 +49,8 @@ namespace arc
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
 
             //  -- Sorting --
-            const random::Index m_rand_tri; //! Random triangle index selector.
-            const double        m_power;    //! Power of the light source.
+            const random::Index m_tri_select;   //! Random triangle index selector.
+            const double        m_power;        //! Power of the light source.
 
 
             //  == INSTANTIATION ==
