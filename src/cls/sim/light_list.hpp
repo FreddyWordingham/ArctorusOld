@@ -57,7 +57,7 @@ namespace arc
             const equip::Light& get_light(const size_t t_index) const { return (m_light[t_index]); }
 
             //  -- Generation --
-            phys::particle::Photon gen_photon() const { return (m_light[m_light_select()].gen_photon()); }
+            phys::particle::Photon gen_photon() const { return (m_light[m_light_select.gen_index()].gen_photon()); }
         };
 
 
