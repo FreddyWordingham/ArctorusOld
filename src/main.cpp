@@ -8,21 +8,9 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-#include <vector>
-#include <cls/data/histogram.hpp>
-
-//  -- General --
-#include "gen/math.hpp"
-
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/setup/sim.hpp"
-
-
-
-//  == NAMESPACE ==
-using namespace arc;
 
 
 
@@ -48,7 +36,7 @@ int main(const int t_argc, const char** t_argv)
     LOG("Setup file: '" << parameters_filepath << "'.");
 
     // Construct the simulation object.
-    setup::Sim pdt(file::read(parameters_filepath));
+    arc::setup::Sim pdt(arc::file::read(parameters_filepath));
 
     // Render the simulation scene.
     pdt.render();
