@@ -183,8 +183,9 @@ namespace arc
          *  Add a render-able entity prop to the scene.
          *
          *  @param  t_ent   Entity be added to the scene.
+         *  @param  t_col   Colour ro render the prop.
          */
-        void Scene::add_entity(const equip::Entity& t_ent)
+        void Scene::add_entity(const equip::Entity& t_ent, const glm::vec4& t_col)
         {
             // Create vector of vertices.
             std::vector<Vertex> vertices;
@@ -212,8 +213,9 @@ namespace arc
          *  Add a render-able light prop to the scene.
          *
          *  @param  t_light Light to be added to the scene.
+         *  @param  t_col   Colour ro render the prop.
          */
-        void Scene::add_light(const equip::Light& t_light)
+        void Scene::add_light(const equip::Light& t_light, const glm::vec4& t_col)
         {
             // Create vector of vertices.
             std::vector<Vertex> vertices;

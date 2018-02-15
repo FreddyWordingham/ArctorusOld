@@ -153,8 +153,8 @@ namespace arc
 
           private:
             //  -- Additions --
-            void add_entity(const equip::Entity& t_ent);
-            void add_light(const equip::Light& t_light);
+            void add_entity(const equip::Entity& t_ent, const glm::vec4& t_col);
+            void add_light(const equip::Light& t_light, const glm::vec4& t_col);
             void add_photon(const std::vector<point::Photon>& t_phot);
 
             //  -- Control --
