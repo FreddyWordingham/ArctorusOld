@@ -37,6 +37,7 @@ namespace arc
           private:
             //  -- Filenames --
             const std::string m_mesh_path;  //! Path to mesh file.
+            const std::string m_spec_path;  //! Path to spectrum file.
 
 
             //  == INSTANTIATION ==
