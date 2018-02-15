@@ -56,7 +56,8 @@ int main()
 
 
 
-    equip::Light led(geom::Mesh(file::read("../test/isohedron.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
+    equip::Light laser(geom::Mesh(file::read("../test/circle.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
+                     math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat.mat")),
                      phys::Spectrum(file::read("../test/laser.spc")), 1.0);
 
     std::vector<phys::particle::Photon> phots;
@@ -65,7 +66,7 @@ int main()
     for (int  i = 0; i < N; ++i)
     {
 //        phys::particle::Photon phot(pos_norm[0], pos_norm[1], 0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
-        phys::particle::Photon phot = led.gen_photon();
+        phys::particle::Photon phot = laser.gen_photon();
 
         for (int j = 0; j < 100; ++j)
         {
@@ -78,12 +79,21 @@ int main()
 
     graphical::Scene scene;
 
-    equip::Entity monkey(
-        geom::Mesh(file::read("../test/cube.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
-                   math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/intralipid_10.mat")));
-    scene.add_entity(monkey);
+    equip::Entity surfaceOne(
+        geom::Mesh(file::read("../test/planeSquare.obj"), math::Vec<3>({{-0.0, 4.0, -2.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
+                   math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat1.mat")));
+    equip::Entity surfaceTwo(
+        geom::Mesh(file::read("../test/planeSquare.obj"), math::Vec<3>({{-0.0, 6.0, -2.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
+                   math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat2.mat")));
+    equip::Entity surfaceThree(
+        geom::Mesh(file::read("../test/planeSquare.obj"), math::Vec<3>({{-0.0, 9.0, -2.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
+               math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat3.mat")));
 
-    scene.add_light(led);
+    scene.add_entity(surfaceOne);
+    scene.add_entity(surfaceTwo);
+    scene.add_entity(surfaceThree);
+
+    scene.add_light(laser);
 
     for (size_t i = 0; i < phots.size(); ++i)
     {
