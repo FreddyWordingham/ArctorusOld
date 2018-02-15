@@ -39,10 +39,6 @@ namespace arc
         {
             //  == FIELDS ==
           private:
-            //  -- Bounds --
-            const double m_min_bound;   //! Minimum wavelength bound of the photon generation range.
-            const double m_max_bound;   //! Maximum wavelength bound of the photon generation range.
-
             //  -- Properties --
             const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
