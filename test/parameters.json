@@ -17,7 +17,7 @@
             "rot":   45.0,
             "scale": [0.1, 0.1, 0.1],
             "mesh":  "meshes/monkey.obj",
-            "mat":   "mat/intralipid_10.mat"
+            "mat":   "materials/intralipid_10.mat"
         }
     }
 }
