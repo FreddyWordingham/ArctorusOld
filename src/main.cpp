@@ -39,7 +39,7 @@ int main()
 {
     LOG("Hello world!");
 
-    setup::Sim pdt(file::read("../test/parameters.json"));
+    //setup::Sim pdt(file::read("../test/parameters.json"));
 
 
 /*    phys::Material mat(file::read("../test/intralipid_10.mat"));
