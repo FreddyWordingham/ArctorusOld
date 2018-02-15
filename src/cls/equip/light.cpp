@@ -32,8 +32,6 @@ namespace arc
          *  @post   m_power must be greater than zero.
          */
         Light::Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec, const double t_power) :
-            m_min_bound(std::max(t_mat.get_min_bound(), t_spec.get_min_bound())),
-            m_max_bound(std::min(t_mat.get_max_bound(), t_spec.get_max_bound())),
             m_mesh(t_mesh),
             m_spec(t_spec),
             m_tri_select(init_rand_tri()),
