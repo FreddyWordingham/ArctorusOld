@@ -27,6 +27,11 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Construct a light setup object from a json description of a light object.
+         *
+         *  @param  t_json  Light setup in json format.
+         */
         Light::Light(const parser::Json& t_json)
         {
         }
