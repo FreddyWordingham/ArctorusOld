@@ -30,6 +30,9 @@ using namespace arc;
 /**
  *  Main function of the Arctorus program.
  *
+ *  @param  t_argc  Command line argument count.
+ *  @param  t_argv  Command line argument vector.
+ *
  *  @return Zero upon a successful run.
  */
 int main(const int t_argc, const char** t_argv)
@@ -44,8 +47,10 @@ int main(const int t_argc, const char** t_argv)
     std::string parameters_filepath(t_argv[1]);
     LOG("Setup file: '" << parameters_filepath << "'.");
 
+    // Construct the simulation object.
     setup::Sim pdt(file::read(parameters_filepath));
 
+    // Render the simulation scene.
     pdt.render();
 
     return (0);
