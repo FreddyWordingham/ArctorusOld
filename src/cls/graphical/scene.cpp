@@ -26,9 +26,6 @@
 #include "gen/log.hpp"
 #include "gen/rng.hpp"
 
-//  -- Utility --
-#include "utl/conversion.hpp"
-
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/graphical/camera/fly.hpp"
