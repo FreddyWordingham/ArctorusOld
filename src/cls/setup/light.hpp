@@ -34,6 +34,8 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Filenames --
+            const std::string m_mesh_filename
 
 
             //  == INSTANTIATION ==

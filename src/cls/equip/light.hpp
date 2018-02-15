@@ -45,7 +45,6 @@ namespace arc
 
             //  -- Properties --
             const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
-            const phys::Material m_mat;     //! Material describing the created photons optical properties.
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
 
             //  -- Sorting --
