@@ -147,6 +147,9 @@ namespace arc
             //  -- Render --
             void render() const;
 
+            //  -- Additions --
+            void add_light_vector(const std::vector<equip::Light>& t_light);
+
             //  -- Control --
             bool should_close() const;
             void handle_input();

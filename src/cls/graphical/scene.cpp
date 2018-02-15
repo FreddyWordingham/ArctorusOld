@@ -180,6 +180,19 @@ namespace arc
         //  == METHODS ==
         //  -- Additions --
         /**
+         *  Add a vector of render-able light props to the scene.
+         *
+         *  @param  t_light Vector of lights to be added to the scene.
+         */
+        void Scene::add_light_vector(const std::vector<equip::Light>& t_light)
+        {
+            for (size_t i=0; i<t_light.size(); ++i)
+            {
+                add_light(t_light[i], glm::vec4(1.0, 0.0, 1.0, 1.0));
+            }
+        }
+
+        /**
          *  Add a render-able entity prop to the scene.
          *
          *  @param  t_ent   Entity be added to the scene.
