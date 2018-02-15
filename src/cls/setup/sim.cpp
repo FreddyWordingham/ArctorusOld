@@ -16,6 +16,9 @@
 //  -- General --
 #include "gen/math.hpp"
 
+//  -- Classes --
+#include "cls/file/handle.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -66,10 +69,19 @@ namespace arc
                 // Get the transformation values.
                 const auto   trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
                 const auto   dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
-                const double rot   = math::deg_to_rad(json_light.parse_child<double>("rot", 0.0));
+                const double spin  = math::deg_to_rad(json_light.parse_child<double>("spin", 0.0));
                 const auto   scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
 
+                // Get light properties.
+                const auto power = json_light.parse_child<double>("power");
 
+                // Get file paths.
+                const std::string mesh_path = json_light.parse_child<std::string>("mesh");
+                const std::string spec_path = json_light.parse_child<std::string>("spec");
+
+                // Construct the light object an add it to the vector of lights.
+                r_light.emplace_back(equip::Light(geom::Mesh(file::read(mesh_path), trans, dir, spin, scale),
+                                                  phys::Spectrum(file::read(spec_path)), power));
             }
 
             return (r_light);
