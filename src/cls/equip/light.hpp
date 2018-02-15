@@ -60,8 +60,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
-            double get_min_bound() const { return (m_min_bound); }
-            double get_max_bound() const { return (m_max_bound); }
+            double get_min_bound() const { return (m_spec.get_min_bound()); }
+            double get_max_bound() const { return (m_spec.get_max_bound()); }
             const geom::Mesh& get_mesh() const { return (m_mesh); }
             const phys::Spectrum& get_spec() const { return (m_spec); }
             double get_power() const { return (m_power); }
