@@ -32,10 +32,6 @@ namespace arc
         constexpr double deg_to_rad(double t_x);
         constexpr double rad_to_deg(double t_x);
 
-        //  -- Colour --
-        glm::vec3 wavelength_to_rgb(double t_wavelength);
-        glm::vec3 colour_chart(double t_x);
-
 
 
         //  == FUNCTIONS ==
