@@ -21,7 +21,7 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace parser
+    namespace data
     {
 
 
@@ -74,7 +74,7 @@ namespace arc
             }
             catch (...)
             {
-                ERROR("Unable to construct parser::Json object.", "Unable to parse serialised data of: '" << m_name << "'.");
+                ERROR("Unable to construct data::Json object.", "Unable to parse serialised data of: '" << m_name << "'.");
             }
 
             return (r_base);
@@ -84,11 +84,11 @@ namespace arc
 
         //  == OPERATORS ==
         /**
-         *  Form a json parser child object.
+         *  Form a json child object.
          *
-         *  @param  t_child Name of the child object to form the base of a new json parser.
+         *  @param  t_child Name of the child object to form the base of a new json data object.
          *
-         *  @return A json parser child object.
+         *  @return A json child object.
          */
         Json Json::operator[](const std::string& t_child) const
         {
@@ -178,5 +178,5 @@ namespace arc
 
 
 
-    } // namespace parser
+    } // namespace data
 } // namespace arc
