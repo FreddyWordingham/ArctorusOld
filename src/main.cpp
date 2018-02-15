@@ -16,10 +16,7 @@
 #include "gen/math.hpp"
 
 //  -- Classes --
-#include "cls/equip/entity.hpp"
-#include "cls/equip/light.hpp"
 #include "cls/file/handle.hpp"
-#include "cls/graphical/scene.hpp"
 #include "cls/setup/sim.hpp"
 
 
@@ -35,7 +32,7 @@ using namespace arc;
  *
  *  @return Zero upon a successful run.
  */
-int main()
+int main(const int t_argc, const char** t_argv)
 {
     LOG("Hello world!");
 
