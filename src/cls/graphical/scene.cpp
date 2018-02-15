@@ -194,8 +194,10 @@ namespace arc
                 return;
             }
 
+            // Calculate the hue delta.
             const double hue_delta = (t_light.size() == 1) ? 0.0 : ((LIGHT_END_HUE - LIGHT_START_HUE) / t_light.size() - 1);
 
+            // Add the light props to the scene.
             for (size_t i = 0; i < t_light.size(); ++i)
             {
                 const auto hue = static_cast<float>(math::deg_to_rad(LIGHT_START_HUE + (i * hue_delta)));

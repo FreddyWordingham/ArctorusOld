@@ -1,8 +1,71 @@
 {
     "lights": {
-        "light_one": {
+        "light_1": {
             "power": 1.0,
             "trans": [1.0, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [0.1, 0.1, 0.1],
+            "mesh" : "meshes/circle.obj",
+            "spec" : "spectra/laser.spc"
+        },
+        "light_2": {
+            "power": 1.0,
+            "trans": [0.5, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [0.1, 0.1, 0.1],
+            "mesh" : "meshes/circle.obj",
+            "spec" : "spectra/laser.spc"
+        },
+        "light_3": {
+            "power": 1.0,
+            "trans": [0.0, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [0.1, 0.1, 0.1],
+            "mesh" : "meshes/circle.obj",
+            "spec" : "spectra/laser.spc"
+        },
+        "light_4": {
+            "power": 1.0,
+            "trans": [-0.5, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [0.1, 0.1, 0.1],
+            "mesh" : "meshes/circle.obj",
+            "spec" : "spectra/laser.spc"
+        },
+        "light_5": {
+            "power": 1.0,
+            "trans": [-1.0, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [0.1, 0.1, 0.1],
+            "mesh" : "meshes/circle.obj",
+            "spec" : "spectra/laser.spc"
+        },
+        "light_6": {
+            "power": 1.0,
+            "trans": [-1.5, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [0.1, 0.1, 0.1],
+            "mesh" : "meshes/circle.obj",
+            "spec" : "spectra/laser.spc"
+        },
+        "light_7": {
+            "power": 1.0,
+            "trans": [-2.0, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [0.1, 0.1, 0.1],
+            "mesh" : "meshes/circle.obj",
+            "spec" : "spectra/laser.spc"
+        },
+        "light_8": {
+            "power": 1.0,
+            "trans": [-2.5, 0.5, -0.5],
             "dir":   [0.0, 1.0, 0.0],
             "rot":   45.0,
             "scale": [0.1, 0.1, 0.1],
