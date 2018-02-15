@@ -144,11 +144,6 @@ namespace arc
 
             //  == METHODS ==
           public:
-            //  -- Additions --
-            void add_entity(const equip::Entity& t_ent);
-            void add_light(const equip::Light& t_light);
-            void add_photon(const std::vector<point::Photon>& t_phot);
-
             //  -- Render --
             void render() const;
 
@@ -157,6 +152,11 @@ namespace arc
             void handle_input();
 
           private:
+            //  -- Additions --
+            void add_entity(const equip::Entity& t_ent);
+            void add_light(const equip::Light& t_light);
+            void add_photon(const std::vector<point::Photon>& t_phot);
+
             //  -- Control --
             void swap_camera();
             void move_camera(float t_time_delta);
