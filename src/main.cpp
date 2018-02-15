@@ -34,6 +34,12 @@ using namespace arc;
  */
 int main(const int t_argc, const char** t_argv)
 {
+    // Check the number of command line arguments.
+    if (t_argc != 2)
+    {
+        ERROR("Invalid number of command line arguments passed.", "./path/to/arctorus <parameters.json>");
+    }
+
     LOG("Hello world!");
 
     setup::Sim pdt(file::read("parameters.json"));
