@@ -22,6 +22,7 @@
 
 //  -- General --
 #include "gen/control.hpp"
+#include "gen/math.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -185,7 +186,7 @@ namespace arc
         {
             for (size_t i = 0; i < t_light.size(); ++i)
             {
-                add_light(t_light[i], glm::vec4(1.0, 0.0, 1.0, 1.0));
+                add_light(t_light[i], glm::vec4(hsv_to_rgb(static_cast<float>(math::deg_to_rad(180.0)), 1.0f, 1.0f), 1.0));
             }
         }
 
@@ -744,18 +745,17 @@ namespace arc
 
         //  -- Utility --
         /**
-         *  Convert a hsba colour to an rgba colour vector.
+         *  Convert a hsv colour to an rgb colour vector.
          *
          *  @param  t_hue       Hue of the colour.
          *  @param  t_sat       Saturation of the colour.
-         *  @param  t_bright    Brightness of the colour.
-         *  @param  t_alpha     Alpha of the colour.
+         *  @param  t_value     Brightness of the colour.
          *
-         *  @return The rgba equivalent of the given hsba colour.
+         *  @return The rgb equivalent of the given hsv colour.
          */
-        glm::vec4 hsba_to_rgba(float t_hue, float t_sat, float t_bright, float t_alpha) const
+        glm::vec3 Scene::hsv_to_rgb(float t_hue, float t_sat, float t_value) const
         {
-            return (glm::vec4(1.0, 0.0, 1.0, t_alpha))
+            return (glm::vec3(1.0, 0.0, 1.0));
         }
 
 

@@ -182,7 +182,7 @@ namespace arc
             void draw_skybox() const;
 
             //  -- Utility --
-            glm::vec4 hsba_to_rgba(float t_hue, float t_sat, float t_bright, float t_alpha) const;
+            glm::vec3 hsv_to_rgb(float t_hue, float t_sat, float t_value) const;
         };
 
 
