@@ -1,13 +1,23 @@
 {
-    "lights": {
+    "lights":   {
         "light_one": {
             "power": 1.0,
             "trans": [1.0, 0.5, -0.5],
             "dir":   [0.0, 1.0, 0.0],
             "rot":   45.0,
             "scale": [0.1, 0.1, 0.1],
-            "mesh" : "meshes/circle.obj",
-            "spec" : "spectra/laser.spc"
+            "mesh":  "meshes/circle.obj",
+            "spec":  "spectra/laser.spc"
+        }
+    },
+    "entities": {
+        "entity_one": {
+            "trans": [1.0, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [0.1, 0.1, 0.1],
+            "mesh":  "meshes/monkey.obj",
+            "mat":   "mat/intralipid_10.mat"
         }
     }
 }
