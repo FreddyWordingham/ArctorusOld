@@ -42,8 +42,7 @@ int main(const int t_argc, const char** t_argv)
 
     // Convert first command line argument to a string.
     std::string parameters_filepath(t_argv[1]);
-
-    LOG("Hello world!");
+    LOG("Setup file: '" << parameters_filepath << "'.");
 
     setup::Sim pdt(file::read(parameters_filepath));
 
