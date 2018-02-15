@@ -14,7 +14,9 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/equip/light.hpp"
+#include "cls/parser/json.hpp"
 
 
 
@@ -41,6 +43,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Sim(const parser::Json& t_param);
 
           private:
             //  -- Initialisation --

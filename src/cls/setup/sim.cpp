@@ -27,7 +27,9 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-
+        Sim::Sim(const parser::Json& t_param)
+        {
+        }
 
 
         //  -- Initialisation --
