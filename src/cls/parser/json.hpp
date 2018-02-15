@@ -14,6 +14,9 @@
 
 
 //  == INCLUDES ==
+//  -- General --
+#include "gen/log.hpp"
+
 //  -- Library --
 #include "lib/nlohmann.hpp"
 
@@ -49,8 +52,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Json(const std::string &t_name, const std::string& t_serial);
-            Json(const std::string &t_name, const nlohmann::json& t_data);
+            Json(const std::string& t_name, const std::string& t_serial);
+            Json(const std::string& t_name, const nlohmann::json& t_data);
 
           private:
             //  -- Initialisation --
@@ -70,6 +73,8 @@ namespace arc
           public:
             //  -- Parsing --
             std::vector<std::string> parse_child_names() const;
+            template <typename T>
+            T parse() const;
 
             //  -- Properties --
             bool has_child(const std::string& t_child) const { return (!(m_data.find(t_child) == m_data.end())); }
@@ -80,6 +85,32 @@ namespace arc
             //  -- Saving --
             void save(const std::string& t_path) const;
         };
+
+
+
+        //  == METHODS ==
+        //  -- Parsing --
+        /**
+         *  Parse a value from the json data object.
+         *
+         *  @tparam T   Type to be parsed from the base json data object.
+         *
+         *  @return The value from the json data object.
+         */
+        template <typename T>
+        T Json::parse() const
+        {
+            try
+            {
+                return (m_data.get<T>());
+            }
+            catch (...)
+            {
+                ERROR("Unable to parse value from data::Json object.",
+                      "Base data::Json object: '" << m_name << "' could not be converted to type: '" << typeid(T).name()
+                                                  << "' as required.");
+            }
+        }
 
 
 

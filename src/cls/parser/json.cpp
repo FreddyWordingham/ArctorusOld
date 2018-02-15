@@ -13,9 +13,6 @@
 
 
 //  == INCLUDES ==
-//  -- General --
-#include "gen/log.hpp"
-
 //  -- Classes --
 #include "cls/file/handle.hpp"
 
