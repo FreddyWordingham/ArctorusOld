@@ -33,7 +33,8 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         Sim::Sim(const data::Json& t_json) :
-            m_light(init_light(t_json["lights"]))
+            m_light(init_light(t_json["lights"])),
+            m_entity(init_entity(t_json["entities"]))
         {
         }
 
@@ -86,6 +87,47 @@ namespace arc
             }
 
             return (r_light);
+        }
+
+        /**
+         *  Initialise the vector of entity objects.
+         *
+         *  @param  t_json Json setup file.
+         *
+         *  @return The initialise vector of entity objects.
+         */
+        std::vector<equip::Entity> Sim::init_entity(const data::Json& t_json) const
+        {
+            // Create the return vector of entities.
+            std::vector<equip::Entity> r_entity;
+
+            // Get list of entity names.
+            std::vector<std::string> entity_name = t_json.get_child_names();
+
+            // Construct the entity objects.
+            for (size_t i = 0; i < entity_name.size(); ++i)
+            {
+                LOG("Constructing entity : " << entity_name[i]);
+
+                // Create a json object of the entity.
+                const data::Json json_entity = t_json[entity_name[i]];
+
+                // Get the transformation values.
+                const auto   trans = json_entity.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
+                const auto   dir   = json_entity.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const double spin  = math::deg_to_rad(json_entity.parse_child<double>("spin", 0.0));
+                const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+
+                // Get file paths.
+                const std::string mesh_path = json_entity.parse_child<std::string>("mesh");
+                const std::string mat_path  = json_entity.parse_child<std::string>("mat");
+
+                // Construct the entity object an add it to the vector of entities.
+                r_entity.emplace_back(equip::Entity(geom::Mesh(file::read(mesh_path), trans, dir, spin, scale),
+                                                    phys::Material(file::read(mat_path))));
+            }
+
+            return (r_entity);
         }
 
 
