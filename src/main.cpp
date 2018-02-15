@@ -40,9 +40,12 @@ int main(const int t_argc, const char** t_argv)
         ERROR("Invalid number of command line arguments passed.", "./path/to/arctorus <parameters.json>");
     }
 
+    // Convert first command line argument to a string.
+    std::string parameters_filepath(t_argv[1]);
+
     LOG("Hello world!");
 
-    setup::Sim pdt(file::read("parameters.json"));
+    setup::Sim pdt(file::read(parameters_filepath));
 
     pdt.render();
 
