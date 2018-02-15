@@ -46,7 +46,7 @@ namespace arc
             const math::Vec<3> m_trans; //! Translation to apply to the mesh.
             const math::Vec<3> m_dir;   //! Direction to face the mesh.
             const double       m_rot;   //! Rotation to apply to the mesh.
-            const math::Vec<3> m_scale; //! Scalting to apply to the mesh.
+            const math::Vec<3> m_scale; //! Scaling to apply to the mesh.
 
             //  -- Properties --
 
