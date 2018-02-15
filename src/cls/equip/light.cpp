@@ -86,17 +86,14 @@ namespace arc
          *  Generate a photon at a random point on the light's surface with optical properties determined by the light's
          *  material.
          *
-         *  @param  t_min   Minimum photon wavelength to be generated.
-         *  @param  t_max   Maximum photon wavelength to be generated.
-         *
          *  @return The newly generated photon.
          */
-        phys::particle::Photon Light::gen_photon(const double t_min, const double t_max) const
+        phys::particle::Photon Light::gen_photon() const
         {
             // Get a random position and normal from the mesh.
             const std::array<math::Vec<3>, 2> tri_pos_norm = m_mesh.get_tri(m_rand_tri()).get_random_pos_and_norm();
 
-            return (phys::particle::Photon(tri_pos_norm[0], tri_pos_norm[1], 0.0, 1.0, m_spec.gen_wavelength(t_min, t_max), m_mat));
+            return (phys::particle::Photon(tri_pos_norm[0], tri_pos_norm[1], 0.0, 1.0, m_spec.gen_wavelength(), m_mat));
         }
 
 
