@@ -1,4 +1,5 @@
 {
+    "seed": 77,
     "lights":   {
         "light_one": {
             "power": 1.0,
