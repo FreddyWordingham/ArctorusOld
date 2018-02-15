@@ -72,6 +72,7 @@ namespace arc
 
         //  -- Rendering --
         constexpr const float PHOTON_TRAVEL_SPEED = 1e-9f;  //! Photon travel speed when rendering path data.
+        constexpr const float LIGHT_
 
 
 

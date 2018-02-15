@@ -184,17 +184,23 @@ namespace arc
          */
         void Scene::add_light_vector(const std::vector<equip::Light>& t_light)
         {
-            for (int i = 0; i <= 360; ++i)
+            // Return if there are no lights.
+            if (t_light.empty())
             {
-                float x = static_cast<float>(math::deg_to_rad(1.0 * i));
-                hsv_to_rgb(x, 1.0f, 1.0f);
+                return;
             }
 
-/*
+            const float start_hue = 240.0f;
+            const float end_hue   = 300.0f;
+            const float hue_delta = (t_light.size() == 1) ? 0.0f : ((end_hue - start_hue) / static_cast<float>(t_light
+                .size() - 1));
+
             for (size_t i = 0; i < t_light.size(); ++i)
             {
+                const float hue = start_hue + (i * hue_delta);
+
                 add_light(t_light[i], glm::vec4(hsv_to_rgb(static_cast<float>(math::deg_to_rad(180.0)), 1.0f, 1.0f), 1.0));
-            }*/
+            }
         }
 
         /**
