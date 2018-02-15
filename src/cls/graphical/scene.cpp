@@ -742,6 +742,23 @@ namespace arc
         }
 
 
+        //  -- Utility --
+        /**
+         *  Convert a hsba colour to an rgba colour vector.
+         *
+         *  @param  t_hue       Hue of the colour.
+         *  @param  t_sat       Saturation of the colour.
+         *  @param  t_bright    Brightness of the colour.
+         *  @param  t_alpha     Alpha of the colour.
+         *
+         *  @return The rgba equivalent of the given hsba colour.
+         */
+        glm::vec4 hsba_to_rgba(float t_hue, float t_sat, float t_bright, float t_alpha) const
+        {
+            return (glm::vec4(1.0, 0.0, 1.0, t_alpha))
+        }
+
+
 
     } // namespace graphical
 } // namespace arc

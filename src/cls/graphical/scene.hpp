@@ -180,6 +180,9 @@ namespace arc
             void draw_phots() const;
             void draw_sun() const;
             void draw_skybox() const;
+
+            //  -- Utility --
+            glm::vec4 hsba_to_rgba(float t_hue, float t_sat, float t_bright, float t_alpha) const;
         };
 
 
