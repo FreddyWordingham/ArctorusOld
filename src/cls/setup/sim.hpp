@@ -56,7 +56,9 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Rendering --
+            void render() const;
         };
 
 

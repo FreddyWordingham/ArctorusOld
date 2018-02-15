@@ -89,5 +89,17 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Rendering --
+        /**
+         *  Render a scene of the current simulation.
+         */
+        void Sim::render() const
+        {
+
+        }
+
+
+
     } // namespace setup
 } // namespace arc
