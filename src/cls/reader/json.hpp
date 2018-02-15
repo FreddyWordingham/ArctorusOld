@@ -35,6 +35,8 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            const std::string m_name;   //! Name of the base object.
 
 
             //  == INSTANTIATION ==
