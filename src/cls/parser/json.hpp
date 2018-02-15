@@ -68,6 +68,9 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Parsing --
+            std::vector<std::string> parse_child_names() const;
+
             //  -- Properties --
             bool has_child(const std::string& t_child) const { return (!(m_data.find(t_child) == m_data.end())); }
 
