@@ -27,6 +27,9 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        Light::Light(const parser::Json& t_json)
+        {
+        }
 
 
 

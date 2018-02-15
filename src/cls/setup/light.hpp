@@ -55,6 +55,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Light(const parser::Json& t_json);
 
           private:
             //  -- Initialisation --
