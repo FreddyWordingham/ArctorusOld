@@ -72,7 +72,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Parsing --
-            std::vector<std::string> parse_child_names() const;
+            std::vector<std::string> get_child_names() const;
             template <typename T>
             T parse() const;
 

@@ -47,7 +47,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
-            init_light(const parser::Json& t_param) const;
+            std::vector<equip::Light> init_light(const parser::Json& t_param) const;
 
 
             //  == OPERATORS ==

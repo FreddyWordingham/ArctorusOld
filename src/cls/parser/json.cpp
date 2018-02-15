@@ -123,11 +123,11 @@ namespace arc
         //  == METHODS ==
         //  -- Parsing --
         /**
-         *  Parse the list of all the json data object's child member names.
+         *  Get the list of all the json data object's child member names.
          *
          *  @return The vector of all this json object's child member names.
          */
-        std::vector<std::string> Json::parse_child_names() const
+        std::vector<std::string> Json::get_child_names() const
         {
             // Create return vector of name strings.
             std::vector<std::string> r_vec;
