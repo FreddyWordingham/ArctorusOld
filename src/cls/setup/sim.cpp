@@ -18,6 +18,7 @@
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
+#include "cls/graphical/scene.hpp"
 
 
 
@@ -96,7 +97,15 @@ namespace arc
          */
         void Sim::render() const
         {
+            // Create a graphical scene.
+            graphical::Scene scene;
 
+            // Render the scene.
+            while (!scene.should_close())
+            {
+                scene.handle_input();
+                scene.render();
+            }
         }
 
 
