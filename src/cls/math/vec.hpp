@@ -27,6 +27,7 @@
 
 //  -- Classes --
 #include "cls/math/mat.hpp"
+#include "cls/parser/json.hpp"
 
 
 
@@ -142,6 +143,13 @@ namespace arc
             template <typename S>
             size_t upper_index(S t_val, size_t t_init_guess = 1) const;
         };
+
+
+
+        //  == FUNCTION PROTOTYPES ==
+        //  -- Parsing --
+        template <size_t N>
+        inline void from_json(const nlohmann::json& j, const Vec<N>& t_vec);
 
 
 
@@ -1007,6 +1015,28 @@ namespace arc
             assert(t_init_guess < N);
 
             return (utl::upper_index(m_data, t_val, t_init_guess));
+        }
+
+
+
+        //  == FUNCTIONS ==
+        //  -- Parsing --
+        /**
+         *  Create a Vec from a json string.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  t_json_object   Json object to be parsed from,
+         *  @param  t_vec           Vector to hold the read values.
+         */
+        template <size_t N>
+        inline void from_json(const nlohmann::json& t_json_object, Vec<N>& t_vec)
+        {
+            const std::array<double, N> arr = t_json_object.get<std::array<double, N>>();
+            for (size_t i = 0; i < N; ++i)
+            {
+                t_vec[i] = arr[i];
+            }
         }
 
 

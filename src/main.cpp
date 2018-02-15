@@ -43,6 +43,7 @@ int main()
 
     VAL(param["light_sources"]["led"]["dist"].parse<std::string>());
     VAL(param["light_sources"]["led"]["power"].parse<double>());
+    VAL(param["light_sources"]["led"]["rot"].parse<math::Vec<3>>());
 
 /*    phys::Material mat(file::read("../test/intralipid_10.mat"));
     VAL(mat.get_ref_index(500e-9));
