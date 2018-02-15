@@ -14,7 +14,6 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/log.hpp"
 
 
 
@@ -32,18 +31,15 @@ namespace arc
          *  Construct a light from a given mesh and spectrum.
          *
          *  @param  t_mesh  Mesh to describe the surface of the light.
-         *  @param  t_mat   Material describing the created photons optical properties.
          *  @param  t_spec  Spectrum distribution.
          *  @param  t_power Power of the light source.
          *
          *  @post   m_power must be greater than zero.
          */
-        Light::Light(const geom::Mesh& t_mesh, const phys::Material& t_mat, const phys::Spectrum& t_spec,
-                     const double t_power) :
+        Light::Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec, const double t_power) :
             m_min_bound(std::max(t_mat.get_min_bound(), t_spec.get_min_bound())),
             m_max_bound(std::min(t_mat.get_max_bound(), t_spec.get_max_bound())),
             m_mesh(t_mesh),
-            m_mat(t_mat),
             m_spec(t_spec),
             m_tri_select(init_rand_tri()),
             m_power(t_power)

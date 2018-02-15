@@ -55,7 +55,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Light(const geom::Mesh& t_mesh, const phys::Material& t_mat, const phys::Spectrum& t_spec, double t_power);
+            Light(const geom::Mesh& t_mesh, const phys::Spectrum& t_spec, double t_power);
 
             //  -- Initialisation --
             random::Index init_rand_tri() const;
