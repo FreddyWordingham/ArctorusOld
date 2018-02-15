@@ -83,14 +83,14 @@ namespace arc
 
 
 
-        //  == OPERATORS ==
+        //  == METHODS ==
         //  -- Generation --
         /**
          *  Generate a random index from the step probability distribution.
          *
          *  @return A randomly generated value from the step probability distribution.
          */
-        size_t Index::operator()() const
+        size_t Index::gen_index() const
         {
             return (utl::lower_index(m_cdf, rng::random()));
         }

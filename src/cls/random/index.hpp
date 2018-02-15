@@ -53,17 +53,14 @@ namespace arc
             std::vector<double> init_cdf(const std::vector<double> &t_p) const;
 
 
-            //  == OPERATORS ==
-          public:
-            //  -- Generation --
-            size_t operator()() const;
-
-
             //  == METHODS ==
           public:
             //  -- Getters --
             size_t get_min_bound() const { return (m_min_bound); }
             size_t get_max_bound() const { return (m_max_bound); }
+
+            //  -- Generation --
+            size_t gen_index() const;
         };
 
 
