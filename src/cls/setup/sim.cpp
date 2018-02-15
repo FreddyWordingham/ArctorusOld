@@ -54,9 +54,13 @@ namespace arc
             // Get list of light names.
             std::vector<std::string> light_name = t_json.get_child_names();
 
+            // Construct the light objects.
+            for (size_t i = 0; i < light_name.size(); ++i)
+            {
+                LOG("Constructing light : " << light_name[i]);
 
-            LOG(light_name);
-
+                const parser::Json json_light = t_json[light_name[i]];
+            }
 
             return (r_light);
         }
