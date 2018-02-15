@@ -83,6 +83,25 @@ namespace arc
 
 
         //  == OPERATORS ==
+        /**
+         *  Form a json parser child object.
+         *
+         *  @param  t_child Name of the child object to form the base of a new json parser.
+         *
+         *  @return A json parser child object.
+         */
+        Json Json::operator[](const std::string& t_child) const
+        {
+            if (!has_child(t_child))
+            {
+                ERROR("Unable to access child member of data::Json object.",
+                      "Parent data::Json object: '" << m_name << "' has no child named: '" << t_child << "'.")
+            }
+
+            return (Json(m_name + "-" + t_child, m_data[t_child]));
+        }
+
+
         //  -- Printing --
         /**
          *  Enable printing of a json object to a given ostream.

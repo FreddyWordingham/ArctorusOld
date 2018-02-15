@@ -59,6 +59,9 @@ namespace arc
 
             //  == OPERATORS ==
           private:
+            //  -- Access --
+            Json operator[](const std::string& t_child) const;
+
             //  -- Printing --
             friend std::ostream& operator<<(std::ostream& t_stream, const Json& t_json);
 
