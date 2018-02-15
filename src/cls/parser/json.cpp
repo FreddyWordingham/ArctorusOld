@@ -16,6 +16,9 @@
 //  -- General --
 #include "gen/log.hpp"
 
+//  -- Classes --
+#include "cls/file/handle.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -117,6 +120,25 @@ namespace arc
 
             return (t_stream);
         }
+
+
+
+        //  == METHODS ==
+        //  -- Saving --
+        /**
+         *  Save the state of the json object to a given file path.
+         *
+         *  @param  t_path  Path to the save location of the file.
+         */
+        void Json::save(const std::string& t_path) const
+        {
+            // Create the output file handle.
+            file::Handle file(t_path, std::fstream::out);
+
+            // Write out the json data.
+            file << serialise();
+        }
+
 
 
 
