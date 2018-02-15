@@ -75,6 +75,8 @@ namespace arc
             std::vector<std::string> get_child_names() const;
             template <typename T>
             T parse() const;
+            template <typename T>
+            T parse_child(const std::string& t_child) const;
 
             //  -- Properties --
             bool has_child(const std::string& t_child) const { return (!(m_data.find(t_child) == m_data.end())); }
@@ -110,6 +112,29 @@ namespace arc
                       "Base data::Json object: '" << m_name << "' could not be converted to type: '" << typeid(T).name()
                                                   << "' as required.");
             }
+        }
+
+        /**
+         *  Parse a child value from the json data object.
+         *
+         *  @tparam T   Type to be parsed from the base json data object.
+         *
+         *  @param  t_child Name of the child value.
+         *
+         *  @return The value of the child of the json data object.
+         */
+        template <typename T>
+        T Json::parse_child(const std::string& t_child) const
+        {
+            // Check that the child value exists.
+            if (!has_child(t_child))
+            {
+                ERROR("Unable to parse child value from data::Json object.",
+                      "Base data::Json object: '" << m_name << "' has no child named: '" << t_child << "'.")
+            }
+
+            // Parse the value.
+            return((*this)[t_child].parse<T>());
         }
 
 

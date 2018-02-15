@@ -41,6 +41,11 @@ int main()
 
     //setup::Sim pdt(file::read("../test/parameters.json"));
 
+    data::Json base("base", file::read("../test/parameters.json"));
+
+    VAL(base["lights"]["light_one"].parse_child<double>("rot"));
+    VAL(base["lights"]["light_one"].parse_child<double>("top"));
+
 
 /*    phys::Material mat(file::read("../test/intralipid_10.mat"));
     VAL(mat.get_ref_index(500e-9));
