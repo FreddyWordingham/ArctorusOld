@@ -207,6 +207,35 @@ namespace arc
         }
 
         /**
+         *  Add a vector of render-able entity props to the scene.
+         *
+         *  @param  t_entity    Vector of entities to be added to the scene.
+         *
+         *  @pre    ENTITY_START_HUE must be less than ENTITY_END_HUE.
+         */
+        void Scene::add_entity_vector(const std::vector<equip::Entity>& t_entity)
+        {
+            static_assert(ENTITY_START_HUE < ENTITY_END_HUE);
+
+            // Return if there are no lights.
+            if (t_entity.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / t_entity.size() - 1);
+
+            // Add the entity props to the scene.
+            for (size_t i = 0; i < t_entity.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(ENTITY_START_HUE + (i * hue_delta)));
+
+                add_light(t_entity[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+            }
+        }
+
+        /**
          *  Add a render-able entity prop to the scene.
          *
          *  @param  t_ent   Entity be added to the scene.
