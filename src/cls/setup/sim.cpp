@@ -43,6 +43,11 @@ namespace arc
         {
         }
 
+        /**
+         *  Initialise a sim object from a serialised json setup file.
+         *
+         *  @param  t_serial    Serialised json setup file.
+         */
         Sim::Sim(const std::string& t_serial) :
             Sim(data::Json("sim", t_serial))
         {
