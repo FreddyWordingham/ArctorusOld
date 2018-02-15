@@ -47,6 +47,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
+            nlohmann::json init_data(const std::string& t_serial) const;
 
 
             //  == OPERATORS ==
