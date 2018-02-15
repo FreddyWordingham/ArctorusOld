@@ -4860,7 +4860,7 @@ namespace nlohmann
 namespace detail
 {
 ///////////////////
-// binary reader //
+// binary parser //
 ///////////////////
 
 /*!

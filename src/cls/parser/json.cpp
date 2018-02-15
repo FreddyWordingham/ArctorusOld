@@ -82,5 +82,5 @@ namespace arc
 
 
 
-    } // namespace reader
+    } // namespace parser
 } // namespace arc
