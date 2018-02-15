@@ -184,10 +184,17 @@ namespace arc
          */
         void Scene::add_light_vector(const std::vector<equip::Light>& t_light)
         {
+            for (int i = 0; i <= 360; ++i)
+            {
+                float x = static_cast<float>(math::deg_to_rad(1.0 * i));
+                hsv_to_rgb(x, 1.0f, 1.0f);
+            }
+
+/*
             for (size_t i = 0; i < t_light.size(); ++i)
             {
                 add_light(t_light[i], glm::vec4(hsv_to_rgb(static_cast<float>(math::deg_to_rad(180.0)), 1.0f, 1.0f), 1.0));
-            }
+            }*/
         }
 
         /**
@@ -751,11 +758,71 @@ namespace arc
          *  @param  t_sat       Saturation of the colour.
          *  @param  t_value     Brightness of the colour.
          *
+         *  @pre    t_hue must be between zero and two pi.
+         *  @pre    t_sat must be between zero and one.
+         *  @pre    t_value must be between zero and one.
+         *
+         *  @post   red must be between zero and one.
+         *  @post   green must be between zero and one.
+         *  @post   blue must be between zero and one.
+         *
          *  @return The rgb equivalent of the given hsv colour.
          */
-        glm::vec3 Scene::hsv_to_rgb(float t_hue, float t_sat, float t_value) const
+        glm::vec3 Scene::hsv_to_rgb(const float t_hue, const float t_sat, const float t_value) const
         {
-            return (glm::vec3(1.0, 0.0, 1.0));
+            assert((t_hue >= 0.0f) && (t_hue < static_cast<float>(2.0 * M_PI)));
+            assert((t_sat >= 0.0f) && (t_sat <= 1.0f));
+            assert((t_value >= 0.0f) && (t_value <= 1.0f));
+
+            // Calculate conversion values.
+            const auto  sector = static_cast<int>(t_hue / static_cast<float>(M_PI / 3.0));
+            const float ff     = (t_hue / static_cast<float>(M_PI / 3.0)) - sector;
+            const float p      = t_value * (1.0f - t_sat);
+            const float q      = t_value * (1.0f - (t_sat * ff));
+            const float t      = t_value * (1.0f - (t_sat * (1.0f - ff)));
+
+            // Calculate the rgb values.
+            float red, blue, green;
+            switch (sector)
+            {
+                case 0:
+                    red   = t_value;
+                    green = t;
+                    blue  = p;
+                    break;
+                case 1:
+                    red   = q;
+                    green = t_value;
+                    blue  = p;
+                    break;
+                case 2:
+                    red   = p;
+                    green = t_value;
+                    blue  = t;
+                    break;
+                case 3:
+                    red   = p;
+                    green = q;
+                    blue  = t_value;
+                    break;
+                case 4:
+                    red   = t;
+                    green = p;
+                    blue  = t_value;
+                    break;
+                case 5:
+                    red   = t_value;
+                    green = p;
+                    blue  = q;
+                    break;
+                default: ERROR("Unable to convert hsv to rgb colour.", "Colour sector is invalid.");
+            }
+
+            assert((red >= 0.0f) && (red <= 1.0f));
+            assert((green >= 0.0f) && (green <= 1.0f));
+            assert((blue >= 0.0f) && (blue <= 1.0f));
+
+            return (glm::vec3(red, green, blue));
         }
 
 
