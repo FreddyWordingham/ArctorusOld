@@ -17,6 +17,9 @@
 //  -- System --
 #include <string>
 
+//  -- Classes --
+#include "cls/math/vec.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -38,6 +41,10 @@ namespace arc
             //  -- Filenames --
             const std::string m_mesh_path;  //! Path to mesh file.
             const std::string m_spec_path;  //! Path to spectrum file.
+
+            //  -- Transformations --
+            const math::Vec<3> m_trans; //! Translation to apply to the mesh.
+//            const math::Vec<3> m_dir;   //! Direction to face the mesh.
 
 
             //  == INSTANTIATION ==
