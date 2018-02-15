@@ -68,7 +68,7 @@ namespace arc
             double get_max_bound() const { return (m_dist.get_max_bound()); }
 
             //  -- Generation --
-            double gen_wavelength() const { return (m_dist()); }
+            double gen_wavelength() const { return (m_dist.gen_value()); }
         };
 
 

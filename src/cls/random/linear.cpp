@@ -187,14 +187,14 @@ namespace arc
 
 
 
-        //  == OPERATORS ==
+        //  == METHODS ==
         //  -- Generation --
         /**
          *  Generate a random number from the probability distribution.
          *
          *  @return A randomly generated value from the probability distribution.
          */
-        double Linear::operator()() const
+        double Linear::gen_value() const
         {
             // Generate a random double between zero and one.
             const double r = rng::random();
@@ -230,7 +230,7 @@ namespace arc
          *
          *  @return A randomly generated value from the probability distribution between the limits.
          */
-        double Linear::operator()(const double t_min, const double t_max) const
+        double Linear::gen_value(const double t_min, const double t_max) const
         {
             assert((t_min >= m_min_bound) && (t_min < m_max_bound));
             assert((t_max > m_min_bound) && (t_min <= m_max_bound));
@@ -262,8 +262,6 @@ namespace arc
         }
 
 
-
-        //  == METHODS ==
         //  -- Interpolation --
         /**
          *  Calculate the cdf for the given value of x.
