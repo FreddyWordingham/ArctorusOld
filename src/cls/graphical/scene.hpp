@@ -72,7 +72,8 @@ namespace arc
 
         //  -- Rendering --
         constexpr const float PHOTON_TRAVEL_SPEED = 1e-9f;  //! Photon travel speed when rendering path data.
-        constexpr const float LIGHT_
+        constexpr const float LIGHT_START_HUE     = 240.0f; //! Light prop start hue.
+        constexpr const float LIGHT_END_HUE       = 300.0f; //! Light prop end hue.
 
 
 
