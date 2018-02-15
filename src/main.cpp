@@ -43,52 +43,5 @@ int main()
 
     pdt.render();
 
-/*    phys::Material mat(file::read("../test/intralipid_10.mat"));
-    VAL(mat.get_ref_index(500e-9));
-    VAL(mat.get_albedo(500e-9));
-    VAL(mat.get_interaction(500e-9));
-    VAL(mat.get_anisotropy(500e-9));*/
-/*
-    phys::Material aether(file::read("../test/intralipid_10.mat"));
-
-    equip::Light led(geom::Mesh(file::read("../test/sphere.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
-
-    std::vector<phys::particle::Photon> phots;
-
-    const int N = 1E4;
-    for (int  i = 0; i < N; ++i)
-    {
-//        phys::particle::Photon phot(pos_norm[0], pos_norm[1], 0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
-        phys::particle::Photon phot = led.gen_photon(aether);
-
-        for (int j = 0; j < 100; ++j)
-        {
-            phot.move(-std::log(rng::random(0.0, 1.0)) / phot.get_interaction());
-            phot.scatter();
-        }
-
-        phots.push_back(phot);
-    }
-
-    graphical::Scene scene;
-
-    equip::Entity monkey(
-        geom::Mesh(file::read("../test/cube.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
-                   math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/intralipid_10.mat")));
-    scene.add_entity(monkey);
-
-    scene.add_light(led);
-
-    for (size_t i = 0; i < phots.size(); ++i)
-    {
-        scene.add_photon(phots[i].get_path());
-    }
-
-    while (!scene.should_close())
-    {
-        scene.handle_input();
-        scene.render();
-    }
-*/
     return (0);
 }
