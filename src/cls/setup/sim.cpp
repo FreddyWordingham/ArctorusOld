@@ -100,6 +100,9 @@ namespace arc
             // Create a graphical scene.
             graphical::Scene scene;
 
+            // Add objects to the scene.
+            scene.add_light_vector(m_light);
+
             // Render the scene.
             while (!scene.should_close())
             {
