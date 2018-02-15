@@ -34,6 +34,8 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Equipment --
+            const std::vector<equip::Light> m_light;    //! Vector of light objects.
 
 
             //  == INSTANTIATION ==
