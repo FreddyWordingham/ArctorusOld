@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/data/json.hpp"
 
@@ -37,7 +38,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Equipment --
-            const std::vector<equip::Light> m_light;    //! Vector of light objects.
+            const std::vector<equip::Light>  m_light;   //! Vector of light objects.
+            const std::vector<equip::Entity> m_entity;  //! Vector of entity objects.
 
 
             //  == INSTANTIATION ==
