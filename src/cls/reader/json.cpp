@@ -27,7 +27,11 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-
+        Json::Json(const std::string& t_name, const std::string& t_serial) :
+            m_name(t_name),
+            m_data(init_data(t_serial))
+        {
+        }
 
 
         //  -- Initialisation --

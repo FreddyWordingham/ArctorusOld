@@ -43,6 +43,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            explicit Json(const std::string &t_name, const std::string& t_serial);
 
           private:
             //  -- Initialisation --
