@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <string>
 
 
 
@@ -35,7 +36,7 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Filenames --
-            const std::string m_mesh_filename
+            const std::string m_mesh_path;  //! Path to mesh file.
 
 
             //  == INSTANTIATION ==
