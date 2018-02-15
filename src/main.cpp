@@ -21,7 +21,7 @@
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
 #include "cls/parser/json.hpp"
-
+#include <map>
 
 
 //  == NAMESPACE ==
@@ -39,18 +39,12 @@ int main()
 {
     LOG("Hello world!");
 
-    parser::Json param("parameters", file::read("../test/parameters.json"));
-
-    VAL(param["light_sources"]["led"]["dist"].parse<std::string>());
-    VAL(param["light_sources"]["led"]["power"].parse<double>());
-    VAL(param["light_sources"]["led"]["rot"].parse<math::Vec<3>>());
-
 /*    phys::Material mat(file::read("../test/intralipid_10.mat"));
     VAL(mat.get_ref_index(500e-9));
     VAL(mat.get_albedo(500e-9));
     VAL(mat.get_interaction(500e-9));
     VAL(mat.get_anisotropy(500e-9));*/
-/*
+
     std::vector<equip::Light> light_list;
     light_list.emplace_back(equip::Light(geom::Mesh(file::read("../test/sphere.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
         phys::Spectrum(file::read("../test/laser.spc")), 1.0));
@@ -64,7 +58,7 @@ int main()
     for (int  i = 0; i < N; ++i)
     {
 //        phys::particle::Photon phot(pos_norm[0], pos_norm[1], 0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
-        phys::particle::Photon phot = led.gen_photon(500E-9, 600E-9);
+        phys::particle::Photon phot = led.gen_photon();
 
         for (int j = 0; j < 100; ++j)
         {
@@ -93,7 +87,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }*/
+    }
 
     return (0);
 }
