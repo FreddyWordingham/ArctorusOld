@@ -8,8 +8,8 @@
 
 
 //  == GUARD ==
-#ifndef ARCTORUS_SRC_CLS_PARSER_JSON_HPP
-#define ARCTORUS_SRC_CLS_PARSER_JSON_HPP
+#ifndef ARCTORUS_SRC_CLS_DATA_JSON_HPP
+#define ARCTORUS_SRC_CLS_DATA_JSON_HPP
 
 
 
@@ -25,7 +25,7 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace parser
+    namespace data
     {
 
 
@@ -114,10 +114,10 @@ namespace arc
 
 
 
-    } // namespace parser
+    } // namespace data
 } // namespace arc
 
 
 
 //  == GUARD END ==
-#endif // ARCTORUS_SRC_CLS_PARSER_JSON_HPP
+#endif // ARCTORUS_SRC_CLS_DATA_JSON_HPP
