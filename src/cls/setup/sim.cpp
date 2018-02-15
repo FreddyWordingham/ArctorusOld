@@ -13,8 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- Utility --
-#include "utl/conversion.hpp"
+//  -- General --
+#include "gen/math.hpp"
 
 
 
@@ -66,7 +66,7 @@ namespace arc
                 // Get the transformation values.
                 const auto   trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
                 const auto   dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const double rot   = utl::deg_to_rad(json_light.parse_child<double>("rot", 0.0));
+                const double rot   = math::deg_to_rad(json_light.parse_child<double>("rot", 0.0));
                 const auto   scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>({{0.0, 0.0, 0.0}}));
             }
 
