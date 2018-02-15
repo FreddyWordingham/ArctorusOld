@@ -124,6 +124,24 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Serialisation --
+        /**
+         *  Create a string representation of the json object.
+         *
+         *  @return A string representation of the json object.
+         */
+        std::string Json::serialise() const
+        {
+            // Create a stringstream to write to.
+            std::stringstream stream;
+
+            // Write the object to the stringstream.
+            stream << m_data.dump(INDENT_WIDTH);
+
+            return (stream.str());
+        }
+
+
         //  -- Saving --
         /**
          *  Save the state of the json object to a given file path.

@@ -71,6 +71,9 @@ namespace arc
             //  -- Properties --
             bool has_child(const std::string& t_child) const { return (!(m_data.find(t_child) == m_data.end())); }
 
+            //  -- Serialisation --
+            std::string serialise() const;
+
             //  -- Saving --
             void save(const std::string& t_path) const;
         };
