@@ -28,9 +28,28 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Mathematical --
+        constexpr double rad_to_deg(double t_x);
+
         //  -- Colour --
         glm::vec3 wavelength_to_rgb(double t_wavelength);
         glm::vec3 colour_chart(double t_x);
+
+
+
+        //  == FUNCTIONS ==
+        //  -- Mathematical --
+        /**
+         *  Convert a value in radians to a value in degrees.
+         *
+         *  @param  t_x Value to convert in units of radians.
+         *
+         *  @return The value in degrees.
+         */
+        constexpr double rad_to_deg(const double t_x)
+        {
+            return (t_x * 180.0 / M_PI);
+        }
 
 
     } // namespace utl
