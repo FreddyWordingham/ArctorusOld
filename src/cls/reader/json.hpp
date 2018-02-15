@@ -44,7 +44,7 @@ namespace arc
           public:
             //  -- Constructors --
             Json(const std::string &t_name, const std::string& t_serial);
-
+            Json(const std::string &t_name, const nlohmann::json& t_data);
 
           private:
             //  -- Initialisation --

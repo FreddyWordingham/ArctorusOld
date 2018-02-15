@@ -40,6 +40,18 @@ namespace arc
         {
         }
 
+        /**
+         *  Construct a json object using a given name and a sub-json data object.
+         *
+         *  @param  t_name  Name of the new json object.
+         *  @param  t_data  New json data.
+         */
+        Json::Json(const std::string& t_name, const nlohmann::json& t_data) :
+            m_name(t_name),
+            m_data(t_data)
+        {
+        }
+
 
         //  -- Initialisation --
         /**
