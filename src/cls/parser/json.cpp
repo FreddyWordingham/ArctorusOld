@@ -82,5 +82,24 @@ namespace arc
 
 
 
+        //  == OPERATORS ==
+        //  -- Printing --
+        /**
+         *  Enable printing of a json object to a given ostream.
+         *
+         *  @param  t_stream    Stream to write to.
+         *  @param  t_json      Json object to be written.
+         *
+         *  @return A reference to the stream post-print.
+         */
+        std::ostream& operator<<(std::ostream& t_stream, const Json& t_json)
+        {
+            t_stream << t_json.m_data.dump(INDENT_WIDTH);
+
+            return (t_stream);
+        }
+
+
+
     } // namespace parser
 } // namespace arc

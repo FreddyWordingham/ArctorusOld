@@ -59,6 +59,8 @@ namespace arc
 
             //  == OPERATORS ==
           private:
+            //  -- Printing --
+            friend std::ostream& operator<<(std::ostream& t_stream, const Json& t_json);
 
 
             //  == METHODS ==
