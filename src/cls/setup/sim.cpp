@@ -32,6 +32,11 @@ namespace arc
         {
         }
 
+        Sim::Sim(const std::string& t_serial) :
+            Sim(parser::Json("sim", t_serial))
+        {
+        }
+
 
         //  -- Initialisation --
         /**
@@ -48,6 +53,9 @@ namespace arc
 
             // Get list of light names.
             std::vector<std::string> light_name = t_json.get_child_names();
+
+
+            LOG(light_name);
 
 
             return (r_light);

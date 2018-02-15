@@ -44,6 +44,7 @@ namespace arc
           public:
             //  -- Constructors --
             Sim(const parser::Json& t_param);
+            Sim(const std::string& t_serial);
 
           private:
             //  -- Initialisation --
