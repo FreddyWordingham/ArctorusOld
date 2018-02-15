@@ -43,12 +43,12 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Sim(const parser::Json& t_param);
+            Sim(const data::Json& t_param);
             Sim(const std::string& t_serial);
 
           private:
             //  -- Initialisation --
-            std::vector<equip::Light> init_light(const parser::Json& t_param) const;
+            std::vector<equip::Light> init_light(const data::Json& t_param) const;
 
 
             //  == OPERATORS ==

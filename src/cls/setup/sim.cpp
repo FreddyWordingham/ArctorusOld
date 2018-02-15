@@ -27,13 +27,13 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-        Sim::Sim(const parser::Json& t_json) :
+        Sim::Sim(const data::Json& t_json) :
             m_light(init_light(t_json["lights"]))
         {
         }
 
         Sim::Sim(const std::string& t_serial) :
-            Sim(parser::Json("sim", t_serial))
+            Sim(data::Json("sim", t_serial))
         {
         }
 
@@ -46,7 +46,7 @@ namespace arc
          *
          *  @return The initialise vector of light objects.
          */
-        std::vector<equip::Light> Sim::init_light(const parser::Json& t_json) const
+        std::vector<equip::Light> Sim::init_light(const data::Json& t_json) const
         {
             // Create the return vector of lights.
             std::vector<equip::Light> r_light;
@@ -59,7 +59,7 @@ namespace arc
             {
                 LOG("Constructing light : " << light_name[i]);
 
-                const parser::Json json_light = t_json[light_name[i]];
+                const data::Json json_light = t_json[light_name[i]];
             }
 
             return (r_light);
