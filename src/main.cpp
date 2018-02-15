@@ -20,6 +20,8 @@
 #include "cls/equip/light.hpp"
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
+#include "cls/setup/sim.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -37,12 +39,15 @@ int main()
 {
     LOG("Hello world!");
 
+    setup::Sim pdt(file::read("../test/parameters.json"));
+
+
 /*    phys::Material mat(file::read("../test/intralipid_10.mat"));
     VAL(mat.get_ref_index(500e-9));
     VAL(mat.get_albedo(500e-9));
     VAL(mat.get_interaction(500e-9));
     VAL(mat.get_anisotropy(500e-9));*/
-
+/*
     phys::Material aether(file::read("../test/intralipid_10.mat"));
 
     equip::Light led(geom::Mesh(file::read("../test/sphere.obj")), phys::Spectrum(file::read("../test/laser.spc")), 1.0);
@@ -83,6 +88,6 @@ int main()
         scene.handle_input();
         scene.render();
     }
-
+*/
     return (0);
 }
