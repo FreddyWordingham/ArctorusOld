@@ -37,12 +37,6 @@ namespace arc
             m_tri_select(init_rand_tri()),
             m_power(t_power)
         {
-            if (m_min_bound >= m_max_bound)
-            {
-                ERROR("Unable to construct equip::Light object.",
-                      "Wavelength ranges of given phys::Material and phys::Spectrum do not overlap.");
-            }
-
             assert(m_power > 0.0);
         }
 
