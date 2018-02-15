@@ -67,7 +67,9 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Properties --
+            bool has_child(const std::string& t_child) const { return (!(m_data.find(t_child) == m_data.end())); }
         };
 
 
