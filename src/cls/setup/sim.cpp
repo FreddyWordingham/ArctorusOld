@@ -64,10 +64,10 @@ namespace arc
                 const data::Json json_light = t_json[light_name[i]];
 
                 // Get the transformation values.
-                const math::Vec<3> trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const math::Vec<3> dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const double       rot   = utl::deg_to_rad(json_light.parse_child<double>("rot", 0.0));
-                const math::Vec<3> scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>({{0.0, 0.0, 0.0}}));
+                const auto   trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
+                const auto   dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 0.0}}));
+                const double rot   = utl::deg_to_rad(json_light.parse_child<double>("rot", 0.0));
+                const auto   scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>({{0.0, 0.0, 0.0}}));
             }
 
             return (r_light);
