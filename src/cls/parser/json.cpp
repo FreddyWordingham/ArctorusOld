@@ -116,7 +116,7 @@ namespace arc
          */
         std::ostream& operator<<(std::ostream& t_stream, const Json& t_json)
         {
-            t_stream << t_json.m_data.dump(INDENT_WIDTH);
+            t_stream << t_json.serialise();
 
             return (t_stream);
         }
