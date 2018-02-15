@@ -1,4 +1,4 @@
-"thing" : {
+{
   "min_wavelength": 632E-9,
   "max_wavelength": 634E-9,
   "num_phot": 1E6,
@@ -26,7 +26,7 @@
       "scale": [0.001, 0.001, 0.001],
       "rot": [180.01, 0.0, 0.0],
       "power": 1.0
-    } bean
+    }
   },
 
   "entities":

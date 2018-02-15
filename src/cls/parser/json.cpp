@@ -72,7 +72,7 @@ namespace arc
             {
                 std::stringstream(t_serial) >> r_base;
             }
-            catch (nlohmann::detail::parse_error)
+            catch (...)
             {
                 ERROR("Unable to construct parser::Json object.", "Unable to parse serialised data of: '" << m_name << "'.");
             }

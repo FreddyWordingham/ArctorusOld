@@ -20,7 +20,7 @@
 #include "cls/equip/light.hpp"
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
-#include "cls/reader/json.hpp"
+#include "cls/parser/json.hpp"
 
 
 
@@ -39,7 +39,7 @@ int main()
 {
     LOG("Hello world!");
 
-    reader::Json param("parameters", file::read("../test/parameters.json"));
+    parser::Json param("parameters", file::read("../test/parameters.json"));
 
 /*    phys::Material mat(file::read("../test/intralipid_10.mat"));
     VAL(mat.get_ref_index(500e-9));
