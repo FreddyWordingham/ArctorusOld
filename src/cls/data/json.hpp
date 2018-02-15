@@ -77,6 +77,8 @@ namespace arc
             T parse() const;
             template <typename T>
             T parse_child(const std::string& t_child) const;
+            template <typename T>
+            T parse_child(const std::string& t_child, const T& t_default) const;
 
             //  -- Properties --
             bool has_child(const std::string& t_child) const { return (!(m_data.find(t_child) == m_data.end())); }
@@ -134,7 +136,31 @@ namespace arc
             }
 
             // Parse the value.
-            return((*this)[t_child].parse<T>());
+            return ((*this)[t_child].parse<T>());
+        }
+
+        /**
+         *  Parse a child value from the json data object.
+         *  If the child value is not located, return a default value.
+         *
+         *  @tparam T   Type to be parsed from the base json data object.
+         *
+         *  @param  t_child     Name of the child value.
+         *  @param  t_default   Default value to be returned if t_child is not located.
+         *
+         *  @return The value of the child of the json data object.
+         */
+        template <typename T>
+        T Json::parse_child(const std::string& t_child, const T& t_default) const
+        {
+            // Check that the child value exists.
+            if (!has_child(t_child))
+            {
+                return (t_default);
+            }
+
+            // Parse the value.
+            return ((*this)[t_child].parse<T>());
         }
 
 
