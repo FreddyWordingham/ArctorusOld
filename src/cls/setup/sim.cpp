@@ -32,6 +32,11 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Initialise a sim object from a json setup file.
+         *
+         *  @param  t_json Json setup file.
+         */
         Sim::Sim(const data::Json& t_json) :
             m_light(init_light(t_json["lights"])),
             m_entity(init_entity(t_json["entities"]))
