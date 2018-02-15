@@ -27,6 +27,12 @@ namespace arc
 
 
 
+        //  == SETTINGS ==
+        //  -- Printing --
+        constexpr const int INDENT_WIDTH = 4;   //! Number of indentation spaces to use when printing the json object.
+
+
+
         //  == CLASS ==
         /**
          *  A reader class used to read data from json files.
