@@ -189,6 +189,15 @@ namespace arc
         }
 
 
+        //  -- Running --
+        /**
+         *  Run the simulation.
+         */
+        void Sim::run()
+        {
+        }
+
+
 
     } // namespace setup
 } // namespace arc
