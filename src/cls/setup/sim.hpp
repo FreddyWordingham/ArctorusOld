@@ -41,6 +41,9 @@ namespace arc
             const std::vector<equip::Light>  m_light;   //! Vector of light objects.
             const std::vector<equip::Entity> m_entity;  //! Vector of entity objects.
 
+            //  -- Simulation --
+            const random::Index m_light_select; //! Light selector.
+
 
             //  == INSTANTIATION ==
           public:
@@ -50,9 +53,9 @@ namespace arc
 
           private:
             //  -- Initialisation --
-
             std::vector<equip::Light> init_light(const data::Json& t_param) const;
             std::vector<equip::Entity> init_entity(const data::Json& t_param) const;
+            random::Index init_light_select() const;
 
 
             //  == OPERATORS ==

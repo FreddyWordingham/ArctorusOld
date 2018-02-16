@@ -140,6 +140,22 @@ namespace arc
             return (r_entity);
         }
 
+        /**
+         *
+         * @return
+         */
+        random::Index Sim::init_light_select() const
+        {
+            // Create a vector of light powers.
+            std::vector<double> power;
+            for (size_t i=0; i<m_light.size(); ++i)
+            {
+                power.push_back(m_light[i].get_power());
+            }
+
+            return (random::Index(power));
+        }
+
 
 
         //  == METHODS ==
