@@ -48,6 +48,9 @@ int main(const int t_argc, const char** t_argv)
     // Construct the simulation object.
     arc::setup::Sim pdt(setup);
 
+    // Run the simulation.
+    pdt.run();
+
     // Render the simulation scene.
     pdt.render();
 
