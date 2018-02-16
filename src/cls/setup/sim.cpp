@@ -38,6 +38,7 @@ namespace arc
          *  @param  t_json Json setup file.
          */
         Sim::Sim(const data::Json& t_json) :
+            m_num_phot(t_json.parse_child<unsigned long int>("num_phot")),
             m_aether(init_aether(t_json["aether"])),
             m_entity(init_entity(t_json["entities"])),
             m_light(init_light(t_json["lights"])),
