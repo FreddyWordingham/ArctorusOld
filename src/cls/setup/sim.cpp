@@ -44,6 +44,42 @@ namespace arc
             m_light(init_light(t_json["lights"])),
             m_light_select(init_light_select())
         {
+            // Check wavelengths are valid.
+            double      light_min_bound = m_light[0].get_min_bound();
+            double      light_max_bound = m_light[0].get_max_bound();
+            for (size_t i               = 1; i < m_light.size(); ++i)
+            {
+                if (m_light[i].get_min_bound() > light_min_bound)
+                {
+                    light_min_bound = m_light[i].get_min_bound();
+                }
+                if (m_light[i].get_max_bound() < light_max_bound)
+                {
+                    light_max_bound = m_light[i].get_max_bound();
+                }
+            }
+
+            double mat_min_bound = m_aether.get_min_bound();
+            double mat_max_bound = m_aether.get_max_bound();
+            for (size_t i=0; i<m_entity.size(); ++i)
+            {
+                if (m_entity[i].get_min_bound() > mat_min_bound)
+                {
+                    mat_min_bound = m_entity[i].get_min_bound();
+                }
+                if (m_entity[i].get_max_bound() < mat_max_bound)
+                {
+                    mat_max_bound = m_entity[i].get_max_bound();
+                }
+            }
+
+            if ((light_min_bound < mat_min_bound) || (light_max_bound > mat_max_bound))
+            {
+                ERROR("Unable to construct setup::Sim object.",
+                      "Range of wavelengths emitted by lights: '" << light_min_bound << "' - '" << light_max_bound
+                                                                  << "', falls beyond the range of wavelengths handled by the materials:'"
+                                                                  << mat_min_bound << "' - '" << mat_max_bound << "'.");
+            }
         }
 
         /**
