@@ -141,8 +141,9 @@ namespace arc
         }
 
         /**
+         *  Construct the light index selector object.
          *
-         * @return
+         *  @return The initialised light index selector.
          */
         random::Index Sim::init_light_select() const
         {
