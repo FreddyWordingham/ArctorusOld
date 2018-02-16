@@ -21,13 +21,8 @@
 #include "lib/stb_image.h"
 
 //  -- General --
-#include "gen/config.hpp"
 #include "gen/control.hpp"
-#include "gen/log.hpp"
-#include "gen/rng.hpp"
-
-//  -- Utility --
-#include "utl/conversion.hpp"
+#include "gen/math.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -183,11 +178,70 @@ namespace arc
         //  == METHODS ==
         //  -- Additions --
         /**
+         *  Add a vector of render-able light props to the scene.
+         *
+         *  @param  t_light Vector of lights to be added to the scene.
+         *
+         *  @pre    LIGHT_START_HUE must be less than LIGHT_END_HUE.
+         */
+        void Scene::add_light_vector(const std::vector<equip::Light>& t_light)
+        {
+            static_assert(LIGHT_START_HUE < LIGHT_END_HUE);
+
+            // Return if there are no lights.
+            if (t_light.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_light.size() == 1) ? 0.0 : ((LIGHT_END_HUE - LIGHT_START_HUE) / t_light.size() - 1);
+
+            // Add the light props to the scene.
+            for (size_t i = 0; i < t_light.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(LIGHT_START_HUE + (i * hue_delta)));
+
+                add_light(t_light[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+            }
+        }
+
+        /**
+         *  Add a vector of render-able entity props to the scene.
+         *
+         *  @param  t_entity    Vector of entities to be added to the scene.
+         *
+         *  @pre    ENTITY_START_HUE must be less than ENTITY_END_HUE.
+         */
+        void Scene::add_entity_vector(const std::vector<equip::Entity>& t_entity)
+        {
+            static_assert(ENTITY_START_HUE < ENTITY_END_HUE);
+
+            // Return if there are no lights.
+            if (t_entity.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / t_entity.size() - 1);
+
+            // Add the entity props to the scene.
+            for (size_t i = 0; i < t_entity.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(ENTITY_START_HUE + (i * hue_delta)));
+
+                add_entity(t_entity[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+            }
+        }
+
+        /**
          *  Add a render-able entity prop to the scene.
          *
          *  @param  t_ent   Entity be added to the scene.
+         *  @param  t_col   Colour ro render the prop.
          */
-        void Scene::add_entity(const equip::Entity& t_ent)
+        void Scene::add_entity(const equip::Entity& t_ent, const glm::vec4& t_col)
         {
             // Create vector of vertices.
             std::vector<Vertex> vertices;
@@ -208,15 +262,16 @@ namespace arc
             }
 
             // Add the entity into the list of render-able props.
-            m_entity.emplace_back(Prop(vertices, {0.1, 0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 1.0}));
+            m_entity.emplace_back(Prop(vertices, t_col));
         }
 
         /**
          *  Add a render-able light prop to the scene.
          *
          *  @param  t_light Light to be added to the scene.
+         *  @param  t_col   Colour ro render the prop.
          */
-        void Scene::add_light(const equip::Light& t_light)
+        void Scene::add_light(const equip::Light& t_light, const glm::vec4& t_col)
         {
             // Create vector of vertices.
             std::vector<Vertex> vertices;
@@ -237,8 +292,7 @@ namespace arc
             }
 
             // Add the light prop into the list of render-able light props.
-            m_light.emplace_back(prop::Light(vertices, static_cast<float>(t_light.get_power()),
-                                             {0.5 + rng::random(0.0, 0.5), 0.5 + rng::random(0.0, 0.5), 0.1, 1.0}));
+            m_light.emplace_back(prop::Light(vertices, static_cast<float>(t_light.get_power()), t_col));
         }
 
         /**
@@ -248,8 +302,7 @@ namespace arc
          */
         void Scene::add_photon(const std::vector<point::Photon>& t_phot)
         {
-            m_phot.emplace_back(
-                Prop(t_phot, glm::vec4(utl::wavelength_to_rgb(static_cast<double>(t_phot.front().get_wavelength())), 1.0)));
+            m_phot.emplace_back(Prop(t_phot, glm::vec4(1.0, 1.0, 1.0, 1.0)));
         }
 
 
@@ -732,6 +785,82 @@ namespace arc
             glDrawArrays(GL_TRIANGLES, 0, 36);
 
             glBindVertexArray(0);
+        }
+
+
+        //  -- Utility --
+        /**
+         *  Convert a hsv colour to an rgb colour vector.
+         *
+         *  @param  t_hue       Hue of the colour.
+         *  @param  t_sat       Saturation of the colour.
+         *  @param  t_value     Brightness of the colour.
+         *
+         *  @pre    t_hue must be between zero and two pi.
+         *  @pre    t_sat must be between zero and one.
+         *  @pre    t_value must be between zero and one.
+         *
+         *  @post   red must be between zero and one.
+         *  @post   green must be between zero and one.
+         *  @post   blue must be between zero and one.
+         *
+         *  @return The rgb equivalent of the given hsv colour.
+         */
+        glm::vec3 Scene::hsv_to_rgb(const float t_hue, const float t_sat, const float t_value) const
+        {
+            assert((t_hue >= 0.0f) && (t_hue < static_cast<float>(2.0 * M_PI)));
+            assert((t_sat >= 0.0f) && (t_sat <= 1.0f));
+            assert((t_value >= 0.0f) && (t_value <= 1.0f));
+
+            // Calculate conversion values.
+            const auto  sector = static_cast<int>(t_hue / static_cast<float>(M_PI / 3.0));
+            const float ff     = (t_hue / static_cast<float>(M_PI / 3.0)) - sector;
+            const float p      = t_value * (1.0f - t_sat);
+            const float q      = t_value * (1.0f - (t_sat * ff));
+            const float t      = t_value * (1.0f - (t_sat * (1.0f - ff)));
+
+            // Calculate the rgb values.
+            float red, blue, green;
+            switch (sector)
+            {
+                case 0:
+                    red   = t_value;
+                    green = t;
+                    blue  = p;
+                    break;
+                case 1:
+                    red   = q;
+                    green = t_value;
+                    blue  = p;
+                    break;
+                case 2:
+                    red   = p;
+                    green = t_value;
+                    blue  = t;
+                    break;
+                case 3:
+                    red   = p;
+                    green = q;
+                    blue  = t_value;
+                    break;
+                case 4:
+                    red   = t;
+                    green = p;
+                    blue  = t_value;
+                    break;
+                case 5:
+                    red   = t_value;
+                    green = p;
+                    blue  = q;
+                    break;
+                default: ERROR("Unable to convert hsv to rgb colour.", "Colour sector is invalid.");
+            }
+
+            assert((red >= 0.0f) && (red <= 1.0f));
+            assert((green >= 0.0f) && (green <= 1.0f));
+            assert((blue >= 0.0f) && (blue <= 1.0f));
+
+            return (glm::vec3(red, green, blue));
         }
 
 

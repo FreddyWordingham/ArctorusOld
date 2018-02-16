@@ -53,8 +53,11 @@ namespace arc
         constexpr int sign(T val);
 
         //  -- Conversion --
+        constexpr double deg_to_rad(double t_x);
+        constexpr double rad_to_deg(double t_x);
         template <typename T>
         T str_to(const std::string& t_str);
+
 
         //  -- Geometry --
         template <size_t N>
@@ -139,6 +142,30 @@ namespace arc
 
 
         //  -- Conversion --
+        /**
+         *  Convert a value in degrees to a value in radians.
+         *
+         *  @param  t_x Value to convert in units of degrees.
+         *
+         *  @return The value in radians.
+         */
+        constexpr double deg_to_rad(const double t_x)
+        {
+            return (t_x * M_PI / 180.0);
+        }
+
+        /**
+         *  Convert a value in radians to a value in degrees.
+         *
+         *  @param  t_x Value to convert in units of radians.
+         *
+         *  @return The value in degrees.
+         */
+        constexpr double rad_to_deg(const double t_x)
+        {
+            return (t_x * 180.0 / M_PI);
+        }
+
         /**
          *  Parse the string into a numerical value.
          *

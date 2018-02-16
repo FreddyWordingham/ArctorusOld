@@ -8,24 +8,13 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-#include <vector>
-#include <cls/data/histogram.hpp>
-
 //  -- General --
-#include "gen/math.hpp"
+#include "gen/rng.hpp"
 
 //  -- Classes --
-#include "cls/equip/entity.hpp"
-#include "cls/equip/light.hpp"
+#include "cls/data/json.hpp"
 #include "cls/file/handle.hpp"
-#include "cls/graphical/scene.hpp"
-#include "cls/parser/json.hpp"
-
-
-
-//  == NAMESPACE ==
-using namespace arc;
+#include "cls/setup/sim.hpp"
 
 
 
@@ -33,80 +22,34 @@ using namespace arc;
 /**
  *  Main function of the Arctorus program.
  *
+ *  @param  t_argc  Command line argument count.
+ *  @param  t_argv  Command line argument vector.
+ *
  *  @return Zero upon a successful run.
  */
-int main()
+int main(const int t_argc, const char** t_argv)
 {
-    LOG("Hello world!");
-
-    parser::Json param("parameters", file::read("../test/parameters.json"));
-
-    VAL(param["light_sources"]["led"]["dist"].parse<std::string>());
-    VAL(param["light_sources"]["led"]["power"].parse<double>());
-    VAL(param["light_sources"]["led"]["rot"].parse<math::Vec<3>>());
-
-/*    phys::Material mat(file::read("../test/intralipid_10.mat"));
-    VAL(mat.get_ref_index(500e-9));
-    VAL(mat.get_albedo(500e-9));
-    VAL(mat.get_interaction(500e-9));
-    VAL(mat.get_anisotropy(500e-9));*/
-/*
-    std::vector<equip::Light> light_list;
-    light_list.emplace_back(equip::Light(geom::Mesh(file::read("../test/sphere.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
-        phys::Spectrum(file::read("../test/laser.spc")), 1.0));
-
-
-    equip::Light laser(geom::Mesh(file::read("../test/circle.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
-                     math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat.mat")),
-    equip::Light led(geom::Mesh(file::read("../test/sphere.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
-                     phys::Spectrum(file::read("../test/laser.spc")), 1.0);
-
-    std::vector<phys::particle::Photon> phots;
-
-    const int N = 1E4;
-    for (int  i = 0; i < N; ++i)
+    // Check the number of command line arguments.
+    if (t_argc != 2)
     {
-//        phys::particle::Photon phot(pos_norm[0], pos_norm[1], 0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
-        phys::particle::Photon phot = led.gen_photon(500E-9, 600E-9);
-        phys::particle::Photon phot = laser.gen_photon();
-
-        for (int j = 0; j < 100; ++j)
-        {
-            phot.move(-std::log(rng::random(0.0, 1.0)) / phot.get_interaction());
-            phot.scatter();
-        }
-
-        phots.push_back(phot);
+        ERROR("Invalid number of command line arguments passed.", "./path/to/arctorus <parameters.json>");
     }
 
-    graphical::Scene scene;
+    // Convert first command line argument to a string.
+    std::string parameters_filepath(t_argv[1]);
+    LOG("Setup file: '" << parameters_filepath << "'.");
 
-    equip::Entity surfaceOne(
-        geom::Mesh(file::read("../test/planeSquare.obj"), math::Vec<3>({{-0.0, 4.0, -2.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
-                   math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat1.mat")));
-    equip::Entity surfaceTwo(
-        geom::Mesh(file::read("../test/planeSquare.obj"), math::Vec<3>({{-0.0, 6.0, -2.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
-                   math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat2.mat")));
-    equip::Entity surfaceThree(
-        geom::Mesh(file::read("../test/planeSquare.obj"), math::Vec<3>({{-0.0, 9.0, -2.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
-               math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat3.mat")));
+    // Create the setup json file.
+    const arc::data::Json setup("setup_file", arc::file::read(parameters_filepath));
 
-    scene.add_entity(surfaceOne);
-    scene.add_entity(surfaceTwo);
-    scene.add_entity(surfaceThree);
+    // Set the program seed.
+    arc::rng::seed(setup.parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
 
-    scene.add_light(laser);
+    // Construct the simulation object.
+    arc::setup::Sim pdt(setup);
 
-    for (size_t i = 0; i < phots.size(); ++i)
-    {
-        scene.add_photon(phots[i].get_path());
-    }
-
-    while (!scene.should_close())
-    {
-        scene.handle_input();
-        scene.render();
-    }*/
+    // Render the simulation scene.
+    pdt.render();
 
     return (0);
 }

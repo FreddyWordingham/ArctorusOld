@@ -53,6 +53,7 @@ namespace arc
             double get_min_bound() const { return (m_mat.get_min_bound()); }
             double get_max_bound() const { return (m_mat.get_max_bound()); }
             const geom::Mesh& get_mesh() const { return (m_mesh); }
+            const phys::Material& get_mat() const { return (m_mat); }
         };
 
 

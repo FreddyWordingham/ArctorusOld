@@ -71,7 +71,11 @@ namespace arc
         constexpr const float ENTITY_NORMAL_LENGTH = 0.5f;  //! Length to draw entity normals.
 
         //  -- Rendering --
-        constexpr const float PHOTON_TRAVEL_SPEED = 1e-9f;  //! Photon travel speed when rendering path data.
+        constexpr const float  PHOTON_TRAVEL_SPEED = 1e-9f; //! Photon travel speed when rendering path data.
+        constexpr const double LIGHT_START_HUE     = 20.0;  //! Light prop start hue.
+        constexpr const double LIGHT_END_HUE       = 60.0;  //! Light prop end hue.
+        constexpr const double ENTITY_START_HUE    = 240.0; //! Entity prop start hue.
+        constexpr const double ENTITY_END_HUE      = 280.0; //! Entity prop end hue.
 
 
 
@@ -144,19 +148,23 @@ namespace arc
 
             //  == METHODS ==
           public:
-            //  -- Additions --
-            void add_entity(const equip::Entity& t_ent);
-            void add_light(const equip::Light& t_light);
-            void add_photon(const std::vector<point::Photon>& t_phot);
-
             //  -- Render --
             void render() const;
+
+            //  -- Additions --
+            void add_light_vector(const std::vector<equip::Light>& t_light);
+            void add_entity_vector(const std::vector<equip::Entity>& t_ent);
 
             //  -- Control --
             bool should_close() const;
             void handle_input();
 
           private:
+            //  -- Additions --
+            void add_entity(const equip::Entity& t_ent, const glm::vec4& t_col);
+            void add_light(const equip::Light& t_light, const glm::vec4& t_col);
+            void add_photon(const std::vector<point::Photon>& t_phot);
+
             //  -- Control --
             void swap_camera();
             void move_camera(float t_time_delta);
@@ -177,6 +185,9 @@ namespace arc
             void draw_phots() const;
             void draw_sun() const;
             void draw_skybox() const;
+
+            //  -- Utility --
+            glm::vec3 hsv_to_rgb(float t_hue, float t_sat, float t_value) const;
         };
 
 

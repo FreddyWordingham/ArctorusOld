@@ -8,7 +8,7 @@
 
 
 //  == HEADER ==
-#include "cls/parser/json.hpp"
+#include "json.hpp"
 
 
 
@@ -21,7 +21,7 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace parser
+    namespace data
     {
 
 
@@ -74,7 +74,7 @@ namespace arc
             }
             catch (...)
             {
-                ERROR("Unable to construct parser::Json object.", "Unable to parse serialised data of: '" << m_name << "'.");
+                ERROR("Unable to construct data::Json object.", "Unable to parse serialised data of: '" << m_name << "'.");
             }
 
             return (r_base);
@@ -84,11 +84,11 @@ namespace arc
 
         //  == OPERATORS ==
         /**
-         *  Form a json parser child object.
+         *  Form a json child object.
          *
-         *  @param  t_child Name of the child object to form the base of a new json parser.
+         *  @param  t_child Name of the child object to form the base of a new json data object.
          *
-         *  @return A json parser child object.
+         *  @return A json child object.
          */
         Json Json::operator[](const std::string& t_child) const
         {
@@ -123,11 +123,11 @@ namespace arc
         //  == METHODS ==
         //  -- Parsing --
         /**
-         *  Parse the list of all the json data object's child member names.
+         *  Get the list of all the json data object's child member names.
          *
          *  @return The vector of all this json object's child member names.
          */
-        std::vector<std::string> Json::parse_child_names() const
+        std::vector<std::string> Json::get_child_names() const
         {
             // Create return vector of name strings.
             std::vector<std::string> r_vec;
@@ -178,5 +178,5 @@ namespace arc
 
 
 
-    } // namespace parser
+    } // namespace data
 } // namespace arc
