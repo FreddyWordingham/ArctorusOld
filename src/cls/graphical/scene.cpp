@@ -268,7 +268,7 @@ namespace arc
          *  Add a render-able entity prop to the scene.
          *
          *  @param  t_ent   Entity be added to the scene.
-         *  @param  t_col   Colour ro render the prop.
+         *  @param  t_col   Colour to render the prop.
          */
         void Scene::add_entity(const equip::Entity& t_ent, const glm::vec4& t_col)
         {
@@ -298,7 +298,7 @@ namespace arc
          *  Add a render-able light prop to the scene.
          *
          *  @param  t_light Light to be added to the scene.
-         *  @param  t_col   Colour ro render the prop.
+         *  @param  t_col   Colour to render the prop.
          */
         void Scene::add_light(const equip::Light& t_light, const glm::vec4& t_col)
         {
@@ -328,10 +328,11 @@ namespace arc
          *  Add a renderable photon packet path prop to the scene.
          *
          *  @param  t_phot  Photon packet path prop to be added.
+         *  @param  t_col   Colour to render the prop.
          */
-        void Scene::add_photon(const std::vector<point::Photon>& t_phot)
+        void Scene::add_photon(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col)
         {
-            m_phot.emplace_back(Prop(t_phot, glm::vec4(1.0, 1.0, 1.0, 1.0)));
+            m_phot.emplace_back(Prop(t_phot, t_col));
         }
 
 
