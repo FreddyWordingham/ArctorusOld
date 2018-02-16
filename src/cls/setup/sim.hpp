@@ -37,12 +37,15 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Settings --
+            const unsigned long int m_num_phot; //! Number of photons to simulate.
+
             //  -- Equipment --
             const phys::Material             m_aether;  //! Aether material.
             const std::vector<equip::Entity> m_entity;  //! Vector of entity objects.
             const std::vector<equip::Light>  m_light;   //! Vector of light objects.
 
-            //  -- Simulation --
+            //  -- Tools --
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
