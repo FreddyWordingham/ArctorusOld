@@ -174,6 +174,12 @@ namespace arc
             scene.add_light_vector(m_light);
             scene.add_entity_vector(m_entity);
 
+            // Add photon paths.
+            for (size_t i=0; i<m_path; ++i)
+            {
+                scene.add_photon(m_path[i]);
+            }
+
             // Render the scene.
             while (!scene.should_close())
             {

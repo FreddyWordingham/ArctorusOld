@@ -44,6 +44,9 @@ namespace arc
             //  -- Simulation --
             const random::Index m_light_select; //! Light selector.
 
+            //  -- Data --
+            std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
+
 
             //  == INSTANTIATION ==
           public:
@@ -66,6 +69,9 @@ namespace arc
           public:
             //  -- Rendering --
             void render() const;
+
+            //  -- Running --
+            void run();
         };
 
 
