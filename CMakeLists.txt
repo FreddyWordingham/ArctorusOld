@@ -147,3 +147,5 @@ target_link_libraries(arctorus ${OPENGL_LIBRARIES})
 target_link_libraries(arctorus ${SDL2_LIBRARIES})
 target_link_libraries(arctorus GLEW)
 target_link_libraries(arctorus glfw)
+
+target_link_libraries(arctorus cptk)
