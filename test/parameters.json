@@ -1,5 +1,21 @@
 {
     "seed": 77,
+
+    "aether": {
+        "mat": "materials/intralipid_10.mat"
+    },
+
+    "entities": {
+        "entity_one": {
+            "trans": [1.0, 0.5, -0.5],
+            "dir":   [0.0, 1.0, 0.0],
+            "rot":   45.0,
+            "scale": [1.0, 1.0, 1.0],
+            "mesh":  "meshes/monkey.obj",
+            "mat":   "materials/intralipid_10.mat"
+        }
+    },
+
     "lights":   {
         "light_one": {
             "power": 1.0,
@@ -9,16 +25,6 @@
             "scale": [0.5, 0.5, 0.5],
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
-        }
-    },
-    "entities": {
-        "entity_one": {
-            "trans": [1.0, 0.5, -0.5],
-            "dir":   [0.0, 1.0, 0.0],
-            "rot":   45.0,
-            "scale": [1.0, 1.0, 1.0],
-            "mesh":  "meshes/monkey.obj",
-            "mat":   "materials/intralipid_10.mat"
         }
     }
 }
