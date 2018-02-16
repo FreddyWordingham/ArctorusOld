@@ -208,6 +208,11 @@ namespace arc
          */
         void Sim::run()
         {
+            phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
+
+            phot.move(1.0);
+
+            m_path.push_back(phot.get_path());
         }
 
 
