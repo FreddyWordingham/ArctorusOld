@@ -53,8 +53,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Bounds --
-            const double m_min_bound;   //! Minimum bound of the interpolation range.
-            const double m_max_bound;   //! Maximum bound of the interpolation range.
+            const double m_min_bound;   //! Minimum wavelength bound of the interpolation range.
+            const double m_max_bound;   //! Maximum wavelength bound of the interpolation range.
 
             //  -- Optical Properties --
             const interpolator::Linear m_ref_index;     //! Refractive index.

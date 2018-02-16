@@ -49,10 +49,6 @@ namespace arc
 
             //  == FIELDS ==
           private:
-            //  -- Bounds --
-            const double m_min_bound;   //! Minimum bound of the interpolation range.
-            const double m_max_bound;   //! Maximum bound of the interpolation range.
-
             //  -- Data --
             const random::Linear m_dist;    //! Random number distribution generator.
 
@@ -67,8 +63,12 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Getters --
+            double get_min_bound() const { return (m_dist.get_min_bound()); }
+            double get_max_bound() const { return (m_dist.get_max_bound()); }
+
             //  -- Generation --
-            double gen_wavelength() const { return (m_dist()); }
+            double gen_wavelength() const { return (m_dist.gen_value()); }
         };
 
 

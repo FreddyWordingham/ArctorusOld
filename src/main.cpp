@@ -20,6 +20,7 @@
 #include "cls/equip/light.hpp"
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
+#include "cls/parser/json.hpp"
 
 
 
@@ -37,27 +38,27 @@ using namespace arc;
 int main()
 {
     LOG("Hello world!");
+
+    parser::Json param("parameters", file::read("../test/parameters.json"));
+
+    VAL(param["light_sources"]["led"]["dist"].parse<std::string>());
+    VAL(param["light_sources"]["led"]["power"].parse<double>());
+    VAL(param["light_sources"]["led"]["rot"].parse<math::Vec<3>>());
+
+/*    phys::Material mat(file::read("../test/intralipid_10.mat"));
+    VAL(mat.get_ref_index(500e-9));
+    VAL(mat.get_albedo(500e-9));
+    VAL(mat.get_interaction(500e-9));
+    VAL(mat.get_anisotropy(500e-9));*/
 /*
-    std::vector<double> x({-4.0, -2.0, -1.0, 0.0, +1.0, +2.0, +4.0});
-    std::vector<double> y({15.0, 10.0, 8.0, 7.5, 7.0, 5.0, 0.0});
-
-    random::Linear lin(x, y);
-
-    data::Histogram hist(-5.0, +5.0, 100);
-
-    for (size_t i = 0; i < 1e6; ++i)
-    {
-        hist(lin(-2.0, +2.0));
-//        hist(lin());
-    }
-
-    hist.save("hist.dat");*/
-
-
+    std::vector<equip::Light> light_list;
+    light_list.emplace_back(equip::Light(geom::Mesh(file::read("../test/sphere.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
+        phys::Spectrum(file::read("../test/laser.spc")), 1.0));
 
 
     equip::Light laser(geom::Mesh(file::read("../test/circle.obj"), math::Vec<3>({{3.0, 3.0, -3.0}}), math::Vec<3>({{0.0, 0.0, 1.0}}), 0.0,
                      math::Vec<3>({{1.0, 1.0, 1.0}})), phys::Material(file::read("../test/mat.mat")),
+    equip::Light led(geom::Mesh(file::read("../test/sphere.obj")), phys::Material(file::read("../test/intralipid_10.mat")),
                      phys::Spectrum(file::read("../test/laser.spc")), 1.0);
 
     std::vector<phys::particle::Photon> phots;
@@ -66,6 +67,7 @@ int main()
     for (int  i = 0; i < N; ++i)
     {
 //        phys::particle::Photon phot(pos_norm[0], pos_norm[1], 0.0, w, 1.0, 1.5, 0.99, 1.0, 1.0);
+        phys::particle::Photon phot = led.gen_photon(500E-9, 600E-9);
         phys::particle::Photon phot = laser.gen_photon();
 
         for (int j = 0; j < 100; ++j)
@@ -104,7 +106,7 @@ int main()
     {
         scene.handle_input();
         scene.render();
-    }
+    }*/
 
     return (0);
 }

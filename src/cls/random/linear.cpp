@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/log.hpp"
+#include "gen/math.hpp"
 #include "gen/rng.hpp"
 
 
@@ -35,23 +36,59 @@ namespace arc
          *  @param  t_x Vector of X positions.
          *  @param  t_p Vector of corresponding probabilities.
          *
+         *  @post   t_x must be sorted into ascending order.
          *  @post   t_min_bound must be less than m_max_bound.
          */
         Linear::Linear(const std::vector<double>& t_x, const std::vector<double>& t_p) :
             m_min_bound(t_x.front()),
             m_max_bound(t_x.back()),
             m_x(t_x),
-            m_p(t_p),
+            m_p(init_p(t_p)),
             m_grad(init_grad()),
             m_inter(init_inter()),
             m_cdf(init_cdf()),
             m_frac(init_frac())
         {
+            assert(utl::is_ascending(t_x));
             assert(m_min_bound < m_max_bound);
         }
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the probability vector by normalising the area.
+         *
+         *  @param  t_p Vector of corresponding probabilities.
+         *
+         *  @pre    t_p size must equal m_x size.
+         *  @pre    t_p must always be greater than zero.
+         *
+         *  @return Initialise the probability values.
+         */
+        std::vector<double> Linear::init_p(const std::vector<double>& t_p) const
+        {
+            assert(t_p.size() == m_x.size());
+            assert(utl::is_always_greater_than_or_equal_to(t_p, 0.0));
+
+            // Sum the area of each trapezium.
+            double      total_area = 0.0;
+            for (size_t i          = 0; i < (t_p.size() - 1); ++i)
+            {
+                total_area += ((t_p[i] + t_p[i + 1]) * (m_x[i + 1] - m_x[i])) / 2.0;
+            }
+
+            // Create the return probability values.
+            std::vector<double> r_p(t_p.size());
+
+            // Calculate the normalised probability values.
+            for (size_t i = 0; i < t_p.size(); ++i)
+            {
+                r_p[i] = t_p[i] / total_area;
+            }
+
+            return (r_p);
+        }
+
         /**
          *  Initialise the vector of probability gradients.
          *
@@ -93,19 +130,17 @@ namespace arc
         /**
          *  Initialise the cumulative distribution vector of the probability distribution.
          *
-         *  @pre    m_x size must match m_p size.
          *  @pre    m_x size must be greater than one.
          *  @pre    m_x data must be in ascending order.
-         *  @pre    m_p data must always be non-negative.
+         *
+         *  @post   m_cdf final value must be unity.
          *
          *  @return The initialised cdf data vector.
          */
         std::vector<double> Linear::init_cdf() const
         {
-            assert(m_x.size() == m_p.size());
             assert(m_x.size() > 1);
             assert(utl::is_ascending(m_x));
-            assert(utl::is_always_greater_than_or_equal_to(m_p, 0.0));
 
             // Calculate the area of each trapezium.
             std::vector<double> base(m_x.size() - 1);
@@ -122,11 +157,7 @@ namespace arc
                 r_cdf[i] = r_cdf[i - 1] + base[i - 1];
             }
 
-            // Normalise the cdf point.
-            for (size_t i = 0; i < r_cdf.size(); ++i)
-            {
-                r_cdf[i] /= r_cdf.back();
-            }
+            assert(m_cdf.back() == 1.0);
 
             return (r_cdf);
         }
@@ -156,14 +187,14 @@ namespace arc
 
 
 
-        //  == OPERATORS ==
+        //  == METHODS ==
         //  -- Generation --
         /**
          *  Generate a random number from the probability distribution.
          *
          *  @return A randomly generated value from the probability distribution.
          */
-        double Linear::operator()() const
+        double Linear::gen_value() const
         {
             // Generate a random double between zero and one.
             const double r = rng::random();
@@ -192,29 +223,78 @@ namespace arc
          *  @param  t_min   Minimum value that may be returned.
          *  @param  t_max   Maximum value that may be returned.
          *
-         *  @pre    t_min must be greater than, or equal to, m_lower_bound and less than m_upper_bound.
-         *  @pre    t_max must be greater than m_lower_bound and less than, or equal to, the m_upper_bound.
+         *  @pre    t_min must be greater than, or equal to, m_min_bound and less than m_max_bound.
+         *  @pre    t_max must be greater than m_min_bound and less than, or equal to, the m_max_bound.
          *
          *  @post   r_val must be between the limits of t_min and t_max.
          *
          *  @return A randomly generated value from the probability distribution between the limits.
          */
-        double Linear::operator()(const double t_min, const double t_max) const
+        double Linear::gen_value(const double t_min, const double t_max) const
         {
             assert((t_min >= m_min_bound) && (t_min < m_max_bound));
             assert((t_max > m_min_bound) && (t_min <= m_max_bound));
 
-            double r_val;
+            // Generate a random double between the interpolated cdf values.
+            const double r = rng::random(get_cdf(t_min), get_cdf(t_max));
 
-            do
+            // Determine the lower index of the cdf where the value is found.
+            static size_t lower_index = 0;
+            lower_index = utl::lower_index(m_cdf, r, lower_index);
+
+            // Generate a value by interpolating the probabilities.
+            const double f = rng::random();
+            if (f <= m_frac[lower_index])
             {
-                r_val = (*this)();
+                if (m_p[lower_index] < m_p[lower_index + 1])
+                {
+                    return (m_x[lower_index] + (std::sqrt(rng::random()) * (m_x[lower_index + 1] - m_x[lower_index])));
+                }
+                return (m_x[lower_index + 1] - (std::sqrt(rng::random()) * (m_x[lower_index + 1] - m_x[lower_index])));
             }
-            while ((r_val < t_min) || (r_val > t_max));
+
+            // Calculate the generated value.
+            const double r_val = m_x[lower_index] + (rng::random() * (m_x[lower_index + 1] - m_x[lower_index]));
 
             assert((r_val >= t_min) && (r_val <= t_max));
 
             return (r_val);
+        }
+
+
+        //  -- Interpolation --
+        /**
+         *  Calculate the cdf for the given value of x.
+         *
+         *  @param  t_x Value of x to calculate the cdf of.
+         *
+         *  @pre    t_x must fall within the bounds.
+         *
+         *  @post   r_cdf must be between zero and one.
+         *
+         *  @return The cdf for the given value.
+         */
+        double Linear::get_cdf(const double t_x) const
+        {
+            assert((t_x >= m_min_bound) && (t_x <= m_max_bound));
+
+            if (math::equal(t_x, m_min_bound))
+            {
+                return (0.0);
+            }
+            if (math::equal(t_x, m_max_bound))
+            {
+                return (1.0);
+            }
+
+            const size_t lower_index = utl::lower_index(m_x, t_x);
+
+            const double r_cdf = m_cdf[lower_index] + ((m_grad[lower_index] / 2.0) * (math::square(t_x) - math::square(
+                m_x[lower_index]))) + (m_inter[lower_index] * (t_x - m_x[lower_index]));
+
+            assert((r_cdf >= 0.0) && (r_cdf <= 1.0));
+
+            return (r_cdf);
         }
 
 

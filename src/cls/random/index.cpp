@@ -14,10 +14,8 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/log.hpp"
 #include "gen/rng.hpp"
-
-//  -- Utility --
-#include "utl/vector.hpp"
 
 
 
@@ -39,6 +37,7 @@ namespace arc
          *  @post   m_p data must always be non-negative.
          */
         Index::Index(const std::vector<double>& t_p) :
+            m_max_bound(t_p.size() - 1),
             m_cdf(init_cdf(t_p))
         {
             assert(utl::is_always_greater_than_or_equal_to(t_p, 0.0));
@@ -52,6 +51,8 @@ namespace arc
          *  @param  t_p Vector of corresponding probabilities.
          *
          *  @pre    m_p data must always be non-negative.
+         *
+         *  @post   m_cdf final value must be unity.
          *
          *  @return The initialised cumulative distribution frequency vector.
          */
@@ -70,24 +71,26 @@ namespace arc
             }
 
             // Normalise the cdf values.
-            for (size_t i = 0; i < t_p.size(); ++i)
+            for (size_t i=0; i<r_cdf.size(); ++i)
             {
                 r_cdf[i] /= r_cdf.back();
             }
+
+            assert(m_cdf.back() == 1.0);
 
             return (r_cdf);
         }
 
 
 
-        //  == OPERATORS ==
+        //  == METHODS ==
         //  -- Generation --
         /**
          *  Generate a random index from the step probability distribution.
          *
          *  @return A randomly generated value from the step probability distribution.
          */
-        size_t Index::operator()() const
+        size_t Index::gen_index() const
         {
             return (utl::lower_index(m_cdf, rng::random()));
         }

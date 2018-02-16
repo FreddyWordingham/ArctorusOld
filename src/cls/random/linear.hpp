@@ -55,22 +55,26 @@ namespace arc
 
           private:
             //  -- Initialisation --
+            std::vector<double> init_p(const std::vector<double>& t_p) const;
             std::vector<double> init_grad() const;
             std::vector<double> init_inter() const;
             std::vector<double> init_cdf() const;
             std::vector<double> init_frac() const;
 
 
-            //  == OPERATORS ==
-          public:
-            //  -- Generation --
-            double operator()() const;
-            double operator()(double t_min, double t_max) const;
-
-
-
             //  == METHODS ==
+          public:
+            //  -- Getters --
+            double get_min_bound() const { return (m_min_bound); }
+            double get_max_bound() const { return (m_max_bound); }
 
+            //  -- Generation --
+            double gen_value() const;
+            double gen_value(double t_min, double t_max) const;
+
+          private:
+            //  -- Interpolation --
+            double get_cdf(double t_x) const;
         };
 
 

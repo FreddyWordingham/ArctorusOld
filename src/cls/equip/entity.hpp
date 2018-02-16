@@ -50,6 +50,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            double get_min_bound() const { return (m_mat.get_min_bound()); }
+            double get_max_bound() const { return (m_mat.get_max_bound()); }
             const geom::Mesh& get_mesh() const { return (m_mesh); }
         };
 

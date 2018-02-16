@@ -39,14 +39,18 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Bounds --
+            const double m_min_bound;   //! Minimum wavelength bound of the photon generation range.
+            const double m_max_bound;   //! Maximum wavelength bound of the photon generation range.
+
             //  -- Properties --
             const geom::Mesh     m_mesh;    //! Mesh describing the surface of the light.
             const phys::Material m_mat;     //! Material describing the created photons optical properties.
             const phys::Spectrum m_spec;    //! Linear random generator forming the emission spectrum.
 
             //  -- Sorting --
-            const random::Index m_rand_tri; //! Random triangle index selector.
-            const double        m_power;    //! Power of the light source.
+            const random::Index m_tri_select;   //! Random triangle index selector.
+            const double        m_power;        //! Power of the light source.
 
 
             //  == INSTANTIATION ==
@@ -61,6 +65,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            double get_min_bound() const { return (m_min_bound); }
+            double get_max_bound() const { return (m_max_bound); }
             const geom::Mesh& get_mesh() const { return (m_mesh); }
             const phys::Spectrum& get_spec() const { return (m_spec); }
             double get_power() const { return (m_power); }

@@ -66,13 +66,11 @@ namespace arc
             void init_generation_variables();
 
 
-            //  == OPERATORS ==
+            //  == METHODS ==
           public:
             //  -- Generation --
-            inline double operator()(double t_min = 0.0, double t_max = 1.0);
+            inline double gen_value(double t_min = 0.0, double t_max = 1.0);
 
-
-            //  == METHODS ==
           private:
             //  -- Generation --
             base gen_base();
@@ -93,7 +91,7 @@ namespace arc
          *
          *  @return A random double between the given bounds.
          */
-        inline double Uniform::operator()(const double t_min, const double t_max)
+        inline double Uniform::gen_value(const double t_min, const double t_max)
         {
             assert(t_min < t_max);
 

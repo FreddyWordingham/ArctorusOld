@@ -66,7 +66,7 @@ namespace arc
          */
         inline double random(const double t_min, const double t_max)
         {
-            return (random::Uniform::get_instance()(t_min, t_max));
+            return (random::Uniform::get_instance().gen_value(t_min, t_max));
         }
 
 
