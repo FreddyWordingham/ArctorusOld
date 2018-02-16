@@ -76,8 +76,8 @@ namespace arc
         constexpr const double LIGHT_END_HUE       = 60.0;  //! Light prop end hue.
         constexpr const double ENTITY_START_HUE    = 240.0; //! Entity prop start hue.
         constexpr const double ENTITY_END_HUE      = 280.0; //! Entity prop end hue.
-        constexpr const double PHOTON_START_HUE    = 0.0;   //! Photon path prop start hue.
-        constexpr const double PHOTON_END_HUE      = 360.0; //! Photon path prop end hue.
+        constexpr const double PHOTON_START_HUE    = 120.0; //! Photon path prop start hue.
+        constexpr const double PHOTON_END_HUE      = 160.0; //! Photon path prop end hue.
 
 
 
