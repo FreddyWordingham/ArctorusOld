@@ -39,7 +39,8 @@ namespace arc
          */
         Sim::Sim(const data::Json& t_json) :
             m_light(init_light(t_json["lights"])),
-            m_entity(init_entity(t_json["entities"]))
+            m_entity(init_entity(t_json["entities"])),
+            m_light_select(init_light_select())
         {
         }
 
