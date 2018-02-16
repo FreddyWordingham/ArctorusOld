@@ -217,7 +217,7 @@ namespace arc
         {
             static_assert(ENTITY_START_HUE < ENTITY_END_HUE);
 
-            // Return if there are no lights.
+            // Return if there are no entities.
             if (t_entity.empty())
             {
                 return;
@@ -232,6 +232,35 @@ namespace arc
                 const auto hue = static_cast<float>(math::deg_to_rad(ENTITY_START_HUE + (i * hue_delta)));
 
                 add_entity(t_entity[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+            }
+        }
+
+        /**
+         *  Add a vector of render-able photon path props to the scene.
+         *
+         *  @param  t_phot  Vector of photon paths to be added to the scene.
+         *
+         *  @pre    PHOTON_START_HUE must be less than PHOTON_END_HUE.
+         */
+        void Scene::add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot)
+        {
+            static_assert(PHOTON_START_HUE < PHOTON_END_HUE);
+
+            // Return if there are no photon paths.
+            if (t_phot.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_phot.size() == 1) ? 0.0 : ((PHOTON_END_HUE - PHOTON_START_HUE) / t_phot.size() - 1);
+
+            // Add the photon path props to the scene.
+            for (size_t i = 0; i < t_phot.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(PHOTON_START_HUE + (i * hue_delta)));
+
+                add_photon(t_phot[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
             }
         }
 
