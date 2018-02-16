@@ -1,5 +1,6 @@
 {
     "seed": 77,
+    "num_phot": 1e3,
 
     "aether": {
         "mat": "materials/intralipid_10.mat"
