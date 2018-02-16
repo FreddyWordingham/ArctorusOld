@@ -195,7 +195,7 @@ namespace arc
             }
 
             // Calculate the hue delta.
-            const double hue_delta = (t_light.size() == 1) ? 0.0 : ((LIGHT_END_HUE - LIGHT_START_HUE) / t_light.size() - 1);
+            const double hue_delta = (t_light.size() == 1) ? 0.0 : ((LIGHT_END_HUE - LIGHT_START_HUE) / (t_light.size() - 1));
 
             // Add the light props to the scene.
             for (size_t i = 0; i < t_light.size(); ++i)
@@ -224,7 +224,7 @@ namespace arc
             }
 
             // Calculate the hue delta.
-            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / t_entity.size() - 1);
+            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / (t_entity.size() - 1));
 
             // Add the entity props to the scene.
             for (size_t i = 0; i < t_entity.size(); ++i)
@@ -253,7 +253,7 @@ namespace arc
             }
 
             // Calculate the hue delta.
-            const double hue_delta = (t_phot.size() == 1) ? 0.0 : ((PHOTON_END_HUE - PHOTON_START_HUE) / t_phot.size() - 1);
+            const double hue_delta = (t_phot.size() == 1) ? 0.0 : ((PHOTON_END_HUE - PHOTON_START_HUE) / (t_phot.size() - 1));
 
             // Add the photon path props to the scene.
             for (size_t i = 0; i < t_phot.size(); ++i)
