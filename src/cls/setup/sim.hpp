@@ -40,6 +40,7 @@ namespace arc
             //  -- Equipment --
             const std::vector<equip::Light>  m_light;   //! Vector of light objects.
             const std::vector<equip::Entity> m_entity;  //! Vector of entity objects.
+            const phys::Material             m_aether;  //! Aether material.
 
             //  -- Simulation --
             const random::Index m_light_select; //! Light selector.
