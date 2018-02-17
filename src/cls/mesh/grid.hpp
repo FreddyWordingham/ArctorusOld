@@ -40,10 +40,6 @@ namespace arc
             const std::array<double, 3> m_min_bound;    //! Minimum bound of the cell.
             const std::array<double, 3> m_max_bound;    //! Maximum bound of the cell.
 
-            //  -- Triangles --
-            const std::vector<std::array<size_t, 2>> m_entity_tri;  //! List of entity triangles contained within the cell.
-            const std::vector<std::array<size_t, 2>> m_light_tri;   //! List of light triangles contained within the cell.
-
 
             //  == INSTANTIATION ==
           public:
