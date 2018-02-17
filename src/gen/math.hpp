@@ -61,9 +61,10 @@ namespace arc
 
         //  -- Geometry --
         template <size_t N>
-        constexpr double dist(const math::Vec<N>& t_start, const math::Vec<N>& t_end);
-        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos);
-        double area(const std::array<math::Vec<3>, 3>& t_pos);
+        constexpr double dist(const Vec<N>& t_start, const Vec<N>& t_end);
+        constexpr Vec<3> normal(const std::array<Vec<3>, 3>& t_pos);
+        double area(const std::array<Vec<3>, 3>& t_pos);
+        bool tri_box_overlap(const Vec<3>& t_max_vert, const Vec<3> )
 
         //  -- Transformation --
         Mat<4, 4> create_trans_mat(const Vec<3>& t_trans);
@@ -222,7 +223,7 @@ namespace arc
          *  @return The distance between the two points.
          */
         template <size_t N>
-        constexpr double dist(const math::Vec<N>& t_start, const math::Vec<N>& t_end)
+        constexpr double dist(const Vec<N>& t_start, const Vec<N>& t_end)
         {
             return ((t_start - t_end).magnitude());
         }
@@ -234,10 +235,10 @@ namespace arc
          *
          *  @return The normal vector of the plane.
          */
-        constexpr math::Vec<3> normal(const std::array<math::Vec<3>, 3>& t_pos)
+        constexpr Vec<3> normal(const std::array<Vec<3>, 3>& t_pos)
         {
             // Determine the normal from the cross product.
-            math::Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^ (t_pos[GAMMA] - t_pos[ALPHA]);
+            Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^ (t_pos[GAMMA] - t_pos[ALPHA]);
 
             // Normalise the vector.
             r_norm.normalise();
