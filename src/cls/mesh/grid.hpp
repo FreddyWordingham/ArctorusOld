@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- Classes --
 #include "cls/math/vec.hpp"
+#include "cls/mesh/cell.hpp"
 
 
 
