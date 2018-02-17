@@ -3,7 +3,7 @@
     "num_phot": 1e4,
 
     "aether": {
-        "mat": "materials/intralipid_10.mat"
+        "mat": "materials/vacuum.mat"
     },
 
     "entities": {
