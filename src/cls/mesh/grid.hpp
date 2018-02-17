@@ -40,7 +40,8 @@ namespace arc
             const math::Vec<3> m_max_bound; //! Maximum bound of the cell.
 
             //  -- Data --
-            const std::vector<std::vector<std::vector<Cell>>> m_cell;   //! Three-dimensional vector of cells.
+            const std::vector<std::vector<std::vector<Cell>>> m_cell;       //! Three-dimensional vector of cells.
+            const double                                      cell_volume;  //! Volume of each cell.
 
 
             //  == INSTANTIATION ==
