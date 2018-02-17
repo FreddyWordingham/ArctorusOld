@@ -56,11 +56,12 @@ int main(const int t_argc, const char** t_argv)
     pdt.render();*/
 
 
-    const arc::math::Vec<3> center({{0.0, 0.0, 0.0}});
-    const arc::math::Vec<3> half_size({{1.0, 1.0, 1.0}});
+    const arc::math::Vec<3> center({{-0.0001, -0.0001, -0.0001}});
+    const double width = (1.0/3.0) + 0.00001;
+    const arc::math::Vec<3> half_size({{width, width, width}});
 
 
-    const arc::math::Vec<3> pos_0({{0.0, 0.0, 0.0}});
+    const arc::math::Vec<3> pos_0({{0.0, 0.0, 1.0}});
     const arc::math::Vec<3> pos_1({{1.0, 0.0, 0.0}});
     const arc::math::Vec<3> pos_2({{0.0, 1.0, 0.0}});
 
