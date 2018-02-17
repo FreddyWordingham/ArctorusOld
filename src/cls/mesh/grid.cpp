@@ -27,6 +27,17 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Construct a grid within given bounds.
+         *
+         *  @param  t_min_bound Minimum grid bound.
+         *  @param  t_max_bound Maximum grid bound.
+         */
+        Grid::Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound) :
+            m_min_bound(t_min_bound),
+            m_max_bound(t_max_bound)
+        {
+        }
 
 
 
