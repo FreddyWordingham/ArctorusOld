@@ -86,13 +86,13 @@ namespace arc
          *  @post   ANISOTROPY index column must have the correct title.
          */
         Material::Material(const data::Table& t_tab) :
-            Material(t_tab[WAVELENGTH].get_data(), t_tab[REF_INDEX].get_data(), t_tab[ABS_LENGTH].get_data(),
-                     t_tab[SCAT_LENGTH].get_data(), t_tab[ANISOTROPY].get_data())
+            Material(t_tab[WAVELENGTH].get_data(), t_tab[REF_INDEX].get_data(), t_tab[ABS_COEF].get_data(),
+                     t_tab[SCAT_COEF].get_data(), t_tab[ANISOTROPY].get_data())
         {
             assert(t_tab[WAVELENGTH].get_title() == "w");
             assert(t_tab[REF_INDEX].get_title() == "n");
-            assert(t_tab[ABS_LENGTH].get_title() == "a");
-            assert(t_tab[SCAT_LENGTH].get_title() == "s");
+            assert(t_tab[ABS_COEF].get_title() == "a");
+            assert(t_tab[SCAT_COEF].get_title() == "s");
             assert(t_tab[ANISOTROPY].get_title() == "g");
         }
 
@@ -109,24 +109,24 @@ namespace arc
 
         //  -- Initialisation --
         /**
-         *  Construct the interaction interpolator by calculating the interaction length coefficients from the absorption and
+         *  Construct the interaction interpolator by calculating the interaction coefficients from the absorption and
          *  scattering length coefficients.
          *
          *  @param  t_wavelength    Vector of wavelength values.
-         *  @param  t_abs_length    Vector of corresponding absorption lengths.
-         *  @param  t_scat_length   Vector of corresponding scattering lengths.
+         *  @param  t_abs_coef      Vector of corresponding absorption coefficients.
+         *  @param  t_scat_coef     Vector of corresponding scattering coefficients.
          *
-         *  @post   t_wavelength size must match t_abs_length size.
-         *  @post   t_wavelength size must match t_scat_length size.
+         *  @post   t_wavelength size must match t_abs_coef size.
+         *  @post   t_wavelength size must match t_scat_coef size.
          *
          *  @return The initialised interaction linear interpolator.
          */
         interpolator::Linear Material::init_interation(const std::vector<double>& t_wavelength,
-                                                       const std::vector<double>& t_abs_length,
-                                                       const std::vector<double>& t_scat_length) const
+                                                       const std::vector<double>& t_abs_coef,
+                                                       const std::vector<double>& t_scat_coef) const
         {
-            assert(t_wavelength.size() == t_abs_length.size());
-            assert(t_wavelength.size() == t_scat_length.size());
+            assert(t_wavelength.size() == t_abs_coef.size());
+            assert(t_wavelength.size() == t_scat_coef.size());
 
             // Create interaction value vector.
             std::vector<double> interaction(t_wavelength.size());
@@ -134,30 +134,30 @@ namespace arc
             // Calculate the interaction coefficient values.
             for (size_t i = 0; i < t_wavelength.size(); ++i)
             {
-                interaction[i] = t_abs_length[i] + t_scat_length[i];
+                interaction[i] = t_abs_coef[i] + t_scat_coef[i];
             }
 
             return (interpolator::Linear(t_wavelength, interaction));
         }
 
         /**
-         *  Construct the albedo interpolator by calculating the albedo from the absorption and scattering length coefficients.
+         *  Construct the albedo interpolator by calculating the albedo from the absorption and scattering coefficients.
          *
          *  @param  t_wavelength    Vector of wavelength values.
-         *  @param  t_abs_length    Vector of corresponding absorption lengths.
-         *  @param  t_scat_length   Vector of corresponding scattering lengths.
+         *  @param  t_abs_coef      Vector of corresponding absorption coefficients.
+         *  @param  t_scat_coef     Vector of corresponding scattering coefficients.
          *
-         *  @post   t_wavelength size must match t_abs_length size.
-         *  @post   t_wavelength size must match t_scat_length size.
+         *  @post   t_wavelength size must match t_abs_coef size.
+         *  @post   t_wavelength size must match t_scat_coef size.
          *
          *  @return The initialised interaction linear interpolator.
          */
         interpolator::Linear Material::init_albedo(const std::vector<double>& t_wavelength,
-                                                   const std::vector<double>& t_abs_length,
-                                                   const std::vector<double>& t_scat_length) const
+                                                   const std::vector<double>& t_abs_coef,
+                                                   const std::vector<double>& t_scat_coef) const
         {
-            assert(t_wavelength.size() == t_abs_length.size());
-            assert(t_wavelength.size() == t_scat_length.size());
+            assert(t_wavelength.size() == t_abs_coef.size());
+            assert(t_wavelength.size() == t_scat_coef.size());
 
             // Create albedo value vector.
             std::vector<double> albedo(t_wavelength.size());
@@ -165,7 +165,7 @@ namespace arc
             // Calculate the albedo values.
             for (size_t i = 0; i < t_wavelength.size(); ++i)
             {
-                albedo[i] = t_abs_length[i] / (t_abs_length[i] + t_scat_length[i]);
+                albedo[i] = t_abs_coef[i] / (t_abs_coef[i] + t_scat_coef[i]);
             }
 
             return (interpolator::Linear(t_wavelength, albedo));
