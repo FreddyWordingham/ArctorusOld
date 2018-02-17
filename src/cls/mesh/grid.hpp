@@ -43,9 +43,9 @@ namespace arc
             const std::vector<std::vector<std::vector<Cell>>> m_cell;   //! Three-dimensional vector of cells.
 
             //  -- Information --
+            const size_t m_total_cells; //! Total number of cells.
             const double m_grid_vol;    //! Volume of the total grid.
             const double m_cell_vol;    //! Volume of each cell.
-            const size_t m_total_cells; //! Total number of cells.
 
 
             //  == INSTANTIATION ==
