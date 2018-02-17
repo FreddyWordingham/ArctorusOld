@@ -44,8 +44,8 @@ namespace arc
             {
                 WAVELENGTH,     //! Index of the wavelength data column.
                 REF_INDEX,      //! Index of the refractive index data column.
-                ABS_COEF,     //! Index of the absorption length data column.
-                SCAT_COEF,    //! Index of the scattering length data column.
+                ABS_COEF,       //! Index of the absorption coefficient data column.
+                SCAT_COEF,      //! Index of the scattering coefficient data column.
                 ANISOTROPY      //! Index of the anisotropy data column.
             };
 
