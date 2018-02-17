@@ -42,6 +42,21 @@ namespace arc
             return (std::sqrt(half_perim * (half_perim - alpha_beta) * (half_perim - beta_gamma) * (half_perim - gamma_alpha)));
         }
 
+        /**
+         *  Determine if an axis-aligned bounding box is intersecting with a triangle.
+         *  Box and triangle are considered to be overlapping even if the triangle is in the plane of the box.
+         *
+         *  @param  t_max_vert  Maximum vertex of the box.
+         *  @param  t_min_vert  Minimum vertex of the box.
+         *  @param  t_tri       Triangle to test intersection with.
+         *
+         *  @return True if the box and triangle are intersecting.
+         */
+        bool tri_box_overlap(const Vec<3>& t_max_vert, const Vec<3>& t_min_vert, const geom::Triangle& t_tri)
+        {
+
+        }
+
 
         //  -- Transformation --
         /**

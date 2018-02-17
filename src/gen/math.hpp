@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <cmath>
+#include <cls/geom/triangle.hpp>
 
 //  -- General --
 #include "gen/log.hpp"
@@ -64,7 +65,7 @@ namespace arc
         constexpr double dist(const Vec<N>& t_start, const Vec<N>& t_end);
         constexpr Vec<3> normal(const std::array<Vec<3>, 3>& t_pos);
         double area(const std::array<Vec<3>, 3>& t_pos);
-        bool tri_box_overlap(const Vec<3>& t_max_vert, const Vec<3> )
+        bool tri_box_overlap(const Vec<3>& t_max_vert, const Vec<3>& t_min_vert, const geom::Triangle& t_tri);
 
         //  -- Transformation --
         Mat<4, 4> create_trans_mat(const Vec<3>& t_trans);
@@ -238,7 +239,7 @@ namespace arc
         constexpr Vec<3> normal(const std::array<Vec<3>, 3>& t_pos)
         {
             // Determine the normal from the cross product.
-            Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^ (t_pos[GAMMA] - t_pos[ALPHA]);
+            Vec<3> r_norm = (t_pos[BETA] - t_pos[ALPHA]) ^(t_pos[GAMMA] - t_pos[ALPHA]);
 
             // Normalise the vector.
             r_norm.normalise();
