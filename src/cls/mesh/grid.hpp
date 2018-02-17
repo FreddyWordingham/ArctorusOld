@@ -40,9 +40,9 @@ namespace arc
             const math::Vec<3> m_max_bound; //! Maximum bound of the cell.
 
             //  -- Information --
-            const size_t m_total_cells; //! Total number of cells.
-            const double m_grid_vol;    //! Volume of the total grid.
-            const double m_cell_vol;    //! Volume of each cell.
+            const std::array<size_t, 3> m_num_cells;    //! Number of cells in each dimension.
+            const double                m_grid_vol;     //! Volume of the total grid.
+            const double                m_cell_vol;     //! Volume of each cell.
 
             //  -- Data --
             const std::vector<std::vector<std::vector<Cell>>> m_cell;   //! Three-dimensional vector of cells.
