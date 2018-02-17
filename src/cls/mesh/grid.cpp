@@ -35,9 +35,12 @@ namespace arc
          *  @param  t_num_x_cells   Number of cells across the x-dimension.
          *  @param  t_num_y_cells   Number of cells across the y-dimension.
          *  @param  t_num_z_cells   Number of cells across the z-dimension.
+         *  @param  t_entity        Array of entities which may be contained within the grid.
+         *  @param  t_light         Array of lights which may be contained within the grid.
          */
         Grid::Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const size_t t_num_x_cells,
-                   const size_t t_num_y_cells, const size_t t_num_z_cells) :
+                   const size_t t_num_y_cells, const size_t t_num_z_cells, const std::vector<equip::Entity>& t_entity,
+                   const std::vector<equip::Light>& t_light) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
             m_num_cells({{t_num_x_cells, t_num_y_cells, t_num_z_cells}}),

@@ -15,6 +15,8 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/equip/entity.hpp"
+#include "cls/equip/light.hpp"
 #include "cls/math/vec.hpp"
 #include "cls/mesh/cell.hpp"
 
@@ -53,14 +55,12 @@ namespace arc
           public:
             //  -- Constructors --
             Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, size_t t_num_x_cells, size_t t_num_y_cells,
-                 size_t t_num_z_cells);
+                 size_t t_num_z_cells, const std::vector<equip::Entity>& t_entity, const std::vector<equip::Light>& t_light);
 
           private:
             //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
+            std::vector<std::vector<std::vector<Cell>>> init_cell(const std::vector<equip::Entity>& t_entity,
+                                                                  const std::vector<equip::Light>& t_light) const;
 
 
             //  == METHODS ==
