@@ -63,6 +63,8 @@ namespace arc
 
             //  == METHODS ==
           private:
+            //  -- Getters --
+            size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
         };
 
 
