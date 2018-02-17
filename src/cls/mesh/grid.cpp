@@ -33,9 +33,11 @@ namespace arc
          *  @param  t_min_bound Minimum grid bound.
          *  @param  t_max_bound Maximum grid bound.
          */
-        Grid::Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound) :
+        Grid::Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const size_t t_num_x_cells,
+                   const size_t t_num_y_cells, const size_t t_num_z_cells) :
             m_min_bound(t_min_bound),
-            m_max_bound(t_max_bound)
+            m_max_bound(t_max_bound),
+            m_num_cells({{t_num_x_cells, t_num_y_cells, t_num_z_cells}})
         {
         }
 
