@@ -29,7 +29,7 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  Grid mesh class storing a three-dimensional array of uniform cells.
+         *  Grid mesh class storing a three-dimensional vector of uniform cells.
          */
         class Grid
         {
@@ -40,7 +40,7 @@ namespace arc
             const math::Vec<3> m_max_bound; //! Maximum bound of the cell.
 
             //  -- Data --
-            const std::vector<std::vector<std::vector<Cell>>> m_cell;   //! Three-dimensional array of cells.
+            const std::vector<std::vector<std::vector<Cell>>> m_cell;   //! Three-dimensional vector of cells.
 
 
             //  == INSTANTIATION ==
