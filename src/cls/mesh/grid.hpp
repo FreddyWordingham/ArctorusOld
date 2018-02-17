@@ -39,6 +39,9 @@ namespace arc
             const math::Vec<3> m_min_bound; //! Minimum bound of the cell.
             const math::Vec<3> m_max_bound; //! Maximum bound of the cell.
 
+            //  -- Data --
+            const std::vector<std::vector<std::vector<Cell>>> m_cell;   //! Three-dimensional array of cells.
+
 
             //  == INSTANTIATION ==
           public:
