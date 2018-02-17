@@ -43,7 +43,7 @@ namespace arc
             m_num_cells({{t_num_x_cells, t_num_y_cells, t_num_z_cells}}),
             m_grid_vol(
                 (t_max_bound[X] - t_min_bound[X]) * (t_max_bound[Y] - t_min_bound[Y]) * (t_max_bound[Z] - t_min_bound[Z])),
-            m_cell_vol(m_grid_vol / m_num_cells)
+            m_cell_vol(m_grid_vol / (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]))
         {
         }
 
