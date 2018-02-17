@@ -37,7 +37,10 @@ namespace arc
                    const size_t t_num_y_cells, const size_t t_num_z_cells) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
-            m_num_cells({{t_num_x_cells, t_num_y_cells, t_num_z_cells}})
+            m_num_cells({{t_num_x_cells, t_num_y_cells, t_num_z_cells}}),
+            m_grid_vol(
+                (t_max_bound[X] - t_min_bound[X]) * (t_max_bound[Y] - t_min_bound[Y]) * (t_max_bound[Z] - t_min_bound[Z])),
+            m_cell_vol(m_grid_vol / m_num_cells)
         {
         }
 
