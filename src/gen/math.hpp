@@ -65,7 +65,8 @@ namespace arc
         constexpr double dist(const Vec<N>& t_start, const Vec<N>& t_end);
         constexpr Vec<3> normal(const std::array<Vec<3>, 3>& t_pos);
         double area(const std::array<Vec<3>, 3>& t_pos);
-        bool tri_box_overlap(const Vec<3>& t_max_vert, const Vec<3>& t_min_vert, const geom::Triangle& t_tri);
+        bool tri_cuboid_overlap(const Vec<3>& t_center, const Vec<3>& t_half_size, const geom::Triangle& t_tri);
+        bool plane_origin_cuboid_overlap(const Vec<3>& t_norm, const Vec<3>& t_point, const Vec<3>& t_half_width);
 
         //  -- Transformation --
         Mat<4, 4> create_trans_mat(const Vec<3>& t_trans);

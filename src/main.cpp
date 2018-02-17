@@ -10,6 +10,7 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/rng.hpp"
+#include "gen/math.hpp"
 
 //  -- Classes --
 #include "cls/data/json.hpp"
@@ -29,7 +30,7 @@
  */
 int main(const int t_argc, const char** t_argv)
 {
-    // Check the number of command line arguments.
+    /*// Check the number of command line arguments.
     if (t_argc != 2)
     {
         ERROR("Invalid number of command line arguments passed.", "./path/to/arctorus <parameters.json>");
@@ -52,7 +53,20 @@ int main(const int t_argc, const char** t_argv)
     pdt.run();
 
     // Render the simulation scene.
-    pdt.render();
+    pdt.render();*/
+
+
+    const arc::math::Vec<3> center({{0.0, 0.0, 0.0}});
+    const arc::math::Vec<3> half_size({{1.0, 1.0, 1.0}});
+
+
+    const arc::math::Vec<3> pos_0({{0.0, 0.0, 0.0}});
+    const arc::math::Vec<3> pos_1({{1.0, 0.0, 0.0}});
+    const arc::math::Vec<3> pos_2({{0.0, 1.0, 0.0}});
+
+    const arc::geom::Triangle tri({{arc::geom::Vertex(pos_0, arc::math::Vec<3>({{0.0, 0.0, 1.0}})), arc::geom::Vertex(pos_1, arc::math::Vec<3>({{0.0, 0.0, 1.0}})), arc::geom::Vertex(pos_2, arc::math::Vec<3>({{0.0, 0.0, 1.0}}))}});
+
+    VAL(arc::math::tri_cuboid_overlap(center, half_size, tri));
 
     return (0);
 }
