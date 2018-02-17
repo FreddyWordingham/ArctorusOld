@@ -30,8 +30,11 @@ namespace arc
         /**
          *  Construct a grid within given bounds.
          *
-         *  @param  t_min_bound Minimum grid bound.
-         *  @param  t_max_bound Maximum grid bound.
+         *  @param  t_min_bound     Minimum grid bound.
+         *  @param  t_max_bound     Maximum grid bound.
+         *  @param  t_num_x_cells   Number of cells across the x-dimension.
+         *  @param  t_num_y_cells   Number of cells across the y-dimension.
+         *  @param  t_num_z_cells   Number of cells across the z-dimension.
          */
         Grid::Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const size_t t_num_x_cells,
                    const size_t t_num_y_cells, const size_t t_num_z_cells) :
