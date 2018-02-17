@@ -34,6 +34,9 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Bounds --
+            const std::array<double, 3> m_min_bound;    //! Minimum bound of the cell.
+            const std::array<double, 3> m_max_bound;    //! Maximum bound of the cell.
 
 
             //  == INSTANTIATION ==
