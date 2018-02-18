@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/enum.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -340,7 +346,7 @@ namespace arc
             // Create vertex vector.
             std::vector<Vertex> r_vert;
 
-            // Reserve space for 24 vertices.
+            // Reserve space for 24 + 18 vertices.
             r_vert.reserve(24 + 18);
 
             // Add face vertices into the vertex vector.
@@ -401,6 +407,55 @@ namespace arc
             r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            return (r_vert);
+        }
+
+        /**
+         *  Initialise the vertices for a box shape.
+         *
+         *  @param  t_min   Minimum bound of the box.
+         *  @param  t_max   Maximum bound of the box.
+         *
+         *  @return The initialised vector of vertices for a box.
+         */
+        std::vector<Vertex> Prop::init_vert_box(const glm::vec3 &t_min, const glm::vec3 &t_max) const
+        {
+            // Create vertex vector.
+            std::vector<Vertex> r_vert;
+
+            // Reserve space for 24 vertices.
+            r_vert.reserve(24);
+
+            // Bottom of the box.
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+
+            // Pillars of the box.
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+
+            // Top of the box.
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));)
 
             return (r_vert);
         }
