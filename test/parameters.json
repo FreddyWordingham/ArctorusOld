@@ -1,11 +1,14 @@
 {
-    "seed": 77,
+    "seed":     77,
     "num_phot": 1e4,
-
-    "aether": {
+    "grid":     {
+        "min":   [-1.0, -1.0, -1.0],
+        "max":   [1.0, 1.0, 1.0],
+        "cells": [10, 10, 10]
+    },
+    "aether":   {
         "mat": "materials/vacuum.mat"
     },
-
     "entities": {
         "entity_one": {
             "trans": [1.0, 0.5, -0.5],
@@ -16,7 +19,6 @@
             "mat":   "materials/intralipid_10.mat"
         }
     },
-
     "lights":   {
         "light_one": {
             "power": 1.0,
