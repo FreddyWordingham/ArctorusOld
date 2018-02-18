@@ -54,8 +54,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, size_t t_num_x_cells, size_t t_num_y_cells,
-                 size_t t_num_z_cells, const std::vector<equip::Entity>& t_entity, const std::vector<equip::Light>& t_light);
+            Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, std::array<size_t, 3> t_num_cells,
+                 const std::vector<equip::Entity>& t_entity, const std::vector<equip::Light>& t_light);
 
           private:
             //  -- Initialisation --
