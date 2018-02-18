@@ -372,6 +372,7 @@ namespace arc
             draw_lights();
             draw_sun();
             draw_phots();
+            draw_cells();
 
             // Swap the buffers.
             glfwSwapBuffers(m_window);
