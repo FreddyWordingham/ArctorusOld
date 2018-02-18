@@ -273,7 +273,8 @@ namespace arc
          */
         void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max)
         {
-            m_cell.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0}, t_min, t_max));
+            m_cell.emplace_back(
+                Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0}, {t_min[X], t_min[Y], t_min[Z]}, {t_max[X], t_max[Y], t_max[Z]}));
         }
 
         /**
