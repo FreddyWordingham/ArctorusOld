@@ -66,6 +66,8 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            const math::Vec<3>& get_min_bound() const { return (m_min_bound); }
+            const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
             size_t get_num_cells() const { return (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]); }
             size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
             const Cell& get_cell(const size_t t_i, const size_t t_j, const size_t t_k) const { return (m_cell[t_i][t_j][t_k]); }
