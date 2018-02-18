@@ -224,7 +224,8 @@ namespace arc
             }
 
             // Calculate the hue delta.
-            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / (t_entity.size() - 1));
+            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / (t_entity
+                .size() - 1));
 
             // Add the entity props to the scene.
             for (size_t i = 0; i < t_entity.size(); ++i)
@@ -262,6 +263,17 @@ namespace arc
 
                 add_photon(t_phot[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
             }
+        }
+
+        /**
+         *  Add a render-able cell prop to the scene.
+         *
+         *  @param  t_min   Minimum bound of the cell.
+         *  @param  t_max   Minimum bound of the cell.
+         */
+        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max)
+        {
+            m_cell.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0}, t_min, t_max));
         }
 
         /**

@@ -158,6 +158,7 @@ namespace arc
             void add_light_vector(const std::vector<equip::Light>& t_light);
             void add_entity_vector(const std::vector<equip::Entity>& t_ent);
             void add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot);
+            void add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max);
 
             //  -- Control --
             bool should_close() const;
