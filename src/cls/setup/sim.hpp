@@ -15,9 +15,10 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/data/json.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
-#include "cls/data/json.hpp"
+#include "cls/mesh/grid.hpp"
 
 
 
@@ -49,6 +50,7 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
+            const mesh::Grid                                   m_grid;  //! Simulation grid.
             std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
 
 
