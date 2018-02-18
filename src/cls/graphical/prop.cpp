@@ -77,6 +77,19 @@ namespace arc
         }
 
         /**
+         *  Construct a basic prop using a given shape type, colour and bounds.
+         *
+         *  @param  t_shape Type of shape to be created.
+         *  @param  t_col   Colour of the shape.
+         *  @param  t_min   Minimum bound of the box.
+         *  @param  t_max   Maximum bound of the box.
+         */
+        Prop::Prop(const shape t_shape, const glm::vec4& t_col, const glm::vec3& t_min, const glm::vec3& t_max) :
+            Prop(init_vert(t_shape, t_min, t_max), t_col)
+        {
+        }
+
+        /**
          *  Construct a photon packet path prop from a vector of photon positions.
          *
          *  @param  t_phot  Vector of photon point paths.
