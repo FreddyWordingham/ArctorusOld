@@ -49,6 +49,9 @@ namespace arc
             const std::vector<std::array<size_t, 2>> m_entity_list; //! List of entity triangles with the cell.
             const std::vector<std::array<size_t, 2>> m_light_list;  //! List of light triangles with the cell.
 
+            //  -- Data --
+            const bool m_empty; //! True if the cell contains no triangles.
+
 
             //  == INSTANTIATION ==
           public:
