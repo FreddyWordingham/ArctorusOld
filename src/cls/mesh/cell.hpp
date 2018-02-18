@@ -58,7 +58,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
-
+            std::vector<std::array<size_t, 2>> init_entity_list(const std::vector<equip::Entity>& t_entity) const;
 
             //  == OPERATORS ==
           private:
