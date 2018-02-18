@@ -787,6 +787,26 @@ namespace arc
         }
 
         /**
+         *  Draw the scene's cells.
+         */
+        void Scene::draw_cells() const
+        {
+            glUseProgram(m_ambient_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            for (size_t i = 0; i < m_cell.size(); ++i)
+            {
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_cell[i].get_vao());
+
+                glDrawArrays(GL_LINES, 0, m_cell[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+        }
+
+        /**
          *  Draw the global illuminator object.
          */
         void Scene::draw_sun() const
