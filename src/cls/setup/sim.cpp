@@ -234,7 +234,7 @@ namespace arc
 
             scene.add_cell(math::Vec<3>({{-1.0, -1.0, -1.0}}), math::Vec<3>({{+1.0, +1.0, +1.0}}));
 
-            for (size_t i=0; i<m_grid.get_num_cells(X), ++i)
+            for (size_t i=0; i<m_grid.get_num_cells(X); ++i)
             {
                 for (size_t j=0; j<m_grid.get_num_cells(Y); ++j)
                 {
