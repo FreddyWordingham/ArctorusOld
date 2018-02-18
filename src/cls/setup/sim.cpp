@@ -231,7 +231,7 @@ namespace arc
             scene.add_light_vector(m_light);
             scene.add_entity_vector(m_entity);
             scene.add_photon_vector(m_path);
-            scene.add_cell(m_grid.get_min_bound(), m_);
+            scene.add_cell(m_grid.get_min_bound(), m_grid.get_max_bound());
 
             for (size_t i=0; i<m_grid.get_num_cells(X); ++i)
             {
@@ -239,7 +239,10 @@ namespace arc
                 {
                     for (size_t k=0; k<m_grid.get_num_cells(Z); ++k)
                     {
-                        scene.add_cell(m_grid.get_cell(i, j, k).get_min_bound(), m_grid.get_cell(i, j, k).get_max_bound());
+                        if (!m_grid.get_cell(i, j, k).empty())
+                        {
+                            scene.add_cell(m_grid.get_cell(i, j, k).get_min_bound(), m_grid.get_cell(i, j, k).get_max_bound());
+                        }
                     }
                 }
             }
