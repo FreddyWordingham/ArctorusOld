@@ -189,6 +189,24 @@ namespace arc
         }
 
         /**
+         *  Initialise the vertices for a simple, bounded, prop shape.
+         *
+         *  @param  t_shape Type of shape to be created.
+         *  @param  t_min   Minimum bound of the box.
+         *  @param  t_max   Maximum bound of the box.
+         *
+         *  @return The initialised vector of vertices for the simple shape.
+         */
+        std::vector<Vertex> Prop::init_vert(const shape t_shape, const glm::vec3 &t_min, const glm::vec3 &t_max) const
+        {
+            switch (t_shape)
+            {
+                case shape::BOX:
+                    return (init_vert_box(t_min, t_max));
+            }
+        }
+
+        /**
          *  Initialise the vertices for a simple cube prop shape.
          *
          *  @param  t_scale Size multiplier of the shape.
