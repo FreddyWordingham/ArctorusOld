@@ -33,8 +33,8 @@ namespace arc
          *  @param  t_min_bound Minimum grid bound.
          *  @param  t_max_bound Maximum grid bound.
          *  @param  t_num_cells Number of cells across each dimension.
-         *  @param  t_entity    Array of entities which may be contained within the grid.
-         *  @param  t_light     Array of lights which may be contained within the grid.
+         *  @param  t_entity    Vector of entities which may be contained within the grid.
+         *  @param  t_light     Vector of lights which may be contained within the grid.
          */
         Grid::Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::array<size_t, 3> t_num_cells,
                    const std::vector<equip::Entity>& t_entity, const std::vector<equip::Light>& t_light) :
@@ -50,6 +50,14 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the three-dimensional vector of cells.
+         *
+         *  @param  t_entity    Vector of entities which may be contained within the grid.
+         *  @param  t_light     Vector of lights which may be contained within the grid.
+         *
+         *  @return The initialised three-dimensional vector of cells.
+         */
         std::vector<std::vector<std::vector<Cell>>> Grid::init_cell(const std::vector<equip::Entity>& t_entity,
                                                                     const std::vector<equip::Light>& t_light) const
         {
