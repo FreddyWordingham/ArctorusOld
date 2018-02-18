@@ -28,6 +28,14 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Construct a cell with given bounds which may contain triangles of the given entities.
+         *
+         *  @param  t_min_bound Minimum bound of the cell.
+         *  @param  t_max_bound Maximum bound of the cell.
+         *  @param  t_entity    Vector of entities which may be contained within the cell.
+         *  @param  t_light     Vector of lights which may be contained within the cell.
+         */
         Cell::Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::vector<equip::Entity>& t_entity,
                    const std::vector<equip::Light>& t_light) :
             m_min_bound(t_min_bound),
