@@ -797,6 +797,9 @@ namespace arc
 
             for (size_t i = 0; i < m_cell.size(); ++i)
             {
+                glUniform4f(m_ambient_shader.get_col_uni(), m_cell[i].get_col()[R], m_cell[i].get_col()[G],
+                            m_cell[i].get_col()[B], m_cell[i].get_col()[A]);
+
                 glEnableVertexAttribArray(0);
 
                 glBindVertexArray(m_cell[i].get_vao());
