@@ -42,7 +42,9 @@ namespace arc
             m_aether(init_aether(t_json["aether"])),
             m_entity(init_entity(t_json["entities"])),
             m_light(init_light(t_json["lights"])),
-            m_light_select(init_light_select())
+            m_light_select(init_light_select()),
+            m_grid(t_json["grid"].parse_child<math::Vec<3>>("min"), t_json["grid"].parse_child<math::Vec<3>>("max"),
+                   t_json["grid"].parse_child<std::array<size_t, 3>>("size"))
         {
             // Check wavelengths are valid.
             double      light_min_bound = m_light[0].get_min_bound();
@@ -59,9 +61,9 @@ namespace arc
                 }
             }
 
-            double mat_min_bound = m_aether.get_min_bound();
-            double mat_max_bound = m_aether.get_max_bound();
-            for (size_t i=0; i<m_entity.size(); ++i)
+            double      mat_min_bound = m_aether.get_min_bound();
+            double      mat_max_bound = m_aether.get_max_bound();
+            for (size_t i             = 0; i < m_entity.size(); ++i)
             {
                 if (m_entity[i].get_min_bound() > mat_min_bound)
                 {
@@ -245,12 +247,12 @@ namespace arc
          */
         void Sim::run()
         {
-            for (unsigned long int i=0; i<m_num_phot; ++i)
+            for (unsigned long int i = 0; i < m_num_phot; ++i)
             {
                 // Generate a new photon.
                 phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
-                for (unsigned long int j=0; j<100; ++j)
+                for (unsigned long int j = 0; j < 100; ++j)
                 {
                     phot.move(-std::log(rng::random()) / phot.get_interaction());
                     phot.scatter();
