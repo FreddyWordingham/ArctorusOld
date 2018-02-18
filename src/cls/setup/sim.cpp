@@ -228,9 +228,11 @@ namespace arc
             graphical::Scene scene;
 
             // Add objects to the scene.
-            scene.add_light_vector(m_light);
-            scene.add_entity_vector(m_entity);
-            scene.add_photon_vector(m_path);
+//            scene.add_light_vector(m_light);
+//            scene.add_entity_vector(m_entity);
+//            scene.add_photon_vector(m_path);
+
+            scene.add_cell(math::Vec<3>({{-1.0, -1.0, -1.0}}), math::Vec<3>({{+1.0, +1.0, +1.0}}));
 
             // Render the scene.
             while (!scene.should_close())
