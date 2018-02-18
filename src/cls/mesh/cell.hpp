@@ -51,7 +51,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Cell(const math::Vec<3> &t_min_bound, const math::Vec<3> &t_max_bound);
+            Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound);
 
           private:
             //  -- Initialisation --
@@ -62,7 +62,10 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            const math::Vec<3>& get_min_bound() const { return (m_min_bound); }
+            const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
         };
 
 
