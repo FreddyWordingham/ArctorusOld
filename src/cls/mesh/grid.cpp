@@ -61,6 +61,12 @@ namespace arc
         std::vector<std::vector<std::vector<Cell>>> Grid::init_cell(const std::vector<equip::Entity>& t_entity,
                                                                     const std::vector<equip::Light>& t_light) const
         {
+            // Calculate cell dimensions.
+            math::Vec<3> cell_size = m_max_bound - m_min_bound;
+            cell_size[X] /= m_num_cells[X];
+            cell_size[Y] /= m_num_cells[Y];
+            cell_size[Z] /= m_num_cells[Z];
+
             // Create three-dimensional vector of cells.
             std::vector<std::vector<std::vector<Cell>>> r_cell;
 
@@ -76,7 +82,10 @@ namespace arc
                     r_cell[i][j].reserve(m_num_cells[Z]);
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        r_cell[i][j].emplace_back(Cell(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 0.0}})));
+                        r_cell[i][j].emplace_back(Cell(math::Vec<3>(
+                            {{m_min_bound[X] + (i * cell_size[X]), m_min_bound[Y] + (j * cell_size[Y]), m_min_bound[Z] + (k * cell_size[Z])}}),
+                                                       math::Vec<3>(
+                                                           {{m_min_bound[X] + ((i + 1) * cell_size[X]), m_min_bound[Y] + ((j + 1) * cell_size[Y]), m_min_bound[Z] + ((k + 1) * cell_size[Z])}})));
                     }
                 }
             }
