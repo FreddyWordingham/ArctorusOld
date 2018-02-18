@@ -57,8 +57,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Sim(const data::Json& t_param);
-            Sim(const std::string& t_serial);
+            explicit Sim(const data::Json& t_param);
+            explicit Sim(const std::string& t_serial);
 
           private:
             //  -- Initialisation --
