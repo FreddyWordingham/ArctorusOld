@@ -234,6 +234,17 @@ namespace arc
 
             scene.add_cell(math::Vec<3>({{-1.0, -1.0, -1.0}}), math::Vec<3>({{+1.0, +1.0, +1.0}}));
 
+            for (size_t i=0; i<m_grid.get_num_cells(X), ++i)
+            {
+                for (size_t j=0; j<m_grid.get_num_cells(Y); ++j)
+                {
+                    for (size_t k=0; k<m_grid.get_num_cells(Z); ++k)
+                    {
+                        scene.add_cell(m_grid.get_cell(i, j, k).get_min_bound(), m_grid.get_cell(i, j, k).get_max_bound());
+                    }
+                }
+            }
+
             // Render the scene.
             while (!scene.should_close())
             {
