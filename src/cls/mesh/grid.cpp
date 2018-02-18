@@ -71,16 +71,20 @@ namespace arc
             }
 
             // Create the cells.
-            for (size_t i=0; i<m_num_cells[X]; ++i)
+            for (size_t i = 0; i < m_num_cells[X]; ++i)
             {
-                for (size_t j=0; j<m_num_cells[Y]; ++j)
+                r_cell.emplace_back(std::vector<std::vector<Cell>>());
+                for (size_t j = 0; j < m_num_cells[Y]; ++j)
                 {
-                    for (size_t k=0; k<m_num_cells[Z]; ++k)
+                    r_cell[i].emplace_back(std::vector<Cell>());
+                    for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        r_cell[i][j][k].emplace_back(Cell());
+                        r_cell[i][j].emplace_back(Cell(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 0.0}})));
                     }
                 }
             }
+
+            return (r_cell);
         }
 
 
