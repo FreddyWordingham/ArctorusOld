@@ -48,7 +48,8 @@ namespace arc
             {
                 CUBE,   //! Simple cube.
                 SKYBOX, //! Skybox.
-                SUN     //! Sun illuminator.
+                SUN,    //! Sun illuminator.
+                BOX     //! Box.
             };
 
 
