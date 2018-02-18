@@ -51,6 +51,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Cell(const math::Vec<3> &t_min_bound, const math::Vec<3> &t_max_bound);
 
           private:
             //  -- Initialisation --

@@ -27,7 +27,11 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-
+        Cell::Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound) :
+            m_min_bound(t_min_bound),
+            m_max_bound(t_max_bound)
+        {
+        }
 
 
         //  -- Initialisation --
