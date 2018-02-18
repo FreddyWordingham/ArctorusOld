@@ -39,8 +39,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Bounds --
-            const math::Vec<3> m_min_bound; //! Minimum bound of the cell.
-            const math::Vec<3> m_max_bound; //! Maximum bound of the cell.
+            const math::Vec<3> m_min_bound; //! Minimum bound of the grid.
+            const math::Vec<3> m_max_bound; //! Maximum bound of the grid.
 
             //  -- Information --
             const std::array<size_t, 3> m_num_cells;    //! Number of cells in each dimension.
