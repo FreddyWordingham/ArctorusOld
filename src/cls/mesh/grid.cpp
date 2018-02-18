@@ -56,24 +56,16 @@ namespace arc
             // Create three-dimensional vector of cells.
             std::vector<std::vector<std::vector<Cell>>> r_cell;
 
-            // Reserve cell memory.
+            // Create the cells.
             r_cell.reserve(m_num_cells[X]);
             for (size_t i = 0; i < m_num_cells[X]; ++i)
             {
+                r_cell.emplace_back(std::vector<std::vector<Cell>>());
                 r_cell[i].reserve(m_num_cells[Y]);
                 for (size_t j = 0; j < m_num_cells[Y]; ++j)
                 {
-                    r_cell[i][j].reserve(m_num_cells[Z]);
-                }
-            }
-
-            // Create the cells.
-            for (size_t i = 0; i < m_num_cells[X]; ++i)
-            {
-                r_cell.emplace_back(std::vector<std::vector<Cell>>());
-                for (size_t j = 0; j < m_num_cells[Y]; ++j)
-                {
                     r_cell[i].emplace_back(std::vector<Cell>());
+                    r_cell[i][j].reserve(m_num_cells[Z]);
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
                         r_cell[i][j].emplace_back(Cell(math::Vec<3>({{0.0, 0.0, 0.0}}), math::Vec<3>({{0.0, 0.0, 0.0}})));
