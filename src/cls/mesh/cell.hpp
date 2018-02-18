@@ -19,6 +19,8 @@
 #include <vector>
 
 //  -- Classes --
+#include "cls/equip/entity.hpp"
+#include "cls/equip/light.hpp"
 #include "cls/math/vec.hpp"
 
 
@@ -51,7 +53,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound);
+            Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::vector<equip::Entity>& t_entity,
+                 const std::vector<equip::Light>& t_light);
 
           private:
             //  -- Initialisation --
