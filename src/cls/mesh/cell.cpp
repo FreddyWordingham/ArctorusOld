@@ -51,6 +51,11 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the list of entity triangles found within the cell.
+         *
+         *  @param  t_entity    Vector of entities which may be contained within the cell.
+         */
         std::vector<std::array<size_t, 2>> Cell::init_entity_list(const std::vector<equip::Entity>& t_entity) const
         {
             std::vector<std::array<size_t, 2>> r_entity_list;
@@ -72,6 +77,11 @@ namespace arc
             return (r_entity_list);
         }
 
+        /**
+         *  Initialise the list of light triangles found within the cell.
+         *
+         *  @param  t_light Vector of lights which may be contained within the cell.
+         */
         std::vector<std::array<size_t, 2>> Cell::init_light_list(const std::vector<equip::Light>& t_light) const
         {
             std::vector<std::array<size_t, 2>> r_light_list;
