@@ -370,9 +370,9 @@ namespace arc
             draw_skybox();
             draw_entities();
             draw_lights();
+            draw_cells();
             draw_sun();
             draw_phots();
-            draw_cells();
 
             // Swap the buffers.
             glfwSwapBuffers(m_window);
