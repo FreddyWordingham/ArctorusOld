@@ -4,7 +4,7 @@
     "grid":     {
         "min":   [-1.0, -1.0, -1.0],
         "max":   [1.0, 1.0, 1.0],
-        "cells": [10, 10, 10]
+        "cells": [30, 30, 30]
     },
     "aether":   {
         "mat": "materials/vacuum.mat"

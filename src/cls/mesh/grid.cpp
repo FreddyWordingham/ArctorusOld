@@ -71,6 +71,9 @@ namespace arc
             std::vector<std::vector<std::vector<Cell>>> r_cell;
 
             // Create the cells.
+            const double total_cells = m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z];
+            double constructed_cells = 0;
+
             r_cell.reserve(m_num_cells[X]);
             for (size_t i = 0; i < m_num_cells[X]; ++i)
             {
@@ -87,6 +90,10 @@ namespace arc
                                                        math::Vec<3>(
                                                            {{m_min_bound[X] + ((i + 1) * cell_size[X]), m_min_bound[Y] + ((j + 1) * cell_size[Y]), m_min_bound[Z] + ((k + 1) * cell_size[Z])}}),
                                                        t_entity, t_light));
+
+                        // Report grid construction.
+                        TEMP("Constructing grid", 100.0 * (constructed_cells / total_cells));
+                        ++constructed_cells;
                     }
                 }
             }
