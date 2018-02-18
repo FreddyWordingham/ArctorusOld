@@ -70,6 +70,7 @@ namespace arc
             //  -- Getters --
             const math::Vec<3>& get_min_bound() const { return (m_min_bound); }
             const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
+            bool empty() const { return (m_empty); }
         };
 
 
