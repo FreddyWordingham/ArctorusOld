@@ -46,14 +46,42 @@ namespace arc
             m_num_cells({{t_num_x_cells, t_num_y_cells, t_num_z_cells}}),
             m_grid_vol(
                 (t_max_bound[X] - t_min_bound[X]) * (t_max_bound[Y] - t_min_bound[Y]) * (t_max_bound[Z] - t_min_bound[Z])),
-            m_cell_vol(m_grid_vol / (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]))
+            m_cell_vol(m_grid_vol / (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z])),
+            m_cell(init_cell(t_entity, t_light))
         {
         }
 
 
-
         //  -- Initialisation --
+        std::vector<std::vector<std::vector<Cell>>> Grid::init_cell(const std::vector<equip::Entity>& t_entity,
+                                                                    const std::vector<equip::Light>& t_light) const
+        {
+            // Create three-dimensional vector of cells.
+            std::vector<std::vector<std::vector<Cell>>> r_cell;
 
+            // Reserve cell memory.
+            r_cell.reserve(m_num_cells[X]);
+            for (size_t i = 0; i < m_num_cells[X]; ++i)
+            {
+                r_cell[i].reserve(m_num_cells[Y]);
+                for (size_t j = 0; j < m_num_cells[Y]; ++j)
+                {
+                    r_cell[i][j].reserve(m_num_cells[Z]);
+                }
+            }
+
+            // Create the cells.
+            for (size_t i=0; i<m_num_cells[X]; ++i)
+            {
+                for (size_t j=0; j<m_num_cells[Y]; ++j)
+                {
+                    for (size_t k=0; k<m_num_cells[Z]; ++k)
+                    {
+                        r_cell[i][j][k].emplace_back(Cell());
+                    }
+                }
+            }
+        }
 
 
     } // namespace mesh
