@@ -72,7 +72,10 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            const math::Vec<3>& get_pos() const { return (m_pos); }
+            const math::Vec<3>& get_dir() const { return (m_dir); }
         };
 
 
