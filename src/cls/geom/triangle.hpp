@@ -64,6 +64,8 @@ namespace arc
             //  -- Getters --
             double get_area() const { return (m_area); }
             inline const Vertex& get_vert(size_t t_index) const;
+
+            //  -- Generation --
             std::pair<math::Vec<3>, math::Vec<3>> gen_random_pos_and_norm() const;
         };
 

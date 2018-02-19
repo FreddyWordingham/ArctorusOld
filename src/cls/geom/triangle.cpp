@@ -66,7 +66,7 @@ namespace arc
 
 
         //  == METHODS ==
-        //  -- Getters --
+        //  -- Generation --
         /**
          *  Generate a random position on the triangle's surface and determine the associated normal.
          *  Position and normal are stored together in an array.
