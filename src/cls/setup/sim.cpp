@@ -281,8 +281,9 @@ namespace arc
 
                     if (scat_dist < cell_dist)
                     {
-                        phot.move(s);
+                        phot.move(scat_dist);
                         phot.scatter();
+                        phot.multiply_weight(phot.get_albedo());
                     }
                     else
                     {
