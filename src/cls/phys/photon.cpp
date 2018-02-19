@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/constants.hpp"
 #include "gen/math.hpp"
 
 
@@ -75,6 +76,31 @@ namespace arc
 
         //  == METHODS ==
         //  -- Setters --
+        /**
+         *  Move the photon a given distance.
+         *
+         *  @param  t_dist  Distance to move the photon.
+         *
+         *  @pre    t_dist must be greater than zero.
+         *  @pre    m_dir must be normalised.
+         */
+        void Photon::move(const double t_dist)
+        {
+            assert(t_dist > 0.0);
+            assert(m_dir.is_normalised());
+
+            // Move the photons position.
+            m_pos[X] += m_dir[X] * t_dist;
+            m_pos[Y] += m_dir[Y] * t_dist;
+            m_pos[Z] += m_dir[Z] * t_dist;
+
+            // Update the time.
+            m_time += (t_dist * m_ref_index) / SPEED_OF_LIGHT;
+
+            // Record the new position of the photon.
+            record_path();
+        }
+
         /**
          *  Rotate the particle by a given declination and then a given azimuthal rotation.
          *
