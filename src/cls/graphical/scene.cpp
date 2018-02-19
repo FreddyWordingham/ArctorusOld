@@ -119,9 +119,12 @@ namespace arc
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LEQUAL);
 
+            // Enable back-face culling.
+            glEnable(GL_CULL_FACE);
+
             // Enable transparency.
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//            glEnable(GL_BLEND);
+//            glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 
             return (r_window);
         }
@@ -290,7 +293,7 @@ namespace arc
                 {
                     for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
                     {
-                        m_cell.emplace_back(Prop(Prop::shape::CUBOID, {1.0, 1.0, 1.0, 0.1},
+                        m_cell.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 0.1},
                                                  {static_cast<float>(t_grid.get_cell(i, j, k)
                                                                            .get_min_bound()[X]) - cell_padding,
                                                   static_cast<float>(t_grid.get_cell(i, j, k)
@@ -882,7 +885,7 @@ namespace arc
 
                     glBindVertexArray(m_cell[i].get_vao());
 
-                    glDrawArrays(GL_TRIANGLES, 0, m_cell[i].get_num_vert());
+                    glDrawArrays(GL_LINES, 0, m_cell[i].get_num_vert());
 
                     glBindVertexArray(0);
                 }
