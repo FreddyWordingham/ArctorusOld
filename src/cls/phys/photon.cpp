@@ -56,6 +56,13 @@ namespace arc
          *  @param  t_anisotropy    Anisotropy value of the current medium.
          *
          *  @post   m_dir must be normalised.
+         *  @post   m_time must be non-negative.
+         *  @post   m_weight must be unity.
+         *  @post   m_wavelength must be positive.
+         *  @post   m_ref_index must be positive.
+         *  @post   m_albedo must be non-negative.
+         *  @post   m_interaction must be positive.
+         *  @post   m_anisotropy must be between minus one and one.
          */
         Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_wavelength,
                        const double t_ref_index, const double t_albedo, const double t_interaction, const double t_anisotropy) :
@@ -70,6 +77,13 @@ namespace arc
             m_time(0.0)
         {
             assert(m_dir.is_normalised());
+            assert(m_time >= 0.0);
+            assert(m_weight == 1.0);
+            assert(m_wavelength > 0.0);
+            assert(m_ref_index > 0.0);
+            assert(m_albedo >= 0.0);
+            assert(m_interaction > 0.0);
+            assert((m_anisotropy >= -1.0) && (m_anisotropy <= 1.0));
 
             // Record the initial position of the photon.
             record_path();
