@@ -238,7 +238,7 @@ namespace arc
             {
                 const auto hue = static_cast<float>(math::deg_to_rad(ENTITY_START_HUE + (i * hue_delta)));
 
-                add_entity(t_entity[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+                add_entity(t_entity[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 0.5));
             }
         }
 
