@@ -14,7 +14,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/math/vec.hpp"
 
 
 
@@ -34,6 +35,9 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Properties --
+            math::Vec<3> n_pos; //! Position of the particle.
+            math::Vec<3> n_dir; //! Direction of travel.
 
 
             //  == INSTANTIATION ==
