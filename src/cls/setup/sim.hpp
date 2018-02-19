@@ -68,10 +68,6 @@ namespace arc
             random::Index init_light_select() const;
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
           public:
             //  -- Rendering --
