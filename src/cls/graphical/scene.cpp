@@ -24,6 +24,8 @@
 #include "gen/control.hpp"
 #include "gen/math.hpp"
 
+//  -- Utility --
+
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/graphical/camera/fly.hpp"
@@ -285,6 +287,23 @@ namespace arc
                                       static_cast<float>(t_grid.get_max_bound()[Y]) + grid_padding,
                                       static_cast<float>(t_grid.get_max_bound()[Z]) + grid_padding}));
 
+            // Determine maximum grid cell energy density.
+            double      max_energy_density = 0.0;
+            for (size_t i                  = 0; i < t_grid.get_num_cells(X); ++i)
+            {
+                for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
+                {
+                    for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
+                    {
+                        const double energy_density = t_grid.get_cell(i, j, k).get_energy_density();
+                        if (energy_density > max_energy_density)
+                        {
+                            max_energy_density = energy_density;
+                        }
+                    }
+                }
+            }
+
             // Add grid cells.
             const float cell_padding = -0.001f;
             for (size_t i            = 0; i < t_grid.get_num_cells(X); ++i)
@@ -293,7 +312,8 @@ namespace arc
                 {
                     for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
                     {
-                        m_cell.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 0.1},
+                        m_cell.emplace_back(Prop(Prop::shape::BOX, {utl::colourmap::transform_rainbow(
+                            static_cast<float>(t_grid.get_cell(i, j, k).get_energy_density() / max_energy_density)), 0.1},
                                                  {static_cast<float>(t_grid.get_cell(i, j, k)
                                                                            .get_min_bound()[X]) - cell_padding,
                                                   static_cast<float>(t_grid.get_cell(i, j, k)
