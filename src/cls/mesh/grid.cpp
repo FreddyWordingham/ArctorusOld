@@ -105,5 +105,44 @@ namespace arc
 
 
 
-    } // namespace mesh
+        //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Determine the maximum energy density of a single cell within the grid.
+         *
+         *  @post   r_max_energy_density must be non-negative.
+         *
+         *  @return The maximum energy density of any cell within the grid.
+         */
+        double Grid::get_max_energy_density() const
+        {
+            // Create return value.
+            double r_max_energy_density = 0.0;
+
+            // Loop over every cell.
+            for (size_t i = 0; i < m_num_cells[X]; ++i)
+            {
+                for (size_t j = 0; j < m_num_cells[Y]; ++j)
+                {
+                    for (size_t k = 0; k < m_num_cells[Z]; ++K)
+                    {
+                        const double energy_density = m_cell[i][j][k].get_energy_density();
+
+                        if (energy_density > r_max_energy_density)
+                        {
+                            r_max_energy_density = energy_density;
+                        }
+                    }
+                }
+            }
+
+            assert(r_max_energy_density >= 0.0);
+
+            return (r_max_energy_density);
+        }
+    }
+
+
+
+} // namespace mesh
 } // namespace arc

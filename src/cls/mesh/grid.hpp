@@ -73,6 +73,7 @@ namespace arc
             size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
             const Cell& get_cell(const size_t t_i, const size_t t_j, const size_t t_k) const { return (m_cell[t_i][t_j][t_k]); }
             inline Cell& get_cell(const math::Vec<3>& t_point);
+            double get_max_energy_density() const;
 
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_pos) const;
