@@ -74,6 +74,9 @@ namespace arc
             double get_energy_density() const { return (m_energy_density); }
             bool empty() const { return (m_empty); }
 
+            //  -- Setters --
+            void add_energy_density(const double t_energy_density) { m_energy_density += t_energy_density; }
+
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_pos) const;
 
