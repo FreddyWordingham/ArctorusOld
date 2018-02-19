@@ -282,7 +282,7 @@ namespace arc
         {
             assert(t_energy_density > 0.0);
 
-            m_enery_density += t_energy_density;
+            m_energy_density += t_energy_density;
         }
 
 
