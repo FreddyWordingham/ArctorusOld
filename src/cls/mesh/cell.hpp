@@ -177,7 +177,7 @@ namespace arc
                 // Determine the distance to the triangle.
                 const geom::Triangle& tri = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
 
-                const double tri_dist = tri.intersection(t_pos, t_dir);
+                const double tri_dist = tri.intersection(t_pos, t_dir, t_tri_norm);
 
                 // If this intersection is closer than the current, make this the closest distance.
                 if (tri_dist < r_dist)
