@@ -57,10 +57,7 @@ namespace arc
          */
         Mesh::Mesh(const std::string& t_serial, const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin,
                    const math::Vec<3>& t_scale) :
-            m_num_vert(init_num(t_serial, POS_KEYWORD)),
-            m_num_norm(init_num(t_serial, NORM_KEYWORD)),
-            m_num_tri(init_num(t_serial, FACE_KEYWORD)),
-            m_tri(init_tri(t_serial))
+
         {
             assert(t_dir.magnitude() > 0.0);
             assert(t_scale[X] != 0.0);
@@ -72,7 +69,11 @@ namespace arc
         }
 
 
-        Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans)
+        Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans) :
+            m_num_vert(init_num(t_serial, POS_KEYWORD)),
+            m_num_norm(init_num(t_serial, NORM_KEYWORD)),
+            m_num_tri(init_num(t_serial, FACE_KEYWORD)),
+            m_tri(init_tri(t_serial))
         {
 
         }
