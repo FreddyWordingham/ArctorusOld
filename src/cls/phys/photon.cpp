@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/math.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -66,7 +72,40 @@ namespace arc
         }
 
 
-        //  -- Initialisation --
+
+        //  == METHODS ==
+        //  -- Setters --
+        void Photon::rotate(double t_dec, double t_azi)
+        {
+            assert(m_dir.is_normalised());
+            assert((t_dec >= 0.0) && (t_dec <= M_PI));
+            assert((t_azi >= 0.0) && (t_azi <= 2.0 * M_PI));
+
+            if (std::fabs(1.0 - std::fabs(m_dir[Z])) < 1E-10)
+            {
+                m_dir[X] = std::sin(t_dec) * std::cos(t_azi);
+                m_dir[Y] = std::sin(t_dec) * std::sin(t_azi);
+                m_dir[Z] = math::sign(m_dir[Z]) * std::cos(t_dec);
+            }
+            else
+            {
+                const math::Vec<3> prev_dir = m_dir;
+
+                const double a         = std::sqrt(1.0 - math::square(prev_dir[Z]));
+                const double sin_theta = std::sin(t_dec);
+                const double cos_theta = std::cos(t_dec);
+                const double sin_phi   = std::sin(t_azi);
+                const double cos_phi   = std::cos(t_azi);
+
+                m_dir[X] = ((sin_theta / a) * ((prev_dir[X] * prev_dir[Z] * cos_phi) - (prev_dir[Y] * sin_phi))) + (prev_dir[X] * cos_theta);
+                m_dir[Y] = ((sin_theta / a) * ((prev_dir[Y] * prev_dir[Z] * cos_phi) + (prev_dir[X] * sin_phi))) + (prev_dir[Y] * cos_theta);
+                m_dir[Z] = (prev_dir[Z] * cos_theta) - (sin_theta * cos_phi * a);
+            }
+
+            m_dir.normalise();
+
+            assert(m_dir.is_normalised());
+        }
 
 
 

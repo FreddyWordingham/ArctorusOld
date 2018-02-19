@@ -70,6 +70,9 @@ namespace arc
             //  -- Getters --
             const math::Vec<3>& get_pos() const { return (m_pos); }
             const math::Vec<3>& get_dir() const { return (m_dir); }
+
+            //  -- Setters --
+            void rotate(double t_dec, double t_azi);
         };
 
 
