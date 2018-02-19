@@ -35,10 +35,17 @@ namespace arc
         {
             //  == FIELDS ==
           private:
-            //  -- Properties --
-            math::Vec<3> n_pos; //! Position of the particle.
-            math::Vec<3> n_dir; //! Direction of travel.
-            double       n_weight;    //! Statistical weight of the particle.
+            //  -- Spatial --
+            math::Vec<3> n_pos;     //! Position of the particle.
+            math::Vec<3> n_dir;     //! Direction of travel.
+            double       n_weight;  //! Statistical weight of the particle.
+
+            //  -- Optical --
+            const double m_wavelength;  //! Wavelength of the photon packet.
+            double       m_ref_index;         //! Current refractive index.
+            double       m_albedo;            //! Current albedo.
+            double       m_interaction;       //! Current interaction coefficient.
+            double       m_anisotropy;        //! Current anisotropy value.
 
 
             //  == INSTANTIATION ==
