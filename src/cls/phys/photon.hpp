@@ -43,13 +43,13 @@ namespace arc
 
             //  -- Optical --
             const double m_wavelength;  //! Wavelength of the photon packet.
-            double       m_ref_index;         //! Current refractive index.
-            double       m_albedo;            //! Current albedo.
-            double       m_interaction;       //! Current interaction coefficient.
-            double       m_anisotropy;        //! Current anisotropy value.
+            double       m_ref_index;   //! Current refractive index.
+            double       m_albedo;      //! Current albedo.
+            double       m_interaction; //! Current interaction coefficient.
+            double       m_anisotropy;  //! Current anisotropy value.
 
             //  -- Data --
-            double                                m_time;                                  //! Emission time plus current age of the particle.
+            double                                m_time;   //! Emission time plus current age of the particle.
             std::vector<graphical::point::Photon> m_path;   //! Path data of the photon.
 
 
