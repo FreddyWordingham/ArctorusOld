@@ -576,6 +576,19 @@ namespace arc
                     m_toggle_light_normal = !m_toggle_light_normal;
                 }
             }
+
+            // Grid rendering.
+            static int old_state_toggle_grid_render = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::TOGGLE_GRID_RENDER) != old_state_toggle_grid_render)
+            {
+                old_state_toggle_grid_render = glfwGetKey(m_window, control::TOGGLE_GRID_RENDER);
+
+                if (old_state_toggle_grid_render == GLFW_PRESS)
+                {
+                    m_toggle_grid_render = !m_toggle_grid_render;
+                }
+            }
         }
 
         /**
