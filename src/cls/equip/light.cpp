@@ -77,9 +77,10 @@ namespace arc
         phys::particle::Photon Light::gen_photon(const phys::Material& t_mat) const
         {
             // Get a random position and normal from the mesh.
-            const std::array<math::Vec<3>, 2> tri_pos_norm = m_mesh.get_tri(m_tri_select.gen_index()).get_random_pos_and_norm();
+            math::Vec<3> pos, norm;
+            std::tie(pos, norm) = m_mesh.get_tri(m_tri_select.gen_index()).gen_random_pos_and_norm();
 
-            return (phys::particle::Photon(tri_pos_norm[0], tri_pos_norm[1], 0.0, 1.0, m_spec.gen_wavelength(), t_mat));
+            return (phys::particle::Photon(pos, norm, 0.0, 1.0, m_spec.gen_wavelength(), t_mat));
         }
 
 
