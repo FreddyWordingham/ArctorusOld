@@ -57,6 +57,7 @@ namespace arc
         //  -- Toggles --
         constexpr const int TOGGLE_FILLED_TRIS  = GLFW_KEY_M;   //! Toggle filled triangle rendering on and off.
         constexpr const int TOGGLE_LIGHT_NORMAL = GLFW_KEY_N;   //! Toggle light normal rendering on and off.
+        constexpr const int TOGGLE_GRID_RENDER  = GLFW_KEY_B;   //! Toggle grid rendering on and off.
 
         //  -- Rendering --
         constexpr const int INIT_PHOTON_TRANSPORT = GLFW_KEY_SPACE; //! Initiate photon transport rendering.
