@@ -278,24 +278,6 @@ namespace arc
         }
 
         /**
-         *  Add a render-able cell prop to the scene.
-         *
-         *  @param  t_min                   Minimum bound of the cell.
-         *  @param  t_max                   Minimum bound of the cell.
-         *  @param  t_energy_density_frac   Fraction of energy density of the cell compared to the maximum within the grid.
-         *
-         *  @pre    t_energy_density_frac must be between zero and one.
-         */
-        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const double t_energy_density_frac)
-        {
-            assert((t_energy_density_frac >= 0.0) && (t_energy_density_frac <= 1.0));
-
-            m_cell.emplace_back(
-                Prop(Prop::shape::BOX, {t_energy_density_frac, t_energy_density_frac, t_energy_density_frac, 1.0},
-                     {t_min[X], t_min[Y], t_min[Z]}, {t_max[X], t_max[Y], t_max[Z]}));
-        }
-
-        /**
          *  Add a render-able entity prop to the scene.
          *
          *  @param  t_ent   Entity be added to the scene.
@@ -395,6 +377,21 @@ namespace arc
             // Swap the buffers.
             glfwSwapBuffers(m_window);
         }
+
+        /**
+         *  Add a render-able cell prop to the scene.
+         *
+         *  @param  t_min   Minimum bound of the cell.
+         *  @param  t_max   Minimum bound of the cell.
+         *  @param  t_col   Colour of the cell prop.
+         */
+        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const glm::vec4& t_col)
+        {
+            m_cell.emplace_back(
+                Prop(Prop::shape::BOX, {t_energy_density_frac, t_energy_density_frac, t_energy_density_frac, 1.0},
+                     {t_min[X], t_min[Y], t_min[Z]}, {t_max[X], t_max[Y], t_max[Z]}));
+        }
+
 
 
         //  -- Control --
