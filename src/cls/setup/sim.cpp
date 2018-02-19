@@ -276,10 +276,18 @@ namespace arc
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
-                    const double s = -std::log(rng::random()) / phot.get_interaction();
+                    const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
+                    const double cell_dist = cell.dist_to_boundary(phot.get_pos(), phot.get_dir());
 
-                    phot.move(s);
-                    phot.scatter();
+                    if (scat_dist < cell_dist)
+                    {
+                        phot.move(s);
+                        phot.scatter();
+                    }
+                    else
+                    {
+
+                    }
                 }
 
                 // Add the photon path.

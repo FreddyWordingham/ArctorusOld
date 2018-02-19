@@ -61,6 +61,7 @@ namespace arc
           protected:
             //  -- Simulation --
             void rotate(double t_dec, double t_azi);
+            void multiply_weight(const double t_mult) const { n_weight *= t_mult; }
         };
 
 
