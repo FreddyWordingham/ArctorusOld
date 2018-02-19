@@ -14,8 +14,6 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/log.hpp"
-#include "gen/math.hpp"
 
 //  -- Utility --
 #include "utl/stream.hpp"
@@ -221,39 +219,6 @@ namespace arc
             assert(r_tri.size() == m_num_tri);
 
             return (r_tri);
-        }
-
-
-
-        //  == METHODS ==
-        //  -- Transformation --
-        /**
-         *  Transform a meshes' triangles using a given position and normal transformation matrix.
-         *
-         *  @param  t_trans Vector of translation.
-         *  @param  t_dir   Direction to face.
-         *  @param  t_spin  Spin angle.
-         *  @param  t_scale Vector of scaling values.
-         *
-         *  @pre    t_dir's magnitude must be greater than zero.
-         *  @pre    t_scale elements must all be non-zero.
-         */
-        void Mesh::transform(const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin, const math::Vec<3>& t_scale)
-        {
-            assert(t_dir.magnitude() > 0.0);
-            assert(t_scale[X] != 0.0);
-            assert(t_scale[Y] != 0.0);
-            assert(t_scale[Z] != 0.0);
-
-            // Create transformation matrices.
-            const math::Mat<4, 4> pos_trans_mat = math::create_pos_trans_mat(t_trans, t_dir, t_spin, t_scale);
-            const math::Mat<4, 4> dir_trans_mat = math::create_dir_trans_mat(t_dir, t_spin, t_scale);
-
-            // Transform the triangles.
-            for (size_t i = 0; i < m_tri.size(); ++i)
-            {
-                m_tri[i].transform(pos_trans_mat, dir_trans_mat);
-            }
         }
 
 

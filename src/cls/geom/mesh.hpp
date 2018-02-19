@@ -76,9 +76,6 @@ namespace arc
             size_t get_num_norm() const { return (m_num_norm); }
             size_t get_num_tri() const { return (m_num_tri); }
             inline const Triangle& get_tri(size_t t_index) const;
-
-            //  -- Transformation --
-            void transform(const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin, const math::Vec<3>& t_scale);
         };
 
 
