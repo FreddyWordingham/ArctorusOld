@@ -14,7 +14,6 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/math.hpp"
 
 
 
@@ -245,11 +244,21 @@ namespace arc
             return plane_origin_overlap(e0 ^ e1, v0, t_half_size);
         }
 
-        bool Cell::plane_origin_overlap(const math::Vec<3>& t_norm, const math::Vec<3>& t_point, const math::Vec<3>& t_half_width) const
+        /**
+         *  Determine if a plane described by a given normal and point overlaps with a given box centered at the origin.
+         *
+         *  @param  t_norm          Normal of the plane.
+         *  @param  t_point         Point located on the plane.
+         *  @param  t_half_width    Half sizes of the box.
+         *
+         *  @return True if the plane and box are intersecting.
+         */
+        bool Cell::plane_origin_overlap(const math::Vec<3>& t_norm, const math::Vec<3>& t_point,
+                                        const math::Vec<3>& t_half_width) const
         {
             math::Vec<3> min, max;
 
-            for (size_t q=0; q<3; ++q)
+            for (size_t q = 0; q < 3; ++q)
             {
                 double v = t_point[q];
 
