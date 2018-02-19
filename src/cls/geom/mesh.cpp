@@ -132,19 +132,29 @@ namespace arc
 
                 if (word == POS_KEYWORD)
                 {
-                    math::Vec<3> pos;
+                    // Read in the position vector.
+                    math::Vec<4> pos;
                     line_stream >> pos[X] >> pos[Y] >> pos[Z];
+                    pos[3] = 1.0;
 
-                    vert_pos.push_back(pos);
+                    // Transform it using the position transformation matrix.
+                    pos = t_pos_trans * pos;
+
+                    // Add the three-dimensional position to the vertex position list.
+                    vert_pos.push_back(math::Vec<3>({{pos[X], pos[Y], pos[Z]}}));
                 }
                 else if (word == NORM_KEYWORD)
                 {
-                    math::Vec<3> norm;
+                    // Read in the normal vector.
+                    math::Vec<4> norm;
                     line_stream >> norm[X] >> norm[Y] >> norm[Z];
+                    norm[3] = 1.0;
 
-                    norm.normalise();
+                    // Transform it using the direction transformation matrix.
+                    norm = t_dir_trans * norm;
 
-                    vert_norm.push_back(norm);
+                    // Add the three-dimensional normal to the vertex normal list.
+                    vert_norm.push_back(math::normalise(math::Vec<3>({{norm[X], norm[Y], norm[Z]}})));
                 }
 
                 if (line_stream.fail())
