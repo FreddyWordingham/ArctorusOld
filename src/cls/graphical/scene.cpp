@@ -817,21 +817,21 @@ namespace arc
         /**
          *  Draw the scene's cells.
          */
-        void Scene::draw_cells() const
+        void Scene::draw_grid() const
         {
             glUseProgram(m_ambient_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-            for (size_t i = 0; i < m_cell.size(); ++i)
+            for (size_t i = 0; i < m_grid.size(); ++i)
             {
-                glUniform4f(m_ambient_shader.get_col_uni(), m_cell[i].get_col()[R], m_cell[i].get_col()[G],
-                            m_cell[i].get_col()[B], m_cell[i].get_col()[A]);
+                glUniform4f(m_ambient_shader.get_col_uni(), m_grid[i].get_col()[R], m_grid[i].get_col()[G],
+                            m_grid[i].get_col()[B], m_grid[i].get_col()[A]);
 
                 glEnableVertexAttribArray(0);
 
-                glBindVertexArray(m_cell[i].get_vao());
+                glBindVertexArray(m_grid[i].get_vao());
 
-                glDrawArrays(GL_LINES, 0, m_cell[i].get_num_vert());
+                glDrawArrays(GL_LINES, 0, m_grid[i].get_num_vert());
 
                 glBindVertexArray(0);
             }
