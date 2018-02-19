@@ -50,7 +50,8 @@ namespace arc
             const std::vector<std::array<size_t, 2>> m_light_list;  //! List of light triangles with the cell.
 
             //  -- Data --
-            const bool m_empty; //! True if the cell contains no triangles.
+            const bool m_empty;                 //! True if the cell contains no triangles.
+            double     m_energy_density = 0.0;  //! Energy density of the cell.
 
 
             //  == INSTANTIATION ==
@@ -114,15 +115,17 @@ namespace arc
 
             // Calculate distance to each boundary.
             std::array<double, 6> dist{};
-            for (size_t i = 0; i < 3; ++i)
+            for (size_t           i = 0; i < 3; ++i)
             {
-                dist[i * 2]       = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max() : (m_min_bound[i] - t_pos[i]) / t_dir[i];
-                dist[(i * 2) + 1] = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max() : (m_max_bound[i] - t_pos[i]) / t_dir[i];
+                dist[i * 2]       = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max()
+                                                      : (m_min_bound[i] - t_pos[i]) / t_dir[i];
+                dist[(i * 2) + 1] = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max()
+                                                      : (m_max_bound[i] - t_pos[i]) / t_dir[i];
             }
 
             // Determine the smallest positive distance.
-            double r_dist = std::numeric_limits<double>::max();
-            for (unsigned int i = 0; i < 6; ++i)
+            double            r_dist = std::numeric_limits<double>::max();
+            for (unsigned int i      = 0; i < 6; ++i)
             {
                 if ((dist[i] < r_dist) && (dist[i] > 0.0))
                 {
