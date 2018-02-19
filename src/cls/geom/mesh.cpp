@@ -112,8 +112,8 @@ namespace arc
          *
          *  @return The initialised vector of triangle faces.
          */
-        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
-                                                   const math::Mat<4, 4>& t_dir_trans) const
+        std::vector<const geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
+                                                         const math::Mat<4, 4>& t_dir_trans) const
         {
             // Create return vector of triangles.
             std::vector<geom::Triangle> r_tri;
