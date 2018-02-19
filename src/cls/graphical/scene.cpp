@@ -867,18 +867,21 @@ namespace arc
          */
         void Scene::draw_phots() const
         {
-            glUseProgram(m_path_shader.get_handle());
-            glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
-
-            for (size_t i = 0; i < m_phot.size(); ++i)
+            if (m_toggle_photon_render)
             {
-                glEnableVertexAttribArray(0);
+                glUseProgram(m_path_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 
-                glBindVertexArray(m_phot[i].get_vao());
+                for (size_t i = 0; i < m_phot.size(); ++i)
+                {
+                    glEnableVertexAttribArray(0);
 
-                glDrawArrays(GL_LINE_STRIP, 0, m_phot[i].get_num_vert());
+                    glBindVertexArray(m_phot[i].get_vao());
 
-                glBindVertexArray(0);
+                    glDrawArrays(GL_LINE_STRIP, 0, m_phot[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
             }
         }
 
