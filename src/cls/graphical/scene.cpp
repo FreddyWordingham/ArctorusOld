@@ -594,13 +594,13 @@ namespace arc
             }
 
             // Grid rendering.
-            static int old_state_toggle_grid_render = GLFW_RELEASE;
+            static int old_state_toggle_cell_render = GLFW_RELEASE;
 
-            if (glfwGetKey(m_window, control::TOGGLE_CELL_RENDER) != old_state_toggle_grid_render)
+            if (glfwGetKey(m_window, control::TOGGLE_CELL_RENDER) != old_state_toggle_cell_render)
             {
-                old_state_toggle_grid_render = glfwGetKey(m_window, control::TOGGLE_CELL_RENDER);
+                old_state_toggle_cell_render = glfwGetKey(m_window, control::TOGGLE_CELL_RENDER);
 
-                if (old_state_toggle_grid_render == GLFW_PRESS)
+                if (old_state_toggle_cell_render == GLFW_PRESS)
                 {
                     m_toggle_cell_render = !m_toggle_cell_render;
                 }
