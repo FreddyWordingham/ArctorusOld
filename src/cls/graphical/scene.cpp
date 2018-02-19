@@ -306,7 +306,7 @@ namespace arc
             }
 
             // Add grid cells.
-            const float cell_padding = -0.001f;
+            const float cell_padding = -0.01f;
             for (size_t i            = 0; i < t_grid.get_num_cells(X); ++i)
             {
                 for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
