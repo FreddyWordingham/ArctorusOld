@@ -283,14 +283,15 @@ namespace arc
                                       static_cast<float>(t_grid.get_max_bound()[Z]) + grid_padding}));
 
             // Add grid cells.
-            const float cell_padding = -0.001f;
+            const float cell_padding = 0.0f;
             for (size_t i            = 0; i < t_grid.get_num_cells(X); ++i)
             {
                 for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
                 {
                     for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
                     {
-                        m_cell.emplace_back(Prop(Prop::shape::CUBOID, {1.0, 0.0, 0.0, 0.1},
+                        LOG("Added cell: " << i << " : " << j << " : " << k << "\n");
+                        m_cell.emplace_back(Prop(Prop::shape::CUBOID, {1.0, 1.0, 1.0, 1.0},
                                                  {static_cast<float>(t_grid.get_cell(i, j, k)
                                                                            .get_min_bound()[X]) - cell_padding,
                                                   static_cast<float>(t_grid.get_cell(i, j, k)
@@ -302,7 +303,7 @@ namespace arc
                                                   static_cast<float>(t_grid.get_cell(i, j, k)
                                                                            .get_max_bound()[Y]) + cell_padding,
                                                   static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                           .get_max_bound()[Z]) + cell_padding}));));
+                                                                           .get_max_bound()[Z]) + cell_padding}));
                     }
                 }
             }
@@ -875,14 +876,14 @@ namespace arc
 
                 for (size_t i = 0; i < m_cell.size(); ++i)
                 {
-                    glUniform4f(m_ambient_shader.get_col_uni(), m_cell[i].get_col()[R], m_cell[i].get_col()[G],
+                    glUniform4f(m_diffuse_shader.get_col_uni(), m_cell[i].get_col()[R], m_cell[i].get_col()[G],
                                 m_cell[i].get_col()[B], m_cell[i].get_col()[A]);
 
                     glEnableVertexAttribArray(0);
 
                     glBindVertexArray(m_cell[i].get_vao());
 
-                    glDrawArrays(GL_LINES, 0, m_cell[i].get_num_vert());
+                    glDrawArrays(GL_TRIANGLES, 0, m_cell[i].get_num_vert());
 
                     glBindVertexArray(0);
                 }
