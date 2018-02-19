@@ -64,12 +64,6 @@ namespace arc
             Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_wavelength, double t_ref_index,
                    double t_albedo, double t_interaction, double t_anisotropy);
 
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
-
 
             //  == METHODS ==
           public:
