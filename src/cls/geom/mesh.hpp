@@ -64,6 +64,9 @@ namespace arc
                  const math::Vec<3>& t_scale = {{1.0, 1.0, 1.0}});
 
           private:
+            //  -- Constructors --
+            Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans);
+
             //  -- Initialisation --
             size_t init_num(const std::string& t_serial, const std::string& t_type_string) const;
             std::vector<geom::Triangle> init_tri(const std::string& t_serial) const;

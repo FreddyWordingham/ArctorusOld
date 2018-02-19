@@ -72,6 +72,12 @@ namespace arc
         }
 
 
+        Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans)
+        {
+
+        }
+
+
         //  -- Initialisation --
         /**
          *  Determine the number of a given type of data within the wavefront mesh.
