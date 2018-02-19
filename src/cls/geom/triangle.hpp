@@ -60,6 +60,12 @@ namespace arc
 
             //  -- Transformation --
             void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat);
+
+            //  -- Simulation --
+            double intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir)
+            {
+
+            }
         };
 
 
