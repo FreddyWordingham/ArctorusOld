@@ -87,7 +87,7 @@ namespace arc
          *
          *  @post   n_dir must be normalised.
          */
-        void Photon::rotate(double t_dec, double t_azi)
+        void Photon::rotate(const double t_dec, const double t_azi)
         {
             assert(m_dir.is_normalised());
             assert((t_dec >= 0.0) && (t_dec <= M_PI));
