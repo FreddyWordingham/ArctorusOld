@@ -31,19 +31,6 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a mesh from a given serialised string.
-         *
-         *  @param  t_serial    Mesh as a serialised string.
-         */
-        Mesh::Mesh(const std::string& t_serial) :
-            m_num_vert(init_num(t_serial, POS_KEYWORD)),
-            m_num_norm(init_num(t_serial, NORM_KEYWORD)),
-            m_num_tri(init_num(t_serial, FACE_KEYWORD)),
-            m_tri(init_tri(t_serial))
-        {
-        }
-
-        /**
          *  Construct a mesh from a given serialised string and transformations.
          *
          *  @param  t_serial    Mesh as a serialised string.
@@ -71,7 +58,7 @@ namespace arc
             m_num_vert(init_num(t_serial, POS_KEYWORD)),
             m_num_norm(init_num(t_serial, NORM_KEYWORD)),
             m_num_tri(init_num(t_serial, FACE_KEYWORD)),
-            m_tri(init_tri(t_serial))
+            m_tri(init_tri(t_serial, t_pos_trans, t_dir_trans))
         {
 
         }
@@ -110,9 +97,11 @@ namespace arc
         }
 
         /**
-         *  Initialise the vector of triangles forming the mesh.
+         *  Initialise the vector of triangles forming the mesh from a serialised mesh and transformation matrices.
          *
-         *  @param  t_serial        Mesh as a serialised string.
+         *  @param  t_serial    Mesh as a serialised string.
+         *  @param  t_pos_trans Position transformation matrix.
+         *  @param  t_dir_trans Direction transformation matrix.
          *
          *  @post   Number of read vertex positions must equal that read initially.
          *  @post   Number of read vertex normals must equal that read initially.
@@ -120,7 +109,8 @@ namespace arc
          *
          *  @return The initialised vector of triangle faces.
          */
-        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial) const
+        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
+                                                   const math::Mat<4, 4>& t_dir_trans) const
         {
             // Create return vector of triangles.
             std::vector<geom::Triangle> r_tri;

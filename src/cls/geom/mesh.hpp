@@ -69,7 +69,8 @@ namespace arc
 
             //  -- Initialisation --
             size_t init_num(const std::string& t_serial, const std::string& t_type_string) const;
-            std::vector<const geom::Triangle> init_tri(const std::string& t_serial) const;
+            std::vector<const geom::Triangle> init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
+                                                       const math::Mat<4, 4>& t_dir_trans) const;
 
 
             //  == METHODS ==
