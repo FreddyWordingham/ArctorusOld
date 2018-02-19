@@ -274,6 +274,8 @@ namespace arc
                     cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
                 }
 
+                double distance_through_cell = 0.0;
+
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
@@ -284,6 +286,8 @@ namespace arc
                     {
                         // Undergo a scattering.
                         phot.move(scat_dist);
+                        distance_through_cell += scat_dist;
+
                         phot.scatter();
 //                        phot.multiply_weight(phot.get_albedo());
                     }
@@ -291,10 +295,14 @@ namespace arc
                     {
                         // Move to the next grid cell.
                         phot.move(cell_dist + 1e-10);
+                        distance_through_cell += cell_dist;
+
                         if (m_grid.is_within(phot.get_pos()))
                         {
                             cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
                         }
+
+                        distance_through_cell = 0.0;
                     }
                 }
 
