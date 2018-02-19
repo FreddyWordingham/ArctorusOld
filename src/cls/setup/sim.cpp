@@ -290,7 +290,7 @@ namespace arc
                     else
                     {
                         // Move to the next grid cell.
-                        phot.move(cell_dist + 1e-3);
+                        phot.move(cell_dist + 1e-6);
                         if (m_grid.is_within(phot.get_pos()))
                         {
                             cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
