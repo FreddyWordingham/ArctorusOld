@@ -386,10 +386,7 @@ namespace arc
             draw_skybox();
             draw_entities();
             draw_lights();
-            if (m_toggle_cell_render)
-            {
-                draw_cells();
-            }
+            draw_cells();
             draw_sun();
             draw_phots();
 
