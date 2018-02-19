@@ -231,18 +231,32 @@ namespace arc
             scene.add_light_vector(m_light);
             scene.add_entity_vector(m_entity);
             scene.add_photon_vector(m_path);
-            scene.add_cell(m_grid.get_min_bound(), m_grid.get_max_bound());
+            scene.add_cell(m_grid.get_min_bound(), m_grid.get_max_bound(), 1.0);
 
-            for (size_t i = 0; i < m_grid.get_num_cells(X); ++i)
+            double      max_energy_density = 0.0;
+            for (size_t i                  = 0; i < m_grid.get_num_cells(X); ++i)
             {
                 for (size_t j = 0; j < m_grid.get_num_cells(Y); ++j)
                 {
                     for (size_t k = 0; k < m_grid.get_num_cells(Z); ++k)
                     {
-                        if (!m_grid.get_cell(i, j, k).empty())
+                        if (m_grid.get_cell(i, j, k).get_energy_density() > max_energy_density)
                         {
-                            scene.add_cell(m_grid.get_cell(i, j, k).get_min_bound(), m_grid.get_cell(i, j, k).get_max_bound());
+                            max_energy_density = m_grid.get_cell(i, j, k).get_energy_density();
                         }
+                    }
+                }
+            }
+            VAL(max_energy_density);
+
+            for (size_t i                  = 0; i < m_grid.get_num_cells(X); ++i)
+            {
+                for (size_t j = 0; j < m_grid.get_num_cells(Y); ++j)
+                {
+                    for (size_t k = 0; k < m_grid.get_num_cells(Z); ++k)
+                    {
+                        scene.add_cell(m_grid.get_cell(i, j, k).get_min_bound(), m_grid.get_cell(i, j, k).get_max_bound(),
+                                       m_grid.get_cell(i, j, k).get_energy_density() / max_energy_density);
                     }
                 }
             }
@@ -296,7 +310,8 @@ namespace arc
                         // Move to the next grid cell.
                         phot.move(cell_dist + 1e-10);
                         distance_through_cell += cell_dist;
-                        cell->add_energy_density(distance_through_cell);
+                        m_grid.get_cell(phot.get_pos()).add_energy_density(distance_through_cell);
+                        LOG("Added energy");
 
                         if (m_grid.is_within(phot.get_pos()))
                         {

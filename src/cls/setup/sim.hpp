@@ -50,7 +50,7 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
-            const mesh::Grid                                   m_grid;  //! Simulation grid.
+            mesh::Grid                                         m_grid;  //! Simulation grid.
             std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
 
 
