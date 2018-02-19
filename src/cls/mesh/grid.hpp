@@ -45,6 +45,7 @@ namespace arc
             //  -- Information --
             const std::array<size_t, 3> m_num_cells;    //! Number of cells in each dimension.
             const double                m_grid_vol;     //! Volume of the total grid.
+            const std::array<double, 3> m_cell_size;    //! Size of each cell.
             const double                m_cell_vol;     //! Volume of each cell.
 
             //  -- Data --
