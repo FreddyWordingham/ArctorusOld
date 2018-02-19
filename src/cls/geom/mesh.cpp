@@ -57,7 +57,8 @@ namespace arc
          */
         Mesh::Mesh(const std::string& t_serial, const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin,
                    const math::Vec<3>& t_scale) :
-
+            Mesh(t_serial, math::create_pos_trans_mat(t_trans, t_dir, t_spin, t_scale),
+                 math::create_dir_trans_mat(t_dir, t_spin, t_scale))
         {
             assert(t_dir.magnitude() > 0.0);
             assert(t_scale[X] != 0.0);
