@@ -70,6 +70,7 @@ namespace arc
             //  -- Getters --
             const math::Vec<3>& get_pos() const { return (m_pos); }
             const math::Vec<3>& get_dir() const { return (m_dir); }
+            const std::vector<graphical::point::Photon>& get_path() const { return (m_path); }
 
             //  -- Setters --
             void move(double t_dist);
