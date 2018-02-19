@@ -37,9 +37,9 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Spatial --
-            math::Vec<3> n_pos;     //! Position of the particle.
-            math::Vec<3> n_dir;     //! Direction of travel.
-            double       n_weight;  //! Statistical weight of the particle.
+            math::Vec<3> m_pos;     //! Position of the particle.
+            math::Vec<3> m_dir;     //! Direction of travel.
+            double       m_weight;  //! Statistical weight of the particle.
 
             //  -- Optical --
             const double m_wavelength;  //! Wavelength of the photon packet.
