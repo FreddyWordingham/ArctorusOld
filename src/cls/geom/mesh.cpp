@@ -64,9 +64,6 @@ namespace arc
             assert(t_scale[X] != 0.0);
             assert(t_scale[Y] != 0.0);
             assert(t_scale[Z] != 0.0);
-
-            // Apply the transformations.
-            transform(t_trans, t_dir, t_spin, t_scale);
         }
 
 
