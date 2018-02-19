@@ -22,18 +22,21 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace colourmap
+    namespace utl
     {
+        namespace colourmap
+        {
 
 
 
-        //  == FUNCTION PROTOTYPES ==
-        //  -- Maps --
-        glm::vec3 transform_rainbow(float t_x);
+            //  == FUNCTION PROTOTYPES ==
+            //  -- Maps --
+            glm::vec3 transform_rainbow(float t_x);
 
 
 
-    } // namespace colourmap
+        } // namespace colourmap
+    } // namespace utl
 } // namespace arc
 
 
