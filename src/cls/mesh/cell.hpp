@@ -83,11 +83,11 @@ namespace arc
 
         //  -- Testing --
         /**
-         *  Test if a given pos is located within the cell.
+         *  Test if a given position is located within the cell.
          *
          *  @param  t_pos   Position to be tested.
          *
-         *  @return True if the point is located within the cell.
+         *  @return True if the position is located within the cell.
          */
         bool Cell::is_within(const math::Vec<3>& t_pos) const
         {
