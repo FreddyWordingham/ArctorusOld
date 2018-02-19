@@ -69,18 +69,17 @@ namespace arc
          *  Generate a photon at a random point on the light's surface with optical properties determined by the light's
          *  material.
          *
-         *
          *  @param  t_mat   Material to sample initial optical properties from.
          *
          *  @return The newly generated photon.
          */
-        phys::particle::Photon Light::gen_photon(const phys::Material& t_mat) const
+        phys::Photon Light::gen_photon(const phys::Material& t_mat) const
         {
             // Get a random position and normal from the mesh.
             math::Vec<3> pos, norm;
             std::tie(pos, norm) = m_mesh.get_tri(m_tri_select.gen_index()).gen_random_pos_and_norm();
 
-            return (phys::particle::Photon(pos, norm, 0.0, 1.0, m_spec.gen_wavelength(), t_mat));
+            return (phys::Photon(pos, norm, m_spec.gen_wavelength(), t_mat));
         }
 
 
