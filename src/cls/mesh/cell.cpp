@@ -12,11 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- General --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
