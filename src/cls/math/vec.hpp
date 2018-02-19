@@ -149,7 +149,7 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Mathematical --
         template <size_t N>
-        inline Vec<N> normalise(const math::Vec<3>& t_vec);
+        inline Vec<N> normalise(const math::Vec<N>& t_vec);
 
         //  -- Parsing --
         template <size_t N>
@@ -1037,7 +1037,7 @@ namespace arc
          *  @return The normalisation of the given vec.
          */
         template <size_t N>
-        inline Vec<N> normalise(const math::Vec<3>& t_vec)
+        inline Vec<N> normalise(const math::Vec<N>& t_vec)
         {
             // Create a copy of the vec.
             math::Vec<N> r_vec;
