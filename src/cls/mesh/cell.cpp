@@ -102,8 +102,6 @@ namespace arc
             return (r_light_list);
         }
 
-
-
         /**
          *  Determine if an axis-aligned bounding box is intersecting with a triangle.
          *  Box and triangle are considered to be overlapping even if the triangle is in the plane of the box.
