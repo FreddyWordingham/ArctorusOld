@@ -42,7 +42,9 @@ namespace arc
             m_max_bound(t_max_bound),
             m_num_cells(t_num_cells),
             m_grid_vol(
-                (t_max_bound[X] - t_min_bound[X]) * (t_max_bound[Y] - t_min_bound[Y]) * (t_max_bound[Z] - t_min_bound[Z])),
+                (m_max_bound[X] - m_min_bound[X]) * (m_max_bound[Y] - m_min_bound[Y]) * (m_max_bound[Z] - m_min_bound[Z])),
+            m_cell_size(
+                {{(m_max_bound[X] - m_min_bound[X]) / m_num_cells[X], (m_max_bound[Y] - m_min_bound[Y]) / m_num_cells[Y], (m_max_bound[Z] - m_min_bound[Z]) / m_num_cells[Z]}}),
             m_cell_vol(m_grid_vol / (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z])),
             m_cell(init_cell(t_entity, t_light))
         {
