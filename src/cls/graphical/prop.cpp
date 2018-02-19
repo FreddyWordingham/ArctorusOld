@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/enum.hpp"
+#include "gen/log.hpp"
 
 
 
@@ -191,6 +192,8 @@ namespace arc
                     return (init_vert_skybox(t_scale));
                 case shape::SUN:
                     return (init_vert_sun(t_scale));
+                default:
+                    ERROR("Invalid case enumeration.", "Unbounded init_vert is not valid for the given enumeration.");
             }
         }
 
@@ -211,6 +214,8 @@ namespace arc
                     return (init_vert_box(t_min, t_max));
                 case shape::CUBOID:
                     return (init_vert_cuboid(t_min, t_max));
+                default:
+                    ERROR("Invalid case enumeration.", "Bounded init_vert is not valid for the given enumeration.");
             }
         }
 
