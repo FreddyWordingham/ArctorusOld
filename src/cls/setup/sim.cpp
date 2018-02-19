@@ -267,14 +267,12 @@ namespace arc
                 // Generate a new photon.
                 phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
-                // Skip simulation if this photon begins outside of the grid.
+                // Determine starting cell containing the photon.
+                std::unique_ptr<mesh::Cell> cell = nullptr;
                 if (m_grid.is_within(phot.get_pos()))
                 {
-                    continue;
+                    std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
                 }
-
-                // Determine starting cell containing the photon.
-                std::unique_ptr<mesh::Cell> cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
 
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
