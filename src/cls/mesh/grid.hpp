@@ -71,7 +71,7 @@ namespace arc
             const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
             size_t get_num_cells() const { return (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]); }
             size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
-            const Cell& get_cell(const math::Vec<3>& t_point) const;
+            inline const Cell& get_cell(const math::Vec<3>& t_point) const;
 
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_point) const;
@@ -87,6 +87,10 @@ namespace arc
          *  @param  t_point Point which grid cell must contain.
          *
          *  @pre    t_point must fall within the bounds of the grid.
+         *
+         *  @post   x index must be a valid cell index.
+         *  @post   y index must be a valid cell index.
+         *  @post   z index must be a valid cell index.
          *  @post   t_point must fall within the determined cell.
          *
          *  @return A reference to the cell containing the given point.
@@ -95,10 +99,15 @@ namespace arc
         {
             assert(is_within(t_point));
 
+            // Calculate cell indices.
+            const auto x = static_cast<size_t>((t_point[X] - m_min_bound[X]) / m_cell_size[X]);
+            const auto y = static_cast<size_t>((t_point[Y] - m_min_bound[Y]) / m_cell_size[Y]);
+            const auto z = static_cast<size_t>((t_point[Z] - m_min_bound[Z]) / m_cell_size[Z]);
 
-
-
-            // assert(m_cell[x][y][z].is_within(t_point);
+            assert(x < m_num_cells[X]);
+            assert(y < m_num_cells[Y]);
+            assert(z < m_num_cells[Z]);
+            assert(m_cell[x][y][z].is_within(t_point);
 
             return (m_cell[x][y][z]);
         }
