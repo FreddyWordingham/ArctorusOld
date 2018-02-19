@@ -756,7 +756,7 @@ namespace arc
             }
 
             // Draw normals if toggle is on.
-            if (m_toggle_cell_render)
+            if (m_toggle_light_normal)
             {
                 glUseProgram(m_normal_shader.get_handle());
                 glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -871,7 +871,7 @@ namespace arc
             // If cell rendering is toggle on, draw the cells.
             if (m_toggle_cell_render)
             {
-                glUseProgram(m_normal_shader.get_handle());
+                glUseProgram(m_diffuse_shader.get_handle());
                 glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
                 for (size_t i = 0; i < m_cell.size(); ++i)
