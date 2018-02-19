@@ -73,7 +73,7 @@ namespace arc
             bool empty() const { return (m_empty); }
 
             //  -- Testing --
-            inline bool is_within(const math::Vec<3>& t_point) const;
+            inline bool is_within(const math::Vec<3>& t_pos) const;
 
             //  -- Simulation --
             inline double dist_to_boundary(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
@@ -83,15 +83,15 @@ namespace arc
 
         //  -- Testing --
         /**
-         *  Test if a given point is located within the cell.
+         *  Test if a given pos is located within the cell.
          *
-         *  @param  t_point Point to be tested.
+         *  @param  t_pos   Position to be tested.
          *
          *  @return True if the point is located within the cell.
          */
-        bool Cell::is_within(const math::Vec<3>& t_point) const
+        bool Cell::is_within(const math::Vec<3>& t_pos) const
         {
-            return (t_point[X] >= m_min_bound[X]) && (t_point[X] <= m_max_bound[X]) && (t_point[Y] >= m_min_bound[Y]) && (t_point[Y] <= m_max_bound[Y]) && (t_point[Z] >= m_min_bound[Z]) && (t_point[Z] <= m_max_bound[Z]);
+            return (t_pos[X] >= m_min_bound[X]) && (t_pos[X] <= m_max_bound[X]) && (t_pos[Y] >= m_min_bound[Y]) && (t_pos[Y] <= m_max_bound[Y]) && (t_pos[Z] >= m_min_bound[Z]) && (t_pos[Z] <= m_max_bound[Z]);
         }
 
 
