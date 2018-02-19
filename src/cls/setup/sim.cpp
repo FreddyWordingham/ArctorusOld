@@ -298,7 +298,9 @@ namespace arc
                     }
                     else
                     {
-                        if (acos(tri_norm * phot.get_dir()) > (M_PI / 2.0))
+                        tri_norm.normalise();
+
+                        if (acos(tri_norm * phot.get_dir()) < (M_PI / 2.0))
                         {
                             tri_norm *= -1.0;
                         }
@@ -307,7 +309,7 @@ namespace arc
 
                         // Move to the entity.
                         distance_through_cell += (entity_dist * phot.get_weight());
-                        phot.move(entity_dist - 1e-10);
+                        phot.move(entity_dist - 1E-10);
 
                         const double incident_angle = acos(tri_norm * phot.get_dir());
                         math::Vec<3> out_dir = phot.get_dir() - (tri_norm * (2.0 * (phot.get_dir() * tri_norm)));

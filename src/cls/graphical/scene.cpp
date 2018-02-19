@@ -123,7 +123,7 @@ namespace arc
             glDepthFunc(GL_LEQUAL);
 
             // Enable back-face culling.
-            glEnable(GL_CULL_FACE);
+//            glEnable(GL_CULL_FACE);
 
             // Enable transparency.
 //            glEnable(GL_BLEND);

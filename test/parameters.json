@@ -11,8 +11,7 @@
     },
     "entities": {
         "entity_one": {
-            "scale": [0.1, 0.1, 0.1],
-            "mesh":  "meshes/sphere.obj",
+            "mesh":  "meshes/small_sphere.obj",
             "mat":   "materials/intralipid_10.mat"
         }
     },
