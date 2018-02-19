@@ -2,30 +2,26 @@
     "seed":     77,
     "num_phot": 1e0,
     "grid":     {
-        "min":   [-1.0, -1.0, -1.0],
-        "max":   [1.0, 1.0, 1.0],
-        "cells": [20, 20, 20]
+        "min":   [-4.0, -1.0, -1.0],
+        "max":   [4.0, 1.0, 1.0],
+        "cells": [80, 10, 10]
     },
     "aether":   {
         "mat": "materials/vacuum.mat"
     },
     "entities": {
         "entity_one": {
-            "trans": [1.0, 0.5, -0.5],
-            "dir":   [0.0, 1.0, 0.0],
-            "rot":   45.0,
-            "scale": [1.0, 1.0, 1.0],
-            "mesh":  "meshes/monkey.obj",
+            "scale": [0.25, 0.25, 0.25],
+            "mesh":  "meshes/prism.obj",
             "mat":   "materials/intralipid_10.mat"
         }
     },
     "lights":   {
         "light_one": {
             "power": 1.0,
-            "trans": [0.0, 0.0, 5.0],
-            "dir":   [0.0, 0.0, -1.0],
-            "rot":   45.0,
-            "scale": [0.5, 0.5, 0.5],
+            "trans": [3.0, 0.0, 0.0],
+            "dir":   [1.0, 0.0, 0.0],
+            "scale": [0.01, 0.01, 0.01],
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
         }
