@@ -51,6 +51,9 @@ namespace arc
             //  -- Constructors --
             explicit Triangle(const std::array<Vertex, 3>& t_vert);
 
+            //  -- Initialisation --
+            math::Vec<3> init_normal() const;
+
 
             //  == METHODS ==
           public:
