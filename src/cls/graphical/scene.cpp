@@ -281,6 +281,31 @@ namespace arc
                                      {static_cast<float>(t_grid.get_max_bound()[X]) + grid_padding,
                                       static_cast<float>(t_grid.get_max_bound()[Y]) + grid_padding,
                                       static_cast<float>(t_grid.get_max_bound()[Z]) + grid_padding}));
+
+            // Add grid cells.
+            const float cell_padding = -0.001f;
+            for (size_t i            = 0; i < t_grid.get_num_cells(X); ++i)
+            {
+                for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
+                {
+                    for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
+                    {
+                        m_cell.emplace_back(Prop(Prop::shape::CUBOID, {1.0, 0.0, 0.0, 0.1},
+                                                 {static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                           .get_min_bound()[X]) - cell_padding,
+                                                  static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                           .get_min_bound()[Y]) - cell_padding,
+                                                  static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                           .get_min_bound()[Z]) - cell_padding},
+                                                 {static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                           .get_max_bound()[X]) + cell_padding,
+                                                  static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                           .get_max_bound()[Y]) + cell_padding,
+                                                  static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                           .get_max_bound()[Z]) + cell_padding}));));
+                    }
+                }
+            }
         }
 
         /**
