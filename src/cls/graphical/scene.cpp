@@ -22,7 +22,6 @@
 
 //  -- General --
 #include "gen/control.hpp"
-#include "gen/math.hpp"
 
 //  -- Utility --
 #include "utl/colourmap.hpp"
@@ -289,21 +288,7 @@ namespace arc
                                       static_cast<float>(t_grid.get_max_bound()[Z]) + grid_padding}));
 
             // Determine maximum grid cell energy density.
-            double      max_energy_density = 0.0;
-            for (size_t i                  = 0; i < t_grid.get_num_cells(X); ++i)
-            {
-                for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
-                {
-                    for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
-                    {
-                        const double energy_density = t_grid.get_cell(i, j, k).get_energy_density();
-                        if (energy_density > max_energy_density)
-                        {
-                            max_energy_density = energy_density;
-                        }
-                    }
-                }
-            }
+            double max_energy_density = t_grid.get_max_energy_density();
 
             // Add grid cells.
             const float cell_padding = -0.01f;
