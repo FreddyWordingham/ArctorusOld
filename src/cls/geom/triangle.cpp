@@ -42,14 +42,22 @@ namespace arc
 
         //  -- Initialisation --
         /**
-         *  Initialise the normal vector of the triangle.
+         *  Initialise the normal vector of the triangle by determining the cross-product of two of the triangles edges.
+         *  Normal must be normalised after determining the cross-product.
+         *
+         *  @post   r_norm must be normalised.
          *
          *  @return The normal vector of the triangle.
          */
         math::Vec<3> Triangle::init_norm() const
         {
+            // Compute the cross-product of two edges to find the triangle's normal.
             math::Vec<3> r_norm = (m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^ (m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos());
+
+            // Normalise the normal.
             r_norm.normalise();
+
+            assert(r_norm.is_normalised());
 
             return (r_norm);
         }
