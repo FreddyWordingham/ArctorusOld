@@ -76,6 +76,7 @@ namespace arc
             const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
             double get_energy_density() const { return (m_energy_density); }
             bool empty() const { return (m_empty); }
+            double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
 
             //  -- Setters --
             void add_energy_density(double t_energy_density);

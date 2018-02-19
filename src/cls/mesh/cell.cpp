@@ -274,6 +274,24 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Determine the distance to the wall of the cell from the given position travelling along the given direction.
+         *
+         *  @param  t_pos   Position of the point within the cell.
+         *  @param  t_dir   Direction of travel.
+         *
+         *  @pre    t_pos must be within the cell.
+         *  @pre    t_dir must be normalised.
+         *
+         *  @return The distance to the wall of the cell from the given position travelling along the given direction.
+         */
+        double Cell::get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
+        {
+
+        }
+
+
         //  -- Setters --
         /**
          *  Add a given energy density to the total energy density of the cell.
