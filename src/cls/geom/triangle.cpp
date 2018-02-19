@@ -31,12 +31,17 @@ namespace arc
          *  Construct a triangle from three vertices.
          *
          *  @param  t_vert  Array of three vertices forming the triangle.
+         *
+         *  @post   m_area must be positive.
+         *  @post   m_norm must be normalised.
          */
         Triangle::Triangle(const std::array<Vertex, 3>& t_vert) :
             m_vert(t_vert),
             m_area(math::area({{m_vert[ALPHA].get_pos(), m_vert[BETA].get_pos(), m_vert[GAMMA].get_pos()}})),
             m_norm(init_norm())
         {
+            assert(m_area > 0.0);
+            assert(m_norm.is_normalised());
         }
 
 
