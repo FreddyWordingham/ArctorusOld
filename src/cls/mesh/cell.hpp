@@ -79,11 +79,13 @@ namespace arc
 
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_pos) const;
+            bool tri_overlap(const math::Vec<3>& t_center, const math::Vec<3>& t_half_size, const geom::Triangle& t_tri) const;
+            bool plane_origin_overlap(const math::Vec<3>& t_norm, const math::Vec<3>& t_point, const math::Vec<3>& t_half_width) const;
 
             //  -- Simulation --
             inline double dist_to_boundary(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
             inline double dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                         const std::vector<equip::Entity>& t_entity) const;
+                                         const std::vector<equip::Entity>& t_entity, math::Vec<3>& t_tri_norm) const;
         };
 
 
@@ -186,7 +188,7 @@ namespace arc
                 }
             }
 
-            assert(t_tri_norm.is_normalised());
+//            assert(t_tri_norm.is_normalised());
 
             return (r_dist);
         }

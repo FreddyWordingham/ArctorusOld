@@ -78,6 +78,14 @@ namespace arc
                 double gem_anisotropy() const { return (m_anisotropy); }
                 const std::vector<graphical::point::Photon>& get_path() const { return (m_path); }
 
+                //  -- Setters --
+                void set_dir(const math::Vec<3>& t_dir) const
+                {
+                    assert(t_dir.is_normalised());
+
+                    n_dir = t_dir;
+                }
+
                 //  -- Simulation --
                 void move(double t_dist);
                 void scatter();

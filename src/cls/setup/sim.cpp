@@ -298,15 +298,19 @@ namespace arc
                     }
                     else
                     {
+                        if (acos(tri_norm * phot.get_dir()) > (M_PI / 2.0))
+                        {
+                            tri_norm *= -1.0;
+                        }
+
                         // Photon will now reflect or refract.
-
-
 
                         // Move to the entity.
                         distance_through_cell += (entity_dist * phot.get_weight());
-                        phot.move(entity_dist + 1e-10);
+                        phot.move(entity_dist - 1e-10);
 
-                        break;
+                        const double incident_angle = acos(tri_norm * phot.get_dir());
+                        phot.set_dir(math::Vec<3>({{0.0, 0.0, 1.0}}));
                     }
                 }
 

@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/math.hpp"
 #include "gen/rng.hpp"
 
 //  -- Classes --
@@ -83,6 +84,28 @@ namespace arc
                 {
                     return (std::numeric_limits<double>::max());
                 }
+
+                // Calculate intersection point.
+                const math::Vec<3> q = t_pos + (t_dir * t_dist);
+
+                // Check that the point falls within the triangle.
+                if ((((m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^ (q - m_vert[ALPHA].get_pos())) * m_norm) < 0.0)
+                {
+                    return (std::numeric_limits<double>::max());
+                }
+                if ((((m_vert[GAMMA].get_pos() - m_vert[BETA].get_pos()) ^ (q - m_vert[BETA].get_pos())) * m_norm) < 0.0)
+                {
+                    return (std::numeric_limits<double>::max());
+                }
+                if ((((m_vert[ALPHA].get_pos() - m_vert[GAMMA].get_pos()) ^ (q - m_vert[GAMMA].get_pos())) * m_norm) < 0.0)
+                {
+                    return (std::numeric_limits<double>::max());
+                }
+
+                t_tri_norm = (m_vert[ALPHA].get_norm() * (math::area(
+                    {{q, m_vert[BETA].get_pos(), m_vert[GAMMA].get_pos()}}) / m_area)) + (m_vert[BETA].get_norm() * (math::area(
+                    {{q, m_vert[GAMMA].get_pos(), m_vert[ALPHA].get_pos()}}) / m_area)) + (m_vert[GAMMA]
+                    .get_norm() * (math::area({{q, m_vert[ALPHA].get_pos(), m_vert[BETA].get_pos()}}) / m_area));
 
                 return (t_dist);
             }
