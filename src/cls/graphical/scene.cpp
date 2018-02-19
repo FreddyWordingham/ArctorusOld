@@ -272,7 +272,7 @@ namespace arc
          */
         void Scene::add_grid(const mesh::Grid& t_grid)
         {
-
+            m_grid =
         }
 
         /**

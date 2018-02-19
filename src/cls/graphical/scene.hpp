@@ -117,7 +117,7 @@ namespace arc
             std::vector<Prop>        m_entity;  //! Vector of entity props.
             std::vector<prop::Light> m_light;   //! Vector of light source props.
             std::vector<Prop>        m_phot;    //! Vector of photon packet path props.
-            Prop                     m_grid;    //! Grid prop.
+            std::vector<Prop>        m_grid;    //! Vector of grid props.
             std::vector<Prop>        m_cell;    //! Vector of cell props.
 
             //  -- Toggles --
