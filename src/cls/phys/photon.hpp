@@ -72,7 +72,7 @@ namespace arc
             const math::Vec<3>& get_dir() const { return (m_dir); }
 
             //  -- Setters --
-            void move(const double t_dist);
+            void move(double t_dist);
             void rotate(double t_dec, double t_azi);
 
           private:
