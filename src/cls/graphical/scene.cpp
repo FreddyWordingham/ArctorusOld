@@ -266,6 +266,16 @@ namespace arc
         }
 
         /**
+         *  Add a render-able grid mesh to the scene.
+         *
+         *  @param  t_grid  Grid to be added to the scene.
+         */
+        void Scene::add_grid(const mesh::Grid& t_grid)
+        {
+
+        }
+
+        /**
          *  Add a render-able cell prop to the scene.
          *
          *  @param  t_min                   Minimum bound of the cell.
