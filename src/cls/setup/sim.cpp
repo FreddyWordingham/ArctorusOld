@@ -233,11 +233,11 @@ namespace arc
             scene.add_photon_vector(m_path);
             scene.add_cell(m_grid.get_min_bound(), m_grid.get_max_bound());
 
-            for (size_t i=0; i<m_grid.get_num_cells(X); ++i)
+            for (size_t i = 0; i < m_grid.get_num_cells(X); ++i)
             {
-                for (size_t j=0; j<m_grid.get_num_cells(Y); ++j)
+                for (size_t j = 0; j < m_grid.get_num_cells(Y); ++j)
                 {
-                    for (size_t k=0; k<m_grid.get_num_cells(Z); ++k)
+                    for (size_t k = 0; k < m_grid.get_num_cells(Z); ++k)
                     {
                         if (!m_grid.get_cell(i, j, k).empty())
                         {
@@ -296,6 +296,7 @@ namespace arc
                         // Move to the next grid cell.
                         phot.move(cell_dist + 1e-10);
                         distance_through_cell += cell_dist;
+                        cell->add_energy_density(distance_through_cell);
 
                         if (m_grid.is_within(phot.get_pos()))
                         {
