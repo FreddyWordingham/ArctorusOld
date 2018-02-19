@@ -49,7 +49,7 @@ namespace arc
             const double                m_cell_vol;     //! Volume of each cell.
 
             //  -- Data --
-            const std::vector<std::vector<std::vector<Cell>>> m_cell;   //! Three-dimensional vector of cells.
+            std::vector<std::vector<std::vector<Cell>>> m_cell;   //! Three-dimensional vector of cells.
 
 
             //  == INSTANTIATION ==
@@ -72,7 +72,7 @@ namespace arc
             size_t get_num_cells() const { return (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]); }
             size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
             const Cell& get_cell(const size_t t_i, const size_t t_j, const size_t t_k) const { return (m_cell[t_i][t_j][t_k]); }
-            inline const Cell& get_cell(const math::Vec<3>& t_point) const;
+            inline Cell& get_cell(const math::Vec<3>& t_point);
 
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_pos) const;
@@ -96,7 +96,7 @@ namespace arc
          *
          *  @return A reference to the cell containing the given point.
          */
-        const Cell& Grid::get_cell(const math::Vec<3>& t_point) const
+        Cell& Grid::get_cell(const math::Vec<3>& t_point)
         {
             assert(is_within(t_point));
 

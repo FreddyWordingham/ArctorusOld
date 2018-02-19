@@ -308,9 +308,9 @@ namespace arc
                     else
                     {
                         // Move to the next grid cell.
-                        phot.move(cell_dist + 1e-10);
                         distance_through_cell += cell_dist;
                         m_grid.get_cell(phot.get_pos()).add_energy_density(distance_through_cell);
+                        phot.move(cell_dist + 1e-10);
                         LOG("Added energy");
 
                         if (m_grid.is_within(phot.get_pos()))
