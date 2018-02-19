@@ -275,10 +275,12 @@ namespace arc
             // Add main grid bounds.
             const float grid_padding = 0.001f;
             m_grid.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0},
-                                     {t_grid.get_min_bound()[X] - grid_padding, t_grid.get_min_bound()[Y] - grid_padding,
-                                      t_grid.get_min_bound()[Z] - grid_padding},
-                                     {t_grid.get_max_bound()[X] + grid_padding, t_grid.get_max_bound()[Y] + grid_padding,
-                                      t_grid.get_max_bound()[Z] + grid_padding}));
+                                     {static_cast<float>(t_grid.get_min_bound()[X]) - grid_padding,
+                                      static_cast<float>(t_grid.get_min_bound()[Y]) - grid_padding,
+                                      static_cast<float>(t_grid.get_min_bound()[Z]) - grid_padding},
+                                     {static_cast<float>(t_grid.get_max_bound()[X]) + grid_padding,
+                                      static_cast<float>(t_grid.get_max_bound()[Y]) + grid_padding,
+                                      static_cast<float>(t_grid.get_max_bound()[Z]) + grid_padding}));
         }
 
         /**
