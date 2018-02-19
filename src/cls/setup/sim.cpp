@@ -14,7 +14,6 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/math.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -248,73 +247,20 @@ namespace arc
          */
         void Sim::run()
         {
+            // Run each photon.
             for (unsigned long int i = 0; i < m_num_phot; ++i)
             {
                 TEMP("Photon Loop", 100.0 * i / m_num_phot);
 
                 // Generate a new photon.
-                phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
-
-                // Determine starting cell containing the photon.
-                std::unique_ptr<mesh::Cell> cell = nullptr;
-                if (m_grid.is_within(phot.get_pos()))
-                {
-                    cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
-                }
-
-                double distance_through_cell = 0.0;
+                phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
-                    const double cell_dist = cell->dist_to_boundary(phot.get_pos(), phot.get_dir());
 
-                    math::Vec<3> tri_norm;
-                    const double entity_dist = cell->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity, tri_norm);
-
-                    if ((scat_dist < cell_dist) && (scat_dist < entity_dist))
-                    {
-                        // Undergo a scattering.
-                        phot.move(scat_dist);
-                        distance_through_cell += (scat_dist * phot.get_weight());
-
-                        phot.scatter();
-                        phot.multiply_weight(phot.get_albedo());
-                    }
-                    else if (cell_dist < entity_dist)
-                    {
-                        // Move to the next grid cell.
-                        distance_through_cell += (cell_dist * phot.get_weight());
-                        m_grid.get_cell(phot.get_pos()).add_energy_density(distance_through_cell);
-                        phot.move(cell_dist + 1e-10);
-
-                        if (m_grid.is_within(phot.get_pos()))
-                        {
-                            cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
-                        }
-
-                        distance_through_cell = 0.0;
-                    }
-                    else
-                    {
-                        tri_norm.normalise();
-                        if (acos(tri_norm * phot.get_dir()) > (M_PI / 2.0))
-                        {
-                            tri_norm *= -1.0;
-                        }
-
-                        // Photon will now reflect or refract.
-
-                        // Move to the entity.
-                        distance_through_cell += (entity_dist * phot.get_weight());
-                        phot.move(entity_dist - 1E-10);
-
-                        math::Vec<3> out_dir = phot.get_dir() - (tri_norm * (2.0 * (phot.get_dir() * tri_norm)));
-                        out_dir.normalise();
-
-                        phot.set_dir(out_dir);
-                    }
+                    phot.move(scat_dist);
                 }
 
                 // Add the photon path.
