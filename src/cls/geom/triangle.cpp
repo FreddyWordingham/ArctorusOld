@@ -109,7 +109,7 @@ namespace arc
             m_area = math::area({{m_vert[ALPHA].get_pos(), m_vert[BETA].get_pos(), m_vert[GAMMA].get_pos()}});
 
             // Recalculate the triangle's normal.
-            m_norm = math::normalise((m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^ (m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos()));
+            m_norm = init_norm();
         }
 
 
