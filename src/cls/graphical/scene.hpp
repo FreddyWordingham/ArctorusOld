@@ -123,7 +123,7 @@ namespace arc
             //  -- Toggles --
             bool m_toggle_filled_tris  = true;  //! When true render triangles as filled.
             bool m_toggle_light_normal = false; //! When true render light prop normals.
-            bool m_toggle_grid_render  = false; //! When true render the grid.
+            bool m_toggle_cell_render  = false; //! When true render the grid cells.
 
             //  -- Rendering --
             float m_render_time = 0.0f; //! Photon rendering time.

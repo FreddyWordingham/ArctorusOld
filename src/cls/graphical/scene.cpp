@@ -386,7 +386,7 @@ namespace arc
             draw_skybox();
             draw_entities();
             draw_lights();
-            if (m_toggle_grid_render)
+            if (m_toggle_cell_render)
             {
                 draw_cells();
             }
@@ -605,7 +605,7 @@ namespace arc
 
                 if (old_state_toggle_grid_render == GLFW_PRESS)
                 {
-                    m_toggle_grid_render = !m_toggle_grid_render;
+                    m_toggle_cell_render = !m_toggle_cell_render;
                 }
             }
         }
