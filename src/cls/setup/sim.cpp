@@ -267,27 +267,36 @@ namespace arc
                 // Generate a new photon.
                 phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
-                const mesh::Cell& cell = m_grid.get_cell(phot.get_pos());
+                // Skip simulation if this photon begins outside of the grid.
                 if (m_grid.is_within(phot.get_pos()))
                 {
-
+                    continue;
                 }
+
+                // Determine starting cell containing the photon.
+                std::unique_ptr<mesh::Cell> cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
 
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
-                    const double cell_dist = cell.dist_to_boundary(phot.get_pos(), phot.get_dir());
+                    const double cell_dist = cell->dist_to_boundary(phot.get_pos(), phot.get_dir());
 
                     if (scat_dist < cell_dist)
                     {
+                        // Undergo a scattering.
                         phot.move(scat_dist);
                         phot.scatter();
                         phot.multiply_weight(phot.get_albedo());
                     }
                     else
                     {
-
+                        // Move to the next grid cell.
+                        phot.move(cell_dist + std::numeric_limits<double>::epsilon());
+                        if (m_grid.is_within(phot.get_pos()))
+                        {
+                            cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
+                        }
                     }
                 }
 
