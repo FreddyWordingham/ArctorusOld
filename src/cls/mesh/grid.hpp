@@ -107,7 +107,7 @@ namespace arc
             assert(x < m_num_cells[X]);
             assert(y < m_num_cells[Y]);
             assert(z < m_num_cells[Z]);
-            assert(m_cell[x][y][z].is_within(t_point);
+            assert(m_cell[x][y][z].is_within(t_point));
 
             return (m_cell[x][y][z]);
         }

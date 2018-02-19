@@ -267,6 +267,12 @@ namespace arc
                 // Generate a new photon.
                 phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
+                const mesh::Cell& cell = m_grid.get_cell(phot.get_pos());
+                if (m_grid.is_within(phot.get_pos()))
+                {
+
+                }
+
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
