@@ -27,6 +27,8 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Maps --
+        glm::vec3 transform_rainbow(const float t_x);
 
 
 
