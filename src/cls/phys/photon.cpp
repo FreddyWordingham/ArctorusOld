@@ -70,6 +70,9 @@ namespace arc
             m_time(0.0)
         {
             assert(m_dir.is_normalised());
+
+            // Record the initial position of the photon.
+            record_path();
         }
 
 
