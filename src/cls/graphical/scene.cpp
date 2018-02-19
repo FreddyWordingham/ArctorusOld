@@ -290,8 +290,7 @@ namespace arc
                 {
                     for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
                     {
-                        LOG("Added cell: " << i << " : " << j << " : " << k << "\n");
-                        m_cell.emplace_back(Prop(Prop::shape::CUBOID, {1.0, 1.0, 1.0, 1.0},
+                        m_cell.emplace_back(Prop(Prop::shape::CUBOID, {1.0, 1.0, 1.0, 0.1},
                                                  {static_cast<float>(t_grid.get_cell(i, j, k)
                                                                            .get_min_bound()[X]) - cell_padding,
                                                   static_cast<float>(t_grid.get_cell(i, j, k)
