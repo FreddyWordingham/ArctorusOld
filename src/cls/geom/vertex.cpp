@@ -59,7 +59,7 @@ namespace arc
             m_pos[Z] = pos[Z];
 
             // Calculate the normal transform.
-            math::Vec<4> norm({{m_norm[X], m_norm[Y], m_norm[Z], 1.0}});
+            math::Vec<4> norm({{m_norm[X], m_norm[Y], m_norm[Z], 0.0}});
             norm *= t_dir_trans_mat;
             m_norm[X] = norm[X];
             m_norm[Y] = norm[Y];

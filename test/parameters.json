@@ -1,17 +1,18 @@
 {
     "seed":     77,
-    "num_phot": 1e4,
+    "num_phot": 3,
     "grid":     {
         "min":   [-4.0, -1.0, -1.0],
         "max":   [4.0, 1.0, 1.0],
-        "cells": [31, 11, 11]
+        "cells": [81, 21, 21]
     },
     "aether":   {
         "mat": "materials/vacuum.mat"
     },
     "entities": {
         "entity_one": {
-            "mesh":  "meshes/small_sphere.obj",
+            "scale": [0.25, 0.25, 0.25],
+            "mesh":  "meshes/cone.obj",
             "mat":   "materials/intralipid_10.mat"
         }
     },
