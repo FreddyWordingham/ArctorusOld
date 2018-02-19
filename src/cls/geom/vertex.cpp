@@ -39,39 +39,5 @@ namespace arc
 
 
 
-        //  == METHODS ==
-        //  -- Transformation --
-        /**
-         *  Transform a vector using a given position and normal transformation matrix.
-         *
-         *  @param  t_pos_trans_mat Position transformation matrix.
-         *  @param  t_dir_trans_mat Normal transformation matrix.
-         *
-         *  @post   m_norm must be normalised.
-         */
-        void Vertex::transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
-        {
-            // Calculate the position transform.
-            math::Vec<4> pos({{m_pos[X], m_pos[Y], m_pos[Z], 1.0}});
-            pos *= t_pos_trans_mat;
-            m_pos[X] = pos[X];
-            m_pos[Y] = pos[Y];
-            m_pos[Z] = pos[Z];
-
-            // Calculate the normal transform.
-            math::Vec<4> norm({{m_norm[X], m_norm[Y], m_norm[Z], 0.0}});
-            norm *= t_dir_trans_mat;
-            m_norm[X] = norm[X];
-            m_norm[Y] = norm[Y];
-            m_norm[Z] = norm[Z];
-
-            // Re-normalise the normal vector.
-            m_norm.normalise();
-
-            assert(m_norm.is_normalised());
-        }
-
-
-
     } // namespace geom
 } // namespace arc
