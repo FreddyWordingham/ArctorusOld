@@ -285,6 +285,7 @@ namespace arc
             m_enery_density += t_energy_density;
         }
 
+
         //  -- Testing --
         /**
          *  Test if a given position is located within the cell.
