@@ -1040,7 +1040,7 @@ namespace arc
         inline Vec<N> normalise(const math::Vec<N>& t_vec)
         {
             // Create a copy of the vec.
-            math::Vec<N> r_vec;
+            math::Vec<N> r_vec = t_vec;
 
             // Normalise the vec.
             r_vec.normalise();
