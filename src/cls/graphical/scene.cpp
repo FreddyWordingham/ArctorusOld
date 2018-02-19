@@ -25,6 +25,7 @@
 #include "gen/math.hpp"
 
 //  -- Utility --
+#include "utl/colourmap.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
