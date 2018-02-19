@@ -13,8 +13,6 @@
 
 
 //  == INCLUDES ==
-//  -- General --
-
 //  -- Utility --
 #include "utl/stream.hpp"
 
