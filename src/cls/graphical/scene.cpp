@@ -370,7 +370,7 @@ namespace arc
             draw_skybox();
             draw_entities();
             draw_lights();
-            draw_cells();
+            draw_grid();
             draw_sun();
             draw_phots();
 
@@ -834,6 +834,27 @@ namespace arc
                 glDrawArrays(GL_LINES, 0, m_grid[i].get_num_vert());
 
                 glBindVertexArray(0);
+            }
+
+            // If cell rendering is toggle on, draw the cells.
+            if (m_toggle_cell_render)
+            {
+                glUseProgram(m_normal_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+                for (size_t i = 0; i < m_cell.size(); ++i)
+                {
+                    glUniform4f(m_ambient_shader.get_col_uni(), m_cell[i].get_col()[R], m_cell[i].get_col()[G],
+                                m_cell[i].get_col()[B], m_cell[i].get_col()[A]);
+
+                    glEnableVertexAttribArray(0);
+
+                    glBindVertexArray(m_cell[i].get_vao());
+
+                    glDrawArrays(GL_LINES, 0, m_cell[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
             }
         }
 
