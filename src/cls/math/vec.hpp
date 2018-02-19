@@ -153,7 +153,7 @@ namespace arc
 
         //  -- Parsing --
         template <size_t N>
-        inline void from_json(const nlohmann::json& j, const Vec<N>& t_vec);
+        inline void from_json(const nlohmann::json& t_json, const Vec<N>& t_vec);
 
 
 
@@ -1057,14 +1057,14 @@ namespace arc
          *
          *  @tparam N   Size of the vec.
          *
-         *  @param  t_json_object   Json object to be parsed from,
-         *  @param  t_vec           Vector to hold the read values.
+         *  @param  t_json  Json object to be parsed from,
+         *  @param  t_vec   Vector to hold the read values.
          */
         template <size_t N>
-        inline void from_json(const nlohmann::json& t_json_object, Vec<N>& t_vec)
+        inline void from_json(const nlohmann::json& t_json, Vec<N>& t_vec)
         {
-            const std::array<double, N> arr = t_json_object.get<std::array<double, N>>();
-            for (size_t i = 0; i < N; ++i)
+            const std::array<double, N> arr = t_json.get<std::array<double, N>>();
+            for (size_t                 i   = 0; i < N; ++i)
             {
                 t_vec[i] = arr[i];
             }
