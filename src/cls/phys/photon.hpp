@@ -49,6 +49,7 @@ namespace arc
             double       m_anisotropy;        //! Current anisotropy value.
 
             //  -- Data --
+            double                                m_time;                                  //! Emission time plus current age of the particle.
             std::vector<graphical::point::Photon> m_path;   //! Path data of the photon.
 
 
