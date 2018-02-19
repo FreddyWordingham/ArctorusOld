@@ -269,7 +269,9 @@ namespace arc
                 {
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
                     const double cell_dist = cell->dist_to_boundary(phot.get_pos(), phot.get_dir());
-                    const double entity_dist = cell->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+
+                    math::Vec<3> tri_norm;
+                    const double entity_dist = cell->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity, tri_norm);
 
                     if ((scat_dist < cell_dist) && (scat_dist < entity_dist))
                     {
@@ -296,11 +298,15 @@ namespace arc
                     }
                     else
                     {
+                        // Photon will now reflect or refract.
+
+
+
                         // Move to the entity.
                         distance_through_cell += (entity_dist * phot.get_weight());
                         phot.move(entity_dist + 1e-10);
 
-                        continue;
+                        break;
                     }
                 }
 

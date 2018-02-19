@@ -150,15 +150,17 @@ namespace arc
          *  @param  t_pos       Position of the point.
          *  @param  t_dir       Direction of the path.
          *  @param  t_entity    Vector of entities within the simulation.
+         *  @param  t_tri_norm  Normal of the triangle being hit.
          *
          *  @pre    t_pos   Must be within this cell.
          *
          *  @post   r_dist must be positive.
+         *  @post   t_tri_norm must be normalised.
          *
          *  @return The distance along the direction vector from the point until an entity triangle is reached.
          */
         double Cell::dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                    const std::vector<equip::Entity>& t_entity) const
+                                    const std::vector<equip::Entity>& t_entity, math::Vec<3>& t_tri_norm) const
         {
             assert(is_within(t_pos));
 
@@ -183,6 +185,8 @@ namespace arc
                     r_dist = tri_dist;
                 }
             }
+
+            assert(t_tri_norm.is_normalised());
 
             return (r_dist);
         }
