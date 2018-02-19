@@ -119,7 +119,7 @@ namespace arc
             {
                 for (size_t j = 0; j < m_num_cells[Y]; ++j)
                 {
-                    for (size_t k = 0; k < m_num_cells[Z]; ++K)
+                    for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
                         const double energy_density = m_cell[i][j][k].get_energy_density();
 
