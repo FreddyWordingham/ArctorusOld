@@ -113,7 +113,7 @@ namespace arc
             assert(is_within(t_pos));
 
             // Calculate distance to each boundary.
-            std::array<double, 6> dist;
+            std::array<double, 6> dist{};
             for (size_t i = 0; i < 3; ++i)
             {
                 dist[i * 2]       = (m_min_bound[i] - t_pos[i]) / t_dir[i];
@@ -121,16 +121,18 @@ namespace arc
             }
 
             // Determine the smallest positive distance.
-            double min_dist = std::numeric_limits<double>::max();
+            double r_dist = std::numeric_limits<double>::max();
             for (unsigned int i = 0; i < 6; ++i)
             {
-                if ((dist[i] < min_dist) && (dist[i] > 0.0))
+                if ((dist[i] < r_dist) && (dist[i] > 0.0))
                 {
-                    min_dist = dist[i];
+                    r_dist = dist[i];
                 }
             }
 
-            return (min_dist);
+            assert(r_dist > 0.0);
+
+            return (r_dist);
         }
 
 
