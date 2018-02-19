@@ -38,6 +38,7 @@ namespace arc
             //  -- Properties --
             math::Vec<3> n_pos; //! Position of the particle.
             math::Vec<3> n_dir; //! Direction of travel.
+            double       n_weight;    //! Statistical weight of the particle.
 
 
             //  == INSTANTIATION ==
