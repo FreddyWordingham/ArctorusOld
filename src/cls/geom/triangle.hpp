@@ -68,7 +68,23 @@ namespace arc
             //  -- Simulation --
             double intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir)
             {
+                // Check if ray is parallel to triangle.
+                const double approach = m_norm * t_dir;
+                if (fabs(approach) < 10E-10)
+                {
+                    return (std::numeric_limits<double>::max());
+                }
 
+                // Calculate intersection distance.
+                const double t_dist = ((m_norm * m_vert[ALPHA].get_pos()) - (m_norm * t_pos)) / approach;
+
+                // Check intersection is in the positive direction.
+                if (t_dist < 0.0)
+                {
+                    return (std::numeric_limits<double>::max());
+                }
+
+                return (t_dist);
             }
         };
 
