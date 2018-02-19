@@ -313,20 +313,25 @@ namespace arc
                 {
                     for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
                     {
-                        m_cell.emplace_back(Prop(Prop::shape::BOX, {utl::colourmap::transform_rainbow(
-                            static_cast<float>(t_grid.get_cell(i, j, k).get_energy_density() / max_energy_density)), 0.1},
-                                                 {static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                           .get_min_bound()[X]) - cell_padding,
-                                                  static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                           .get_min_bound()[Y]) - cell_padding,
-                                                  static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                           .get_min_bound()[Z]) - cell_padding},
-                                                 {static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                           .get_max_bound()[X]) + cell_padding,
-                                                  static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                           .get_max_bound()[Y]) + cell_padding,
-                                                  static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                           .get_max_bound()[Z]) + cell_padding}));
+                        const double energy_density = t_grid.get_cell(i, j, k).get_energy_density();
+
+                        if (energy_density > 0.0)
+                        {
+                            m_cell.emplace_back(Prop(Prop::shape::BOX, {utl::colourmap::transform_rainbow(
+                                static_cast<float>(energy_density / max_energy_density)), 0.1},
+                                                     {static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_min_bound()[X]) - cell_padding,
+                                                      static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_min_bound()[Y]) - cell_padding,
+                                                      static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_min_bound()[Z]) - cell_padding},
+                                                     {static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_max_bound()[X]) + cell_padding,
+                                                      static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_max_bound()[Y]) + cell_padding,
+                                                      static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_max_bound()[Z]) + cell_padding}));
+                        }
                     }
                 }
             }
