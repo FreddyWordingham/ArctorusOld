@@ -14,7 +14,6 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/math.hpp"
 
 
 
@@ -88,28 +87,6 @@ namespace arc
             r_vec[1].normalise();
 
             return (r_vec);
-        }
-
-
-        //  -- Transformation --
-        /**
-         *  Transform a triangle's vertices using a given position and normal transformation matrix.
-         *
-         *  @param  t_pos_trans_mat Position transformation matrix.
-         *  @param  t_dir_trans_mat Normal transformation matrix.
-         */
-        void Triangle::transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat)
-        {
-            // Transform the vertices.
-            m_vert[ALPHA].transform(t_pos_trans_mat, t_dir_trans_mat);
-            m_vert[BETA].transform(t_pos_trans_mat, t_dir_trans_mat);
-            m_vert[GAMMA].transform(t_pos_trans_mat, t_dir_trans_mat);
-
-            // Recalculate the triangle's area.
-            m_area = math::area({{m_vert[ALPHA].get_pos(), m_vert[BETA].get_pos(), m_vert[GAMMA].get_pos()}});
-
-            // Recalculate the triangle's normal.
-            m_norm = init_norm();
         }
 
 
