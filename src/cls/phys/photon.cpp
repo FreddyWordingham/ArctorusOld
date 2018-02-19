@@ -162,6 +162,20 @@ namespace arc
             assert(m_dir.is_normalised());
         }
 
+        /**
+         *  Multiply the photon's current statistical weight by a given value.
+         *
+         *  @param  t_mult  Multiplier.
+         *
+         *  @pre    t_mult must be positive.
+         */
+        void Photon::multiply_weight(const double t_mult)
+        {
+            assert(t_mult > 0.0);
+
+            m_weight *= t_mult;
+        }
+
 
         //  -- Data --
         /**

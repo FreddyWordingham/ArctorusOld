@@ -75,6 +75,7 @@ namespace arc
             //  -- Setters --
             void move(double t_dist);
             void rotate(double t_dec, double t_azi);
+            void multiply_weight(double t_mult);
 
           private:
             //  -- Data --
