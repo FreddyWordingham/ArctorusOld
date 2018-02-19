@@ -12,11 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- General --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -57,7 +52,8 @@ namespace arc
         math::Vec<3> Triangle::init_norm() const
         {
             // Compute the cross-product of two edges to find the triangle's normal.
-            math::Vec<3> r_norm = (m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^ (m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos());
+            math::Vec<3> r_norm = (m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^(m_vert[GAMMA].get_pos() - m_vert[ALPHA]
+                .get_pos());
 
             // Normalise the normal.
             r_norm.normalise();
@@ -73,14 +69,14 @@ namespace arc
         //  -- Getters --
         /**
          *  Generate a random position on the triangle's surface and determine the associated normal.
+         *  Position and normal are stored together in an array.
+         *
+         *  @post   r_norm must be normalised.
          *
          *  @return A random position and associated normal on the triangle's surface.
          */
-        std::array<math::Vec<3>, 2> Triangle::get_random_pos_and_norm() const
+        std::pair<math::Vec<3>, math::Vec<3>> Triangle::gen_random_pos_and_norm() const
         {
-            // Create return array.
-            std::array<math::Vec<3>, 2> r_vec;
-
             // Generate a pair of random barycentric coordinates.
             double a = rng::random();
             double b = rng::random();
@@ -92,14 +88,15 @@ namespace arc
                 b = 1.0 - b;
             }
 
-            // Generate the world-space cartesian coordinates from the barycentric coordinates.
-            r_vec[0] = m_vert[GAMMA].get_pos() + ((m_vert[ALPHA].get_pos() - m_vert[GAMMA].get_pos()) * a) + ((m_vert[BETA]
-                .get_pos() - m_vert[GAMMA].get_pos()) * b);
-            r_vec[1] = (m_vert[ALPHA].get_norm() * a) + (m_vert[BETA].get_norm() * b) + (m_vert[GAMMA]
-                .get_norm() * (1.0 - a - b));
-            r_vec[1].normalise();
+            // Calculate the world-space cartesian coordinates from the barycentric coordinates.
+            const math::Vec<3> r_pos = m_vert[GAMMA].get_pos() + ((m_vert[ALPHA].get_pos() - m_vert[GAMMA]
+                .get_pos()) * a) + ((m_vert[BETA].get_pos() - m_vert[GAMMA].get_pos()) * b);
 
-            return (r_vec);
+            // Calculate the corresponding normal.
+            const math::Vec<3> r_norm = math::normalise(
+                (m_vert[ALPHA].get_norm() * a) + (m_vert[BETA].get_norm() * b) + (m_vert[GAMMA].get_norm() * (1.0 - a - b)));
+
+            return (std::make_pair<math::Vec<3>, math::Vec<3>>(r_pos, r_norm));
         }
 
 

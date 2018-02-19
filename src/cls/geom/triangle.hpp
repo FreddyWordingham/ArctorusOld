@@ -14,6 +14,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <utility>
+
 //  -- General --
 #include "gen/math.hpp"
 #include "gen/rng.hpp"
@@ -61,7 +64,7 @@ namespace arc
             //  -- Getters --
             double get_area() const { return (m_area); }
             inline const Vertex& get_vert(size_t t_index) const;
-            std::array<math::Vec<3>, 2> get_random_pos_and_norm() const;
+            std::pair<math::Vec<3>, math::Vec<3>> gen_random_pos_and_norm() const;
         };
 
 
