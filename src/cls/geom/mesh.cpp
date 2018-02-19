@@ -53,14 +53,19 @@ namespace arc
             assert(t_scale[Z] != 0.0);
         }
 
-
+        /**
+         *  Construct a mesh from a given serialised string and transformation matrices.
+         *
+         *  @param  t_serial    Mesh as a serialised string.
+         *  @param  t_pos_trans Position transformation matrix.
+         *  @param  t_dir_trans Direction transformation matrix.
+         */
         Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans) :
             m_num_vert(init_num(t_serial, POS_KEYWORD)),
             m_num_norm(init_num(t_serial, NORM_KEYWORD)),
             m_num_tri(init_num(t_serial, FACE_KEYWORD)),
             m_tri(init_tri(t_serial, t_pos_trans, t_dir_trans))
         {
-
         }
 
 
