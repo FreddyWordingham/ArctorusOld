@@ -71,8 +71,8 @@ namespace arc
             std::vector<std::vector<std::vector<Cell>>> r_cell;
 
             // Create the cells.
-            const double total_cells = m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z];
-            double constructed_cells = 0;
+            const double total_cells       = m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z];
+            double       constructed_cells = 0;
 
             r_cell.reserve(m_num_cells[X]);
             for (size_t i = 0; i < m_num_cells[X]; ++i)

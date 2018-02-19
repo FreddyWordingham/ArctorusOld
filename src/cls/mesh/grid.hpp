@@ -71,7 +71,26 @@ namespace arc
             size_t get_num_cells() const { return (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]); }
             size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
             const Cell& get_cell(const size_t t_i, const size_t t_j, const size_t t_k) const { return (m_cell[t_i][t_j][t_k]); }
+
+            //  -- Testing --
+            inline bool is_within(const math::Vec<3>& t_point) const;
         };
+
+
+
+        //  == METHODS ==
+        //  -- Testing --
+        /**
+         *  Test if a given point is located within the grid.
+         *
+         *  @param  t_point Point to be tested.
+         *
+         *  @return True if the point is located within the grid.
+         */
+        bool Grid::is_within(const math::Vec<3>& t_point) const
+        {
+            return (t_point[X] >= m_min_bound[X]) && (t_point[X] <= m_max_bound[X]) && (t_point[Y] >= m_min_bound[Y]) && (t_point[Y] <= m_max_bound[Y]) && (t_point[Z] >= m_min_bound[Z]) && (t_point[Z] <= m_max_bound[Z]);
+        }
 
 
 
