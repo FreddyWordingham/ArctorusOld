@@ -271,7 +271,7 @@ namespace arc
                 std::unique_ptr<mesh::Cell> cell = nullptr;
                 if (m_grid.is_within(phot.get_pos()))
                 {
-                    std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
+                    cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
                 }
 
                 // Loop until the photon exits the grid.
