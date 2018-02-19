@@ -646,6 +646,19 @@ namespace arc
                 }
             }
 
+            // Photon path rendering.
+            static int old_state_toggle_photon_render = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::TOGGLE_PHOTON_RENDER) != old_state_toggle_photon_render)
+            {
+                old_state_toggle_photon_render = glfwGetKey(m_window, control::TOGGLE_PHOTON_RENDER);
+
+                if (old_state_toggle_photon_render == GLFW_PRESS)
+                {
+                    m_toggle_photon_render = !m_toggle_photon_render;
+                }
+            }
+
             // Grid rendering.
             static int old_state_toggle_cell_render = GLFW_RELEASE;
 
