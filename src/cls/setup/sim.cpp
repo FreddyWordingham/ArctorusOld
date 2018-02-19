@@ -274,15 +274,16 @@ namespace arc
                     {
                         // Undergo a scattering.
                         phot.move(scat_dist);
-                        distance_through_cell += scat_dist;
+                        distance_through_cell += (scat_dist * phot.get_weight());
 
-                        phot.scatter();
+//                        phot.scatter();
 //                        phot.multiply_weight(phot.get_albedo());
+                        phot.rotate(0.1, 1.0);
                     }
                     else
                     {
                         // Move to the next grid cell.
-                        distance_through_cell += cell_dist;
+                        distance_through_cell += (cell_dist * phot.get_weight());
                         m_grid.get_cell(phot.get_pos()).add_energy_density(distance_through_cell);
                         phot.move(cell_dist + 1e-10);
 
