@@ -70,7 +70,7 @@ namespace arc
             const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
             size_t get_num_cells() const { return (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]); }
             size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
-            const Cell& get_cell(const size_t t_i, const size_t t_j, const size_t t_k) const { return (m_cell[t_i][t_j][t_k]); }
+            const Cell& get_cell(const math::Vec<3>& t_point) const;
 
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_point) const;
@@ -79,6 +79,30 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Get a reference to the cell containing the given point.
+         *
+         *  @param  t_point Point which grid cell must contain.
+         *
+         *  @pre    t_point must fall within the bounds of the grid.
+         *  @post   t_point must fall within the determined cell.
+         *
+         *  @return A reference to the cell containing the given point.
+         */
+        const Cell& Grid::get_cell(const math::Vec<3>& t_point) const
+        {
+            assert(is_within(t_point));
+
+
+
+
+            // assert(m_cell[x][y][z].is_within(t_point);
+
+            return (m_cell[x][y][z]);
+        }
+
+
         //  -- Testing --
         /**
          *  Test if a given point is located within the grid.
