@@ -40,7 +40,7 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Vertices --
-            std::array<Vertex, 3> m_vert;   //! Vertices of the triangle.
+            const std::array<Vertex, 3> m_vert; //! Vertices of the triangle.
 
             //  -- Properties --
             double       m_area;    //! Area of the triangle.
