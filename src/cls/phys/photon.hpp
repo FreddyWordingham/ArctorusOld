@@ -17,6 +17,7 @@
 //  -- Classes --
 #include "cls/graphical/point/photon.hpp"
 #include "cls/math/vec.hpp"
+#include "material.hpp"
 
 
 
@@ -55,6 +56,8 @@ namespace arc
 
             //  == INSTANTIATION ==
           public:
+            //  -- Constructors --
+            Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_wavelength, const phys::Material& t_mat);
 
           private:
             //  -- Constructors --

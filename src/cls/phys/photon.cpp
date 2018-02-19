@@ -35,8 +35,8 @@ namespace arc
          *
          *  @post   m_dir must be normalised.
          */
-        Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, double t_wavelength, double t_ref_index,
-                       double t_albedo, double t_interaction, double t_anisotropy) :
+        Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_wavelength,
+                       const double t_ref_index, const double t_albedo, const double t_interaction, const double t_anisotropy) :
             m_pos(t_pos),
             m_dir(t_dir),
             m_weight(1.0),
