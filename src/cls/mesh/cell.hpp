@@ -74,6 +74,9 @@ namespace arc
 
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_point) const;
+
+            //  -- Simulation --
+            inline double dist_to_boundary(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
         };
 
 
@@ -89,6 +92,45 @@ namespace arc
         bool Cell::is_within(const math::Vec<3>& t_point) const
         {
             return (t_point[X] >= m_min_bound[X]) && (t_point[X] <= m_max_bound[X]) && (t_point[Y] >= m_min_bound[Y]) && (t_point[Y] <= m_max_bound[Y]) && (t_point[Z] >= m_min_bound[Z]) && (t_point[Z] <= m_max_bound[Z]);
+        }
+
+
+        //  -- Simulation --
+        /**
+         *  Determine the distance to the cell boundary from a given point along a given vector.
+         *
+         *  @param  t_pos   Position of the point.
+         *  @param  t_dir   Direction of the path.
+         *
+         *  @pre    t_pos   Must be within this cell.
+         *
+         *  @post   r_dist must be positive.
+         *
+         *  @return The distance along the direction vector from the point until the boundary of the cell is reached.
+         */
+        double Cell::dist_to_boundary(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
+        {
+            assert(is_within(t_pos));
+
+            // Calculate distance to each boundary.
+            std::array<double, 6> dist;
+            for (size_t i = 0; i < 3; ++i)
+            {
+                dist[i * 2]       = (m_min_bound[i] - t_pos[i]) / t_dir[i];
+                dist[(i * 2) + 1] = (m_max_bound[i] - t_pos[i]) / t_dir[i];
+            }
+
+            // Determine the smallest positive distance.
+            double min_dist = std::numeric_limits<double>::max();
+            for (unsigned int i = 0; i < 6; ++i)
+            {
+                if ((dist[i] < min_dist) && (dist[i] > 0.0))
+                {
+                    min_dist = dist[i];
+                }
+            }
+
+            return (min_dist);
         }
 
 

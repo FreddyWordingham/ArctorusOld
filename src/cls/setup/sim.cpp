@@ -276,7 +276,9 @@ namespace arc
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
-                    phot.move(-std::log(rng::random()) / phot.get_interaction());
+                    const double s = -std::log(rng::random()) / phot.get_interaction();
+
+                    phot.move(s);
                     phot.scatter();
                 }
 
