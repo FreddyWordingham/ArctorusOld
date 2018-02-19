@@ -81,23 +81,8 @@ namespace arc
             void add_energy_density(const double t_energy_density) { m_energy_density += t_energy_density; }
 
             //  -- Testing --
-            inline bool is_within(const math::Vec<3>& t_pos) const;
+            bool is_within(const math::Vec<3>& t_pos) const;
         };
-
-
-
-        //  -- Testing --
-        /**
-         *  Test if a given position is located within the cell.
-         *
-         *  @param  t_pos   Position to be tested.
-         *
-         *  @return True if the position is located within the cell.
-         */
-        bool Cell::is_within(const math::Vec<3>& t_pos) const
-        {
-            return (t_pos[X] >= m_min_bound[X]) && (t_pos[X] <= m_max_bound[X]) && (t_pos[Y] >= m_min_bound[Y]) && (t_pos[Y] <= m_max_bound[Y]) && (t_pos[Z] >= m_min_bound[Z]) && (t_pos[Z] <= m_max_bound[Z]);
-        }
 
 
 
