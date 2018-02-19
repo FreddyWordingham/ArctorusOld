@@ -278,6 +278,8 @@ namespace arc
         {
             for (unsigned long int i = 0; i < m_num_phot; ++i)
             {
+                TEMP("Photon Loop", 100.0 * i / m_num_phot);
+
                 // Generate a new photon.
                 phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
