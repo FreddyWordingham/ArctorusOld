@@ -61,7 +61,7 @@ namespace arc
             //  -- Setters --
             void multiply_weight(const double t_mult) { n_weight *= t_mult; }
 
-          protected:
+          public:
             //  -- Simulation --
             void rotate(double t_dec, double t_azi);
         };
