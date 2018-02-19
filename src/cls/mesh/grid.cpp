@@ -12,11 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- System --
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {
@@ -140,9 +135,8 @@ namespace arc
 
             return (r_max_energy_density);
         }
-    }
 
 
 
-} // namespace mesh
+    } // namespace mesh
 } // namespace arc
