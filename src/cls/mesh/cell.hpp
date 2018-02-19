@@ -71,7 +71,25 @@ namespace arc
             const math::Vec<3>& get_min_bound() const { return (m_min_bound); }
             const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
             bool empty() const { return (m_empty); }
+
+            //  -- Testing --
+            inline bool is_within(const math::Vec<3>& t_point) const;
         };
+
+
+
+        //  -- Testing --
+        /**
+         *  Test if a given point is located within the cell.
+         *
+         *  @param  t_point Point to be tested.
+         *
+         *  @return True if the point is located within the cell.
+         */
+        bool Cell::is_within(const math::Vec<3>& t_point) const
+        {
+            return (t_point[X] >= m_min_bound[X]) && (t_point[X] <= m_max_bound[X]) && (t_point[Y] >= m_min_bound[Y]) && (t_point[Y] <= m_max_bound[Y]) && (t_point[Z] >= m_min_bound[Z]) && (t_point[Z] <= m_max_bound[Z]);
+        }
 
 
 
