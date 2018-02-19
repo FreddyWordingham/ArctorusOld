@@ -270,6 +270,21 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Setters --
+        /**
+         *  Add a given value to the total energy density of the cell.
+         *
+         *  @param  t_energy_density    Energy density to be added to the cell.
+         *
+         *  @pre    t_energy_density must be positive.
+         */
+        void Cell::add_energy_density(const double t_energy_density)
+        {
+            assert(t_energy_density > 0.0);
+
+            m_enery_density += t_energy_density;
+        }
+
         //  -- Testing --
         /**
          *  Test if a given position is located within the cell.
