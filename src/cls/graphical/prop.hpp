@@ -47,6 +47,7 @@ namespace arc
             enum class shape
             {
                 CUBE,   //! Simple cube.
+                CUBOID, //! Simple cuboid.
                 SKYBOX, //! Skybox.
                 SUN,    //! Sun illuminator.
                 BOX     //! Box.
@@ -79,6 +80,7 @@ namespace arc
             std::vector<Vertex> init_vert(shape t_shape, float t_size) const;
             std::vector<Vertex> init_vert(shape t_shape, const glm::vec3& t_min, const glm::vec3& t_max) const;
             std::vector<Vertex> init_vert_cube(float t_scale) const;
+            std::vector<Vertex> init_vert_cuboid(const glm::vec3& t_min, const glm::vec3& t_max) const;
             std::vector<Vertex> init_vert_skybox(float t_scale) const;
             std::vector<Vertex> init_vert_sun(float t_scale) const;
             std::vector<Vertex> init_vert_box(const glm::vec3& t_min, const glm::vec3& t_max) const;
