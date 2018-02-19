@@ -75,6 +75,18 @@ namespace arc
 
         //  == METHODS ==
         //  -- Setters --
+        /**
+         *  Rotate the particle by a given declination and then a given azimuthal rotation.
+         *
+         *  @param  t_dec   Declination angle away from current direction vector.
+         *  @param  t_azi   Azimuthal rotation around current direction vector.
+         *
+         *  @pre    n_dir must be normalised.
+         *  @pre    t_dec must be between zero and pi.
+         *  @pre    t_azi must be between zero and two pi.
+         *
+         *  @post   n_dir must be normalised.
+         */
         void Photon::rotate(double t_dec, double t_azi)
         {
             assert(m_dir.is_normalised());
