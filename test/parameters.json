@@ -4,7 +4,7 @@
     "grid":     {
         "min":   [-4.0, -1.0, -1.0],
         "max":   [4.0, 1.0, 1.0],
-        "cells": [80, 10, 10]
+        "cells": [81, 11, 11]
     },
     "aether":   {
         "mat": "materials/intralipid_10.mat"
