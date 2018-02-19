@@ -272,9 +272,13 @@ namespace arc
          */
         void Scene::add_grid(const mesh::Grid& t_grid)
         {
+            // Add main grid bounds.
+            const float grid_padding = 0.001f;
             m_grid.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0},
-                                     {t_grid.get_min_bound()[X], t_grid.get_min_bound()[Y], t_grid.get_min_bound()[Z]},
-                                     {t_grid.get_max_bound()[X], t_grid.get_max_bound()[Y], t_grid.get_max_bound()[Z]}));
+                                     {t_grid.get_min_bound()[X] - grid_padding, t_grid.get_min_bound()[Y] - grid_padding,
+                                      t_grid.get_min_bound()[Z] - grid_padding},
+                                     {t_grid.get_max_bound()[X] + grid_padding, t_grid.get_max_bound()[Y] + grid_padding,
+                                      t_grid.get_max_bound()[Z] + grid_padding}));
         }
 
         /**
