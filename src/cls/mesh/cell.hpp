@@ -116,8 +116,8 @@ namespace arc
             std::array<double, 6> dist{};
             for (size_t i = 0; i < 3; ++i)
             {
-                dist[i * 2]       = (m_min_bound[i] - t_pos[i]) / t_dir[i];
-                dist[(i * 2) + 1] = (m_max_bound[i] - t_pos[i]) / t_dir[i];
+                dist[i * 2]       = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max() : (m_min_bound[i] - t_pos[i]) / t_dir[i];
+                dist[(i * 2) + 1] = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max() : (m_max_bound[i] - t_pos[i]) / t_dir[i];
             }
 
             // Determine the smallest positive distance.
