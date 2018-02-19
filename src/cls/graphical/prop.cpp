@@ -209,6 +209,8 @@ namespace arc
             {
                 case shape::BOX:
                     return (init_vert_box(t_min, t_max));
+                case shape::CUBOID:
+                    return (init_vert_cuboid(t_min, t_max));
             }
         }
 
