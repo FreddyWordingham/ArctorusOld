@@ -81,17 +81,6 @@ namespace arc
         };
 
 
-        //  -- Data --
-        /**
-         *  Record the current properties of the photon to the path data.
-         */
-        void Photon::record_path()
-        {
-            m_path.emplace_back(graphical::point::Photon({m_pos[X], m_pos[Y], m_pos[Z]}, static_cast<float>(m_wavelength),
-                                                         static_cast<float>(m_weight), static_cast<float>(m_time)));
-        }
-
-
 
     } // namespace phys
 } // namespace arc
