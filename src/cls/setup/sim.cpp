@@ -273,7 +273,7 @@ namespace arc
                 {
                     cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
                 }
-LOG("hi");
+
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
@@ -285,21 +285,17 @@ LOG("hi");
                         // Undergo a scattering.
                         phot.move(scat_dist);
                         phot.scatter();
-                        phot.multiply_weight(phot.get_albedo());
-                        LOG("scattering...");
+//                        phot.multiply_weight(phot.get_albedo());
                     }
                     else
                     {
                         // Move to the next grid cell.
-                        phot.move(cell_dist + std::numeric_limits<double>::epsilon());
+                        phot.move(cell_dist + 1e-3);
                         if (m_grid.is_within(phot.get_pos()))
                         {
                             cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
                         }
-                        LOG("moving...");
                     }
-
-                    LOG("looping...");
                 }
 
                 // Add the photon path.
