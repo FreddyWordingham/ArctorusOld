@@ -310,7 +310,9 @@ namespace arc
                         phot.move(entity_dist - 1e-10);
 
                         const double incident_angle = acos(tri_norm * phot.get_dir());
-                        phot.set_dir(math::Vec<3>({{0.0, 0.0, 1.0}}));
+                        math::Vec<3> out_dir = phot.get_dir() - (tri_norm * (2.0 * (phot.get_dir() * tri_norm)));
+                        out_dir.normalise();
+                        phot.set_dir(out_dir);
                     }
                 }
 
