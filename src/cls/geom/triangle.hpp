@@ -66,7 +66,7 @@ namespace arc
             void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat);
 
             //  -- Simulation --
-            double intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir)
+            double intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
             {
                 // Check if ray is parallel to triangle.
                 const double approach = m_norm * t_dir;
