@@ -82,6 +82,8 @@ namespace arc
 
             //  -- Simulation --
             inline double dist_to_boundary(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
+            inline double dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                         const std::vector<equip::Entity>& t_entity) const;
         };
 
 
@@ -138,6 +140,49 @@ namespace arc
             }
 
             assert(r_dist > 0.0);
+
+            return (r_dist);
+        }
+
+        /**
+         *  Determine the distance to the nearest entity triangle from a given point along a given vector.
+         *
+         *  @param  t_pos       Position of the point.
+         *  @param  t_dir       Direction of the path.
+         *  @param  t_entity    Vector of entities within the simulation.
+         *
+         *  @pre    t_pos   Must be within this cell.
+         *
+         *  @post   r_dist must be positive.
+         *
+         *  @return The distance along the direction vector from the point until an entity triangle is reached.
+         */
+        double Cell::dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                    const std::vector<equip::Entity>& t_entity) const
+        {
+            assert(is_within(t_pos));
+
+            // If the cell contains no triangles, return a large value.
+            if (m_empty)
+            {
+                return (std::numeric_limits<double>::max());
+            }
+
+            // Calculate the closest intersection point if one exists.
+            double      r_dist = std::numeric_limits<double>::max();
+            for (size_t i      = 0; i < m_entity_list.size(); ++i)
+            {
+                // Determine the distance to the triangle.
+                const geom::Triangle& tri = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
+
+                const double tri_dist = tri.intersection(t_pos, t_dir);
+
+                // If this intersection is closer than the current, make this the closest distance.
+                if (tri_dist < r_dist)
+                {
+                    r_dist = tri_dist;
+                }
+            }
 
             return (r_dist);
         }

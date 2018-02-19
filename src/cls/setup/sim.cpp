@@ -269,6 +269,7 @@ namespace arc
                 {
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
                     const double cell_dist = cell->dist_to_boundary(phot.get_pos(), phot.get_dir());
+                    const double entity_dist = cell->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
 
                     if (scat_dist < cell_dist)
                     {
