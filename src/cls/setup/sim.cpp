@@ -276,9 +276,8 @@ namespace arc
                         phot.move(scat_dist);
                         distance_through_cell += (scat_dist * phot.get_weight());
 
-//                        phot.scatter();
+                        phot.scatter();
                         phot.multiply_weight(phot.get_albedo());
-                        phot.rotate(0.1, 1.0);
                     }
                     else
                     {
