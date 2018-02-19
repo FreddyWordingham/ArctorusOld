@@ -65,50 +65,6 @@ namespace arc
 
             //  -- Transformation --
             void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat);
-
-            //  -- Simulation --
-            double intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, math::Vec<3>& t_tri_norm) const
-            {
-                // Check if ray is parallel to triangle.
-                const double approach = m_norm * t_dir;
-                if (fabs(approach) < 10E-10)
-                {
-                    return (std::numeric_limits<double>::max());
-                }
-
-                // Calculate intersection distance.
-                const double t_dist = ((m_norm * m_vert[ALPHA].get_pos()) - (m_norm * t_pos)) / approach;
-
-                // Check intersection is in the positive direction.
-                if (t_dist < 0.0)
-                {
-                    return (std::numeric_limits<double>::max());
-                }
-
-                // Calculate intersection point.
-                const math::Vec<3> q = t_pos + (t_dir * t_dist);
-
-                // Check that the point falls within the triangle.
-                if ((((m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^ (q - m_vert[ALPHA].get_pos())) * m_norm) < 0.0)
-                {
-                    return (std::numeric_limits<double>::max());
-                }
-                if ((((m_vert[GAMMA].get_pos() - m_vert[BETA].get_pos()) ^ (q - m_vert[BETA].get_pos())) * m_norm) < 0.0)
-                {
-                    return (std::numeric_limits<double>::max());
-                }
-                if ((((m_vert[ALPHA].get_pos() - m_vert[GAMMA].get_pos()) ^ (q - m_vert[GAMMA].get_pos())) * m_norm) < 0.0)
-                {
-                    return (std::numeric_limits<double>::max());
-                }
-
-                t_tri_norm = (m_vert[ALPHA].get_norm() * (math::area(
-                    {{q, m_vert[BETA].get_pos(), m_vert[GAMMA].get_pos()}}) / m_area)) + (m_vert[BETA].get_norm() * (math::area(
-                    {{q, m_vert[GAMMA].get_pos(), m_vert[ALPHA].get_pos()}}) / m_area)) + (m_vert[GAMMA]
-                    .get_norm() * (math::area({{q, m_vert[ALPHA].get_pos(), m_vert[BETA].get_pos()}}) / m_area));
-
-                return (t_dist);
-            }
         };
 
 
