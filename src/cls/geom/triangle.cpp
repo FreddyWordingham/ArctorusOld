@@ -36,7 +36,7 @@ namespace arc
         Triangle::Triangle(const std::array<Vertex, 3>& t_vert) :
             m_vert(t_vert),
             m_area(math::area({{m_vert[ALPHA].get_pos(), m_vert[BETA].get_pos(), m_vert[GAMMA].get_pos()}})),
-            m_norm(init_normal())
+            m_norm(init_norm())
         {
         }
 
@@ -47,7 +47,7 @@ namespace arc
          *
          *  @return The normal vector of the triangle.
          */
-        math::Vec<3> Triangle::init_normal() const
+        math::Vec<3> Triangle::init_norm() const
         {
             math::Vec<3> r_norm = (m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^ (m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos());
             r_norm.normalise();

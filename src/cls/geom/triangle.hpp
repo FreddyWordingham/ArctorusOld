@@ -52,7 +52,7 @@ namespace arc
             explicit Triangle(const std::array<Vertex, 3>& t_vert);
 
             //  -- Initialisation --
-            math::Vec<3> init_normal() const;
+            math::Vec<3> init_norm() const;
 
 
             //  == METHODS ==
