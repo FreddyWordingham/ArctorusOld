@@ -271,7 +271,7 @@ namespace arc
                     const double cell_dist = cell->dist_to_boundary(phot.get_pos(), phot.get_dir());
                     const double entity_dist = cell->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
 
-                    if (scat_dist < cell_dist)
+                    if ((scat_dist < cell_dist) && (scat_dist < entity_dist))
                     {
                         // Undergo a scattering.
                         phot.move(scat_dist);
@@ -280,7 +280,7 @@ namespace arc
                         phot.scatter();
                         phot.multiply_weight(phot.get_albedo());
                     }
-                    else
+                    else if (cell_dist < entity_dist)
                     {
                         // Move to the next grid cell.
                         distance_through_cell += (cell_dist * phot.get_weight());
@@ -293,6 +293,14 @@ namespace arc
                         }
 
                         distance_through_cell = 0.0;
+                    }
+                    else
+                    {
+                        // Move to the entity.
+                        distance_through_cell += (entity_dist * phot.get_weight());
+                        phot.move(entity_dist + 1e-10);
+
+                        continue;
                     }
                 }
 
