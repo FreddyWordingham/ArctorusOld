@@ -82,11 +82,6 @@ namespace arc
 
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_pos) const;
-
-            //  -- Simulation --
-            inline double dist_to_boundary(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
-            inline double dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                         const std::vector<equip::Entity>& t_entity, math::Vec<3>& t_tri_norm) const;
         };
 
 
@@ -102,96 +97,6 @@ namespace arc
         bool Cell::is_within(const math::Vec<3>& t_pos) const
         {
             return (t_pos[X] >= m_min_bound[X]) && (t_pos[X] <= m_max_bound[X]) && (t_pos[Y] >= m_min_bound[Y]) && (t_pos[Y] <= m_max_bound[Y]) && (t_pos[Z] >= m_min_bound[Z]) && (t_pos[Z] <= m_max_bound[Z]);
-        }
-
-
-        //  -- Simulation --
-        /**
-         *  Determine the distance to the cell boundary from a given point along a given vector.
-         *
-         *  @param  t_pos   Position of the point.
-         *  @param  t_dir   Direction of the path.
-         *
-         *  @pre    t_pos   Must be within this cell.
-         *
-         *  @post   r_dist must be positive.
-         *
-         *  @return The distance along the direction vector from the point until the boundary of the cell is reached.
-         */
-        double Cell::dist_to_boundary(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
-        {
-            assert(is_within(t_pos));
-
-            // Calculate distance to each boundary.
-            std::array<double, 6> dist{};
-            for (size_t           i = 0; i < 3; ++i)
-            {
-                dist[i * 2]       = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max()
-                                                      : (m_min_bound[i] - t_pos[i]) / t_dir[i];
-                dist[(i * 2) + 1] = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max()
-                                                      : (m_max_bound[i] - t_pos[i]) / t_dir[i];
-            }
-
-            // Determine the smallest positive distance.
-            double            r_dist = std::numeric_limits<double>::max();
-            for (unsigned int i      = 0; i < 6; ++i)
-            {
-                if ((dist[i] < r_dist) && (dist[i] > 0.0))
-                {
-                    r_dist = dist[i];
-                }
-            }
-
-            assert(r_dist > 0.0);
-
-            return (r_dist);
-        }
-
-        /**
-         *  Determine the distance to the nearest entity triangle from a given point along a given vector.
-         *
-         *  @param  t_pos       Position of the point.
-         *  @param  t_dir       Direction of the path.
-         *  @param  t_entity    Vector of entities within the simulation.
-         *  @param  t_tri_norm  Normal of the triangle being hit.
-         *
-         *  @pre    t_pos   Must be within this cell.
-         *
-         *  @post   r_dist must be positive.
-         *  @post   t_tri_norm must be normalised.
-         *
-         *  @return The distance along the direction vector from the point until an entity triangle is reached.
-         */
-        double Cell::dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                    const std::vector<equip::Entity>& t_entity, math::Vec<3>& t_tri_norm) const
-        {
-            assert(is_within(t_pos));
-
-            // If the cell contains no triangles, return a large value.
-            if (m_empty)
-            {
-                return (std::numeric_limits<double>::max());
-            }
-
-            // Calculate the closest intersection point if one exists.
-            double      r_dist = std::numeric_limits<double>::max();
-            for (size_t i      = 0; i < m_entity_list.size(); ++i)
-            {
-                // Determine the distance to the triangle.
-                const geom::Triangle& tri = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
-
-                const double tri_dist = tri.intersection(t_pos, t_dir, t_tri_norm);
-
-                // If this intersection is closer than the current, make this the closest distance.
-                if (tri_dist < r_dist)
-                {
-                    r_dist = tri_dist;
-                }
-            }
-
-//            assert(t_tri_norm.is_normalised());
-
-            return (r_dist);
         }
 
 
