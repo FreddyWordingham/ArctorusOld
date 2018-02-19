@@ -96,6 +96,8 @@ namespace arc
             const math::Vec<3> r_norm = math::normalise(
                 (m_vert[ALPHA].get_norm() * a) + (m_vert[BETA].get_norm() * b) + (m_vert[GAMMA].get_norm() * (1.0 - a - b)));
 
+            assert(r_norm.is_normalised());
+
             return (std::make_pair(r_pos, r_norm));
         }
 
