@@ -267,7 +267,8 @@ namespace arc
                 // Generate a new photon.
                 phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
-                for (unsigned long int j = 0; j < 100; ++j)
+                // Loop until the photon exits the grid.
+                while (m_grid.is_within(phot.get_pos()))
                 {
                     phot.move(-std::log(rng::random()) / phot.get_interaction());
                     phot.scatter();
