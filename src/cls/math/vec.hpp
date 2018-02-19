@@ -147,6 +147,10 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Mathematical --
+        template <size_t N>
+        inline Vec<N> normalise(const math::Vec<3>& t_vec);
+
         //  -- Parsing --
         template <size_t N>
         inline void from_json(const nlohmann::json& j, const Vec<N>& t_vec);
@@ -1020,6 +1024,33 @@ namespace arc
 
 
         //  == FUNCTIONS ==
+        //  -- Mathematical --
+        /**
+         *  Find the normalisation of a given vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  t_vec   Vec to find the normalisation of.
+         *
+         *  @post   r_vec must be normalised.
+         *
+         *  @return The normalisation of the given vec.
+         */
+        template <size_t N>
+        inline Vec<N> normalise(const math::Vec<3>& t_vec)
+        {
+            // Create a copy of the vec.
+            math::Vec<N> r_vec;
+
+            // Normalise the vec.
+            r_vec.normalise();
+
+            assert(r_vec.is_normalised());
+
+            return (r_vec);
+        }
+
+
         //  -- Parsing --
         /**
          *  Create a Vec from a json string.
