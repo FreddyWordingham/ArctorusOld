@@ -42,7 +42,8 @@ namespace arc
             std::array<Vertex, 3> m_vert;   //! Vertices of the triangle.
 
             //  -- Properties --
-            double m_area;  //! Area of the triangle.
+            double       m_area;    //! Area of the triangle.
+            math::Vec<3> m_norm;    //! Normal of the triangle.
 
 
             //  == INSTANTIATION ==
