@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <glm/glm.hpp>
 
 
 
@@ -28,7 +29,7 @@ namespace arc
 
         //  == FUNCTION PROTOTYPES ==
         //  -- Maps --
-        glm::vec3 transform_rainbow(const float t_x);
+        glm::vec3 transform_rainbow(float t_x);
 
 
 
