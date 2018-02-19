@@ -236,12 +236,8 @@ namespace arc
             }
 
             find_min_max(v0[Z], v1[Z], v2[Z], min, max);
-            if ((min > t_half_size[Z]) || (max < -t_half_size[Z]))
-            {
-                return (false);
-            }
-
-            return plane_origin_overlap(e0 ^ e1, v0, t_half_size);
+            return (!(((min > t_half_size[Z]) || (max < -t_half_size[Z])) != nullptr) && plane_origin_overlap(e0 ^ e1, v0,
+                                                                                                              t_half_size));
         }
 
         /**
