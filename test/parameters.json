@@ -1,10 +1,10 @@
 {
     "seed":     77,
-    "num_phot": 3,
+    "num_phot": 1e4,
     "grid":     {
         "min":   [-4.0, -1.0, -1.0],
         "max":   [4.0, 1.0, 1.0],
-        "cells": [2, 2, 2]
+        "cells": [81, 21, 21]
     },
     "aether":   {
         "mat": "materials/vacuum.mat"
@@ -12,6 +12,7 @@
     "entities": {
         "entity_one": {
             "scale": [0.25, 0.25, 0.25],
+            "trans": [0.0, 0.0, -0.07],
             "mesh":  "meshes/cone.obj",
             "mat":   "materials/intralipid_10.mat"
         }
