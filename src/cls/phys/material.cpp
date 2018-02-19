@@ -165,7 +165,7 @@ namespace arc
             // Calculate the albedo values.
             for (size_t i = 0; i < t_wavelength.size(); ++i)
             {
-                albedo[i] = t_abs_coef[i] / (t_abs_coef[i] + t_scat_coef[i]);
+                albedo[i] = 1.0 - (t_abs_coef[i] / (t_abs_coef[i] + t_scat_coef[i]));
             }
 
             return (interpolator::Linear(t_wavelength, albedo));
