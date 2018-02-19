@@ -58,10 +58,12 @@ namespace arc
             double get_time() const { return (n_time); }
             double get_weight() const { return (n_weight); }
 
+            //  -- Setters --
+            void multiply_weight(const double t_mult) { n_weight *= t_mult; }
+
           protected:
             //  -- Simulation --
             void rotate(double t_dec, double t_azi);
-            void multiply_weight(const double t_mult) { n_weight *= t_mult; }
         };
 
 
