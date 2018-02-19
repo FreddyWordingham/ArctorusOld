@@ -23,6 +23,21 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
+         *  Construct a photon at a given initial position with a given initial direction using a given initial material.
+         *
+         *  @param  t_pos           Initial position of the photon.
+         *  @param  t_dir           Initial direction of the photon.
+         *  @param  t_wavelength    Wavelength of the photon packet.
+         *  @param  t_mat           Initial material the photon is located within.
+         */
+        Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_wavelength,
+                       const phys::Material& t_mat) :
+            Photon(t_pos, t_dir, t_wavelength, t_mat.get_ref_index(t_wavelength), t_mat.get_albedo(t_wavelength),
+                   t_mat.get_interaction(t_wavelength), t_mat.get_anisotropy(t_wavelength))
+        {
+        }
+
+        /**
          *  Construct a photon at a given initial position with a given initial direction with given initial optical properties.
          *
          *  @param  t_pos           Initial position of the photon.
