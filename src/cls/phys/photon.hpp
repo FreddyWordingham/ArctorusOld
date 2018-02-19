@@ -74,7 +74,22 @@ namespace arc
             //  -- Setters --
             void move(const double t_dist);
             void rotate(double t_dec, double t_azi);
+
+          private:
+            //  -- Data --
+            void record_path();
         };
+
+
+        //  -- Data --
+        /**
+         *  Record the current properties of the photon to the path data.
+         */
+        void Photon::record_path()
+        {
+            m_path.emplace_back(graphical::point::Photon({m_pos[X], m_pos[Y], m_pos[Z]}, static_cast<float>(m_wavelength),
+                                                         static_cast<float>(m_weight), static_cast<float>(m_time)));
+        }
 
 
 
