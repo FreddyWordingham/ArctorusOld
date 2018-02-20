@@ -105,7 +105,7 @@ namespace arc
                     // If this distance is the closest so far, accept it.
                     if ((tri_dist < r_dist) && (tri_dist > 0.0))
                     {
-                        r_index = i;
+                        r_index = m_entity_list[i][0];
                         r_dist  = tri_dist;
                         r_norm  = tri_norm;
                     }
