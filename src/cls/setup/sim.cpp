@@ -303,6 +303,9 @@ namespace arc
 
                         energy += entity_dist;
 
+                        // Move to just before the boundary.
+                        phot.move(entity_dist - SMOOTHING_LENGTH);
+
                         phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
 
                         /*// Get new material optical properties.
