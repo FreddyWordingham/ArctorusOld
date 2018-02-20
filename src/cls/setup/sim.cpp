@@ -296,7 +296,7 @@ namespace arc
                     else if (entity_dist < cell_dist) // TODO material stack.
                     {
                         // If entity normal is facing away, multiply it by -1.
-                        if ((phot.get_dir() * entity_norm) < 0.0)
+                        if ((phot.get_dir() * entity_norm) > 0.0)
                         {
                             entity_norm = entity_norm * -1.0;
                         }
