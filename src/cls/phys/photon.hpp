@@ -97,6 +97,7 @@ namespace arc
             void move(double t_dist);
             void rotate(double t_dec, double t_azi);
             void multiply_weight(double t_mult);
+            void set_opt(const phys::Material& t_mat);
 
           private:
             //  -- Data --

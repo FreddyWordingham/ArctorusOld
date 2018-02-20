@@ -195,6 +195,33 @@ namespace arc
             m_weight *= t_mult;
         }
 
+        /**
+         *  Set the photon's optical properties using the given material.
+         *
+         *  @param  t_mat   Material used to set the optical properties.
+         *
+         *  @pre    m_wavelength must be within the bounds of t_mat.
+         *  @post   m_ref_index must be positive.
+         *  @post   m_albedo must be non-negative.
+         *  @post   m_interaction must be positive.
+         *  @post   m_anisotropy must be between minus one and one.
+         */
+        void Photon::set_opt(const phys::Material& t_mat)
+        {
+            assert((m_wavelength >= t_mat.get_min_bound()) && (m_wavelength <= t_mat.get_max_bound()));
+
+            // Set optical properties.
+            m_ref_index   = t_mat.get_ref_index(m_wavelength);
+            m_albedo      = t_mat.get_albedo(m_wavelength);
+            m_interaction = t_mat.get_interaction(m_wavelength);
+            m_anisotropy  = t_mat.get_anisotropy(m_wavelength);
+
+            assert(m_ref_index > 0.0);
+            assert(m_albedo >= 0.0);
+            assert(m_interaction > 0.0);
+            assert((m_anisotropy >= -1.0) && (m_anisotropy <= 1.0));
+        }
+
 
         //  -- Data --
         /**
