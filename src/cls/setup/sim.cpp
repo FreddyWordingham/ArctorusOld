@@ -295,9 +295,10 @@ namespace arc
                         energy += entity_dist;
 
                         // Move to the boundary intersection.
-                        phot.move(entity_dist + SMOOTHING_LENGTH);
+                        phot.move(entity_dist - SMOOTHING_LENGTH);
 
-                        phot.set_dir(entity_norm);
+                        // Reflect the photon.
+                        phot.set_dir(math::normalise(phot.get_dir() - (entity_norm * (2.0 * (phot.get_dir() * entity_norm)))));
                     }
 
                         // Will exit cell.

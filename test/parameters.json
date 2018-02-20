@@ -4,16 +4,17 @@
     "grid":     {
         "min":   [-4.0, -1.0, -1.0],
         "max":   [4.0, 1.0, 1.0],
-        "cells": [81, 21, 21]
+        "cells": [41, 11, 11]
     },
     "aether":   {
         "mat": "materials/vacuum.mat"
     },
     "entities": {
         "entity_one": {
-            "scale": [0.25, 0.25, 0.25],
-            "trans": [0.0, 0.0, -0.2],
-            "mesh":  "meshes/anti_icosphere.obj",
+            "scale": [0.1, 0.1, 0.1],
+            "dir":   [-1.0, 0.0, 0.0],
+            "trans": [0.0, 0.0, 0.0],
+            "mesh":  "meshes/hemisphere.obj",
             "mat":   "materials/intralipid_10.mat"
         }
     },
