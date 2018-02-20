@@ -30,6 +30,12 @@ namespace arc
 
 
 
+        //  == SETTINGS ==
+        //  -- Numerical Simultion --
+        constexpr const double SMOOTHING_LENGTH = 1E-6; //! Smoothing length applied to stop photons getting stuck.
+
+
+
         //  == CLASS ==
         /**
          *  Simulation class which holds all objects required to run a simulation.
