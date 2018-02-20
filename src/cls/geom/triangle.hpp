@@ -113,7 +113,7 @@ namespace arc
 
                 // Determine interpolated normal.
                 math::Vec<3> r_norm = math::normalise(
-                    (m_vert[ALPHA].get_norm() * alpha) + (m_vert[BETA].get_norm() * beta) + (m_vert[GAMMA].get_norm() * gamma));
+                    (m_vert[ALPHA].get_norm() * gamma) + (m_vert[BETA].get_norm() * alpha) + (m_vert[GAMMA].get_norm() * beta));
 
                 return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
             }

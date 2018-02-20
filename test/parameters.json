@@ -13,7 +13,7 @@
         "entity_one": {
             "scale": [0.25, 0.25, 0.25],
             "trans": [0.0, 0.0, -0.2],
-            "mesh":  "meshes/cone.obj",
+            "mesh":  "meshes/anti_icosphere.obj",
             "mat":   "materials/intralipid_10.mat"
         }
     },
