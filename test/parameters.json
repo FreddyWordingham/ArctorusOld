@@ -7,7 +7,7 @@
         "cells": [41, 11, 11]
     },
     "aether":   {
-        "mat": "materials/vacuum.mat"
+        "mat": "materials/glass.mat"
     },
     "entities": {
         "entity_one": {
