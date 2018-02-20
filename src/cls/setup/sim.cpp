@@ -342,42 +342,29 @@ namespace arc
                         }
                         else
                         {
-                            // Calculate transmission angle.
-                            const double a_t = std::acos((n_i / n_t) * std::sin(a_i));
-
                             // Determine reflection probability.
-                            const double R = optics::reflection_prob(n_i, n_t, a_i, a_t);
+                            const double R = optics::reflection_prob(a_i, n_i, n_t);
+
+                            if (rng::random() <= R)  // Reflect.
+                            {
+                                // Move to just before the boundary.
+                                phot.move(entity_dist - SMOOTHING_LENGTH);
+
+                                // Reflect the photon.
+                                phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+                            }
+                            else                    // Refract.
+                            {
+                                // Move to just pase the boundary.
+                                phot.move(entity_dist + SMOOTHING_LENGTH);
+
+                                // Refract the photon.
+                                const double sin_sq = math::square(n_i / n_t) * math::square(std::sin(a_i));
+                                phot.set_dir(math::normalise(
+                                    (phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(
+                                        1.0 - sin_sq)))));
+                            }
                         }
-
-
-                        /*// Get new material optical properties.
-                        const double n_i = phot.get_ref_index();
-                        const double n_t = m_entity[entity_index].get_mat().get_ref_index(phot.get_wavelength());
-
-                        const double a_i = acos(phot.get_dir() * entity_norm);
-
-                        // Internal reflection.
-                        if (std::sin(a_i) > (n_t / n_i))
-                        {
-                            // Move to the photon to just before boundary.
-                            phot.move(entity_dist - SMOOTHING_LENGTH);
-
-                            // Reflect the photon.
-                            phot.set_dir(
-                                math::normalise(phot.get_dir() - (entity_norm * (2.0 * (phot.get_dir() * entity_norm)))));
-                        }
-
-                            // Refraction.
-                        else
-                        {
-                            // Move to the photon to just past boundary.
-                            phot.move(entity_dist + SMOOTHING_LENGTH);
-
-                            const double sin_sq = math::square(n_i / n_t) * math::square(std::sin(a_i));
-                            phot.set_dir(math::normalise(
-                                (phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(
-                                    1.0 - sin_sq)))));
-                        }*/
                     }
 
                         // Will exit cell.
