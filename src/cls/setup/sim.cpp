@@ -276,6 +276,9 @@ namespace arc
 
                         // Scatter.
                         phot.rotate(rng::henyey_greenstein(phot.get_anisotropy()), rng::random(0.0, 2.0 * M_PI));
+
+                        // Reduce weight by albedo.
+                        phot.multiply_weight(phot.get_albedo());
                     }
                     else
                     {
