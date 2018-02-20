@@ -306,11 +306,16 @@ namespace arc
                         // Determine the incident and transfer materials.
                         const phys::Material* mat_i = nullptr;
                         const phys::Material* mat_t = nullptr;
+
+                        int index_i, index_t;
                         if (phot.get_entity_index() == static_cast<int>(entity_index))  // Exiting a material.
                         {
                             mat_i = &m_entity[entity_index].get_mat();
                             mat_t = (phot.get_prev_entity_index() == -1) ? &m_aether : &m_entity[static_cast<size_t>(phot
                                 .get_prev_entity_index())].get_mat();
+
+                            index_i = static_cast<int>(entity_index);
+                            index_t = phot.get_prev_entity_index();
 
                             phot.pop_entity_index();
                             phot.pop_entity_index();
@@ -320,6 +325,9 @@ namespace arc
                             mat_i = (phot.get_entity_index() == -1) ? &m_aether : &m_entity[static_cast<size_t>(phot
                                 .get_entity_index())].get_mat();
                             mat_t = &m_entity[entity_index].get_mat();
+
+                            index_i = phot.get_entity_index();
+                            index_t = static_cast<int>(entity_index);
 
                             phot.pop_entity_index();
                         }
@@ -339,6 +347,9 @@ namespace arc
 
                             // Reflect the photon.
                             phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+
+                            // Photon does not need to change entity.
+                            phot.push_entity_index(index_i);
                         }
                         else
                         {
@@ -352,6 +363,9 @@ namespace arc
 
                                 // Reflect the photon.
                                 phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+
+                                // Photon does not need to change entity.
+                                phot.push_entity_index(index_i);
                             }
                             else                    // Refract.
                             {
@@ -363,6 +377,9 @@ namespace arc
                                 phot.set_dir(math::normalise(
                                     (phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(
                                         1.0 - sin_sq)))));
+
+                                // Photon does need to change entity.
+                                phot.push_entity_index(index_t);
                             }
                         }
                     }
