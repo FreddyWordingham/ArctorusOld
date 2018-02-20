@@ -264,13 +264,13 @@ namespace arc
                 }
 
                 // Determine the initial cell.
-                mesh::Cell& cell = m_grid.get_cell(phot.get_pos());
+                auto cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
 
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
-                    const double cell_dist = cell.get_dist_to_wall(phot.get_pos(), phot.get_dir());
+                    const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
 
                     if (scat_dist < cell_dist)
                     {
@@ -284,7 +284,7 @@ namespace arc
                         // Change cell if still within the grid.
                         if (m_grid.is_within(phot.get_pos()))
                         {
-                            cell = m_grid.get_cell(phot.get_pos());
+                            cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
                         }
                     }
                 }
