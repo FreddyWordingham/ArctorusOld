@@ -99,13 +99,7 @@ namespace arc
         {
             assert((t_val >= m_min_bound) && (t_val <= m_max_bound));
 
-            static size_t index = 0;
-            if (index >= m_x.size())
-            {
-                index = 0;
-            }
-
-            index = utl::lower_index(m_x, t_val, index);
+            m_last_index = utl::lower_index(m_x, t_val, m_last_index);
 
             return (m_y[index] + ((t_val - m_x[index]) * m_grad[index]));
         }
