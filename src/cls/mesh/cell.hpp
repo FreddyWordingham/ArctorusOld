@@ -91,6 +91,7 @@ namespace arc
                 }
 
                 // Run through all entity triangles and determine the closest intersection distance.
+                size_t       r_index;
                 double       r_dist = std::numeric_limits<double>::max();
                 math::Vec<3> r_norm;
                 for (size_t  i      = 0; i < m_entity_list.size(); ++i)
@@ -104,14 +105,15 @@ namespace arc
                     // If this distance is the closest so far, accept it.
                     if ((tri_dist < r_dist) && (tri_dist > 0.0))
                     {
-                        r_dist = tri_dist;
-                        r_norm = tri_norm;
+                        r_index = i;
+                        r_dist  = tri_dist;
+                        r_norm  = tri_norm;
                     }
                 }
 
                 assert(r_dist > 0.0);
 
-                return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
+                return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
             }
 
             //  -- Setters --
