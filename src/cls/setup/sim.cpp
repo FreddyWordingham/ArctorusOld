@@ -266,7 +266,6 @@ namespace arc
                 unsigned long int loops = 0;
                 while (m_grid.is_within(phot.get_pos()))
                 {
-                    VAL(loops);
                     if (loops > 1e3)
                     {
                         WARN("Photon removed from loop prematurely.", "Photon appeared to be stuck in main loop.");
