@@ -74,6 +74,7 @@ namespace arc
             m_albedo(t_albedo),
             m_interaction(t_interaction),
             m_anisotropy(t_anisotropy),
+            m_entity_index({-1}),
             m_time(0.0)
         {
             assert(m_dir.is_normalised());
