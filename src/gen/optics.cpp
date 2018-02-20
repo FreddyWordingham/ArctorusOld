@@ -40,7 +40,7 @@ namespace arc
         {
             assert(t_in.is_normalised());
             assert(t_norm.is_normalised());
-            assert((t_in * t_norm) > 0.0);
+            assert((t_in * t_norm) < 0.0);
 
             const math::Vec<3> r_out = t_in + (t_norm * (2.0 * (t_in * t_norm)));
 
