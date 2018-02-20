@@ -268,9 +268,9 @@ namespace arc
                     const double entity_dist = cell->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
                     const double cell_dist   = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
 
-                    assert(math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
-                    assert(math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
-                    assert(math::equal(scat_dist, entity_dist, SMOOTHING_LENGTH));
+                    assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
+                    assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
+                    assert(!math::equal(scat_dist, entity_dist, SMOOTHING_LENGTH));
 
                     // Will scatter.
                     if ((scat_dist < entity_dist) && (scat_dist < cell_dist))
