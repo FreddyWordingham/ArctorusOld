@@ -7,7 +7,7 @@
         "cells": [41, 11, 11]
     },
     "aether":   {
-        "mat": "materials/glass.mat"
+        "mat": "materials/vacuum.mat"
     },
     "entities": {
         "entity_one": {
@@ -15,7 +15,7 @@
             "dir":   [-1.0, 0.0, 0.0],
             "trans": [0.0, 0.0, 0.0],
             "mesh":  "meshes/hemisphere.obj",
-            "mat":   "materials/intralipid_10.mat"
+            "mat":   "materials/glass.mat"
         }
     },
     "lights":   {
