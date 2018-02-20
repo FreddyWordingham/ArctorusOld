@@ -13,7 +13,7 @@
         "entity_one": {
             "scale": [0.9, 0.9, 0.9],
             "trans": [0.0, 0.0, 0.0],
-            "mesh":  "meshes/prism.obj",
+            "mesh":  "meshes/sphere.obj",
             "mat":   "materials/glass.mat"
         }
     },
