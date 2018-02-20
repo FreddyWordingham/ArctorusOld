@@ -278,7 +278,7 @@ namespace arc
                         energy += cell_dist;
 
                         // Add current energy to current cell and reset count.
-                        cell->add_energy_density(energy);
+                        cell->add_energy(energy);
                         energy = 0.0;
 
                         // Move into the next cell space.
