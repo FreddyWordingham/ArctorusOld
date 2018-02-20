@@ -91,11 +91,9 @@ namespace arc
                 double      r_dist = std::numeric_limits<double>::max();
                 for (size_t i      = 0; i < m_entity_list.size(); ++i)
                 {
-                    // Get the triangle.
-                    const geom::Triangle& tri = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
-
                     // Get distance to intersection.
-                    const double tri_dist = tri.get_intersection_dist(t_pos, t_dir);
+                    const double tri_dist = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
+                                                                         .get_intersection_dist(t_pos, t_dir);
 
                     // If this distance is the closest so far, accept it.
                     if ((tri_dist < r_dist) && (tri_dist > 0.0))

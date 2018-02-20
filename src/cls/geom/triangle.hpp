@@ -66,6 +66,8 @@ namespace arc
             inline const Vertex& get_vert(size_t t_index) const;
             double get_intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
             {
+                assert(t_dir.is_normalised());
+
                 // Check if ray is parallel to triangle.
                 const double approach = m_norm * t_dir;
                 if (fabs(approach) < 10E-10)
