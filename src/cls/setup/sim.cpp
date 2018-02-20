@@ -365,9 +365,7 @@ namespace arc
 
                                 // Refract the photon.
                                 const double sin_sq = math::square(n_i / n_t) * math::square(std::sin(a_i));
-                                phot.set_dir(math::normalise(
-                                    (phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(
-                                        1.0 - sin_sq)))));
+                                phot.set_dir(optics::refraction_dir(phot.get_dir(), entity_norm, n_i / n_t));
 
                                 // Photon moves to new entity.
                                 phot.push_entity_index(index_t);
