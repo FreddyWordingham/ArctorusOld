@@ -271,7 +271,11 @@ namespace arc
                     {
                         energy += scat_dist;
 
+                        // Move to the scattering point.
                         phot.move(scat_dist);
+
+                        // Scatter.
+                        phot.rotate(rng::random(0.0, M_PI), rng::random(0.0, 2.0 * M_PI));
                     }
                     else
                     {
