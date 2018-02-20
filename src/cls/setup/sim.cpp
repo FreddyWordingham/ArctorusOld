@@ -314,8 +314,8 @@ namespace arc
                         }
                         else                                                            // Entering a new entity.
                         {
-                            index_i = static_cast<int>(entity_index);
-                            index_t = phot.get_entity_index();
+                            index_i = phot.get_entity_index();
+                            index_t = static_cast<int>(entity_index);
                         }
                         assert(index_i != index_t);
 
