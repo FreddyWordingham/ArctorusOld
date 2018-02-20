@@ -81,6 +81,14 @@ namespace arc
             double get_interaction() const { return (m_interaction); }
             double get_anisotropy() const { return (m_anisotropy); }
             int get_entity_index() const { return (m_entity_index.top()); }
+            int get_prev_entity_index()
+            {
+                const int hold = m_entity_index.top();
+                m_entity_index.pop();
+                const int r_index = m_entity_index.top();
+                m_entity_index.push(hold);
+                return (r_index);
+            }
 
             //  -- Setters --
             void pop_entity_index() { m_entity_index.pop(); }
