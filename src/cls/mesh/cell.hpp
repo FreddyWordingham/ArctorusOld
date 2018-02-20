@@ -86,7 +86,7 @@ namespace arc
                 // If cell contains no entity triangles, return a large dummy value.
                 if (m_empty)
                 {
-                    return (std::numeric_limits<double>::max());
+                    return (std::numeric_limits<double>::max(), math::Vec<3>({{0.0, 0.0, 0.0}}));
                 }
 
                 // Run through all entity triangles and determine the closest intersection distance.
@@ -109,9 +109,8 @@ namespace arc
                 }
 
                 assert(r_dist > 0.0);
-                assert(r_norm.is_normalised());
 
-                return (r_dist);
+                return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
             }
 
             //  -- Setters --
