@@ -284,11 +284,38 @@ namespace arc
          *  @pre    t_pos must be within the cell.
          *  @pre    t_dir must be normalised.
          *
+         *  @post   r_dist must be positive.
+         *
          *  @return The distance to the wall of the cell from the given position travelling along the given direction.
          */
         double Cell::get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
         {
+            assert(is_within(t_pos));
+            assert(t_dir.is_normalised());
 
+            // Calculate distance to each boundary.
+            std::array<double, 6> dist{};
+            for (size_t           i = 0; i < 3; ++i)
+            {
+                dist[i * 2]       = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max()
+                                                      : (m_min_bound[i] - t_pos[i]) / t_dir[i];
+                dist[(i * 2) + 1] = (t_dir[i] == 0.0) ? std::numeric_limits<double>::max()
+                                                      : (m_max_bound[i] - t_pos[i]) / t_dir[i];
+            }
+
+            // Determine the smallest positive distance.
+            double            r_dist = std::numeric_limits<double>::max();
+            for (unsigned int i      = 0; i < 6; ++i)
+            {
+                if ((dist[i] < r_dist) && (dist[i] > 0.0))
+                {
+                    r_dist = dist[i];
+                }
+            }
+
+            assert(r_dist > 0.0);
+
+            return (r_dist);
         }
 
 
