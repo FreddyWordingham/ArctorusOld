@@ -78,6 +78,34 @@ namespace arc
             double get_energy_density() const { return (m_energy / get_volume()); }
             bool empty() const { return (m_empty); }
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
+            double get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                      const std::vector<equip::Entity>& t_entity) const
+            {
+                // If cell contains no entity triangles, return a large dummy value.
+                if (m_empty)
+                {
+                    return (std::numeric_limits<double>::max());
+                }
+
+                // Run through all entity triangles and determine the closest intersection distance.
+                double      r_dist = std::numeric_limits<double>::max();
+                for (size_t i      = 0; i < m_entity_list.size(); ++i)
+                {
+                    // Get the triangle.
+                    const geom::Triangle& tri = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
+
+                    // Get distance to intersection.
+                    const double tri_dist = tri.get_intersection_dist(t_pos, t_dir);
+
+                    // If this distance is the closest so far, accept it.
+                    if ((tri_dist < r_dist) && (tri_dist > 0.0))
+                    {
+                        r_dist = tri_dist;
+                    }
+                }
+
+                return (r_dist);
+            }
 
             //  -- Setters --
             void add_energy(double t_energy);
