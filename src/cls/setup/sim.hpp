@@ -32,7 +32,7 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Numerical Simultion --
-        constexpr const double SMOOTHING_LENGTH = 1E-6; //! Smoothing length applied to stop photons getting stuck.
+        constexpr const double SMOOTHING_LENGTH = 1E-9; //! Smoothing length applied to stop photons getting stuck.
 
 
 
