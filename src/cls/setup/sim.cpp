@@ -309,6 +309,8 @@ namespace arc
                         {
                             index_i = phot.get_entity_index();
                             index_t = phot.get_prev_entity_index();
+
+                            phot.pop_entity_index();
                         }
                         else                                                            // Entering a new entity.
                         {
@@ -322,7 +324,37 @@ namespace arc
                             .get_mat();
                         const phys::Material& mat_t = (index_t == -1) ? m_aether : m_entity[static_cast<size_t>(index_t)]
                             .get_mat();
-                    }
+
+                        // Get optical properties of the materials.
+                        const double n_i = mat_i.get_ref_index(phot.get_wavelength());
+                        const double n_t = mat_t.get_ref_index(phot.get_wavelength());
+
+                        // Calculate incident angle.
+                        const double a_i = acos(-1.0 * (phot.get_dir() * entity_norm));
+                        assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
+
+                        // Check for total internal reflection.
+                        if (std::sin(a_i) > (n_t / n_i))
+                        {
+                            // Move to just before the boundary.
+                            phot.move(entity_dist - SMOOTHING_LENGTH);
+
+                            // Reflect the photon.
+                            phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+
+                            // Photon does not need to change entity.
+                            phot.push_entity_index(index_i);
+                        }
+                        else
+                        {
+                            // Move to just past the boundary.
+                            phot.move(entity_dist + SMOOTHING_LENGTH);
+
+                            // Photon does need to change entity.
+                            phot.push_entity_index(index_t);
+                            phot.set_opt((index_t == -1) ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
+                        }
+                    }/*
                     else if (entity_dist < cell_dist)
                     {
                         // If entity normal is facing away, multiply it by -1.
@@ -357,8 +389,6 @@ namespace arc
 
                             index_i = phot.get_entity_index();
                             index_t = static_cast<int>(entity_index);
-
-                            phot.pop_entity_index();
                         }
 
                         // Get optical properties of the materials.
@@ -412,7 +442,7 @@ namespace arc
                                 phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                             }
                         }
-                    }
+                    }*/
 
                         // Will exit cell.
                     else
