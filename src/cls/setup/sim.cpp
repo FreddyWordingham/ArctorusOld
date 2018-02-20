@@ -316,13 +316,13 @@ namespace arc
                             // Refraction.
                         else
                         {
+                            // Move to the photon to just past boundary.
+                            phot.move(entity_dist + SMOOTHING_LENGTH);
+
                             const double sin_sq = math::square(n_i / n_t) * math::square(std::sin(a_i));
                             phot.set_dir(math::normalise(
                                 (phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(
                                     1.0 - sin_sq)))));
-
-                            // Move to the photon to just past boundary.
-                            phot.move(entity_dist - SMOOTHING_LENGTH);
                         }
                     }
 
