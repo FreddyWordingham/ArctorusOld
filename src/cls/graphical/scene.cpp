@@ -289,6 +289,7 @@ namespace arc
 
             // Determine maximum grid cell energy density.
             double max_energy_density = t_grid.get_max_energy_density();
+            VAL(max_energy_density);
 
             // Add grid cells.
             const float cell_padding = -0.01f;

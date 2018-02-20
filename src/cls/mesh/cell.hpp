@@ -50,8 +50,8 @@ namespace arc
             const std::vector<std::array<size_t, 2>> m_light_list;  //! List of light triangles with the cell.
 
             //  -- Data --
-            const bool m_empty;                 //! True if the cell contains no triangles.
-            double     m_energy_density = 0.0;  //! Energy density of the cell.
+            const bool m_empty;         //! True if the cell contains no triangles.
+            double     m_energy = 0.0;  //! Energy withihn the cell.
 
 
             //  == INSTANTIATION ==
