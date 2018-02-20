@@ -307,7 +307,7 @@ namespace arc
                         int index_i, index_t;
                         if (phot.get_entity_index() == static_cast<int>(entity_index))  // Exiting the current entity.
                         {
-                            index_i = entity_index;
+                            index_i = static_cast<int>(entity_index);
                             index_t = phot.get_prev_entity_index();
 
                             phot.pop_entity_index();
