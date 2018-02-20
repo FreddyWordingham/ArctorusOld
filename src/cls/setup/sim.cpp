@@ -266,9 +266,11 @@ namespace arc
                 unsigned long int loops = 0;
                 while (m_grid.is_within(phot.get_pos()))
                 {
-                    if (loops > 1e6)
+                    VAL(loops);
+                    if (loops > 1e3)
                     {
                         WARN("Photon removed from loop prematurely.", "Photon appeared to be stuck in main loop.");
+                        break;
                     }
                     ++loops;
 
@@ -348,6 +350,8 @@ namespace arc
                             .get_mat();
 
                         // Get optical properties of the materials.
+                        VAL(index_i);
+                        VAL(index_t);
                         const double n_i = mat_i.get_ref_index(phot.get_wavelength());
                         const double n_t = mat_t.get_ref_index(phot.get_wavelength());
 
