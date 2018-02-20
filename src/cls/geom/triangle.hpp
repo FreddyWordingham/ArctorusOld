@@ -67,15 +67,48 @@ namespace arc
             double get_intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
             {
                 assert(t_dir.is_normalised());
+                assert(m_norm.is_normalised());
 
-                // Check if ray is parallel to triangle.
-                const double approach = m_norm * t_dir;
-                if (fabs(approach) < 10E-10)
+                // Calculate edge vectors.
+                const math::Vec<3> edge_1 = m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos();
+                const math::Vec<3> edge_2 = m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos();
+
+                const math::Vec<3> q = t_dir ^edge_2;
+                const double       a = edge_1 * q;
+
+                // Check if ray is almost parallel to the triangle.
+                if (std::fabs(a) <= std::numeric_limits<double>::epsilon())
                 {
+                    // Does not hit triangle.
                     return (std::numeric_limits<double>::max());
                 }
 
-                return (((m_norm * m_vert[ALPHA].get_pos()) - (m_norm * t_pos)) / approach);
+                const math::Vec<3> s = (t_pos - m_vert[ALPHA].get_pos()) / a;
+                const math::Vec<3> r = s ^edge_1;
+
+                // Calculate barycentric coordinates.
+                const double alpha = s * q;
+                const double beta  = r * t_dir;
+                const double gamma = 1.0 - alpha - beta;
+
+                // Check hit is on triangle (rather than somewhere else in the plane).
+                if ((alpha < 0.0) || (beta < 0.0) | (gamma < 0.0))
+                {
+                    // Does not hit triangle.
+                    return (std::numeric_limits<double>::max());
+                }
+
+                // Calculate intersection distance.
+                const double r_dist = edge_2 * r;
+
+                // Check triangle is ahead of ray, rather than behind.
+                if (r_dist <= 0.0)
+                {
+                    // Does not hit triangle.
+                    return (std::numeric_limits<double>::max());
+                }
+
+                return (r_dist);
             }
 
             //  -- Generation --
