@@ -94,6 +94,24 @@ namespace arc
         //  == METHODS ==
         //  -- Setters --
         /**
+         *  Set the direction of the photon.
+         *
+         *  @param  t_dir   Direction to set.
+         *
+         *  @pre    t_dir must be normalised.
+         *
+         *  @post   m_dir must be normalised.
+         */
+        void Photon::set_dir(const math::Vec<3>& t_dir)
+        {
+            assert(t_dir.is_normalised());
+
+            m_dir = t_dir;
+
+            assert(m_dir.is_normalised());
+        }
+
+        /**
          *  Move the photon a given distance.
          *
          *  @param  t_dist  Distance to move the photon.

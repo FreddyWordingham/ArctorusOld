@@ -77,6 +77,7 @@ namespace arc
             double get_anisotropy() const { return (m_anisotropy); }
 
             //  -- Setters --
+            void set_dir(const math::Vec<3>& t_dir)
             void move(double t_dist);
             void rotate(double t_dec, double t_azi);
             void multiply_weight(double t_mult);
