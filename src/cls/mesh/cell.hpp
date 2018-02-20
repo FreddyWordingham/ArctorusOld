@@ -78,8 +78,8 @@ namespace arc
             double get_energy_density() const { return (m_energy / get_volume()); }
             bool empty() const { return (m_empty); }
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
-            double get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                      const std::vector<equip::Entity>& t_entity) const
+            std::pair<double, math::Vec<3>> get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                               const std::vector<equip::Entity>& t_entity) const
             {
                 assert(t_dir.is_normalised());
 
