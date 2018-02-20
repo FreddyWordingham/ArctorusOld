@@ -321,17 +321,17 @@ namespace arc
 
         //  -- Setters --
         /**
-         *  Add a given energy density to the total energy density of the cell.
+         *  Add a given energy to the total energy of the cell.
          *
-         *  @param  t_energy_density    Energy density to add to the cell.
+         *  @param  t_energy    Energy to add to the cell.
          *
-         *  @pre    t_energy_density must be positive.
+         *  @pre    t_energy must be positive.
          */
-        void Cell::add_energy_density(const double t_energy_density)
+        void Cell::add_energy(const double t_energy)
         {
-            assert(t_energy_density > 0.0);
+            assert(t_energy > 0.0);
 
-            m_energy_density += t_energy_density;
+            m_energy += t_energy;
         }
 
 

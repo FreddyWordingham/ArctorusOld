@@ -80,7 +80,7 @@ namespace arc
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
 
             //  -- Setters --
-            void add_energy_density(double t_energy_density);
+            void add_energy(double t_energy);
 
             //  -- Testing --
             bool is_within(const math::Vec<3>& t_pos) const;
