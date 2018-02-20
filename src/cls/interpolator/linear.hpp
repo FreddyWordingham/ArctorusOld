@@ -46,7 +46,7 @@ namespace arc
             const std::vector<double> m_grad;   //! Vector of intermediate gradients.
 
             //  -- Optimisations --
-            size_t m_last_index = 0;    //! Last index accessed during the interpolation.
+            mutable size_t m_last_index = 0;    //! Last index accessed during the interpolation.
 
 
             //  == INSTANTIATION ==
