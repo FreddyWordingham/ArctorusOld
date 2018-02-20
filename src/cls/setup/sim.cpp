@@ -256,7 +256,7 @@ namespace arc
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
                 // Determine the initial cell.
-                auto cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
+                auto cell = &m_grid.get_cell(phot.get_pos());
 
                 // Track energy density to be added to each cell.
                 double energy = 0.0;
@@ -287,7 +287,7 @@ namespace arc
                         // Change cell if still within the grid.
                         if (m_grid.is_within(phot.get_pos()))
                         {
-                            cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
+                            cell = &m_grid.get_cell(phot.get_pos());
                         }
                     }
                 }
