@@ -20,7 +20,7 @@
 //  == NAMESPACE ==
 namespace arc
 {
-    namespace gen
+    namespace optics
     {
 
 
@@ -29,5 +29,5 @@ namespace arc
 
 
 
-    } // namespace gen
+    } // namespace optics
 } // namespace arc
