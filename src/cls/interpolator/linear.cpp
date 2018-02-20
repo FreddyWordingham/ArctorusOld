@@ -15,9 +15,6 @@
 //  == INCLUDES ==
 //  -- System --
 #include <sstream>
-#include <gen/log.hpp>
-
-//  -- Utility --
 
 //  -- Classes --
 #include "cls/data/column.hpp"
