@@ -264,11 +264,11 @@ namespace arc
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
-                    const double scat_dist   = -std::log(rng::random()) / phot.get_interaction();
-                    const double entity_dist = cell->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
-                    double       cell_dist;
+                    const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
+                    const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
+                    double       entity_dist;
                     math::Vec<3> entity_norm;
-                    const std::tie(cell_dist, entity_norm) = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
+                    std::tie(entity_dist, entity_norm) = cell->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
 
                     assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
                     assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
@@ -296,8 +296,6 @@ namespace arc
 
                         // Move to the boundary intersection.
                         phot.move(entity_dist + SMOOTHING_LENGTH);
-
-                        break;
                     }
 
                         // Will exit cell.
