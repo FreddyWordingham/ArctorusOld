@@ -63,6 +63,7 @@ namespace arc
          *  @post   m_albedo must be non-negative.
          *  @post   m_interaction must be positive.
          *  @post   m_anisotropy must be between minus one and one.
+         *  @post   m_entity_index must be of size one.
          */
         Photon::Photon(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir, const double t_wavelength,
                        const double t_ref_index, const double t_albedo, const double t_interaction, const double t_anisotropy) :
@@ -85,6 +86,7 @@ namespace arc
             assert(m_albedo >= 0.0);
             assert(m_interaction > 0.0);
             assert((m_anisotropy >= -1.0) && (m_anisotropy <= 1.0));
+            assert(m_entity_index.size() == 1);
 
             // Record the initial position of the photon.
             record_path();
