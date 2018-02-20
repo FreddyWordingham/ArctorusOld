@@ -139,7 +139,7 @@ namespace arc
                 // Get the transformation values.
                 const auto   trans = json_entity.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
                 const auto   dir   = json_entity.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
-                const double spin  = math::deg_to_rad(json_entity.parse_child<double>("spin", 0.0));
+                const double rot   = math::deg_to_rad(json_entity.parse_child<double>("rot", 0.0));
                 const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
 
                 // Get file paths.
@@ -147,7 +147,7 @@ namespace arc
                 const std::string mat_path  = json_entity.parse_child<std::string>("mat");
 
                 // Construct the entity object an add it to the vector of entities.
-                r_entity.emplace_back(equip::Entity(geom::Mesh(file::read(mesh_path), trans, dir, spin, scale),
+                r_entity.emplace_back(equip::Entity(geom::Mesh(file::read(mesh_path), trans, dir, rot, scale),
                                                     phys::Material(file::read(mat_path))));
             }
 
@@ -180,7 +180,7 @@ namespace arc
                 // Get the transformation values.
                 const auto   trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
                 const auto   dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
-                const double spin  = math::deg_to_rad(json_light.parse_child<double>("spin", 0.0));
+                const double rot   = math::deg_to_rad(json_light.parse_child<double>("rot", 0.0));
                 const auto   scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
 
                 // Get light properties.
@@ -191,7 +191,7 @@ namespace arc
                 const std::string spec_path = json_light.parse_child<std::string>("spec");
 
                 // Construct the light object an add it to the vector of lights.
-                r_light.emplace_back(equip::Light(geom::Mesh(file::read(mesh_path), trans, dir, spin, scale),
+                r_light.emplace_back(equip::Light(geom::Mesh(file::read(mesh_path), trans, dir, rot, scale),
                                                   phys::Spectrum(file::read(spec_path)), power));
             }
 
