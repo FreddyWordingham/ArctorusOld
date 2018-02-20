@@ -277,8 +277,7 @@ namespace arc
                     assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
                     assert(!math::equal(scat_dist, entity_dist, SMOOTHING_LENGTH));
 
-                    // Will scatter.
-                    if ((scat_dist < entity_dist) && (scat_dist < cell_dist))
+                    if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.
                     {
                         energy += scat_dist;
 
@@ -291,9 +290,7 @@ namespace arc
                         // Reduce weight by albedo.
                         phot.multiply_weight(phot.get_albedo());
                     }
-
-                        // Will hit boundary.
-                    else if (entity_dist < cell_dist)
+                    else if (entity_dist < cell_dist)   // Change entity.
                     {
                         // If entity normal is facing away, multiply it by -1.
                         if ((phot.get_dir() * entity_norm) > 0.0)
@@ -373,9 +370,7 @@ namespace arc
                             }
                         }
                     }
-
-                        // Will exit cell.
-                    else
+                    else    // Exit cell.
                     {
                         energy += cell_dist;
 
