@@ -256,7 +256,7 @@ namespace arc
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
                 // Determine the initial cell.
-                auto cell = &m_grid.get_cell(phot.get_pos());
+                mesh::Cell* cell = &m_grid.get_cell(phot.get_pos());
 
                 // Track energy density to be added to each cell.
                 double energy = 0.0;
