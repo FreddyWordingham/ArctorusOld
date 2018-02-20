@@ -81,6 +81,8 @@ namespace arc
             double get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
                                       const std::vector<equip::Entity>& t_entity) const
             {
+                assert(t_dir.is_normalised());
+
                 // If cell contains no entity triangles, return a large dummy value.
                 if (m_empty)
                 {
