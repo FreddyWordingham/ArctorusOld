@@ -22,7 +22,7 @@
             "power": 1.0,
             "trans": [-3.0, 0.0, 0.0],
             "dir":   [-1.0, 0.0, 0.0],
-            "scale": [0.01, 0.01, 0.01],
+            "scale": [0.01, 0.001, 0.01],
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
         }
