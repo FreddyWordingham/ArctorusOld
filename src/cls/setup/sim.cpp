@@ -297,7 +297,7 @@ namespace arc
                         // Move to the boundary intersection.
                         phot.move(entity_dist + SMOOTHING_LENGTH);
 
-                        phot.set_dir(math::Vec<3>({{0.0, 0.0, 1.0}}));
+                        phot.set_dir(entity_norm);
                     }
 
                         // Will exit cell.
