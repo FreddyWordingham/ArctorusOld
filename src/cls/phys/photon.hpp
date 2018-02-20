@@ -80,6 +80,7 @@ namespace arc
             double get_albedo() const { return (m_albedo); }
             double get_interaction() const { return (m_interaction); }
             double get_anisotropy() const { return (m_anisotropy); }
+            int get_entity_index() const { return (m_entity_index.top()); }
 
             //  -- Setters --
             void set_dir(const math::Vec<3>& t_dir);
