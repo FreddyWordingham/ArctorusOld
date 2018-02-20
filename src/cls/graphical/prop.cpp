@@ -34,11 +34,6 @@ namespace arc
          *
          *  @param  t_vert  Vector of vertices forming the prop.
          *  @param  t_col   Colour of the prop.
-         *
-         *  @post   m_col.r must be greater than, or equal to, zero and less than, or equal to, one.
-         *  @post   m_col.g must be greater than, or equal to, zero and less than, or equal to, one.
-         *  @post   m_col.b must be greater than, or equal to, zero and less than, or equal to, one.
-         *  @post   m_col.a must be greater than, or equal to, zero and less than, or equal to, one.
          */
         Prop::Prop(const std::vector<Vertex>& t_vert, const glm::vec4& t_col) :
             m_num_vert(static_cast<GLsizei>(t_vert.size())),
@@ -64,11 +59,6 @@ namespace arc
 
             // Clear the active buffer.
             glBindVertexArray(0);
-
-            assert((m_col.r >= 0.0f) && (m_col.r <= 1.0f));
-            assert((m_col.g >= 0.0f) && (m_col.g <= 1.0f));
-            assert((m_col.b >= 0.0f) && (m_col.b <= 1.0f));
-            assert((m_col.a >= 0.0f) && (m_col.a <= 1.0f));
         }
 
         /**

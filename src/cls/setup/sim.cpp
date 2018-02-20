@@ -280,8 +280,14 @@ namespace arc
 
                     if (entity_dist <= SMOOTHING_LENGTH)
                     {
+                        VAL(scat_dist);
+                        VAL(cell_dist);
+                        VAL(entity_dist);
                         WARN("Photon removed from loop prematurely.",
                              "Distance to entity is shorter than the smoothing length.");
+                        phot.move(0.1);
+
+                        m_path.push_back(phot.get_path());
 
                         break;
                     }
@@ -401,7 +407,7 @@ namespace arc
                 }
 
                 // Add the photon path.
-                m_path.push_back(phot.get_path());
+//                m_path.push_back(phot.get_path());
             }
         }
 

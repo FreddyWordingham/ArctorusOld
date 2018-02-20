@@ -2,8 +2,8 @@
     "seed":     77,
     "num_phot": 1e4,
     "grid":     {
-        "min":   [-4.0, -1.0, -1.0],
-        "max":   [4.0, 1.0, 1.0],
+        "min":   [-4.1, -1.1, -1.1],
+        "max":   [4.1, 1.1, 1.1],
         "cells": [41, 11, 11]
     },
     "aether":   {
@@ -13,7 +13,9 @@
         "entity_one": {
             "scale": [1.0, 1.0, 1.0],
             "trans": [0.0, 0.0, 0.0],
-            "mesh":  "meshes/cylinder.obj",
+            "dir":   [1.0, 0.0, 0.0],
+            "rot":   45.0,
+            "mesh":  "meshes/square.obj",
             "mat":   "materials/glass.mat"
         }
     },
