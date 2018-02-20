@@ -297,14 +297,31 @@ namespace arc
                         energy += entity_dist;
 
                         // Get new material optical properties.
-                        const double ref_index = m_entity[entity_index].get_mat().get_ref_index(phot.get_wavelength);
+                        const double n_i = phot.get_ref_index();
+                        const double n_t = m_entity[entity_index].get_mat().get_ref_index(phot.get_wavelength());
 
+                        const double a_i = acos(phot.get_dir() * entity_norm);
 
-                        // Move to the boundary intersection.
-                        phot.move(entity_dist - SMOOTHING_LENGTH);
+                        // Internal reflection.
+                        if (std::sin(a_i) > (n_t / n_i))
+                        {
+                            // Move to the photon to just before boundary.
+                            phot.move(entity_dist - SMOOTHING_LENGTH);
 
-                        // Reflect the photon.
-                        phot.set_dir(math::normalise(phot.get_dir() - (entity_norm * (2.0 * (phot.get_dir() * entity_norm)))));
+                            // Reflect the photon.
+                            phot.set_dir(
+                                math::normalise(phot.get_dir() - (entity_norm * (2.0 * (phot.get_dir() * entity_norm)))));
+                        }
+
+                            // Refraction.
+                        else
+                        {
+                            // Move to the photon to just past boundary.
+                            phot.move(entity_dist - SMOOTHING_LENGTH);
+
+                            //const double sin_sq = math::square(n_i / n_t) * math::square(std::sin(a_i));
+                            //phot.set_dir(math::normalise((phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(1.0 - sin_sq)))));
+                        }
                     }
 
                         // Will exit cell.
