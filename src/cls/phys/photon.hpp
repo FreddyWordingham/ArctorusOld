@@ -83,6 +83,7 @@ namespace arc
             int get_entity_index() const { return (m_entity_index.top()); }
 
             //  -- Setters --
+            void pop_entity_index() { m_entity_index.pop(); }
             void set_dir(const math::Vec<3>& t_dir);
             void move(double t_dist);
             void rotate(double t_dec, double t_azi);

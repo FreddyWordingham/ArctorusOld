@@ -11,9 +11,9 @@
     },
     "entities": {
         "entity_one": {
-            "scale": [0.09, 0.09, 0.09],
+            "scale": [0.9, 0.9, 0.9],
             "trans": [0.0, 0.0, 0.0],
-            "mesh":  "meshes/sphere.obj",
+            "mesh":  "meshes/prism.obj",
             "mat":   "materials/glass.mat"
         }
     },
