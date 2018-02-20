@@ -292,7 +292,7 @@ namespace arc
                     }
 
                         // Will hit boundary.
-                    else if (entity_dist < cell_dist)
+                    else if (entity_dist < cell_dist) // TODO material stack.
                     {
                         energy += entity_dist;
 
