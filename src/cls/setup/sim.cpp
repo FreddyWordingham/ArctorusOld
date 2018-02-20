@@ -380,7 +380,7 @@ namespace arc
 
                                 // Photon does need to change entity.
                                 phot.push_entity_index(index_t);
-                                phot.set_opt(index_t == -1 ? m_aether : m_entity[index_t].get_mat());
+                                phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                             }
                         }
                     }
