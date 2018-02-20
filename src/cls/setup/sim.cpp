@@ -304,7 +304,11 @@ namespace arc
                         energy += entity_dist;
 
                         // Move to just before the boundary.
-                        phot.move(entity_dist * (1.0 - SMOOTHING_LENGTH));
+                        if ((entity_dist - SMOOTHING_LENGTH) < 0.0)
+                        {
+                            VAL(entity_dist);
+                        }
+                        phot.move(entity_dist - SMOOTHING_LENGTH);
 
                         phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
 
