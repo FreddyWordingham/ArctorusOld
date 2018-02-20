@@ -293,7 +293,37 @@ namespace arc
                     }
 
                         // Will hit boundary.
-                    else if (entity_dist < cell_dist) // TODO material stack.
+                    else if (entity_dist < cell_dist)
+                    {
+                        // If entity normal is facing away, multiply it by -1.
+                        if ((phot.get_dir() * entity_norm) > 0.0)
+                        {
+                            entity_norm = entity_norm * -1.0;
+                        }
+
+                        energy += entity_dist;
+
+                        // Determine the material indices.
+                        int index_i, index_t;
+                        if (phot.get_entity_index() == static_cast<int>(entity_index))  // Exiting the current entity.
+                        {
+                            index_i = phot.get_entity_index();
+                            index_t = phot.get_prev_entity_index();
+                        }
+                        else                                                            // Entering a new entity.
+                        {
+                            index_i = static_cast<int>(entity_index);
+                            index_t = phot.get_entity_index();
+                        }
+                        assert(index_i != index_t);
+
+                        // Get references to the materials.
+                        const phys::Material& mat_i = (index_i == -1) ? m_aether : m_entity[static_cast<size_t>(index_i)]
+                            .get_mat();
+                        const phys::Material& mat_t = (index_t == -1) ? m_aether : m_entity[static_cast<size_t>(index_t)]
+                            .get_mat();
+                    }
+                    else if (entity_dist < cell_dist)
                     {
                         // If entity normal is facing away, multiply it by -1.
                         if ((phot.get_dir() * entity_norm) > 0.0)
