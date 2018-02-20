@@ -264,10 +264,16 @@ namespace arc
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
-                    const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
-                    const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
+                    const double scat_dist   = -std::log(rng::random()) / phot.get_interaction();
+                    const double entity_dist = cell->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+                    const double cell_dist   = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
 
-                    if (scat_dist < cell_dist)
+                    assert(math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
+                    assert(math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
+                    assert(math::equal(scat_dist, entity_dist, SMOOTHING_LENGTH));
+
+                    // Will scatter.
+                    if ((scat_dist < entity_dist) && (scat_dist < cell_dist))
                     {
                         energy += scat_dist;
 
@@ -280,6 +286,19 @@ namespace arc
                         // Reduce weight by albedo.
                         phot.multiply_weight(phot.get_albedo());
                     }
+
+                        // Will hit boundary.
+                    else if (entity_dist < cell_dist)
+                    {
+                        energy += entity_dist;
+
+                        // Move to the boundary intersection.
+                        phot.move(entity_dist + SMOOTHING_LENGTH);
+
+                        break;
+                    }
+
+                        // Will exit cell.
                     else
                     {
                         energy += cell_dist;
