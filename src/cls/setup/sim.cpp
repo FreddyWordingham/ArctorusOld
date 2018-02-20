@@ -298,9 +298,6 @@ namespace arc
 
                         // Get new material optical properties.
                         const double n_i = phot.get_ref_index();
-
-                        VAL(entity_index);
-                        VAL(phot.get_wavelength());
                         const double n_t = m_entity[entity_index].get_mat().get_ref_index(phot.get_wavelength());
 
                         const double a_i = acos(phot.get_dir() * entity_norm);
