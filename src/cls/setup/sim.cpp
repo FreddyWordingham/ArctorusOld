@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/optics.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -296,7 +297,9 @@ namespace arc
                     {
                         energy += entity_dist;
 
-                        // Get new material optical properties.
+                        phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+
+                        /*// Get new material optical properties.
                         const double n_i = phot.get_ref_index();
                         const double n_t = m_entity[entity_index].get_mat().get_ref_index(phot.get_wavelength());
 
@@ -323,7 +326,7 @@ namespace arc
                             phot.set_dir(math::normalise(
                                 (phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(
                                     1.0 - sin_sq)))));
-                        }
+                        }*/
                     }
 
                         // Will exit cell.
