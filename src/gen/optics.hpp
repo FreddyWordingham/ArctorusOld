@@ -14,8 +14,6 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-
 //  -- Classes --
 #include "cls/math/vec.hpp"
 
@@ -30,6 +28,8 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Boundary --
+        math::Vec<3> reflection_dir(const math::Vec<3>& t_in, const math::Vec<3>& t_norm);
 
 
 
