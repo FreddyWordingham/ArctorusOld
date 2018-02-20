@@ -16,6 +16,9 @@
 //  == INCLUDES ==
 //  -- System --
 
+//  -- Classes --
+#include "cls/math/vec.hpp"
+
 
 
 //  == NAMESPACE ==
