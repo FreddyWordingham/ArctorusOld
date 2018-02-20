@@ -14,6 +14,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <stack>
+
 //  -- Classes --
 #include "cls/graphical/point/photon.hpp"
 #include "cls/math/vec.hpp"
@@ -43,11 +46,12 @@ namespace arc
             double       m_weight;  //! Statistical weight of the particle.
 
             //  -- Optical --
-            const double m_wavelength;  //! Wavelength of the photon packet.
-            double       m_ref_index;   //! Current refractive index.
-            double       m_albedo;      //! Current albedo.
-            double       m_interaction; //! Current interaction coefficient.
-            double       m_anisotropy;  //! Current anisotropy value.
+            const double m_wavelength;      //! Wavelength of the photon packet.
+            double       m_ref_index;       //! Current refractive index.
+            double       m_albedo;          //! Current albedo.
+            double       m_interaction;     //! Current interaction coefficient.
+            double       m_anisotropy;      //! Current anisotropy value.
+            std::stack   m_entity_index;    //! A record of the entity index which the photon is currently inside.
 
             //  -- Data --
             double                                m_time;   //! Emission time plus current age of the particle.
