@@ -76,6 +76,8 @@ namespace arc
         constexpr const double LIGHT_END_HUE       = 60.0;  //! Light prop end hue.
         constexpr const double ENTITY_START_HUE    = 240.0; //! Entity prop start hue.
         constexpr const double ENTITY_END_HUE      = 280.0; //! Entity prop end hue.
+        constexpr const double PHOTON_START_HUE    = 120.0; //! Photon path prop start hue.
+        constexpr const double PHOTON_END_HUE      = 160.0; //! Photon path prop end hue.
 
 
 
@@ -154,6 +156,7 @@ namespace arc
             //  -- Additions --
             void add_light_vector(const std::vector<equip::Light>& t_light);
             void add_entity_vector(const std::vector<equip::Entity>& t_ent);
+            void add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot);
 
             //  -- Control --
             bool should_close() const;
@@ -163,7 +166,7 @@ namespace arc
             //  -- Additions --
             void add_entity(const equip::Entity& t_ent, const glm::vec4& t_col);
             void add_light(const equip::Light& t_light, const glm::vec4& t_col);
-            void add_photon(const std::vector<point::Photon>& t_phot);
+            void add_photon(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col);
 
             //  -- Control --
             void swap_camera();

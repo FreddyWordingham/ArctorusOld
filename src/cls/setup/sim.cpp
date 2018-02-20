@@ -38,9 +38,48 @@ namespace arc
          *  @param  t_json Json setup file.
          */
         Sim::Sim(const data::Json& t_json) :
+            m_num_phot(t_json.parse_child<unsigned long int>("num_phot")),
+            m_aether(init_aether(t_json["aether"])),
+            m_entity(init_entity(t_json["entities"])),
             m_light(init_light(t_json["lights"])),
-            m_entity(init_entity(t_json["entities"]))
+            m_light_select(init_light_select())
         {
+            // Check wavelengths are valid.
+            double      light_min_bound = m_light[0].get_min_bound();
+            double      light_max_bound = m_light[0].get_max_bound();
+            for (size_t i               = 1; i < m_light.size(); ++i)
+            {
+                if (m_light[i].get_min_bound() > light_min_bound)
+                {
+                    light_min_bound = m_light[i].get_min_bound();
+                }
+                if (m_light[i].get_max_bound() < light_max_bound)
+                {
+                    light_max_bound = m_light[i].get_max_bound();
+                }
+            }
+
+            double mat_min_bound = m_aether.get_min_bound();
+            double mat_max_bound = m_aether.get_max_bound();
+            for (size_t i=0; i<m_entity.size(); ++i)
+            {
+                if (m_entity[i].get_min_bound() > mat_min_bound)
+                {
+                    mat_min_bound = m_entity[i].get_min_bound();
+                }
+                if (m_entity[i].get_max_bound() < mat_max_bound)
+                {
+                    mat_max_bound = m_entity[i].get_max_bound();
+                }
+            }
+
+            if ((light_min_bound < mat_min_bound) || (light_max_bound > mat_max_bound))
+            {
+                ERROR("Unable to construct setup::Sim object.",
+                      "Range of wavelengths emitted by lights: '" << light_min_bound << "' - '" << light_max_bound
+                                                                  << "', falls beyond the range of wavelengths handled by the materials:'"
+                                                                  << mat_min_bound << "' - '" << mat_max_bound << "'.");
+            }
         }
 
         /**
@@ -55,6 +94,64 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the aether material.
+         *
+         *  @param  t_json  Json setup file.
+         *
+         *  @return The initialised aether material.
+         */
+        phys::Material Sim::init_aether(const data::Json& t_json) const
+        {
+            LOG("Constructing aether.");
+
+            // Get file paths.
+            const std::string mat_path = t_json.parse_child<std::string>("mat");
+
+            return (phys::Material(file::read(mat_path)));
+        }
+
+        /**
+         *  Initialise the vector of entity objects.
+         *
+         *  @param  t_json Json setup file.
+         *
+         *  @return The initialise vector of entity objects.
+         */
+        std::vector<equip::Entity> Sim::init_entity(const data::Json& t_json) const
+        {
+            // Create the return vector of entities.
+            std::vector<equip::Entity> r_entity;
+
+            // Get list of entity names.
+            std::vector<std::string> entity_name = t_json.get_child_names();
+
+            // Construct the entity objects.
+            for (size_t i = 0; i < entity_name.size(); ++i)
+            {
+                LOG("Constructing entity : " << entity_name[i]);
+
+                // Create a json object of the entity.
+                const data::Json json_entity = t_json[entity_name[i]];
+
+                // Get the transformation values.
+                const auto   trans = json_entity.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
+                const auto   dir   = json_entity.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const double spin  = math::deg_to_rad(json_entity.parse_child<double>("spin", 0.0));
+                const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+
+                // Get file paths.
+                const std::string mesh_path = json_entity.parse_child<std::string>("mesh");
+                const std::string mat_path  = json_entity.parse_child<std::string>("mat");
+
+                // Construct the entity object an add it to the vector of entities.
+                r_entity.emplace_back(equip::Entity(geom::Mesh(file::read(mesh_path), trans, dir, spin, scale),
+                                                    phys::Material(file::read(mat_path))));
+            }
+
+            return (r_entity);
+        }
+
         /**
          *  Initialise the vector of light objects.
          *
@@ -100,44 +197,20 @@ namespace arc
         }
 
         /**
-         *  Initialise the vector of entity objects.
+         *  Construct the light index selector object.
          *
-         *  @param  t_json Json setup file.
-         *
-         *  @return The initialise vector of entity objects.
+         *  @return The initialised light index selector.
          */
-        std::vector<equip::Entity> Sim::init_entity(const data::Json& t_json) const
+        random::Index Sim::init_light_select() const
         {
-            // Create the return vector of entities.
-            std::vector<equip::Entity> r_entity;
-
-            // Get list of entity names.
-            std::vector<std::string> entity_name = t_json.get_child_names();
-
-            // Construct the entity objects.
-            for (size_t i = 0; i < entity_name.size(); ++i)
+            // Create a vector of light powers.
+            std::vector<double> power;
+            for (size_t         i = 0; i < m_light.size(); ++i)
             {
-                LOG("Constructing entity : " << entity_name[i]);
-
-                // Create a json object of the entity.
-                const data::Json json_entity = t_json[entity_name[i]];
-
-                // Get the transformation values.
-                const auto   trans = json_entity.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const auto   dir   = json_entity.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
-                const double spin  = math::deg_to_rad(json_entity.parse_child<double>("spin", 0.0));
-                const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
-
-                // Get file paths.
-                const std::string mesh_path = json_entity.parse_child<std::string>("mesh");
-                const std::string mat_path  = json_entity.parse_child<std::string>("mat");
-
-                // Construct the entity object an add it to the vector of entities.
-                r_entity.emplace_back(equip::Entity(geom::Mesh(file::read(mesh_path), trans, dir, spin, scale),
-                                                    phys::Material(file::read(mat_path))));
+                power.push_back(m_light[i].get_power());
             }
 
-            return (r_entity);
+            return (random::Index(power));
         }
 
 
@@ -155,12 +228,36 @@ namespace arc
             // Add objects to the scene.
             scene.add_light_vector(m_light);
             scene.add_entity_vector(m_entity);
+            scene.add_photon_vector(m_path);
 
             // Render the scene.
             while (!scene.should_close())
             {
                 scene.handle_input();
                 scene.render();
+            }
+        }
+
+
+        //  -- Running --
+        /**
+         *  Run the simulation.
+         */
+        void Sim::run()
+        {
+            for (unsigned long int i=0; i<m_num_phot; ++i)
+            {
+                // Generate a new photon.
+                phys::particle::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
+
+                for (unsigned long int j=0; j<100; ++j)
+                {
+                    phot.move(-std::log(rng::random()) / phot.get_interaction());
+                    phot.scatter();
+                }
+
+                // Add the photon path.
+                m_path.push_back(phot.get_path());
             }
         }
 

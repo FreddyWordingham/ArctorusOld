@@ -37,9 +37,19 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Settings --
+            const unsigned long int m_num_phot; //! Number of photons to simulate.
+
             //  -- Equipment --
-            const std::vector<equip::Light>  m_light;   //! Vector of light objects.
+            const phys::Material             m_aether;  //! Aether material.
             const std::vector<equip::Entity> m_entity;  //! Vector of entity objects.
+            const std::vector<equip::Light>  m_light;   //! Vector of light objects.
+
+            //  -- Tools --
+            const random::Index m_light_select; //! Light selector.
+
+            //  -- Data --
+            std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
 
 
             //  == INSTANTIATION ==
@@ -50,9 +60,10 @@ namespace arc
 
           private:
             //  -- Initialisation --
-
-            std::vector<equip::Light> init_light(const data::Json& t_param) const;
-            std::vector<equip::Entity> init_entity(const data::Json& t_param) const;
+            phys::Material init_aether(const data::Json& t_json) const;
+            std::vector<equip::Entity> init_entity(const data::Json& t_json) const;
+            std::vector<equip::Light> init_light(const data::Json& t_json) const;
+            random::Index init_light_select() const;
 
 
             //  == OPERATORS ==
@@ -63,6 +74,9 @@ namespace arc
           public:
             //  -- Rendering --
             void render() const;
+
+            //  -- Running --
+            void run();
         };
 
 

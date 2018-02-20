@@ -195,7 +195,7 @@ namespace arc
             }
 
             // Calculate the hue delta.
-            const double hue_delta = (t_light.size() == 1) ? 0.0 : ((LIGHT_END_HUE - LIGHT_START_HUE) / t_light.size() - 1);
+            const double hue_delta = (t_light.size() == 1) ? 0.0 : ((LIGHT_END_HUE - LIGHT_START_HUE) / (t_light.size() - 1));
 
             // Add the light props to the scene.
             for (size_t i = 0; i < t_light.size(); ++i)
@@ -217,14 +217,14 @@ namespace arc
         {
             static_assert(ENTITY_START_HUE < ENTITY_END_HUE);
 
-            // Return if there are no lights.
+            // Return if there are no entities.
             if (t_entity.empty())
             {
                 return;
             }
 
             // Calculate the hue delta.
-            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / t_entity.size() - 1);
+            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / (t_entity.size() - 1));
 
             // Add the entity props to the scene.
             for (size_t i = 0; i < t_entity.size(); ++i)
@@ -236,10 +236,39 @@ namespace arc
         }
 
         /**
+         *  Add a vector of render-able photon path props to the scene.
+         *
+         *  @param  t_phot  Vector of photon paths to be added to the scene.
+         *
+         *  @pre    PHOTON_START_HUE must be less than PHOTON_END_HUE.
+         */
+        void Scene::add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot)
+        {
+            static_assert(PHOTON_START_HUE < PHOTON_END_HUE);
+
+            // Return if there are no photon paths.
+            if (t_phot.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_phot.size() == 1) ? 0.0 : ((PHOTON_END_HUE - PHOTON_START_HUE) / (t_phot.size() - 1));
+
+            // Add the photon path props to the scene.
+            for (size_t i = 0; i < t_phot.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(PHOTON_START_HUE + (i * hue_delta)));
+
+                add_photon(t_phot[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+            }
+        }
+
+        /**
          *  Add a render-able entity prop to the scene.
          *
          *  @param  t_ent   Entity be added to the scene.
-         *  @param  t_col   Colour ro render the prop.
+         *  @param  t_col   Colour to render the prop.
          */
         void Scene::add_entity(const equip::Entity& t_ent, const glm::vec4& t_col)
         {
@@ -269,7 +298,7 @@ namespace arc
          *  Add a render-able light prop to the scene.
          *
          *  @param  t_light Light to be added to the scene.
-         *  @param  t_col   Colour ro render the prop.
+         *  @param  t_col   Colour to render the prop.
          */
         void Scene::add_light(const equip::Light& t_light, const glm::vec4& t_col)
         {
@@ -299,10 +328,11 @@ namespace arc
          *  Add a renderable photon packet path prop to the scene.
          *
          *  @param  t_phot  Photon packet path prop to be added.
+         *  @param  t_col   Colour to render the prop.
          */
-        void Scene::add_photon(const std::vector<point::Photon>& t_phot)
+        void Scene::add_photon(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col)
         {
-            m_phot.emplace_back(Prop(t_phot, glm::vec4(1.0, 1.0, 1.0, 1.0)));
+            m_phot.emplace_back(Prop(t_phot, t_col));
         }
 
 
