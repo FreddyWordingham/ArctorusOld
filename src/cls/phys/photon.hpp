@@ -71,7 +71,10 @@ namespace arc
             const math::Vec<3>& get_pos() const { return (m_pos); }
             const math::Vec<3>& get_dir() const { return (m_dir); }
             const std::vector<graphical::point::Photon>& get_path() const { return (m_path); }
+            double get_ref_index() const { return (m_ref_index); }
+            double get_albedo() const { return (m_albedo); }
             double get_interaction() const { return (m_interaction); }
+            double get_anisotropy() const { return (m_anisotropy); }
 
             //  -- Setters --
             void move(double t_dist);

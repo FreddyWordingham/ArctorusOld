@@ -275,7 +275,7 @@ namespace arc
                         phot.move(scat_dist);
 
                         // Scatter.
-                        phot.rotate(rng::random(0.0, M_PI), rng::random(0.0, 2.0 * M_PI));
+                        phot.rotate(rng::henyey_greenstein(phot.get_anisotopy), rng::random(0.0, 2.0 * M_PI));
                     }
                     else
                     {
