@@ -296,6 +296,10 @@ namespace arc
                     {
                         energy += entity_dist;
 
+                        // Get new material optical properties.
+                        const double ref_index = m_entity[entity_index].get_mat().get_ref_index(phot.get_wavelength);
+
+
                         // Move to the boundary intersection.
                         phot.move(entity_dist - SMOOTHING_LENGTH);
 
