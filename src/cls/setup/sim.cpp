@@ -347,10 +347,7 @@ namespace arc
                         }
                         else
                         {
-                            // Determine reflection probability.
-                            const double R = optics::reflection_prob(a_i, n_i, n_t);
-
-                            if (rng::random() <= R)  // Reflect.
+                            if (rng::random() <= optics::reflection_prob(a_i, n_i, n_t))    // Reflect.
                             {
                                 // Move to just before the boundary.
                                 phot.move(entity_dist - SMOOTHING_LENGTH);
@@ -361,7 +358,7 @@ namespace arc
                                 // Photon does not need to change entity.
                                 phot.push_entity_index(index_i);
                             }
-                            else                    // Refract.
+                            else                                                            // Refract.
                             {
                                 // Move to just past the boundary.
                                 phot.move(entity_dist + SMOOTHING_LENGTH);
