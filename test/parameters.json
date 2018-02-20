@@ -7,7 +7,7 @@
         "cells": [81, 21, 21]
     },
     "aether":   {
-        "mat": "materials/vacuum.mat"
+        "mat": "materials/intralipid_10.mat"
     },
     "entities": {
         "entity_one": {
