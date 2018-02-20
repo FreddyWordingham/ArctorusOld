@@ -104,6 +104,8 @@ namespace arc
                     }
                 }
 
+                assert(r_dist > 0.0);
+
                 return (r_dist);
             }
 
