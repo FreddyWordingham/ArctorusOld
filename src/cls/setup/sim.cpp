@@ -258,6 +258,9 @@ namespace arc
                 // Determine the initial cell.
                 auto cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
 
+                // Track energy density to be added to each cell.
+                double energy = 0.0;
+
                 // Loop until the photon exits the grid.
                 while (m_grid.is_within(phot.get_pos()))
                 {
@@ -266,11 +269,19 @@ namespace arc
 
                     if (scat_dist < cell_dist)
                     {
+                        energy += scat_dist;
+
                         phot.move(scat_dist);
                     }
                     else
                     {
-                        // Move into the next cell.
+                        energy += cell_dist;
+
+                        // Add current energy to current cell and reset count.
+                        cell->add_energy_density(energy);
+                        energy = 0.0;
+
+                        // Move into the next cell space.
                         phot.move(cell_dist + SMOOTHING_LENGTH);
 
                         // Change cell if still within the grid.
