@@ -291,7 +291,6 @@ namespace arc
                         // Reduce weight by albedo.
                         phot.multiply_weight(phot.get_albedo());
                     }
-
                         // Will hit boundary.
                     else if (entity_dist < cell_dist)
                     {
@@ -342,80 +341,12 @@ namespace arc
                             // Reflect the photon.
                             phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
 
-                            // Photon does not need to change entity.
+                            // Photon stays in current entity.
                             phot.push_entity_index(index_i);
                         }
                         else
                         {
-                            // Move to just past the boundary.
-                            phot.move(entity_dist + SMOOTHING_LENGTH);
-
-                            // Photon does need to change entity.
-                            phot.push_entity_index(index_t);
-                            phot.set_opt((index_t == -1) ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
-                        }
-                    }/*
-                    else if (entity_dist < cell_dist)
-                    {
-                        // If entity normal is facing away, multiply it by -1.
-                        if ((phot.get_dir() * entity_norm) > 0.0)
-                        {
-                            entity_norm = entity_norm * -1.0;
-                        }
-
-                        energy += entity_dist;
-
-                        // Determine the incident and transfer materials.
-                        const phys::Material* mat_i = nullptr;
-                        const phys::Material* mat_t = nullptr;
-
-                        int index_i, index_t;
-                        if (phot.get_entity_index() == static_cast<int>(entity_index))  // Exiting a material.
-                        {
-                            mat_i = &m_entity[entity_index].get_mat();
-                            mat_t = (phot.get_prev_entity_index() == -1) ? &m_aether : &m_entity[static_cast<size_t>(phot
-                                .get_prev_entity_index())].get_mat();
-
-                            index_i = static_cast<int>(entity_index);
-                            index_t = phot.get_prev_entity_index();
-
-                            phot.pop_entity_index();
-                        }
-                        else                                                            // Entering a material.
-                        {
-                            mat_i = (phot.get_entity_index() == -1) ? &m_aether : &m_entity[static_cast<size_t>(phot
-                                .get_entity_index())].get_mat();
-                            mat_t = &m_entity[entity_index].get_mat();
-
-                            index_i = phot.get_entity_index();
-                            index_t = static_cast<int>(entity_index);
-                        }
-
-                        // Get optical properties of the materials.
-                        const double n_i = mat_i->get_ref_index(phot.get_wavelength());
-                        const double n_t = mat_t->get_ref_index(phot.get_wavelength());
-
-                        // Calculate incident angle.
-                        const double a_i = acos(-1.0 * (phot.get_dir() * entity_norm));
-
-                        // Check for total internal reflection.
-                        if (std::sin(a_i) > (n_t / n_i))
-                        {
-                            // Move to just before the boundary.
-                            phot.move(entity_dist - SMOOTHING_LENGTH);
-
-                            // Reflect the photon.
-                            phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
-
-                            // Photon does not need to change entity.
-                            phot.push_entity_index(index_i);
-                        }
-                        else
-                        {
-                            // Determine reflection probability.
-                            const double R = optics::reflection_prob(a_i, n_i, n_t);
-
-                            if (rng::random() <= R)  // Reflect.
+                            if (rng::random() <= optics::reflection_prob(a_i, n_i, n_t))
                             {
                                 // Move to just before the boundary.
                                 phot.move(entity_dist - SMOOTHING_LENGTH);
@@ -423,7 +354,7 @@ namespace arc
                                 // Reflect the photon.
                                 phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
 
-                                // Photon does not need to change entity.
+                                // Photon stays in current entity.
                                 phot.push_entity_index(index_i);
                             }
                             else                    // Refract.
@@ -437,13 +368,12 @@ namespace arc
                                     (phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(
                                         1.0 - sin_sq)))));
 
-                                // Photon does need to change entity.
+                                // Photon moves to new entity.
                                 phot.push_entity_index(index_t);
                                 phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                             }
                         }
-                    }*/
-
+                    }
                         // Will exit cell.
                     else
                     {
