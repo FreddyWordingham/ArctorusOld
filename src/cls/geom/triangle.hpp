@@ -64,7 +64,7 @@ namespace arc
             //  -- Getters --
             double get_area() const { return (m_area); }
             inline const Vertex& get_vert(size_t t_index) const;
-            double get_intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
+            std::pair<double, math::Vec<3>> get_intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
             {
                 assert(t_dir.is_normalised());
                 assert(m_norm.is_normalised());
@@ -80,7 +80,8 @@ namespace arc
                 if (std::fabs(a) <= std::numeric_limits<double>::epsilon())
                 {
                     // Does not hit triangle.
-                    return (std::numeric_limits<double>::max());
+                    return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(),
+                                                            math::Vec<3>({{0.0, 0.0, 0.0}})));
                 }
 
                 const math::Vec<3> s = (t_pos - m_vert[ALPHA].get_pos()) / a;
@@ -95,7 +96,8 @@ namespace arc
                 if ((alpha < 0.0) || (beta < 0.0) | (gamma < 0.0))
                 {
                     // Does not hit triangle.
-                    return (std::numeric_limits<double>::max());
+                    return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(),
+                                                            math::Vec<3>({{0.0, 0.0, 0.0}})));
                 }
 
                 // Calculate intersection distance.
@@ -105,10 +107,15 @@ namespace arc
                 if (r_dist <= 0.0)
                 {
                     // Does not hit triangle.
-                    return (std::numeric_limits<double>::max());
+                    return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(),
+                                                            math::Vec<3>({{0.0, 0.0, 0.0}})));
                 }
 
-                return (r_dist);
+                // Determine interpolated normal.
+                math::Vec<3> r_norm = math::normalise(
+                    (m_vert[ALPHA].get_norm() * alpha) + (m_vert[BETA].get_norm()) + (m_vert[GAMMA].get_norm() * gamma));
+
+                return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
             }
 
             //  -- Generation --
