@@ -318,7 +318,6 @@ namespace arc
                             index_t = phot.get_prev_entity_index();
 
                             phot.pop_entity_index();
-                            phot.pop_entity_index();
                         }
                         else                                                            // Entering a material.
                         {
