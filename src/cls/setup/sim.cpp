@@ -350,8 +350,6 @@ namespace arc
                             .get_mat();
 
                         // Get optical properties of the materials.
-                        VAL(index_i);
-                        VAL(index_t);
                         const double n_i = mat_i.get_ref_index(phot.get_wavelength());
                         const double n_t = mat_t.get_ref_index(phot.get_wavelength());
 
