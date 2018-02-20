@@ -324,10 +324,28 @@ namespace arc
                             phot.pop_entity_index();
                         }
 
-                        // Move to just before the boundary.
-                        phot.move(entity_dist - SMOOTHING_LENGTH);
+                        // Get optical properties of the materials.
+                        const double n_i = mat_i->get_ref_index(phot.get_wavelength());
+                        const double n_t = mat_t->get_ref_index(phot.get_wavelength());
 
-                        phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+                        // Calculate incident angle.
+                        const double a_i = acos(-1.0 * (phot.get_dir() * entity_norm));
+
+                        // Check for total internal reflection.
+                        if (std::sin(a_i) > (n_t / n_i))
+                        {
+                            // Move to just before the boundary.
+                            phot.move(entity_dist - SMOOTHING_LENGTH);
+
+                            // Reflect the photon.
+                            phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+                        }
+                        else
+                        {
+                            // Calculate transmission angle.
+                            const double a_t = std::acos((n_i / n_t) * std::sin(a_i));
+                        }
+
 
                         /*// Get new material optical properties.
                         const double n_i = phot.get_ref_index();
