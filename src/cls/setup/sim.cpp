@@ -278,7 +278,14 @@ namespace arc
                     }
                     else
                     {
-                        phot.move(cell_dist + )
+                        // Move into the next cell.
+                        phot.move(cell_dist + SMOOTHING_LENGTH);
+
+                        // Change cell if still within the grid.
+                        if (m_grid.is_within(phot.get_pos()))
+                        {
+                            cell = m_grid.get_cell(phot.get_pos());
+                        }
                     }
                 }
 
