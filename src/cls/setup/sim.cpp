@@ -291,6 +291,7 @@ namespace arc
                         // Reduce weight by albedo.
                         phot.multiply_weight(phot.get_albedo());
                     }
+
                         // Will hit boundary.
                     else if (entity_dist < cell_dist)
                     {
@@ -306,7 +307,7 @@ namespace arc
                         int index_i, index_t;
                         if (phot.get_entity_index() == static_cast<int>(entity_index))  // Exiting the current entity.
                         {
-                            index_i = phot.get_entity_index();
+                            index_i = entity_index;
                             index_t = phot.get_prev_entity_index();
 
                             phot.pop_entity_index();
@@ -346,7 +347,10 @@ namespace arc
                         }
                         else
                         {
-                            if (rng::random() <= optics::reflection_prob(a_i, n_i, n_t))
+                            // Determine reflection probability.
+                            const double R = optics::reflection_prob(a_i, n_i, n_t);
+
+                            if (rng::random() <= R)  // Reflect.
                             {
                                 // Move to just before the boundary.
                                 phot.move(entity_dist - SMOOTHING_LENGTH);
@@ -354,7 +358,7 @@ namespace arc
                                 // Reflect the photon.
                                 phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
 
-                                // Photon stays in current entity.
+                                // Photon does not need to change entity.
                                 phot.push_entity_index(index_i);
                             }
                             else                    // Refract.
@@ -368,12 +372,13 @@ namespace arc
                                     (phot.get_dir() * (n_i / n_t)) + (entity_norm * (((n_i / n_t) * std::cos(a_i)) - std::sqrt(
                                         1.0 - sin_sq)))));
 
-                                // Photon moves to new entity.
+                                // Photon does need to change entity.
                                 phot.push_entity_index(index_t);
                                 phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                             }
                         }
                     }
+
                         // Will exit cell.
                     else
                     {
