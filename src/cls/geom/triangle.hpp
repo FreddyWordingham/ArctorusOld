@@ -64,6 +64,17 @@ namespace arc
             //  -- Getters --
             double get_area() const { return (m_area); }
             inline const Vertex& get_vert(size_t t_index) const;
+            double get_intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
+            {
+                // Check if ray is parallel to triangle.
+                const double approach = m_norm * t_dir;
+                if (fabs(approach) < 10E-10)
+                {
+                    return (std::numeric_limits<double>::max());
+                }
+
+                return (((m_norm * m_vert[ALPHA].get_pos()) - (m_norm * t_pos)) / approach);
+            }
 
             //  -- Generation --
             std::pair<math::Vec<3>, math::Vec<3>> gen_random_pos_and_norm() const;
