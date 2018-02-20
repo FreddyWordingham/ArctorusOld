@@ -30,6 +30,7 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Boundary --
         math::Vec<3> reflection_dir(const math::Vec<3>& t_in, const math::Vec<3>& t_norm);
+        double reflection_prob(double a_i, double n_i, double n_t);
 
 
 
