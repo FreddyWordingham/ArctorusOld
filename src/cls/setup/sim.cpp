@@ -294,6 +294,8 @@ namespace arc
 
                         // Move to the boundary intersection.
                         phot.move(entity_dist + SMOOTHING_LENGTH);
+
+                        break;
                     }
 
                         // Will exit cell.
