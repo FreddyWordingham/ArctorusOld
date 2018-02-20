@@ -263,8 +263,15 @@ namespace arc
                 double energy = 0.0;
 
                 // Loop until the photon exits the grid.
+                unsigned long int loops = 0;
                 while (m_grid.is_within(phot.get_pos()))
                 {
+                    if (loops > 1e6)
+                    {
+                        WARN("Photon removed from loop prematurely.", "Photon appeared to be stuck in main loop.");
+                    }
+                    ++loops;
+
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
                     const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
                     size_t       entity_index;

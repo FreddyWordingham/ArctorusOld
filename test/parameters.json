@@ -13,9 +13,10 @@
         "entity_one": {
             "scale": [2.0, 2.0, 2.0],
             "trans": [0.0, 0.0, 0.0],
+            "dir":   [1.0, 0.0, 0.0],
             "rot":   0.0,
             "mesh":  "meshes/square.obj",
-            "mat":   "materials/glass.mat"
+            "mat":   "materials/intralipid_10.mat"
         }
     },
     "lights":   {
