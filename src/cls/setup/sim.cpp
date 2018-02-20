@@ -287,7 +287,7 @@ namespace arc
                              "Distance to entity is shorter than the smoothing length.");
                         phot.move(0.1);
 
-                        m_path.push_back(phot.get_path());
+//                        m_path.push_back(phot.get_path());
 
                         break;
                     }
@@ -407,7 +407,7 @@ namespace arc
                 }
 
                 // Add the photon path.
-//                m_path.push_back(phot.get_path());
+                m_path.push_back(phot.get_path());
             }
         }
 
