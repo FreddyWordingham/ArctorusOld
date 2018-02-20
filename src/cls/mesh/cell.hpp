@@ -90,21 +90,26 @@ namespace arc
                 }
 
                 // Run through all entity triangles and determine the closest intersection distance.
-                double      r_dist = std::numeric_limits<double>::max();
-                for (size_t i      = 0; i < m_entity_list.size(); ++i)
+                double       r_dist = std::numeric_limits<double>::max();
+                math::Vec<3> r_norm;
+                for (size_t  i      = 0; i < m_entity_list.size(); ++i)
                 {
                     // Get distance to intersection.
-                    const double tri_dist = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
-                                                                         .get_intersection_dist(t_pos, t_dir);
+                    double       tri_dist;
+                    math::Vec<3> tri_norm;
+                    std::tie(tri_dist, tri_norm) = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
+                                                                                .get_intersection_dist(t_pos, t_dir);
 
                     // If this distance is the closest so far, accept it.
                     if ((tri_dist < r_dist) && (tri_dist > 0.0))
                     {
                         r_dist = tri_dist;
+                        r_norm = tri_norm;
                     }
                 }
 
                 assert(r_dist > 0.0);
+                assert(r_norm.is_normalised());
 
                 return (r_dist);
             }
