@@ -277,6 +277,18 @@ namespace arc
                     assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
                     assert(!math::equal(scat_dist, entity_dist, SMOOTHING_LENGTH));
 
+
+                    if (entity_dist <= SMOOTHING_LENGTH)
+                    {
+                        WARN("Photon removed from loop prematurely.",
+                             "Distance to entity is shorter than the smoothing length.");
+
+                        break;
+                    }
+                    assert(scat_dist > SMOOTHING_LENGTH);
+                    assert(cell_dist > SMOOTHING_LENGTH);
+                    assert(entity_dist > SMOOTHING_LENGTH);
+
                     if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.
                     {
                         energy += scat_dist;

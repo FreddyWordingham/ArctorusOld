@@ -11,9 +11,9 @@
     },
     "entities": {
         "entity_one": {
-            "scale": [0.9, 0.9, 0.9],
+            "scale": [1.0, 1.0, 1.0],
             "trans": [0.0, 0.0, 0.0],
-            "mesh":  "meshes/prism.obj",
+            "mesh":  "meshes/cylinder.obj",
             "mat":   "materials/glass.mat"
         }
     },
@@ -22,8 +22,7 @@
             "power": 1.0,
             "trans": [-3.0, 0.0, 0.0],
             "dir":   [-1.0, 0.0, 0.0],
-            "scale": [0.01, 0.01, 0.01],
-            "mesh":  "meshes/circle.obj",
+            "mesh":  "meshes/square.obj",
             "spec":  "spectra/laser.spc"
         }
     }
