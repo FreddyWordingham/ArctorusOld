@@ -355,7 +355,7 @@ namespace arc
                             }
                             else                    // Refract.
                             {
-                                // Move to just pase the boundary.
+                                // Move to just past the boundary.
                                 phot.move(entity_dist + SMOOTHING_LENGTH);
 
                                 // Refract the photon.
