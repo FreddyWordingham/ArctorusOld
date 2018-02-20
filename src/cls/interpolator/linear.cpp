@@ -16,6 +16,9 @@
 //  -- System --
 #include <sstream>
 
+//  -- Utility --
+#include "utl/vector.hpp"
+
 //  -- Classes --
 #include "cls/data/column.hpp"
 #include "cls/data/table.hpp"
