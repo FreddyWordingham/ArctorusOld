@@ -74,6 +74,7 @@ namespace arc
             //  -- Getters --
             const math::Vec<3>& get_min_bound() const { return (m_min_bound); }
             const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
+            double get_volume() const { return ((m_max_bound[X] - m_min_bound[X]) * (m_max_bound[Y] - m_min_bound[Y]) * (m_max_bound[Z] - m_min_bound[Z])); }
             double get_energy_density() const { return (m_energy / get_volume()); }
             bool empty() const { return (m_empty); }
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
