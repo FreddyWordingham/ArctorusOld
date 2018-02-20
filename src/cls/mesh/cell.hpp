@@ -78,16 +78,16 @@ namespace arc
             double get_energy_density() const { return (m_energy / get_volume()); }
             bool empty() const { return (m_empty); }
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
-            std::pair<double, math::Vec<3>> get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                                               const std::vector<equip::Entity>& t_entity) const
+            std::tuple<size_t, double, math::Vec<3>> get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                                        const std::vector<equip::Entity>& t_entity) const
             {
                 assert(t_dir.is_normalised());
 
                 // If cell contains no entity triangles, return a large dummy value.
                 if (m_empty)
                 {
-                    return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(),
-                                                            math::Vec<3>({{0.0, 0.0, 0.0}})));
+                    return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
+                                                                     math::Vec<3>({{0.0, 0.0, 0.0}})));
                 }
 
                 // Run through all entity triangles and determine the closest intersection distance.
