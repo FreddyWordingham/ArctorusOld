@@ -255,14 +255,6 @@ namespace arc
                 // Generate a new photon.
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
-                // Check photon is within the grid.
-                if (!m_grid.is_within(phot.get_pos()))
-                {
-                    WARN("Photon emitted outside of grid.", "Light emission surface falls outside of grid domain.");
-
-                    continue;
-                }
-
                 // Determine the initial cell.
                 auto cell = std::make_unique<mesh::Cell>(m_grid.get_cell(phot.get_pos()));
 
