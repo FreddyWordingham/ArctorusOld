@@ -344,6 +344,9 @@ namespace arc
                         {
                             // Calculate transmission angle.
                             const double a_t = std::acos((n_i / n_t) * std::sin(a_i));
+
+                            // Determine reflection probability.
+                            const double R = optics::reflection_prob(n_i, n_t, a_i, a_t);
                         }
 
 
