@@ -101,7 +101,7 @@ namespace arc
 
             m_last_index = utl::lower_index(m_x, t_val, m_last_index);
 
-            return (m_y[index] + ((t_val - m_x[index]) * m_grad[index]));
+            return (m_y[m_last_index] + ((t_val - m_x[m_last_index]) * m_grad[m_last_index]));
         }
 
 
