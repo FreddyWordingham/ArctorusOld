@@ -44,9 +44,6 @@ namespace arc
 
             const math::Vec<3> r_out = t_in + (t_norm * (2.0 * (t_in * t_norm)));
 
-            VAL(t_in.magnitude());
-            VAL(t_norm.magnitude());
-            VAL(r_out.magnitude());
             assert(r_out.is_normalised());
 
             return (r_out);
