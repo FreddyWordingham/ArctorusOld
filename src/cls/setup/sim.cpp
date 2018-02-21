@@ -327,15 +327,14 @@ namespace arc
                         energy += entity_dist;
 
                         // Determine the material indices.
-                        int index_i, index_t;
-                        if (phot.get_entity_index() == static_cast<int>(entity_index))  // Exiting the current entity.
+                        int  index_i, index_t;
+                        bool exiting = phot.get_entity_index() == static_cast<int>(entity_index);
+                        if (exiting)    // Exiting the current entity.
                         {
                             index_i = static_cast<int>(entity_index);
                             index_t = phot.get_prev_entity_index();
-
-                            phot.pop_entity_index();
                         }
-                        else                                                            // Entering a new entity.
+                        else            // Entering a new entity.
                         {
                             index_i = phot.get_entity_index();
                             index_t = static_cast<int>(entity_index);

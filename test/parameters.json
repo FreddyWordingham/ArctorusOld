@@ -4,7 +4,7 @@
     "grid":     {
         "min":   [-4.1, -1.1, -1.1],
         "max":   [4.1, 1.1, 1.1],
-        "cells": [41, 11, 11]
+        "cells": [1, 1, 1]
     },
     "aether":   {
         "mat": "materials/vacuum.mat"
@@ -13,9 +13,18 @@
         "entity_one": {
             "trans": [0.0, 0.0, 0.0],
             "dir":   [1.0, 0.0, 0.0],
+            "scale": [4.2, 4.2, 4.2],
             "rot":   0.0,
             "mesh":  "meshes/square.obj",
-            "mat":   "materials/intralipid_10.mat"
+            "mat":   "materials/glass.mat"
+        },
+        "entity_two": {
+            "trans": [1.0, 0.0, 0.0],
+            "dir":   [1.0, 0.0, 0.0],
+            "scale": [4.2, 4.2, 4.2],
+            "rot":   0.0,
+            "mesh":  "meshes/square.obj",
+            "mat":   "materials/vacuum.mat"
         }
     },
     "lights":   {
