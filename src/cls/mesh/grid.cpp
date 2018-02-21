@@ -155,11 +155,11 @@ namespace arc
             energy_density.reserve(m_num_cells[X]);
             for (size_t i = 0; i < m_num_cells[X]; ++i)
             {
-                energy_density.emplace_back(std::vector<std::vector<Cell>>());
+                energy_density.emplace_back(std::vector<std::vector<double>>());
                 energy_density[i].reserve(m_num_cells[Y]);
                 for (size_t j = 0; j < m_num_cells[Y]; ++j)
                 {
-                    energy_density[i].emplace_back(std::vector<Cell>());
+                    energy_density[i].emplace_back(std::vector<double>());
                     energy_density[i][j].reserve(m_num_cells[Z]);
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {

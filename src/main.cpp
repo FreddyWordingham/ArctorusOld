@@ -52,7 +52,7 @@ int main(const int t_argc, const char** t_argv)
     pdt.run();
 
     // Save grid data.
-    pdt.save_grid_images();
+    pdt.save_grid_images(setup.parse_child<std::string>("output_dir"));
 
     // Render the simulation scene.
     pdt.render();
