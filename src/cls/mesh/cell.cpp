@@ -37,6 +37,7 @@ namespace arc
             m_max_bound(t_max_bound),
             m_entity_list(init_entity_list(t_entity)),
             m_light_list(init_light_list(t_light)),
+            m_ccd_list(init_ccd_list(t_ccd)),
             m_empty(m_entity_list.empty() && m_light_list.empty())
         {
             assert(t_max_bound[X] > t_min_bound[X]);
@@ -96,6 +97,32 @@ namespace arc
             }
 
             return (r_light_list);
+        }
+
+        /**
+         *  Initialise the list of ccd triangles found within the cell.
+         *
+         *  @param  t_ccd   Vector of ccds which may be contained within the cell.
+         */
+        std::vector<std::array<size_t, 2>> Cell::init_ccd_list(const std::vector<detector::Ccd>& t_ccd) const
+        {
+            std::vector<std::array<size_t, 2>> r_ccd_list;
+
+            const math::Vec<3> center    = (m_max_bound + m_min_bound) / 2.0;
+            const math::Vec<3> half_size = (m_max_bound - m_min_bound) / 2.0;
+
+            for (size_t i = 0; i < t_ccd.size(); ++i)
+            {
+                for (size_t j = 0; j < t_ccd[i].get_mesh().get_num_tri(); ++j)
+                {
+                    if (tri_overlap(center, half_size, t_ccd[i].get_mesh().get_tri(j)))
+                    {
+                        r_ccd_list.push_back({{i, j}});
+                    }
+                }
+            }
+
+            return (r_ccd_list);
         }
 
         /**

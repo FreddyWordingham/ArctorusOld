@@ -66,6 +66,7 @@ namespace arc
             //  -- Initialisation --
             std::vector<std::array<size_t, 2>> init_entity_list(const std::vector<equip::Entity>& t_entity) const;
             std::vector<std::array<size_t, 2>> init_light_list(const std::vector<equip::Light>& t_light) const;
+            std::vector<std::array<size_t, 2>> init_ccd_list(const std::vector<detector::Ccd>& t_ccd) const;
             bool tri_overlap(const math::Vec<3>& t_center, const math::Vec<3>& t_half_size, const geom::Triangle& t_tri) const;
             bool plane_origin_overlap(const math::Vec<3>& t_norm, const math::Vec<3>& t_point,
                                       const math::Vec<3>& t_half_width) const;
