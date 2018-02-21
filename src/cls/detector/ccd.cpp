@@ -40,8 +40,7 @@ namespace arc
          *  @param  t_scale     Vector of scaling values.
          */
         Ccd::Ccd(const size_t t_width, const size_t t_height, const bool t_col, const math::Vec<3>& t_trans,
-                 const math::Vec<3>& t_dir,
-                 const double t_spin, const math::Vec<3>& t_scale) :
+                 const math::Vec<3>& t_dir, const double t_spin, const math::Vec<3>& t_scale) :
             m_mesh(
                 "v 1.000000 1.000000 0.000000\nv -1.000000 1.000000 0.000000\nv 1.000000 -1.000000 0.000000\nv -1.000000 -1.000000 0.000000\nvn 0.0000 0.0000 1.0000\ns off\nf 2//1 3//1 1//1\nf 2//1 4//1 3//1",
                 t_trans, t_dir, t_spin, t_scale),
@@ -75,7 +74,8 @@ namespace arc
             const size_t pix_x = static_cast<size_t>(x * m_image.get_width());
             const size_t pix_y = static_cast<size_t>(y * m_image.get_height());
 
-            const std::array<double, 3> col         = utl::colourmap::transform_rainbow((t_wavelength - 400E-9) / 300E-9);
+            const std::array<double, 3> col = m_col ? utl::colourmap::transform_rainbow((t_wavelength - 400E-9) / 300E-9)
+                                                    : std::array<double, 3>({{1.0, 1.0, 1.0}});
 
             m_image.add_to_pixel(pix_x, pix_y, {{t_weight * col[R], t_weight * col[G], t_weight * col[B]}});
         }
