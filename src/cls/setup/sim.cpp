@@ -363,9 +363,6 @@ namespace arc
 
                             // Reflect the photon.
                             phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
-
-                            // Photon stays in current entity.
-                            phot.push_entity_index(index_i);
                         }
                         else
                         {
@@ -376,9 +373,6 @@ namespace arc
 
                                 // Reflect the photon.
                                 phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
-
-                                // Photon stays in current entity.
-                                phot.push_entity_index(index_i);
                             }
                             else                                                            // Refract.
                             {
@@ -389,7 +383,14 @@ namespace arc
                                 phot.set_dir(optics::refraction_dir(phot.get_dir(), entity_norm, n_i / n_t));
 
                                 // Photon moves to new entity.
-                                phot.push_entity_index(index_t);
+                                if (exiting)
+                                {
+                                    phot.pop_entity_index();
+                                }
+                                else
+                                {
+                                    phot.push_entity_index(index_t);
+                                }
                                 phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                             }
                         }
