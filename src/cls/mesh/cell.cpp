@@ -29,9 +29,10 @@ namespace arc
          *  @param  t_max_bound Maximum bound of the cell.
          *  @param  t_entity    Vector of entities which may be contained within the cell.
          *  @param  t_light     Vector of lights which may be contained within the cell.
+         *  @param  t_ccd       Vector of ccds which may be contained within the cell.
          */
         Cell::Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::vector<equip::Entity>& t_entity,
-                   const std::vector<equip::Light>& t_light) :
+                   const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
             m_entity_list(init_entity_list(t_entity)),
