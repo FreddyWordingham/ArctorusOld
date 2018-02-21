@@ -135,6 +135,16 @@ namespace arc
             return (r_mat);
         }
 
+        template <size_t N>
+        constexpr double determinant(const Mat<N, N>& t_mat)
+        {
+            static_assert(N > 1);
+
+            return (0.0);
+        }
+
+        double determinant(const Mat<2, 2>& t_mat);
+
 
 
         //  == INSTANTIATION ==

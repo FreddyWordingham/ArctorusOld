@@ -29,9 +29,10 @@
  */
 int main(const int t_argc, const char** t_argv)
 {
-    arc::math::Mat<4, 3> mat({{{{0.0, 1.0, 2.0}}, {{4.0, 5.0, 6.0}}, {{8.0, 9.0, 10.}}, {{12., 13., 14.}}}});
+//    arc::math::Mat<4, 4> mat({{{{0.0, 1.0, 2.0, 3.0}}, {{4.0, 5.0, 6.0, 7.0}}, {{8.0, 9.0, 10., 11.}}, {{12., 13., 14., 15.}}}});
+    arc::math::Mat<2, 2> mat({{{{0.0, 1.0}}, {{2.0, 3.0}}}});
     VAL(mat);
-    VAL(arc::math::transpose(mat));
+    VAL(arc::math::determinant(mat));
 
     exit(1);
 
