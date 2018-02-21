@@ -177,11 +177,11 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        img.add_to_pixel(j, k, {{energy_density[i][j][k] / max_energy_density, 0.0, 0.0}});
+                        img.add_to_pixel(j, k, {{energy_density[i][j][k], 0.0, 0.0}});
                     }
                 }
 
-                img.save(t_dir + "/X_" + std::to_string(i) + ".ppm", max_energy_density);
+                img.save(t_dir + "/X_" + std::to_string(i) + ".ppm", 1.0);
             }
         }
 
