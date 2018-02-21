@@ -48,6 +48,12 @@ int main(const int t_argc, const char** t_argv)
     // Construct the simulation object.
     arc::setup::Sim pdt(setup);
 
+    // Render the simulation scene.
+    if (setup.parse_child<bool>("pre_render", false))
+    {
+        pdt.render();
+    }
+
     // Run the simulation.
     pdt.run();
 
@@ -55,7 +61,10 @@ int main(const int t_argc, const char** t_argv)
     pdt.save_grid_images(setup.parse_child<std::string>("output_dir"));
 
     // Render the simulation scene.
-    pdt.render();
+    if (setup.parse_child<bool>("post_render", false))
+    {
+        pdt.render();
+    }
 
     return (0);
 }

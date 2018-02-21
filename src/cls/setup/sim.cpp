@@ -311,7 +311,7 @@ namespace arc
 
                         break;
                     }
-                    assert(scat_dist > SMOOTHING_LENGTH);
+                    //assert(scat_dist > SMOOTHING_LENGTH);
                     assert(cell_dist > SMOOTHING_LENGTH);
                     assert(entity_dist > SMOOTHING_LENGTH);
 
