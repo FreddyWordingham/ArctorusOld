@@ -56,7 +56,7 @@ namespace arc
           public:
             //  -- Getters --
             const geom::Mesh& get_mesh() const { return (m_mesh); }
-            std::array<double, 3> get_max_value() const { return (m_image.get_max_value()); };
+            std::array<double, 3> get_max_value() const { return (m_image.get_max_value()); }
 
             //  -- Setters --
             void add_hit(const math::Vec<3>& t_pos, double t_weight);
