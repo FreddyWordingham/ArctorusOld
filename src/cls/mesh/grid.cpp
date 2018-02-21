@@ -65,8 +65,8 @@ namespace arc
          *  @return The initialised three-dimensional vector of cells.
          */
         std::vector<std::vector<std::vector<Cell>>> Grid::init_cell(const std::vector<equip::Entity>& t_entity,
-                                                                    const std::vector<equip::Light>& t_light const
-                                                                    std::vector<detector::Ccd>& t_ccd) const
+                                                                    const std::vector<equip::Light>& t_light,
+                                                                    const std::vector<detector::Ccd>& t_ccd) const
         {
             // Calculate cell dimensions.
             math::Vec<3> cell_size = m_max_bound - m_min_bound;
