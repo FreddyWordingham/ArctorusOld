@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <array>
+#include <cmath>
 #include <iostream>
 #include <utility>
 
@@ -135,12 +136,59 @@ namespace arc
             return (r_mat);
         }
 
+        /**
+         *  Determine in the determinant of a square matrix, larger than 2 by 2, through recursion.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix whose determinant is to be determined.
+         *
+         *  @return The determinant of the given matrix.
+         */
         template <size_t N>
         constexpr double determinant(const Mat<N, N>& t_mat)
         {
             static_assert(N > 1);
+            static_assert(N != 2);
 
-            return (0.0);
+            // Create return determinant.
+            double r_det = 0.0;
+
+            // Calculate the determinant.
+            for (size_t i = 0; i < N; ++i)
+            {
+                // Create sub matrix.
+                Mat<N - 1, N - 1> sub;
+
+                size_t      n = 0;
+                for (size_t j = 0; j < N; ++j)
+                {
+                    if (j == 0)
+                    {
+                        continue;
+                    }
+
+                    size_t      m = 0;
+                    for (size_t k = 0; k < N; ++k)
+                    {
+                        if (k == i)
+                        {
+                            continue;
+                        }
+
+                        sub[n][m] = t_mat[j][k];
+
+                        ++m;
+                    }
+
+                    ++n;
+                }
+
+                // Mutiply cofactor by the determinant of the minor matrix.
+                r_det += std::pow(-1, 0 + i) * t_mat[0][i] * determinant(sub);
+            }
+
+            return (r_det);
         }
 
         double determinant(const Mat<2, 2>& t_mat);
