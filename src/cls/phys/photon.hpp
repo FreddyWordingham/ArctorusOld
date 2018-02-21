@@ -74,6 +74,7 @@ namespace arc
             //  -- Getters --
             const math::Vec<3>& get_pos() const { return (m_pos); }
             const math::Vec<3>& get_dir() const { return (m_dir); }
+            double get_weight() const { return (m_weight); }
             const std::vector<graphical::point::Photon>& get_path() const { return (m_path); }
             double get_wavelength() const { return (m_wavelength); }
             double get_ref_index() const { return (m_ref_index); }

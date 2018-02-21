@@ -43,5 +43,14 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Setters --
+        void Ccd::add_hit(const math::Vec<3>& t_pos, const double t_weight)
+        {
+            m_image.add_to_pixel(m_image.get_width() / 2, m_image.get_height() / 2, {{t_weight, t_weight, t_weight}});
+        }
+
+
+
     } // namespace detector
 } // namespace arc

@@ -52,14 +52,13 @@ namespace arc
                          const math::Vec<3>& t_scale = math::Vec<3>({{1.0, 1.0, 1.0}}));
 
 
-            //  == OPERATORS ==
-          private:
-
-
             //  == METHODS ==
           public:
             //  -- Getters --
             const geom::Mesh& get_mesh() const { return (m_mesh); }
+
+            //  -- Setters --
+            void add_hit(const math::Vec<3>& t_pos, double t_weight);
         };
 
 
