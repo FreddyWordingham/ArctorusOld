@@ -41,6 +41,25 @@ namespace arc
 
 
 
+        //  == OPERATORS ==
+        //  -- Printing --
+        /**
+         *  Enable printing of an image to a given ostream.
+         *
+         *  @param  t_stream    Stream to write to.
+         *  @param  t_image     Image to be written.
+         *
+         *  @return A reference to the stream post-write.
+         */
+        friend std::ostream& operator<<(std::ostream& t_stream, const Image& t_image)
+        {
+            t_stream << t_image.serialise();
+
+            return (t_stream);
+        }
+
+
+
         //  == METHODS ==
         //  -- Serialisation --
         /**

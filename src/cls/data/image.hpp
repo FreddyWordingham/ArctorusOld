@@ -45,12 +45,11 @@ namespace arc
             //  -- Constructors --
             Image(size_t t_width, size_t t_height);
 
-          private:
-            //  -- Initialisation --
-
 
             //  == OPERATORS ==
-          private:
+          public:
+            //  -- Printing --
+            friend std::ostream& operator<<(std::ostream& t_stream, const Image& t_image);
 
 
             //  == METHODS ==
