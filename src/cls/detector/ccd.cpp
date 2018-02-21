@@ -51,9 +51,6 @@ namespace arc
             const math::Vec<3> beta  = m_mesh.get_tri(1).get_vert(2).get_pos();
             const math::Vec<3> gamma = m_mesh.get_tri(1).get_vert(0).get_pos();
 
-            const double width  = (gamma - alpha).magnitude();
-            const double height = (beta - alpha).magnitude();
-
             const double theta = std::acos(
                 ((t_pos - alpha) * (gamma - alpha)) / ((t_pos - alpha).magnitude() * (gamma - alpha).magnitude()));
 
