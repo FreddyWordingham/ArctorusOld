@@ -42,6 +42,7 @@ namespace arc
             m_aether(init_aether(t_json["aether"])),
             m_entity(init_entity(t_json["entities"])),
             m_light(init_light(t_json["lights"])),
+            m_ccd(init_ccd(t_json["ccds"])),
             m_light_select(init_light_select()),
             m_grid(t_json["grid"].parse_child<math::Vec<3>>("min"), t_json["grid"].parse_child<math::Vec<3>>("max"),
                    t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light)
@@ -196,6 +197,45 @@ namespace arc
             }
 
             return (r_light);
+        }
+
+        /**
+         *  Initialise the vector of ccd objects.
+         *
+         *  @param  t_json  Json setup file.
+         *
+         *  @return The initialised vector of ccd objects.
+         */
+        std::vector<detector::Ccd> Sim::init_ccd(const data::Json& t_json) const
+        {
+            // Create the return vector of ccds.
+            std::vector<equip::Light> r_ccd;
+
+            // Get list of ccd names.
+            std::vector<std::string> ccd_name = t_json.get_child_names();
+
+            // Construct the ccd objects.
+            for (size_t i = 0; i < ccd_name.size(); ++i)
+            {
+                LOG("Constructing ccd : " << ccd_name[i]);
+
+                // Create a json object of the ccd.
+                const data::Json json_ccd = t_json[ccd_name[i]];
+
+                // Get the transformation values.
+                const auto   trans = json_ccd.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
+                const auto   dir   = json_ccd.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const double rot   = math::deg_to_rad(json_ccd.parse_child<double>("rot", 0.0));
+                const auto   scale = json_ccd.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+
+                // Get ccd properties.
+                const auto pix = json_ccd.parse_child<std::array<size_t, 2>>("pixel");
+
+                // Construct the ccd object an add it to the vector of ccds.
+                r_ccd.emplace_back(detector::Ccd(pix[X], pix[Y], trans, dir, rot, scale));
+            }
+
+            return (r_ccd);
         }
 
         /**
