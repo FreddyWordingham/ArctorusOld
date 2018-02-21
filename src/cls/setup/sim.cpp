@@ -276,10 +276,24 @@ namespace arc
          */
         void Sim::save_ccd_images(const std::string& t_dir) const
         {
+            // Get the maximum rgb values.
+            double      max;
+            for (size_t i = 0; i < m_ccd.size(); ++i)
+            {
+                std::array<double, 3> ccd_max = m_ccd[i].get_max_value();
+                for (size_t           j       = 0; j < 3; ++j)
+                {
+                    if (ccd_max[j] > max)
+                    {
+                        max = ccd_max[j];
+                    }
+                }
+            }
+
             // Save each ccd image.
             for (size_t i = 0; i < m_ccd.size(); ++i)
             {
-                m_ccd[i].save(t_dir + "/ccd_" + std::to_string(i) + ".ppm", 1.0);
+                m_ccd[i].save(t_dir + "/ccd_" + std::to_string(i) + ".ppm", max);
             }
         }
 
