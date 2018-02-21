@@ -198,6 +198,7 @@ namespace arc
             //  -- Drawing --
             void draw_entities() const;
             void draw_lights() const;
+            void draw_ccds() const;
             void draw_phots() const;
             void draw_grid() const;
             void draw_sun() const;

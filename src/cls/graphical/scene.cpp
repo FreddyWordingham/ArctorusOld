@@ -914,6 +914,54 @@ namespace arc
         }
 
         /**
+         *  Draw the scene's ccds.
+         */
+        void Scene::draw_ccds() const
+        {
+            // Draw diffusely lit prop mesh.
+            glUseProgram(m_diffuse_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
+
+            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), CCD_AMB_POW);
+
+            for (size_t i = 0; i < m_ccd.size(); ++i)
+            {
+                glUniform4f(m_diffuse_shader.get_col_uni(), m_ccd[i].get_col()[R], m_ccd[i].get_col()[G], m_ccd[i].get_col()[B],
+                            m_ccd[i].get_col()[A]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_ccd[i].get_vao());
+
+                glDrawArrays(GL_TRIANGLES, 0, m_ccd[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+
+            // Draw normals if toggle is on.
+            if (m_toggle_light_normal)
+            {
+                glUseProgram(m_normal_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+                for (size_t i = 0; i < m_ccd.size(); ++i)
+                {
+                    glUniform4f(m_normal_shader.get_col_uni(), m_ccd[i].get_col()[R], m_ccd[i].get_col()[G],
+                                m_ccd[i].get_col()[B], m_ccd[i].get_col()[A]);
+                    glUniform1f(m_normal_shader.get_light_power_uni(), CCD_NORMAL_LENGTH);
+
+                    glEnableVertexAttribArray(0);
+
+                    glBindVertexArray(m_ccd[i].get_vao());
+
+                    glDrawArrays(GL_POINTS, 0, m_ccd[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
+            }
+        }
+
+        /**
          *  Draw the scene's photon packet paths.
          */
         void Scene::draw_phots() const
