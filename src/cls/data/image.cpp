@@ -69,6 +69,40 @@ namespace arc
             // Write the file header.
             stream << "P3\n" << get_width() << " " << get_height() << "\n255\n";
 
+            // Determine the normalisation value.
+            double      max = 0.0;
+            for (size_t i   = 0; i < get_width(); ++i)
+            {
+                for (size_t j = 0; j < get_height(); ++j)
+                {
+                    for (size_t k = 0; k < 3; ++k)
+                    {
+                        if (m_data[i][j][k] > max)
+                        {
+                            max = m_data[i][j][k];
+                        }
+                    }
+                }
+            }
+
+            // Normalise and print each pixel.
+            if (max > 0.0)
+            {
+                // Normalise the pixels.
+                for (size_t i = 0; i < get_height(); ++i)
+                {
+                    for (size_t j = 0; j < get_width(); ++j)
+                    {
+                        for (size_t k = 0; k < 3; ++k)
+                        {
+                            stream << static_cast<int>(225 * (m_data[j][i][k] / max)) << "\t";
+                        }
+                        stream << "\t";
+                    }
+                    stream << "\n";
+                }
+            }
+
             return (stream.str());
         }
 
