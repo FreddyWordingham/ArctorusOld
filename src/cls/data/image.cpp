@@ -13,7 +13,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- General --
+#include "gen/log.hpp"
 
 
 
@@ -41,6 +42,35 @@ namespace arc
 
         //  -- Initialisation --
 
+
+
+        //  == METHODS ==
+        //  -- Serialisation --
+        /**
+         *  Create a string representation of the image in ppm format.
+         *
+         *  @return A string representation of the image.
+         */
+        std::string Image::serialise() const
+        {
+            // Check there is data to be written.
+            if (m_data.empty())
+            {
+                WARN("Unable to serialise data::Image.", "No data to form into image.");
+            }
+            if (m_data.front().empty())
+            {
+                WARN("Unable to serialise data::Image.", "No data to form into image.");
+            }
+
+            // Create a stream to write to.
+            std::stringstream stream;
+
+            // Write the file header.
+            stream << "P3\n" << get_width() << " " << get_height() << "\n255\n";
+
+            return (stream.str());
+        }
 
 
     } // namespace data

@@ -54,7 +54,13 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            size_t get_width() const { return (m_data.size()); }
+            size_t get_height() const { return (m_data.front().size()); }
+
+            //  -- Serialisation --
+            std::string serialise() const;
         };
 
 
