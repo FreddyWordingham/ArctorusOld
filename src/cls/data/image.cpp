@@ -56,7 +56,23 @@ namespace arc
          */
         friend std::ostream& operator<<(std::ostream& t_stream, const Image& t_image)
         {
-            t_stream << t_image.serialise();
+            // Determine the maximum of the file.
+            double      max = 0.0;
+            for (size_t i   = 0; i < t_image.get_height(); ++i)
+            {
+                for (size_t j = 0; j < t_image.get_width(); ++j)
+                {
+                    for (size_t k = 0; k < 3; ++k)
+                    {
+                        if (t_image.m_data[i][j][k] > max)
+                        {
+                            max = t_image.m_data[i][j][k];
+                        }
+                    }
+                }
+            }
+
+            t_stream << t_image.serialise(max);
 
             return (t_stream);
         }
