@@ -31,7 +31,7 @@ namespace arc
 
             //  == FUNCTION PROTOTYPES ==
             //  -- Maps --
-            std::array<double, 3> transform_rainbow(float t_x);
+            std::array<double, 3> transform_rainbow(double t_x);
 
 
 

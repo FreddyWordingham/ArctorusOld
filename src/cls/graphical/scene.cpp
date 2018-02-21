@@ -303,8 +303,9 @@ namespace arc
 
                         if (energy_density > 0.0)
                         {
-                            m_cell.emplace_back(Prop(Prop::shape::BOX, {utl::colourmap::transform_rainbow(
-                                static_cast<float>(energy_density / max_energy_density)), 0.1},
+                            const std::array<double, 3> col = utl::colourmap::transform_rainbow(
+                                energy_density / max_energy_density);
+                            m_cell.emplace_back(Prop(Prop::shape::BOX, {glm::vec3(col[R], col[G], col[B]), 0.1},
                                                      {static_cast<float>(t_grid.get_cell(i, j, k)
                                                                                .get_min_bound()[X]) - cell_padding,
                                                       static_cast<float>(t_grid.get_cell(i, j, k)
