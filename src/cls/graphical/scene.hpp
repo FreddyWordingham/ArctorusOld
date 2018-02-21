@@ -70,7 +70,9 @@ namespace arc
         constexpr const float SUN_SIZE             = 0.25f; //! Size of the sun.
         constexpr const float LIGHT_AMB_POW        = 0.5f;  //! Ambient lighting of rendered light sources.
         constexpr const float ENTITIY_AMB_POW      = 0.1f;  //! Ambient lighting of rendered entities.
+        constexpr const float CCD_AMB_POW          = 0.6f;  //! Ambient lighting of rendered ccds.
         constexpr const float ENTITY_NORMAL_LENGTH = 0.5f;  //! Length to draw entity normals.
+        constexpr const float CCD_NORMAL_LENGTH    = 0.5f;  //! Length to draw ccd normals.
 
         //  -- Rendering --
         constexpr const float  PHOTON_TRAVEL_SPEED = 1e-9f; //! Photon travel speed when rendering path data.
