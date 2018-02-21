@@ -60,6 +60,9 @@ namespace arc
 
             //  -- Serialisation --
             std::string serialise() const;
+
+            //  -- Saving --
+            void save(const std::string& t_path) const;
         };
 
 

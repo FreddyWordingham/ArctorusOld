@@ -16,6 +16,9 @@
 //  -- General --
 #include "gen/log.hpp"
 
+//  -- Classes --
+#include "cls/file/handle.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -120,6 +123,20 @@ namespace arc
             }
 
             return (stream.str());
+        }
+
+
+        //  -- Saving --
+        /**
+         *  Save the state of the image to a given file path.
+         *
+         *  @param  t_path      Path to the save location of the file.
+         */
+        void Image::save(const std::string& t_path) const
+        {
+            file::Handle file(t_path, std::fstream::out);
+
+            file << serialise();
         }
 
 
