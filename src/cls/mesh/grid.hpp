@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/data/image.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/math/vec.hpp"
@@ -77,6 +78,9 @@ namespace arc
 
             //  -- Testing --
             inline bool is_within(const math::Vec<3>& t_pos) const;
+
+            //  -- Saving --
+            void save_images(const std::string& t_dir) const;
         };
 
 

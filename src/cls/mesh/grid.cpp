@@ -95,6 +95,8 @@ namespace arc
                 }
             }
 
+            LOG("Grid construction complete.");
+
             return (r_cell);
         }
 
@@ -134,6 +136,65 @@ namespace arc
             assert(r_max_energy_density >= 0.0);
 
             return (r_max_energy_density);
+        }
+
+
+        //  -- Saving --
+        /**
+         *  Save the data of the grid cells as image files.
+         *
+         *  @param  t_dir   Directory to write the images to.
+         */
+        void Grid::save_images(const std::string& t_dir) const
+        {
+            // Get maximum energy density.
+            const double max_energy_density = get_max_energy_density();
+
+            // Calculate energy density fractions.
+// Create three-dimensional vector of cells.
+            std::vector<std::vector<std::vector<Cell>>> r_cell;
+
+            // Create the cells.
+            const double total_cells       = m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z];
+            double       constructed_cells = 0;
+
+            r_cell.reserve(m_num_cells[X]);
+            for (size_t i = 0; i < m_num_cells[X]; ++i)
+            {
+                r_cell.emplace_back(std::vector<std::vector<Cell>>());
+                r_cell[i].reserve(m_num_cells[Y]);
+                for (size_t j = 0; j < m_num_cells[Y]; ++j)
+                {
+                    r_cell[i].emplace_back(std::vector<Cell>());
+                    r_cell[i][j].reserve(m_num_cells[Z]);
+                    for (size_t k = 0; k < m_num_cells[Z]; ++k)
+                    {
+                        r_cell[i][j].emplace_back(Cell(math::Vec<3>(
+                            {{m_min_bound[X] + (i * cell_size[X]), m_min_bound[Y] + (j * cell_size[Y]), m_min_bound[Z] + (k * cell_size[Z])}}),
+                                                       math::Vec<3>(
+                                                           {{m_min_bound[X] + ((i + 1) * cell_size[X]), m_min_bound[Y] + ((j + 1) * cell_size[Y]), m_min_bound[Z] + ((k + 1) * cell_size[Z])}}),
+                                                       t_entity, t_light));
+
+                        // Report grid construction.
+                        TEMP("Constructing grid", 100.0 * (constructed_cells / total_cells));
+                        ++constructed_cells;
+                    }
+                }
+            }
+
+            // Write x slices.
+            for (size_t i = 0; i < m_num_cells[X]; ++i)
+            {
+                data::Image img(m_num_cells[Y], m_num_cells[Z]);
+
+                for (size_t j = 0; j < m_num_cells[Y]; ++j)
+                {
+                    for (size_t k = 0; k < m_num_cells[Z]; ++k)
+                    {
+                        img.add_to_pixel(, {{/max_enegy_denity, 0.0, 0.0}});
+                    }
+                }
+            }
         }
 
 
