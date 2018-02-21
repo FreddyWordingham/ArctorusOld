@@ -79,8 +79,20 @@ namespace arc
 
             const double       cos_a_i    = -(t_in * t_norm);
             const double       sin_a_t_sq = math::square(t_n) * (1.0 - math::square(cos_a_i));
-            const math::Vec<3> r_out      = math::normalise(
-                (t_in * t_n) + (t_norm * ((t_n * cos_a_i) - std::sqrt(1.0 - sin_a_t_sq))));
+            const math::Vec<3> r_out      = (t_in * t_n) + (t_norm * ((t_n * cos_a_i) - std::sqrt(1.0 - sin_a_t_sq)));
+
+
+            if (!r_out.is_normalised())
+            {
+                VAL(t_in);
+                VAL(t_norm);
+                VAL(t_n);
+                VAL(r_out);
+                VAL(1.0 - t_in.magnitude());
+                VAL(1.0 - t_norm.magnitude());
+                VAL(1.0 - r_out.magnitude());
+            }
+
 
             assert(r_out.is_normalised());
 

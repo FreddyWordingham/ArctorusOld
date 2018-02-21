@@ -123,7 +123,7 @@ namespace arc
             double get_phi() const;
 
             //  -- Properties --
-            constexpr bool is_normalised(double t_tol = (N * std::numeric_limits<double>::epsilon())) const;
+            constexpr bool is_normalised(double t_tol = (N * N * std::numeric_limits<double>::epsilon())) const;
             constexpr bool is_ascending() const;
             constexpr bool is_descending() const;
             constexpr bool is_monotonic() const;
