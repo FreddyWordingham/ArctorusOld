@@ -17,6 +17,7 @@
 //  -- System --
 #include <array>
 #include <iostream>
+#include <utility>
 
 
 
@@ -101,6 +102,28 @@ namespace arc
             template <size_t U, size_t V>
             friend std::ostream& operator<<(std::ostream& t_stream, const Mat<U, V>& t_mat);
         };
+
+
+
+        //  == FUNCTION PROTOTYPES ==
+        //  -- Mathematical --
+        template <size_t N>
+        constexpr Mat<N, N> transpose(const Mat<N, N>& t_mat)
+        {
+            // Create a copy of the matrix.
+            Mat<N, N> r_mat = t_mat;
+
+            // Transpose the elements.
+            for (size_t i = 0; i < (N - 1); ++i)
+            {
+                for (size_t j = (i + 1); j < N; ++j)
+                {
+                    std::swap(r_mat[i][j], r_mat[j][i]);
+                }
+            }
+
+            return (r_mat);
+        }
 
 
 
