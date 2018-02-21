@@ -411,7 +411,7 @@ namespace arc
             }
 
             // Add the ccd prop into the list of render-able ccd props.
-            m_light.emplace_back(Prop(vertices, t_col));
+            m_ccd.emplace_back(Prop(vertices, t_col));
         }
 
         /**
