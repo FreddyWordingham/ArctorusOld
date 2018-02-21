@@ -14,7 +14,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/geom/mesh.hpp"
 
 
 
@@ -35,6 +36,8 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Properties --
+            const geom::Mesh m_mesh;    //! Mesh describing the surface of the detector.
 
 
             //  == INSTANTIATION ==
