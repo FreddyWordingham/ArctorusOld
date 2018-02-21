@@ -1,5 +1,5 @@
 {
-    "seed":        78,
+    "seed":        77,
     "output_dir":  "output",
     "num_phot":    1e6,
     "pre_render":  false,
@@ -7,16 +7,15 @@
     "grid":        {
         "min":   [-4.1, -1.1, -1.1],
         "max":   [4.1, 1.1, 1.1],
-        "cells": [21, 11, 11]
+        "cells": [201, 101, 101]
     },
     "aether":      {
         "mat": "materials/vacuum.mat"
     },
     "entities":    {
         "entity_zero": {
-            "dir":   [1.0, 0.0, 0.0],
-            "scale": [1.0, 1.0, 1.0],
-            "mesh":  "meshes/sphere.obj",
+            "scale": [0.1, 0.1, 0.1],
+            "mesh":  "meshes/lens.obj",
             "mat":   "materials/glass.mat"
         }
     },
@@ -32,10 +31,18 @@
     },
     "ccds":        {
         "ccd_zero": {
-            "trans": [3.0, 0.0, 0.0],
-            "dir":   [-1.0, -1.0, 0.0],
-            "scale": [0.025, 0.025, 0.025],
-            "pixel": [100, 200]
+            "trans":  [3.0, -0.05, 0.0],
+            "dir":    [-1.0, 0.0, 0.0],
+            "scale":  [0.05, 0.05, 0.05],
+            "pixel":  [100, 100],
+            "colour": false
+        },
+        "ccd_one":  {
+            "trans":  [3.0, 0.05, 0.0],
+            "dir":    [-1.0, 0.0, 0.0],
+            "scale":  [0.05, 0.05, 0.05],
+            "pixel":  [100, 100],
+            "colour": true
         }
     }
 }
