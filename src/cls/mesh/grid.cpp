@@ -181,7 +181,7 @@ namespace arc
                     }
                 }
 
-                img.save(t_dir + "/X_" + std::to_string(i), max_energy_density);
+                img.save(t_dir + "/X_" + std::to_string(i) + ".ppm", max_energy_density);
             }
         }
 
