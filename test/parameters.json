@@ -12,7 +12,7 @@
     },
     "entities":   {
         "entity_zero":  {
-            "scale": [1.0, 1.0, 1.0],
+            "scale": [2.0, 1.0, 1.0],
             "mesh":  "meshes/sphere.obj",
             "mat":   "materials/glass.mat"
         }
