@@ -47,7 +47,31 @@ namespace arc
         //  -- Setters --
         void Ccd::add_hit(const math::Vec<3>& t_pos, const double t_weight)
         {
-            m_image.add_to_pixel(m_image.get_width() / 2, m_image.get_height() / 2, {{t_weight, t_weight, t_weight}});
+            const math::Vec<3> alpha = m_mesh.get_tri(1).get_vert(1).get_pos();
+            const math::Vec<3> beta  = m_mesh.get_tri(1).get_vert(2).get_pos();
+            const math::Vec<3> gamma = m_mesh.get_tri(1).get_vert(0).get_pos();
+
+            const double width  = (gamma - alpha).magnitude();
+            const double height = (beta - alpha).magnitude();
+
+            const double theta = std::acos(
+                ((t_pos - alpha) * (gamma - alpha)) / ((t_pos - alpha).magnitude() * (gamma - alpha).magnitude()));
+
+            assert(theta <= (M_PI / 2.0));
+
+            const double h = (t_pos - alpha).magnitude();
+            const double x = (h * std::cos(theta)) / (beta - alpha).magnitude();
+            const double y = (h * std::sin(theta)) / (gamma - alpha).magnitude();
+
+            if ((x < 0.0) || (x > 1.0) || (y < 0.0) || (y > 1.0))
+            {
+                return;
+            }
+
+            const size_t pix_x = static_cast<size_t>(x * m_image.get_width());
+            const size_t pix_y = static_cast<size_t>(y * m_image.get_height());
+
+            m_image.add_to_pixel(pix_x, pix_y, {{t_weight, t_weight, t_weight}});
         }
 
 
