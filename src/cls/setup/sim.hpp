@@ -46,7 +46,6 @@ namespace arc
           private:
             //  -- Settings --
             const unsigned long int m_num_phot; //! Number of photons to simulate.
-            const std::string       m_output_dir;     //! Directory to output data to.
 
             //  -- Equipment --
             const phys::Material             m_aether;  //! Aether material.
@@ -77,6 +76,9 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Saving --
+            void save_grid_images() const;
+
             //  -- Rendering --
             void render() const;
 

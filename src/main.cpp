@@ -51,6 +51,9 @@ int main(const int t_argc, const char** t_argv)
     // Run the simulation.
     pdt.run();
 
+    // Save grid data.
+    pdt.save_grid_images();
+
     // Render the simulation scene.
     pdt.render();
 

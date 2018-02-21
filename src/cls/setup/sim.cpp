@@ -39,7 +39,6 @@ namespace arc
          */
         Sim::Sim(const data::Json& t_json) :
             m_num_phot(t_json.parse_child<unsigned long int>("num_phot")),
-            m_output_dir(t_json.parse_child<std::string>("output_dir")),
             m_aether(init_aether(t_json["aether"])),
             m_entity(init_entity(t_json["entities"])),
             m_light(init_light(t_json["lights"])),
@@ -219,6 +218,16 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Saving --
+        /**
+         *  Save
+         */
+        void save_grid_images() const
+        {
+
+        }
+
+
         //  -- Rendering --
         /**
          *  Render a scene of the current simulation.
