@@ -1,5 +1,5 @@
 {
-    "seed":     77,
+    "seed":     78,
     "num_phot": 1e3,
     "grid":     {
         "min":   [-4.1, -1.1, -1.1],
@@ -10,21 +10,33 @@
         "mat": "materials/vacuum.mat"
     },
     "entities": {
-        "entity_one": {
+        "entity_zero":  {
             "trans": [0.0, 0.0, 0.0],
             "dir":   [1.0, 0.0, 0.0],
             "scale": [4.2, 4.2, 4.2],
-            "rot":   0.0,
             "mesh":  "meshes/square.obj",
             "mat":   "materials/intralipid_10.mat"
         },
-        "entity_two": {
+        "entity_one":   {
+            "trans": [0.2, 0.0, 0.0],
+            "dir":   [1.0, 0.0, 0.0],
+            "scale": [4.2, 4.2, 4.2],
+            "mesh":  "meshes/square.obj",
+            "mat":   "materials/glass.mat"
+        },
+        "entity_two":   {
+            "trans": [0.8, 0.0, 0.0],
+            "dir":   [1.0, 0.0, 0.0],
+            "scale": [4.2, 4.2, 4.2],
+            "mesh":  "meshes/square.obj",
+            "mat":   "materials/intralipid_10.mat"
+        },
+        "entity_three": {
             "trans": [1.0, 0.0, 0.0],
             "dir":   [1.0, 0.0, 0.0],
             "scale": [4.2, 4.2, 4.2],
-            "rot":   0.0,
             "mesh":  "meshes/square.obj",
-            "mat":   "materials/glass.mat"
+            "mat":   "materials/vacuum.mat"
         }
     },
     "lights":   {
