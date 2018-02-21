@@ -92,7 +92,7 @@ namespace arc
                             {{m_min_bound[X] + (i * cell_size[X]), m_min_bound[Y] + (j * cell_size[Y]), m_min_bound[Z] + (k * cell_size[Z])}}),
                                                        math::Vec<3>(
                                                            {{m_min_bound[X] + ((i + 1) * cell_size[X]), m_min_bound[Y] + ((j + 1) * cell_size[Y]), m_min_bound[Z] + ((k + 1) * cell_size[Z])}}),
-                                                       t_entity, t_light));
+                                                       t_entity, t_light, t_ccd));
 
                         // Report grid construction.
                         TEMP("Constructing grid", 100.0 * (constructed_cells / total_cells));
