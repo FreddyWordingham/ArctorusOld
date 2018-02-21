@@ -40,9 +40,6 @@ namespace arc
         }
 
 
-        //  -- Initialisation --
-
-
 
         //  == METHODS ==
         //  -- Serialisation --
