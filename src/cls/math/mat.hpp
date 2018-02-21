@@ -107,18 +107,28 @@ namespace arc
 
         //  == FUNCTION PROTOTYPES ==
         //  -- Mathematical --
-        template <size_t N>
-        constexpr Mat<N, N> transpose(const Mat<N, N>& t_mat)
+        /**
+         *  Transpose a given matrix.
+         *
+         *  @tparam N   Number of matrix rows.
+         *  @tparam M   Number of matrix columns.
+         *
+         *  @param  t_mat   Matrix to determine the transpose of.
+         *
+         *  @return The transpose of the given matrix.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<M, N> transpose(const Mat<N, M>& t_mat)
         {
-            // Create a copy of the matrix.
-            Mat<N, N> r_mat = t_mat;
+            // Create a the return matrix.
+            Mat<M, N> r_mat;
 
-            // Transpose the elements.
-            for (size_t i = 0; i < (N - 1); ++i)
+            // Determine the transpose elements.
+            for (size_t i = 0; i < N; ++i)
             {
-                for (size_t j = (i + 1); j < N; ++j)
+                for (size_t j = 0; j < M; ++j)
                 {
-                    std::swap(r_mat[i][j], r_mat[j][i]);
+                    r_mat[j][i] = t_mat[i][j];
                 }
             }
 
