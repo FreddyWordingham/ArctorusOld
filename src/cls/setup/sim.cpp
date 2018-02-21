@@ -209,7 +209,7 @@ namespace arc
         std::vector<detector::Ccd> Sim::init_ccd(const data::Json& t_json) const
         {
             // Create the return vector of ccds.
-            std::vector<equip::Light> r_ccd;
+            std::vector<detector::Ccd> r_ccd;
 
             // Get list of ccd names.
             std::vector<std::string> ccd_name = t_json.get_child_names();
