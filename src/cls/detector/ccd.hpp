@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/data/image.hpp"
 #include "cls/geom/mesh.hpp"
 
 
@@ -38,6 +39,9 @@ namespace arc
           private:
             //  -- Properties --
             const geom::Mesh m_mesh;    //! Mesh describing the surface of the detector.
+
+            //  -- Data --
+            data::Image m_image;    //! Ccd image data.
 
 
             //  == INSTANTIATION ==
