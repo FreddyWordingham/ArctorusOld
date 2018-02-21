@@ -59,7 +59,7 @@ namespace arc
             size_t get_height() const { return (m_data.front().size()); }
 
             //  -- Serialisation --
-            std::string serialise() const;
+            std::string serialise(double t_norm) const;
 
             //  -- Saving --
             void save(const std::string& t_path) const;

@@ -67,10 +67,13 @@ namespace arc
         //  -- Serialisation --
         /**
          *  Create a string representation of the image in ppm format.
+         *  Data is normalised against a given value.
+         *
+         *  @param  t_norm  Normalisation value.
          *
          *  @return A string representation of the image.
          */
-        std::string Image::serialise() const
+        std::string Image::serialise(const double t_norm) const
         {
             // Check there is data to be written.
             if (m_data.empty())
@@ -88,38 +91,18 @@ namespace arc
             // Write the file header.
             stream << "P3\n" << get_width() << " " << get_height() << "\n255\n";
 
-            // Determine the normalisation value.
-            double      max = 0.0;
-            for (size_t i   = 0; i < get_width(); ++i)
+            // Normalise and print each pixel.
+            for (size_t i = 0; i < get_height(); ++i)
             {
-                for (size_t j = 0; j < get_height(); ++j)
+                for (size_t j = 0; j < get_width(); ++j)
                 {
                     for (size_t k = 0; k < 3; ++k)
                     {
-                        if (m_data[i][j][k] > max)
-                        {
-                            max = m_data[i][j][k];
-                        }
+                        stream << std::min(255, static_cast<int>(225 * (m_data[j][i][k] / t_norm))) << "\t";
                     }
+                    stream << "\t";
                 }
-            }
-
-            // Normalise and print each pixel.
-            if (max > 0.0)
-            {
-                // Normalise the pixels.
-                for (size_t i = 0; i < get_height(); ++i)
-                {
-                    for (size_t j = 0; j < get_width(); ++j)
-                    {
-                        for (size_t k = 0; k < 3; ++k)
-                        {
-                            stream << static_cast<int>(225 * (m_data[j][i][k] / max)) << "\t";
-                        }
-                        stream << "\t";
-                    }
-                    stream << "\n";
-                }
+                stream << "\n";
             }
 
             return (stream.str());
