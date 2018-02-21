@@ -72,8 +72,6 @@ namespace arc
             const size_t pix_x = static_cast<size_t>(x * m_image.get_width());
             const size_t pix_y = static_cast<size_t>(y * m_image.get_height());
 
-            const double                m_min_bound = 300e-9;
-            const double                m_max_bound = 800e-9;
             const std::array<double, 3> col         = utl::colourmap::transform_rainbow((t_wavelength - 400E-9) / 300E-9);
 
             m_image.add_to_pixel(pix_x, pix_y, {{t_weight * col[R], t_weight * col[G], t_weight * col[B]}});
