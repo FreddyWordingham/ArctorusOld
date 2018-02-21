@@ -34,6 +34,9 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Data --
+            std::vector <std::vector<std::array < double, 3>>>
+            m_data; //! Pixel data of the image.
 
 
             //  == INSTANTIATION ==
