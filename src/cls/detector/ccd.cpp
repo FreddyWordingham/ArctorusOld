@@ -63,10 +63,8 @@ namespace arc
             const double x = (h * std::cos(theta)) / (beta - alpha).magnitude();
             const double y = (h * std::sin(theta)) / (gamma - alpha).magnitude();
 
-            if ((x < 0.0) || (x > 1.0) || (y < 0.0) || (y > 1.0))
-            {
-                return;
-            }
+            assert ((x >= 0.0) && (x <= 1.0));
+            assert ((y >= 0.0) && (y <= 1.0));
 
             const size_t pix_x = static_cast<size_t>(x * m_image.get_width());
             const size_t pix_y = static_cast<size_t>(y * m_image.get_height());
