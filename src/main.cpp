@@ -13,10 +13,9 @@
 #include "gen/math.hpp"
 
 //  -- Classes --
-#include "cls/data/json.hpp"
-#include "cls/file/handle.hpp"
 #include "cls/setup/sim.hpp"
 
+#include "cls/data/image.hpp"
 
 
 //  == MAIN ==
@@ -30,6 +29,10 @@
  */
 int main(const int t_argc, const char** t_argv)
 {
+    arc::data::Image img(20, 40);
+    img.save("test.ppm");
+
+/*
     // Check the number of command line arguments.
     if (t_argc != 2)
     {
@@ -53,7 +56,7 @@ int main(const int t_argc, const char** t_argv)
     pdt.run();
 
     // Render the simulation scene.
-    pdt.render();
+    pdt.render();*/
 
     return (0);
 }

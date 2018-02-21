@@ -54,7 +54,7 @@ namespace arc
          *
          *  @return A reference to the stream post-write.
          */
-        friend std::ostream& operator<<(std::ostream& t_stream, const Image& t_image)
+        std::ostream& operator<<(std::ostream& t_stream, const Image& t_image)
         {
             // Determine the maximum of the file.
             double      max = 0.0;
