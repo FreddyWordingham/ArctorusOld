@@ -43,7 +43,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Image(const size_t t_width, const size_t t_height);
+            Image(size_t t_width, size_t t_height);
 
           private:
             //  -- Initialisation --
