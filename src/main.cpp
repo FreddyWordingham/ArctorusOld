@@ -29,7 +29,7 @@
  */
 int main(const int t_argc, const char** t_argv)
 {
-    arc::data::Image img(20, 40);
+    arc::data::Image img(40 * 2, 20 * 2);
     img.save("test.ppm", 1.0);
 
 /*
