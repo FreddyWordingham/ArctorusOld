@@ -389,7 +389,8 @@ namespace arc
 
                     if ((ccd_dist < scat_dist) && (ccd_dist < entity_dist) && (ccd_dist < cell_dist))
                     {
-                        m_ccd[ccd_index].add_hit(phot.get_pos() + (phot.get_dir() * ccd_dist), phot.get_weight());
+                        m_ccd[ccd_index]
+                            .add_hit(phot.get_pos() + (phot.get_dir() * ccd_dist), phot.get_weight(), phot.get_wavelength());
                     }
 
                     if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.

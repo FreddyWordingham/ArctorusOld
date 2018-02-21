@@ -59,7 +59,7 @@ namespace arc
             std::array<double, 3> get_max_value() const { return (m_image.get_max_value()); }
 
             //  -- Setters --
-            void add_hit(const math::Vec<3>& t_pos, double t_weight);
+            void add_hit(const math::Vec<3>& t_pos, double t_weight, double t_wavelength);
 
             //  -- Save --
             void save(const std::string& t_path, double t_norm) const;

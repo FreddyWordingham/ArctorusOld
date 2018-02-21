@@ -45,7 +45,7 @@ namespace arc
 
         //  == METHODS ==
         //  -- Setters --
-        void Ccd::add_hit(const math::Vec<3>& t_pos, const double t_weight)
+        void Ccd::add_hit(const math::Vec<3>& t_pos, const double t_weight, const double t_wavelength)
         {
             const math::Vec<3> alpha = m_mesh.get_tri(1).get_vert(1).get_pos();
             const math::Vec<3> beta  = m_mesh.get_tri(1).get_vert(2).get_pos();
