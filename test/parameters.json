@@ -3,7 +3,7 @@
     "output_dir":  "output",
     "num_phot":    1e3,
     "pre_render":  false,
-    "post_render": false,
+    "post_render": true,
     "grid":        {
         "min":   [-4.1, -1.1, -1.1],
         "max":   [4.1, 1.1, 1.1],
@@ -23,7 +23,7 @@
     "lights":      {
         "light_one": {
             "power": 1.0,
-            "scale": [0.1, 0.1, 0.1],
+            "scale": [0.01, 0.01, 0.01],
             "trans": [-3.0, 0.0, 0.0],
             "dir":   [-1.0, 0.0, 0.0],
             "mesh":  "meshes/circle.obj",

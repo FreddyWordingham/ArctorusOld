@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- Utility --
+#include "utl/colourmap.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -179,9 +185,7 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-
-                        img_x.add_to_pixel(j, start_row + k,
-                                           {{energy_density[i][j][k], energy_density[i][j][k], energy_density[i][j][k]}});
+                        img_x.add_to_pixel(j, start_row + k, utl::colourmap::transform_rainbow(energy_density[i][j][k]));
                     }
                 }
             }
@@ -197,8 +201,7 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        img_y.add_to_pixel(j, start_row + k,
-                                           {{energy_density[j][i][k], energy_density[j][i][k], energy_density[j][i][k]}});
+                        img_y.add_to_pixel(j, start_row + k, utl::colourmap::transform_rainbow(energy_density[j][i][k]));
                     }
                 }
             }
@@ -214,8 +217,7 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Y]; ++k)
                     {
-                        img_z.add_to_pixel(j, start_row + k,
-                                           {{energy_density[j][k][i], energy_density[j][k][i], energy_density[j][k][i]}});
+                        img_z.add_to_pixel(j, start_row + k, utl::colourmap::transform_rainbow(energy_density[j][k][i]));
                     }
                 }
             }
