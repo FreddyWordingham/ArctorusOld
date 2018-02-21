@@ -230,9 +230,10 @@ namespace arc
 
                 // Get ccd properties.
                 const auto pix = json_ccd.parse_child<std::array<size_t, 2>>("pixel");
+                const auto col = json_ccd.parse_child<bool>("col");
 
                 // Construct the ccd object an add it to the vector of ccds.
-                r_ccd.emplace_back(detector::Ccd(pix[X], pix[Y], trans, dir, rot, scale));
+                r_ccd.emplace_back(detector::Ccd(pix[X], pix[Y], col, trans, dir, rot, scale));
             }
 
             return (r_ccd);
