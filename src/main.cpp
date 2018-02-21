@@ -9,13 +9,13 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/rng.hpp"
 #include "gen/math.hpp"
+#include "gen/rng.hpp"
 
 //  -- Classes --
+#include "cls/file/handle.hpp"
 #include "cls/setup/sim.hpp"
 
-#include "cls/data/image.hpp"
 
 
 //  == MAIN ==
@@ -29,16 +29,6 @@
  */
 int main(const int t_argc, const char** t_argv)
 {
-    arc::data::Image img(40 * 2, 20 * 2);
-
-    for (size_t i = 0; i < 20; ++i)
-    {
-        img.add_to_pixel(i, i, {{1.0, 1.0, 1.0}});
-    }
-
-    img.save("test.ppm", 1.0);
-
-/*
     // Check the number of command line arguments.
     if (t_argc != 2)
     {
@@ -62,7 +52,7 @@ int main(const int t_argc, const char** t_argv)
     pdt.run();
 
     // Render the simulation scene.
-    pdt.render();*/
+    pdt.render();
 
     return (0);
 }
