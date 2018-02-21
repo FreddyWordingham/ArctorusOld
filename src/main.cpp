@@ -30,6 +30,12 @@
 int main(const int t_argc, const char** t_argv)
 {
     arc::data::Image img(40 * 2, 20 * 2);
+
+    for (size_t i = 0; i < 20; ++i)
+    {
+        img.add_to_pixel(i, i, {{1.0, 1.0, 1.0}});
+    }
+
     img.save("test.ppm", 1.0);
 
 /*
