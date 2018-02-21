@@ -165,6 +165,7 @@ namespace arc
             //  -- Additions --
             void add_light_vector(const std::vector<equip::Light>& t_light);
             void add_entity_vector(const std::vector<equip::Entity>& t_ent);
+            void add_ccd_vector(const std::vector<detector::Ccd>& t_ccd);
             void add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot);
             void add_grid(const mesh::Grid& t_grid);
 

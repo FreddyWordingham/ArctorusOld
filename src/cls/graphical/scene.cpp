@@ -242,6 +242,35 @@ namespace arc
         }
 
         /**
+         *  Add a vector of render-able ccd props to the scene.
+         *
+         *  @param  t_ccd   Vector of ccds to be added to the scene.
+         *
+         *  @pre    CCD_START_HUE must be less than CCD_END_HUE.
+         */
+        void Scene::add_ccd_vector(const std::vector<detector::Ccd>& t_ccd)
+        {
+            static_assert(CCD_START_HUE < CCD_END_HUE);
+
+            // Return if there are no entities.
+            if (t_ccd.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_ccd.size() == 1) ? 0.0 : ((CCD_END_HUE - CCD_START_HUE) / (t_ccd.size() - 1));
+
+            // Add the entity props to the scene.
+            for (size_t i = 0; i < t_ccd.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(CCD_START_HUE + (i * hue_delta)));
+
+                add_ccd(t_ccd[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 0.5));
+            }
+        }
+
+        /**
          *  Add a vector of render-able photon path props to the scene.
          *
          *  @param  t_phot  Vector of photon paths to be added to the scene.
