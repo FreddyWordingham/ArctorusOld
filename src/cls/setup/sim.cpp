@@ -269,6 +269,20 @@ namespace arc
             m_grid.save_images(t_dir);
         }
 
+        /**
+         *  Save the ccd images to a given directory.
+         *
+         *  @param  t_dir   Directory to save the images to.
+         */
+        void Sim::save_ccd_images(const std::string& t_dir) const
+        {
+            // Save each ccd image.
+            for (size_t i = 0; i < m_ccd.size(); ++i)
+            {
+                m_ccd[i].save(t_dir + "/ccd_" + std::to_string(i) + ".ppm", 1.0);
+            }
+        }
+
 
         //  -- Rendering --
         /**

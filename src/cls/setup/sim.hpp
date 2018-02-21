@@ -81,6 +81,7 @@ namespace arc
           public:
             //  -- Saving --
             void save_grid_images(const std::string& t_dir) const;
+            void save_ccd_images(const std::string& t_dir) const;
 
             //  -- Rendering --
             void render() const;
