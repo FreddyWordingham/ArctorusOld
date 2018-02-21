@@ -29,12 +29,16 @@ namespace arc
              *
              *  @param  t_x Value to be mapped.
              *
-             *  @pre    t_x must be between zero and one.
-             *
              *  @return The colour mapping of the value.
              */
             std::array<double, 3> transform_rainbow(const double t_x)
             {
+                // Check for value out of range.
+                if ((t_x < 0.0) || (t_x > 1.0))
+                {
+                    return (std::array<double, 3>({{1.0, 0.0, 1.0}}));
+                }
+
                 assert((t_x >= 0.0) && (t_x <= 1.0));
 
                 // Calculate the red component.
