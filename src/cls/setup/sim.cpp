@@ -45,7 +45,7 @@ namespace arc
             m_ccd(init_ccd(t_json["ccds"])),
             m_light_select(init_light_select()),
             m_grid(t_json["grid"].parse_child<math::Vec<3>>("min"), t_json["grid"].parse_child<math::Vec<3>>("max"),
-                   t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light)
+                   t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd)
         {
             // Check wavelengths are valid.
             double      light_min_bound = m_light[0].get_min_bound();
