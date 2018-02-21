@@ -59,6 +59,9 @@ namespace arc
 
             //  -- Setters --
             void add_hit(const math::Vec<3>& t_pos, double t_weight);
+
+            //  -- Save --
+            void save(const std::string& t_path, double t_norm) const;
         };
 
 
