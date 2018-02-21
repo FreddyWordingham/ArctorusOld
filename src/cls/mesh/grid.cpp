@@ -151,33 +151,19 @@ namespace arc
             const double max_energy_density = get_max_energy_density();
 
             // Calculate energy density fractions.
-// Create three-dimensional vector of cells.
-            std::vector<std::vector<std::vector<Cell>>> r_cell;
-
-            // Create the cells.
-            const double total_cells       = m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z];
-            double       constructed_cells = 0;
-
-            r_cell.reserve(m_num_cells[X]);
+            std::vector<std::vector<std::vector<double>>> energy_density;
+            energy_density.reserve(m_num_cells[X]);
             for (size_t i = 0; i < m_num_cells[X]; ++i)
             {
-                r_cell.emplace_back(std::vector<std::vector<Cell>>());
-                r_cell[i].reserve(m_num_cells[Y]);
+                energy_density.emplace_back(std::vector<std::vector<Cell>>());
+                energy_density[i].reserve(m_num_cells[Y]);
                 for (size_t j = 0; j < m_num_cells[Y]; ++j)
                 {
-                    r_cell[i].emplace_back(std::vector<Cell>());
-                    r_cell[i][j].reserve(m_num_cells[Z]);
+                    energy_density[i].emplace_back(std::vector<Cell>());
+                    energy_density[i][j].reserve(m_num_cells[Z]);
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        r_cell[i][j].emplace_back(Cell(math::Vec<3>(
-                            {{m_min_bound[X] + (i * cell_size[X]), m_min_bound[Y] + (j * cell_size[Y]), m_min_bound[Z] + (k * cell_size[Z])}}),
-                                                       math::Vec<3>(
-                                                           {{m_min_bound[X] + ((i + 1) * cell_size[X]), m_min_bound[Y] + ((j + 1) * cell_size[Y]), m_min_bound[Z] + ((k + 1) * cell_size[Z])}}),
-                                                       t_entity, t_light));
-
-                        // Report grid construction.
-                        TEMP("Constructing grid", 100.0 * (constructed_cells / total_cells));
-                        ++constructed_cells;
+                        energy_density[i][j].emplace_back(m_cell[i][j][k].get_energy_density() / max_energy_density);
                     }
                 }
             }
@@ -191,9 +177,11 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        img.add_to_pixel(, {{/max_enegy_denity, 0.0, 0.0}});
+                        img.add_to_pixel(j, k, {{energy_density[i][j][k] / max_energy_density, 0.0, 0.0}});
                     }
                 }
+
+                img.save(t_dir + "/X_" + std::to_string(i), max_energy_density);
             }
         }
 
