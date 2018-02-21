@@ -385,6 +385,36 @@ namespace arc
         }
 
         /**
+         *  Add a render-able ccd prop to the scene.
+         *
+         *  @param  t_ccd   Ccd to be added to the scene.
+         *  @param  t_col   Colour to render the prop.
+         */
+        void Scene::add_ccd(const detector::Ccd& t_ccd, const glm::vec4& t_col)
+        {
+            // Create vector of vertices.
+            std::vector<Vertex> vertices;
+            vertices.reserve(t_ccd.get_mesh().get_num_tri() * 3);
+
+            // Add vertices into list from mesh.
+            for (size_t i = 0; i < t_ccd.get_mesh().get_num_tri(); ++i)
+            {
+                for (size_t j = 0; j < 3; ++j)
+                {
+                    vertices.push_back(Vertex({static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
+                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
+                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
+                                              {static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
+                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
+                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
+                }
+            }
+
+            // Add the ccd prop into the list of render-able ccd props.
+            m_light.emplace_back(Prop(vertices, t_col));
+        }
+
+        /**
          *  Add a renderable photon packet path prop to the scene.
          *
          *  @param  t_phot  Photon packet path prop to be added.

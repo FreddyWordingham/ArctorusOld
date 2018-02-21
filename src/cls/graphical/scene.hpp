@@ -20,6 +20,7 @@
 #include <glm/glm.hpp>
 
 //  -- Classes --
+#include "cls/detector/ccd.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/graphical/camera.hpp"
@@ -118,10 +119,10 @@ namespace arc
             //  -- Props --
             std::vector<Prop>        m_entity;  //! Vector of entity props.
             std::vector<prop::Light> m_light;   //! Vector of light source props.
+            std::vector<Prop>        m_ccd;     //! Vector of ccd props.
             std::vector<Prop>        m_phot;    //! Vector of photon packet path props.
             std::vector<Prop>        m_grid;    //! Vector of grid props.
             std::vector<Prop>        m_cell;    //! Vector of cell props.
-            std::vector<Prop>        m_ccd;     //! Vector of ccd props.
 
             //  -- Toggles --
             bool m_toggle_filled_tris   = true;     //! When true render triangles as filled.
@@ -175,6 +176,7 @@ namespace arc
             //  -- Additions --
             void add_entity(const equip::Entity& t_ent, const glm::vec4& t_col);
             void add_light(const equip::Light& t_light, const glm::vec4& t_col);
+            void add_ccd(const detector::Ccd& t_ccd, const glm::vec4& t_col);
             void add_photon(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col);
             void add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const glm::vec4& t_col);
 
