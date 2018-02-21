@@ -129,7 +129,7 @@ namespace arc
         /**
          *  Save the state of the image to a given file path.
          *
-         *  @param  t_path      Path to the save location of the file.
+         *  @param  t_path  Path to the save location of the file.
          *  @param  t_norm  Normalisation value.
          */
         void Image::save(const std::string& t_path, const double t_norm) const
