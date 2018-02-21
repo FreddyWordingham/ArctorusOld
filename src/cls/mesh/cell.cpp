@@ -38,7 +38,7 @@ namespace arc
             m_entity_list(init_entity_list(t_entity)),
             m_light_list(init_light_list(t_light)),
             m_ccd_list(init_ccd_list(t_ccd)),
-            m_empty(m_entity_list.empty() && m_light_list.empty())
+            m_empty(m_entity_list.empty() && m_light_list.empty() && m_ccd_list.empty())
         {
             assert(t_max_bound[X] > t_min_bound[X]);
             assert(t_max_bound[Y] > t_min_bound[Y]);
