@@ -58,6 +58,9 @@ namespace arc
             size_t get_width() const { return (m_data.size()); }
             size_t get_height() const { return (m_data.front().size()); }
 
+            //  -- Setters --
+            void add_to_pixel(size_t t_row, size_t t_col, const std::array<double, 3>& t_data);
+
             //  -- Serialisation --
             std::string serialise(double t_norm) const;
 

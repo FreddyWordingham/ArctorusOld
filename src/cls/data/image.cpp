@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/enum.hpp"
 #include "gen/log.hpp"
 
 //  -- Classes --
@@ -80,6 +81,28 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Setters --
+        /**
+         *  Add a value to a given pixel.
+         *
+         *  @param  t_row   Row to add to.
+         *  @param  t_col   Column to add to.
+         *  @param  t_data  Data array to add.
+         *
+         *  @pre    t_row must be less than get_width.
+         *  @pre    t_col must be less than get_height.
+         */
+        void Image::add_to_pixel(const size_t t_row, const size_t t_col, const std::array<double, 3>& t_data)
+        {
+            assert(t_row < get_width());
+            assert(t_col < get_height());
+
+            m_data[t_row][t_col][R] += t_data[R];
+            m_data[t_row][t_col][G] += t_data[G];
+            m_data[t_row][t_col][B] += t_data[B];
+        }
+
+
         //  -- Serialisation --
         /**
          *  Create a string representation of the image in ppm format.
