@@ -57,6 +57,12 @@ float colormap_blue(float x) {
 }
 
 vec4 colormap(float x) {
+
+    if ((x < 0.0) || (x > 1.0))
+    {
+        return (vec4(1.0, 0.0, 1.0, 1.0));
+    }
+
     float r = clamp(colormap_red(x), 0.0, 1.0);
     float g = clamp(colormap_green(x), 0.0, 1.0);
     float b = clamp(colormap_blue(x), 0.0, 1.0);
