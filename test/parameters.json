@@ -1,15 +1,16 @@
 {
-    "seed":     78,
-    "num_phot": 1e3,
-    "grid":     {
+    "seed":       78,
+    "output_dir": "output",
+    "num_phot":   1e3,
+    "grid":       {
         "min":   [-4.1, -1.1, -1.1],
         "max":   [4.1, 1.1, 1.1],
         "cells": [41, 11, 11]
     },
-    "aether":   {
+    "aether":     {
         "mat": "materials/vacuum.mat"
     },
-    "entities": {
+    "entities":   {
         "entity_zero":  {
             "trans": [0.0, 0.0, 0.0],
             "dir":   [1.0, 0.0, 0.0],
@@ -39,7 +40,7 @@
             "mat":   "materials/vacuum.mat"
         }
     },
-    "lights":   {
+    "lights":     {
         "light_one": {
             "power": 1.0,
             "scale": [0.01, 0.01, 0.01],
