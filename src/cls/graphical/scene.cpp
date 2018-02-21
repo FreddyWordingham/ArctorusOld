@@ -476,6 +476,7 @@ namespace arc
             draw_skybox();
             draw_entities();
             draw_lights();
+            draw_ccds();
             draw_grid();
             draw_sun();
             draw_phots();
