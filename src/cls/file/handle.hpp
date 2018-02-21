@@ -61,14 +61,14 @@ namespace arc
             //  -- Constructors --
             Handle(const Handle& /*unused*/) = delete;
             Handle(const Handle&& /*unused*/) = delete;
-            Handle(const std::string& t_path, const std::fstream::openmode& t_mode);
+            Handle(const std::string& t_path, const std::fstream::openmode& t_mode, bool t_header = true);
 
             //  -- Destructors --
             ~Handle();
 
           private:
             //  -- Initialisation --
-            std::fstream init_file(const std::fstream::openmode& t_mode) const;
+            std::fstream init_file(const std::fstream::openmode& t_mode, bool t_header) const;
 
 
             //  == OPERATORS ==

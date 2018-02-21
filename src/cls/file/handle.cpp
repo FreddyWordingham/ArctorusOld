@@ -32,13 +32,14 @@ namespace arc
         /**
          *  Construct a handle to a given file with the specified mode.
          *
-         *  @param  t_path  Path to the file being opened.
-         *  @param  t_mode  Mode to open the file with.
+         *  @param  t_path      Path to the file being opened.
+         *  @param  t_mode      Mode to open the file with.
+         *  @param  t_header    When true, write the Arctorus file header.
          */
-        Handle::Handle(const std::string& t_path, const std::fstream::openmode& t_mode) :
+        Handle::Handle(const std::string& t_path, const std::fstream::openmode& t_mode, const bool t_header) :
             m_path(t_path),
             m_filename(utl::strip_path(m_path)),
-            m_file(init_file(t_mode))
+            m_file(init_file(t_mode, t_header))
         {
             const size_t size = get_file_size();
             if (size > SIZE_WARNING)
@@ -70,13 +71,14 @@ namespace arc
         /**
          *  Initialise the handle to the file itself.
          *
-         *  @param  t_mode  Mode to open the file with.
+         *  @param  t_mode      Mode to open the file with.
+         *  @param  t_header    When true, write the Arctorus file header.
          *
          *  @post   r_file should be open.
          *
          *  @return The handle to the requested file.
          */
-        std::fstream Handle::init_file(const std::fstream::openmode& t_mode) const
+        std::fstream Handle::init_file(const std::fstream::openmode& t_mode, const bool t_header) const
         {
             std::fstream r_file;
             r_file.open(m_path, t_mode);
@@ -91,7 +93,7 @@ namespace arc
                 ERROR("Failed to construct file::Handle object.", "The file: '" << m_filename << "' could not be opened.");
             }
 
-            if (t_mode == std::fstream::out)
+            if ((t_mode == std::fstream::out) && (t_header))
             {
                 r_file << COMMENT_CHAR << " Created by Arctorus: " << utl::create_timestamp() << "\n";
                 r_file << COMMENT_CHAR << " Build: " << config::BUILD_INFO << "\n";
