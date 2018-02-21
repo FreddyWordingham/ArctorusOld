@@ -81,6 +81,36 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Determine the maximum rgb pixel value within the data.
+         *
+         *  @return The maximum rgb pixel values within the image.
+         */
+        std::array<double, 3> Image::get_max_value() const
+        {
+            // Create the return array.
+            std::array<double, 3> r_max({{0.0, 0.0, 0.0}});
+
+            // Check each pixel for the maximum.
+            for (size_t i = 0; i < get_width(); ++i)
+            {
+                for (size_t j = 0; j < get_height(); ++j)
+                {
+                    for (size_t k = 0; k < 3; ++k)
+                    {
+                        if (m_data[i][j][k] > r_max[k])
+                        {
+                            r_max[k] = m_data[i][j][k];
+                        }
+                    }
+                }
+            }
+
+            return (r_max);
+        }
+
+
         //  -- Setters --
         /**
          *  Add a value to a given pixel.
