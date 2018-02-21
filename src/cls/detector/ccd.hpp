@@ -47,7 +47,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            explicit Ccd(const math::Vec<3>& t_trans = math::Vec<3>({{0.0, 0.0, 0.0}}),
+            explicit Ccd(size_t t_width, size_t t_height, const math::Vec<3>& t_trans = math::Vec<3>({{0.0, 0.0, 0.0}}),
                          const math::Vec<3>& t_dir = math::Vec<3>({{0.0, 0.0, 1.0}}), double t_spin = 0.0,
                          const math::Vec<3>& t_scale = math::Vec<3>({{1.0, 1.0, 1.0}}));
 
