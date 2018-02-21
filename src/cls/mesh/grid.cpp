@@ -36,9 +36,11 @@ namespace arc
          *  @param  t_num_cells Number of cells across each dimension.
          *  @param  t_entity    Vector of entities which may be contained within the grid.
          *  @param  t_light     Vector of lights which may be contained within the grid.
+         *  @param  t_ccd       Vector of ccds which may be contained within the grid.
          */
         Grid::Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::array<size_t, 3> t_num_cells,
-                   const std::vector<equip::Entity>& t_entity, const std::vector<equip::Light>& t_light) :
+                   const std::vector<equip::Entity>& t_entity, const std::vector<equip::Light>& t_light,
+                   const std::vector<detector::Ccd>& t_ccd) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
             m_num_cells(t_num_cells),
@@ -47,7 +49,7 @@ namespace arc
             m_cell_size(
                 {{(m_max_bound[X] - m_min_bound[X]) / m_num_cells[X], (m_max_bound[Y] - m_min_bound[Y]) / m_num_cells[Y], (m_max_bound[Z] - m_min_bound[Z]) / m_num_cells[Z]}}),
             m_cell_vol(m_grid_vol / (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z])),
-            m_cell(init_cell(t_entity, t_light))
+            m_cell(init_cell(t_entity, t_light, t_ccd))
         {
         }
 
