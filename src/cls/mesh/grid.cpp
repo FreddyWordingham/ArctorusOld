@@ -179,6 +179,7 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
+
                         img_x.add_to_pixel(j, start_row + k,
                                            {{energy_density[i][j][k], energy_density[i][j][k], energy_density[i][j][k]}});
                     }

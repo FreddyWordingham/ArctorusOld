@@ -33,19 +33,19 @@ namespace arc
              *
              *  @return The colour mapping of the value.
              */
-            glm::vec3 transform_rainbow(const float t_x)
+            std::array<double, 3> transform_rainbow(const double t_x)
             {
-                assert((t_x >= 0.0f) && (t_x <= 1.0f));
+                assert((t_x >= 0.0) && (t_x <= 1.0));
 
                 // Calculate the red component.
-                float red = 0.0f;
-                if (t_x < 0.0f)
+                double red = 0.0;
+                if (t_x < 0.0)
                 {
-                    red = 127.0f / 255.0f;
+                    red = 127.0 / 255.0;
                 }
-                else if (t_x <= 1.0f / 9.0f)
+                else if (t_x <= 1.0 / 9.0)
                 {
-                    red = 1147.5f * (1.0f / 9.0f - t_x) / 255.0f;
+                    red = 1147.5 * (1.0 / 9.0 - t_x) / 255.0;
                 }
                 else if (t_x <= 5.0 / 9.0)
                 {
@@ -53,7 +53,7 @@ namespace arc
                 }
                 else if (t_x <= 7.0 / 9.0)
                 {
-                    red = 1147.5f * (t_x - 5.0f / 9.0f) / 255.0f;
+                    red = 1147.5 * (t_x - 5.0 / 9.0) / 255.0;
                 }
                 else
                 {
@@ -61,44 +61,44 @@ namespace arc
                 }
 
                 // Calculate the green component.
-                float green = 0.0f;
-                if (t_x <= 1.0f / 9.0f)
+                double green = 0.0;
+                if (t_x <= 1.0 / 9.0)
                 {
-                    green = 0.0f;
+                    green = 0.0;
                 }
-                else if (t_x <= 3.0f / 9.0f)
+                else if (t_x <= 3.0 / 9.0)
                 {
-                    green = 1147.5f * (t_x - 1.0f / 9.0f) / 255.0f;
+                    green = 1147.5 * (t_x - 1.0 / 9.0) / 255.0;
                 }
-                else if (t_x <= 7.0f / 9.0f)
+                else if (t_x <= 7.0 / 9.0)
                 {
-                    green = 1.0f;
+                    green = 1.0;
                 }
-                else if (t_x <= 1.0f)
+                else if (t_x <= 1.0)
                 {
-                    green = 1.0f - 1147.5f * (t_x - 7.0f / 9.0f) / 255.0f;
+                    green = 1.0 - 1147.5 * (t_x - 7.0 / 9.0) / 255.0;
                 }
                 else
                 {
-                    green = 0.0f;
+                    green = 0.0;
                 }
 
                 // Calculate the blue component.
-                float blue = 0.0f;
-                if (t_x <= 3.0f / 9.0f)
+                double blue = 0.0;
+                if (t_x <= 3.0 / 9.0)
                 {
-                    blue = 1.0f;
+                    blue = 1.0;
                 }
-                else if (t_x <= 5.0f / 9.0f)
+                else if (t_x <= 5.0 / 9.0)
                 {
-                    blue = 1.0f - 1147.5f * (t_x - 3.0f / 9.0f) / 255.0f;
+                    blue = 1.0 - 1147.5 * (t_x - 3.0 / 9.0) / 255.0;
                 }
                 else
                 {
-                    blue = 0.0f;
+                    blue = 0.0;
                 }
 
-                return glm::vec3(red, green, blue);
+                return (std::array<double, 3>({{red, green, blue}}));
             }
 
 
