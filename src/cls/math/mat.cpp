@@ -8,7 +8,6 @@
 
 
 //  == HEADER ==
-#include "cls/math/mat.hpp"
 
 
 
@@ -22,17 +21,6 @@ namespace arc
 
         //  == FUNCTIONS ==
         //  -- Mathematical --
-        /**
-         *  Determine the determinant of a 2 by 2 matrix.
-         *
-         *  @param  t_mat   Matrix to determine the determinant of.
-         *
-         *  @return The determinant of the given matrix.
-         */
-        double determinant(const Mat<2, 2>& t_mat)
-        {
-            return ((t_mat[0][0] * t_mat[1][1]) - (t_mat[0][1] * t_mat[1][0]));
-        }
 
 
 

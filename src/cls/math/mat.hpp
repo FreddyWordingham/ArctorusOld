@@ -108,7 +108,7 @@ namespace arc
 
         //  == FUNCTION PROTOTYPES ==
         //  -- Mathematical --
-        double determinant(const Mat<2, 2>& t_mat);
+        constexpr double determinant(const Mat<2, 2>& t_mat);
         template <size_t N>
         constexpr double determinant(const Mat<N, N>& t_mat);
         template <size_t N, size_t M>
@@ -690,6 +690,18 @@ namespace arc
 
         //  == FUNCTIONS ==
         //  -- Mathematical --
+        /**
+         *  Determine the determinant of a 2 by 2 matrix.
+         *
+         *  @param  t_mat   Matrix to determine the determinant of.
+         *
+         *  @return The determinant of the given matrix.
+         */
+        constexpr double determinant(const Mat<2, 2>& t_mat)
+        {
+            return ((t_mat[0][0] * t_mat[1][1]) - (t_mat[0][1] * t_mat[1][0]));
+        }
+
         /**
          *  Determine in the determinant of a square matrix, larger than 2 by 2, through recursion.
          *
