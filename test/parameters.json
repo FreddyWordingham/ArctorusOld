@@ -15,9 +15,9 @@
     "entities":    {
         "entity_zero": {
             "dir":   [1.0, 0.0, 0.0],
-            "scale": [2.0, 2.0, 2.0],
-            "mesh":  "meshes/square.obj",
-            "mat":   "materials/intralipid_10.mat"
+            "scale": [1.0, 1.0, 1.0],
+            "mesh":  "meshes/sphere.obj",
+            "mat":   "materials/glass.mat"
         }
     },
     "lights":      {
@@ -32,6 +32,8 @@
     },
     "ccds":        {
         "ccd_zero": {
+            "trans": [3.0, 0.0, 0.0],
+            "dir":   [-1.0, 0.0, 0.0],
             "pixel": [40, 40]
         }
     }
