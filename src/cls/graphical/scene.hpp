@@ -73,14 +73,14 @@ namespace arc
 
         //  -- Rendering --
         constexpr const float  PHOTON_TRAVEL_SPEED = 1e-9f; //! Photon travel speed when rendering path data.
-        constexpr const double LIGHT_START_HUE  = 20.0;  //! Light prop start hue.
-        constexpr const double LIGHT_END_HUE    = 60.0;  //! Light prop end hue.
-        constexpr const double ENTITY_START_HUE = 240.0; //! Entity prop start hue.
-        constexpr const double ENTITY_END_HUE   = 280.0; //! Entity prop end hue.
-        constexpr const double PHOTON_START_HUE = 120.0; //! Photon path prop start hue.
-        constexpr const double PHOTON_END_HUE   = 160.0; //! Photon path prop end hue.
-        constexpr const double CCD_START_HUE    = 100.0; //! Ccd prop start hue.
-        constexpr const double CCD_END_HUE      = 140.0; //! Ccd prop end hue.
+        constexpr const double LIGHT_START_HUE     = 20.0;  //! Light prop start hue.
+        constexpr const double LIGHT_END_HUE       = 60.0;  //! Light prop end hue.
+        constexpr const double ENTITY_START_HUE    = 240.0; //! Entity prop start hue.
+        constexpr const double ENTITY_END_HUE      = 280.0; //! Entity prop end hue.
+        constexpr const double PHOTON_START_HUE    = 120.0; //! Photon path prop start hue.
+        constexpr const double PHOTON_END_HUE      = 160.0; //! Photon path prop end hue.
+        constexpr const double CCD_START_HUE       = 100.0; //! Ccd prop start hue.
+        constexpr const double CCD_END_HUE         = 140.0; //! Ccd prop end hue.
 
 
 
@@ -121,6 +121,7 @@ namespace arc
             std::vector<Prop>        m_phot;    //! Vector of photon packet path props.
             std::vector<Prop>        m_grid;    //! Vector of grid props.
             std::vector<Prop>        m_cell;    //! Vector of cell props.
+            std::vector<Prop>        m_ccd;     //! Vector of ccd props.
 
             //  -- Toggles --
             bool m_toggle_filled_tris   = true;     //! When true render triangles as filled.
