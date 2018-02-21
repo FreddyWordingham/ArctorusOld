@@ -63,7 +63,8 @@ namespace arc
           private:
             //  -- Initialisation --
             std::vector<std::vector<std::vector<Cell>>> init_cell(const std::vector<equip::Entity>& t_entity,
-                                                                  const std::vector<equip::Light>& t_light) const;
+                                                                  const std::vector<equip::Light>& t_light,
+                                                                  const std::vector<detector::Ccd>& t_ccd) const;
 
 
             //  == METHODS ==
