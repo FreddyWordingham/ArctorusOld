@@ -134,7 +134,7 @@ namespace arc
          */
         void Image::save(const std::string& t_path, const double t_norm) const
         {
-            file::Handle file(t_path, std::fstream::out);
+            file::Handle file(t_path, std::fstream::out, false);
 
             file << serialise(t_norm);
         }
