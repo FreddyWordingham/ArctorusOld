@@ -179,17 +179,9 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        img_x.add_to_pixel(j, start_row + k, {{0.0, 0.0, energy_density[i][j][k]}});
+                        img_x.add_to_pixel(j, start_row + k,
+                                           {{energy_density[i][j][k], energy_density[i][j][k], energy_density[i][j][k]}});
                     }
-                }
-            }
-            for (size_t i = 1; i < m_num_cells[X]; ++i)
-            {
-                size_t row = (i * (m_num_cells[Z] + 1)) - 1;
-
-                for (size_t j = 0; j < m_num_cells[Y]; ++j)
-                {
-                    img_x.add_to_pixel(j, row, {{1.0, 1.0, 1.0}});
                 }
             }
             img_x.save(t_dir + "/X__master.ppm", 1.0);
@@ -204,17 +196,9 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        img_y.add_to_pixel(j, start_row + k, {{0.0, 0.0, energy_density[j][i][k]}});
+                        img_y.add_to_pixel(j, start_row + k,
+                                           {{energy_density[j][i][k], energy_density[j][i][k], energy_density[j][i][k]}});
                     }
-                }
-            }
-            for (size_t i = 1; i < m_num_cells[Y]; ++i)
-            {
-                size_t row = (i * (m_num_cells[Z] + 1)) - 1;
-
-                for (size_t j = 0; j < m_num_cells[X]; ++j)
-                {
-                    img_y.add_to_pixel(j, row, {{1.0, 1.0, 1.0}});
                 }
             }
             img_y.save(t_dir + "/Y__master.ppm", 1.0);
@@ -229,21 +213,12 @@ namespace arc
                 {
                     for (size_t k = 0; k < m_num_cells[Y]; ++k)
                     {
-                        img_z.add_to_pixel(j, start_row + k, {{0.0, 0.0, energy_density[j][k][i]}});
+                        img_z.add_to_pixel(j, start_row + k,
+                                           {{energy_density[j][k][i], energy_density[j][k][i], energy_density[j][k][i]}});
                     }
                 }
             }
-            for (size_t i = 1; i < m_num_cells[Z]; ++i)
-            {
-                size_t row = (i * (m_num_cells[Y] + 1)) - 1;
-
-                for (size_t j = 0; j < m_num_cells[X]; ++j)
-                {
-                    img_z.add_to_pixel(j, row, {{1.0, 1.0, 1.0}});
-                }
-            }
             img_z.save(t_dir + "/Z__master.ppm", 1.0);
-
         }
 
 

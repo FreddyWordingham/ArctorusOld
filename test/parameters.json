@@ -12,38 +12,15 @@
     },
     "entities":   {
         "entity_zero":  {
-            "trans": [0.0, 0.0, 0.0],
-            "dir":   [1.0, 0.0, 0.0],
-            "scale": [4.2, 4.2, 4.2],
-            "mesh":  "meshes/square.obj",
-            "mat":   "materials/intralipid_10.mat"
-        },
-        "entity_one":   {
-            "trans": [0.2, 0.0, 0.0],
-            "dir":   [1.0, 0.0, 0.0],
-            "scale": [4.2, 4.2, 4.2],
-            "mesh":  "meshes/square.obj",
+            "scale": [0.25, 0.25, 0.25],
+            "mesh":  "meshes/sphere.obj",
             "mat":   "materials/glass.mat"
-        },
-        "entity_two":   {
-            "trans": [0.8, 0.0, 0.0],
-            "dir":   [1.0, 0.0, 0.0],
-            "scale": [4.2, 4.2, 4.2],
-            "mesh":  "meshes/square.obj",
-            "mat":   "materials/intralipid_10.mat"
-        },
-        "entity_three": {
-            "trans": [1.0, 0.0, 0.0],
-            "dir":   [1.0, 0.0, 0.0],
-            "scale": [4.2, 4.2, 4.2],
-            "mesh":  "meshes/square.obj",
-            "mat":   "materials/vacuum.mat"
         }
     },
     "lights":     {
         "light_one": {
             "power": 1.0,
-            "scale": [0.01, 0.01, 0.01],
+            "scale": [0.1, 0.1, 0.1],
             "trans": [-3.0, 0.0, 0.0],
             "dir":   [-1.0, 0.0, 0.0],
             "mesh":  "meshes/circle.obj",
