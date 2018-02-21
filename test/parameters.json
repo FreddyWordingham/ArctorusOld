@@ -29,5 +29,10 @@
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
         }
+    },
+    "ccds":        {
+        "ccd_zero": {
+            "pixel": [40, 40]
+        }
     }
 }
