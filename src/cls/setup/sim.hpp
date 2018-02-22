@@ -15,9 +15,11 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/data/json.hpp"
+#include "cls/detector/ccd.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
-#include "cls/data/json.hpp"
+#include "cls/mesh/grid.hpp"
 
 
 
@@ -26,6 +28,12 @@ namespace arc
 {
     namespace setup
     {
+
+
+
+        //  == SETTINGS ==
+        //  -- Numerical Simultion --
+        constexpr const double SMOOTHING_LENGTH = 1E-9; //! Smoothing length applied to stop photons getting stuck.
 
 
 
@@ -44,34 +52,37 @@ namespace arc
             const phys::Material             m_aether;  //! Aether material.
             const std::vector<equip::Entity> m_entity;  //! Vector of entity objects.
             const std::vector<equip::Light>  m_light;   //! Vector of light objects.
+            std::vector<detector::Ccd>       m_ccd;           //! Vector of ccd objects.
 
             //  -- Tools --
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
+            mesh::Grid                                         m_grid;  //! Simulation grid.
             std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Sim(const data::Json& t_param);
-            Sim(const std::string& t_serial);
+            explicit Sim(const data::Json& t_param);
+            explicit Sim(const std::string& t_serial);
 
           private:
             //  -- Initialisation --
             phys::Material init_aether(const data::Json& t_json) const;
             std::vector<equip::Entity> init_entity(const data::Json& t_json) const;
             std::vector<equip::Light> init_light(const data::Json& t_json) const;
+            std::vector<detector::Ccd> init_ccd(const data::Json& t_json) const;
             random::Index init_light_select() const;
-
-
-            //  == OPERATORS ==
-          private:
 
 
             //  == METHODS ==
           public:
+            //  -- Saving --
+            void save_grid_images(const std::string& t_dir) const;
+            void save_ccd_images(const std::string& t_dir) const;
+
             //  -- Rendering --
             void render() const;
 

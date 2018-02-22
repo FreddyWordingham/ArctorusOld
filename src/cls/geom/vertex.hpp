@@ -37,8 +37,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Data --
-            math::Vec<3> m_pos;     //! Position of the vertex.
-            math::Vec<3> m_norm;    //! Normal associated with the vertex. Should always be normalised.
+            const math::Vec<3> m_pos;   //! Position of the vertex.
+            const math::Vec<3> m_norm;  //! Normal associated with the vertex. Should always be normalised.
 
 
             //  == INSTANTIATION ==
@@ -52,9 +52,6 @@ namespace arc
             //  -- Getters --
             const math::Vec<3>& get_pos() const { return (m_pos); }
             const math::Vec<3>& get_norm() const { return (m_norm); }
-
-            //  -- Transformation --
-            void transform(const math::Mat<4, 4>& t_pos_trans_mat, const math::Mat<4, 4>& t_dir_trans_mat);
         };
 
 

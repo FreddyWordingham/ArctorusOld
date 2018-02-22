@@ -49,7 +49,7 @@ void main()
 
         if (delta_time > 1e-10)
         {
-            frag_col.a = 0.0;
+            discard;
         }
         else
         {

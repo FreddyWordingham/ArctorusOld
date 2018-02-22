@@ -29,7 +29,7 @@ namespace arc
          *
          *  @return The area described by the three points.
          */
-        double area(const std::array<math::Vec<3>, 3>& t_pos)
+        double area(const std::array<Vec<3>, 3>& t_pos)
         {
             // Calculate the edge lengths.
             const double alpha_beta  = dist(t_pos[ALPHA], t_pos[BETA]);
@@ -93,9 +93,8 @@ namespace arc
         {
             assert(t_dir.magnitude() > 0.0);
 
-            return (create_orient_mat(
-                acos(t_dir[Z] / std::sqrt(math::square(t_dir[X]) + math::square(t_dir[Y]) + math::square(t_dir[Z]))),
-                atan2(t_dir[Y], t_dir[X]), t_spin));
+            return (create_orient_mat(acos(t_dir[Z] / std::sqrt(square(t_dir[X]) + square(t_dir[Y]) + square(t_dir[Z]))),
+                                      atan2(t_dir[Y], t_dir[X]), t_spin));
         }
 
         /**

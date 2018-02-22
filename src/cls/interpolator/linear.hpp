@@ -45,6 +45,9 @@ namespace arc
             const std::vector<double> m_y;      //! Vector of Y positions of the nodes.
             const std::vector<double> m_grad;   //! Vector of intermediate gradients.
 
+            //  -- Optimisations --
+            mutable size_t m_last_index = 0;    //! Last index accessed during the interpolation.
+
 
             //  == INSTANTIATION ==
           public:

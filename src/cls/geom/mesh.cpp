@@ -13,10 +13,6 @@
 
 
 //  == INCLUDES ==
-//  -- General --
-#include "gen/log.hpp"
-#include "gen/math.hpp"
-
 //  -- Utility --
 #include "utl/stream.hpp"
 
@@ -33,19 +29,6 @@ namespace arc
         //  == INSTANTIATION ==
         //  -- Constructors --
         /**
-         *  Construct a mesh from a given serialised string.
-         *
-         *  @param  t_serial    Mesh as a serialised string.
-         */
-        Mesh::Mesh(const std::string& t_serial) :
-            m_num_vert(init_num(t_serial, POS_KEYWORD)),
-            m_num_norm(init_num(t_serial, NORM_KEYWORD)),
-            m_num_tri(init_num(t_serial, FACE_KEYWORD)),
-            m_tri(init_tri(t_serial))
-        {
-        }
-
-        /**
          *  Construct a mesh from a given serialised string and transformations.
          *
          *  @param  t_serial    Mesh as a serialised string.
@@ -59,18 +42,28 @@ namespace arc
          */
         Mesh::Mesh(const std::string& t_serial, const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin,
                    const math::Vec<3>& t_scale) :
-            m_num_vert(init_num(t_serial, POS_KEYWORD)),
-            m_num_norm(init_num(t_serial, NORM_KEYWORD)),
-            m_num_tri(init_num(t_serial, FACE_KEYWORD)),
-            m_tri(init_tri(t_serial))
+            Mesh(t_serial, math::create_pos_trans_mat(t_trans, t_dir, t_spin, t_scale),
+                 math::create_dir_trans_mat(t_dir, t_spin, t_scale))
         {
             assert(t_dir.magnitude() > 0.0);
             assert(t_scale[X] != 0.0);
             assert(t_scale[Y] != 0.0);
             assert(t_scale[Z] != 0.0);
+        }
 
-            // Apply the transformations.
-            transform(t_trans, t_dir, t_spin, t_scale);
+        /**
+         *  Construct a mesh from a given serialised string and transformation matrices.
+         *
+         *  @param  t_serial    Mesh as a serialised string.
+         *  @param  t_pos_trans Position transformation matrix.
+         *  @param  t_dir_trans Direction transformation matrix.
+         */
+        Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans) :
+            m_num_vert(init_num(t_serial, POS_KEYWORD)),
+            m_num_norm(init_num(t_serial, NORM_KEYWORD)),
+            m_num_tri(init_num(t_serial, FACE_KEYWORD)),
+            m_tri(init_tri(t_serial, t_pos_trans, t_dir_trans))
+        {
         }
 
 
@@ -107,9 +100,11 @@ namespace arc
         }
 
         /**
-         *  Initialise the vector of triangles forming the mesh.
+         *  Initialise the vector of triangles forming the mesh from a serialised mesh and transformation matrices.
          *
-         *  @param  t_serial        Mesh as a serialised string.
+         *  @param  t_serial    Mesh as a serialised string.
+         *  @param  t_pos_trans Position transformation matrix.
+         *  @param  t_dir_trans Direction transformation matrix.
          *
          *  @post   Number of read vertex positions must equal that read initially.
          *  @post   Number of read vertex normals must equal that read initially.
@@ -117,8 +112,11 @@ namespace arc
          *
          *  @return The initialised vector of triangle faces.
          */
-        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial) const
+        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
+                                                   const math::Mat<4, 4>& t_dir_trans) const
         {
+            math::Mat<4, 4> Mat = math::transpose(math::inverse(t_pos_trans));
+
             // Create return vector of triangles.
             std::vector<geom::Triangle> r_tri;
             r_tri.reserve(m_num_tri);
@@ -139,19 +137,29 @@ namespace arc
 
                 if (word == POS_KEYWORD)
                 {
-                    math::Vec<3> pos;
+                    // Read in the position vector.
+                    math::Vec<4> pos;
                     line_stream >> pos[X] >> pos[Y] >> pos[Z];
+                    pos[3] = 1.0;
 
-                    vert_pos.push_back(pos);
+                    // Transform it using the position transformation matrix.
+                    pos = t_pos_trans * pos;
+
+                    // Add the three-dimensional position to the vertex position list.
+                    vert_pos.push_back(math::Vec<3>({{pos[X], pos[Y], pos[Z]}}));
                 }
                 else if (word == NORM_KEYWORD)
                 {
-                    math::Vec<3> norm;
+                    // Read in the normal vector.
+                    math::Vec<4> norm;
                     line_stream >> norm[X] >> norm[Y] >> norm[Z];
+                    norm[3] = 1.0;
 
-                    norm.normalise();
+                    // Transform it using the direction transformation matrix.
+                    norm = Mat * norm;
 
-                    vert_norm.push_back(norm);
+                    // Add the three-dimensional normal to the vertex normal list.
+                    vert_norm.push_back(math::normalise(math::Vec<3>({{norm[X], norm[Y], norm[Z]}})));
                 }
 
                 if (line_stream.fail())
@@ -221,39 +229,6 @@ namespace arc
             assert(r_tri.size() == m_num_tri);
 
             return (r_tri);
-        }
-
-
-
-        //  == METHODS ==
-        //  -- Transformation --
-        /**
-         *  Transform a meshes' triangles using a given position and normal transformation matrix.
-         *
-         *  @param  t_trans Vector of translation.
-         *  @param  t_dir   Direction to face.
-         *  @param  t_spin  Spin angle.
-         *  @param  t_scale Vector of scaling values.
-         *
-         *  @pre    t_dir's magnitude must be greater than zero.
-         *  @pre    t_scale elements must all be non-zero.
-         */
-        void Mesh::transform(const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin, const math::Vec<3>& t_scale)
-        {
-            assert(t_dir.magnitude() > 0.0);
-            assert(t_scale[X] != 0.0);
-            assert(t_scale[Y] != 0.0);
-            assert(t_scale[Z] != 0.0);
-
-            // Create transformation matrices.
-            const math::Mat<4, 4> pos_trans_mat = math::create_pos_trans_mat(t_trans, t_dir, t_spin, t_scale);
-            const math::Mat<4, 4> dir_trans_mat = math::create_dir_trans_mat(t_dir, t_spin, t_scale);
-
-            // Transform the triangles.
-            for (size_t i = 0; i < m_tri.size(); ++i)
-            {
-                m_tri[i].transform(pos_trans_mat, dir_trans_mat);
-            }
         }
 
 

@@ -53,20 +53,24 @@ namespace arc
             const size_t m_num_tri;     //! Number of triangle faces.
 
             //  -- Triangle Data --
-            std::vector<geom::Triangle> m_tri;  //! List of triangles forming the mesh.
+            const std::vector<geom::Triangle> m_tri;  //! List of triangles forming the mesh.
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            explicit Mesh(const std::string& t_serial);
-            Mesh(const std::string& t_serial, const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin,
-                 const math::Vec<3>& t_scale);
+            explicit Mesh(const std::string& t_serial, const math::Vec<3>& t_trans = math::Vec<3>({{0.0, 0.0, 0.0}}),
+                          const math::Vec<3>& t_dir = math::Vec<3>({{0.0, 0.0, 1.0}}), double t_spin = 0.0,
+                          const math::Vec<3>& t_scale = math::Vec<3>({{1.0, 1.0, 1.0}}));
 
           private:
+            //  -- Constructors --
+            Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans);
+
             //  -- Initialisation --
             size_t init_num(const std::string& t_serial, const std::string& t_type_string) const;
-            std::vector<geom::Triangle> init_tri(const std::string& t_serial) const;
+            std::vector<geom::Triangle> init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
+                                                 const math::Mat<4, 4>& t_dir_trans) const;
 
 
             //  == METHODS ==
@@ -76,9 +80,6 @@ namespace arc
             size_t get_num_norm() const { return (m_num_norm); }
             size_t get_num_tri() const { return (m_num_tri); }
             inline const Triangle& get_tri(size_t t_index) const;
-
-            //  -- Transformation --
-            void transform(const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin, const math::Vec<3>& t_scale);
         };
 
 

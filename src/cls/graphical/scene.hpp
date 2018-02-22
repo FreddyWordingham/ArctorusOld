@@ -20,6 +20,7 @@
 #include <glm/glm.hpp>
 
 //  -- Classes --
+#include "cls/detector/ccd.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/graphical/camera.hpp"
@@ -30,6 +31,7 @@
 #include "cls/graphical/shader/normal.hpp"
 #include "cls/graphical/shader/path.hpp"
 #include "cls/graphical/shader/skybox.hpp"
+#include "cls/mesh/grid.hpp"
 
 
 
@@ -68,7 +70,9 @@ namespace arc
         constexpr const float SUN_SIZE             = 0.25f; //! Size of the sun.
         constexpr const float LIGHT_AMB_POW        = 0.5f;  //! Ambient lighting of rendered light sources.
         constexpr const float ENTITIY_AMB_POW      = 0.1f;  //! Ambient lighting of rendered entities.
+        constexpr const float CCD_AMB_POW          = 0.6f;  //! Ambient lighting of rendered ccds.
         constexpr const float ENTITY_NORMAL_LENGTH = 0.5f;  //! Length to draw entity normals.
+        constexpr const float CCD_NORMAL_LENGTH    = 0.5f;  //! Length to draw ccd normals.
 
         //  -- Rendering --
         constexpr const float  PHOTON_TRAVEL_SPEED = 1e-9f; //! Photon travel speed when rendering path data.
@@ -78,6 +82,8 @@ namespace arc
         constexpr const double ENTITY_END_HUE      = 280.0; //! Entity prop end hue.
         constexpr const double PHOTON_START_HUE    = 120.0; //! Photon path prop start hue.
         constexpr const double PHOTON_END_HUE      = 160.0; //! Photon path prop end hue.
+        constexpr const double CCD_START_HUE       = 100.0; //! Ccd prop start hue.
+        constexpr const double CCD_END_HUE         = 140.0; //! Ccd prop end hue.
 
 
 
@@ -115,11 +121,16 @@ namespace arc
             //  -- Props --
             std::vector<Prop>        m_entity;  //! Vector of entity props.
             std::vector<prop::Light> m_light;   //! Vector of light source props.
+            std::vector<Prop>        m_ccd;     //! Vector of ccd props.
             std::vector<Prop>        m_phot;    //! Vector of photon packet path props.
+            std::vector<Prop>        m_grid;    //! Vector of grid props.
+            std::vector<Prop>        m_cell;    //! Vector of cell props.
 
             //  -- Toggles --
-            bool m_toggle_filled_tris  = true;  //! When true render triangles as filled.
-            bool m_toggle_light_normal = false; //! When true render light prop normals.
+            bool m_toggle_filled_tris   = true;     //! When true render triangles as filled.
+            bool m_toggle_light_normal  = false;    //! When true render light prop normals.
+            bool m_toggle_photon_render = true;     //! When true render photon paths.
+            bool m_toggle_cell_render   = false;    //! When true render the grid cells.
 
             //  -- Rendering --
             float m_render_time = 0.0f; //! Photon rendering time.
@@ -156,7 +167,9 @@ namespace arc
             //  -- Additions --
             void add_light_vector(const std::vector<equip::Light>& t_light);
             void add_entity_vector(const std::vector<equip::Entity>& t_ent);
+            void add_ccd_vector(const std::vector<detector::Ccd>& t_ccd);
             void add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot);
+            void add_grid(const mesh::Grid& t_grid);
 
             //  -- Control --
             bool should_close() const;
@@ -166,7 +179,9 @@ namespace arc
             //  -- Additions --
             void add_entity(const equip::Entity& t_ent, const glm::vec4& t_col);
             void add_light(const equip::Light& t_light, const glm::vec4& t_col);
+            void add_ccd(const detector::Ccd& t_ccd, const glm::vec4& t_col);
             void add_photon(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col);
+            void add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const glm::vec4& t_col);
 
             //  -- Control --
             void swap_camera();
@@ -185,7 +200,9 @@ namespace arc
             //  -- Drawing --
             void draw_entities() const;
             void draw_lights() const;
+            void draw_ccds() const;
             void draw_phots() const;
+            void draw_grid() const;
             void draw_sun() const;
             void draw_skybox() const;
 

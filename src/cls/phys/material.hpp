@@ -44,8 +44,8 @@ namespace arc
             {
                 WAVELENGTH,     //! Index of the wavelength data column.
                 REF_INDEX,      //! Index of the refractive index data column.
-                ABS_LENGTH,     //! Index of the absorption length data column.
-                SCAT_LENGTH,    //! Index of the scattering length data column.
+                ABS_COEF,       //! Index of the absorption coefficient data column.
+                SCAT_COEF,      //! Index of the scattering coefficient data column.
                 ANISOTROPY      //! Index of the anisotropy data column.
             };
 
@@ -67,18 +67,18 @@ namespace arc
           public:
             //  -- Constructors --
             Material(const std::vector<double>& t_wavelength, const std::vector<double>& t_ref_index,
-                     const std::vector<double>& t_abs_length, const std::vector<double>& t_scat_length,
+                     const std::vector<double>& t_abs_coef, const std::vector<double>& t_scat_coef,
                      const std::vector<double>& t_anisotropy);
             explicit Material(const data::Table& t_tab);
             explicit Material(const std::string& t_serial);
 
           private:
             //  -- Initialisation --
-            interpolator::Linear init_albedo(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_length,
-                                             const std::vector<double>& t_scat_length) const;
+            interpolator::Linear init_albedo(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_coef,
+                                             const std::vector<double>& t_scat_coef) const;
             interpolator::Linear init_interation(const std::vector<double>& t_wavelength,
-                                                 const std::vector<double>& t_abs_length,
-                                                 const std::vector<double>& t_scat_length) const;
+                                                 const std::vector<double>& t_abs_coef,
+                                                 const std::vector<double>& t_scat_coef) const;
 
 
             //  == METHODS ==

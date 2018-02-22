@@ -123,7 +123,7 @@ namespace arc
             double get_phi() const;
 
             //  -- Properties --
-            constexpr bool is_normalised(double t_tol = std::numeric_limits<double>::epsilon()) const;
+            constexpr bool is_normalised(double t_tol = (N * N * std::numeric_limits<double>::epsilon())) const;
             constexpr bool is_ascending() const;
             constexpr bool is_descending() const;
             constexpr bool is_monotonic() const;
@@ -147,9 +147,13 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Mathematical --
+        template <size_t N>
+        inline Vec<N> normalise(const math::Vec<N>& t_vec);
+
         //  -- Parsing --
         template <size_t N>
-        inline void from_json(const nlohmann::json& j, const Vec<N>& t_vec);
+        inline void from_json(const nlohmann::json& t_json, Vec<N>& t_vec);
 
 
 
@@ -1020,20 +1024,47 @@ namespace arc
 
 
         //  == FUNCTIONS ==
+        //  -- Mathematical --
+        /**
+         *  Find the normalisation of a given vec.
+         *
+         *  @tparam N   Size of the vec.
+         *
+         *  @param  t_vec   Vec to find the normalisation of.
+         *
+         *  @post   r_vec must be normalised.
+         *
+         *  @return The normalisation of the given vec.
+         */
+        template <size_t N>
+        inline Vec<N> normalise(const math::Vec<N>& t_vec)
+        {
+            // Create a copy of the vec.
+            math::Vec<N> r_vec = t_vec;
+
+            // Normalise the vec.
+            r_vec.normalise();
+
+            assert(r_vec.is_normalised());
+
+            return (r_vec);
+        }
+
+
         //  -- Parsing --
         /**
          *  Create a Vec from a json string.
          *
          *  @tparam N   Size of the vec.
          *
-         *  @param  t_json_object   Json object to be parsed from,
-         *  @param  t_vec           Vector to hold the read values.
+         *  @param  t_json  Json object to be parsed from,
+         *  @param  t_vec   Vector to hold the read values.
          */
         template <size_t N>
-        inline void from_json(const nlohmann::json& t_json_object, Vec<N>& t_vec)
+        inline void from_json(const nlohmann::json& t_json, Vec<N>& t_vec)
         {
-            const std::array<double, N> arr = t_json_object.get<std::array<double, N>>();
-            for (size_t i = 0; i < N; ++i)
+            const std::array<double, N> arr = t_json.get<std::array<double, N>>();
+            for (size_t                 i   = 0; i < N; ++i)
             {
                 t_vec[i] = arr[i];
             }

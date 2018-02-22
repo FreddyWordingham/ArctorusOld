@@ -16,7 +16,9 @@
 //  == INCLUDES ==
 //  -- System --
 #include <array>
+#include <cmath>
 #include <iostream>
+#include <utility>
 
 
 
@@ -101,6 +103,28 @@ namespace arc
             template <size_t U, size_t V>
             friend std::ostream& operator<<(std::ostream& t_stream, const Mat<U, V>& t_mat);
         };
+
+
+
+        //  == FUNCTION PROTOTYPES ==
+        //  -- Mathematical --
+        constexpr double determinant(const Mat<2, 2>& t_mat);
+        template <size_t N>
+        constexpr double determinant(const Mat<N, N>& t_mat);
+        template <size_t N, size_t M>
+        constexpr Mat<M, N> transpose(const Mat<N, M>& t_mat);
+        template <size_t N>
+        constexpr double minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
+        template <size_t N>
+        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat);
+        template <size_t N>
+        constexpr double cofactor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
+        template <size_t N>
+        constexpr Mat<N, N> cofactor(const Mat<N, N>& t_mat);
+        template <size_t N>
+        constexpr Mat<N, N> adjugate(const Mat<N, N>& t_mat);
+        template <size_t N>
+        constexpr Mat<N, N> inverse(const Mat<N, N>& t_mat);
 
 
 
@@ -672,6 +696,238 @@ namespace arc
             t_stream << "}";
 
             return (t_stream);
+        }
+
+
+
+        //  == FUNCTIONS ==
+        //  -- Mathematical --
+        /**
+         *  Determine the determinant of a 2 by 2 matrix.
+         *
+         *  @param  t_mat   Matrix to determine the determinant of.
+         *
+         *  @return The determinant of the given matrix.
+         */
+        constexpr double determinant(const Mat<2, 2>& t_mat)
+        {
+            return ((t_mat[0][0] * t_mat[1][1]) - (t_mat[0][1] * t_mat[1][0]));
+        }
+
+        /**
+         *  Determine in the determinant of a square matrix, larger than 2 by 2, through recursion.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix whose determinant is to be determined.
+         *
+         *  @pre    N must be greater than 2.
+         *
+         *  @return The determinant of the given matrix.
+         */
+        template <size_t N>
+        constexpr double determinant(const Mat<N, N>& t_mat)
+        {
+            static_assert(N > 2);
+
+            // Create return determinant.
+            double r_det = 0.0;
+
+            // Calculate the determinant.
+            for (size_t i = 0; i < N; ++i)
+            {
+                // Mutiply cofactor by the determinant of the minor matrix.
+                r_det += t_mat[0][i] * cofactor(t_mat, 0, i);
+            }
+
+            return (r_det);
+        }
+
+        /**
+         *  Transpose a given matrix.
+         *
+         *  @tparam N   Number of matrix rows.
+         *  @tparam M   Number of matrix columns.
+         *
+         *  @param  t_mat   Matrix to determine the transpose of.
+         *
+         *  @return The transpose of the given matrix.
+         */
+        template <size_t N, size_t M>
+        constexpr Mat<M, N> transpose(const Mat<N, M>& t_mat)
+        {
+            // Create a the return matrix.
+            Mat<M, N> r_mat;
+
+            // Determine the transpose elements.
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < M; ++j)
+                {
+                    r_mat[j][i] = t_mat[i][j];
+                }
+            }
+
+            return (r_mat);
+        }
+
+        /**
+         *  Determine the minor of a given element of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to find the minor of.
+         *  @param  t_row   Row of the minor.
+         *  @param  t_col   Column of the minor.
+         *
+         *  @pre    N must be greater than 2.
+         *
+         *  @return Minor of the matrix element.
+         */
+        template <size_t N>
+        constexpr double minor(const Mat<N, N>& t_mat, const size_t t_row, const size_t t_col)
+        {
+            static_assert(N > 2);
+
+            // Create the sub-matrix.
+            Mat<N - 1, N - 1> sub;
+
+            size_t      n = 0;
+            for (size_t k = 0; k < N; ++k)
+            {
+                if (k == t_row)
+                {
+                    continue;
+                }
+
+                size_t      m = 0;
+                for (size_t l = 0; l < N; ++l)
+                {
+                    if (l == t_col)
+                    {
+                        continue;
+                    }
+
+                    sub[n][m] = t_mat[k][l];
+
+                    ++m;
+                }
+
+                ++n;
+            }
+
+            return (determinant(sub));
+        }
+
+        /**
+         *  Determine the matrix of minors for a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to find the minors of.
+         *
+         *  @pre    N must be greater than 2.
+         *
+         *  @return Matrix of minors for the given matrix.
+         */
+        template <size_t N>
+        constexpr double minor(const Mat<N, N>& t_mat)
+        {
+            static_assert(N > 2);
+
+            // Create the matrix of minors.
+            Mat<N, N> r_mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < N; ++j)
+                {
+                    r_mat[i][j] = minor(t_mat, i, j);
+                }
+            }
+
+            return (r_mat);
+        }
+
+        /**
+         *  Determine the cofactor of a given element of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to find the cofactor of.
+         *  @param  t_row   Row of the cofactor.
+         *  @param  t_col   Column of the cofactor.
+         *
+         *  @pre    N must be greater than 2.
+         *
+         *  @return Cofactor of the matrix element.
+         */
+        template <size_t N>
+        constexpr double cofactor(const Mat<N, N>& t_mat, const size_t t_row, const size_t t_col)
+        {
+            static_assert(N > 2);
+
+            return (std::pow(-1, t_row + t_col) * minor(t_mat, t_row, t_col));
+        }
+
+        /**
+         *  Determine the cofactor matrix of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to find the cofactor matrix of.
+         *
+         *  @pre    N must be greater than 2.
+         *
+         *  @return Cofactor matrix of the given matrix.
+         */
+        template <size_t N>
+        constexpr Mat<N, N> cofactor(const Mat<N, N>& t_mat)
+        {
+            static_assert(N > 2);
+
+            // Create return matrix.
+            Mat<N, N> r_mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < N; ++j)
+                {
+                    r_mat[i][j] = cofactor(t_mat, i, j);
+                }
+            }
+
+            return (r_mat);
+        }
+
+        /**
+         *  Determine the adjugate matrix of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to determine the adjugate of.
+         *
+         *  @return The adjugate of the given matrix.
+         */
+        template <size_t N>
+        constexpr Mat<N, N> adjugate(const Mat<N, N>& t_mat)
+        {
+            return (transpose(cofactor(t_mat)));
+        }
+
+        /**
+         *  Determine the inverse matrix of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to determine the inverse of.
+         *
+         *  @return The inverse of the given matrix.
+         */
+        template <size_t N>
+        constexpr Mat<N, N> inverse(const Mat<N, N>& t_mat)
+        {
+            return (adjugate(t_mat) * (1.0 / std::abs(determinant(t_mat))));
         }
 
 

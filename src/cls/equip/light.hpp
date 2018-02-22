@@ -17,7 +17,7 @@
 //  -- Classes --
 #include "cls/geom/mesh.hpp"
 #include "cls/phys/material.hpp"
-#include "cls/phys/particle/photon.hpp"
+#include "cls/phys/photon.hpp"
 #include "cls/phys/spectrum.hpp"
 #include "cls/random/index.hpp"
 
@@ -67,7 +67,7 @@ namespace arc
             double get_power() const { return (m_power); }
 
             //  -- Generation --
-            phys::particle::Photon gen_photon(const phys::Material& t_mat) const;
+            phys::Photon gen_photon(const phys::Material& t_mat) const;
         };
 
 

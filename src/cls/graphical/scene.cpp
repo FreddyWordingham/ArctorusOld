@@ -22,7 +22,9 @@
 
 //  -- General --
 #include "gen/control.hpp"
-#include "gen/math.hpp"
+
+//  -- Utility --
+#include "utl/colourmap.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -119,9 +121,12 @@ namespace arc
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LEQUAL);
 
+            // Enable back-face culling.
+//            glEnable(GL_CULL_FACE);
+
             // Enable transparency.
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//            glEnable(GL_BLEND);
+//            glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 
             return (r_window);
         }
@@ -224,14 +229,44 @@ namespace arc
             }
 
             // Calculate the hue delta.
-            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / (t_entity.size() - 1));
+            const double hue_delta = (t_entity.size() == 1) ? 0.0 : ((ENTITY_END_HUE - ENTITY_START_HUE) / (t_entity
+                .size() - 1));
 
             // Add the entity props to the scene.
             for (size_t i = 0; i < t_entity.size(); ++i)
             {
                 const auto hue = static_cast<float>(math::deg_to_rad(ENTITY_START_HUE + (i * hue_delta)));
 
-                add_entity(t_entity[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+                add_entity(t_entity[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 0.5));
+            }
+        }
+
+        /**
+         *  Add a vector of render-able ccd props to the scene.
+         *
+         *  @param  t_ccd   Vector of ccds to be added to the scene.
+         *
+         *  @pre    CCD_START_HUE must be less than CCD_END_HUE.
+         */
+        void Scene::add_ccd_vector(const std::vector<detector::Ccd>& t_ccd)
+        {
+            static_assert(CCD_START_HUE < CCD_END_HUE);
+
+            // Return if there are no entities.
+            if (t_ccd.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_ccd.size() == 1) ? 0.0 : ((CCD_END_HUE - CCD_START_HUE) / (t_ccd.size() - 1));
+
+            // Add the entity props to the scene.
+            for (size_t i = 0; i < t_ccd.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(CCD_START_HUE + (i * hue_delta)));
+
+                add_ccd(t_ccd[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 0.5));
             }
         }
 
@@ -261,6 +296,60 @@ namespace arc
                 const auto hue = static_cast<float>(math::deg_to_rad(PHOTON_START_HUE + (i * hue_delta)));
 
                 add_photon(t_phot[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+            }
+        }
+
+        /**
+         *  Add a render-able grid mesh to the scene.
+         *
+         *  @param  t_grid  Grid to be added to the scene.
+         */
+        void Scene::add_grid(const mesh::Grid& t_grid)
+        {
+            // Add main grid bounds.
+            const float grid_padding = 0.001f;
+            m_grid.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0},
+                                     {static_cast<float>(t_grid.get_min_bound()[X]) - grid_padding,
+                                      static_cast<float>(t_grid.get_min_bound()[Y]) - grid_padding,
+                                      static_cast<float>(t_grid.get_min_bound()[Z]) - grid_padding},
+                                     {static_cast<float>(t_grid.get_max_bound()[X]) + grid_padding,
+                                      static_cast<float>(t_grid.get_max_bound()[Y]) + grid_padding,
+                                      static_cast<float>(t_grid.get_max_bound()[Z]) + grid_padding}));
+
+            // Determine maximum grid cell energy density.
+            double max_energy_density = t_grid.get_max_energy_density();
+            VAL(max_energy_density);
+
+            // Add grid cells.
+            const float cell_padding = -0.01f;
+            for (size_t i            = 0; i < t_grid.get_num_cells(X); ++i)
+            {
+                for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
+                {
+                    for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
+                    {
+                        const double energy_density = t_grid.get_cell(i, j, k).get_energy_density();
+
+                        if (energy_density > 0.0)
+                        {
+                            const std::array<double, 3> col = utl::colourmap::transform_rainbow(
+                                energy_density / max_energy_density);
+                            m_cell.emplace_back(Prop(Prop::shape::BOX, {glm::vec3(col[R], col[G], col[B]), 0.1},
+                                                     {static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_min_bound()[X]) - cell_padding,
+                                                      static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_min_bound()[Y]) - cell_padding,
+                                                      static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_min_bound()[Z]) - cell_padding},
+                                                     {static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_max_bound()[X]) + cell_padding,
+                                                      static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_max_bound()[Y]) + cell_padding,
+                                                      static_cast<float>(t_grid.get_cell(i, j, k)
+                                                                               .get_max_bound()[Z]) + cell_padding}));
+                        }
+                    }
+                }
             }
         }
 
@@ -325,6 +414,36 @@ namespace arc
         }
 
         /**
+         *  Add a render-able ccd prop to the scene.
+         *
+         *  @param  t_ccd   Ccd to be added to the scene.
+         *  @param  t_col   Colour to render the prop.
+         */
+        void Scene::add_ccd(const detector::Ccd& t_ccd, const glm::vec4& t_col)
+        {
+            // Create vector of vertices.
+            std::vector<Vertex> vertices;
+            vertices.reserve(t_ccd.get_mesh().get_num_tri() * 3);
+
+            // Add vertices into list from mesh.
+            for (size_t i = 0; i < t_ccd.get_mesh().get_num_tri(); ++i)
+            {
+                for (size_t j = 0; j < 3; ++j)
+                {
+                    vertices.push_back(Vertex({static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
+                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
+                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
+                                              {static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
+                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
+                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
+                }
+            }
+
+            // Add the ccd prop into the list of render-able ccd props.
+            m_ccd.emplace_back(Prop(vertices, t_col));
+        }
+
+        /**
          *  Add a renderable photon packet path prop to the scene.
          *
          *  @param  t_phot  Photon packet path prop to be added.
@@ -357,12 +476,28 @@ namespace arc
             draw_skybox();
             draw_entities();
             draw_lights();
+            draw_ccds();
+            draw_grid();
             draw_sun();
             draw_phots();
 
             // Swap the buffers.
             glfwSwapBuffers(m_window);
         }
+
+        /**
+         *  Add a render-able cell prop to the scene.
+         *
+         *  @param  t_min   Minimum bound of the cell.
+         *  @param  t_max   Minimum bound of the cell.
+         *  @param  t_col   Colour of the cell prop.
+         */
+        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const glm::vec4& t_col)
+        {
+            m_cell
+                .emplace_back(Prop(Prop::shape::CUBOID, t_col, {t_min[X], t_min[Y], t_min[Z]}, {t_max[X], t_max[Y], t_max[Z]}));
+        }
+
 
 
         //  -- Control --
@@ -562,6 +697,32 @@ namespace arc
                     m_toggle_light_normal = !m_toggle_light_normal;
                 }
             }
+
+            // Photon path rendering.
+            static int old_state_toggle_photon_render = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::TOGGLE_PHOTON_RENDER) != old_state_toggle_photon_render)
+            {
+                old_state_toggle_photon_render = glfwGetKey(m_window, control::TOGGLE_PHOTON_RENDER);
+
+                if (old_state_toggle_photon_render == GLFW_PRESS)
+                {
+                    m_toggle_photon_render = !m_toggle_photon_render;
+                }
+            }
+
+            // Grid rendering.
+            static int old_state_toggle_cell_render = GLFW_RELEASE;
+
+            if (glfwGetKey(m_window, control::TOGGLE_CELL_RENDER) != old_state_toggle_cell_render)
+            {
+                old_state_toggle_cell_render = glfwGetKey(m_window, control::TOGGLE_CELL_RENDER);
+
+                if (old_state_toggle_cell_render == GLFW_PRESS)
+                {
+                    m_toggle_cell_render = !m_toggle_cell_render;
+                }
+            }
         }
 
         /**
@@ -754,22 +915,117 @@ namespace arc
         }
 
         /**
+         *  Draw the scene's ccds.
+         */
+        void Scene::draw_ccds() const
+        {
+            // Draw diffusely lit prop mesh.
+            glUseProgram(m_diffuse_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
+
+            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), CCD_AMB_POW);
+
+            for (size_t i = 0; i < m_ccd.size(); ++i)
+            {
+                glUniform4f(m_diffuse_shader.get_col_uni(), m_ccd[i].get_col()[R], m_ccd[i].get_col()[G], m_ccd[i].get_col()[B],
+                            m_ccd[i].get_col()[A]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_ccd[i].get_vao());
+
+                glDrawArrays(GL_TRIANGLES, 0, m_ccd[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+
+            // Draw normals if toggle is on.
+            if (m_toggle_light_normal)
+            {
+                glUseProgram(m_normal_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+                for (size_t i = 0; i < m_ccd.size(); ++i)
+                {
+                    glUniform4f(m_normal_shader.get_col_uni(), m_ccd[i].get_col()[R], m_ccd[i].get_col()[G],
+                                m_ccd[i].get_col()[B], m_ccd[i].get_col()[A]);
+                    glUniform1f(m_normal_shader.get_light_power_uni(), CCD_NORMAL_LENGTH);
+
+                    glEnableVertexAttribArray(0);
+
+                    glBindVertexArray(m_ccd[i].get_vao());
+
+                    glDrawArrays(GL_POINTS, 0, m_ccd[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
+            }
+        }
+
+        /**
          *  Draw the scene's photon packet paths.
          */
         void Scene::draw_phots() const
         {
-            glUseProgram(m_path_shader.get_handle());
-            glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
-
-            for (size_t i = 0; i < m_phot.size(); ++i)
+            if (m_toggle_photon_render)
             {
+                glUseProgram(m_path_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
+
+                for (size_t i = 0; i < m_phot.size(); ++i)
+                {
+                    glEnableVertexAttribArray(0);
+
+                    glBindVertexArray(m_phot[i].get_vao());
+
+                    glDrawArrays(GL_LINE_STRIP, 0, m_phot[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
+            }
+        }
+
+        /**
+         *  Draw the scene's cells.
+         */
+        void Scene::draw_grid() const
+        {
+            glUseProgram(m_ambient_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            for (size_t i = 0; i < m_grid.size(); ++i)
+            {
+                glUniform4f(m_ambient_shader.get_col_uni(), m_grid[i].get_col()[R], m_grid[i].get_col()[G],
+                            m_grid[i].get_col()[B], m_grid[i].get_col()[A]);
+
                 glEnableVertexAttribArray(0);
 
-                glBindVertexArray(m_phot[i].get_vao());
+                glBindVertexArray(m_grid[i].get_vao());
 
-                glDrawArrays(GL_LINE_STRIP, 0, m_phot[i].get_num_vert());
+                glDrawArrays(GL_LINES, 0, m_grid[i].get_num_vert());
 
                 glBindVertexArray(0);
+            }
+
+            // If cell rendering is toggle on, draw the cells.
+            if (m_toggle_cell_render)
+            {
+                glUseProgram(m_diffuse_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+                for (size_t i = 0; i < m_cell.size(); ++i)
+                {
+                    glUniform4f(m_diffuse_shader.get_col_uni(), m_cell[i].get_col()[R], m_cell[i].get_col()[G],
+                                m_cell[i].get_col()[B], m_cell[i].get_col()[A]);
+
+                    glEnableVertexAttribArray(0);
+
+                    glBindVertexArray(m_cell[i].get_vao());
+
+                    glDrawArrays(GL_LINES, 0, m_cell[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
             }
         }
 

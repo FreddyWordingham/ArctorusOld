@@ -12,6 +12,13 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/enum.hpp"
+#include "gen/log.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -27,11 +34,6 @@ namespace arc
          *
          *  @param  t_vert  Vector of vertices forming the prop.
          *  @param  t_col   Colour of the prop.
-         *
-         *  @post   m_col.r must be greater than, or equal to, zero and less than, or equal to, one.
-         *  @post   m_col.g must be greater than, or equal to, zero and less than, or equal to, one.
-         *  @post   m_col.b must be greater than, or equal to, zero and less than, or equal to, one.
-         *  @post   m_col.a must be greater than, or equal to, zero and less than, or equal to, one.
          */
         Prop::Prop(const std::vector<Vertex>& t_vert, const glm::vec4& t_col) :
             m_num_vert(static_cast<GLsizei>(t_vert.size())),
@@ -57,11 +59,6 @@ namespace arc
 
             // Clear the active buffer.
             glBindVertexArray(0);
-
-            assert((m_col.r >= 0.0f) && (m_col.r <= 1.0f));
-            assert((m_col.g >= 0.0f) && (m_col.g <= 1.0f));
-            assert((m_col.b >= 0.0f) && (m_col.b <= 1.0f));
-            assert((m_col.a >= 0.0f) && (m_col.a <= 1.0f));
         }
 
         /**
@@ -73,6 +70,19 @@ namespace arc
          */
         Prop::Prop(const shape t_shape, const glm::vec4& t_col, const float t_scale) :
             Prop(init_vert(t_shape, t_scale), t_col)
+        {
+        }
+
+        /**
+         *  Construct a basic prop using a given shape type, colour and bounds.
+         *
+         *  @param  t_shape Type of shape to be created.
+         *  @param  t_col   Colour of the shape.
+         *  @param  t_min   Minimum bound of the box.
+         *  @param  t_max   Maximum bound of the box.
+         */
+        Prop::Prop(const shape t_shape, const glm::vec4& t_col, const glm::vec3& t_min, const glm::vec3& t_max) :
+            Prop(init_vert(t_shape, t_min, t_max), t_col)
         {
         }
 
@@ -172,6 +182,30 @@ namespace arc
                     return (init_vert_skybox(t_scale));
                 case shape::SUN:
                     return (init_vert_sun(t_scale));
+                default:
+                    ERROR("Invalid case enumeration.", "Unbounded init_vert is not valid for the given enumeration.");
+            }
+        }
+
+        /**
+         *  Initialise the vertices for a simple, bounded, prop shape.
+         *
+         *  @param  t_shape Type of shape to be created.
+         *  @param  t_min   Minimum bound of the box.
+         *  @param  t_max   Maximum bound of the box.
+         *
+         *  @return The initialised vector of vertices for the simple shape.
+         */
+        std::vector<Vertex> Prop::init_vert(const shape t_shape, const glm::vec3 &t_min, const glm::vec3 &t_max) const
+        {
+            switch (t_shape)
+            {
+                case shape::BOX:
+                    return (init_vert_box(t_min, t_max));
+                case shape::CUBOID:
+                    return (init_vert_cuboid(t_min, t_max));
+                default:
+                    ERROR("Invalid case enumeration.", "Bounded init_vert is not valid for the given enumeration.");
             }
         }
 
@@ -232,6 +266,68 @@ namespace arc
             r_vert.push_back(Vertex({+t_scale, +t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
             r_vert.push_back(Vertex({-t_scale, +t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
             r_vert.push_back(Vertex({+t_scale, -t_scale, +t_scale}, {+0.0f, +0.0f, +1.0f}));
+
+            return (r_vert);
+        }
+
+        /**
+         *  Initialise the vertices for a simple cuboid prop shape.
+         *
+         *  @param  t_min   Minimum bound of the cuboid.
+         *  @param  t_max   Maximum bound of the cuboid.
+         *
+         *  @return The initialised vector of vertices for a simple cuboid.
+         */
+        std::vector<Vertex> Prop::init_vert_cuboid(const glm::vec3& t_min, const glm::vec3& t_max) const
+        {
+            // Create vertex vector.
+            std::vector<Vertex> r_vert;
+
+            // Reserve space for 36 vertices.
+            r_vert.reserve(36);
+
+            // Add face vertices into the vertex vector.
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, -1.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, -1.0f}));
+
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +1.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +1.0f}));
+
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {-1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {-1.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+1.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+1.0f, +0.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, -1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {+0.0f, -1.0f, +0.0f}));
+
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +1.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +1.0f, +0.0f}));
 
             return (r_vert);
         }
@@ -309,7 +405,7 @@ namespace arc
             // Create vertex vector.
             std::vector<Vertex> r_vert;
 
-            // Reserve space for 24 vertices.
+            // Reserve space for 24 + 18 vertices.
             r_vert.reserve(24 + 18);
 
             // Add face vertices into the vertex vector.
@@ -370,6 +466,55 @@ namespace arc
             r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
             r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+
+            return (r_vert);
+        }
+
+        /**
+         *  Initialise the vertices for a box shape.
+         *
+         *  @param  t_min   Minimum bound of the box.
+         *  @param  t_max   Maximum bound of the box.
+         *
+         *  @return The initialised vector of vertices for a box.
+         */
+        std::vector<Vertex> Prop::init_vert_box(const glm::vec3 &t_min, const glm::vec3 &t_max) const
+        {
+            // Create vertex vector.
+            std::vector<Vertex> r_vert;
+
+            // Reserve space for 24 vertices.
+            r_vert.reserve(24);
+
+            // Bottom of the box.
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+
+            // Pillars of the box.
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_min[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+
+            // Top of the box.
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_max[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_max[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({t_min[X], t_min[Y], t_max[Z]}, {+0.0f, +0.0f, +0.0f}));
 
             return (r_vert);
         }
