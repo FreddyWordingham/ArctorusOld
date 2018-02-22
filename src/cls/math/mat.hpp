@@ -123,6 +123,8 @@ namespace arc
         constexpr Mat<N, N> cofactor(const Mat<N, N>& t_mat);
         template <size_t N>
         constexpr Mat<N, N> adjugate(const Mat<N, N>& t_mat);
+        template <size_t N>
+        constexpr Mat<N, N> inverse(const Mat<N, N>& t_mat);
 
 
 
@@ -911,6 +913,21 @@ namespace arc
         constexpr Mat<N, N> adjugate(const Mat<N, N>& t_mat)
         {
             return (transpose(cofactor(t_mat)));
+        }
+
+        /**
+         *  Determine the inverse matrix of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to determine the inverse of.
+         *
+         *  @return The inverse of the given matrix.
+         */
+        template <size_t N>
+        constexpr Mat<N, N> inverse(const Mat<N, N>& t_mat)
+        {
+            return (adjugate(t_mat) * (1.0 / std::abs(determinant(t_mat))));
         }
 
 
