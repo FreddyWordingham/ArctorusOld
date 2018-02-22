@@ -15,7 +15,6 @@
 //  == INCLUDES ==
 //  -- Utility --
 #include "utl/stream.hpp"
-#include <glm/glm.hpp>
 
 
 
@@ -116,15 +115,7 @@ namespace arc
         std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
                                                    const math::Mat<4, 4>& t_dir_trans) const
         {
-            glm::mat4 mat(t_pos_trans[0][0], t_pos_trans[0][1], t_pos_trans[0][2], t_pos_trans[0][3], t_pos_trans[1][0],
-                          t_pos_trans[1][1], t_pos_trans[1][2], t_pos_trans[1][3], t_pos_trans[2][0], t_pos_trans[2][1],
-                          t_pos_trans[2][2], t_pos_trans[2][3], t_pos_trans[3][0], t_pos_trans[3][1], t_pos_trans[3][2],
-                          t_pos_trans[3][3]);
-
-            mat = glm::transpose(glm::inverse(mat));
-
-            math::Mat<4, 4> Mat(
-                {{{{mat[0][0], mat[0][1], mat[0][2], mat[0][3]}}, {{mat[1][0], mat[1][1], mat[1][2], mat[1][3]}}, {{mat[2][0], mat[2][1], mat[2][2], mat[2][3]}}, {{mat[3][0], mat[3][1], mat[3][2], mat[3][3]}}}});
+            math::Mat<4, 4> Mat = math::transpose(math::inverse(t_pos_trans));
 
             // Create return vector of triangles.
             std::vector<geom::Triangle> r_tri;
