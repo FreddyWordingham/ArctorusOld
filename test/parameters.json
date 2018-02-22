@@ -2,7 +2,7 @@
     "seed":        77,
     "output_dir":  "output",
     "num_phot":    1e3,
-    "pre_render":  true,
+    "pre_render":  false,
     "post_render": true,
     "grid":        {
         "min":   [-4.1, -1.1, -1.1],
@@ -14,7 +14,7 @@
     },
     "entities":    {
         "entity_zero": {
-            "scale": [1.0, 0.1, 0.1],
+            "scale": [0.1, 0.1, 0.1],
             "mesh":  "meshes/sphere.obj",
             "mat":   "materials/glass.mat"
         }
