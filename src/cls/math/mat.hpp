@@ -120,7 +120,7 @@ namespace arc
         template <size_t N>
         constexpr double cofactor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
         template <size_t N>
-        constexpr Mat<N, N> cofactor(const Mat<N, N>& t_mat)
+        constexpr Mat<N, N> cofactor(const Mat<N, N>& t_mat);
         template <size_t N>
         constexpr Mat<N, N> adjugate(const Mat<N, N>& t_mat);
 
