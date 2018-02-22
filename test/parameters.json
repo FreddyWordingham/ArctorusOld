@@ -1,13 +1,13 @@
 {
     "seed":        77,
     "output_dir":  "output",
-    "num_phot":    1e3,
+    "num_phot":    1e7,
     "pre_render":  false,
-    "post_render": true,
+    "post_render": false,
     "grid":        {
-        "min":   [-4.1, -1.1, -1.1],
-        "max":   [4.1, 1.1, 1.1],
-        "cells": [21, 11, 11]
+        "min":   [-1.1, -1.1, -1.1],
+        "max":   [1.1, 1.1, 1.1],
+        "cells": [11, 11, 11]
     },
     "aether":      {
         "mat": "materials/vacuum.mat"
@@ -16,14 +16,14 @@
         "entity_zero": {
             "scale": [0.1, 0.1, 0.1],
             "mesh":  "meshes/sphere.obj",
-            "mat":   "materials/glass.mat"
+            "mat":   "materials/water.mat"
         }
     },
     "lights":      {
         "light_one": {
             "power": 1.0,
-            "scale": [0.01, 0.01, 0.01],
-            "trans": [-3.0, 0.0, 0.0],
+            "scale": [0.1, 0.1, 0.1],
+            "trans": [-0.25, 0.0, 0.0],
             "dir":   [-1.0, 0.0, 0.0],
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
@@ -31,17 +31,10 @@
     },
     "ccds":        {
         "ccd_zero": {
-            "trans": [3.0, -0.05, 0.0],
-            "dir":   [-1.0, 0.0, 0.0],
-            "scale": [0.05, 0.05, 0.05],
-            "pixel": [100, 100],
-            "col":   false
-        },
-        "ccd_one":  {
-            "trans": [3.0, 0.05, 0.0],
-            "dir":   [-1.0, 0.0, 0.0],
-            "scale": [0.05, 0.05, 0.05],
-            "pixel": [100, 100],
+            "trans": [-0.3, 0.0, 0.0],
+            "scale": [0.5, 0.5, 0.5],
+            "dir":   [1.0, 0.0, 0.0],
+            "pixel": [200, 200],
             "col":   true
         }
     }
