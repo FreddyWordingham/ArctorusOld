@@ -114,7 +114,7 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<M, N> transpose(const Mat<N, M>& t_mat);
         template <size_t N>
-        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat);
+        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
 
 
 
@@ -789,61 +789,51 @@ namespace arc
         }
 
         /**
-         *  Create the matrix of minors for a given square matrix of size 3 or greater.
+         *  Determine the minor of a given element of a given matrix.
          *
-         *  @tparam N
+         *  @tparam N   Number of matrix rows and columns.
          *
-         *  @param t_mat
+         *  @param  t_mat   Matrix to find the minor of.
+         *  @param  t_row   Row of the minor.
+         *  @param  t_col   Column of the minor.
          *
          *  @pre    N must be greater than 2.
          *
-         * @return
+         *  @return Minor of the matrix element.
          */
         template <size_t N>
-        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat)
+        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat, const size_t t_row, const size_t t_col)
         {
             static_assert(N > 2);
 
-            // Create the return matrix.
-            Mat<N, N> r_minor;
+            // Create the sub-matrix.
+            Mat<N - 1, N - 1> sub;
 
-            // Calculate the minors of the matrix.
-            for (size_t i = 0; i < N; ++i)
+            size_t      n = 0;
+            for (size_t k = 0; k < N; ++k)
             {
-                for (size_t j = 0; j < N; ++j)
+                if (k == t_row)
                 {
-                    // Create the sub-matrix.
-                    Mat<N - 1, N - 1> sub;
+                    continue;
+                }
 
-                    size_t      n = 0;
-                    for (size_t k = 0; k < N; ++k)
+                size_t      m = 0;
+                for (size_t l = 0; l < N; ++l)
+                {
+                    if (l == t_col)
                     {
-                        if (k == i)
-                        {
-                            continue;
-                        }
-
-                        size_t      m = 0;
-                        for (size_t l = 0; l < N; ++l)
-                        {
-                            if (l == i)
-                            {
-                                continue;
-                            }
-
-                            sub[n][m] = t_mat[k][l];
-
-                            ++m;
-                        }
-
-                        ++n;
+                        continue;
                     }
 
-                    r_minor[i][j] = determinant(sub);
+                    sub[n][m] = t_mat[k][l];
+
+                    ++m;
                 }
+
+                ++n;
             }
 
-            return (r_minor);
+            return (determinant(sub));
         }
 
 
