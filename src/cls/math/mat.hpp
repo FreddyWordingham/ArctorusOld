@@ -910,6 +910,7 @@ namespace arc
         template <size_t N>
         constexpr Mat<N, N> adjugate(const Mat<N, N>& t_mat)
         {
+            return (transpose(cofactor(t_mat)));
         }
 
 
