@@ -117,6 +117,10 @@ namespace arc
         constexpr double minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
         template <size_t N>
         constexpr double cofactor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
+        template <size_t N>
+        constexpr Mat<N, N> cofactor(const Mat<N, N>& t_mat)
+        template <size_t N>
+        constexpr Mat<N, N> adjugate(const Mat<N, N>& t_mat);
 
 
 
@@ -830,6 +834,50 @@ namespace arc
             static_assert(N > 2);
 
             return (std::pow(-1, t_row + t_col) * minor(t_mat, t_row, t_col));
+        }
+
+        /**
+         *  Determine the cofactor matrix of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to find the cofactor matrix of.
+         *
+         *  @pre    N must be greater than 2.
+         *
+         *  @return Cofactor matrix of the given matrix.
+         */
+        template <size_t N>
+        constexpr Mat<N, N> cofactor(const Mat<N, N>& t_mat)
+        {
+            static_assert(N > 2);
+
+            // Create return matrix.
+            Mat<N, N> r_mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < N; ++j)
+                {
+                    r_mat[i][j] = cofactor(t_mat, i, j);
+                }
+            }
+
+            return (r_mat);
+        }
+
+        /**
+         *  Determine the adjugate matrix of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to determine the adjugate of.
+         *
+         *  @return The adjugate of the given matrix.
+         */
+        template <size_t N>
+        constexpr Mat<N, N> adjugate(const Mat<N, N>& t_mat)
+        {
         }
 
 
