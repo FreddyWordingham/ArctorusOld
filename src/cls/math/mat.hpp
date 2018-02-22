@@ -116,6 +116,8 @@ namespace arc
         template <size_t N>
         constexpr double minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
         template <size_t N>
+        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
+        template <size_t N>
         constexpr double cofactor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
         template <size_t N>
         constexpr Mat<N, N> cofactor(const Mat<N, N>& t_mat)
@@ -813,6 +815,36 @@ namespace arc
             }
 
             return (determinant(sub));
+        }
+
+        /**
+         *  Determine the matrix of minors for a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to find the minors of.
+         *
+         *  @pre    N must be greater than 2.
+         *
+         *  @return Matrix of minors for the given matrix.
+         */
+        template <size_t N>
+        constexpr double minor(const Mat<N, N>& t_mat)
+        {
+            static_assert(N > 2);
+
+            // Create the matrix of minors.
+            Mat<N, N> r_mat;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < N; ++j)
+                {
+                    r_mat[i][j] = minor(t_mat, i, j);
+                }
+            }
+
+            return (r_mat);
         }
 
         /**
