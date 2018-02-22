@@ -115,6 +115,8 @@ namespace arc
         constexpr Mat<M, N> transpose(const Mat<N, M>& t_mat);
         template <size_t N>
         constexpr double minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
+        template <size_t N>
+        constexpr double cofactor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
 
 
 
@@ -807,6 +809,27 @@ namespace arc
             }
 
             return (determinant(sub));
+        }
+
+        /**
+         *  Determine the cofactor of a given element of a given matrix.
+         *
+         *  @tparam N   Number of matrix rows and columns.
+         *
+         *  @param  t_mat   Matrix to find the cofactor of.
+         *  @param  t_row   Row of the cofactor.
+         *  @param  t_col   Column of the cofactor.
+         *
+         *  @pre    N must be greater than 2.
+         *
+         *  @return Cofactor of the matrix element.
+         */
+        template <size_t N>
+        constexpr double cofactor(const Mat<N, N>& t_mat, const size_t t_row, const size_t t_col)
+        {
+            static_assert(N > 2);
+
+            return (std::pow(-1, t_row + t_col) * minor(t_mat, t_row, t_col));
         }
 
 
