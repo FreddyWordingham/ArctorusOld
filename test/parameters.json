@@ -1,31 +1,56 @@
 {
-    "seed": 77,
-    "num_phot": 1e4,
-
-    "aether": {
-        "mat": "materials/intralipid_10.mat"
+    "seed":       78,
+    "output_dir": "output",
+    "num_phot":   1e4,
+    "pre_render": false,
+    "post_render": true,
+    "grid":       {
+        "min":   [-4.1, -1.1, -1.1],
+        "max":   [4.1, 1.1, 1.1],
+        "cells": [81, 41, 41]
     },
-
-    "entities": {
-        "entity_one": {
-            "trans": [1.0, 0.5, -0.5],
-            "dir":   [0.0, 1.0, 0.0],
-            "rot":   45.0,
-            "scale": [1.0, 1.0, 1.0],
-            "mesh":  "meshes/monkey.obj",
-            "mat":   "materials/intralipid_10.mat"
+    "aether":     {
+        "mat": "mat.mat"
+    },
+    "entities":   {
+        "entity_zero":  {
+            "scale": [4.0, 4.0, 4.0],
+            "dir": [1.0, 0.0, 0.0],
+            "mesh":  "square.obj",
+            "mat":   "mat1.mat"
+        },
+        "entity_one":  {
+            "scale": [4.0, 4.0, 4.0],
+            "dir": [1.0, 0.0, 0.0],
+            "trans": [1.0, 0.0, 0.0],
+            "mesh":  "square.obj",
+            "mat":   "mat2.mat"
+        },
+        "entity_two":  {
+            "scale": [4.0, 4.0, 4.0],
+            "dir": [1.0, 0.0, 0.0],
+            "trans": [2.0, 0.0, 0.0],
+            "mesh":  "square.obj",
+            "mat":   "mat3.mat"
         }
     },
-
-    "lights":   {
+    "lights":     {
         "light_one": {
             "power": 1.0,
-            "trans": [0.0, 0.0, 5.0],
-            "dir":   [0.0, 0.0, -1.0],
-            "rot":   45.0,
+            "trans": [-3, 0, 0],
+            "scale": [0.05, 0.05, 0.05],
+            "dir": [-1.0, 0.0, 0.0],
+            "mesh":  "square.obj",
+            "spec":  "laser.spc"
+        }
+    },
+    "ccds":        {
+        "ccd_zero": {
+            "trans": [3.0, 0.0, 0.0],
             "scale": [0.5, 0.5, 0.5],
-            "mesh":  "meshes/circle.obj",
-            "spec":  "spectra/laser.spc"
+            "dir":   [1.0, 0.0, 0.0],
+            "pixel": [200, 200],
+            "col":   false
         }
     }
 }

@@ -83,6 +83,9 @@ configure_file(${CMAKE_SOURCE_DIR}/res/src/gen/config.hpp.in ${CMAKE_SOURCE_DIR}
 file(GLOB_RECURSE SOURCE_FILES ${ARCTORUS_SRC_DIR}/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${ARCTORUS_SRC_DIR}/*.hpp)
 
+#   -- Missing Lib Include Fix -- HACK
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -L/usr/local/lib")
+
 
 
 #   == FLAGS ==
@@ -90,9 +93,6 @@ file(GLOB_RECURSE HEADER_FILES ${ARCTORUS_SRC_DIR}/*.hpp)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
-#   -- Missing Lib Include Fix -- HACK
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -L/usr/local/lib")
 
 #   -- Optimisation --
 if (CMAKE_BUILD_TYPE MATCHES "debug")
@@ -150,3 +150,4 @@ target_link_libraries(arctorus ${OPENGL_LIBRARIES})
 target_link_libraries(arctorus ${SDL2_LIBRARIES})
 target_link_libraries(arctorus GLEW)
 target_link_libraries(arctorus glfw)
+#target_link_libraries(arctorus cptk)
