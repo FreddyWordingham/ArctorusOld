@@ -114,7 +114,7 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<M, N> transpose(const Mat<N, M>& t_mat);
         template <size_t N>
-        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
+        constexpr double minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
 
 
 
@@ -802,7 +802,7 @@ namespace arc
          *  @return Minor of the matrix element.
          */
         template <size_t N>
-        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat, const size_t t_row, const size_t t_col)
+        constexpr double minor(const Mat<N, N>& t_mat, const size_t t_row, const size_t t_col)
         {
             static_assert(N > 2);
 
