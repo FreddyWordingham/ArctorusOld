@@ -113,6 +113,8 @@ namespace arc
         constexpr double determinant(const Mat<N, N>& t_mat);
         template <size_t N, size_t M>
         constexpr Mat<M, N> transpose(const Mat<N, M>& t_mat);
+        template <size_t N>
+        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat);
 
 
 
@@ -723,7 +725,7 @@ namespace arc
             // Calculate the determinant.
             for (size_t i = 0; i < N; ++i)
             {
-                // Create sub matrix.
+                // Create the sub-matrix.
                 Mat<N - 1, N - 1> sub;
 
                 size_t      n = 0;
@@ -783,6 +785,52 @@ namespace arc
             }
 
             return (r_mat);
+        }
+
+
+        template <size_t N>
+        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat)
+        {
+            static_assert(N > 2);
+
+            // Create the return matrix.
+            Mat<N, N> r_minor;
+
+            // Calculate the minors of the matrix.
+            for (size_t i = 0; i < N; ++i)
+            {
+                for (size_t j = 0; j < N; ++j)
+                {
+                    // Create the sub-matrix.
+                    Mat<N - 1, N - 1> sub;
+
+                    size_t      n = 0;
+                    for (size_t j = 0; j < N; ++j)
+                    {
+                        if (j == 0)
+                        {
+                            continue;
+                        }
+
+                        size_t      m = 0;
+                        for (size_t k = 0; k < N; ++k)
+                        {
+                            if (k == i)
+                            {
+                                continue;
+                            }
+
+                            sub[n][m] = t_mat[j][k];
+
+                            ++m;
+                        }
+
+                        ++n;
+                    }
+                }
+            }
+
+            return (r_minor);
         }
 
 
