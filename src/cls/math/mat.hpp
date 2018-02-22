@@ -711,13 +711,14 @@ namespace arc
          *
          *  @param  t_mat   Matrix whose determinant is to be determined.
          *
+         *  @pre    N must be greater than 2.
+         *
          *  @return The determinant of the given matrix.
          */
         template <size_t N>
         constexpr double determinant(const Mat<N, N>& t_mat)
         {
-            static_assert(N > 1);
-            static_assert(N != 2);
+            static_assert(N > 2);
 
             // Create return determinant.
             double r_det = 0.0;
@@ -787,7 +788,17 @@ namespace arc
             return (r_mat);
         }
 
-
+        /**
+         *  Create the matrix of minors for a given square matrix of size 3 or greater.
+         *
+         *  @tparam N
+         *
+         *  @param t_mat
+         *
+         *  @pre    N must be greater than 2.
+         *
+         * @return
+         */
         template <size_t N>
         constexpr Mat<N, N> minor(const Mat<N, N>& t_mat)
         {
@@ -805,28 +816,30 @@ namespace arc
                     Mat<N - 1, N - 1> sub;
 
                     size_t      n = 0;
-                    for (size_t j = 0; j < N; ++j)
+                    for (size_t k = 0; k < N; ++k)
                     {
-                        if (j == 0)
+                        if (k == i)
                         {
                             continue;
                         }
 
                         size_t      m = 0;
-                        for (size_t k = 0; k < N; ++k)
+                        for (size_t l = 0; l < N; ++l)
                         {
-                            if (k == i)
+                            if (l == i)
                             {
                                 continue;
                             }
 
-                            sub[n][m] = t_mat[j][k];
+                            sub[n][m] = t_mat[k][l];
 
                             ++m;
                         }
 
                         ++n;
                     }
+
+                    r_minor[i][j] = determinant(sub);
                 }
             }
 
