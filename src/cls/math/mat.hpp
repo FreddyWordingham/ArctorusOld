@@ -729,7 +729,7 @@ namespace arc
             for (size_t i = 0; i < N; ++i)
             {
                 // Mutiply cofactor by the determinant of the minor matrix.
-                r_det += std::pow(-1, 0 + i) * t_mat[0][i] * minor(t_mat, 0, i);
+                r_det += t_mat[0][i] * cofactor(t_mat, 0, i);
             }
 
             return (r_det);
