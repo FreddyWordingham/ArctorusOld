@@ -1,6 +1,5 @@
 {
     "seed":        77,
-    "output_dir":  "output",
     "num_phot":    1e3,
     "pre_render":  false,
     "post_render": true,
