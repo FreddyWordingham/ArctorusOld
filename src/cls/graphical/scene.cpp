@@ -488,11 +488,13 @@ namespace arc
         /**
          *  Add a render-able cell prop to the scene.
          *
-         *  @param  t_min   Minimum bound of the cell.
-         *  @param  t_max   Minimum bound of the cell.
-         *  @param  t_col   Colour of the cell prop.
+         *  @param  t_min       Minimum bound of the cell.
+         *  @param  t_max       Minimum bound of the cell.
+         *  @param  t_padding   Padding to apply to cell bounds.
+         *  @param  t_col       Colour of the cell prop.
          */
-        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const glm::vec4& t_col)
+        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const double t_padding,
+                             const glm::vec4& t_col)
         {
             m_cell.emplace_back(Prop(Prop::shape::BOX, t_col, {t_min[X], t_min[Y], t_min[Z]}, {t_max[X], t_max[Y], t_max[Z]}));
         }
