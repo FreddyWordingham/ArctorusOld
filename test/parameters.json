@@ -24,7 +24,7 @@
         "light_one": {
             "power": 1.0,
             "scale": [0.001, 0.001, 0.001],
-            "trans": [-3.0, 0.0, 0.0],
+            "trans": [-3.0, 0.0, 0.9],
             "dir":   [-1.0, 0.0, 0.0],
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
