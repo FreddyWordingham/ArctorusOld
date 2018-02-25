@@ -463,7 +463,6 @@ namespace arc
         }
 
 
-
         //  -- Render --
         /**
          *  Render control function.
