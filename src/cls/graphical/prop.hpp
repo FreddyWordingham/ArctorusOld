@@ -76,7 +76,7 @@ namespace arc
           public:
             //  -- Constructors --
             Prop(const std::vector<Vertex>& t_vert, const glm::vec4& t_col);
-            Prop(shape t_shape, const glm::vec4& t_col, float t_scale = 1.0);
+            Prop(originShape t_shape, const glm::vec4& t_col, float t_scale = 1.0);
             Prop(shape t_shape, const glm::vec4& t_col, const glm::vec3& t_min, const glm::vec3& t_max);
             Prop(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col);
 
