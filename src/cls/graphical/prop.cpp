@@ -200,9 +200,9 @@ namespace arc
             switch (t_shape)
             {
                 case boundedShape::BOX:
-                    return (init_vert_box(t_min, t_max));
+                    return (init_bounded_vert_box(t_min, t_max));
                 case boundedShape::CUBOID:
-                    return (init_vert_cuboid(t_min, t_max));
+                    return (init_bounded_vert_cuboid(t_min, t_max));
             }
         }
 
