@@ -73,8 +73,7 @@ namespace arc
          *
          *  @return The distance to intersection, and the normal of the triangle at the intersection point.
          */
-        std::pair<double, math::Vec<3>> Triangle::get_intersection_dist(const math::Vec<3>& t_pos,
-                                                                        const math::Vec<3>& t_dir) const
+        std::pair<double, math::Vec<3>> Triangle::get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
         {
             assert(t_dir.is_normalised());
             assert(m_norm.is_normalised());

@@ -103,7 +103,7 @@ namespace arc
                     double       tri_dist;
                     math::Vec<3> tri_norm;
                     std::tie(tri_dist, tri_norm) = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
-                                                                                .get_intersection_dist(t_pos, t_dir);
+                                                                                .get_intersection(t_pos, t_dir);
 
                     // If this distance is the closest so far, accept it.
                     if ((tri_dist < r_dist) && (tri_dist > 0.0))
@@ -141,7 +141,7 @@ namespace arc
                     double       tri_dist;
                     math::Vec<3> tri_norm;
                     std::tie(tri_dist, tri_norm) = t_ccd[m_ccd_list[i][0]].get_mesh().get_tri(m_ccd_list[i][1])
-                                                                          .get_intersection_dist(t_pos, t_dir);
+                                                                          .get_intersection(t_pos, t_dir);
 
                     // If this distance is the closest so far, accept it.
                     if ((tri_dist < r_dist) && (tri_dist > 0.0))
