@@ -52,9 +52,7 @@ void main()
         {
             discard;
         }
-        else
-        {
-            frag_col.a = 1.0;
-        }
+
+        frag_col.a = 1.0;
     }
 }
