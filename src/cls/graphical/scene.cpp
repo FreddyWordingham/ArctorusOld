@@ -496,7 +496,9 @@ namespace arc
         void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const double t_padding,
                              const glm::vec4& t_col)
         {
-            m_cell.emplace_back(Prop(Prop::shape::BOX, t_col, {t_min[X], t_min[Y], t_min[Z]}, {t_max[X], t_max[Y], t_max[Z]}));
+            m_cell.emplace_back(
+                Prop(Prop::shape::BOX, t_col, {t_min[X] + t_padding, t_min[Y] + t_padding, t_min[Z] + t_padding},
+                     {t_max[X] - t_padding, t_max[Y] - t_padding, t_max[Z] - t_padding}));
         }
 
 
