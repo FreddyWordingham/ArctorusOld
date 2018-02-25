@@ -93,7 +93,7 @@ namespace arc
                 const double alpha = 1.0 - beta - gamma;
 
                 // Check hit is on triangle (rather than somewhere else in the plane).
-                if ((alpha < 0.0) || (beta < 0.0) | (gamma < 0.0))
+                if ((alpha < 0.0) || (beta < 0.0) || (gamma < 0.0))
                 {
                     // Does not hit triangle.
                     return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(),
