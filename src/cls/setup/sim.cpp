@@ -55,6 +55,11 @@ namespace arc
                 ERROR("Value of m_roulette_weight is invalid.",
                       "Value of m_roulette_weight must be between zero and unity, but is: '" << m_roulette_weight << "'.");
             }
+            if (m_roulette_chambers <= 1.0)
+            {
+                ERROR("Value of m_roulette_chambers is invalid.",
+                      "Value of m_roulette_chambers must be greater than one, but is: '" << m_roulette_chambers << "'.");
+            }
 
             // Check wavelengths are valid.
             double      light_min_bound = m_light[0].get_min_bound();
