@@ -177,11 +177,11 @@ namespace arc
             switch (t_shape)
             {
                 case originShape::CUBE:
-                    return (init_vert_cube(t_scale));
+                    return (init_origin_vert_cube(t_scale));
                 case originShape::SKYBOX:
-                    return (init_vert_skybox(t_scale));
+                    return (init_origin_vert_skybox(t_scale));
                 case originShape::SUN:
-                    return (init_vert_sun(t_scale));
+                    return (init_origin_vert_sun(t_scale));
             }
         }
 
@@ -213,7 +213,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for a simple cube.
          */
-        std::vector<Vertex> Prop::init_vert_cube(const float t_scale) const
+        std::vector<Vertex> Prop::init_origin_vert_cube(const float t_scale) const
         {
             // Create vertex vector.
             std::vector<Vertex> r_vert;
@@ -274,7 +274,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for a skybox.
          */
-        std::vector<Vertex> Prop::init_vert_skybox(const float t_scale) const
+        std::vector<Vertex> Prop::init_origin_vert_skybox(const float t_scale) const
         {
             // Create vertex vector.
             std::vector<Vertex> r_vert;
@@ -335,7 +335,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for a sun.
          */
-        std::vector<Vertex> Prop::init_vert_sun(const float t_scale) const
+        std::vector<Vertex> Prop::init_origin_vert_sun(const float t_scale) const
         {
             // Create vertex vector.
             std::vector<Vertex> r_vert;
