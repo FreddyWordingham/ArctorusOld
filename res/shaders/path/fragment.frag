@@ -43,6 +43,7 @@ void main()
     // Set fragment colour.
     frag_col = vert_col;
 
+    // Render the photon near the timepoint.
     if (render_time > 0.0)
     {
         float delta_time = abs(vert_time - render_time);
