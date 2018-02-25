@@ -165,25 +165,23 @@ namespace arc
         }
 
         /**
-         *  Initialise the vertices for a simple prop shape.
+         *  Initialise the vertices for a simple origin prop shape.
          *
          *  @param  t_shape Type of shape to be created.
          *  @param  t_scale Scaling to be applied to the shape.
          *
-         *  @return The initialised vector of vertices for the simple shape.
+         *  @return The initialised vector of vertices for the origin shape.
          */
-        std::vector<Vertex> Prop::init_vert(const shape t_shape, const float t_scale) const
+        std::vector<Vertex> Prop::init_origin_vert(const originShape t_shape, const float t_scale) const
         {
             switch (t_shape)
             {
-                case shape::CUBE:
+                case originShape::CUBE:
                     return (init_vert_cube(t_scale));
-                case shape::SKYBOX:
+                case originShape::SKYBOX:
                     return (init_vert_skybox(t_scale));
-                case shape::SUN:
+                case originShape::SUN:
                     return (init_vert_sun(t_scale));
-                default:
-                    ERROR("Invalid case enumeration.", "Unbounded init_vert is not valid for the given enumeration.");
             }
         }
 
@@ -196,7 +194,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for the simple shape.
          */
-        std::vector<Vertex> Prop::init_vert(const shape t_shape, const glm::vec3 &t_min, const glm::vec3 &t_max) const
+        std::vector<Vertex> Prop::init_bounded_vert(const shape t_shape, const glm::vec3& t_min, const glm::vec3& t_max) const
         {
             switch (t_shape)
             {
