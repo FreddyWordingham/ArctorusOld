@@ -48,11 +48,15 @@ namespace arc
             //  -- Settings --
             const unsigned long int m_num_phot; //! Number of photons to simulate.
 
+            //  -- Roulette --
+            const double            m_roulette_weight;      //! Roulette threshold.
+            const unsigned long int m_roulette_chambers;    //! Number of roulette chambers.
+
             //  -- Equipment --
             const phys::Material             m_aether;  //! Aether material.
             const std::vector<equip::Entity> m_entity;  //! Vector of entity objects.
             const std::vector<equip::Light>  m_light;   //! Vector of light objects.
-            std::vector<detector::Ccd>       m_ccd;           //! Vector of ccd objects.
+            std::vector<detector::Ccd>       m_ccd;     //! Vector of ccd objects.
 
             //  -- Tools --
             const random::Index m_light_select; //! Light selector.
