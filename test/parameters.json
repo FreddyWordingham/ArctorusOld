@@ -1,5 +1,9 @@
 {
     "seed":        77,
+    "roulette":    {
+        "weight":   1e-3,
+        "chambers": 1e3
+    },
     "num_phot":    1e5,
     "pre_render":  false,
     "post_render": false,
