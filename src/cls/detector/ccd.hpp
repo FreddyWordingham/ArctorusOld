@@ -67,7 +67,7 @@ namespace arc
             void add_hit(const math::Vec<3>& t_pos, double t_weight, double t_wavelength);
 
             //  -- Save --
-            void save(const std::string& t_dir, double t_norm) const;
+            void save(double t_norm) const;
         };
 
 

@@ -85,14 +85,13 @@ namespace arc
 
         //  -- Save --
         /**
-         *  Save the state of the image to a given file path.
+         *  Save the state of the image.
          *
-         *  @param  t_dir   Path to the save directory of the file.
          *  @param  t_norm  Normalisation value.
          */
-        void Ccd::save(const std::string& t_dir, double t_norm) const
+        void Ccd::save(double t_norm) const
         {
-            m_image.save(t_dir + m_name + ".ppm", t_norm);
+            m_image.save(m_name + ".ppm", t_norm);
         }
 
 
