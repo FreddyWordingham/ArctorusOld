@@ -73,8 +73,8 @@ namespace arc
             assert ((x >= 0.0) && (x <= 1.0));
             assert ((y >= 0.0) && (y <= 1.0));
 
-            const size_t pix_x = static_cast<size_t>(x * m_image.get_width());
-            const size_t pix_y = static_cast<size_t>(y * m_image.get_height());
+            const auto pix_x = static_cast<size_t>(x * m_image.get_width());
+            const auto pix_y = static_cast<size_t>(y * m_image.get_height());
 
             const std::array<double, 3> col = m_col ? utl::colourmap::transform_rainbow((t_wavelength - 400E-9) / 300E-9)
                                                     : std::array<double, 3>({{1.0, 1.0, 1.0}});
