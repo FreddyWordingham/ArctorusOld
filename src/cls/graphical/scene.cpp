@@ -49,13 +49,13 @@ namespace arc
         Scene::Scene() :
             m_window(init_window()),
             m_cubemap(init_cubemap()),
-            m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 0.0, 1.0, 1.0}, 10.0)),
+            m_cube_box(Prop(Prop::originShape::SKYBOX, {1.0, 0.0, 1.0, 1.0}, 10.0)),
             m_primary_cam(std::make_unique<camera::Orbit>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
                                                           static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(std::make_unique<camera::Fly>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
                                                           static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_sun_pos(glm::vec3({INIT_SUN_POS_X, INIT_SUN_POS_Y, INIT_SUN_POS_Z})),
-            m_sun(Prop(Prop::shape::SUN, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
+            m_sun(Prop(Prop::originShape::SUN, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
         }
 
@@ -307,10 +307,11 @@ namespace arc
         void Scene::add_grid(const mesh::Grid& t_grid)
         {
             // Add main grid bounds.
-            m_grid.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0}, {static_cast<float>(t_grid.get_min_bound()[X]),
-                                                                              static_cast<float>(t_grid.get_min_bound()[Y]),
-                                                                              static_cast<float>(t_grid.get_min_bound()[Z])},
-                                     {static_cast<float>(t_grid.get_max_bound()[X]),
+            m_grid.emplace_back(
+                Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0}, {static_cast<float>(t_grid.get_min_bound()[X]),
+                                                                     static_cast<float>(t_grid.get_min_bound()[Y]),
+                                                                     static_cast<float>(t_grid.get_min_bound()[Z])},
+                     {static_cast<float>(t_grid.get_max_bound()[X]),
                                       static_cast<float>(t_grid.get_max_bound()[Y]),
                                       static_cast<float>(t_grid.get_max_bound()[Z])}));
 
@@ -458,7 +459,7 @@ namespace arc
                              const glm::vec4& t_col)
         {
             m_cell.emplace_back(
-                Prop(Prop::shape::BOX, t_col, {t_min[X] + t_padding, t_min[Y] + t_padding, t_min[Z] + t_padding},
+                Prop(Prop::boundedShape::BOX, t_col, {t_min[X] + t_padding, t_min[Y] + t_padding, t_min[Z] + t_padding},
                      {t_max[X] - t_padding, t_max[Y] - t_padding, t_max[Z] - t_padding}));
         }
 
