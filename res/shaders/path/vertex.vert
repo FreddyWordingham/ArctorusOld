@@ -67,33 +67,39 @@ vec4 colormap(const float t_x)
     }
 
     // Determine red, green blue values.
-    float r = clamp(colormap_red(t_x), 0.0, 1.0);
-    float g = clamp(colormap_green(t_x), 0.0, 1.0);
-    float b = clamp(colormap_blue(t_x), 0.0, 1.0);
+    float red = clamp(colormap_red(t_x), 0.0, 1.0);
+    float green = clamp(colormap_green(t_x), 0.0, 1.0);
+    float blue = clamp(colormap_blue(t_x), 0.0, 1.0);
 
-    return vec4(r, g, b, 1.0);
+    return vec4(red, green, blue, 1.0);
 }
 
-float colormap_red(const float t_x) {
-    if (t_x < 0.7) {
-        return 4.0 * t_x - 1.5;
-    } else {
-        return -4.0 * t_x + 4.5;
+float colormap_red(const float t_x)
+{
+    if (t_x < 0.7)
+    {
+        return ((4.0 * t_x) - 1.5);
     }
+
+    return ((-4.0 * t_x) + 4.5);
 }
 
-float colormap_green(const float t_x) {
-    if (t_x < 0.5) {
-        return 4.0 * t_x - 0.5;
-    } else {
-        return -4.0 * t_x + 3.5;
+float colormap_green(const float t_x)
+{
+    if (t_x < 0.5)
+    {
+        return ((4.0 * t_x) - 0.5);
     }
+
+    return ((-4.0 * t_x) + 3.5);
 }
 
-float colormap_blue(const float t_x) {
-    if (t_x < 0.3) {
-       return 4.0 * t_x + 0.5;
-    } else {
-       return -4.0 * t_x + 2.5;
+float colormap_blue(const float t_x)
+{
+    if (t_x < 0.3)
+    {
+       return ((4.0 * t_x) + 0.5);
     }
+
+   return ((-4.0 * t_x) + 2.5);
 }
