@@ -38,7 +38,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Properties --
-            const geom::Mesh m_mesh;    //! Mesh describing the surface of the detector.
+            const std::string m_name;   //! Name of the ccd.
+            const geom::Mesh  m_mesh;   //! Mesh describing the surface of the detector.
 
             //  -- Settings --
             const bool m_col;   //! If true save the image as wavelength colours. Otherwise save as greyscale intensity.
