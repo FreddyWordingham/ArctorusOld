@@ -17,18 +17,17 @@
             "scale": [0.5, 0.5, 0.5],
             "dir":   [0.0, -1.0, 0.0],
             "rot":   45.0,
-            "mesh":  "meshes/breaker.obj",
+            "mesh":  "meshes/sphere.obj",
             "mat":   "materials/glass.mat"
         }
     },
     "lights":      {
         "light_one": {
             "power": 1.0,
-            "scale": [0.25, 1.0, 1.0],
+            "scale": [0.1, 0.1, 0.1],
             "trans": [-3.0, 0.0, 0.0],
-            "rot":   90.0,
             "dir":   [-1.0, 0.0, 0.0],
-            "mesh":  "meshes/square.obj",
+            "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
         }
     },
