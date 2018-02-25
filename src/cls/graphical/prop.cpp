@@ -68,8 +68,8 @@ namespace arc
          *  @param  t_col   Colour of the shape.
          *  @param  t_scale Scaling to be applied to the shape.
          */
-        Prop::Prop(const shape t_shape, const glm::vec4& t_col, const float t_scale) :
-            Prop(init_vert(t_shape, t_scale), t_col)
+        Prop::Prop(const originShape t_shape, const glm::vec4& t_col, const float t_scale) :
+            Prop(init_origin_vert(t_shape, t_scale), t_col)
         {
         }
 
@@ -81,8 +81,8 @@ namespace arc
          *  @param  t_min   Minimum bound of the box.
          *  @param  t_max   Maximum bound of the box.
          */
-        Prop::Prop(const shape t_shape, const glm::vec4& t_col, const glm::vec3& t_min, const glm::vec3& t_max) :
-            Prop(init_vert(t_shape, t_min, t_max), t_col)
+        Prop::Prop(const boundedShape t_shape, const glm::vec4& t_col, const glm::vec3& t_min, const glm::vec3& t_max) :
+            Prop(init_bounded_vert(t_shape, t_min, t_max), t_col)
         {
         }
 
