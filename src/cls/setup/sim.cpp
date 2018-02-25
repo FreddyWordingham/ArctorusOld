@@ -413,19 +413,6 @@ namespace arc
                             entity_norm = entity_norm * -1.0;
                         }
 
-                        // Move to just before the boundary.
-                        phot.move(entity_dist - SMOOTHING_LENGTH);
-
-                        // Reflect the photon.
-                        phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
-
-                        /*
-                        // If entity normal is facing away, multiply it by -1.
-                        if ((phot.get_dir() * entity_norm) > 0.0)
-                        {
-                            entity_norm = entity_norm * -1.0;
-                        }
-
                         energy += entity_dist;
 
                         // Determine the material indices.
@@ -496,7 +483,6 @@ namespace arc
                                 phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                             }
                         }
-                         */
                     }
                     else    // Exit cell.
                     {
@@ -518,7 +504,7 @@ namespace arc
                 }
 
                 // Add the photon path.
-//                m_path.push_back(phot.get_path());
+                m_path.push_back(phot.get_path());
             }
         }
 
