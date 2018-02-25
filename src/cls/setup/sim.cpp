@@ -50,10 +50,10 @@ namespace arc
                    t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd)
         {
             // Validate settings.
-            if ((m_roulette_weight < 0.0) || (m_roulette_weight > 1.0))
+            if (m_roulette_weight < 0.0)
             {
                 ERROR("Value of m_roulette_weight is invalid.",
-                      "Value of m_roulette_weight must be between zero and unity, but is: '" << m_roulette_weight << "'.");
+                      "Value of m_roulette_weight must be non-negative, but is: '" << m_roulette_weight << "'.");
             }
             if (m_roulette_chambers <= 1.0)
             {
