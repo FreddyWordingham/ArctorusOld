@@ -32,7 +32,7 @@ out vec4 vert_col;      //! Colour to draw the vertex with.
 
 
 //  == FUNCTION PROTOTYPES ==
-vec3 colormap(const float t_x);
+vec4 colormap(const float t_x);
 float colormap_red(const float t_x);
 float colormap_green(const float t_x);
 float colormap_blue(const float t_x);
@@ -52,13 +52,13 @@ void main()
     vert_time = time;
 
     // Colour the vertex according to wavelength.
-    vert_col = vec4(colormap((wavelength - 400E-9) / 300E-9), 1.0);
+    vert_col = colormap((wavelength - 400E-9) / 300E-9);
 }
 
 
 
 //  == FUNCTIONS ==
-vec3 colormap(const float t_x)
+vec4 colormap(const float t_x)
 {
     // Check if t_x is outside limits.
     if ((t_x < 0.0) || (t_x > 1.0))
@@ -71,7 +71,7 @@ vec3 colormap(const float t_x)
     float g = clamp(colormap_green(t_x), 0.0, 1.0);
     float b = clamp(colormap_blue(t_x), 0.0, 1.0);
 
-    return vec3(r, g, b);
+    return vec4(r, g, b, 1.0);
 }
 
 float colormap_red(const float t_x) {
