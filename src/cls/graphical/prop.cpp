@@ -192,18 +192,17 @@ namespace arc
          *  @param  t_min   Minimum bound of the box.
          *  @param  t_max   Maximum bound of the box.
          *
-         *  @return The initialised vector of vertices for the simple shape.
+         *  @return The initialised vector of vertices for the bounded shape.
          */
-        std::vector<Vertex> Prop::init_bounded_vert(const shape t_shape, const glm::vec3& t_min, const glm::vec3& t_max) const
+        std::vector<Vertex> Prop::init_bounded_vert(const boundedShape t_shape, const glm::vec3& t_min,
+                                                    const glm::vec3& t_max) const
         {
             switch (t_shape)
             {
-                case shape::BOX:
+                case boundedShape::BOX:
                     return (init_vert_box(t_min, t_max));
-                case shape::CUBOID:
+                case boundedShape::CUBOID:
                     return (init_vert_cuboid(t_min, t_max));
-                default:
-                    ERROR("Invalid case enumeration.", "Bounded init_vert is not valid for the given enumeration.");
             }
         }
 
@@ -441,29 +440,29 @@ namespace arc
             r_vert.push_back(Vertex({+t_scale, +0.0f, +0.0f}, {+0.0f, +0.0f, +0.0f}));
 
             // +z point.
-            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f * t_scale, +0.0f, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.25f * t_scale, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f * t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.25f * t_scale, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f * t_scale, +0.0f, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f * t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f * t_scale, +0.0f, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -0.25f * t_scale, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f * t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -0.25f * t_scale, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.25f * t_scale, +0.0f, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.0f, +1.75f * t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0f, +0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.25f * t_scale, +0.0f, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, +0.25f * t_scale, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f * t_scale, +0.0f, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
 
-            r_vert.push_back(Vertex({-0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.25f*t_scale, +0.0f, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
-            r_vert.push_back(Vertex({+0.0f, -0.25f*t_scale, +1.25f*t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({-0.25f * t_scale, +0.0f, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.25f * t_scale, +0.0f, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
+            r_vert.push_back(Vertex({+0.0f, -0.25f * t_scale, +1.25f * t_scale}, {+0.0f, +0.0f, +0.0f}));
 
             return (r_vert);
         }
@@ -476,7 +475,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for a box.
          */
-        std::vector<Vertex> Prop::init_vert_box(const glm::vec3 &t_min, const glm::vec3 &t_max) const
+        std::vector<Vertex> Prop::init_vert_box(const glm::vec3& t_min, const glm::vec3& t_max) const
         {
             // Create vertex vector.
             std::vector<Vertex> r_vert;
