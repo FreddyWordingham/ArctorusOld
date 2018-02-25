@@ -307,14 +307,12 @@ namespace arc
         void Scene::add_grid(const mesh::Grid& t_grid)
         {
             // Add main grid bounds.
-            const float grid_padding = 0.001f;
-            m_grid.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0},
-                                     {static_cast<float>(t_grid.get_min_bound()[X]) - grid_padding,
-                                      static_cast<float>(t_grid.get_min_bound()[Y]) - grid_padding,
-                                      static_cast<float>(t_grid.get_min_bound()[Z]) - grid_padding},
-                                     {static_cast<float>(t_grid.get_max_bound()[X]) + grid_padding,
-                                      static_cast<float>(t_grid.get_max_bound()[Y]) + grid_padding,
-                                      static_cast<float>(t_grid.get_max_bound()[Z]) + grid_padding}));
+            m_grid.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0}, {static_cast<float>(t_grid.get_min_bound()[X]),
+                                                                              static_cast<float>(t_grid.get_min_bound()[Y]),
+                                                                              static_cast<float>(t_grid.get_min_bound()[Z])},
+                                     {static_cast<float>(t_grid.get_max_bound()[X]),
+                                      static_cast<float>(t_grid.get_max_bound()[Y]),
+                                      static_cast<float>(t_grid.get_max_bound()[Z])}));
 
             // Determine maximum grid cell energy density.
             double max_energy_density = t_grid.get_max_energy_density();
