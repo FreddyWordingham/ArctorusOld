@@ -88,9 +88,9 @@ namespace arc
                 const math::Vec<3> r = s ^edge_1;
 
                 // Calculate barycentric coordinates.
-                const double alpha = s * q;
-                const double beta  = r * t_dir;
-                const double gamma = 1.0 - alpha - beta;
+                const double gamma = r * t_dir;
+                const double beta  = s * q;
+                const double alpha = 1.0 - beta - gamma;
 
                 // Check hit is on triangle (rather than somewhere else in the plane).
                 if ((alpha < 0.0) || (beta < 0.0) | (gamma < 0.0))
@@ -113,7 +113,7 @@ namespace arc
 
                 // Determine interpolated normal.
                 math::Vec<3> r_norm = math::normalise(
-                    (m_vert[ALPHA].get_norm() * gamma) + (m_vert[BETA].get_norm() * alpha) + (m_vert[GAMMA].get_norm() * beta));
+                    (m_vert[ALPHA].get_norm() * alpha) + (m_vert[BETA].get_norm() * beta) + (m_vert[GAMMA].get_norm() * gamma));
 
                 return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
             }
