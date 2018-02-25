@@ -44,7 +44,7 @@ namespace arc
                  const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, const double t_spin, const math::Vec<3>& t_scale) :
             m_name(t_name),
             m_mesh(
-                "v 1.000000 1.000000 0.000000\nv -1.000000 1.000000 0.000000\nv 1.000000 -1.000000 0.000000\nv -1.000000 -1.000000 0.000000\nvn 0.0000 0.0000 1.0000\ns off\nf 2//1 3//1 1//1\nf 2//1 4//1 3//1",
+                "v 1.0 1.0 0.0\nv -1.0 1.0 0.0\nv 1.0 -1.0 0.0\nv -1.0 -1.0 0.0\nvn 0.0 0.0 1.0\ns off\nf 2//1 3//1 1//1\nf 2//1 4//1 3//1",
                 t_trans, t_dir, t_spin, t_scale),
             m_norm(t_dir),
             m_col(t_col),
