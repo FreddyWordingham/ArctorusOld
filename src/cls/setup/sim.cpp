@@ -397,6 +397,7 @@ namespace arc
                              "Distance to entity is shorter than the smoothing length.");
 
                         m_path.push_back(phot.get_path());
+
                         break;
                     }
                     //assert(scat_dist > SMOOTHING_LENGTH);
