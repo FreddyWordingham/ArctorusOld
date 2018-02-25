@@ -53,7 +53,7 @@ namespace arc
 
             //  -- Data --
             const bool m_empty;         //! True if the cell contains no triangles.
-            double     m_energy = 0.0;  //! Energy withihn the cell.
+            double     m_energy = 0.0;  //! Energy within the cell.
 
 
             //  == INSTANTIATION ==
