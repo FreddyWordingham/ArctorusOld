@@ -42,14 +42,21 @@ namespace arc
             //  == ENUMERATIONS ==
           public:
             /**
-             *  Enumeration of the types of shapes the Prop class can construct a vertex list of.
+             *  Enumeration of the types of origin shapes the Prop class can construct a vertex list of.
              */
-            enum class shape
+            enum class originShape
             {
                 CUBE,   //! Simple cube.
-                CUBOID, //! Simple cuboid.
                 SKYBOX, //! Skybox.
-                SUN,    //! Sun illuminator.
+                SUN     //! Sun illuminator.
+            };
+
+            /**
+             *  Enumeration of the types of bounded shapes the Prop class can construct a vertex list of.
+             */
+            enum class boundedShape
+            {
+                CUBOID, //! Simple cuboid.
                 BOX     //! Box.
             };
 
