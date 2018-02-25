@@ -58,6 +58,13 @@ void main()
 
 
 //  == FUNCTIONS ==
+/**
+ *  Convert a given value between zero and unity to an rgba colour vector.
+ *
+ *  @param  t_x Value to be converted to an rgba colour vector.
+ *
+ *  @return A colour vector.
+ */
 vec4 colourmap(const float t_x)
 {
     // Check if t_x is outside limits.
@@ -74,6 +81,13 @@ vec4 colourmap(const float t_x)
     return vec4(red, green, blue, 1.0);
 }
 
+/**
+ *  Convert a given value between zero and unity to a red colour channel.
+ *
+ *  @param  t_x Value to be converted to a red colour channel.
+ *
+ *  @return Value of the red colour channel.
+ */
 float colourmap_red(const float t_x)
 {
     if (t_x < 0.7)
@@ -84,6 +98,13 @@ float colourmap_red(const float t_x)
     return ((-4.0 * t_x) + 4.5);
 }
 
+/**
+ *  Convert a given value between zero and unity to a green colour channel.
+ *
+ *  @param  t_x Value to be converted to a green colour channel.
+ *
+ *  @return Value of the green colour channel.
+ */
 float colourmap_green(const float t_x)
 {
     if (t_x < 0.5)
@@ -94,6 +115,13 @@ float colourmap_green(const float t_x)
     return ((-4.0 * t_x) + 3.5);
 }
 
+/**
+ *  Convert a given value between zero and unity to a blue colour channel.
+ *
+ *  @param  t_x Value to be converted to a blue colour channel.
+ *
+ *  @return Value of the blue colour channel.
+ */
 float colourmap_blue(const float t_x)
 {
     if (t_x < 0.3)
