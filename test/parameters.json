@@ -5,26 +5,30 @@
     "pre_render":  false,
     "post_render": true,
     "grid":        {
-        "min":   [-2.1, -2.1, -2.1],
-        "max":   [2.1, 2.1, 2.1],
-        "cells": [101, 101, 101]
+        "min":   [-4.1, -1.1, -1.1],
+        "max":   [4.1, 1.1, 1.1],
+        "cells": [41, 11, 11]
     },
     "aether":      {
         "mat": "materials/vacuum.mat"
     },
     "entities":    {
         "entity_zero": {
-            "mesh": "meshes/triangle.obj",
-            "mat":  "materials/glass.mat"
+            "scale": [0.5, 0.5, 0.5],
+            "dir":   [0.0, -1.0, 0.0],
+            "rot":   45.0,
+            "mesh":  "meshes/breaker.obj",
+            "mat":   "materials/glass.mat"
         }
     },
     "lights":      {
         "light_one": {
             "power": 1.0,
-            "scale": [1.0, 1.0, 1.0],
-            "trans": [0.0, 0.0, 1.0],
-            "dir":   [0.0, 0.0, -1.0],
-            "mesh":  "meshes/circle.obj",
+            "scale": [0.25, 1.0, 1.0],
+            "trans": [-3.0, 0.0, 0.0],
+            "rot":   90.0,
+            "dir":   [-1.0, 0.0, 0.0],
+            "mesh":  "meshes/square.obj",
             "spec":  "spectra/laser.spc"
         }
     },
