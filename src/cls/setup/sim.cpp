@@ -346,7 +346,19 @@ namespace arc
                 unsigned long int loops = 0;
                 while (m_grid.is_within(phot.get_pos()))
                 {
+                    // Increment number of loops.
                     ++loops;
+
+                    // Call roulette if below threshold.
+                    if (phot.get_weight() < m_roulette_weight)
+                    {
+                        if (rng::random() > (1.0 / m_roulette_chambers))
+                        {
+                            break;
+                        }
+
+                        phot.multiply_weight(m_roulette_chambers);
+                    }
 
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
                     const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
