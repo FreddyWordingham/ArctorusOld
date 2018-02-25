@@ -389,7 +389,8 @@ namespace arc
 
                         break;
                     }
-                    else if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.
+
+                    if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.
                     {
                         energy += scat_dist;
 
