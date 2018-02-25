@@ -1,8 +1,8 @@
 {
     "seed":        77,
-    "num_phot":    1e3,
+    "num_phot":    1e5,
     "pre_render":  false,
-    "post_render": true,
+    "post_render": false,
     "grid":        {
         "min":   [-4.1, -1.1, -1.1],
         "max":   [4.1, 1.1, 1.1],
@@ -34,15 +34,15 @@
             "scale":  [0.002, 0.002, 0.002],
             "dir":    [1.0, 0.0, 0.0],
             "trans":  [3.0, 0.0, 0.0],
-            "pixel":  [10, 10],
+            "pixel":  [50, 50],
             "col":    true,
             "absorb": true
         },
         "ccd_one":  {
-            "scale":  [0.01, 0.01, 0.01],
+            "scale":  [0.004, 0.004, 0.004],
             "dir":    [1.0, 0.0, 0.0],
-            "trans":  [3.1, 0.0, 0.0],
-            "pixel":  [10, 10],
+            "trans":  [3.01, 0.0, 0.0],
+            "pixel":  [100, 100],
             "col":    true,
             "absorb": true
         }
