@@ -49,6 +49,13 @@ namespace arc
             m_grid(t_json["grid"].parse_child<math::Vec<3>>("min"), t_json["grid"].parse_child<math::Vec<3>>("max"),
                    t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd)
         {
+            // Validate settings.
+            if ((m_roulette_weight < 0.0) || (m_roulette_weight > 1.0))
+            {
+                ERROR("Value of m_roulette_weight is invalid.",
+                      "Value of m_roulette_weight must be between zero and unity, but is: '" << m_roulette_weight << "'.");
+            }
+
             // Check wavelengths are valid.
             double      light_min_bound = m_light[0].get_min_bound();
             double      light_max_bound = m_light[0].get_max_bound();
