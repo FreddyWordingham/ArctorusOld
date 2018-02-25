@@ -233,7 +233,7 @@ namespace arc
                 const auto col = json_ccd.parse_child<bool>("col");
 
                 // Construct the ccd object an add it to the vector of ccds.
-                r_ccd.emplace_back(detector::Ccd(pix[X], pix[Y], col, trans, dir, rot, scale));
+                r_ccd.emplace_back(detector::Ccd(ccd_name[i], pix[X], pix[Y], col, trans, dir, rot, scale));
             }
 
             return (r_ccd);
