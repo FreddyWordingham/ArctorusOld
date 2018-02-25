@@ -294,7 +294,7 @@ namespace arc
             // Save each ccd image.
             for (size_t i = 0; i < m_ccd.size(); ++i)
             {
-                m_ccd[i].save(t_dir + "/ccd_" + std::to_string(i) + ".ppm", max);
+                m_ccd[i].save(max);
             }
         }
 
