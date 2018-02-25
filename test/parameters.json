@@ -4,9 +4,9 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":    1e5,
+    "num_phot":    1e3,
     "pre_render":  false,
-    "post_render": false,
+    "post_render": true,
     "grid":        {
         "min":   [-4.1, -1.1, -1.1],
         "max":   [4.1, 1.1, 1.1],

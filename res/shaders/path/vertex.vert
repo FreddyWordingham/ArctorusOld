@@ -31,43 +31,11 @@ out vec4 vert_col;      //! Colour to draw the vertex with.
 
 
 
-//  == FUNCTIONS ==
-float colormap_red(float x) {
-    if (x < 0.7) {
-        return 4.0 * x - 1.5;
-    } else {
-        return -4.0 * x + 4.5;
-    }
-}
-
-float colormap_green(float x) {
-    if (x < 0.5) {
-        return 4.0 * x - 0.5;
-    } else {
-        return -4.0 * x + 3.5;
-    }
-}
-
-float colormap_blue(float x) {
-    if (x < 0.3) {
-       return 4.0 * x + 0.5;
-    } else {
-       return -4.0 * x + 2.5;
-    }
-}
-
-vec4 colormap(float x) {
-
-    if ((x < 0.0) || (x > 1.0))
-    {
-        return (vec4(1.0, 0.0, 1.0, 1.0));
-    }
-
-    float r = clamp(colormap_red(x), 0.0, 1.0);
-    float g = clamp(colormap_green(x), 0.0, 1.0);
-    float b = clamp(colormap_blue(x), 0.0, 1.0);
-    return vec4(r, g, b, 1.0);
-}
+//  == FUNCTION PROTOTYPES ==
+vec3 colormap(const float t_x);
+float colormap_red(const float t_x);
+float colormap_green(const float t_x);
+float colormap_blue(const float t_x);
 
 
 
@@ -84,5 +52,48 @@ void main()
     vert_time = time;
 
     // Colour the vertex according to wavelength.
-    vert_col = colormap((wavelength - 400E-9) / 300E-9);
+    vert_col = vec4(colormap((wavelength - 400E-9) / 300E-9), 1.0);
+}
+
+
+
+//  == FUNCTIONS ==
+vec3 colormap(const float t_x)
+{
+    // Check if t_x is outside limits.
+    if ((t_x < 0.0) || (t_x > 1.0))
+    {
+        return (vec4(1.0, 0.0, 1.0, 1.0));
+    }
+
+    // Determine red, green blue values.
+    float r = clamp(colormap_red(t_x), 0.0, 1.0);
+    float g = clamp(colormap_green(t_x), 0.0, 1.0);
+    float b = clamp(colormap_blue(t_x), 0.0, 1.0);
+
+    return vec3(r, g, b);
+}
+
+float colormap_red(const float t_x) {
+    if (t_x < 0.7) {
+        return 4.0 * t_x - 1.5;
+    } else {
+        return -4.0 * t_x + 4.5;
+    }
+}
+
+float colormap_green(const float t_x) {
+    if (t_x < 0.5) {
+        return 4.0 * t_x - 0.5;
+    } else {
+        return -4.0 * t_x + 3.5;
+    }
+}
+
+float colormap_blue(const float t_x) {
+    if (t_x < 0.3) {
+       return 4.0 * t_x + 0.5;
+    } else {
+       return -4.0 * t_x + 2.5;
+    }
 }
