@@ -74,7 +74,7 @@ namespace arc
             const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
             size_t get_num_cells() const { return (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]); }
             size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
-            inline const Cell& get_cell(const size_t t_i, const size_t t_j, const size_t t_k) const;
+            inline const Cell& get_cell(size_t t_i, size_t t_j, size_t t_k) const;
             inline Cell& get_cell(const math::Vec<3>& t_point);
             double get_max_energy_density() const;
 
