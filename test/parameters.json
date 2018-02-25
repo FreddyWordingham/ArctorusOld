@@ -1,9 +1,9 @@
 {
     "seed":        77,
     "output_dir":  "output",
-    "num_phot":    1e3,
+    "num_phot":    1e5,
     "pre_render":  false,
-    "post_render": true,
+    "post_render": false,
     "grid":        {
         "min":   [-4.1, -1.1, -1.1],
         "max":   [4.1, 1.1, 1.1],
@@ -16,7 +16,6 @@
         "entity_zero": {
             "scale": [0.5, 0.5, 0.5],
             "dir":   [0.0, -1.0, 0.0],
-            "rot":   45.0,
             "mesh":  "meshes/sphere.obj",
             "mat":   "materials/glass.mat"
         }
@@ -24,7 +23,7 @@
     "lights":      {
         "light_one": {
             "power": 1.0,
-            "scale": [0.1, 0.1, 0.1],
+            "scale": [0.001, 0.001, 0.001],
             "trans": [-3.0, 0.0, 0.0],
             "dir":   [-1.0, 0.0, 0.0],
             "mesh":  "meshes/circle.obj",
@@ -32,5 +31,12 @@
         }
     },
     "ccds":        {
+        "ccd_zero": {
+            "scale": [0.005, 0.005, 0.005],
+            "dir":   [1.0, 0.0, 0.0],
+            "trans": [3.0, 0.0, 0.0],
+            "pixel": [10, 10],
+            "col":   true
+        }
     }
 }
