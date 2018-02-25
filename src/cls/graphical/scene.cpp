@@ -319,8 +319,7 @@ namespace arc
             VAL(max_energy_density);
 
             // Add grid cells.
-            const float cell_padding = -0.01f;
-            for (size_t i            = 0; i < t_grid.get_num_cells(X); ++i)
+            for (size_t i = 0; i < t_grid.get_num_cells(X); ++i)
             {
                 for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
                 {
@@ -330,21 +329,16 @@ namespace arc
 
                         if (energy_density > 0.0)
                         {
+                            // Get the cell.
+                            const auto cell = t_grid.get_cell(i, j, k);
+
+                            // Calculate the cell colour.
                             const std::array<double, 3> col = utl::colourmap::transform_rainbow(
                                 energy_density / max_energy_density);
-                            m_cell.emplace_back(Prop(Prop::shape::BOX, {glm::vec3(col[R], col[G], col[B]), 0.1},
-                                                     {static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_min_bound()[X]) - cell_padding,
-                                                      static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_min_bound()[Y]) - cell_padding,
-                                                      static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_min_bound()[Z]) - cell_padding},
-                                                     {static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_max_bound()[X]) + cell_padding,
-                                                      static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_max_bound()[Y]) + cell_padding,
-                                                      static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_max_bound()[Z]) + cell_padding}));
+
+                            // Add the cell prop.
+                            add_cell(cell.get_min_bound(), cell.get_max_bound(), 0.01,
+                                     {glm::vec3(col[R], col[G], col[B]), 1.0});
                         }
                     }
                 }
