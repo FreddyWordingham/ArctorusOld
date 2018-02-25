@@ -445,14 +445,14 @@ namespace arc
                         assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
 
                         // Check for total internal reflection.
-                        if (std::sin(a_i) > (n_t / n_i))
-                        {
+                        //if (std::sin(a_i) > (n_t / n_i))
+                        //{
                             // Move to just before the boundary.
                             phot.move(entity_dist - SMOOTHING_LENGTH);
 
                             // Reflect the photon.
                             phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
-                        }
+                        /*}
                         else
                         {
                             if (rng::random() <= optics::reflection_prob(a_i, n_i, n_t))    // Reflect.
@@ -482,7 +482,7 @@ namespace arc
                                 }
                                 phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                             }
-                        }
+                        }*/
                     }
                     else    // Exit cell.
                     {
