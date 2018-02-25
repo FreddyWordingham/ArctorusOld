@@ -413,7 +413,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for a simple cuboid.
          */
-        std::vector<Vertex> Prop::init_vert_cuboid(const glm::vec3& t_min, const glm::vec3& t_max) const
+        std::vector<Vertex> Prop::init_bounded_vert_cuboid(const glm::vec3& t_min, const glm::vec3& t_max) const
         {
             // Create vertex vector.
             std::vector<Vertex> r_vert;
@@ -475,7 +475,7 @@ namespace arc
          *
          *  @return The initialised vector of vertices for a box.
          */
-        std::vector<Vertex> Prop::init_vert_box(const glm::vec3& t_min, const glm::vec3& t_max) const
+        std::vector<Vertex> Prop::init_bounded_vert_box(const glm::vec3& t_min, const glm::vec3& t_max) const
         {
             // Create vertex vector.
             std::vector<Vertex> r_vert;
