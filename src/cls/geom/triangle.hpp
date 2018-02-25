@@ -64,59 +64,7 @@ namespace arc
             //  -- Getters --
             double get_area() const { return (m_area); }
             inline const Vertex& get_vert(size_t t_index) const;
-            std::pair<double, math::Vec<3>> get_intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
-            {
-                assert(t_dir.is_normalised());
-                assert(m_norm.is_normalised());
-
-                // Calculate edge vectors.
-                const math::Vec<3> edge_1 = m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos();
-                const math::Vec<3> edge_2 = m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos();
-
-                const math::Vec<3> q = t_dir ^edge_2;
-                const double       a = edge_1 * q;
-
-                // Check if ray is almost parallel to the triangle.
-                if (std::fabs(a) <= std::numeric_limits<double>::epsilon())
-                {
-                    // Does not hit triangle.
-                    return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(),
-                                                            math::Vec<3>({{0.0, 0.0, 0.0}})));
-                }
-
-                const math::Vec<3> s = (t_pos - m_vert[ALPHA].get_pos()) / a;
-                const math::Vec<3> r = s ^edge_1;
-
-                // Calculate barycentric coordinates.
-                const double gamma = r * t_dir;
-                const double beta  = s * q;
-                const double alpha = 1.0 - beta - gamma;
-
-                // Check hit is on triangle (rather than somewhere else in the plane).
-                if ((alpha < 0.0) || (beta < 0.0) || (gamma < 0.0))
-                {
-                    // Does not hit triangle.
-                    return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(),
-                                                            math::Vec<3>({{0.0, 0.0, 0.0}})));
-                }
-
-                // Calculate intersection distance.
-                const double r_dist = edge_2 * r;
-
-                // Check triangle is ahead of ray, rather than behind.
-                if (r_dist <= 0.0)
-                {
-                    // Does not hit triangle.
-                    return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(),
-                                                            math::Vec<3>({{0.0, 0.0, 0.0}})));
-                }
-
-                // Determine interpolated normal.
-                math::Vec<3> r_norm = math::normalise(
-                    (m_vert[ALPHA].get_norm() * alpha) + (m_vert[BETA].get_norm() * beta) + (m_vert[GAMMA].get_norm() * gamma));
-
-                return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
-            }
+            std::pair<double, math::Vec<3>> get_intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
 
             //  -- Generation --
             std::pair<math::Vec<3>, math::Vec<3>> gen_random_pos_and_norm() const;
