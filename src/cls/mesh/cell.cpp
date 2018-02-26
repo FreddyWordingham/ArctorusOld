@@ -132,6 +132,8 @@ namespace arc
          *  Initialise the list of spectrometer triangles found within the cell.
          *
          *  @param  t_spectrometer  Vector of spectrometers which may be contained within the cell.
+         *
+         *  @return The initialised list of spectrometer triangles found within the cell.
          */
         std::vector<std::array<size_t, 2>> Cell::init_spectrometer_list(
             const std::vector<detector::Spectrometer>& t_spectrometer) const
