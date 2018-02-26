@@ -14,7 +14,6 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include <gen/ansi.hpp>
 
 
 
@@ -101,7 +100,8 @@ namespace arc
             std::array<std::string, TOTAL_COLS> r_text_col;
 
             // If not printing to a terminal, or the terminal is being piped to a file, do not initialise the ansi codes.
-            if (config::COLOUR_LOG && (&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0))
+#ifndef DISABLE_LOG_COLOUR
+            if ((&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0))
             {
                 r_text_col[RESET]   = ansi::RESET;
                 r_text_col[BLACK]   = ansi::BLACK;
@@ -113,6 +113,7 @@ namespace arc
                 r_text_col[CYAN]    = ansi::CYAN;
                 r_text_col[WHITE]   = ansi::WHITE;
             }
+#endif
 
             return (r_text_col);
         }
