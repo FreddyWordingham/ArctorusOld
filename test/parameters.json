@@ -10,7 +10,7 @@
     "grid":          {
         "min":   [-1.1, -1.1, -1.1],
         "max":   [1.1, 1.1, 1.1],
-        "cells": [11, 11, 11]
+        "cells": [1, 1, 1]
     },
     "aether":        {
         "mat": "materials/vacuum.mat"
@@ -40,10 +40,9 @@
             "min":   300E-9,
             "max":   700E-9,
             "bins":  40,
-            "mesh":  "meshes/circle.obj",
-            "trans": [0.0, 0.0, 0.1],
-            "scale": [0.1, 0.1, 0.1],
-            "dir":   [0.0, 0.0, 1.0]
+            "mesh":  "meshes/square.obj",
+            "trans": [0.0, 0.0, 0.2],
+            "scale": [0.1, 0.1, 0.1]
         }
     }
 }
