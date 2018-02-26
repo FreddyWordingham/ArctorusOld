@@ -404,6 +404,7 @@ namespace arc
                         cell->add_energy(energy);
                         break;
                     }
+
                     //assert(scat_dist > SMOOTHING_LENGTH);
                     assert(cell_dist > SMOOTHING_LENGTH);
                     assert(entity_dist > SMOOTHING_LENGTH);
@@ -419,8 +420,7 @@ namespace arc
                         // Check if photon hits the front of the detector.
                         if ((phot.get_dir() * m_ccd[ccd_index].get_norm()) < 0.0)
                         {
-                            m_ccd[ccd_index].add_hit(phot.get_pos(), phot.get_weight(),
-                                                     phot.get_wavelength());
+                            m_ccd[ccd_index].add_hit(phot.get_pos(), phot.get_weight(), phot.get_wavelength());
                         }
 
                         // Remove the photon from simulation.
