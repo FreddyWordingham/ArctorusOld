@@ -17,10 +17,9 @@
     },
     "entities":    {
         "entity_zero": {
-            "scale": [0.5, 0.5, 0.5],
-            "dir":   [0.0, -1.0, 0.0],
-            "mesh":  "meshes/sphere.obj",
-            "mat":   "materials/glass.mat"
+            "dir":  [1.0, 0.0, 0.0],
+            "mesh": "meshes/circle.obj",
+            "mat":  "materials/glass.mat"
         }
     },
     "lights":      {
