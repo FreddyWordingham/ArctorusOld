@@ -119,6 +119,12 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         -Wno-unknown-pragmas                \
         -Wno-weak-vtables                   \
     ")
+elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+        -Wall                               \
+        -Wextra                             \
+        -Wpedantic                          \
+    ")
 else ()
     message(FATAL_ERROR "Warning flags are not defined for compiler type: '${CMAKE_CXX_COMPILER_ID}'.")
 endif ()
