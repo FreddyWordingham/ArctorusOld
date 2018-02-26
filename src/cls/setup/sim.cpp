@@ -255,6 +255,52 @@ namespace arc
         }
 
         /**
+         *  Initialise the vector of spectrometer objects.
+         *
+         *  @param  t_json  Json setup file.
+         *
+         *  @return The initialised vector of spectrometer objects.
+         */
+        std::vector<detector::Spectrometer> Sim::init_spectrometer(const data::Json& t_json) const
+        {
+            // Create the return vector of spectrometers.
+            std::vector<detector::Spectrometer> r_spectrometer;
+
+            // Get list of spectrometer names.
+            std::vector<std::string> spectrometer_name = t_json.get_child_names();
+
+            // Construct the spectrometer objects.
+            for (size_t i = 0; i < spectrometer_name.size(); ++i)
+            {
+                LOG("Constructing spectrometer : " << spectrometer_name[i]);
+
+                // Create a json object of the spectrometer.
+                const data::Json json_spectrometer = t_json[spectrometer_name[i]];
+
+                // Get the transformation values.
+                const auto   trans = json_spectrometer.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
+                const auto   dir   = json_spectrometer.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const double rot   = math::deg_to_rad(json_spectrometer.parse_child<double>("rot", 0.0));
+                const auto   scale = json_spectrometer.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+
+                // Get spectrometer properties.
+                const auto min  = json_spectrometer.parse_child<double>("min");
+                const auto max  = json_spectrometer.parse_child<double>("max");
+                const auto bins = json_spectrometer.parse_child<size_t>("bins");
+
+                // Get file paths.
+                const std::string mesh_path = json_spectrometer.parse_child<std::string>("mesh");
+
+                // Construct the spectrometer object an add it to the vector of spectrometers.
+                r_spectrometer.emplace_back(
+                    detector::Spectrometer(spectrometer_name[i], geom::Mesh(file::read(mesh_path), trans, dir, rot, scale), min,
+                                           max, bins));
+            }
+
+            return (r_spectrometer);
+        }
+
+        /**
          *  Construct the light index selector object.
          *
          *  @return The initialised light index selector.

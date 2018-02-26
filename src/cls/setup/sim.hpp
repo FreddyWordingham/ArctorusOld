@@ -80,6 +80,7 @@ namespace arc
             std::vector<equip::Entity> init_entity(const data::Json& t_json) const;
             std::vector<equip::Light> init_light(const data::Json& t_json) const;
             std::vector<detector::Ccd> init_ccd(const data::Json& t_json) const;
+            std::vector<detector::Spectrometer> init_spectrometer(const data::Json& t_json) const;
             random::Index init_light_select() const;
 
 
