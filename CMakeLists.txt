@@ -48,6 +48,7 @@ set(ARCTORUS_DIR ${CMAKE_SOURCE_DIR})
 message("Build directory:'${ARCTORUS_DIR}'.")
 
 
+
 #   == LOGGING OPTIONS ==
 #   -- Colour --
 if (NOT DEFINED COLOUR)
@@ -60,6 +61,15 @@ if (NOT DEFINED VERBOSE)
     set(VERBOSE true)
 endif ()
 message("Verbose messages: ${VERBOSE}")
+
+
+
+#   == MODULE OPTIONS ==
+#   -- Graphics --
+if (NOT DEFINED GRAPHICS)
+    set(GRAPHICS true)
+endif ()
+message("Graphics: ${GRAPHICS}")
 
 
 
