@@ -106,7 +106,7 @@ namespace arc
          *
          *  @return The created position scaling matrix.
          */
-        Mat<4, 4> create_scale_pos_mat(const Vec<3>& t_scale)
+        Mat<4, 4> create_scale_mat(const Vec<3>& t_scale)
         {
             assert(t_scale[X] != 0.0);
             assert(t_scale[Y] != 0.0);
@@ -136,7 +136,7 @@ namespace arc
             assert(t_scale[Y] != 0.0);
             assert(t_scale[Z] != 0.0);
 
-            return (create_trans_mat(t_trans) * create_orient_mat(t_dir, t_spin) * create_scale_pos_mat(t_scale));
+            return (create_trans_mat(t_trans) * create_orient_mat(t_dir, t_spin) * create_scale_mat(t_scale));
         }
 
 
