@@ -307,11 +307,11 @@ namespace arc
         void Scene::add_grid(const mesh::Grid& t_grid)
         {
             // Add main grid bounds.
-            m_grid.emplace_back(
-                Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0}, {static_cast<float>(t_grid.get_min_bound()[X]),
-                                                                     static_cast<float>(t_grid.get_min_bound()[Y]),
-                                                                     static_cast<float>(t_grid.get_min_bound()[Z])},
-                     {static_cast<float>(t_grid.get_max_bound()[X]),
+            m_grid.emplace_back(Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0},
+                                     {static_cast<float>(t_grid.get_min_bound()[X]),
+                                      static_cast<float>(t_grid.get_min_bound()[Y]),
+                                      static_cast<float>(t_grid.get_min_bound()[Z])},
+                                     {static_cast<float>(t_grid.get_max_bound()[X]),
                                       static_cast<float>(t_grid.get_max_bound()[Y]),
                                       static_cast<float>(t_grid.get_max_bound()[Z])}));
 
@@ -434,6 +434,37 @@ namespace arc
 
             // Add the ccd prop into the list of render-able ccd props.
             m_ccd.emplace_back(Prop(vertices, t_col));
+        }
+
+        /**
+         *  Add a render-able spectrometer prop to the scene.
+         *
+         *  @param  t_spectrometer  Spectrometer to be added to the scene.
+         *  @param  t_col           Colour to render the prop.
+         */
+        void Scene::add_spectrometer(const detector::Spectrometer& t_spectrometer, const glm::vec4& t_col)
+        {
+            // Create vector of vertices.
+            std::vector<Vertex> vertices;
+            vertices.reserve(t_spectrometer.get_mesh().get_num_tri() * 3);
+
+            // Add vertices into list from mesh.
+            for (size_t i = 0; i < t_spectrometer.get_mesh().get_num_tri(); ++i)
+            {
+                for (size_t j = 0; j < 3; ++j)
+                {
+                    vertices.push_back(Vertex(
+                        {static_cast<float>(t_spectrometer.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
+                         static_cast<float>(t_spectrometer.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
+                         static_cast<float>(t_spectrometer.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
+                        {static_cast<float>(t_spectrometer.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
+                         static_cast<float>(t_spectrometer.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
+                         static_cast<float>(t_spectrometer.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
+                }
+            }
+
+            // Add the light prop into the list of render-able light props.
+            m_light.emplace_back(Prop(vertices, t_col));
         }
 
         /**
