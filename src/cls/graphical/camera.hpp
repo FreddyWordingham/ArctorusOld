@@ -29,7 +29,7 @@ namespace arc
 
         //  == SETTINGS ==
         //  -- Defaults --
-        constexpr const float DEFAULT_SPEED = 1.0f;     //! Default speed multiplier for the camera.
+        constexpr const float DEFAULT_SPEED = 0.1f;     //! Default speed multiplier for the camera.
         constexpr const float DEFAULT_FOV   = 90.0f;    //! Default field of view for the camera.
 
         //  -- Camera Properties --
