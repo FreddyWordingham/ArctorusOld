@@ -31,16 +31,17 @@ namespace arc
         /**
          *  Construct a grid within given bounds.
          *
-         *  @param  t_min_bound Minimum grid bound.
-         *  @param  t_max_bound Maximum grid bound.
-         *  @param  t_num_cells Number of cells across each dimension.
-         *  @param  t_entity    Vector of entities which may be contained within the grid.
-         *  @param  t_light     Vector of lights which may be contained within the grid.
-         *  @param  t_ccd       Vector of ccds which may be contained within the grid.
+         *  @param  t_min_bound     Minimum grid bound.
+         *  @param  t_max_bound     Maximum grid bound.
+         *  @param  t_num_cells     Number of cells across each dimension.
+         *  @param  t_entity        Vector of entities which may be contained within the grid.
+         *  @param  t_light         Vector of lights which may be contained within the grid.
+         *  @param  t_ccd           Vector of ccds which may be contained within the grid.
+         *  @param  t_spectrometer  Vector of spectrometers which may be contained within the grid.
          */
         Grid::Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::array<size_t, 3> t_num_cells,
                    const std::vector<equip::Entity>& t_entity, const std::vector<equip::Light>& t_light,
-                   const std::vector<detector::Ccd>& t_ccd) :
+                   const std::vector<detector::Ccd>& t_ccd, const std::vector<detector::Spectrometer>& t_spectrometer) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
             m_num_cells(t_num_cells),
@@ -49,7 +50,7 @@ namespace arc
             m_cell_size(
                 {{(m_max_bound[X] - m_min_bound[X]) / m_num_cells[X], (m_max_bound[Y] - m_min_bound[Y]) / m_num_cells[Y], (m_max_bound[Z] - m_min_bound[Z]) / m_num_cells[Z]}}),
             m_cell_vol(m_grid_vol / (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z])),
-            m_cell(init_cell(t_entity, t_light, t_ccd))
+            m_cell(init_cell(t_entity, t_light, t_ccd, t_spectrometer))
         {
         }
 
@@ -58,15 +59,17 @@ namespace arc
         /**
          *  Initialise the three-dimensional vector of cells.
          *
-         *  @param  t_entity    Vector of entities which may be contained within the grid.
-         *  @param  t_light     Vector of lights which may be contained within the grid.
-         *  @param  t_ccd       Vector of ccds which may be contained within the grid.
+         *  @param  t_entity        Vector of entities which may be contained within the grid.
+         *  @param  t_light         Vector of lights which may be contained within the grid.
+         *  @param  t_ccd           Vector of ccds which may be contained within the grid.
+         *  @param  t_spectrometer  Vector of spectrometers which may be contained within the grid.
          *
          *  @return The initialised three-dimensional vector of cells.
          */
         std::vector<std::vector<std::vector<Cell>>> Grid::init_cell(const std::vector<equip::Entity>& t_entity,
                                                                     const std::vector<equip::Light>& t_light,
-                                                                    const std::vector<detector::Ccd>& t_ccd) const
+                                                                    const std::vector<detector::Ccd>& t_ccd, const std::vector<
+            detector::Spectrometer>& t_spectrometer) const
         {
             // Calculate cell dimensions.
             math::Vec<3> cell_size = m_max_bound - m_min_bound;
@@ -96,7 +99,7 @@ namespace arc
                             {{m_min_bound[X] + (i * cell_size[X]), m_min_bound[Y] + (j * cell_size[Y]), m_min_bound[Z] + (k * cell_size[Z])}}),
                                                        math::Vec<3>(
                                                            {{m_min_bound[X] + ((i + 1) * cell_size[X]), m_min_bound[Y] + ((j + 1) * cell_size[Y]), m_min_bound[Z] + ((k + 1) * cell_size[Z])}}),
-                                                       t_entity, t_light, t_ccd));
+                                                       t_entity, t_light, t_ccd, t_spectrometer));
 
                         // Report grid construction.
                         TEMP("Constructing grid", 100.0 * (constructed_cells / total_cells));
