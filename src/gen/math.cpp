@@ -93,8 +93,8 @@ namespace arc
         {
             assert(t_dir.magnitude() > 0.0);
 
-            return (create_orient_mat(acos(t_dir[Z] / std::sqrt(square(t_dir[X]) + square(t_dir[Y]) + square(t_dir[Z]))),
-                                      atan2(t_dir[Y], t_dir[X]), t_spin));
+            return (create_orient_mat(std::acos(t_dir[Z] / std::sqrt(square(t_dir[X]) + square(t_dir[Y]) + square(t_dir[Z]))),
+                                      std::atan2(t_dir[Y], t_dir[X]), t_spin));
         }
 
         /**
