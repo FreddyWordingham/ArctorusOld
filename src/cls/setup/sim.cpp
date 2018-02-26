@@ -407,10 +407,13 @@ namespace arc
                     // Photon hits a ccd detector.
                     if ((ccd_dist < scat_dist) && (ccd_dist < entity_dist) && (ccd_dist < cell_dist))
                     {
+                        // Move the photon to the detector surface.
+                        phot.move(ccd_dist);
+
                         // Check if photon hits the front of the detector.
                         if ((phot.get_dir() * m_ccd[ccd_index].get_norm()) < 0.0)
                         {
-                            m_ccd[ccd_index].add_hit(phot.get_pos() + (phot.get_dir() * ccd_dist), phot.get_weight(),
+                            m_ccd[ccd_index].add_hit(phot.get_pos(), phot.get_weight(),
                                                      phot.get_wavelength());
                         }
 
