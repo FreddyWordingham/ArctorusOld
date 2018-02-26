@@ -89,6 +89,17 @@ else ()
     message("Graphics disabled.")
 endif ()
 
+#   -- Photon Paths --
+if (NOT DEFINED PHOTON_PATHS)
+    set(PHOTON_PATHS OFF)
+endif ()
+if (PHOTON_PATHS)
+    set(DEFINE_PHOTON_PATHS "#define ENABLE_PHOTON_PATHS")
+    message("Graphics enabled.")
+else ()
+    set(DEFINE_PHOTON_PATHS "// Photon paths are disabled.")
+    message("Graphics disabled.")
+endif ()
 
 
 #   == DIRECTORIES ==
