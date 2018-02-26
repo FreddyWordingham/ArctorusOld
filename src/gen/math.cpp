@@ -117,25 +117,6 @@ namespace arc
         }
 
         /**
-         *  Create a direction scaling transformation matrix.
-         *
-         *  @param  t_scale Vector of scaling values.
-         *
-         *  @pre    t_scale elements must all be non-zero.
-         *
-         *  @return The created direction scaling matrix.
-         */
-        Mat<4, 4> create_scale_dir_mat(const Vec<3>& t_scale)
-        {
-            assert(t_scale[X] != 0.0);
-            assert(t_scale[Y] != 0.0);
-            assert(t_scale[Z] != 0.0);
-
-            return (Mat<4, 4>(
-                {{{{1.0 / t_scale[X], 0.0, 0.0, 0.0}}, {{0.0, 1.0 / t_scale[Y], 0.0, 0.0}}, {{0.0, 0.0, 1.0 / t_scale[Z], 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
-        }
-
-        /**
          *  Create position transformation matrix from individual transformations.
          *
          *  @param  t_trans Vector of translation.

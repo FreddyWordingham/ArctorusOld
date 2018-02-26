@@ -70,7 +70,6 @@ namespace arc
         Mat<4, 4> create_orient_mat(double t_theta, double t_phi, double t_spin = 0.0);
         Mat<4, 4> create_orient_mat(const Vec<3>& t_dir, double t_spin = 0.0);
         Mat<4, 4> create_scale_pos_mat(const Vec<3>& t_scale);
-        Mat<4, 4> create_scale_dir_mat(const Vec<3>& t_scale);
         Mat<4, 4> create_pos_trans_mat(const Vec<3>& t_trans, const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale);
 
 
