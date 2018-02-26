@@ -48,7 +48,7 @@ void main()
     {
         float delta_time = abs(vert_time - render_time);
 
-        if (delta_time > 1e-10)
+        if (delta_time > 1e-12)
         {
             discard;
         }
