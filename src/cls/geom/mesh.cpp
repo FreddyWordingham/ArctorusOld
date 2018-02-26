@@ -111,7 +111,8 @@ namespace arc
          */
         std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_trans_mat) const
         {
-            math::Mat<4, 4> Mat = math::transpose(math::inverse(t_pos_trans));
+            // Create the transposed inverted transformation matrix.
+            math::Mat<4, 4> trans_inv_mat = math::transpose(math::inverse(t_trans_mat));
 
             // Create return vector of triangles.
             std::vector<geom::Triangle> r_tri;
@@ -139,7 +140,7 @@ namespace arc
                     pos[3] = 1.0;
 
                     // Transform it using the position transformation matrix.
-                    pos = t_pos_trans * pos;
+                    pos = t_trans_mat * pos;
 
                     // Add the three-dimensional position to the vertex position list.
                     vert_pos.push_back(math::Vec<3>({{pos[X], pos[Y], pos[Z]}}));
@@ -151,8 +152,8 @@ namespace arc
                     line_stream >> norm[X] >> norm[Y] >> norm[Z];
                     norm[3] = 1.0;
 
-                    // Transform it using the direction transformation matrix.
-                    norm = Mat * norm;
+                    // Transform it using the transverse-inverted-transformation matrix.
+                    norm = trans_inv_mat * norm;
 
                     // Add the three-dimensional normal to the vertex normal list.
                     vert_norm.push_back(math::normalise(math::Vec<3>({{norm[X], norm[Y], norm[Z]}})));
