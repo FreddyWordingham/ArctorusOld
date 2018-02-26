@@ -60,9 +60,9 @@ namespace arc
         constexpr const char* SKYBOX_FILE_EXT = ".tga";                 //! File extension used by skybox images.
 
         //  -- Camera --
-        constexpr const float INIT_CAM_POS_X = +0.0f;   //! Initial x-axis displacement of the camera.
-        constexpr const float INIT_CAM_POS_Y = -5.0f;   //! Initial y-axis displacement of the camera.
-        constexpr const float INIT_CAM_POS_Z = +5.0f;   //! Initial z-axis displacement of the camera.
+        constexpr const float INIT_CAM_POS_X = +0.0e-3f;    //! Initial x-axis displacement of the camera.
+        constexpr const float INIT_CAM_POS_Y = -5.0e-3f;    //! Initial y-axis displacement of the camera.
+        constexpr const float INIT_CAM_POS_Z = +5.0e-3f;    //! Initial z-axis displacement of the camera.
 
         //  -- Lighting --
         constexpr const float INIT_SUN_POS_X             = +3.0f;   //! Initial x-axis displacement of the global illuminator.
