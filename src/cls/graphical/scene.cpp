@@ -488,7 +488,7 @@ namespace arc
             }
 
             // Add the light prop into the list of render-able light props.
-            m_light.emplace_back(Prop(vertices, t_col));
+            m_spectrometer.emplace_back(Prop(vertices, t_col));
         }
 
         /**
