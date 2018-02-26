@@ -63,6 +63,9 @@ int main(const int t_argc, const char** t_argv)
     // Save ccd data.
     pdt.save_ccd_images();
 
+    // Save spectrometer data.
+    pdt.save_spectrometer_data();
+
     // Render the simulation scene.
     if (setup.parse_child<bool>("post_render", false))
     {
