@@ -41,10 +41,6 @@ namespace arc
             const std::string m_name;   //! Name of the ccd.
             const geom::Mesh  m_mesh;   //! Mesh describing the surface of the detector.
 
-            //  -- Bounds --
-            const double m_min_bound;   //! Minimum bound of the histogram range.
-            const double m_max_bound;   //! Minimum bound of the histogram range.
-
             //  -- Data --
             data::Histogram m_data; //! Wavelength data.
 
@@ -52,6 +48,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            Spectrometer(const std::string& t_name, const geom::Mesh& t_mesh, const)
 
           private:
             //  -- Initialisation --
