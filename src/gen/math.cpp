@@ -158,28 +158,6 @@ namespace arc
             return (create_trans_mat(t_trans) * create_orient_mat(t_dir, t_spin) * create_scale_pos_mat(t_scale));
         }
 
-        /**
-         *  Create direction transformation matrix from individual transformations.
-         *
-         *  @param  t_dir   Direction to face.
-         *  @param  t_spin  Spin angle.
-         *  @param  t_scale Vector of scaling values.
-         *
-         *  @pre    t_dir's magnitude must be greater than zero.
-         *  @pre    t_scale elements must all be non-zero.
-         *
-         *  @return The created direction transformation matrix.
-         */
-        Mat<4, 4> create_dir_trans_mat(const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
-        {
-            assert(t_dir.magnitude() > 0.0);
-            assert(t_scale[X] != 0.0);
-            assert(t_scale[Y] != 0.0);
-            assert(t_scale[Z] != 0.0);
-
-            return (create_orient_mat(t_dir, t_spin) * create_scale_pos_mat(t_scale));
-        }
-
 
 
     } // namespace math
