@@ -48,14 +48,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Spectrometer(const std::string& t_name, const geom::Mesh& t_mesh, const)
-
-          private:
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
+            Spectrometer(const std::string& t_name, const geom::Mesh& t_mesh, double t_min_bound, double t_max_bound,
+                         size_t t_num_bins);
 
 
             //  == METHODS ==
