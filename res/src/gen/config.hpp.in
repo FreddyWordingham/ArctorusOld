@@ -16,6 +16,7 @@
 //  == OPTIONS ==
 //  -- Compile-Time --
 @DEFINE_LOG_COLOUR@
+@DEFINE_LOG_VERBOSE@
 @DEFINE_GRAPHICS@
 
 
@@ -33,9 +34,6 @@ namespace arc
         constexpr const char* ARCTORUS_DIR = "@ARCTORUS_DIR@/";     //! Arctorus directory path.
         constexpr const char* BUILD_INFO   = "@BUILD_BRANCH@-@BUILD_HASH@-@BUILD_PATCH@"
             " : @BUILD_COMPILER@ : @BUILD_TYPE@ : @BUILD_DATE@";    //! Arctorus build information.
-
-        //  -- Logging --
-        constexpr const bool VERBOSE_LOG = @VERBOSE@;   //! When true, log verbose messages.
 
 
 

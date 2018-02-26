@@ -63,10 +63,16 @@ else ()
 endif ()
 
 #   -- Verbose --
-if (NOT DEFINED VERBOSE)
-    set(VERBOSE false)
+if (NOT DEFINED LOG_VERBOSE)
+    set(LOG_VERBOSE OFF)
 endif ()
-message("Verbose messages: ${VERBOSE}")
+if (LOG_VERBOSE)
+    set(DEFINE_LOG_VERBOSE "// Verbose log is enabled.")
+    message("Verbose log enabled.")
+else ()
+    set(DEFINE_LOG_VERBOSE "#define DISABLE_LOG_VERBOSE")
+    message("Verbose log disabled.")
+endif ()
 
 
 
