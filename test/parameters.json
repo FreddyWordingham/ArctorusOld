@@ -8,47 +8,33 @@
     "pre_render":    false,
     "post_render":   true,
     "grid":          {
-        "min":   [-4.1, -1.1, -1.1],
-        "max":   [4.1, 1.1, 1.1],
-        "cells": [41, 11, 11]
+        "min":   [-1.1, -1.1, -1.1],
+        "max":   [1.1, 1.1, 1.1],
+        "cells": [11, 11, 11]
     },
     "aether":        {
         "mat": "materials/vacuum.mat"
     },
     "entities":      {
         "entity_zero": {
-            "mesh": "meshes/sphere.obj",
-            "mat":  "materials/glass.mat"
+            "mesh":  "meshes/cube.obj",
+            "mat":   "materials/intralipid_10.mat",
+            "scale": [1.0, 1.0, 0.5],
+            "trans": [0.0, 0.0, -0.5]
         }
     },
     "lights":        {
         "light_one": {
             "power": 1.0,
-            "scale": [0.001, 0.001, 0.001],
-            "trans": [-3.0, 0.0, 0.0],
-            "dir":   [1.0, 0.0, 0.0],
+            "scale": [0.01, 0.01, 0.01],
+            "trans": [0.0, 0.0, 1.0],
+            "dir":   [0.0, 0.0, -1.0],
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
         }
     },
     "ccds":          {
-        "ccd_zero": {
-            "scale": [0.005, 0.005, 0.005],
-            "dir":   [-1.0, 0.0, 0.0],
-            "trans": [3.0, 0.0, 0.005],
-            "pixel": [50, 50],
-            "col":   true
-        }
     },
     "spectrometers": {
-        "spec_zero": {
-            "mesh":  "meshes/square.obj",
-            "scale": [0.005, 0.005, 0.005],
-            "dir":   [-1.0, 0.0, 0.0],
-            "trans": [3.0, 0.0, -0.005],
-            "bins":  100,
-            "min":   0.0,
-            "max":   1000E-9
-        }
     }
 }
