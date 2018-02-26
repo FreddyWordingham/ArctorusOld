@@ -45,6 +45,7 @@ namespace arc
             m_entity(init_entity(t_json["entities"])),
             m_light(init_light(t_json["lights"])),
             m_ccd(init_ccd(t_json["ccds"])),
+            m_spectrometer(init_spectrometer(t_json["spectrometers"])),
             m_light_select(init_light_select()),
             m_grid(t_json["grid"].parse_child<math::Vec<3>>("min"), t_json["grid"].parse_child<math::Vec<3>>("max"),
                    t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd)
