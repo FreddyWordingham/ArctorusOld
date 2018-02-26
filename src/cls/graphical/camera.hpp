@@ -7,6 +7,12 @@
 
 
 
+//  == MODULE ==
+#include "gen/config.hpp"
+#ifdef ENABLE_GRAPHICS
+
+
+
 //  == GUARD ==
 #ifndef ARCTORUS_SRC_CLS_GRAPHICAL_CAMERA_HPP
 #define ARCTORUS_SRC_CLS_GRAPHICAL_CAMERA_HPP
@@ -103,3 +109,8 @@ namespace arc
 
 //  == GUARD END ==
 #endif // ARCTORUS_SRC_CLS_GRAPHICAL_CAMERA_HPP
+
+
+
+//  == MODULE END ==
+#endif
