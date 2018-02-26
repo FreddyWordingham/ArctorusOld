@@ -72,6 +72,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            double get_min_bound() const { return (m_min_bound); }
             double get_bin_width() const { return (m_bin_width); }
             size_t get_num_bin() const { return (m_data.size()); }
             std::vector<double> get_bin_pos(align t_align = align::CENTER) const;

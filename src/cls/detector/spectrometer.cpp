@@ -46,5 +46,14 @@ namespace arc
 
 
 
+        //  == METHODS ==
+        //  -- Setters --
+        Spectrometer::add_hit(const double t_wavelength, const double t_weight)
+        {
+            if ((t_wavelength < m_data.get_min_bound()))
+        }
+
+
+
     } // namespace detector
 } // namespace arc
