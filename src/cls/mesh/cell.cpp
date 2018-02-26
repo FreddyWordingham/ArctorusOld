@@ -80,6 +80,8 @@ namespace arc
          *  Initialise the list of light triangles found within the cell.
          *
          *  @param  t_light Vector of lights which may be contained within the cell.
+         *
+         *  @return The initialised list of light triangles found within the cell.
          */
         std::vector<std::array<size_t, 2>> Cell::init_light_list(const std::vector<equip::Light>& t_light) const
         {
