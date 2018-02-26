@@ -382,7 +382,9 @@ namespace arc
             scene.add_entity_vector(m_entity);
             scene.add_ccd_vector(m_ccd);
             scene.add_spectrometer_vector(m_spectrometer);
+#ifdef ENABLE_PHOTON_PATHS
             scene.add_photon_vector(m_path);
+#endif
             scene.add_grid(m_grid);
 
             // Render the scene.
@@ -463,7 +465,9 @@ namespace arc
                         WARN("Photon removed from loop prematurely.",
                              "Distance to entity is shorter than the smoothing length.");
 
+#ifdef ENABLE_PHOTON_PATHS
                         m_path.push_back(phot.get_path());
+#endif
 
                         // Remove the photon from simulation.
                         cell->add_energy(energy);
@@ -623,8 +627,10 @@ namespace arc
                     }
                 }
 
+#ifdef ENABLE_PHOTON_PATHS
                 // Add the photon path.
                 m_path.push_back(phot.get_path());
+#endif
             }
         }
 

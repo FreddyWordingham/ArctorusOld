@@ -55,7 +55,9 @@ namespace arc
 
             //  -- Data --
             double                                m_time;   //! Emission time plus current age of the particle.
+#ifdef ENABLE_PHOTON_PATHS
             std::vector<graphical::point::Photon> m_path;   //! Path data of the photon.
+#endif
 
 
             //  == INSTANTIATION ==
@@ -75,7 +77,9 @@ namespace arc
             const math::Vec<3>& get_pos() const { return (m_pos); }
             const math::Vec<3>& get_dir() const { return (m_dir); }
             double get_weight() const { return (m_weight); }
+#ifdef ENABLE_PHOTON_PATHS
             const std::vector<graphical::point::Photon>& get_path() const { return (m_path); }
+#endif
             double get_wavelength() const { return (m_wavelength); }
             double get_ref_index() const { return (m_ref_index); }
             double get_albedo() const { return (m_albedo); }
@@ -115,7 +119,9 @@ namespace arc
 
           private:
             //  -- Data --
+#ifdef ENABLE_PHOTON_PATHS
             void record_path();
+#endif
         };
 
 
