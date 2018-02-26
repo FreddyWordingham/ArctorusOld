@@ -52,13 +52,13 @@ message("Build directory:'${ARCTORUS_DIR}'.")
 #   == LOGGING OPTIONS ==
 #   -- Colour --
 if (NOT DEFINED COLOUR)
-    set(COLOUR true)
+    set(COLOUR false)
 endif ()
 message("Coloured messages: ${COLOUR}")
 
 #   -- Verbose --
 if (NOT DEFINED VERBOSE)
-    set(VERBOSE true)
+    set(VERBOSE false)
 endif ()
 message("Verbose messages: ${VERBOSE}")
 
@@ -67,9 +67,13 @@ message("Verbose messages: ${VERBOSE}")
 #   == MODULE OPTIONS ==
 #   -- Graphics --
 if (NOT DEFINED GRAPHICS)
-    set(GRAPHICS true)
+    set(GRAPHICS OFF)
 endif ()
-message("Graphics: ${GRAPHICS}")
+if (GRAPHICS)
+    message("Graphics enabled.")
+else ()
+    message("Graphics disabled.")
+endif ()
 
 
 
