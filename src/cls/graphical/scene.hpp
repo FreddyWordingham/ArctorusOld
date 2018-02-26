@@ -120,12 +120,13 @@ namespace arc
             const Prop m_sun;       //! Drawable sun illuminator object.
 
             //  -- Props --
-            std::vector<Prop>        m_entity;  //! Vector of entity props.
-            std::vector<prop::Light> m_light;   //! Vector of light source props.
-            std::vector<Prop>        m_ccd;     //! Vector of ccd props.
-            std::vector<Prop>        m_phot;    //! Vector of photon packet path props.
-            std::vector<Prop>        m_grid;    //! Vector of grid props.
-            std::vector<Prop>        m_cell;    //! Vector of cell props.
+            std::vector<Prop>        m_entity;      //! Vector of entity props.
+            std::vector<prop::Light> m_light;       //! Vector of light source props.
+            std::vector<Prop>        m_ccd;         //! Vector of ccd props.
+            std::vector<Prop>        m_spectromter; //! Vector of spectrometer props.
+            std::vector<Prop>        m_phot;        //! Vector of photon packet path props.
+            std::vector<Prop>        m_grid;        //! Vector of grid props.
+            std::vector<Prop>        m_cell;        //! Vector of cell props.
 
             //  -- Toggles --
             bool m_toggle_filled_tris   = true;     //! When true render triangles as filled.
