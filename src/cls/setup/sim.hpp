@@ -89,6 +89,7 @@ namespace arc
             //  -- Saving --
             void save_grid_images() const;
             void save_ccd_images() const;
+            void save_spectrometer_data() const;
 
             //  -- Rendering --
             void render() const;
