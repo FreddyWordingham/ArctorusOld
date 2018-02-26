@@ -14,7 +14,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/geom/mesh.hpp"
 
 
 
@@ -35,6 +36,8 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Properties --
+            const std::string m_name;  //! Name of the ccd.
 
 
             //  == INSTANTIATION ==
