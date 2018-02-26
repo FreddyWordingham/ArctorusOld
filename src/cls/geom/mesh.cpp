@@ -169,7 +169,6 @@ namespace arc
             assert(vert_pos.size() == m_num_vert);
             assert(vert_norm.size() == m_num_norm);
 
-
             // Read in the triangular faces.
             utl::rewind(serial_stream);
             while (std::getline(serial_stream, line))
