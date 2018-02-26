@@ -445,6 +445,11 @@ namespace arc
                     double       ccd_dist;
                     math::Vec<3> ccd_norm;
                     std::tie(ccd_index, ccd_dist, ccd_norm) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
+                    size_t       spectrometer_index;
+                    double       spectrometer_dist;
+                    math::Vec<3> spectrometer_norm;
+                    std::tie(spectrometer_index, spectrometer_dist, spectrometer_norm) = cell
+                        ->get_dist_to_spectrometer(phot.get_pos(), phot.get_dir(), m_spectrometer);
 
                     assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
                     assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
