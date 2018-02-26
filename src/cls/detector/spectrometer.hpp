@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/data/histogram.hpp"
 #include "cls/geom/mesh.hpp"
 
 
@@ -39,6 +40,9 @@ namespace arc
             //  -- Properties --
             const std::string m_name;   //! Name of the ccd.
             const geom::Mesh  m_mesh;   //! Mesh describing the surface of the detector.
+
+            //  -- Data --
+            data::Histogram m_data; //! Wavelength data.
 
 
             //  == INSTANTIATION ==
