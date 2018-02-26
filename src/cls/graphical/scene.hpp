@@ -76,13 +76,15 @@ namespace arc
         constexpr const float CCD_NORMAL_LENGTH    = 0.5f;  //! Length to draw ccd normals.
 
         //  -- Rendering --
-        constexpr const float  PHOTON_TRAVEL_SPEED = 1e-9f; //! Photon travel speed when rendering path data.
-        constexpr const double LIGHT_START_HUE     = 20.0;  //! Light prop start hue.
-        constexpr const double LIGHT_END_HUE       = 60.0;  //! Light prop end hue.
-        constexpr const double ENTITY_START_HUE    = 240.0; //! Entity prop start hue.
-        constexpr const double ENTITY_END_HUE      = 280.0; //! Entity prop end hue.
-        constexpr const double CCD_START_HUE       = 100.0; //! Ccd prop start hue.
-        constexpr const double CCD_END_HUE         = 140.0; //! Ccd prop end hue.
+        constexpr const float  PHOTON_TRAVEL_SPEED    = 1e-9f;  //! Photon travel speed when rendering path data.
+        constexpr const double LIGHT_START_HUE        = 20.0;   //! Light prop start hue.
+        constexpr const double LIGHT_END_HUE          = 60.0;   //! Light prop end hue.
+        constexpr const double ENTITY_START_HUE       = 240.0;  //! Entity prop start hue.
+        constexpr const double ENTITY_END_HUE         = 280.0;  //! Entity prop end hue.
+        constexpr const double CCD_START_HUE          = 100.0;  //! Ccd prop start hue.
+        constexpr const double CCD_END_HUE            = 140.0;  //! Ccd prop end hue.
+        constexpr const double SPECTROMETER_START_HUE = 100.0;  //! Ccd prop start hue.
+        constexpr const double SPECTROMETER_END_HUE   = 140.0;  //! Ccd prop end hue.
 
 
 
