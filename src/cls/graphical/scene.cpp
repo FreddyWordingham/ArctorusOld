@@ -541,6 +541,7 @@ namespace arc
             draw_entities();
             draw_lights();
             draw_ccds();
+            draw_spectrometers();
             draw_grid();
             draw_sun();
             draw_phots();
