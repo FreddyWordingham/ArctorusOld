@@ -17,8 +17,7 @@
     },
     "entities":    {
         "entity_zero": {
-            "dir":  [1.0, 0.0, 0.0],
-            "mesh": "meshes/circle.obj",
+            "mesh": "meshes/sphere.obj",
             "mat":  "materials/glass.mat"
         }
     },
@@ -27,7 +26,7 @@
             "power": 1.0,
             "scale": [0.001, 0.001, 0.001],
             "trans": [-3.0, 0.0, 0.0],
-            "dir":   [-1.0, 0.0, 0.0],
+            "dir":   [1.0, 0.0, 0.0],
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc"
         }
