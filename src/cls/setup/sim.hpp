@@ -17,6 +17,7 @@
 //  -- Classes --
 #include "cls/data/json.hpp"
 #include "cls/detector/ccd.hpp"
+#include "cls/detector/spectrometer.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/mesh/grid.hpp"
@@ -53,10 +54,11 @@ namespace arc
             const double m_roulette_chambers;   //! Number of roulette chambers.
 
             //  -- Equipment --
-            const phys::Material             m_aether;  //! Aether material.
-            const std::vector<equip::Entity> m_entity;  //! Vector of entity objects.
-            const std::vector<equip::Light>  m_light;   //! Vector of light objects.
-            std::vector<detector::Ccd>       m_ccd;     //! Vector of ccd objects.
+            const phys::Material                m_aether;       //! Aether material.
+            const std::vector<equip::Entity>    m_entity;       //! Vector of entity objects.
+            const std::vector<equip::Light>     m_light;        //! Vector of light objects.
+            std::vector<detector::Ccd>          m_ccd;          //! Vector of ccd objects.
+            std::vector<detector::Spectrometer> m_spectrometer; //! Vector of spectrometer objects.
 
             //  -- Tools --
             const random::Index m_light_select; //! Light selector.
