@@ -58,7 +58,7 @@ namespace arc
             const geom::Mesh& get_mesh() const { return (m_mesh); }
 
             //  -- Setters --
-            add_hit(const double t_wavelength, const double t_weight);
+            void add_hit(const double t_wavelength, const double t_weight);
         };
 
 

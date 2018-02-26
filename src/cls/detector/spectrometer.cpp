@@ -31,6 +31,7 @@ namespace arc
          *  @param  t_max_bound Maximum bound of the spectrometer.
          *  @param  t_num_bins  Number of spectrometer bins.
          *
+         *  @pre    t_min_bound must be non-negative.
          *  @pre    t_min_bound must be less than t_max_bound.
          *  @pre    t_num_bins must be positive.
          */
@@ -40,6 +41,7 @@ namespace arc
             m_mesh(t_mesh),
             m_data(t_min_bound, t_max_bound, t_num_bins)
         {
+            assert(t_min_bound >= 0.0);
             assert(t_min_bound < t_max_bound);
             assert(t_num_bins > 0);
         }
@@ -48,9 +50,28 @@ namespace arc
 
         //  == METHODS ==
         //  -- Setters --
-        Spectrometer::add_hit(const double t_wavelength, const double t_weight)
+        /**
+         *  Add a hit to the spectrometer.
+         *
+         *  @param  t_wavelength    Wavelength to be binned.
+         *  @param  t_weight        Statistical weight of the value.
+         *
+         *  @pre    t_wavelength must be non-negative.
+         *  @pre    t_weight must be non-negative.
+         */
+        void Spectrometer::add_hit(const double t_wavelength, const double t_weight)
         {
-            if ((t_wavelength < m_data.get_min_bound()))
+            assert(t_wavelength >= 0.0);
+            assert(t_weight >= 0.0);
+
+            // Check if wavelength is outside of recorded range.
+            if ((t_wavelength < m_data.get_min_bound()) || (t_wavelength > m_data.get_max_bound()))
+            {
+                return;
+            }
+
+            // Bin the value.
+            m_data.bin_value(t_wavelength, t_weight);
         }
 
 
