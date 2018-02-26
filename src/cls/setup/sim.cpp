@@ -374,6 +374,7 @@ namespace arc
          */
         void Sim::render() const
         {
+#ifdef ENABLE_GRAPHICS
             // Create a graphical scene.
             graphical::Scene scene;
 
@@ -393,6 +394,9 @@ namespace arc
                 scene.handle_input();
                 scene.render();
             }
+#else
+            WARN("Unable to render scene.", "GRAPHICS compile-time option has been set to off.");
+#endif
         }
 
 
