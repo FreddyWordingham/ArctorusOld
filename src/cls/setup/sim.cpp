@@ -411,7 +411,7 @@ namespace arc
                     // Photon hits a ccd detector.
                     if ((ccd_dist < scat_dist) && (ccd_dist < entity_dist) && (ccd_dist < cell_dist))
                     {
-                        energy += ccd_dist;
+                        energy += ccd_dist * phot.get_weight();
 
                         // Move the photon to the detector surface.
                         phot.move(ccd_dist);
@@ -430,7 +430,7 @@ namespace arc
 
                     if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.
                     {
-                        energy += scat_dist;
+                        energy += scat_dist * phot.get_weight();
 
                         // Move to the scattering point.
                         phot.move(scat_dist);
@@ -449,7 +449,7 @@ namespace arc
                             entity_norm = entity_norm * -1.0;
                         }
 
-                        energy += entity_dist;
+                        energy += entity_dist * phot.get_weight();
 
                         // Determine the material indices.
                         int  index_i, index_t;
@@ -522,7 +522,7 @@ namespace arc
                     }
                     else    // Exit cell.
                     {
-                        energy += cell_dist;
+                        energy += cell_dist * phot.get_weight();
 
                         // Add current energy to current cell and reset count.
                         cell->add_energy(energy);
