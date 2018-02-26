@@ -381,6 +381,7 @@ namespace arc
             scene.add_light_vector(m_light);
             scene.add_entity_vector(m_entity);
             scene.add_ccd_vector(m_ccd);
+            scene.add_spectrometer_vector(m_spectrometer);
             scene.add_photon_vector(m_path);
             scene.add_grid(m_grid);
 
