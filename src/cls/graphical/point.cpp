@@ -7,6 +7,12 @@
 
 
 
+//  == MODULE ==
+#include "gen/config.hpp"
+#ifdef ENABLE_GRAPHICS
+
+
+
 //  == HEADER ==
 #include "cls/graphical/point.hpp"
 
@@ -36,3 +42,8 @@ namespace arc
 
     } // namespace graphical
 } // namespace arc
+
+
+
+//  == MODULE END ==
+#endif
