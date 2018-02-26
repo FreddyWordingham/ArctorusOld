@@ -4,36 +4,79 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":      1e1,
+    "num_phot":      1e3,
     "pre_render":    false,
     "post_render":   true,
     "grid":          {
-        "min":   [-1.1, -1.1, -1.1],
-        "max":   [1.1, 1.1, 1.1],
+        "min":   [-11e-3, -11e-3, -11e-3],
+        "max":   [11e-3, 11e-3, 2e-3],
         "cells": [11, 11, 11]
     },
     "aether":        {
         "mat": "materials/vacuum.mat"
     },
     "entities":      {
-        "stratum_corneum": {
+        "stratum_corneum":        {
             "mesh":  "meshes/plane.obj",
             "mat":   "materials/stratum_corneum.mat",
-            "scale": [1.0, 1.0, 1.0],
+            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
             "trans": [0.0, 0.0, 0.0]
+        },
+        "living_epidermis":       {
+            "mesh":  "meshes/plane.obj",
+            "mat":   "materials/living_epidermis.mat",
+            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
+            "trans": [0.0, 0.0, -20.0e-6]
+        },
+        "papillary_dermis":       {
+            "mesh":  "meshes/plane.obj",
+            "mat":   "materials/papillary_dermis.mat",
+            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
+            "trans": [0.0, 0.0, -100.0e-6]
+        },
+        "upper_blood_net_dermis": {
+            "mesh":  "meshes/plane.obj",
+            "mat":   "materials/upper_blood_net_dermis.mat",
+            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
+            "trans": [0.0, 0.0, -250.0e-6]
+        },
+        "reticular_dermis":       {
+            "mesh":  "meshes/plane.obj",
+            "mat":   "materials/reticular_dermis.mat",
+            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
+            "trans": [0.0, 0.0, -330.0e-6]
+        },
+        "deep_blood_net_dermis":  {
+            "mesh":  "meshes/plane.obj",
+            "mat":   "materials/deep_blood_net_dermis.mat",
+            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
+            "trans": [0.0, 0.0, -1830.0e-6]
+        },
+        "subcutaneous_fat":       {
+            "mesh":  "meshes/plane.obj",
+            "mat":   "materials/subcutaneous_fat.mat",
+            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
+            "trans": [0.0, 0.0, -1910.0e-6]
         }
     },
     "lights":        {
         "light_one": {
             "power": 1.0,
-            "scale": [0.01, 0.01, 0.01],
-            "trans": [0.0, 0.0, 1.0],
+            "scale": [0.1e-3, 0.1e-3, 0.1e-3],
+            "trans": [0.0, 0.0, 1e-3],
             "dir":   [0.0, 0.0, -1.0],
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/limited_led.spc"
         }
     },
     "ccds":          {
+        "spec_zero": {
+            "scale": [1.0e-3, 1.0e-3, 1.0e-3],
+            "trans": [0.0, 0.0, 1.05e-3],
+            "dir":   [0.0, 0.0, -1.0],
+            "pixel": [100, 100],
+            "col":   true
+        }
     },
     "spectrometers": {
     }
