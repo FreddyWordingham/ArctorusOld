@@ -271,6 +271,37 @@ namespace arc
         }
 
         /**
+         *  Add a vector of render-able spectrometer props to the scene.
+         *
+         *  @param  t_spectrometer  Vector of spectrometers to be added to the scene.
+         *
+         *  @pre    SPECTROMETER_START_HUE must be less than SPECTROMETER_END_HUE.
+         */
+        void Scene::add_spectrometer_vector(const std::vector<detector::Spectrometer>& t_spectrometer)
+        {
+            static_assert(SPECTROMETER_START_HUE < SPECTROMETER_END_HUE);
+
+            // Return if there are no entities.
+            if (t_spectrometer.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_spectrometer.size() == 1) ? 0.0
+                                                                  : ((SPECTROMETER_END_HUE - SPECTROMETER_START_HUE) / (t_spectrometer
+                    .size() - 1));
+
+            // Add the entity props to the scene.
+            for (size_t i = 0; i < t_spectrometer.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(SPECTROMETER_START_HUE + (i * hue_delta)));
+
+                add_spectrometer(t_spectrometer[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 0.5));
+            }
+        }
+
+        /**
          *  Add a vector of render-able photon path props to the scene.
          *
          *  @param  t_phot  Vector of photon paths to be added to the scene.
