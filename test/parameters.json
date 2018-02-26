@@ -30,11 +30,20 @@
             "trans": [0.0, 0.0, 1.0],
             "dir":   [0.0, 0.0, -1.0],
             "mesh":  "meshes/circle.obj",
-            "spec":  "spectra/laser.spc"
+            "spec":  "spectra/led.spc"
         }
     },
     "ccds":          {
     },
     "spectrometers": {
+        "spec_zero": {
+            "min":   300E-9,
+            "max":   700E-9,
+            "bins":  40,
+            "mesh":  "meshes/circle.obj",
+            "trans": [0.0, 0.0, 0.1],
+            "scale": [0.1, 0.1, 0.1],
+            "dir":   [0.0, 0.0, 1.0]
+        }
     }
 }
