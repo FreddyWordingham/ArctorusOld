@@ -30,6 +30,9 @@ namespace arc
          *  @param  t_min_bound Minimum bound of the spectrometer.
          *  @param  t_max_bound Maximum bound of the spectrometer.
          *  @param  t_num_bins  Number of spectrometer bins.
+         *
+         *  @pre    t_min_bound must be less than t_max_bound.
+         *  @pre    t_num_bins must be positive.
          */
         Spectrometer::Spectrometer(const std::string& t_name, const geom::Mesh& t_mesh, const double t_min_bound,
                                    const double t_max_bound, const size_t t_num_bins) :
