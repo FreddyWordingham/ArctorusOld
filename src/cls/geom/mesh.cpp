@@ -52,13 +52,12 @@ namespace arc
         }
 
         /**
-         *  Construct a mesh from a given serialised string and transformation matrices.
+         *  Construct a mesh from a given serialised string and transformation matrix.
          *
          *  @param  t_serial    Mesh as a serialised string.
-         *  @param  t_pos_trans Position transformation matrix.
-         *  @param  t_dir_trans Direction transformation matrix.
+         *  @param  t_trans_mat Transformation matrix.
          */
-        Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans) :
+        Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_trans_mat) :
             m_num_vert(init_num(t_serial, POS_KEYWORD)),
             m_num_norm(init_num(t_serial, NORM_KEYWORD)),
             m_num_tri(init_num(t_serial, FACE_KEYWORD)),

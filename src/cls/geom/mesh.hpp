@@ -65,7 +65,7 @@ namespace arc
 
           private:
             //  -- Constructors --
-            Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans);
+            Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_trans_mat);
 
             //  -- Initialisation --
             size_t init_num(const std::string& t_serial, const std::string& t_type_string) const;
