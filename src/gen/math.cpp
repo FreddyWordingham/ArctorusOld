@@ -98,7 +98,7 @@ namespace arc
         }
 
         /**
-         *  Create a position scaling transformation matrix.
+         *  Create a scaling transformation matrix.
          *
          *  @param  t_scale Vector of scaling values.
          *
