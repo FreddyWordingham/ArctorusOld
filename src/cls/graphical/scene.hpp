@@ -65,16 +65,17 @@ namespace arc
         constexpr const float INIT_CAM_POS_Z = +5.0f;   //! Initial z-axis displacement of the camera.
 
         //  -- Lighting --
-        constexpr const float INIT_SUN_POS_X       = +3.0f; //! Initial x-axis displacement of the global illuminator.
-        constexpr const float INIT_SUN_POS_Y       = +0.0f; //! Initial y-axis displacement of the global illuminator.
-        constexpr const float INIT_SUN_POS_Z       = +3.0f; //! Initial z-axis displacement of the global illuminator.
-        constexpr const float SUN_SIZE             = 0.25f; //! Size of the sun.
-        constexpr const float LIGHT_AMB_POW        = 0.5f;  //! Ambient lighting of rendered light sources.
-        constexpr const float ENTITIY_AMB_POW      = 0.1f;  //! Ambient lighting of rendered entities.
-        constexpr const float CCD_AMB_POW          = 0.6f;  //! Ambient lighting of rendered ccds.
-        constexpr const float SPECTROMETER_AMB_POW = 0.6f;  //! Ambient lighting of rendered spectrometers.
-        constexpr const float ENTITY_NORMAL_LENGTH = 0.5f;  //! Length to draw entity normals.
-        constexpr const float CCD_NORMAL_LENGTH    = 0.5f;  //! Length to draw ccd normals.
+        constexpr const float INIT_SUN_POS_X             = +3.0f;   //! Initial x-axis displacement of the global illuminator.
+        constexpr const float INIT_SUN_POS_Y             = +0.0f;   //! Initial y-axis displacement of the global illuminator.
+        constexpr const float INIT_SUN_POS_Z             = +3.0f;   //! Initial z-axis displacement of the global illuminator.
+        constexpr const float SUN_SIZE                   = 0.25f;   //! Size of the sun.
+        constexpr const float LIGHT_AMB_POW              = 0.5f;    //! Ambient lighting of rendered light sources.
+        constexpr const float ENTITIY_AMB_POW            = 0.1f;    //! Ambient lighting of rendered entities.
+        constexpr const float CCD_AMB_POW                = 0.6f;    //! Ambient lighting of rendered ccds.
+        constexpr const float SPECTROMETER_AMB_POW       = 0.6f;    //! Ambient lighting of rendered spectrometers.
+        constexpr const float ENTITY_NORMAL_LENGTH       = 0.5f;    //! Length to draw entity normals.
+        constexpr const float CCD_NORMAL_LENGTH          = 0.5f;    //! Length to draw ccd normals.
+        constexpr const float SPECTROMETER_NORMAL_LENGTH = 0.5f;    //! Length to draw spectrometer normals.
 
         //  -- Rendering --
         constexpr const float  PHOTON_TRAVEL_SPEED    = 1e-9f;  //! Photon travel speed when rendering path data.
