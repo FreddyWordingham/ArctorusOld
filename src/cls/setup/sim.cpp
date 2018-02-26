@@ -443,8 +443,7 @@ namespace arc
                         ->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
                     size_t       ccd_index;
                     double       ccd_dist;
-                    math::Vec<3> ccd_norm;
-                    std::tie(ccd_index, ccd_dist, ccd_norm) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
+                    std::tie(ccd_index, ccd_dist) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
 
                     assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
                     assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
