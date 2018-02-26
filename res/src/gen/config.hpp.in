@@ -15,6 +15,7 @@
 
 //  == OPTIONS ==
 //  -- Compile-Time --
+@DEFINE_LOG_COLOUR@
 @DEFINE_GRAPHICS@
 
 
@@ -34,7 +35,6 @@ namespace arc
             " : @BUILD_COMPILER@ : @BUILD_TYPE@ : @BUILD_DATE@";    //! Arctorus build information.
 
         //  -- Logging --
-        constexpr const bool COLOUR_LOG  = @COLOUR@;    //! When true, colour the message log if possible.
         constexpr const bool VERBOSE_LOG = @VERBOSE@;   //! When true, log verbose messages.
 
 

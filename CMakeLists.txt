@@ -51,10 +51,16 @@ message("Build directory:'${ARCTORUS_DIR}'.")
 
 #   == LOGGING OPTIONS ==
 #   -- Colour --
-if (NOT DEFINED COLOUR)
-    set(COLOUR false)
+if (NOT DEFINED LOG_COLOUR)
+    set(LOG_COLOUR OFF)
 endif ()
-message("Coloured messages: ${COLOUR}")
+if (LOG_COLOUR)
+    set(DEFINE_LOG_COLOUR "// Coloured log is enabled.")
+    message("Coloured log enabled.")
+else ()
+    set(DEFINE_LOG_COLOUR "#define DISABLE_LOG_COLOUR")
+    message("Coloured log disabled.")
+endif ()
 
 #   -- Verbose --
 if (NOT DEFINED VERBOSE)
