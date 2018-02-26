@@ -480,6 +480,57 @@ namespace arc
             return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
         }
 
+        /**
+         *  Determine the distance along the given ray to the nearest spectrometer triangle.
+         *  Also return the index of the spectrometer, as well as the normal of the spectrometer triangle.
+         *
+         *  @param  t_pos           Initial position of the ray.
+         *  @param  t_dir           Direction of the ray.
+         *  @param  t_spectrometer  Vector of spectrometers within the simulation.
+         *
+         *  @return A tuple containing the spectrometer index, distance to the spectrometer triangle and the normal at the
+         *  intersection.
+         */
+        std::tuple<size_t, double, math::Vec<3>> Cell::get_dist_to_spectrometer(const math::Vec<3>& t_pos,
+                                                                                const math::Vec<3>& t_dir, const std::vector<
+            detector::Spectrometer>& t_spectrometer) const
+        {
+            assert(t_dir.is_normalised());
+
+            // If cell contains no triangles, return a large dummy value.
+            if (m_empty)
+            {
+                return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
+                                                                 math::Vec<3>({{0.0, 0.0, 0.0}})));
+            }
+
+            // Run through all spectrometer triangles and determine the closest intersection distance.
+            size_t       r_index;
+            double       r_dist = std::numeric_limits<double>::max();
+            math::Vec<3> r_norm;
+            for (size_t  i      = 0; i < m_spectrometer_list.size(); ++i)
+            {
+                // Get distance to intersection.
+                double       tri_dist;
+                math::Vec<3> tri_norm;
+                std::tie(tri_dist, tri_norm) = t_spectrometer[m_spectrometer_list[i][0]].get_mesh()
+                                                                                        .get_tri(m_spectrometer_list[i][1])
+                                                                                        .get_intersection(t_pos, t_dir);
+
+                // If this distance is the closest so far, accept it.
+                if ((tri_dist < r_dist) && (tri_dist > 0.0))
+                {
+                    r_index = m_spectrometer_list[i][0];
+                    r_dist  = tri_dist;
+                    r_norm  = tri_norm;
+                }
+            }
+
+            assert(r_dist > 0.0);
+
+            return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
+        }
+
 
         //  -- Setters --
         /**
