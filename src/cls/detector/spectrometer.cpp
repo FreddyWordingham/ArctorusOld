@@ -75,6 +75,16 @@ namespace arc
         }
 
 
+        //  -- Save --
+        /**
+         *  Save the state of the spectrometer.
+         */
+        void Spectrometer::save() const
+        {
+            m_data.save(m_name + ".dat");
+        }
+
+
 
     } // namespace detector
 } // namespace arc

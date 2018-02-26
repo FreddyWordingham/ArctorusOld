@@ -59,6 +59,9 @@ namespace arc
 
             //  -- Setters --
             void add_hit(double t_wavelength, double t_weight);
+
+            //  -- Save --
+            void save() const;
         };
 
 
