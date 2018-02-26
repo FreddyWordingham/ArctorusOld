@@ -63,20 +63,24 @@ namespace arc
          *  Then rotate the object around the global y-axis by the theta angle.
          *  Then rotate the object around the global z-axis by the phi angle.
          *
-         *  @param  t_theta Angle to rotate around the global  y-axis.
-         *  @param  t_phi   Angle to then rotate around  the global z-axis.
+         *  @param  t_theta Angle to rotate around the global y-axis.
+         *  @param  t_phi   Angle to then rotate around the global z-axis.
          *  @param  t_spin  Angle to initially rotate around the global z-axis.
          *
          *  @return The created orientation matrix.
          */
         Mat<4, 4> create_orient_mat(const double t_theta, const double t_phi, const double t_spin)
         {
-            return (Mat<4, 4>({{{{std::cos(t_phi), sin(t_phi), 0.0, 0.0}}, {{-std::sin(t_phi), cos(
-                t_phi), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}) * Mat<4, 4>(
-                {{{{std::cos(t_theta), 0.0, -std::sin(t_theta), 0.0}}, {{0.0, 1.0, 0.0, 0.0}}, {{std::sin(
-                    t_theta), 0.0, std::cos(t_theta), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}) * Mat<4, 4>(
-                {{{{std::cos(t_spin), std::sin(t_spin), 0.0, 0.0}}, {{-std::sin(t_spin), std::cos(
-                    t_spin), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}}));
+            const Mat<4, 4> theta_mat({{{{std::cos(t_theta), 0.0, std::sin(t_theta), 0.0}}, {{0.0, 1.0, 0.0, 0.0}}, {{-std::sin(
+                t_theta), 0.0, std::cos(t_theta), 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+
+            const Mat<4, 4> phi_mat({{{{std::cos(t_phi), -std::sin(t_phi), 0.0, 0.0}}, {{std::sin(t_phi), std::cos(
+                t_phi), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+
+            const Mat<4, 4> spin_mat({{{{std::cos(t_spin), -std::sin(t_spin), 0.0, 0.0}}, {{std::sin(t_spin), std::cos(
+                t_spin), 0.0, 0.0}}, {{0.0, 0.0, 1.0, 0.0}}, {{0.0, 0.0, 0.0, 1.0}}}});
+
+            return (spin_mat * phi_mat * theta_mat);
         }
 
         /**
@@ -93,8 +97,11 @@ namespace arc
         {
             assert(t_dir.magnitude() > 0.0);
 
-            return (create_orient_mat(std::acos(t_dir[Z] / std::sqrt(square(t_dir[X]) + square(t_dir[Y]) + square(t_dir[Z]))),
-                                      std::atan2(t_dir[Y], t_dir[X]), t_spin));
+            // Calculate spherical angles.
+            const double theta = std::acos(t_dir[Z] / std::sqrt(square(t_dir[X]) + square(t_dir[Y]) + square(t_dir[Z])));
+            const double phi   = std::atan2(t_dir[Y], t_dir[X]);
+
+            return (create_orient_mat(theta, phi, t_spin));
         }
 
         /**
