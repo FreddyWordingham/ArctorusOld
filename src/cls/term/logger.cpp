@@ -101,7 +101,7 @@ namespace arc
             std::array<std::string, TOTAL_COLS> r_text_col;
 
             // If not printing to a terminal, or the terminal is being piped to a file, do not initialise the ansi codes.
-#ifndef DISABLE_LOG_COLOUR
+#ifdef ENABLE_LOG_COLOUR
             if ((&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0))
             {
                 r_text_col[RESET]   = ansi::RESET;
