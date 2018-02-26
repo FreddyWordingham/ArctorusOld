@@ -129,7 +129,7 @@ namespace arc
          *
          *  @return The created position transformation matrix.
          */
-        Mat<4, 4> create_pos_trans_mat(const Vec<3>& t_trans, const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
+        Mat<4, 4> create_trans_mat(const Vec<3>& t_trans, const Vec<3>& t_dir, double t_spin, const Vec<3>& t_scale)
         {
             assert(t_dir.magnitude() > 0.0);
             assert(t_scale[X] != 0.0);
