@@ -99,10 +99,10 @@ if (PHOTON_PATHS)
     endif ()
 
     set(DEFINE_PHOTON_PATHS "#define ENABLE_PHOTON_PATHS")
-    message("Graphics enabled.")
+    message("Photon paths enabled.")
 else ()
     set(DEFINE_PHOTON_PATHS "// Photon paths are disabled.")
-    message("Graphics disabled.")
+    message("Photon paths disabled.")
 endif ()
 
 
