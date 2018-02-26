@@ -60,7 +60,7 @@ namespace arc
             m_num_vert(init_num(t_serial, POS_KEYWORD)),
             m_num_norm(init_num(t_serial, NORM_KEYWORD)),
             m_num_tri(init_num(t_serial, FACE_KEYWORD)),
-            m_tri(init_tri(t_serial, t_pos_trans, t_dir_trans))
+            m_tri(init_tri(t_serial, t_trans_mat))
         {
         }
 
@@ -101,8 +101,7 @@ namespace arc
          *  Initialise the vector of triangles forming the mesh from a serialised mesh and transformation matrices.
          *
          *  @param  t_serial    Mesh as a serialised string.
-         *  @param  t_pos_trans Position transformation matrix.
-         *  @param  t_dir_trans Direction transformation matrix.
+         *  @param  t_trans_mat Transformation matrix.
          *
          *  @post   Number of read vertex positions must equal that read initially.
          *  @post   Number of read vertex normals must equal that read initially.
@@ -110,8 +109,7 @@ namespace arc
          *
          *  @return The initialised vector of triangle faces.
          */
-        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
-                                                   const math::Mat<4, 4>& t_dir_trans) const
+        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_trans_mat) const
         {
             math::Mat<4, 4> Mat = math::transpose(math::inverse(t_pos_trans));
 
