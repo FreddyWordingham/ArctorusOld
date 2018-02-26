@@ -451,9 +451,6 @@ namespace arc
                     std::tie(spectrometer_index, spectrometer_dist, spectrometer_norm) = cell
                         ->get_dist_to_spectrometer(phot.get_pos(), phot.get_dir(), m_spectrometer);
 
-                    VAL(ccd_dist);
-                    VAL(spectrometer_dist);
-
                     assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
                     assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
                     assert(!math::equal(scat_dist, entity_dist, SMOOTHING_LENGTH));
