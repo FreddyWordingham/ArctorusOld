@@ -16,47 +16,11 @@
         "mat": "materials/vacuum.mat"
     },
     "entities":    {
-        "stratum_corneum":        {
+        "plane": {
             "mesh":  "meshes/plane.obj",
-            "mat":   "materials/stratum_corneum.mat",
+            "mat":   "materials/glass.mat",
             "scale": [1.1e-2, 1.1e-2, 1.1e-2],
             "trans": [0.0, 0.0, 0.0]
-        },
-        "living_epidermis":       {
-            "mesh":  "meshes/plane.obj",
-            "mat":   "materials/living_epidermis.mat",
-            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
-            "trans": [0.0, 0.0, -20.0e-6]
-        },
-        "papillary_dermis":       {
-            "mesh":  "meshes/plane.obj",
-            "mat":   "materials/papillary_dermis.mat",
-            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
-            "trans": [0.0, 0.0, -100.0e-6]
-        },
-        "upper_blood_net_dermis": {
-            "mesh":  "meshes/plane.obj",
-            "mat":   "materials/upper_blood_net_dermis.mat",
-            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
-            "trans": [0.0, 0.0, -250.0e-6]
-        },
-        "reticular_dermis":       {
-            "mesh":  "meshes/plane.obj",
-            "mat":   "materials/reticular_dermis.mat",
-            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
-            "trans": [0.0, 0.0, -330.0e-6]
-        },
-        "deep_blood_net_dermis":  {
-            "mesh":  "meshes/plane.obj",
-            "mat":   "materials/deep_blood_net_dermis.mat",
-            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
-            "trans": [0.0, 0.0, -1830.0e-6]
-        },
-        "subcutaneous_fat":       {
-            "mesh":  "meshes/plane.obj",
-            "mat":   "materials/subcutaneous_fat.mat",
-            "scale": [1.1e-2, 1.1e-2, 1.1e-2],
-            "trans": [0.0, 0.0, -1910.0e-6]
         }
     },
     "lights":        {
