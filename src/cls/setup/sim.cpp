@@ -470,9 +470,28 @@ namespace arc
                         break;
                     }
 
-                    //assert(scat_dist > SMOOTHING_LENGTH);
+                    assert(scat_dist > SMOOTHING_LENGTH);
                     assert(cell_dist > SMOOTHING_LENGTH);
                     assert(entity_dist > SMOOTHING_LENGTH);
+
+                    // Photon hits a spectrometer detector.
+                    if ((spectrometer_dist < ccd_dist) && (spectrometer_dist < scat_dist) && (spectrometer_dist < entity_dist) && (spectrometer_dist < cell_dist))
+                    {
+                        energy += spectrometer_dist * phot.get_weight();
+
+                        // Move the photon to the detector surface.
+                        phot.move(spectrometer_dist);
+
+                        // Check if photon hits the front of the detector.
+                        if ((phot.get_dir() * spectrometer_norm) < 0.0)
+                        {
+                            m_spectrometer[spectrometer_index].add_hit(phot.get_wavelength(), phot.get_weight());
+                        }
+
+                        // Remove the photon from simulation.
+                        cell->add_energy(energy);
+                        break;
+                    }
 
                     // Photon hits a ccd detector.
                     if ((ccd_dist < scat_dist) && (ccd_dist < entity_dist) && (ccd_dist < cell_dist))
