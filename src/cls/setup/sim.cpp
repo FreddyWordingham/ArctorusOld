@@ -407,6 +407,8 @@ namespace arc
                     // Photon hits a ccd detector.
                     if ((ccd_dist < scat_dist) && (ccd_dist < entity_dist) && (ccd_dist < cell_dist))
                     {
+                        energy += ccd_dist;
+
                         // Move the photon to the detector surface.
                         phot.move(ccd_dist);
 
