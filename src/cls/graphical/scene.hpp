@@ -183,7 +183,7 @@ namespace arc
             void add_ccd(const detector::Ccd& t_ccd, const glm::vec4& t_col);
             void add_spectrometer(const detector::Spectrometer& t_spectrometer, const glm::vec4& t_col);
             void add_photon(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col);
-            void add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const double t_padding, const glm::vec4& t_col);
+            void add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, double t_padding, const glm::vec4& t_col);
 
             //  -- Control --
             void swap_camera();
