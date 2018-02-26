@@ -366,6 +366,8 @@ namespace arc
                     {
                         if (rng::random() > (1.0 / m_roulette_chambers))
                         {
+                            // Remove the photon from simulation.
+                            cell->add_energy(energy);
                             break;
                         }
 
@@ -398,6 +400,8 @@ namespace arc
 
                         m_path.push_back(phot.get_path());
 
+                        // Remove the photon from simulation.
+                        cell->add_energy(energy);
                         break;
                     }
                     //assert(scat_dist > SMOOTHING_LENGTH);
@@ -420,6 +424,7 @@ namespace arc
                         }
 
                         // Remove the photon from simulation.
+                        cell->add_energy(energy);
                         break;
                     }
 
