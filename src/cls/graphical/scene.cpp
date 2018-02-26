@@ -1012,6 +1012,54 @@ namespace arc
         }
 
         /**
+         *  Draw the scene's spectrometers.
+         */
+        void Scene::draw_spectrometers() const
+        {
+            // Draw diffusely lit prop mesh.
+            glUseProgram(m_diffuse_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
+
+            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), SPECTROMETER_AMB_POW);
+
+            for (size_t i = 0; i < m_spectrometer.size(); ++i)
+            {
+                glUniform4f(m_diffuse_shader.get_col_uni(), m_spectrometer[i].get_col()[R], m_spectrometer[i].get_col()[G],
+                            m_spectrometer[i].get_col()[B], m_spectrometer[i].get_col()[A]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_spectrometer[i].get_vao());
+
+                glDrawArrays(GL_TRIANGLES, 0, m_spectrometer[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+
+            // Draw normals if toggle is on.
+            if (m_toggle_light_normal)
+            {
+                glUseProgram(m_normal_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+                for (size_t i = 0; i < m_spectrometer.size(); ++i)
+                {
+                    glUniform4f(m_normal_shader.get_col_uni(), m_spectrometer[i].get_col()[R], m_spectrometer[i].get_col()[G],
+                                m_spectrometer[i].get_col()[B], m_spectrometer[i].get_col()[A]);
+                    glUniform1f(m_normal_shader.get_light_power_uni(), SPECTROMETER_NORMAL_LENGTH);
+
+                    glEnableVertexAttribArray(0);
+
+                    glBindVertexArray(m_spectrometer[i].get_vao());
+
+                    glDrawArrays(GL_POINTS, 0, m_spectrometer[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
+            }
+        }
+
+        /**
          *  Draw the scene's photon packet paths.
          */
         void Scene::draw_phots() const
