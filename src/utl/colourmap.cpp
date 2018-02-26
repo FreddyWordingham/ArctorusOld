@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- System --
+#include <cassert>
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
