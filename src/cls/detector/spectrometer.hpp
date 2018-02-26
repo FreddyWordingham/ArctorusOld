@@ -53,7 +53,9 @@ namespace arc
 
 
             //  == METHODS ==
-          private:
+          public:
+            //  -- Getters --
+            const geom::Mesh& get_mesh() const { return (m_mesh); }
         };
 
 
