@@ -81,8 +81,8 @@ namespace arc
         constexpr const double LIGHT_END_HUE          = 60.0;   //! Light prop end hue.
         constexpr const double ENTITY_START_HUE       = 300.0;  //! Entity prop start hue.
         constexpr const double ENTITY_END_HUE         = 330.0;  //! Entity prop end hue.
-        constexpr const double CCD_START_HUE          = 100.0;  //! Ccd prop start hue.
-        constexpr const double CCD_END_HUE            = 140.0;  //! Ccd prop end hue.
+        constexpr const double CCD_START_HUE          = 120.0;  //! Ccd prop start hue.
+        constexpr const double CCD_END_HUE            = 150.0;  //! Ccd prop end hue.
         constexpr const double SPECTROMETER_START_HUE = 100.0;  //! Spectrometer prop start hue.
         constexpr const double SPECTROMETER_END_HUE   = 140.0;  //! Spectrometer prop end hue.
 
