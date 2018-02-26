@@ -7,6 +7,12 @@
 
 
 
+//  == MODULE ==
+#include "gen/config.hpp"
+#ifdef ENABLE_GRAPHICS
+
+
+
 //  == GUARD ==
 #ifndef ARCTORUS_SRC_CLS_GRAPHICAL_SCENE_HPP
 #define ARCTORUS_SRC_CLS_GRAPHICAL_SCENE_HPP
@@ -226,3 +232,8 @@ namespace arc
 
 //  == GUARD END ==
 #endif // ARCTORUS_SRC_CLS_GRAPHICAL_SCENE_HPP
+
+
+
+//  == MODULE END ==
+#endif
