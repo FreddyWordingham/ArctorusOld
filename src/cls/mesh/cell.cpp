@@ -106,6 +106,8 @@ namespace arc
          *  Initialise the list of ccd triangles found within the cell.
          *
          *  @param  t_ccd   Vector of ccds which may be contained within the cell.
+         *
+         *  @return The initialised list of ccd triangles found within the cell.
          */
         std::vector<std::array<size_t, 2>> Cell::init_ccd_list(const std::vector<detector::Ccd>& t_ccd) const
         {
