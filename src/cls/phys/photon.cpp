@@ -196,7 +196,7 @@ namespace arc
          */
         void Photon::multiply_weight(const double t_mult)
         {
-            assert(t_mult > 0.0);
+            assert(t_mult >= 0.0);
 
             m_weight *= t_mult;
         }
