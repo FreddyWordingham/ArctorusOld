@@ -636,6 +636,8 @@ namespace arc
                 m_path.push_back(phot.get_path());
 #endif
             }
+
+            LOG("Photon loop complete.");
         }
 
 
