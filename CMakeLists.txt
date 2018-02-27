@@ -86,8 +86,6 @@ file(GLOB_RECURSE HEADER_FILES ${ARCTORUS_SRC_DIR}/*.hpp)
 #   -- Missing Lib Include Fix -- HACK
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -L/usr/local/lib")
 
-
-
 #   == FLAGS ==
 #   -- Standard --
 set(CMAKE_CXX_STANDARD 17)
