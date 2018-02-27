@@ -67,7 +67,7 @@ namespace arc
             assert(t_wavelength.size() == t_anisotropy.size());
             assert(utl::is_always_greater_than(t_ref_index, 0.0));
             assert(utl::is_always_greater_than_or_equal_to(t_abs_coef, 0.0));
-            assert(utl::is_always_greater_than(t_scat_coef, 0.0));
+            assert(utl::is_always_greater_than_or_equal_to(t_scat_coef, 0.0));
             assert(utl::is_always_greater_than_or_equal_to(t_anisotropy, -1.0));
             assert(utl::is_always_less_than_or_equal_to(t_anisotropy, 1.0));
             assert(m_min_bound > 0.0);
