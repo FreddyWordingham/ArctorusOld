@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/config.hpp"
 #include "gen/optics.hpp"
 
 //  -- Classes --
