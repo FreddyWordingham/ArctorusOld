@@ -8,31 +8,42 @@
     "pre_render":    false,
     "post_render":   true,
     "grid":          {
-        "min":   [-1.1, -1.1, -1.1],
-        "max":   [1.1, 1.1, 1.1],
+        "min":   [-10.1e-3, -10.1e-3, -10.1e-3],
+        "max":   [10.1e-3, 10.1e-3, 10.1e-3],
         "cells": [21, 21, 21]
     },
     "aether":        {
-        "mat": "materials/vacuum.mat"
+        "mat": "materials/intralipid_10.mat"
     },
     "entities":      {
-        "stratum_corneum": {
-            "mesh": "meshes/cone.obj",
-            "mat":  "materials/glass.mat"
+        "detector_body":   {
+            "mesh":  "meshes/detector/body.obj",
+            "mat":   "materials/black.mat",
+            "scale": [1e-3, 1e-3, 1e-3]
+        },
+        "detector_mirror": {
+            "mesh":  "meshes/detector/mirror.obj",
+            "mat":   "materials/mirror.mat",
+            "scale": [1e-3, 1e-3, 1e-3]
         }
     },
     "lights":        {
-        "light_one": {
+        "detector_led": {
             "power": 1.0,
-            "scale": [0.1, 0.1, 0.1],
-            "trans": [0.0, 0.0, 1.0],
-            "dir":   [0.0, 0.0, -1.0],
-            "mesh":  "meshes/circle.obj",
-            "spec":  "spectra/limited_led.spc"
+            "mesh":  "meshes/detector/led.obj",
+            "spec":  "spectra/limited_led.spc",
+            "scale": [1e-3, 1e-3, 1e-3]
         }
     },
     "ccds":          {
     },
     "spectrometers": {
+        "detector_spectrometer": {
+            "mesh":  "meshes/detector/spectrometer.obj",
+            "min":   300E-9,
+            "max":   800E-9,
+            "bins":  500,
+            "scale": [1e-3, 1e-3, 1e-3]
+        }
     }
 }
