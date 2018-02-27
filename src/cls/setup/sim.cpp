@@ -427,7 +427,7 @@ namespace arc
 
                 // Loop until the photon exits the grid.
                 unsigned long int loops = 0;
-                while (m_grid.is_within(phot.get_pos()))
+                while (m_grid.is_within(phot.get_pos()) && (phot.get_weight() > 0.0))
                 {
                     // Increment number of loops.
                     ++loops;
