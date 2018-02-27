@@ -19,6 +19,7 @@
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
+#include "cls/graphical/scene.hpp"
 
 
 
