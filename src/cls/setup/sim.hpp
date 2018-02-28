@@ -89,7 +89,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Saving --
-            void save_grid_images() const;
+            void save_grid_images(const std::string& t_output_dir) const;
             void save_ccd_images() const;
             void save_spectrometer_data() const;
 

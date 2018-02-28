@@ -324,8 +324,10 @@ namespace arc
         //  -- Saving --
         /**
          *  Save the grid images.
+         *
+         *  @param  t_output_dir    Directory to write the images to.
          */
-        void Sim::save_grid_images() const
+        void Sim::save_grid_images(const std::string& t_output_dir) const
         {
             m_grid.save_images();
         }

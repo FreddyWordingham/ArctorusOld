@@ -70,7 +70,7 @@ int main(const int t_argc, const char** t_argv)
     pdt.run();
 
     // Save grid data.
-    pdt.save_grid_images();
+    pdt.save_grid_images(output_dir + "/grid_images");
 
     // Save ccd data.
     pdt.save_ccd_images();
