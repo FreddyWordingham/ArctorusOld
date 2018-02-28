@@ -22,8 +22,8 @@
 //  -- General --
 #include "gen/log.hpp"
 
-//  -- Classes --
-#include "cls/file/handle.hpp"
+//  -- Utility --
+#include "utl/file.hpp"
 
 
 
@@ -116,7 +116,7 @@ namespace arc
         GLuint Shader::init_sub_shader(const std::string& t_path, const GLenum t_type) const
         {
             // Load the shader source code.
-            const std::string serial = file::read(t_path, false);
+            const std::string serial = utl::read(t_path, false);
             const char* code = serial.c_str();
 
             // Compile the vertex shader.
