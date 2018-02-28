@@ -41,14 +41,14 @@ int main(const int t_argc, const char** t_argv)
     }
 
     // Create output directory and check it was created successfully,
-    std::string output_dir = "output_" + arc::utl::create_timestamp("%Y%m%d%H%M%S");
+    const std::string output_dir = "output_" + arc::utl::create_timestamp("%Y%m%d%H%M%S");
     if (mkdir(output_dir.c_str(), S_IRWXU) != 0)
     {
         ERROR("Unable to create output directory.", "The directory: '" << output_dir << "', could not be created.");
     }
 
     // Convert first command line argument to a string.
-    std::string parameters_filepath(t_argv[1]);
+    const std::string parameters_filepath(t_argv[1]);
     LOG("Setup file: '" << parameters_filepath << "'.");
 
     // Create the setup json file.
