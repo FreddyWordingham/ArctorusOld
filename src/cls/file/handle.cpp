@@ -187,22 +187,5 @@ namespace arc
 
 
 
-        //  == FUNCTIONS ==
-        //  -- File Contents --
-        /**
-         *  Read the contents of the given file into a string.
-         *
-         *  @param  t_file_path Path to the file to retrieve the contents from.
-         *  @param  t_filter    If true filter the file when reading its contents.
-         *
-         *  @return A string of the file's contents.
-         */
-        std::string read(const std::string& t_file_path, bool t_filter)
-        {
-            return (arc::file::Handle(t_file_path, std::fstream::in).get_contents(t_filter));
-        }
-
-
-
     } // namespace file
 } // namespace arc

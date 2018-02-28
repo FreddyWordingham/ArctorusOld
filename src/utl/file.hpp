@@ -14,7 +14,8 @@
 
 
 //  == INCLUDES ==
-//  -- System --
+//  -- Classes --
+#include "cls/file/handle.hpp"
 
 
 
@@ -27,6 +28,8 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Reading --
+        std::string read(const std::string& t_file_path, bool t_filter = true);
 
 
 
