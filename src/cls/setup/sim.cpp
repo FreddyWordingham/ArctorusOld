@@ -298,7 +298,7 @@ namespace arc
 
                 // Construct the spectrometer object an add it to the vector of spectrometers.
                 r_spectrometer.emplace_back(
-                    detector::Spectrometer(spectrometer_name[i], geom::Mesh(file::read(mesh_path), trans, dir, rot, scale), min,
+                    detector::Spectrometer(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), min,
                                            max, bins));
             }
 
