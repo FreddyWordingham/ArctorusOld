@@ -10,12 +10,22 @@
     "grid":          {
         "min":   [-10.1e-3, -10.1e-3, -10.1e-3],
         "max":   [10.1e-3, 10.1e-3, 10.1e-3],
-        "cells": [21, 21, 21]
+        "cells": [11, 11, 11]
     },
     "aether":        {
         "mat": "materials/intralipid_001-0.mat"
     },
     "entities":      {
+        "detector_mirror": {
+            "mesh":  "meshes/detector/mirror.obj",
+            "mat":   "materials/mirror.mat",
+            "scale": [1e-3, 1e-3, 1e-3]
+        },
+        "detector_body":   {
+            "mesh":  "meshes/detector/body.obj",
+            "mat":   "materials/black.mat",
+            "scale": [1e-3, 1e-3, 1e-3]
+        }
     },
     "lights":        {
         "detector_led": {

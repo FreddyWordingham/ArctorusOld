@@ -8,8 +8,14 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <sys/stat.h>
+
 //  -- General --
 #include "gen/math.hpp"
+
+//  -- Utility --
+#include "utl/string.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -32,6 +38,15 @@ int main(const int t_argc, const char** t_argv)
     if (t_argc != 2)
     {
         ERROR("Invalid number of command line arguments passed.", "./path/to/arctorus <parameters.json>");
+    }
+
+    // Create output directory and check it was created successfully,
+    std::string output_dir = "output_" + arc::utl::create_timestamp();
+    arc::utl::find_and_replace(&output_dir, ":", "-");
+    arc::utl::find_and_replace(&output_dir, " ", "_");
+    if (mkdir(output_dir.c_str(), S_IRWXU) != 0)
+    {
+        ERROR("Unable to create output directory.", "The directory: '" << output_dir << "', could not be created.");
     }
 
     // Convert first command line argument to a string.
