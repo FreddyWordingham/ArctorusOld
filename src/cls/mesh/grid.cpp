@@ -183,53 +183,10 @@ namespace arc
                 }
             }
 
-            // Write x slices.
-            data::Image img_x(m_num_cells[Y], ((m_num_cells[Z] + 1) * m_num_cells[X]) - 1);
-            for (size_t i = 0; i < m_num_cells[X]; ++i)
-            {
-                size_t start_row = i * (m_num_cells[Z] + 1);
-
-                for (size_t j = 0; j < m_num_cells[Y]; ++j)
-                {
-                    for (size_t k = 0; k < m_num_cells[Z]; ++k)
-                    {
-                        img_x.add_to_pixel(j, start_row + k, utl::colourmap::transform_rainbow(energy_density[i][j][k]));
-                    }
-                }
-            }
-            img_x.save(t_output_dir + "X__master.ppm", 1.0);
-
-            // Write y slices.
-            data::Image img_y(m_num_cells[X], ((m_num_cells[Z] + 1) * m_num_cells[Y]) - 1);
-            for (size_t i = 0; i < m_num_cells[Y]; ++i)
-            {
-                size_t start_row = i * (m_num_cells[Z] + 1);
-
-                for (size_t j = 0; j < m_num_cells[X]; ++j)
-                {
-                    for (size_t k = 0; k < m_num_cells[Z]; ++k)
-                    {
-                        img_y.add_to_pixel(j, start_row + k, utl::colourmap::transform_rainbow(energy_density[j][i][k]));
-                    }
-                }
-            }
-            img_y.save(t_output_dir + "Y__master.ppm", 1.0);
-
-            // Write z slices.
-            data::Image img_z(m_num_cells[X], ((m_num_cells[Y] + 1) * m_num_cells[Z]) - 1);
-            for (size_t i = 0; i < m_num_cells[Z]; ++i)
-            {
-                size_t start_row = i * (m_num_cells[Y] + 1);
-
-                for (size_t j = 0; j < m_num_cells[X]; ++j)
-                {
-                    for (size_t k = 0; k < m_num_cells[Y]; ++k)
-                    {
-                        img_z.add_to_pixel(j, start_row + k, utl::colourmap::transform_rainbow(energy_density[j][k][i]));
-                    }
-                }
-            }
-            img_z.save(t_output_dir + "Z__master.ppm", 1.0);
+            // Write the slices.
+            save_slices(t_output_dir, X, energy_density);
+            save_slices(t_output_dir, Y, energy_density);
+            save_slices(t_output_dir, Z, energy_density);
         }
 
         /**
