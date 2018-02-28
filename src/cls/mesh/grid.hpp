@@ -85,6 +85,12 @@ namespace arc
 
             //  -- Saving --
             void save_images(const std::string& t_output_dir) const;
+
+          private:
+            //  -- Saving --
+            void save_slices(const std::string& t_output_dir, const size_t t_dimension,
+                             const std::vector<std::vector<std::vector<double>>>& t_data)
+            );
         };
 
 

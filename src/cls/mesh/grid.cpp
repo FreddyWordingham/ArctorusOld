@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- Utility --
 #include "utl/colourmap.hpp"
+#include "utl/file.hpp"
 
 
 
@@ -229,6 +230,64 @@ namespace arc
                 }
             }
             img_z.save(t_output_dir + "Z__master.ppm", 1.0);
+        }
+
+        /**
+         *  Save the slices of one dimension of the grid.
+         *
+         *  @param  t_output_dir    Directory to write the images to.
+         *  @param  t_dimension     Dimension to be sliced.
+         *  @param  t_data          Data to be sliced into images.
+         *
+         *  @pre    t_dimension must be less than three.
+         */
+        void Grid::save_slices(const std::string& t_output_dir, const size_t t_dimension,
+                               const std::vector<std::vector<std::vector<double>>>& t_data)
+        {
+            assert(t_dimension < 3);
+
+            // Set dimensions.
+            size_t      x, y, z = t_dimension;
+            std::string dim_name;
+            switch (z)
+            {
+                case X:
+                    x        = Y;
+                    y        = Z;
+                    dim_name = "X";
+                case Y:
+                    x        = X;
+                    y        = Z;
+                    dim_name = "Y";
+                case Z:
+                    x        = X;
+                    y        = Y;
+                    dim_name = "Z";
+                default: ERROR("Unable to save grid slice images.", "The given dimension: '" << z << "' is invalid.");
+            }
+
+            // Create sub-directory.
+            const std::string sub_dir = t_output_dir + "grid_" + dim_name + "_slices/";
+            utl::create_directory(sub_dir);
+
+            // Write the images.
+            for (size_t i = 0; i < m_num_cells[z]; ++i)
+            {
+                // Create the image.
+                data::Image img(m_num_cells[x], m_num_cells[y]);
+
+                // Write each pixel.
+                for (size_t j = 0; j < m_num_cells[x]; ++j)
+                {
+                    for (size_t k = 0; k < m_num_cells[y]; ++k)
+                    {
+                        img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(t_data[j][k][i]));
+                    }
+                }
+
+                // Save the image.
+                img.save(dim_name + "_" + std::to_string(i) + ".ppm");
+            }
         }
 
 
