@@ -15,7 +15,7 @@
 #include "gen/math.hpp"
 
 //  -- Utility --
-#include "utl/string.hpp"
+#include "utl/file.hpp"
 
 //  -- Classes --
 #include "cls/file/handle.hpp"
@@ -52,7 +52,7 @@ int main(const int t_argc, const char** t_argv)
     LOG("Setup file: '" << parameters_filepath << "'.");
 
     // Create the setup json file.
-    const arc::data::Json setup("setup_file", arc::file::read(parameters_filepath));
+    const arc::data::Json setup("setup_file", arc::utl::read(parameters_filepath));
 
     // Set the program seed.
     arc::rng::seed(setup.parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
