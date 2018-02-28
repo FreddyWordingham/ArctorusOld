@@ -42,10 +42,7 @@ int main(const int t_argc, const char** t_argv)
 
     // Create output directory and check it was created successfully,
     const std::string output_dir = "output_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
-    if (mkdir(output_dir.c_str(), S_IRWXU) != 0)
-    {
-        ERROR("Unable to create output directory.", "The directory: '" << output_dir << "', could not be created.");
-    }
+    arc::utl::create_directory(output_dir);
 
     // Convert first command line argument to a string.
     const std::string parameters_filepath(t_argv[1]);
@@ -71,10 +68,7 @@ int main(const int t_argc, const char** t_argv)
 
     // Save grid data.
     const std::string grid_images_dir = output_dir + "grid_images/";
-    if (mkdir(grid_images_dir.c_str(), S_IRWXU) != 0)
-    {
-        ERROR("Unable to create grid_images directory.", "The directory: '" << grid_images_dir << "', could not be created.");
-    }
+    arc::utl::create_directory(grid_images_dir);
     pdt.save_grid_images(grid_images_dir);
 
     // Save ccd data.
