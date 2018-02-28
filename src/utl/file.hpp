@@ -28,6 +28,9 @@ namespace arc
 
 
         //  == FUNCTION PROTOTYPES ==
+        //  -- Creation --
+        void create_directory(const std::string& t_name);
+
         //  -- Reading --
         std::string read(const std::string& t_file_path, bool t_filter = true);
 

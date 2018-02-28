@@ -12,6 +12,15 @@
 
 
 
+//  == INCLUDES ==
+//  -- System --
+#include <sys/stat.h>
+
+//  -- Classes --
+#include "gen/log.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -21,6 +30,20 @@ namespace arc
 
 
         //  == FUNCTIONS ==
+        /**
+         *  Create a new directory and check that it was successfully created.
+         *
+         *  @param  t_name  Name of the directory.
+         */
+        void create_directory(const std::string& t_name)
+        {
+            if (mkdir(t_name.c_str(), S_IRWXU) != 0)
+            {
+                ERROR("Unable to create directory.", "The directory: '" << t_name << "', could not be created.");
+            }
+        }
+
+
         //  -- File Contents --
         /**
          *  Read the contents of the given file into a string.
