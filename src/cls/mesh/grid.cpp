@@ -233,6 +233,8 @@ namespace arc
             // Write the images.
             for (size_t i = 0; i < m_num_cells[z]; ++i)
             {
+                TEMP("Saving " + dim_name + " slices", 100.0 * i / m_num_cells[z]);
+
                 // Create the image.
                 data::Image img(m_num_cells[x], m_num_cells[y]);
 
