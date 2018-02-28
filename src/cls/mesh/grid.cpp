@@ -212,14 +212,17 @@ namespace arc
                     x        = Y;
                     y        = Z;
                     dim_name = "X";
+                    break;
                 case Y:
                     x        = X;
                     y        = Z;
                     dim_name = "Y";
+                    break;
                 case Z:
                     x        = X;
                     y        = Y;
                     dim_name = "Z";
+                    break;
                 default: ERROR("Unable to save grid slice images.", "The given dimension: '" << z << "' is invalid.");
             }
 
