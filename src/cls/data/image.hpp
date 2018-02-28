@@ -66,7 +66,7 @@ namespace arc
             std::string serialise(double t_norm) const;
 
             //  -- Saving --
-            void save(const std::string& t_path, double t_norm) const;
+            void save(const std::string& t_path, double t_nor = 1.0) const;
         };
 
 
