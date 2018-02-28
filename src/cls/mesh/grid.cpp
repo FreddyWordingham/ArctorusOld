@@ -155,8 +155,10 @@ namespace arc
         //  -- Saving --
         /**
          *  Save the data of the grid cells as image files.
+         *
+         *  @param  t_output_dir    Directory to write the images to.
          */
-        void Grid::save_images() const
+        void Grid::save_images(const std::string& t_output_dir) const
         {
             // Get maximum energy density.
             const double max_energy_density = get_max_energy_density();
@@ -194,7 +196,7 @@ namespace arc
                     }
                 }
             }
-            img_x.save("X__master.ppm", 1.0);
+            img_x.save(t_output_dir + "X__master.ppm", 1.0);
 
             // Write y slices.
             data::Image img_y(m_num_cells[X], ((m_num_cells[Z] + 1) * m_num_cells[Y]) - 1);
@@ -210,7 +212,7 @@ namespace arc
                     }
                 }
             }
-            img_y.save("Y__master.ppm", 1.0);
+            img_y.save(t_output_dir + "Y__master.ppm", 1.0);
 
             // Write z slices.
             data::Image img_z(m_num_cells[X], ((m_num_cells[Y] + 1) * m_num_cells[Z]) - 1);
@@ -226,7 +228,7 @@ namespace arc
                     }
                 }
             }
-            img_z.save("Z__master.ppm", 1.0);
+            img_z.save(t_output_dir + "Z__master.ppm", 1.0);
         }
 
 

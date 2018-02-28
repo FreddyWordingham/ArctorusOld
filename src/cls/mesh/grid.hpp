@@ -84,7 +84,7 @@ namespace arc
             inline bool is_within(const math::Vec<3>& t_pos) const;
 
             //  -- Saving --
-            void save_images() const;
+            void save_images(const std::string& t_output_dir) const;
         };
 
 
