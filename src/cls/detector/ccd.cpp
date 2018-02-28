@@ -13,13 +13,9 @@
 
 
 //  == INCLUDES ==
-//  -- General --
-
 //  -- Utility --
 #include "utl/colourmap.hpp"
-
-//  -- Classes --
-#include "cls/file/handle.hpp"
+#include "utl/file.hpp"
 
 
 
@@ -48,7 +44,7 @@ namespace arc
         Ccd::Ccd(const std::string& t_name, const size_t t_width, const size_t t_height, const bool t_col,
                  const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, const double t_spin, const math::Vec<3>& t_scale) :
             m_name(t_name),
-            m_mesh(file::read(std::string(config::ARCTORUS_DIR) + "res/meshes/square.obj"), t_trans, t_dir, t_spin, t_scale),
+            m_mesh(utl::read(std::string(config::ARCTORUS_DIR) + "res/meshes/square.obj"), t_trans, t_dir, t_spin, t_scale),
             m_norm(t_dir),
             m_col(t_col),
             m_image(t_width, t_height)
