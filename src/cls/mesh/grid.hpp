@@ -15,8 +15,8 @@
 
 //  == INCLUDES ==
 //  -- Classes --
-#include "cls/detector/spectrometer.hpp"
 #include "cls/data/image.hpp"
+#include "cls/detector/spectrometer.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/math/vec.hpp"
