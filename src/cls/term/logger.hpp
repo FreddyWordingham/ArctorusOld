@@ -74,7 +74,7 @@ namespace arc
         constexpr const int VALUE_NAME_WIDTH = 16;                                      //! Space allocated to the value name.
 
         //  -- Updating --
-        constexpr const double MIN_UPDATE_DELAY = 5.0;  //! Minimum delay between temporary logs.
+        constexpr const double MIN_UPDATE_DELAY = 1.0;  //! Minimum delay between temporary logs.
 
 
 

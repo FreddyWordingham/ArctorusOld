@@ -4,9 +4,9 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":      1e3,
+    "num_phot":      1e6,
     "pre_render":    false,
-    "post_render":   true,
+    "post_render":   false,
     "grid":          {
         "min":   [-10.1e-3, -10.1e-3, -10.1e-3],
         "max":   [10.1e-3, 10.1e-3, 10.1e-3],
@@ -22,7 +22,7 @@
             "scale": [1e-3, 1e-3, 1e-3]
         },
         "detector_body":   {
-            "mesh":  "meshes/detector/body.obj",
+            "mesh":  "meshes/detector/body_flat.obj",
             "mat":   "materials/black.mat",
             "scale": [1e-3, 1e-3, 1e-3]
         }
