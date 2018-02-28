@@ -17,6 +17,9 @@
 #include "gen/config.hpp"
 #include "gen/optics.hpp"
 
+//  -- Utility --
+#include "utl/file.hpp"
+
 //  -- Classes --
 #include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
@@ -127,7 +130,7 @@ namespace arc
             // Get file paths.
             const std::string mat_path = t_json.parse_child<std::string>("mat");
 
-            return (phys::Material(file::read(mat_path)));
+            return (phys::Material(utl::read(mat_path)));
         }
 
         /**
@@ -164,8 +167,8 @@ namespace arc
                 const std::string mat_path  = json_entity.parse_child<std::string>("mat");
 
                 // Construct the entity object an add it to the vector of entities.
-                r_entity.emplace_back(equip::Entity(geom::Mesh(file::read(mesh_path), trans, dir, rot, scale),
-                                                    phys::Material(file::read(mat_path))));
+                r_entity.emplace_back(equip::Entity(geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale),
+                                                    phys::Material(utl::read(mat_path))));
             }
 
             return (r_entity);
@@ -208,8 +211,9 @@ namespace arc
                 const std::string spec_path = json_light.parse_child<std::string>("spec");
 
                 // Construct the light object an add it to the vector of lights.
-                r_light.emplace_back(equip::Light(geom::Mesh(file::read(mesh_path), trans, dir, rot, scale),
-                                                  phys::Spectrum(file::read(spec_path)), power));
+                r_light.emplace_back(
+                    equip::Light(geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), phys::Spectrum(utl::read(spec_path)),
+                                 power));
             }
 
             return (r_light);
