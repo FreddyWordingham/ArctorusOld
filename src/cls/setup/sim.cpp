@@ -417,10 +417,6 @@ namespace arc
             for (unsigned long int i = 0; i < m_num_phot; ++i)
             {
                 TEMP("Photon Loop", 100.0 * i / m_num_phot);
-                if (((i * 10) % m_num_phot) == 0)
-                {
-                    LOG("Photon Loop: " << ((i * 100.0) / m_num_phot) << "% complete.");
-                }
 
                 // Generate a new photon.
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
