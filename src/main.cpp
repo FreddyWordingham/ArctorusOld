@@ -70,7 +70,12 @@ int main(const int t_argc, const char** t_argv)
     pdt.run();
 
     // Save grid data.
-    pdt.save_grid_images(output_dir + "/grid_images/");
+    const std::string grid_images_dir = output_dir + "/grid_images";
+    if (mkdir(grid_images_dir.c_str(), S_IRWXU) != 0)
+    {
+        ERROR("Unable to create grid_images directory.", "The directory: '" << grid_images_dir << "', could not be created.");
+    }
+    pdt.save_grid_images(grid_images_dir);
 
     // Save ccd data.
     pdt.save_ccd_images();
