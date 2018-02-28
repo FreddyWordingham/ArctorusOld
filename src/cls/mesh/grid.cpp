@@ -246,7 +246,7 @@ namespace arc
                 }
 
                 // Save the image.
-                img.save(dim_name + "_" + std::to_string(i) + ".ppm");
+                img.save(sub_dir + dim_name + "_" + std::to_string(i) + ".ppm");
             }
         }
 
