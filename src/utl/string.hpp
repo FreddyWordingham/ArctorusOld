@@ -29,7 +29,7 @@ namespace arc
 
         //  == FUNCTION PROTOTYPES ==
         //  -- Timestamp --
-        std::string create_timestamp(const std::string& t_format = "%d-%m-%Y %H:%M:%S");
+        std::string create_timestamp(const std::string& t_format = "%Y-%m-%d %H:%M:%S");
         std::string create_time_string(int t_sec);
 
         //  -- Manipulation --
