@@ -36,12 +36,12 @@ namespace arc
          *
          *  @return The current time as a string.
          */
-        std::string create_timestamp()
+        std::string create_timestamp(const std::string& t_format)
         {
             std::time_t t = std::time(nullptr);
 
             std::stringstream time_stream;
-            time_stream << std::put_time(std::localtime(&t), "%d-%m-%Y %H:%M:%S");
+            time_stream << std::put_time(std::localtime(&t), t_format.c_str());
 
             return (time_stream.str());
         }
