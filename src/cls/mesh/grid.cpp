@@ -199,7 +199,7 @@ namespace arc
          *  @pre    t_dimension must be less than three.
          */
         void Grid::save_slices(const std::string& t_output_dir, const size_t t_dimension,
-                               const std::vector<std::vector<std::vector<double>>>& t_data)
+                               const std::vector<std::vector<std::vector<double>>>& t_data) const
         {
             assert(t_dimension < 3);
 
