@@ -16,16 +16,6 @@
         "mat": "materials/intralipid_001-0.mat"
     },
     "entities":    {
-        "detector_body":   {
-            "mesh":  "meshes/detector/body.obj",
-            "mat":   "materials/black.mat",
-            "scale": [1e-3, 1e-3, 1e-3]
-        },
-        "detector_mirror": {
-            "mesh":  "meshes/detector/mirror.obj",
-            "mat":   "materials/mirror.mat",
-            "scale": [1e-3, 1e-3, 1e-3]
-        }
     },
     "lights":      {
         "detector_led": {
@@ -42,7 +32,7 @@
             "mesh":  "meshes/detector/spectrometer.obj",
             "min":   300E-9,
             "max":   800E-9,
-            "bins":  500,
+            "bins":  50,
             "scale": [1e-3, 1e-3, 1e-3]
         }
     }

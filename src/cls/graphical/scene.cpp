@@ -368,7 +368,7 @@ namespace arc
                                 energy_density / max_energy_density);
 
                             // Add the cell prop.
-                            add_cell(cell.get_min_bound(), cell.get_max_bound(), 0.01,
+                            add_cell(cell.get_min_bound(), cell.get_max_bound(), 1e-6,
                                      {glm::vec3(col[R], col[G], col[B]), 1.0});
                         }
                     }
