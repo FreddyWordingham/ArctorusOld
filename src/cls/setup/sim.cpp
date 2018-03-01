@@ -125,7 +125,7 @@ namespace arc
          */
         phys::Material Sim::init_aether(const data::Json& t_json) const
         {
-            LOG("Constructing aether       :");
+            LOG("Constructing aether");
 
             // Get file paths.
             const std::string mat_path = t_json.parse_child<std::string>("mat");
