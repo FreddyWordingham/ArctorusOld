@@ -46,7 +46,7 @@ namespace arc
             //  -- Vertices --
             const std::array<math::Vec<3>, 3> m_pos;    //! Vertex positions.
             const std::array<math::Vec<3>, 3> m_norm;   //! Vertex normals.
-            const std::array<double, 3>       m_cons;   //! Consistent normals used to calculate real reflections.
+            const std::array<double, 3>       m_cons;   //! Consistent values used to calculate real reflections.
 
 
             //  == INSTANTIATION ==
