@@ -555,7 +555,7 @@ namespace arc
                         // If entity normal is facing away, multiply it by -1.
                         if ((phot.get_dir() * entity_norm) > 0.0)
                         {
-                            entity_norm = entity_norm * -1.0;
+                            entity_norm *= -1.0;
                         }
 
                         energy += entity_dist * phot.get_weight();
