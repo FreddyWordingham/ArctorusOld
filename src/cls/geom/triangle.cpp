@@ -195,6 +195,11 @@ namespace arc
             const math::Vec<3> phong = math::normalise(
                 (m_norm[ALPHA] * alpha) + (m_norm[BETA] * beta) + (m_norm[GAMMA] * gamma));
 
+            if (USE_PHONG)
+            {
+                return (std::pair<double, math::Vec<3>>(r_dist, phong));
+            }
+
             const double       f      = (m_cons[ALPHA] * alpha) + (m_cons[BETA] * beta) + (m_cons[GAMMA] * gamma);
             const double       q      = math::square(1.0 - (f * (2.0 / M_PI))) / (1.0 + (2.0 * f * (1.0 - (2.0 / M_PI))));
             const double       b      = i * phong;
