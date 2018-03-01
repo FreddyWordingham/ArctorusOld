@@ -95,6 +95,11 @@ namespace arc
          */
         std::array<double, 3> Triangle::init_cons() const
         {
+            if (m_flat)
+            {
+                return (std::array<double, 3>({{0.0, 0.0, 0.0}}));
+            }
+
             // Create the return array of consistent normal vectors.
             std::array<double, 3> r_cons;
 
