@@ -60,6 +60,7 @@ namespace arc
           public:
             //  -- Constructors --
             constexpr Vec();
+            constexpr Vec(double t_x, double t_y, double t_z);
             explicit constexpr Vec(double t_data);
             explicit constexpr Vec(const std::array<double, N>& t_data);
 
@@ -166,6 +167,33 @@ namespace arc
         constexpr Vec<N>::Vec()
         {
             std::fill(m_data.begin(), m_data.end(), 0.0);
+        }
+
+        /**
+         *  Construct a vec of three values and initialise its data elements using the given values.
+         *
+         *  @param  t_x Value to initialise the zeroth data element to.
+         *  @param  t_y Value to initialise the first data element to.
+         *  @param  t_z Value to initialise the second data element to.
+         */
+        template <>
+        constexpr Vec<3>::Vec(const double t_x, const double t_y, const double t_z) :
+            m_data({{t_x, t_y, t_z}})
+        {
+        }
+
+        /**
+         *  Construct a vec of four values and initialise its data elements using the given values.
+         *
+         *  @param  t_x Value to initialise the zeroth data element to.
+         *  @param  t_y Value to initialise the first data element to.
+         *  @param  t_z Value to initialise the second data element to.
+         *  @param  t_w Value to initialise the third data element to.
+         */
+        template <>
+        constexpr Vec<3>::Vec(const double t_x, const double t_y, const double t_z, const double t_w) :
+            m_data({{t_x, t_y, t_z, t_w}})
+        {
         }
 
         /**
