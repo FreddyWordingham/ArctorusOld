@@ -338,8 +338,10 @@ namespace arc
 
         /**
          *  Save the ccd images.
+         *
+         *  @param  t_output_dir    Directory to write the images to.
          */
-        void Sim::save_ccd_images() const
+        void Sim::save_ccd_images(const std::string& t_output_dir) const
         {
             // Get the maximum rgb values.
             double      max = 0.0;
