@@ -47,7 +47,6 @@ namespace arc
             const math::Vec<3> m_norm;  //! Normal of the triangle.
 
             //  -- Vertices --
-            const std::array<Vertex, 3> m_vert; //! Vertices of the triangle.
 
 
             //  == INSTANTIATION ==
