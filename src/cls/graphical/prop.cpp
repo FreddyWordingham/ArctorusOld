@@ -189,6 +189,8 @@ namespace arc
                 case originShape::SUN:
                     return (init_origin_vert_sun(t_scale));
             }
+
+            ERROR("Switch failed to catch enumeration.", "Switch does not handle the given enumeration.");
         }
 
         /**

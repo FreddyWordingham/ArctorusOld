@@ -171,6 +171,7 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         -Wall                               \
         -Wextra                             \
         -Wpedantic                          \
+        -Wno-unknown-pragmas                \
     ")
 else ()
     message(FATAL_ERROR "Warning flags are not defined for compiler type: '${CMAKE_CXX_COMPILER_ID}'.")
