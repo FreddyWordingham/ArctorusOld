@@ -83,7 +83,6 @@ namespace arc
         std::pair<double, math::Vec<3>> Triangle::get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
         {
             assert(t_dir.is_normalised());
-            assert(m_norm.is_normalised());
 
             // Calculate edge vectors.
             const math::Vec<3> edge_1 = m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos();
