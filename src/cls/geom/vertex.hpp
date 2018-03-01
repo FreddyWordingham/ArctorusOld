@@ -53,6 +53,7 @@ namespace arc
             //  -- Getters --
             const math::Vec<3>& get_pos() const { return (m_pos); }
             const math::Vec<3>& get_norm() const { return (m_norm); }
+            const math::Vec<3>& get_cons() const { return (m_cons); }
         };
 
 
