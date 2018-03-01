@@ -623,7 +623,7 @@ namespace arc
         {
             glm::vec3 translate;
             glm::vec2 rotate;
-            float     speed_multiplier = 1.0f;
+            float     speed_multiplier = 0.01f;
 
             if (glfwGetKey(m_window, control::DECREASE_CAM_SPEED) == GLFW_PRESS)
             {
