@@ -140,10 +140,14 @@ if (CMAKE_BUILD_TYPE MATCHES "debug")
         -DDEBUG                                                     \
         -g                                                          \
         -O0                                                         \
+    ")
+    if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}                     \
         -fsanitize=integer                                          \
         -fsanitize=undefined                                        \
         -fsanitize-blacklist=${CMAKE_SOURCE_DIR}/.clang-sanitizer   \
     ")
+    endif ()
 elseif (CMAKE_BUILD_TYPE MATCHES "release")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
         -DNDEBUG                            \
