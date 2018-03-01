@@ -36,7 +36,7 @@ namespace arc
          */
         Triangle::Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm) :
             m_area(math::area(t_pos)),
-            m_plane_norm(math::normalise((t_pos[BETA] - t_pos[ALPHA]) ^ (t_pos[GAMMA] - t_pos[ALPHA]))),
+            m_plane_norm(init_plane_norm(t_pos, t_norm)),
             m_pos(t_pos),
             m_norm(t_norm),
             m_cons(std::acos(), ,),
@@ -46,6 +46,42 @@ namespace arc
             assert(m_norm[GAMMA].is_normalised());
             assert(m_area >= 0.0);
             assert(m_plane_norm.is_normalised());
+        }
+
+
+        //  -- Initialisation --
+        /**
+         *  Initialise the normal vector of the triangle by determining the cross-product of two of the triangles edges.
+         *  Normal must be normalised after determining the cross-product.
+         *
+         *  @param  t_pos   Array of vertex positions.
+         *  @param  t_norm  Array of vertex normals.
+         *
+         *  @post   r_plane_norm must be normalised.
+         *  @post   r_plane_norm * t_norm[ALPHA] must be greater than zero.
+         *  @post   r_plane_norm * t_norm[BETA] must be greater than zero.
+         *  @post   r_plane_norm * t_norm[GAMMA] must be greater than zero.
+         *
+         *  @return The normal vector of the triangle.
+         */
+        math::Vec<3> Triangle::init_plane_norm(const std::array<math::Vec<3>, 3>& t_pos,
+                                               const std::array<math::Vec<3>, 3>& t_norm) const
+        {
+            // Compute the cross-product of two edges to find the triangle's normal.
+            math::Vec<3> r_plane_norm = math::normalise((m_pos[BETA] - m_pos[ALPHA]) ^ (m_pos[GAMMA] - m_pos[ALPHA]));
+
+            // Mirror the plane normal if it faces away from the vertex normals.
+            if ((r_plane_norm * (t_norm[ALPHA] + t_norm[BETA] + t_norm[GAMMA])) < 0.0)
+            {
+                r_plane_norm *= -1.0;
+            }
+
+            assert(r_plane_norm.is_normalised());
+            assert((r_plane_norm * t_norm[ALPHA]) > 0.0);
+            assert((r_plane_norm * t_norm[BETA]) > 0.0);
+            assert((r_plane_norm * t_norm[GAMMA]) > 0.0);
+
+            return (r_plane_norm);
         }
 
 
