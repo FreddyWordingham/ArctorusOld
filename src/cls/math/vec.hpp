@@ -60,10 +60,10 @@ namespace arc
           public:
             //  -- Constructors --
             constexpr Vec();
+            explicit constexpr Vec(double t_data);
             constexpr Vec(double t_x, double t_y);
             constexpr Vec(double t_x, double t_y, double t_z);
             constexpr Vec(double t_x, double t_y, double t_z, double t_w);
-            explicit constexpr Vec(double t_data);
             explicit constexpr Vec(const std::array<double, N>& t_data);
 
 
@@ -172,6 +172,17 @@ namespace arc
         }
 
         /**
+         *  Construct a vec and initialise all of its data elements to the given initial value.
+         *
+         *  @param  t_data  Value to initialise all data elements to.
+         */
+        template <size_t N>
+        constexpr Vec<N>::Vec(const double t_data)
+        {
+            std::fill(m_data.begin(), m_data.end(), t_data);
+        }
+
+        /**
          *  Construct a vec of two values and initialise its data elements using the given values.
          *
          *  @param  t_x Value to initialise the zeroth data element to.
@@ -208,17 +219,6 @@ namespace arc
         constexpr Vec<4>::Vec(const double t_x, const double t_y, const double t_z, const double t_w) :
             m_data({{t_x, t_y, t_z, t_w}})
         {
-        }
-
-        /**
-         *  Construct a vec and initialise all of its data elements to the given initial value.
-         *
-         *  @param  t_data  Value to initialise all data elements to.
-         */
-        template <size_t N>
-        constexpr Vec<N>::Vec(const double t_data)
-        {
-            std::fill(m_data.begin(), m_data.end(), t_data);
         }
 
         /**
