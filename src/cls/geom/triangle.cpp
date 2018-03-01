@@ -85,8 +85,8 @@ namespace arc
             assert(t_dir.is_normalised());
 
             // Calculate edge vectors.
-            const math::Vec<3> edge_1 = m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos();
-            const math::Vec<3> edge_2 = m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos();
+            const math::Vec<3> edge_1 = m_pos[BETA] - m_pos[ALPHA];
+            const math::Vec<3> edge_2 = m_pos[GAMMA] - m_pos[ALPHA];
 
             const math::Vec<3> q = t_dir ^edge_2;
             const double       a = edge_1 * q;
@@ -98,7 +98,7 @@ namespace arc
                 return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
-            const math::Vec<3> s = (t_pos - m_vert[ALPHA].get_pos()) / a;
+            const math::Vec<3> s = (t_pos - m_pos[ALPHA]) / a;
             const math::Vec<3> r = s ^edge_1;
 
             // Calculate barycentric coordinates.
@@ -124,8 +124,7 @@ namespace arc
             }
 
             // Determine interpolated normal.
-            math::Vec<3> r_norm = math::normalise(
-                (m_vert[ALPHA].get_norm() * alpha) + (m_vert[BETA].get_norm() * beta) + (m_vert[GAMMA].get_norm() * gamma));
+            math::Vec<3> r_norm = math::normalise((m_norm[ALPHA] * alpha) + (m_norm[BETA] * beta) + (m_norm[GAMMA] * gamma));
 
             return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
         }
