@@ -53,8 +53,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            explicit Triangle(const std::array<Vertex, 3>& t_vert);
-            explicit Triangle(const Vertex& t_alpha, const Vertex& t_beta, const Vertex& t_gamma);
+//            explicit Triangle(const math::Vec<3>& t_alpha_pos, const math::Vec<3>& t_beta_pos, const math::Vec<3>& t_gamma_pos, const math::Vec<3>& t_alpha_norm, const math::Vec<3>& t_beta_norm, const math::Vec<3>& t_gamma_norm)
 
             //  -- Initialisation --
             math::Vec<3> init_norm() const;
