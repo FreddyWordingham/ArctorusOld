@@ -91,7 +91,7 @@ namespace arc
             //  -- Saving --
             void save_grid_images(const std::string& t_output_dir) const;
             void save_ccd_images(const std::string& t_output_dir) const;
-            void save_spectrometer_data() const;
+            void save_spectrometer_data(const std::string& t_output_dir) const;
 
             //  -- Rendering --
             void render() const;

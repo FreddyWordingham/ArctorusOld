@@ -366,13 +366,15 @@ namespace arc
 
         /**
          *  Save the spectrometer data.
+         *
+         *  @param  t_output_dir    Directory to write the images to.
          */
-        void Sim::save_spectrometer_data() const
+        void Sim::save_spectrometer_data(const std::string& t_output_dir) const
         {
             // Save each spectrometer's data.
             for (size_t i = 0; i < m_spectrometer.size(); ++i)
             {
-                m_spectrometer[i].save();
+                m_spectrometer[i].save(t_output_dir);
             }
         }
 
