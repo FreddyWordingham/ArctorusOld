@@ -5,13 +5,13 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":        1e3,
-    "pre_render":      true,
-    "post_render":     true,
+    "num_phot":        1e7,
+    "pre_render":      false,
+    "post_render":     false,
     "grid":            {
-        "min":   [-2.1e-3, -2.1e-3, -2.1e-3],
-        "max":   [2.1e-3, 2.1e-3, 2.1e-3],
-        "cells": [11, 11, 31]
+        "min":   [-4.1e-3, -4.1e-3, -2.1e-3],
+        "max":   [4.1e-3, 4.1e-3, 2.1e-3],
+        "cells": [11, 11, 11]
     },
     "aether":          {
         "mat": "materials/vacuum.mat"
@@ -29,16 +29,16 @@
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc",
             "scale": [1e-3, 1e-3, 1e-3],
-            "trans": [0.0, 0.0, 2.0e-3],
+            "trans": [0.0, 0.0, 1.5e-3],
             "dir":   [0.0, 0.0, -1.0]
         }
     },
     "ccds":            {
-        "below": {
-            "pixel": [100, 100],
-            "scale": [2e-3, 2e-3, 2e-3],
-            "trans": [0.0, 0.0, -2.0e-3],
-            "dir":   [0.0, 0.0, 1.0],
+        "above": {
+            "pixel": [1000, 1000],
+            "scale": [4e-3, 4e-3, 4e-3],
+            "trans": [0.0, 0.0, 2.0e-3],
+            "dir":   [0.0, 0.0, -1.0],
             "col":   true
         }
     },
