@@ -47,21 +47,25 @@ namespace arc
 
         /**
          *  Construct a populated data table using a vector of data columns.
+         *  Each of the columns must contain the same number of rows.
          *
          *  @param  t_col   Vector of data columns.
          *
          *  @post   m_col must not be empty.
-         *  @post   m_col columns must all be the same size.
          */
         Table::Table(const std::vector<Column>& t_col) :
             m_col(t_col)
         {
             assert(!m_col.empty());
 
+            // Check that the columns contain the same number of rows.
             const size_t num_rows = m_col.front().size();
             for (size_t  i        = 1; i < m_col.size(); ++i)
             {
-                assert(m_col[i].size() == num_rows);
+                if (m_col[i].size() != num_rows)
+                {
+                    ERROR("Unable to construct data::Column object.", "Columns must all contain the same number of rows.");
+                }
             }
         }
 
