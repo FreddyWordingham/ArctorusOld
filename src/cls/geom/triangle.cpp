@@ -39,7 +39,7 @@ namespace arc
             m_area(math::area(t_pos)),
             m_plane_norm(init_plane_norm(t_pos, t_norm)),
             m_pos(t_pos),
-            m_norm(t_norm),
+            m_norm(m_flat ? std::array<math::Vec<3>, 3>(m_plane_norm, m_plane_norm, m_plane_norm) : t_norm),
             m_cons(init_cons())
         {
             assert(m_norm[ALPHA].is_normalised());
