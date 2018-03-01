@@ -170,13 +170,13 @@ namespace arc
             // Add padding lines.
             size_t pre_pad  = 0;
             size_t post_pad = 0;
-            if (t_text.size() < (LINE_WIDTH - 2))
+            if (t_text.size() < (TEXT_WIDTH - 2))
             {
-                pre_pad  = (LINE_WIDTH - (t_text.size() + 2)) / 2;
-                post_pad = LINE_WIDTH - (pre_pad + t_text.size() + 2);
+                pre_pad  = (TEXT_WIDTH - (t_text.size() + 2)) / 2;
+                post_pad = TEXT_WIDTH - (pre_pad + t_text.size() + 2);
             }
 
-            print_text(CYAN, LOG, std::string(pre_pad, '-') + " " + t_text + " " + std::string(post_pad, '-') + "\n");
+            print_text(CYAN, LOG, std::string(pre_pad, '-') + " " + t_text + " " + std::string(post_pad, '-'));
         }
 
         /**
