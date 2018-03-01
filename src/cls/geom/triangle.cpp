@@ -188,8 +188,6 @@ namespace arc
          *  Generate a random position on the triangle's surface and determine the associated normal.
          *  Position and normal are stored together in an array.
          *
-         *  @post   r_norm must be normalised.
-         *
          *  @return A random position and associated normal on the triangle's surface.
          */
         std::pair<math::Vec<3>, math::Vec<3>> Triangle::gen_random_pos_and_norm() const
@@ -208,11 +206,15 @@ namespace arc
             // Calculate the world-space cartesian coordinates from the barycentric coordinates.
             const math::Vec<3> r_pos = m_pos[GAMMA] + ((m_pos[ALPHA] - m_pos[GAMMA]) * a) + ((m_pos[BETA] - m_pos[GAMMA]) * b);
 
+            // If triangle is flat, return the plane normal.
+            if (m_flat)
+            {
+                return (std::make_pair(r_pos, m_plane_norm));
+            }
+
             // Calculate the corresponding normal.
             const math::Vec<3> r_norm = math::normalise(
                 (m_norm[ALPHA] * a) + (m_norm[BETA] * b) + (m_norm[GAMMA] * (1.0 - a - b)));
-
-            assert(r_norm.is_normalised());
 
             return (std::make_pair(r_pos, r_norm));
         }
