@@ -35,6 +35,7 @@ namespace arc
          *  @post   m_plane_norm must be normalised.
          */
         Triangle::Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm) :
+            m_flat((math::equal((t_norm[ALPHA] * t_norm[BETA]), 1.0) && math::equal((t_norm[ALPHA] * t_norm[GAMMA]), 1.0))),
             m_area(math::area(t_pos)),
             m_plane_norm(init_plane_norm(t_pos, t_norm)),
             m_pos(t_pos),

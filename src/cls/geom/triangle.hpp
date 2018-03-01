@@ -40,6 +40,7 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Properties --
+            const bool         m_flat;          //! True if all normals are parallel.
             const double       m_area;          //! Area of the triangle.
             const math::Vec<3> m_plane_norm;    //! Normal of the triangle plane.
 
@@ -55,6 +56,7 @@ namespace arc
             Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm);
 
             //  -- Initialisation --
+            bool init_flat(const std::array<math::Vec<3>, 3>& t_norm) const;
             math::Vec<3> init_plane_norm(const std::array<math::Vec<3>, 3>& t_pos,
                                          const std::array<math::Vec<3>, 3>& t_norm) const;
             std::array<double, 3> init_cons() const;
