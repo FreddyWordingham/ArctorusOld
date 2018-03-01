@@ -403,7 +403,7 @@ namespace arc
             if (m_empty)
             {
                 return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
-                                                                 math::Vec<3>({{0.0, 0.0, 0.0}})));
+                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
             // Run through all entity triangles and determine the closest intersection distance.
@@ -451,7 +451,7 @@ namespace arc
             if (m_empty)
             {
                 return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
-                                                                 math::Vec<3>({{0.0, 0.0, 0.0}})));
+                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
             // Run through all ccd triangles and determine the closest intersection distance.
@@ -501,7 +501,7 @@ namespace arc
             if (m_empty)
             {
                 return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
-                                                                 math::Vec<3>({{0.0, 0.0, 0.0}})));
+                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
             // Run through all spectrometer triangles and determine the closest intersection distance.
