@@ -147,6 +147,29 @@ namespace arc
         }
 
         /**
+         *  Strip the file extension leaving only the filename and extension, from the full file path.
+         *
+         *  @param  t_path  Full file path.
+         *
+         *  @pre    t_path must not be empty.
+         *
+         *  @return The path stripped of the file extension.
+         */
+        std::string strip_extension(const std::string& t_path)
+        {
+            assert(!t_path.empty());
+
+            size_t last_period_pos = t_path.find_last_of('.');
+
+            if (last_period_pos == std::string::npos)
+            {
+                return (t_path);
+            }
+
+            return (t_path.substr(last_period_pos + 1));
+        }
+
+        /**
          *  Strip the leading and trailing whitespace from a given string.
          *
          *  @param  t_str   String to be stripped of whitespace.

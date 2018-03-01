@@ -4,13 +4,13 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":    1e4,
+    "num_phot":    1e6,
     "pre_render":  false,
     "post_render": false,
     "grid":        {
         "min":   [-10.1e-3, -10.1e-3, -10.1e-3],
         "max":   [10.1e-3, 10.1e-3, 10.1e-3],
-        "cells": [17, 17, 17]
+        "cells": [101, 101, 101]
     },
     "aether":      {
         "mat": "materials/intralipid_001-0.mat"
