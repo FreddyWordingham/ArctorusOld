@@ -22,15 +22,25 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Construct a triangle from an array of given vertex positions and an array of the associated vertex normals.
+         *
+         *  @param  t_pos   Array of vertex positions.
+         *  @param  t_norm  Array of vertex normals.
+         *
+         *  @post   m_norm[ALPHA] must be normalised.
+         *  @post   m_norm[BETA] must be normalised.
+         *  @post   m_norm[GAMMA] must be normalised.
+         */
         Triangle::Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm) :
             m_pos(t_pos),
             m_norm(t_norm),
             m_area(math::area(t_pos)),
             m_plane_norm(init_plane_norm())
         {
-            assert(t_norm[ALPHA].is_normalised());
-            assert(t_norm[BETA].is_normalised());
-            assert(t_norm[GAMMA].is_normalised());
+            assert(m_norm[ALPHA].is_normalised());
+            assert(m_norm[BETA].is_normalised());
+            assert(m_norm[GAMMA].is_normalised());
         }
 
 
