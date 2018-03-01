@@ -360,7 +360,7 @@ namespace arc
             // Save each ccd image.
             for (size_t i = 0; i < m_ccd.size(); ++i)
             {
-                m_ccd[i].save(max);
+                m_ccd[i].save(t_output_dir, max);
             }
         }
 
