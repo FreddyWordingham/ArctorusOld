@@ -42,13 +42,13 @@ int main(const int t_argc, const char** t_argv)
     const std::string parameters_filepath(t_argv[1]);
     LOG("Setup file: '" << parameters_filepath << "'.");
 
-    // Create output directory and check it was created successfully,
-    const std::string output_dir = "output_" + arc::utl::strip_path(
-        arc::utl::strip_extension(parameters_filepath)) + "_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
-    arc::utl::create_directory(output_dir);
-
     // Create the setup json file.
     const arc::data::Json setup("setup_file", arc::utl::read(parameters_filepath));
+
+    // Create output directory and check it was created successfully,
+    const std::string output_dir = "output_" + setup
+        .parse_child<std::string>("output_dir_name") + "_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
+    arc::utl::create_directory(output_dir);
 
     // Set the program seed.
     arc::rng::seed(setup.parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
