@@ -28,6 +28,9 @@ namespace arc
             m_area(math::area(t_pos)),
             m_plane_norm(init_plane_norm())
         {
+            assert(t_norm[ALPHA].is_normalised());
+            assert(t_norm[BETA].is_normalised());
+            assert(t_norm[GAMMA].is_normalised());
         }
 
 
