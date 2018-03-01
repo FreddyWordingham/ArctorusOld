@@ -71,26 +71,6 @@ namespace arc
 
 
 
-        //  == METHODS ==
-        //  -- Getters --
-        /**
-         *  Retrieve a const reference to a vertex of the triangle,
-         *
-         *  @param  t_index Index of the vertex to retrieve.
-         *
-         *  @pre    t_index must be a valid index of m_vert.
-         *
-         *  @return A const reference to a vertex of the triangle.
-         */
-        inline const Vertex& Triangle::get_vert(const size_t t_index) const
-        {
-            assert(t_index < m_vert.size());
-
-            return (m_vert[t_index]);
-        }
-
-
-
     } // namespace geom
 } // namespace arc
 
