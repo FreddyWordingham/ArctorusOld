@@ -166,7 +166,7 @@ namespace arc
                 return (t_path);
             }
 
-            return (t_path.substr(last_period_pos + 1));
+            return (t_path.substr(0, last_period_pos));
         }
 
         /**
