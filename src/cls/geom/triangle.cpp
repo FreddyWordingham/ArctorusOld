@@ -35,37 +35,17 @@ namespace arc
          *  @post   m_plane_norm must be normalised.
          */
         Triangle::Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm) :
+            m_area(math::area(t_pos)),
+            m_plane_norm(math::normalise((t_pos[BETA] - t_pos[ALPHA]) ^ (t_pos[GAMMA] - t_pos[ALPHA]))),
             m_pos(t_pos),
             m_norm(t_norm),
             m_cons(std::acos(), ,),
-            m_area(math::area(t_pos)),
-            m_plane_norm(init_plane_norm())
         {
             assert(m_norm[ALPHA].is_normalised());
             assert(m_norm[BETA].is_normalised());
             assert(m_norm[GAMMA].is_normalised());
             assert(m_area >= 0.0);
             assert(m_plane_norm.is_normalised());
-        }
-
-
-        //  -- Initialisation --
-        /**
-         *  Initialise the normal vector of the triangle by determining the cross-product of two of the triangles edges.
-         *  Normal must be normalised after determining the cross-product.
-         *
-         *  @post   r_norm must be normalised.
-         *
-         *  @return The normal vector of the triangle.
-         */
-        math::Vec<3> Triangle::init_plane_norm() const
-        {
-            // Compute the cross-product of two edges to find the triangle's normal.
-            math::Vec<3> r_norm = math::normalise((m_pos[BETA] - m_pos[ALPHA]) ^ (m_pos[GAMMA] - m_pos[ALPHA]));
-
-            assert(r_norm.is_normalised());
-
-            return (r_norm);
         }
 
 
