@@ -131,16 +131,11 @@ namespace arc
         {
             assert(t_dir.is_normalised());
 
-            // Determine the incident vector.
-            const math::Vec<3> i = ((t_dir * m_plane_norm) < 0.0) ? -t_dir : t_dir;
-
-            assert((i * m_plane_norm) > 0.0);
-
             // Calculate edge vectors.
             const math::Vec<3> edge_1 = m_pos[BETA] - m_pos[ALPHA];
             const math::Vec<3> edge_2 = m_pos[GAMMA] - m_pos[ALPHA];
 
-            const math::Vec<3> t = i ^edge_2;
+            const math::Vec<3> t = t_dir ^edge_2;
             const double       a = edge_1 * t;
 
             // Check if ray is almost parallel to the triangle.
@@ -154,7 +149,7 @@ namespace arc
             const math::Vec<3> r = s ^edge_1;
 
             // Calculate barycentric coordinates.
-            const double gamma = r * i;
+            const double gamma = r * t_dir;
             const double beta  = s * t;
             const double alpha = 1.0 - beta - gamma;
 
@@ -174,6 +169,10 @@ namespace arc
                 // Does not hit triangle.
                 return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
             }
+
+            // Determine the incident vector.
+            const math::Vec<3> i = ((t_dir * m_plane_norm) > 0.0) ? t_dir : -t_dir;
+            assert((i * m_plane_norm) > 0.0);
 
             // Determine interpolated normal.
             const math::Vec<3> phong = math::normalise(
@@ -214,12 +213,6 @@ namespace arc
 
             // Calculate the world-space cartesian coordinates from the barycentric coordinates.
             const math::Vec<3> r_pos = m_pos[GAMMA] + ((m_pos[ALPHA] - m_pos[GAMMA]) * a) + ((m_pos[BETA] - m_pos[GAMMA]) * b);
-
-            // If triangle is flat, return the plane normal.
-            if (m_flat)
-            {
-                return (std::make_pair(r_pos, m_plane_norm));
-            }
 
             // If triangle is flat, return the plane normal.
             if (m_flat)
