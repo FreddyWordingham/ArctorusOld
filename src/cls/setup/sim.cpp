@@ -157,10 +157,10 @@ namespace arc
                 const data::Json json_entity = t_json[entity_name[i]];
 
                 // Get the transformation values.
-                const auto   trans = json_entity.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const auto   dir   = json_entity.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const auto   trans = json_entity.parse_child<math::Vec<3>>("trans", math::Vec<3>(0.0, 0.0, 0.0));
+                const auto   dir   = json_entity.parse_child<math::Vec<3>>("dir", math::Vec<3>(0.0, 0.0, 1.0));
                 const double rot   = math::deg_to_rad(json_entity.parse_child<double>("rot", 0.0));
-                const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+                const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get file paths.
                 const std::string mesh_path = json_entity.parse_child<std::string>("mesh");
@@ -198,10 +198,10 @@ namespace arc
                 const data::Json json_light = t_json[light_name[i]];
 
                 // Get the transformation values.
-                const auto   trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const auto   dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const auto   trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>(0.0, 0.0, 0.0));
+                const auto   dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>(0.0, 0.0, 1.0));
                 const double rot   = math::deg_to_rad(json_light.parse_child<double>("rot", 0.0));
-                const auto   scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+                const auto   scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get light properties.
                 const auto power = json_light.parse_child<double>("power");
@@ -243,10 +243,10 @@ namespace arc
                 const data::Json json_ccd = t_json[ccd_name[i]];
 
                 // Get the transformation values.
-                const auto   trans = json_ccd.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const auto   dir   = json_ccd.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const auto   trans = json_ccd.parse_child<math::Vec<3>>("trans", math::Vec<3>(0.0, 0.0, 0.0));
+                const auto   dir   = json_ccd.parse_child<math::Vec<3>>("dir", math::Vec<3>(0.0, 0.0, 1.0));
                 const double rot   = math::deg_to_rad(json_ccd.parse_child<double>("rot", 0.0));
-                const auto   scale = json_ccd.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+                const auto   scale = json_ccd.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get ccd properties.
                 const auto pix = json_ccd.parse_child<std::array<size_t, 2>>("pixel");
@@ -283,10 +283,10 @@ namespace arc
                 const data::Json json_spectrometer = t_json[spectrometer_name[i]];
 
                 // Get the transformation values.
-                const auto   trans = json_spectrometer.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const auto   dir   = json_spectrometer.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const auto   trans = json_spectrometer.parse_child<math::Vec<3>>("trans", math::Vec<3>(0.0, 0.0, 0.0));
+                const auto   dir   = json_spectrometer.parse_child<math::Vec<3>>("dir", math::Vec<3>(0.0, 0.0, 1.0));
                 const double rot   = math::deg_to_rad(json_spectrometer.parse_child<double>("rot", 0.0));
-                const auto   scale = json_spectrometer.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+                const auto   scale = json_spectrometer.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get spectrometer properties.
                 const auto min  = json_spectrometer.parse_child<double>("min");
