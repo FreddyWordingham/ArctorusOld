@@ -121,6 +121,8 @@ namespace arc
          *  @param  t_pos   Start position of the ray.
          *  @param  t_dir   Direction of the ray.
          *
+         *  @pre    t_dir must be normalised.
+         *
          *  @post   r_i_dot_n must be less than pi/2.
          *
          *  @return The distance to intersection, and the cosine of the -t_dir * consistent normal at the intersection point.
