@@ -8,9 +8,6 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-#include <sys/stat.h>
-
 //  -- General --
 #include "gen/math.hpp"
 
