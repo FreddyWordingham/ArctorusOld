@@ -21,9 +21,6 @@
 #include "gen/math.hpp"
 #include "gen/rng.hpp"
 
-//  -- Classes --
-#include "cls/geom/vertex.hpp"
-
 
 
 //  == NAMESPACE ==

@@ -22,14 +22,14 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-        Triangle::Triangle(const math::Vec<3>& t_alpha_pos, const math::Vec<3>& t_beta_pos, const math::Vec<3>& t_gamma_pos,
-                           const math::Vec<3>& t_alpha_norm, const math::Vec<3>& t_beta_norm,
-                           const math::Vec<3>& t_gamma_norm) :
-            m_area(math::area(t_alpha_pos, t_beta_pos, t_gamma_pos)),
-            m_plane_norm(math::normalise(
-                (m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^ (m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos())))
+        Triangle::Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm) :
+            m_pos(t_pos),
+            m_norm(t_norm),
+            m_area(math::area(t_pos)),
+            m_plane_norm(init_norm())
         {
         }
+
 
         //  -- Initialisation --
         /**
