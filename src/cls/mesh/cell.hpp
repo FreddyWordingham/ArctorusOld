@@ -88,8 +88,8 @@ namespace arc
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
             std::tuple<size_t, double, double> get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
                                                                   const std::vector<equip::Entity>& t_entity) const;
-            std::tuple<size_t, double, math::Vec<3>> get_dist_to_ccd(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                                                     const std::vector<detector::Ccd>& t_ccd) const;
+            std::tuple<size_t, double, double> get_dist_to_ccd(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                               const std::vector<detector::Ccd>& t_ccd) const;
             std::tuple<size_t, double, math::Vec<3>> get_dist_to_spectrometer(const math::Vec<3>& t_pos,
                                                                               const math::Vec<3>& t_dir, const std::vector<
                 detector::Spectrometer>& t_spectrometer) const;
