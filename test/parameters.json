@@ -1,21 +1,22 @@
 {
-    "seed":        77,
-    "roulette":    {
+    "output_dir_name": "intralipid_001-0",
+    "seed":            77,
+    "roulette":        {
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":    1e3,
-    "pre_render":  false,
-    "post_render": false,
-    "grid":        {
+    "num_phot":        1e3,
+    "pre_render":      false,
+    "post_render":     false,
+    "grid":            {
         "min":   [-11e-3, -11e-3, -26e-3],
         "max":   [11e-3, 11e-3, 34e-3],
         "cells": [11, 11, 31]
     },
-    "aether":      {
+    "aether":          {
         "mat": "materials/intralipid_001-0.mat"
     },
-    "entities":    {
+    "entities":        {
         "detector_mirror": {
             "mesh":  "meshes/detector/mirror.obj",
             "mat":   "materials/mirror.mat",
@@ -32,7 +33,7 @@
             "scale": [1e-3, 1e-3, 1e-3]
         }
     },
-    "lights":        {
+    "lights":          {
         "detector_led": {
             "power": 1.0,
             "mesh":  "meshes/detector/led.obj",
@@ -40,9 +41,9 @@
             "scale": [1e-3, 1e-3, 1e-3]
         }
     },
-    "ccds":          {
+    "ccds":            {
     },
-    "spectrometers": {
+    "spectrometers":   {
         "detector_spectrometer": {
             "mesh":  "meshes/detector/spectrometer.obj",
             "min":   300E-9,
