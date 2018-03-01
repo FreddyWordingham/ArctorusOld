@@ -157,7 +157,7 @@ namespace arc
                 r_cdf[i] = r_cdf[i - 1] + base[i - 1];
             }
 
-            assert(math::equal(m_cdf.back(), 1.0));
+            assert(math::equal(r_cdf.back(), 1.0));
 
             return (r_cdf);
         }
