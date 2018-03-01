@@ -13,6 +13,7 @@
 #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 
 
 
