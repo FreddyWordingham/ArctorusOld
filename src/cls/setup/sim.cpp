@@ -506,7 +506,7 @@ namespace arc
                         phot.move(spectrometer_dist);
 
                         // Check if photon hits the front of the detector.
-                        if ((phot.get_dir() * spectrometer_norm) < 0.0)
+//                        if ((phot.get_dir() * spectrometer_norm) < 0.0)
                         {
                             m_spectrometer[spectrometer_index].add_hit(phot.get_wavelength(), phot.get_weight());
                         }
@@ -550,12 +550,6 @@ namespace arc
                     }
                     else if (entity_dist < cell_dist)   // Change entity.
                     {
-                        // If entity normal is facing away, multiply it by -1.
-                        if ((phot.get_dir() * entity_norm) > 0.0)
-                        {
-                            entity_norm = entity_norm * -1.0;
-                        }
-
                         energy += entity_dist * phot.get_weight();
 
                         // Determine the material indices.
@@ -584,7 +578,7 @@ namespace arc
                         const double n_t = mat_t.get_ref_index(phot.get_wavelength());
 
                         // Calculate incident angle.
-                        const double a_i = acos(-1.0 * (phot.get_dir() * entity_norm));
+                        const double a_i = acos(entity_i_dot_n);
                         assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
 
                         // Check for total internal reflection.
