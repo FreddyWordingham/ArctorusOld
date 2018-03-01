@@ -57,9 +57,9 @@ namespace arc
         //  -- Setters --
         void Ccd::add_hit(const math::Vec<3>& t_pos, const double t_weight, const double t_wavelength)
         {
-            const math::Vec<3> alpha = m_mesh.get_tri(1).get_vert(1).get_pos();
-            const math::Vec<3> beta  = m_mesh.get_tri(1).get_vert(2).get_pos();
-            const math::Vec<3> gamma = m_mesh.get_tri(1).get_vert(0).get_pos();
+            const math::Vec<3> alpha = m_mesh.get_tri(1).get_pos(1);
+            const math::Vec<3> beta  = m_mesh.get_tri(1).get_pos(2);
+            const math::Vec<3> gamma = m_mesh.get_tri(1).get_pos(0);
 
             const double theta = std::acos(
                 ((t_pos - alpha) * (gamma - alpha)) / ((t_pos - alpha).magnitude() * (gamma - alpha).magnitude()));
