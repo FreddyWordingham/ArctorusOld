@@ -130,8 +130,8 @@ namespace arc
             const math::Vec<3> edge_1 = m_pos[BETA] - m_pos[ALPHA];
             const math::Vec<3> edge_2 = m_pos[GAMMA] - m_pos[ALPHA];
 
-            const math::Vec<3> q = t_dir ^edge_2;
-            const double       a = edge_1 * q;
+            const math::Vec<3> t = t_dir ^edge_2;
+            const double       a = edge_1 * t;
 
             // Check if ray is almost parallel to the triangle.
             if (std::fabs(a) <= std::numeric_limits<double>::epsilon())
@@ -145,7 +145,7 @@ namespace arc
 
             // Calculate barycentric coordinates.
             const double gamma = r * t_dir;
-            const double beta  = s * q;
+            const double beta  = s * t;
             const double alpha = 1.0 - beta - gamma;
 
             // Check hit is on triangle (rather than somewhere else in the plane).
@@ -166,9 +166,19 @@ namespace arc
             }
 
             // Determine interpolated normal.
-            math::Vec<3> r_norm = math::normalise((m_norm[ALPHA] * alpha) + (m_norm[BETA] * beta) + (m_norm[GAMMA] * gamma));
+            const math::Vec<3> d = ((m_plane_norm * t_dir) > 0.0) ? t_dir : (t_dir * -1.0);
 
-            return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
+            const math::Vec<3> phong = math::normalise(
+                (m_norm[ALPHA] * alpha) + (m_norm[BETA] * beta) + (m_norm[GAMMA] * gamma));
+
+            const double       f    = (m_cons[ALPHA] * alpha) + (m_cons[BETA] * beta) + (m_cons[GAMMA] * gamma);
+            const double       q    = math::square(1.0 - (f * (2.0 / M_PI))) / (1.0 + (2.0 * f * (1.0 - (2.0 / M_PI))));
+            const double       b    = d * phong;
+            const double       g    = 1.0 + (q * (b - 1.0));
+            const double       p    = std::sqrt(q * ((1.0 + g) / (1.0 + b)));
+            const math::Vec<3> rect = (phong * (g + (p * b))) - (d * p);
+
+            return (std::pair<double, math::Vec<3>>(r_dist, math::normalise(d + rect)));
         }
 
 
