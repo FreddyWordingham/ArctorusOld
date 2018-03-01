@@ -172,7 +172,10 @@ namespace arc
             const size_t rows     = t_col_data.front().size();
             for (size_t  i        = 1; i < t_col_data.size(); ++i)
             {
-                assert(t_col_data[i].size() == rows);
+                if (t_col_data[i].size() != rows)
+                {
+                    ERROR("Unable to construct data::Column object.", "Columns must all contain the same number of rows.");
+                }
             }
 
             std::vector<Column> r_col;
