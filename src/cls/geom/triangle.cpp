@@ -68,6 +68,12 @@ namespace arc
         math::Vec<3> Triangle::init_plane_norm(const std::array<math::Vec<3>, 3>& t_pos,
                                                const std::array<math::Vec<3>, 3>& t_norm) const
         {
+            // If USE_FLAT is true, set plane normal to true.
+            if (USE_FLAT)
+            {
+                return (true);
+            }
+
             // Compute the cross-product of two edges to find the triangle's normal.
             math::Vec<3> r_plane_norm = math::normalise((t_pos[BETA] - t_pos[ALPHA]) ^ (t_pos[GAMMA] - t_pos[ALPHA]));
 
