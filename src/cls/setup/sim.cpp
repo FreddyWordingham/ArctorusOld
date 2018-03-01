@@ -125,7 +125,7 @@ namespace arc
          */
         phys::Material Sim::init_aether(const data::Json& t_json) const
         {
-            LOG("Constructing aether.");
+            LOG("Constructing aether       :");
 
             // Get file paths.
             const std::string mat_path = t_json.parse_child<std::string>("mat");
@@ -151,7 +151,7 @@ namespace arc
             // Construct the entity objects.
             for (size_t i = 0; i < entity_name.size(); ++i)
             {
-                LOG("Constructing entity : " << entity_name[i]);
+                LOG("Constructing entity       : " << entity_name[i]);
 
                 // Create a json object of the entity.
                 const data::Json json_entity = t_json[entity_name[i]];
@@ -192,7 +192,7 @@ namespace arc
             // Construct the light objects.
             for (size_t i = 0; i < light_name.size(); ++i)
             {
-                LOG("Constructing light : " << light_name[i]);
+                LOG("Constructing light        : " << light_name[i]);
 
                 // Create a json object of the light.
                 const data::Json json_light = t_json[light_name[i]];
@@ -237,7 +237,7 @@ namespace arc
             // Construct the ccd objects.
             for (size_t i = 0; i < ccd_name.size(); ++i)
             {
-                LOG("Constructing ccd : " << ccd_name[i]);
+                LOG("Constructing ccd          : " << ccd_name[i]);
 
                 // Create a json object of the ccd.
                 const data::Json json_ccd = t_json[ccd_name[i]];
