@@ -181,7 +181,8 @@ namespace arc
             }
 
             // Determine the incident vector.
-            const math::Vec<3> i = ((t_dir * m_plane_norm) > 0.0) ? t_dir : -t_dir;
+            const bool         reversed = (t_dir * m_plane_norm) > 0.0;
+            const math::Vec<3> i        = reversed ? t_dir : -t_dir;
             assert((i * m_plane_norm) > 0.0);
 
             // Determine interpolated normal.
@@ -197,7 +198,7 @@ namespace arc
 
             assert(r_norm.is_normalised());
 
-            return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
+            return (std::pair<double, math::Vec<3>>(r_dist, reversed ? r_norm : -r_norm));
         }
 
 
