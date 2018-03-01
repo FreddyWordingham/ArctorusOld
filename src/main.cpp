@@ -69,7 +69,9 @@ int main(const int t_argc, const char** t_argv)
     pdt.save_grid_images(grid_images_dir);
 
     // Save ccd data.
-    pdt.save_ccd_images();
+    const std::string ccd_images_dir = output_dir + "ccd_images/";
+    arc::utl::create_directory(ccd_images_dir);
+    pdt.save_ccd_images(ccd_images_dir);
 
     // Save spectrometer data.
     pdt.save_spectrometer_data();
