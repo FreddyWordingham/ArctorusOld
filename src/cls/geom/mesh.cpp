@@ -211,7 +211,7 @@ namespace arc
 
                     r_tri.push_back(
                         Triangle({{vert_pos[pos_index[ALPHA]], vert_pos[pos_index[BETA]], vert_pos[pos_index[GAMMA]]}},
-                                 {{vert_norm[norm_index[ALPHA]], vert_norm[norm_index[BETA]], vert_norm[norm_index[GAMMA]]}})));
+                                 {{vert_norm[norm_index[ALPHA]], vert_norm[norm_index[BETA]], vert_norm[norm_index[GAMMA]]}}));
                 }
 
                 if (line_stream.fail())
