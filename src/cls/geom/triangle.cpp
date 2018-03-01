@@ -153,12 +153,11 @@ namespace arc
             }
 
             // Calculate the world-space cartesian coordinates from the barycentric coordinates.
-            const math::Vec<3> r_pos = m_vert[GAMMA].get_pos() + ((m_vert[ALPHA].get_pos() - m_vert[GAMMA]
-                .get_pos()) * a) + ((m_vert[BETA].get_pos() - m_vert[GAMMA].get_pos()) * b);
+            const math::Vec<3> r_pos = m_pos[GAMMA] + ((m_pos[ALPHA] - m_pos[GAMMA]) * a) + ((m_pos[BETA] - m_pos[GAMMA]) * b);
 
             // Calculate the corresponding normal.
             const math::Vec<3> r_norm = math::normalise(
-                (m_vert[ALPHA].get_norm() * a) + (m_vert[BETA].get_norm() * b) + (m_vert[GAMMA].get_norm() * (1.0 - a - b)));
+                (m_norm[ALPHA] * a) + (m_norm[BETA] * b) + (m_norm[GAMMA] * (1.0 - a - b)));
 
             assert(r_norm.is_normalised());
 
