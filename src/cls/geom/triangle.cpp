@@ -43,8 +43,7 @@ namespace arc
         math::Vec<3> Triangle::init_norm() const
         {
             // Compute the cross-product of two edges to find the triangle's normal.
-            math::Vec<3> r_norm = math::normalise(
-                (m_vert[BETA].get_pos() - m_vert[ALPHA].get_pos()) ^ (m_vert[GAMMA].get_pos() - m_vert[ALPHA].get_pos()));
+            math::Vec<3> r_norm = math::normalise((m_pos[BETA] - m_pos[ALPHA]) ^ (m_pos[GAMMA] - m_pos[ALPHA]));
 
             assert(r_norm.is_normalised());
 
