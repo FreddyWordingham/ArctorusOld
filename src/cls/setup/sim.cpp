@@ -14,14 +14,12 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/config.hpp"
 #include "gen/optics.hpp"
 
 //  -- Utility --
 #include "utl/file.hpp"
 
 //  -- Classes --
-#include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
 
 
@@ -464,17 +462,17 @@ namespace arc
                     const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
                     size_t       entity_index;
                     double       entity_dist;
-                    math::Vec<3> entity_norm;
-                    std::tie(entity_index, entity_dist, entity_norm) = cell
+                    double       entity_i_dot_n;
+                    std::tie(entity_index, entity_dist, entity_i_dot_n) = cell
                         ->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
-                    size_t       ccd_index;
-                    double       ccd_dist;
-                    math::Vec<3> ccd_norm;
-                    std::tie(ccd_index, ccd_dist, ccd_norm) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
-                    size_t       spectrometer_index;
-                    double       spectrometer_dist;
-                    math::Vec<3> spectrometer_norm;
-                    std::tie(spectrometer_index, spectrometer_dist, spectrometer_norm) = cell
+                    size_t ccd_index;
+                    double ccd_dist;
+                    double ccd_i_dot_n;
+                    std::tie(ccd_index, ccd_dist, ccd_i_dot_n) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
+                    size_t spectrometer_index;
+                    double spectrometer_dist;
+                    double spectrometer_i_dot_n;
+                    std::tie(spectrometer_index, spectrometer_dist, spectrometer_i_dot_n) = cell
                         ->get_dist_to_spectrometer(phot.get_pos(), phot.get_dir(), m_spectrometer);
 
                     assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
