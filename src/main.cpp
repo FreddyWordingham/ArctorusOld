@@ -16,10 +16,8 @@
 
 //  -- Utility --
 #include "utl/file.hpp"
-#include "utl/string.hpp"
 
 //  -- Classes --
-#include "cls/file/handle.hpp"
 #include "cls/setup/sim.hpp"
 
 
@@ -46,8 +44,8 @@ int main(const int t_argc, const char** t_argv)
     LOG("Setup file: '" << parameters_filepath << "'.");
 
     // Create output directory and check it was created successfully,
-    VAL(arc::utl::strip_extension(t_argv[1]));
-    const std::string output_dir = "output_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
+    const std::string output_dir = "output_" + arc::utl::strip_path(
+        arc::utl::strip_extension(parameters_filepath)) + "_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
     arc::utl::create_directory(output_dir);
 
     // Create the setup json file.
