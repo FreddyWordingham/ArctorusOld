@@ -42,18 +42,18 @@ namespace arc
         {
             //  == FIELDS ==
           private:
+            //  -- Vertices --
+            const std::array<math::Vec<3>, 3> m_pos;    //! Vertex positions.
+
             //  -- Properties --
             const double       m_area;          //! Area of the triangle.
             const math::Vec<3> m_plane_norm;    //! Normal of the triangle plane.
-
-            //  -- Vertices --
 
 
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Triangle(const math::Vec<3>& t_alpha_pos, const math::Vec<3>& t_beta_pos, const math::Vec<3>& t_gamma_pos,
-                     const math::Vec<3>& t_alpha_norm, const math::Vec<3>& t_beta_norm, const math::Vec<3>& t_gamma_norm)
+            Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm);
 
             //  -- Initialisation --
             math::Vec<3> init_norm() const;
