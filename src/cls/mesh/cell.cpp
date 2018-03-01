@@ -176,9 +176,9 @@ namespace arc
         bool Cell::tri_overlap(const math::Vec<3>& t_center, const math::Vec<3>& t_half_size, const geom::Triangle& t_tri) const
         {
             // Translate everything so the box center is at the origin.
-            const math::Vec<3> v0 = t_tri.get_vert(0).get_pos() - t_center;
-            const math::Vec<3> v1 = t_tri.get_vert(1).get_pos() - t_center;
-            const math::Vec<3> v2 = t_tri.get_vert(2).get_pos() - t_center;
+            const math::Vec<3> v0 = t_tri.get_pos(0) - t_center;
+            const math::Vec<3> v1 = t_tri.get_pos(1) - t_center;
+            const math::Vec<3> v2 = t_tri.get_pos(2) - t_center;
 
             // Compute triangle edges.
             const math::Vec<3> e0 = v1 - v0;
