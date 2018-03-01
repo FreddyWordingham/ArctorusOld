@@ -125,7 +125,7 @@ namespace arc
          *
          *  @post   r_i_dot_n must be less than pi/2.
          *
-         *  @return The distance to intersection, and the cosine of the -t_dir * consistent normal at the intersection point.
+         *  @return The distance to intersection, and the consistent normal at the intersection point.
          */
         std::pair<double, math::Vec<3>> Triangle::get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
         {
