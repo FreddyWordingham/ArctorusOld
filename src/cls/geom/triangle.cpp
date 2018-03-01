@@ -26,7 +26,7 @@ namespace arc
             m_pos(t_pos),
             m_norm(t_norm),
             m_area(math::area(t_pos)),
-            m_plane_norm(init_norm())
+            m_plane_norm(init_plane_norm())
         {
         }
 
@@ -40,7 +40,7 @@ namespace arc
          *
          *  @return The normal vector of the triangle.
          */
-        math::Vec<3> Triangle::init_norm() const
+        math::Vec<3> Triangle::init_plane_norm() const
         {
             // Compute the cross-product of two edges to find the triangle's normal.
             math::Vec<3> r_norm = math::normalise((m_pos[BETA] - m_pos[ALPHA]) ^ (m_pos[GAMMA] - m_pos[ALPHA]));

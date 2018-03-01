@@ -54,7 +54,7 @@ namespace arc
             Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm);
 
             //  -- Initialisation --
-            math::Vec<3> init_norm() const;
+            math::Vec<3> init_plane_norm() const;
 
 
             //  == METHODS ==
