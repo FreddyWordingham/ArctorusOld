@@ -74,7 +74,9 @@ int main(const int t_argc, const char** t_argv)
     pdt.save_ccd_images(ccd_images_dir);
 
     // Save spectrometer data.
-    pdt.save_spectrometer_data();
+    const std::string spectrometer_data_dir = output_dir + "spectrometer_data/";
+    arc::utl::create_directory(spectrometer_data_dir);
+    pdt.save_spectrometer_data(spectrometer_data_dir);
 
     // Render the simulation scene.
     if (setup.parse_child<bool>("post_render", false))
