@@ -30,7 +30,7 @@
  */
 int main(const int t_argc, const char** t_argv)
 {
-    LOG("---- Initialising Arctorus ----")
+    SEC("Initialising Arctorus");
 
     // Check the number of command line arguments.
     if (t_argc != 2)
