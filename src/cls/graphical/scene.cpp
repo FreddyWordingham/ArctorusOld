@@ -393,12 +393,12 @@ namespace arc
             {
                 for (size_t j = 0; j < 3; ++j)
                 {
-                    vertices.push_back(Vertex({static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
-                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
-                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
-                                              {static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
-                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
-                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
+                    vertices.push_back(Vertex({static_cast<float>(t_ent.get_mesh().get_tri(i).get_pos(j)[X]),
+                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_pos(j)[Y]),
+                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_pos(j)[Z])},
+                                              {static_cast<float>(t_ent.get_mesh().get_tri(i).get_norm(j)[X]),
+                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_norm(j)[Y]),
+                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_norm(j)[Z])}));
                 }
             }
 
