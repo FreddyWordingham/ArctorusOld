@@ -5,7 +5,7 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":        1e3,
+    "num_phot":        1e4,
     "pre_render":      false,
     "post_render":     true,
     "grid":            {
@@ -28,7 +28,7 @@
             "power": 1.0,
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc",
-            "scale": [1e-3, 1e-3, 1e-3],
+            "scale": [1.1e-3, 1.1e-3, 1.1e-3],
             "trans": [0.0, 0.0, 1.5e-3],
             "dir":   [0.0, 0.0, -1.0]
         }
