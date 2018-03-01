@@ -38,7 +38,8 @@ namespace arc
             m_area(math::area(t_pos)),
             m_plane_norm(init_plane_norm(t_pos, t_norm)),
             m_pos(t_pos),
-            m_norm(t_norm)
+            m_norm(t_norm),
+            m_cons(init_cons())
         {
             assert(m_norm[ALPHA].is_normalised());
             assert(m_norm[BETA].is_normalised());
@@ -81,6 +82,29 @@ namespace arc
             assert((r_plane_norm * t_norm[GAMMA]) > 0.0);
 
             return (r_plane_norm);
+        }
+
+        /**
+         *  Initialise the array of consistent normals.
+         *
+         *  @return The initialised array of consistent normal vectors.
+         */
+        std::array<double, 3> Triangle::init_cons() const
+        {
+            // Create the return array of consistent normal vectors.
+            std::array<double, 3> r_cons;
+
+            // Determine the consistent normals.
+            for (size_t i = 0; i < 3; ++i)
+            {
+                const double n = m_plane_norm * m_norm[i];
+                assert(n > 0.0);
+
+                r_cons[i] = std::acos(n) * (1.0 + (0.03632 * math::square(1.0 - n)));
+                assert(r_cons[i] > 0.0);
+            }
+
+            return (r_cons);
         }
 
 
