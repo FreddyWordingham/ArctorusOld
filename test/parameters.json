@@ -1,21 +1,21 @@
 {
-    "seed":          77,
-    "roulette":      {
+    "seed":        77,
+    "roulette":    {
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":      1e6,
-    "pre_render":    false,
-    "post_render":   false,
-    "grid":          {
+    "num_phot":    1e1,
+    "pre_render":  false,
+    "post_render": true,
+    "grid":        {
         "min":   [-11e-3, -11e-3, -26e-3],
         "max":   [11e-3, 11e-3, 34e-3],
-        "cells": [101, 101, 301]
+        "cells": [5, 4, 6]
     },
-    "aether":        {
+    "aether":      {
         "mat": "materials/intralipid_001-0.mat"
     },
-    "entities":      {
+    "entities":    {
         "detector_mirror": {
             "mesh":  "meshes/detector/mirror.obj",
             "mat":   "materials/mirror.mat",

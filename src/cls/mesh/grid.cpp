@@ -204,29 +204,30 @@ namespace arc
             assert(t_dimension < 3);
 
             // Set dimensions.
-            std::array<size_t, 3> dim;
-            std::string           dim_name;
+            size_t      width, height, slice;
+            std::string dim_name;
             switch (t_dimension)
             {
                 case X:
-                    dim[X] = Y;
-                    dim[Y] = Z;
-                    dim[Z] = X;
+                    width    = Y;
+                    height   = Z;
+                    slice    = X;
                     dim_name = "X";
                     break;
                 case Y:
-                    dim[X] = X;
-                    dim[Y] = Z;
-                    dim[Z] = Y;
+                    width    = X;
+                    height   = Z;
+                    slice    = Y;
                     dim_name = "Y";
                     break;
                 case Z:
-                    dim[X] = X;
-                    dim[Y] = Y;
-                    dim[Z] = Z;
+                    width    = X;
+                    height   = Y;
+                    slice    = Z;
                     dim_name = "Z";
                     break;
-                default: ERROR("Unable to save grid slice images.", "The given dimension: '" << dim[Z] << "' is invalid.");
+                default: ERROR("Unable to save grid slice images.",
+                               "The given slice dimension: '" << t_dimension << "' is invalid.");
             }
 
             // Create sub-directory.
@@ -234,21 +235,32 @@ namespace arc
             utl::create_directory(sub_dir);
 
             // Write the images.
-            for (size_t i = 0; i < m_num_cells[dim[Z]]; ++i)
+            for (size_t i = 0; i < m_num_cells[slice]; ++i)
             {
-                TEMP("Saving " + dim_name + " slices", 100.0 * i / m_num_cells[dim[Z]]);
+                TEMP("Saving " + dim_name + " slices", 100.0 * i / m_num_cells[slice]);
 
                 // Create the image.
-                data::Image img(m_num_cells[dim[X]], m_num_cells[dim[Y]]);
+                data::Image img(m_num_cells[width], m_num_cells[height]);
 
                 // Write each pixel.
-                for (size_t j = 0; j < m_num_cells[dim[X]]; ++j)
+                for (size_t j = 0; j < m_num_cells[width]; ++j)
                 {
-                    for (size_t k = 0; k < m_num_cells[dim[Y]]; ++k)
+                    for (size_t k = 0; k < m_num_cells[height]; ++k)
                     {
-                        const std::array<size_t, 3> index({{j, k, i}});
-                        img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(
-                            t_data[index[dim[X]]][index[dim[Y]]][index[dim[Z]]]));
+                        switch (t_dimension)
+                        {
+                            case X:
+                                img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(t_data[i][j][k]));
+                                break;
+                            case Y:
+                                img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(t_data[j][i][k]));
+                                break;
+                            case Z:
+                                img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(t_data[j][k][i]));
+                                break;
+                            default: ERROR("Unable to save grid slice images.",
+                                           "The given slice dimension: '" << t_dimension << "' is invalid.");
+                        }
                     }
                 }
 
