@@ -43,8 +43,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Properties --
-            const double       m_area;  //! Area of the triangle.
-            const math::Vec<3> m_norm;  //! Normal of the triangle.
+            const double       m_area;          //! Area of the triangle.
+            const math::Vec<3> m_plane_norm;    //! Normal of the triangle plane.
 
             //  -- Vertices --
 
