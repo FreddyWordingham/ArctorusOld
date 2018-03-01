@@ -131,11 +131,14 @@ namespace arc
         {
             assert(t_dir.is_normalised());
 
+            // Determine the incident vector.
+            const math::Vec<3> i = ((t_dir * m_plane_norm) < 0.0) ? -t_dir : t_dir;
+
             // Calculate edge vectors.
             const math::Vec<3> edge_1 = m_pos[BETA] - m_pos[ALPHA];
             const math::Vec<3> edge_2 = m_pos[GAMMA] - m_pos[ALPHA];
 
-            const math::Vec<3> t = t_dir ^edge_2;
+            const math::Vec<3> t = i ^edge_2;
             const double       a = edge_1 * t;
 
             // Check if ray is almost parallel to the triangle.
@@ -149,7 +152,7 @@ namespace arc
             const math::Vec<3> r = s ^edge_1;
 
             // Calculate barycentric coordinates.
-            const double gamma = r * t_dir;
+            const double gamma = r * i;
             const double beta  = s * t;
             const double alpha = 1.0 - beta - gamma;
 
@@ -171,14 +174,12 @@ namespace arc
             }
 
             // Determine interpolated normal.
-            const math::Vec<3> d = ((m_plane_norm * t_dir) > 0.0) ? t_dir : (t_dir * -1.0);
-
             const math::Vec<3> phong = math::normalise(
                 (m_norm[ALPHA] * alpha) + (m_norm[BETA] * beta) + (m_norm[GAMMA] * gamma));
 
             const double f = (m_cons[ALPHA] * alpha) + (m_cons[BETA] * beta) + (m_cons[GAMMA] * gamma);
             const double q = math::square(1.0 - (f * (2.0 / M_PI))) / (1.0 + (2.0 * f * (1.0 - (2.0 / M_PI))));
-            const double b = d * phong;
+            const double b = i * phong;
             const double g = 1.0 + (q * (b - 1.0));
             const double p = std::sqrt(q * ((1.0 + g) / (1.0 + b)));
 
