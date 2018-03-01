@@ -17,6 +17,7 @@
 //  -- System --
 #include <array>
 #include <cassert>
+#include <chrono>
 #include <cstdio>
 #include <iostream>
 #include <sstream>
