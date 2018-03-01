@@ -392,6 +392,9 @@ namespace arc
          *  @param  t_dir       Direction of the ray.
          *  @param  t_entity    Vector of entities within the simulation.
          *
+         *  @post   r_dist must be greater than zero.
+         *  @post   r_i_dot_n must be between zero and pi/2.0.
+         *
          *  @return A tuple containing the entity index, distance to the entity triangle and the normal at the intersection.
          */
         std::tuple<size_t, double, double> Cell::get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
@@ -407,9 +410,9 @@ namespace arc
 
             // Run through all entity triangles and determine the closest intersection distance.
             size_t      r_index;
-            double      r_dist = std::numeric_limits<double>::max();
-            double      r_i_dot_n;
-            for (size_t i      = 0; i < m_entity_list.size(); ++i)
+            double      r_dist    = std::numeric_limits<double>::max();
+            double      r_i_dot_n = -1.0;
+            for (size_t i         = 0; i < m_entity_list.size(); ++i)
             {
                 // Get distance to intersection.
                 double tri_dist;
@@ -427,6 +430,7 @@ namespace arc
             }
 
             assert(r_dist > 0.0);
+            assert((r_i_dot_n >= 0.0) && (r_i_dot_n < (M_PI / 2.0)));
 
             return (std::tuple<size_t, double, double>(r_index, r_dist, r_i_dot_n));
         }
@@ -438,6 +442,9 @@ namespace arc
          *  @param  t_pos   Initial position of the ray.
          *  @param  t_dir   Direction of the ray.
          *  @param  t_ccd   Vector of ccds within the simulation.
+         *
+         *  @post   r_dist must be greater than zero.
+         *  @post   r_i_dot_n must be between zero and pi/2.0.
          *
          *  @return A tuple containing the ccd index, distance to the ccd triangle and the normal at the intersection.
          */
@@ -454,9 +461,9 @@ namespace arc
 
             // Run through all ccd triangles and determine the closest intersection distance.
             size_t      r_index;
-            double      r_dist = std::numeric_limits<double>::max();
-            double      r_i_dot_n;
-            for (size_t i      = 0; i < m_ccd_list.size(); ++i)
+            double      r_dist    = std::numeric_limits<double>::max();
+            double      r_i_dot_n = -1.0;
+            for (size_t i         = 0; i < m_ccd_list.size(); ++i)
             {
                 // Get distance to intersection.
                 double tri_dist;
@@ -474,6 +481,7 @@ namespace arc
             }
 
             assert(r_dist > 0.0);
+            assert((r_i_dot_n >= 0.0) && (r_i_dot_n < (M_PI / 2.0)));
 
             return (std::tuple<size_t, double, double>(r_index, r_dist, r_i_dot_n));
         }
@@ -485,6 +493,9 @@ namespace arc
          *  @param  t_pos           Initial position of the ray.
          *  @param  t_dir           Direction of the ray.
          *  @param  t_spectrometer  Vector of spectrometers within the simulation.
+         *
+         *  @post   r_dist must be greater than zero.
+         *  @post   r_i_dot_n must be between zero and pi/2.0.
          *
          *  @return A tuple containing the spectrometer index, distance to the spectrometer triangle and the normal at the
          *  intersection.
@@ -503,9 +514,9 @@ namespace arc
 
             // Run through all spectrometer triangles and determine the closest intersection distance.
             size_t      r_index;
-            double      r_dist = std::numeric_limits<double>::max();
-            double      r_i_dot_n;
-            for (size_t i      = 0; i < m_spectrometer_list.size(); ++i)
+            double      r_dist    = std::numeric_limits<double>::max();
+            double      r_i_dot_n = -1.0;
+            for (size_t i         = 0; i < m_spectrometer_list.size(); ++i)
             {
                 // Get distance to intersection.
                 double tri_dist;
@@ -524,6 +535,7 @@ namespace arc
             }
 
             assert(r_dist > 0.0);
+            assert((r_i_dot_n >= 0.0) && (r_i_dot_n < (M_PI / 2.0)));
 
             return (std::tuple<size_t, double, double>(r_index, r_dist, r_i_dot_n));
         }
