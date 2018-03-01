@@ -61,7 +61,7 @@ namespace arc
             void add_hit(double t_wavelength, double t_weight);
 
             //  -- Save --
-            void save() const;
+            void save(const std::string& t_output_dir) const;
         };
 
 

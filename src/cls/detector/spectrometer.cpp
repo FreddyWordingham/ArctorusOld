@@ -78,10 +78,12 @@ namespace arc
         //  -- Save --
         /**
          *  Save the state of the spectrometer.
+         *
+         *  @param  t_output_dir    Directory to write the images to.
          */
-        void Spectrometer::save() const
+        void Spectrometer::save(const std::string& t_output_dir) const
         {
-            m_data.save(m_name + ".dat");
+            m_data.save(t_output_dir + m_name + ".dat");
         }
 
 
