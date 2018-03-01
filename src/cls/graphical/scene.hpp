@@ -79,18 +79,18 @@ namespace arc
         constexpr const float ENTITIY_AMB_POW            = 0.1f;    //! Ambient lighting of rendered entities.
         constexpr const float CCD_AMB_POW                = 0.6f;    //! Ambient lighting of rendered ccds.
         constexpr const float SPECTROMETER_AMB_POW       = 0.6f;    //! Ambient lighting of rendered spectrometers.
-        constexpr const float ENTITY_NORMAL_LENGTH       = 0.5f;    //! Length to draw entity normals.
-        constexpr const float CCD_NORMAL_LENGTH          = 0.5f;    //! Length to draw ccd normals.
-        constexpr const float SPECTROMETER_NORMAL_LENGTH = 0.5f;    //! Length to draw spectrometer normals.
+        constexpr const float ENTITY_NORMAL_LENGTH       = 0.5e-3f; //! Length to draw entity normals.
+        constexpr const float CCD_NORMAL_LENGTH          = 0.5e-3f; //! Length to draw ccd normals.
+        constexpr const float SPECTROMETER_NORMAL_LENGTH = 0.5e-3f; //! Length to draw spectrometer normals.
 
         //  -- Rendering --
-        constexpr const float  PHOTON_TRAVEL_SPEED = 1e-11f; //! Photon travel speed when rendering path data.
-        constexpr const double LIGHT_START_HUE     = 30.0;   //! Light prop start hue.
-        constexpr const double LIGHT_END_HUE       = 60.0;   //! Light prop end hue.
-        constexpr const double ENTITY_START_HUE    = 300.0;  //! Entity prop start hue.
-        constexpr const double ENTITY_END_HUE      = 330.0;  //! Entity prop end hue.
-        constexpr const double CCD_START_HUE       = 120.0;  //! Ccd prop start hue.
-        constexpr const double CCD_END_HUE         = 150.0;  //! Ccd prop end hue.
+        constexpr const float  PHOTON_TRAVEL_SPEED    = 1e-11f; //! Photon travel speed when rendering path data.
+        constexpr const double LIGHT_START_HUE        = 30.0;   //! Light prop start hue.
+        constexpr const double LIGHT_END_HUE          = 60.0;   //! Light prop end hue.
+        constexpr const double ENTITY_START_HUE       = 300.0;  //! Entity prop start hue.
+        constexpr const double ENTITY_END_HUE         = 330.0;  //! Entity prop end hue.
+        constexpr const double CCD_START_HUE          = 120.0;  //! Ccd prop start hue.
+        constexpr const double CCD_END_HUE            = 150.0;  //! Ccd prop end hue.
         constexpr const double SPECTROMETER_START_HUE = 165.0;  //! Spectrometer prop start hue.
         constexpr const double SPECTROMETER_END_HUE   = 195.0;  //! Spectrometer prop end hue.
 
