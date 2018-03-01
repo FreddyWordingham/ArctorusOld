@@ -170,6 +170,16 @@ namespace arc
                 return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
+            // If triangle is flat, return the plane normal.
+            if (m_flat)
+            {
+                if ((t_dir * m_plane_norm) < 0.0)
+                {
+                    return (std::pair<double, math::Vec<3>>(r_dist, m_plane_norm));
+                }
+                return (std::pair<double, math::Vec<3>>(r_dist, -m_plane_norm));
+            }
+
             // Determine the incident vector.
             const math::Vec<3> i = ((t_dir * m_plane_norm) > 0.0) ? t_dir : -t_dir;
             assert((i * m_plane_norm) > 0.0);
@@ -187,7 +197,7 @@ namespace arc
 
             assert(r_norm.is_normalised());
 
-            return (std::pair<double, math::Vec<3>>(r_dist, phong));
+            return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
         }
 
 
