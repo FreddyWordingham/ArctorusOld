@@ -63,7 +63,6 @@ namespace arc
           public:
             //  -- Getters --
             double get_area() const { return (m_area); }
-            inline const Vertex& get_vert(size_t t_index) const;
             std::pair<double, math::Vec<3>> get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
 
             //  -- Generation --
