@@ -87,6 +87,8 @@ namespace arc
         /**
          *  Initialise the array of consistent normals.
          *
+         *  @post   r_cons[i] must be positive.
+         *
          *  @return The initialised array of consistent normal vectors.
          */
         std::array<double, 3> Triangle::init_cons() const
