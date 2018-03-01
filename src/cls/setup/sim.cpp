@@ -14,12 +14,14 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/config.hpp"
 #include "gen/optics.hpp"
 
 //  -- Utility --
 #include "utl/file.hpp"
 
 //  -- Classes --
+#include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
 
 
@@ -462,17 +464,17 @@ namespace arc
                     const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
                     size_t       entity_index;
                     double       entity_dist;
-                    double       entity_i_dot_n;
-                    std::tie(entity_index, entity_dist, entity_i_dot_n) = cell
+                    math::Vec<3> entity_norm;
+                    std::tie(entity_index, entity_dist, entity_norm) = cell
                         ->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
-                    size_t ccd_index;
-                    double ccd_dist;
-                    double ccd_i_dot_n;
-                    std::tie(ccd_index, ccd_dist, ccd_i_dot_n) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
-                    size_t spectrometer_index;
-                    double spectrometer_dist;
-                    double spectrometer_i_dot_n;
-                    std::tie(spectrometer_index, spectrometer_dist, spectrometer_i_dot_n) = cell
+                    size_t       ccd_index;
+                    double       ccd_dist;
+                    math::Vec<3> ccd_norm;
+                    std::tie(ccd_index, ccd_dist, ccd_norm) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
+                    size_t       spectrometer_index;
+                    double       spectrometer_dist;
+                    math::Vec<3> spectrometer_norm;
+                    std::tie(spectrometer_index, spectrometer_dist, spectrometer_norm) = cell
                         ->get_dist_to_spectrometer(phot.get_pos(), phot.get_dir(), m_spectrometer);
 
                     assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
@@ -481,8 +483,8 @@ namespace arc
 
                     if (entity_dist <= SMOOTHING_LENGTH)
                     {
-                        WARN("Photon removed from loop prematurely.",
-                             "Distance to entity is shorter than the smoothing length.");
+                        //WARN("Photon removed from loop prematurely.",
+                        //    "Distance to entity is shorter than the smoothing length.");
 
 #ifdef ENABLE_PHOTON_PATHS
                         m_path.push_back(phot.get_path());
@@ -506,7 +508,7 @@ namespace arc
                         phot.move(spectrometer_dist);
 
                         // Check if photon hits the front of the detector.
-//                        if ((phot.get_dir() * spectrometer_norm) < 0.0)
+                        if ((phot.get_dir() * spectrometer_norm) < 0.0)
                         {
                             m_spectrometer[spectrometer_index].add_hit(phot.get_wavelength(), phot.get_weight());
                         }
@@ -550,6 +552,12 @@ namespace arc
                     }
                     else if (entity_dist < cell_dist)   // Change entity.
                     {
+                        // If entity normal is facing away, multiply it by -1.
+                        if ((phot.get_dir() * entity_norm) > 0.0)
+                        {
+                            entity_norm = entity_norm * -1.0;
+                        }
+
                         energy += entity_dist * phot.get_weight();
 
                         // Determine the material indices.
@@ -578,7 +586,7 @@ namespace arc
                         const double n_t = mat_t.get_ref_index(phot.get_wavelength());
 
                         // Calculate incident angle.
-                        const double a_i = acos(entity_i_dot_n);
+                        const double a_i = acos(-1.0 * (phot.get_dir() * entity_norm));
                         assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
 
                         // Check for total internal reflection.
