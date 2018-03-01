@@ -441,6 +441,11 @@ namespace arc
                 {
                     // Increment number of loops.
                     ++loops;
+                    if (loops > 1e6)
+                    {
+
+                        break;
+                    }
 
                     // Call roulette if below threshold.
                     if (phot.get_weight() < m_roulette_weight)
@@ -478,9 +483,6 @@ namespace arc
 
                     if (entity_dist <= SMOOTHING_LENGTH)
                     {
-                        VAL(scat_dist);
-                        VAL(cell_dist);
-                        VAL(entity_dist);
                         WARN("Photon removed from loop prematurely.",
                              "Distance to entity is shorter than the smoothing length.");
 

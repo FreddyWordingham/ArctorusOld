@@ -1,21 +1,21 @@
 {
-    "seed":        77,
-    "roulette":    {
+    "seed":          77,
+    "roulette":      {
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":    1e3,
-    "pre_render":  false,
-    "post_render": false,
-    "grid":        {
-        "min":   [-10.1e-3, -10.1e-3, -10.1e-3],
-        "max":   [10.1e-3, 10.1e-3, 10.1e-3],
-        "cells": [11, 11, 11]
+    "num_phot":      1e6,
+    "pre_render":    false,
+    "post_render":   false,
+    "grid":          {
+        "min":   [-11e-3, -11e-3, -26e-3],
+        "max":   [11e-3, 11e-3, 34e-3],
+        "cells": [101, 101, 301]
     },
-    "aether":      {
+    "aether":        {
         "mat": "materials/intralipid_001-0.mat"
     },
-    "entities":    {
+    "entities":      {
         "detector_mirror": {
             "mesh":  "meshes/detector/mirror.obj",
             "mat":   "materials/mirror.mat",
@@ -25,9 +25,14 @@
             "mesh":  "meshes/detector/body_flat.obj",
             "mat":   "materials/black.mat",
             "scale": [1e-3, 1e-3, 1e-3]
+        },
+        "vial":            {
+            "mesh":  "meshes/detector/vial.obj",
+            "mat":   "materials/vacuum.mat",
+            "scale": [1e-3, 1e-3, 1e-3]
         }
     },
-    "lights":      {
+    "lights":        {
         "detector_led": {
             "power": 1.0,
             "mesh":  "meshes/detector/led.obj",
