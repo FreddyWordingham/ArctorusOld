@@ -457,12 +457,14 @@ namespace arc
             {
                 for (size_t j = 0; j < 3; ++j)
                 {
-                    vertices.push_back(Vertex({static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
-                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
-                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
-                                              {static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
-                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
-                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
+                    // Get the vertex position and normal.
+                    const math::Vec<3>& pos  = t_ccd.get_mesh().get_tri(i).get_pos(j);
+                    const math::Vec<3>& norm = t_ccd.get_mesh().get_tri(i).get_norm(j);
+
+                    // Add the vertex to the list of vertices.
+                    vertices.push_back(
+                        Vertex({static_cast<float>(pos[X]), static_cast<float>(pos[Y]), static_cast<float>(pos[Z])},
+                               {static_cast<float>(norm[X]), static_cast<float>(norm[Y]), static_cast<float>(norm[Z])}));
                 }
             }
 
