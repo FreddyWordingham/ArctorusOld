@@ -134,6 +134,8 @@ namespace arc
             // Determine the incident vector.
             const math::Vec<3> i = ((t_dir * m_plane_norm) < 0.0) ? -t_dir : t_dir;
 
+            assert((i * m_plane_norm) > 0.0);
+
             // Calculate edge vectors.
             const math::Vec<3> edge_1 = m_pos[BETA] - m_pos[ALPHA];
             const math::Vec<3> edge_2 = m_pos[GAMMA] - m_pos[ALPHA];
@@ -186,7 +188,7 @@ namespace arc
 
             assert(r_norm.is_normalised());
 
-            return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
+            return (std::pair<double, math::Vec<3>>(r_dist, phong));
         }
 
 
@@ -212,6 +214,12 @@ namespace arc
 
             // Calculate the world-space cartesian coordinates from the barycentric coordinates.
             const math::Vec<3> r_pos = m_pos[GAMMA] + ((m_pos[ALPHA] - m_pos[GAMMA]) * a) + ((m_pos[BETA] - m_pos[GAMMA]) * b);
+
+            // If triangle is flat, return the plane normal.
+            if (m_flat)
+            {
+                return (std::make_pair(r_pos, m_plane_norm));
+            }
 
             // If triangle is flat, return the plane normal.
             if (m_flat)

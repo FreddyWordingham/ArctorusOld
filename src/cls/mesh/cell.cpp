@@ -403,7 +403,7 @@ namespace arc
             if (m_empty)
             {
                 return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
-                                                                 math::Vec<3>({{0.0, 0.0, 0.0}})));
+                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
             // Run through all entity triangles and determine the closest intersection distance.
@@ -416,7 +416,7 @@ namespace arc
                 double       tri_dist;
                 math::Vec<3> tri_norm;
                 std::tie(tri_dist, tri_norm) = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
-                                                                               .get_intersection(t_pos, t_dir);
+                                                                            .get_intersection(t_pos, t_dir);
 
                 // If this distance is the closest so far, accept it.
                 if ((tri_dist < r_dist) && (tri_dist > 0.0))
