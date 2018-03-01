@@ -161,6 +161,25 @@ namespace arc
         }
 
         /**
+         *  Log a section divider message.
+         *
+         *  @param  t_text  Text of the section.
+         */
+        void Logger::sec(const std::string& t_text) const
+        {
+            // Add padding lines.
+            size_t pre_pad  = 0;
+            size_t post_pad = 0;
+            if (t_text.size() < (LINE_WIDTH - 2))
+            {
+                pre_pad  = (LINE_WIDTH - (t_text.size() + 2)) / 2;
+                post_pad = LINE_WIDTH - (pre_pad + t_text.size() + 2);
+            }
+
+            print_text(CYAN, LOG, std::string(pre_pad, '-') + " " + t_text + " " + std::string(post_pad, '-') + "\n");
+        }
+
+        /**
          *  Log a verbose message.
          *
          *  @param  t_text  Message text to be logged.

@@ -187,6 +187,7 @@ namespace arc
           public:
             //  -- Logging --
             void log(const std::string& t_text) const;
+            void sec(const std::string& t_text) const;
             void verb(const std::string& t_text) const;
             template <typename T>
             void val(const std::string& t_name, const T& t_val) const;
