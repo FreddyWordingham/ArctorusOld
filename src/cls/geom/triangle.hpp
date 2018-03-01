@@ -69,7 +69,7 @@ namespace arc
             const math::Vec<3>& get_plane_norm() const { return (m_plane_norm); }
             const math::Vec<3>& get_pos(const size_t t_index) const { return (m_pos[t_index]); }
             const math::Vec<3>& get_norm(const size_t t_index) const { return (m_norm[t_index]); }
-            std::pair<double, math::Vec<3>> get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
+            std::pair<double, double> get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
 
             //  -- Generation --
             std::pair<math::Vec<3>, math::Vec<3>> gen_random_pos_and_norm() const;

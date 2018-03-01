@@ -121,9 +121,11 @@ namespace arc
          *  @param  t_pos   Start position of the ray.
          *  @param  t_dir   Direction of the ray.
          *
-         *  @return The distance to intersection, and the normal of the triangle at the intersection point.
+         *  @post   r_i_dot_n must be less than pi/2.
+         *
+         *  @return The distance to intersection, and the cosine of the -t_dir * consistent normal at the intersection point.
          */
-        std::pair<double, math::Vec<3>> Triangle::get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
+        std::pair<double, double> Triangle::get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
         {
             assert(t_dir.is_normalised());
 
@@ -138,7 +140,7 @@ namespace arc
             if (std::fabs(a) <= std::numeric_limits<double>::epsilon())
             {
                 // Does not hit triangle.
-                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
+                return (std::pair<double, double>(std::numeric_limits<double>::max(), 0.0));
             }
 
             const math::Vec<3> s = (t_pos - m_pos[ALPHA]) / a;
@@ -153,7 +155,7 @@ namespace arc
             if ((alpha < 0.0) || (beta < 0.0) || (gamma < 0.0))
             {
                 // Does not hit triangle.
-                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
+                return (std::pair<double, double>(std::numeric_limits<double>::max(), 0.0));
             }
 
             // Calculate intersection distance.
@@ -163,7 +165,7 @@ namespace arc
             if (r_dist <= 0.0)
             {
                 // Does not hit triangle.
-                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
+                return (std::pair<double, double>(std::numeric_limits<double>::max(), 0.0));
             }
 
             // Determine interpolated normal.
@@ -172,14 +174,17 @@ namespace arc
             const math::Vec<3> phong = math::normalise(
                 (m_norm[ALPHA] * alpha) + (m_norm[BETA] * beta) + (m_norm[GAMMA] * gamma));
 
-            const double       f    = (m_cons[ALPHA] * alpha) + (m_cons[BETA] * beta) + (m_cons[GAMMA] * gamma);
-            const double       q    = math::square(1.0 - (f * (2.0 / M_PI))) / (1.0 + (2.0 * f * (1.0 - (2.0 / M_PI))));
-            const double       b    = d * phong;
-            const double       g    = 1.0 + (q * (b - 1.0));
-            const double       p    = std::sqrt(q * ((1.0 + g) / (1.0 + b)));
-            const math::Vec<3> rect = (phong * (g + (p * b))) - (d * p);
+            const double f = (m_cons[ALPHA] * alpha) + (m_cons[BETA] * beta) + (m_cons[GAMMA] * gamma);
+            const double q = math::square(1.0 - (f * (2.0 / M_PI))) / (1.0 + (2.0 * f * (1.0 - (2.0 / M_PI))));
+            const double b = d * phong;
+            const double g = 1.0 + (q * (b - 1.0));
+            const double p = std::sqrt(q * ((1.0 + g) / (1.0 + b)));
 
-            return (std::pair<double, math::Vec<3>>(r_dist, math::normalise(d + rect)));
+            const double r_i_dot_n = std::sqrt((1.0 + ((g + (p * b)) * b) - p) / 2.0);
+
+            assert(r_i_dot_n < (M_PI / 2.0));
+
+            return (std::pair<double, double>(r_dist, r_i_dot_n));
         }
 
 
