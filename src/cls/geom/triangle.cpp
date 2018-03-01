@@ -39,6 +39,18 @@ namespace arc
             assert(m_norm.is_normalised());
         }
 
+        /**
+         *  Construct a triangle from three vertices.
+         *
+         *  @param  t_alpha First vertex of the triangle.
+         *  @param  t_beta  Second vertex of the triangle.
+         *  @param  t_gamma Third vertex of the triangle.
+         */
+        Triangle::Triangle(const Vertex& t_alpha, const Vertex& t_beta, const Vertex& t_gamma) :
+            Triangle({{t_alpha, t_beta, t_gamma}})
+        {
+        }
+
 
         //  -- Initialisation --
         /**
