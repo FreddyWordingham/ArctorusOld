@@ -5,7 +5,7 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":        1e4,
+    "num_phot":        1e6,
     "pre_render":      false,
     "post_render":     true,
     "grid":            {
