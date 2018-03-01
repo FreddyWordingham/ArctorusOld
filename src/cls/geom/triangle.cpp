@@ -47,7 +47,7 @@ namespace arc
          *  @param  t_gamma Third vertex of the triangle.
          */
         Triangle::Triangle(const Vertex& t_alpha, const Vertex& t_beta, const Vertex& t_gamma) :
-            Triangle({{t_alpha, t_beta, t_gamma}})
+            Triangle(std::array<Vertex, 3>({{t_alpha, t_beta, t_gamma}}))
         {
         }
 
