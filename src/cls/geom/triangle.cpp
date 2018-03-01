@@ -89,7 +89,7 @@ namespace arc
             if (std::fabs(a) <= std::numeric_limits<double>::epsilon())
             {
                 // Does not hit triangle.
-                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>({{0.0, 0.0, 0.0}})));
+                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
             const math::Vec<3> s = (t_pos - m_vert[ALPHA].get_pos()) / a;
@@ -104,7 +104,7 @@ namespace arc
             if ((alpha < 0.0) || (beta < 0.0) || (gamma < 0.0))
             {
                 // Does not hit triangle.
-                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>({{0.0, 0.0, 0.0}})));
+                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
             // Calculate intersection distance.
@@ -114,7 +114,7 @@ namespace arc
             if (r_dist <= 0.0)
             {
                 // Does not hit triangle.
-                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>({{0.0, 0.0, 0.0}})));
+                return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
             // Determine interpolated normal.
