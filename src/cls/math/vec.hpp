@@ -172,6 +172,18 @@ namespace arc
         }
 
         /**
+         *  Construct a vec of two values and initialise its data elements using the given values.
+         *
+         *  @param  t_x Value to initialise the zeroth data element to.
+         *  @param  t_y Value to initialise the first data element to.
+         */
+        template <>
+        constexpr Vec<2>::Vec(const double t_x, const double t_y) :
+            m_data({{t_x, t_y}})
+        {
+        }
+
+        /**
          *  Construct a vec of three values and initialise its data elements using the given values.
          *
          *  @param  t_x Value to initialise the zeroth data element to.
@@ -181,18 +193,6 @@ namespace arc
         template <>
         constexpr Vec<3>::Vec(const double t_x, const double t_y, const double t_z) :
             m_data({{t_x, t_y, t_z}})
-        {
-        }
-
-        /**
-         *  Construct a vec of two values and initialise its data elements using the given values.
-         *
-         *  @param  t_x Value to initialise the zeroth data element to.
-         *  @param  t_y Value to initialise the first data element to.
-         */
-        template <>
-        constexpr Vec<2>::Vec(const double t_x, const double t_y) :
-            m_data({{t_x, t_y}})
         {
         }
 
