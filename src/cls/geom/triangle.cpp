@@ -38,8 +38,7 @@ namespace arc
             m_area(math::area(t_pos)),
             m_plane_norm(init_plane_norm(t_pos, t_norm)),
             m_pos(t_pos),
-            m_norm(t_norm),
-            m_cons(std::acos(), ,),
+            m_norm(t_norm)
         {
             assert(m_norm[ALPHA].is_normalised());
             assert(m_norm[BETA].is_normalised());
@@ -68,7 +67,7 @@ namespace arc
                                                const std::array<math::Vec<3>, 3>& t_norm) const
         {
             // Compute the cross-product of two edges to find the triangle's normal.
-            math::Vec<3> r_plane_norm = math::normalise((m_pos[BETA] - m_pos[ALPHA]) ^ (m_pos[GAMMA] - m_pos[ALPHA]));
+            math::Vec<3> r_plane_norm = math::normalise((t_pos[BETA] - t_pos[ALPHA]) ^ (t_pos[GAMMA] - t_pos[ALPHA]));
 
             // Mirror the plane normal if it faces away from the vertex normals.
             if ((r_plane_norm * (t_norm[ALPHA] + t_norm[BETA] + t_norm[GAMMA])) < 0.0)
