@@ -31,6 +31,8 @@ namespace arc
          *  @post   m_norm[ALPHA] must be normalised.
          *  @post   m_norm[BETA] must be normalised.
          *  @post   m_norm[GAMMA] must be normalised.
+         *  @post   m_area must be non-negative.
+         *  @post   m_plane_norm must be normalised.
          */
         Triangle::Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm) :
             m_pos(t_pos),
@@ -41,6 +43,8 @@ namespace arc
             assert(m_norm[ALPHA].is_normalised());
             assert(m_norm[BETA].is_normalised());
             assert(m_norm[GAMMA].is_normalised());
+            assert(m_area >= 0.0);
+            assert(m_plane_norm.is_normalised());
         }
 
 
