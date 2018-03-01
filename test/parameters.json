@@ -7,7 +7,7 @@
     },
     "num_phot":        1e3,
     "pre_render":      false,
-    "post_render":     false,
+    "post_render":     true,
     "grid":            {
         "min":   [-4.1e-3, -4.1e-3, -2.1e-3],
         "max":   [4.1e-3, 4.1e-3, 2.1e-3],
