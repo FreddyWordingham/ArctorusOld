@@ -37,6 +37,7 @@ namespace arc
         Triangle::Triangle(const std::array<math::Vec<3>, 3>& t_pos, const std::array<math::Vec<3>, 3>& t_norm) :
             m_pos(t_pos),
             m_norm(t_norm),
+            m_cons(std::acos(), ,),
             m_area(math::area(t_pos)),
             m_plane_norm(init_plane_norm())
         {
