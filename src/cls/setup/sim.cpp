@@ -443,7 +443,7 @@ namespace arc
                     ++loops;
                     if (loops > 1e6)
                     {
-
+                        WARN("Photon removed from loop prematurely.", "Number of loops exceeded set limit.");
                         break;
                     }
 
