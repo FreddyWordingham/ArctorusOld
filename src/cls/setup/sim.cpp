@@ -362,6 +362,8 @@ namespace arc
             {
                 m_ccd[i].save(t_output_dir, max);
             }
+
+            LOG("CCD image saving complete.");
         }
 
         /**
@@ -376,6 +378,8 @@ namespace arc
             {
                 m_spectrometer[i].save(t_output_dir);
             }
+
+            LOG("Spectrometer data saving complete.");
         }
 
 
