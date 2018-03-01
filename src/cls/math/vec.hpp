@@ -61,6 +61,7 @@ namespace arc
             //  -- Constructors --
             constexpr Vec();
             constexpr Vec(double t_x, double t_y, double t_z);
+            constexpr Vec(double t_x, double t_y, double t_z, double t_w);
             explicit constexpr Vec(double t_data);
             explicit constexpr Vec(const std::array<double, N>& t_data);
 
@@ -191,7 +192,7 @@ namespace arc
          *  @param  t_w Value to initialise the third data element to.
          */
         template <>
-        constexpr Vec<3>::Vec(const double t_x, const double t_y, const double t_z, const double t_w) :
+        constexpr Vec<4>::Vec(const double t_x, const double t_y, const double t_z, const double t_w) :
             m_data({{t_x, t_y, t_z, t_w}})
         {
         }
