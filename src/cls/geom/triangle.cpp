@@ -99,9 +99,10 @@ namespace arc
             {
                 const double n = m_plane_norm * m_norm[i];
                 assert(n > 0.0);
+                VAL(n);
 
                 r_cons[i] = std::acos(n) * (1.0 + (0.03632 * math::square(1.0 - n)));
-                assert(r_cons[i] > 0.0);
+                assert(r_cons[i] >= 0.0);
             }
 
             return (r_cons);
