@@ -22,7 +22,10 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
-
+        Triangle::Triangle(const math::Vec<3>& t_alpha_pos, const math::Vec<3>& t_beta_pos, const math::Vec<3>& t_gamma_pos,
+                           const math::Vec<3>& t_alpha_norm, const math::Vec<3>& t_beta_norm, const math::Vec<3>& t_gamma_norm)
+        {
+        }
 
         //  -- Initialisation --
         /**
