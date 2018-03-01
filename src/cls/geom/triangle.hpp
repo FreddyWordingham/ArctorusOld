@@ -62,6 +62,7 @@ namespace arc
             //  -- Getters --
             double get_area() const { return (m_area); }
             const math::Vec<3>& get_plane_norm() const { return (m_plane_norm); }
+            math::Vec<3>& get_pos(const size_t t_index) const { return (m_pos[t_index]); }
             std::pair<double, math::Vec<3>> get_intersection(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
 
             //  -- Generation --
