@@ -212,6 +212,8 @@ namespace arc
                 case boundedShape::CUBOID:
                     return (init_bounded_vert_cuboid(t_min, t_max));
             }
+
+            ERROR("Switch failed to catch enumeration.", "Switch does not handle the given enumeration.");
         }
 
         /**
