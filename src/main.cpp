@@ -54,7 +54,7 @@ int main(const int t_argc, const char** t_argv)
     arc::rng::seed(setup.parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
 
     // Construct the simulation object.
-    LOG("--- Constructing Simulation ---")
+    SEC("Constructing Simulation");
     arc::setup::Sim pdt(setup);
 
     // Render the simulation scene.
@@ -64,11 +64,11 @@ int main(const int t_argc, const char** t_argv)
     }
 
     // Run the simulation.
-    LOG("----- Running Simulation ------")
+    SEC("Running Simulation");
     pdt.run();
 
     // Save grid data.
-    LOG("-------- Saving Data ----------")
+    SEC("Saving Data");
     const std::string grid_images_dir = output_dir + "grid_images/";
     arc::utl::create_directory(grid_images_dir);
     pdt.save_grid_images(grid_images_dir);
