@@ -211,16 +211,19 @@ namespace arc
                 case X:
                     dim[X] = Y;
                     dim[Y] = Z;
+                    dim[Z] = X;
                     dim_name = "X";
                     break;
                 case Y:
                     dim[X] = X;
                     dim[Y] = Z;
+                    dim[Z] = Y;
                     dim_name = "Y";
                     break;
                 case Z:
                     dim[X] = X;
                     dim[Y] = Y;
+                    dim[Z] = Z;
                     dim_name = "Z";
                     break;
                 default: ERROR("Unable to save grid slice images.", "The given dimension: '" << dim[Z] << "' is invalid.");
