@@ -95,6 +95,7 @@ namespace arc
          */
         std::array<double, 3> Triangle::init_cons() const
         {
+            // If flat don't calculate consistent normal values.
             if (m_flat)
             {
                 return (std::array<double, 3>({{0.0, 0.0, 0.0}}));
