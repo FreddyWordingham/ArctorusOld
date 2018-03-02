@@ -197,8 +197,8 @@ namespace arc
             }
 
             // Determine the incident vector.
-            const bool         reversed = (t_dir * m_plane_norm) > 0.0;
-            const math::Vec<3> i        = reversed ? t_dir : -t_dir;
+            const bool         flip = (t_dir * m_plane_norm) > 0.0;
+            const math::Vec<3> i    = flip ? t_dir : -t_dir;
             assert((i * m_plane_norm) > 0.0);
 
             const double       f      = (m_cons[ALPHA] * alpha) + (m_cons[BETA] * beta) + (m_cons[GAMMA] * gamma);
@@ -210,7 +210,7 @@ namespace arc
 
             assert(r_norm.is_normalised());
 
-            return (std::pair<double, math::Vec<3>>(r_dist, reversed ? r_norm : -r_norm));
+            return (std::pair<double, math::Vec<3>>(r_dist, flip ? r_norm : -r_norm));
         }
 
 
