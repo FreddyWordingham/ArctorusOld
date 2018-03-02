@@ -14,14 +14,12 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/config.hpp"
 #include "gen/optics.hpp"
 
 //  -- Utility --
 #include "utl/file.hpp"
 
 //  -- Classes --
-#include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
 
 
@@ -557,6 +555,7 @@ namespace arc
                         {
                             entity_norm *= -1.0;
                         }
+                        assert(entity_norm.is_normalised());
 
                         energy += entity_dist * phot.get_weight();
 
@@ -586,11 +585,26 @@ namespace arc
                         const double n_t = mat_t.get_ref_index(phot.get_wavelength());
 
                         // Calculate incident angle.
-                        const double a_i = acos(-1.0 * (phot.get_dir() * entity_norm));
+                        const double a_i = acos(-phot.get_dir() * entity_norm);
                         assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
 
-                        // Check for total internal reflection.
-                        if (std::sin(a_i) > (n_t / n_i))
+                        // Calculate reflectance probability.
+                        double reflectance;
+                        if (std::sin(a_i) >= (n_t / n_i))   // Total internal reflectance.
+                        {
+                            reflectance = 1.0;
+                        }
+                        else                                // Specular reflectance.
+                        {
+                            const double a_t = std::asin((n_i / n_t) * std::sin(a_i));
+                            reflectance = 0.5 * ((math::square(std::sin(a_i - a_t)) / (math::square(
+                                std::sin(a_i + a_t)))) + (math::square(std::tan(a_i - a_t)) / (math::square(
+                                std::tan(a_i + a_t)))));
+                        }
+
+                        assert((reflectance >= 0.0) && (reflectance <= 1.0));
+
+                        if (rng::random() <= reflectance)                               // Reflect.
                         {
                             // Move to just before the boundary.
                             phot.move(entity_dist - SMOOTHING_LENGTH);
@@ -598,35 +612,24 @@ namespace arc
                             // Reflect the photon.
                             phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
                         }
-                        else
+                        else                                                            // Refract.
                         {
-                            if (rng::random() <= optics::reflection_prob(a_i, n_i, n_t))    // Reflect.
+                            // Move to just past the boundary.
+                            phot.move(entity_dist + SMOOTHING_LENGTH);
+
+                            // Refract the photon.
+                            phot.set_dir(optics::refraction_dir(phot.get_dir(), entity_norm, n_i / n_t));
+
+                            // Photon moves to new entity.
+                            if (exiting)
                             {
-                                // Move to just before the boundary.
-                                phot.move(entity_dist - SMOOTHING_LENGTH);
-
-                                // Reflect the photon.
-                                phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+                                phot.pop_entity_index();
                             }
-                            else                                                            // Refract.
+                            else
                             {
-                                // Move to just past the boundary.
-                                phot.move(entity_dist + SMOOTHING_LENGTH);
-
-                                // Refract the photon.
-                                phot.set_dir(optics::refraction_dir(phot.get_dir(), entity_norm, n_i / n_t));
-
-                                // Photon moves to new entity.
-                                if (exiting)
-                                {
-                                    phot.pop_entity_index();
-                                }
-                                else
-                                {
-                                    phot.push_entity_index(index_t);
-                                }
-                                phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
+                                phot.push_entity_index(index_t);
                             }
+                            phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                         }
                     }
                     else    // Exit cell.
@@ -649,8 +652,11 @@ namespace arc
                 }
 
 #ifdef ENABLE_PHOTON_PATHS
-                // Add the photon path.
-                m_path.push_back(phot.get_path());
+                if (phot.get_pos()[Z] > 0.0)
+                {
+                    // Add the photon path.
+                    m_path.push_back(phot.get_path());
+                }
 #endif
             }
 

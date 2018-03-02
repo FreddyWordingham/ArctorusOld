@@ -1,24 +1,24 @@
 {
     "output_dir_name": "intralipid_001-0",
-    "seed":            77,
+    "seed":            777,
     "roulette":        {
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":        1e8,
+    "num_phot":        1e5,
     "pre_render":      false,
-    "post_render":     false,
+    "post_render":     true,
     "grid":            {
         "min":   [-4.1e-3, -4.1e-3, -2.1e-3],
         "max":   [4.1e-3, 4.1e-3, 2.1e-3],
-        "cells": [31, 31, 31]
+        "cells": [11, 11, 11]
     },
     "aether":          {
         "mat": "materials/vacuum.mat"
     },
     "entities":        {
         "sphere": {
-            "mesh":  "meshes/sphere.obj",
+            "mesh":  "meshes/side_cylinder.obj",
             "mat":   "materials/water.mat",
             "scale": [1e-3, 1e-3, 1e-3]
         }
@@ -26,10 +26,10 @@
     "lights":          {
         "detector_led": {
             "power": 1.0,
-            "mesh":  "meshes/circle.obj",
+            "mesh":  "meshes/square.obj",
             "spec":  "spectra/laser.spc",
-            "scale": [1.1e-3, 1.1e-3, 1.1e-3],
-            "trans": [0.0, 0.0, 1.5e-3],
+            "scale": [0.5e-3, 0.01e-3, 1.1e-3],
+            "trans": [0.5e-3, 0.0, 1.5e-3],
             "dir":   [0.0, 0.0, -1.0]
         }
     },
