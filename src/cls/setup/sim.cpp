@@ -652,11 +652,8 @@ namespace arc
                 }
 
 #ifdef ENABLE_PHOTON_PATHS
-                if (phot.get_pos()[Z] > 0.0)
-                {
-                    // Add the photon path.
-                    m_path.push_back(phot.get_path());
-                }
+                // Add the photon path.
+                m_path.push_back(phot.get_path());
 #endif
             }
 
