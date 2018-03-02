@@ -89,9 +89,9 @@ namespace arc
         /**
          *  Determine the reflection probability for the given incident angle over a boundary with given refractive indices.
          *
-         *  @param  a_i Incident angle.
-         *  @param  n_i Refractive index of incident material.
-         *  @param  n_t Refractive index of transmission material.
+         *  @param  t_a_i   Incident angle.
+         *  @param  t_n_i   Refractive index of incident material.
+         *  @param  t_n_t   Refractive index of transmission material.
          *
          *  @pre    a_i must be between zero and pi/2.0.
          *  @pre    n_i must be greater than, or equal to, one.
@@ -101,17 +101,19 @@ namespace arc
          *
          *  @return The probability of reflection.
          */
-        double reflection_prob(const double a_i, const double n_i, const double n_t)
+        double reflection_prob(const double t_a_i, const double t_n_i, const double t_n_t)
         {
-            assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
-            assert(n_i >= 1.0);
-            assert(n_t >= 1.0);
+            assert((t_a_i >= 0.0) && (t_a_i < (M_PI / 2.0)));
+            assert(t_n_i >= 1.0);
+            assert(t_n_t >= 1.0);
 
             // Calculate transverse reflection probability.
-            const double cos_a_i = std::cos(a_i);
-            const double cos_a_t = std::cos((n_i / n_t) * std::sin(a_i));
-            const double trans   = math::square(((n_t * cos_a_i) - (n_i * cos_a_t)) / ((n_t * cos_a_i) + (n_i * cos_a_t)));
-            const double paral   = math::square(((n_t * cos_a_i) - (n_i * cos_a_t)) / ((n_t * cos_a_i) + (n_i * cos_a_t)));
+            const double cos_a_i = std::cos(t_a_i);
+            const double cos_a_t = std::cos((t_n_i / t_n_t) * std::sin(t_a_i));
+            const double trans   = math::square(
+                ((t_n_t * cos_a_i) - (t_n_i * cos_a_t)) / ((t_n_t * cos_a_i) + (t_n_i * cos_a_t)));
+            const double paral   = math::square(
+                ((t_n_t * cos_a_i) - (t_n_i * cos_a_t)) / ((t_n_t * cos_a_i) + (t_n_i * cos_a_t)));
 
             // Determine average reflection probability.
             const double r_ref_prob = 0.5 * (trans + paral);

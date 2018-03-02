@@ -5,9 +5,9 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":        1e6,
+    "num_phot":        1e8,
     "pre_render":      false,
-    "post_render":     true,
+    "post_render":     false,
     "grid":            {
         "min":   [-4.1e-3, -4.1e-3, -2.1e-3],
         "max":   [4.1e-3, 4.1e-3, 2.1e-3],
@@ -18,7 +18,7 @@
     },
     "entities":        {
         "sphere": {
-            "mesh":  "meshes/high_sphere.obj",
+            "mesh":  "meshes/sphere.obj",
             "mat":   "materials/water.mat",
             "scale": [1e-3, 1e-3, 1e-3]
         }
