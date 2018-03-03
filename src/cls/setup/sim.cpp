@@ -40,7 +40,6 @@ namespace arc
          *  @param  t_json Json setup file.
          */
         Sim::Sim(const data::Json& t_json) :
-            m_num_phot(t_json.parse_child<unsigned long int>("num_phot")),
             m_roulette_weight(t_json["roulette"].parse_child<double>("weight")),
             m_roulette_chambers(t_json["roulette"].parse_child<double>("chambers")),
             m_aether(init_aether(t_json["aether"])),
@@ -415,14 +414,15 @@ namespace arc
 
         //  -- Running --
         /**
-         *  Run the simulation.
+         *  Run a number of photons through the simulation.
+         *
+         *  @param  t_num_phot  The number of photons to run.
          */
-        void Sim::run()
+        void Sim::run_photons(const unsigned long int t_num_phot)
         {
-            // Run each photon.
-            for (unsigned long int i = 0; i < m_num_phot; ++i)
+            for (unsigned long int i = 0; i < t_num_phot; ++i)
             {
-                TEMP("Photon Loop", 100.0 * i / m_num_phot);
+
 
                 // Generate a new photon.
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
@@ -578,7 +578,7 @@ namespace arc
 
                         // Determine the material indices.
                         int  index_i, index_t;
-                        bool exiting = phot.get_entity_index() == static_cast<int>(entity_index);
+                        bool exiting      = phot.get_entity_index() == static_cast<int>(entity_index);
                         if (exiting)    // Exiting the current entity.
                         {
                             index_i = static_cast<int>(entity_index);
@@ -613,10 +613,7 @@ namespace arc
                         }
                         else                                // Specular reflectance.
                         {
-                            const double a_t = std::asin((n_i / n_t) * std::sin(a_i));
-                            reflectance = 0.5 * ((math::square(std::sin(a_i - a_t)) / (math::square(
-                                std::sin(a_i + a_t)))) + (math::square(std::tan(a_i - a_t)) / (math::square(
-                                std::tan(a_i + a_t)))));
+                            reflectance = optics::reflection_prob(a_i, n_i, n_t);
                         }
 
                         assert((reflectance >= 0.0) && (reflectance <= 1.0));
@@ -673,8 +670,6 @@ namespace arc
                 m_path.push_back(phot.get_path());
 #endif
             }
-
-            LOG("Photon loop complete.");
         }
 
 

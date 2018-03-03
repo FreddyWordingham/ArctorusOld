@@ -18,6 +18,48 @@
 #include "cls/setup/sim.hpp"
 
 
+#include <thread>
+/*
+
+
+class Wallet
+{
+    int        mMoney;
+    std::mutex mutex;
+  public:
+    Wallet() :
+        mMoney(0) {}
+    int getMoney() { return mMoney; }
+    void addMoney(int money)
+    {
+        std::lock_guard<std::mutex> lockGuard(mutex);
+        for (int                    i = 0; i < money; ++i)
+        {
+            mMoney++;
+        }
+    }
+};
+
+
+
+int testMultithreadedWallet()
+{
+    Wallet                   walletObject;
+    std::vector<std::thread> threads;
+    for (int                 i = 0; i < 5; ++i)
+    {
+        threads.push_back(std::thread(&Wallet::addMoney, &walletObject, 1000));
+    }
+
+    for (int i = 0; i < threads.size(); i++)
+    {
+        threads.at(i).join();
+    }
+    return walletObject.getMoney();
+}*/
+
+
+
 
 //  == MAIN ==
 /**
@@ -30,6 +72,19 @@
  */
 int main(const int t_argc, const char** t_argv)
 {
+/*    int      val = 0;
+    for (int k   = 0; k < 1000; k++)
+    {
+        if ((val = testMultithreadedWallet()) != 5000)
+        {
+            std::cout << "Error at count = " << k << " Money in Wallet = " << val << std::endl;
+        }
+    }
+
+    return 0;*/
+
+
+
     SEC("Initialising Arctorus");
 
     // Check the number of command line arguments.
@@ -65,7 +120,23 @@ int main(const int t_argc, const char** t_argv)
 
     // Run the simulation.
     SEC("Running Simulation");
-    pdt.run();
+    const unsigned long int num_phot     = setup.parse_child<unsigned long int>("num_phot");
+    LOG("Number of photons to run: " << num_phot);
+    std::vector<std::thread> threads;
+    const size_t             num_threads = std::thread::hardware_concurrency();
+    LOG("Number of threads: " << num_threads);
+
+    const unsigned long int num_phot_per_thread = num_phot / num_threads;
+    for (unsigned long int  i                   = 0; i < num_threads; ++i)
+    {
+        threads.push_back(std::thread(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread));
+    }
+    for (int                i                   = 0; i < threads.size(); i++)
+    {
+        threads.at(i).join();
+    }
+
+//    pdt.run_photons(num_phot);
 
     // Save grid data.
     SEC("Saving Data");
