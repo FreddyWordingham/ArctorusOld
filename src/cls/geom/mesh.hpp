@@ -78,28 +78,8 @@ namespace arc
             size_t get_num_vert() const { return (m_num_vert); }
             size_t get_num_norm() const { return (m_num_norm); }
             size_t get_num_tri() const { return (m_num_tri); }
-            inline const Triangle& get_tri(size_t t_index) const;
+            inline const Triangle& get_tri(size_t t_index) const { return (m_tri[t_index]); }
         };
-
-
-
-        //  == METHODS ==
-        //  -- Getters --
-        /**
-         *  Retrieve a reference to a triangle of the mesh.
-         *
-         *  @param  t_index Index of the triangle to retrieve.
-         *
-         *  @pre    t_index must be a valid index of m_tri.
-         *
-         *  @return A const reference to the triangle.
-         */
-        inline const Triangle& Mesh::get_tri(const size_t t_index) const
-        {
-            assert(t_index < m_tri.size());
-
-            return (m_tri[t_index]);
-        }
 
 
 
