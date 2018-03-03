@@ -108,7 +108,7 @@ namespace arc
          *
          *  @return The barycentric coordinates of the given point.
          */
-        math::Vec<3> Triangle::get_barycentric_coor(const math::Vec<3>& t_pos) const
+        std::array<double, 3> Triangle::get_barycentric_coor(const math::Vec<3>& t_pos) const
         {
             assert(plane_dist(t_pos) <= std::numeric_limits<double>::min());
 
@@ -128,7 +128,7 @@ namespace arc
             const double w = (d00 * d21 - d01 * d20) / denom;
             const double u = 1.0 - v - w;
 
-            return (math::Vec<3>(u, v, w));
+            return (std::array<double, 3>({{u, v, w}}));
         }
 
         /**
@@ -152,7 +152,7 @@ namespace arc
             }
 
             // Get the barycentric coordinates.
-            const math::Vec<3> bary = get_barycentric_coor(t_pos);
+            const std::array<double, 3> bary = get_barycentric_coor(t_pos);
 
             return (!((bary[ALPHA] < 0.0) || (bary[ALPHA] > 1.0) || (bary[BETA] < 0.0) || (bary[BETA] > 1.0) || ((bary[GAMMA] < 0.0) || (bary[GAMMA] > 1.0))));
         }

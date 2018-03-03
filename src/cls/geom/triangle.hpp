@@ -67,7 +67,7 @@ namespace arc
 
             //  -- Geometric --
             double plane_dist(const math::Vec<3>& t_pos) const;
-            math::Vec<3> get_barycentric_coor(const math::Vec<3>& t_pos) const;
+            std::array<double, 3> get_barycentric_coor(const math::Vec<3>& t_pos) const;
             bool within_tri(const math::Vec<3>& t_pos, double t_tol = std::numeric_limits<double>::min()) const;
             std::pair<bool, double> intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
                                                       double t_tol = std::numeric_limits<double>::min()) const;
