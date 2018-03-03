@@ -38,7 +38,7 @@ namespace arc
             m_area(math::area(t_pos)),
             m_plane_norm(init_plane_norm(t_pos, t_norm)),
             m_pos(t_pos),
-            m_norm(t_norm),
+            m_norm(t_norm)
         {
             assert(m_norm[ALPHA].is_normalised());
             assert(m_norm[BETA].is_normalised());
