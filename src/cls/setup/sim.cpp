@@ -481,8 +481,8 @@ namespace arc
 
                     if (entity_dist <= SMOOTHING_LENGTH)
                     {
-                        WARN("Photon removed from loop prematurely.",
-                             "Distance to entity is shorter than the smoothing length.");
+                        //WARN("Photon removed from loop prematurely.",
+                        //     "Distance to entity is shorter than the smoothing length.");
 
 #ifdef ENABLE_PHOTON_PATHS
                         m_path.push_back(phot.get_path());
