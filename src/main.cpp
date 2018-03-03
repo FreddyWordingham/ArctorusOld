@@ -118,7 +118,12 @@ int main(const int t_argc, const char** t_argv)
 
     // Run the simulation.
     SEC("Running Simulation");
-    pdt.run();
+    const unsigned long int num_phot = setup.parse_child<unsigned long int>("num_phot");
+    for (unsigned long int  i        = 0; i < num_phot; ++i)
+    {
+        TEMP("Photon Loop", 100.0 * i / num_phot);
+        pdt.run_photon();
+    }
 
     // Save grid data.
     SEC("Saving Data");
