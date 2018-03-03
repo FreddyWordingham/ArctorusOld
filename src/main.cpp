@@ -18,9 +18,8 @@
 #include "cls/setup/sim.hpp"
 
 
-/*#include <thread>
-#include <mutex>
-
+#include <thread>
+/*
 
 
 class Wallet
@@ -58,6 +57,9 @@ int testMultithreadedWallet()
     }
     return walletObject.getMoney();
 }*/
+
+
+
 
 //  == MAIN ==
 /**
@@ -118,6 +120,12 @@ int main(const int t_argc, const char** t_argv)
 
     // Run the simulation.
     SEC("Running Simulation");
+    std::vector<std::thread> threads;
+    const size_t             num_threads = std::thread::hardware_concurrency();
+    LOG("Number of threads: " << num_threads);
+
+
+
     const unsigned long int num_phot = setup.parse_child<unsigned long int>("num_phot");
     for (unsigned long int  i        = 0; i < num_phot; ++i)
     {
