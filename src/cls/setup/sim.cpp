@@ -414,9 +414,9 @@ namespace arc
 
         //  -- Running --
         /**
-         *  Run the simulation.
+         *  Run a single photon through the simulation.
          */
-        void Sim::run_phot()
+        void Sim::run_photon()
         {
             // Generate a new photon.
             phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);

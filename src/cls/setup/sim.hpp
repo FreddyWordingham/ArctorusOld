@@ -94,7 +94,7 @@ namespace arc
             void render() const;
 
             //  -- Running --
-            void run();
+            void run_photon();
         };
 
 
