@@ -65,6 +65,10 @@ namespace arc
             const math::Vec<3>& get_pos(const size_t t_index) const { return (m_pos[t_index]); }
             const math::Vec<3>& get_norm(const size_t t_index) const { return (m_norm[t_index]); }
 
+            //  -- Geometric --
+            std::pair<bool, double> intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                      const double t_tol = 1e-8) const;
+
             //  -- Generation --
             std::pair<math::Vec<3>, math::Vec<3>> gen_random_pos_and_norm() const;
         };

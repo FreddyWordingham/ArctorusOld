@@ -86,8 +86,73 @@ namespace arc
 
 
         //  == METHODS ==
-        //  -- Getters --
+        //  -- Geometric --
+        /**
+         *  Determine if a ray intersects the triangle and also the distance until intersection.
+         *  Note that a signalling NaN is returned as the distance when an intersection does not occur.
+         *  This means that intersection status should be checked before distance is used if intersection is not guaranteed.
+         *  Algoritm adapted from 'Fast Minimum Storage RayTriangle Intersection' by Tomal Moller et al.
+         *
+         *  @param  t_pos   Initial position of the ray.
+         *  @param  t_dir   Direction of the ray.
+         *  @param  t_tol   Tolerance used to determine if ray is parallel to the triangle surface.
+         *
+         *  @pre    t_dir must be normalised.
+         *  @pre    t_tol must be positive.
+         *
+         *  @return True if intersection occurs and the distance until ray-triangle intersection.
+         */
+        std::pair<bool, double> Triangle::intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                            const double t_tol) const
+        {
+            assert(t_dir.is_normalised());
+            assert(t_tol >= 0.0);
 
+            // Calculate edge vectors sharing vertex alpha.
+            const math::Vec<3> edge_alpha_beta  = m_pos[BETA] - m_pos[ALPHA];
+            const math::Vec<3> edge_alpha_gamma = m_pos[GAMMA] - m_pos[ALPHA];
+
+            // Calculate determinant.
+            const math::Vec<3> p   = t_dir ^edge_alpha_gamma;
+            const double       det = edge_alpha_beta * p;
+
+            // Check if ray is parallel to the triangle surface.
+            if (std::abs(det) < t_tol)
+            {
+                return (std::pair<bool, double>(false, std::numeric_limits<double>::signaling_NaN()));
+            }
+
+            // Calculate first barycentric coordinate and test bounds.
+            const math::Vec<3> t = t_pos - m_pos[ALPHA];
+            const double       u = (t * p) / det;
+
+            // If u is not between zero and unity, the intersection with the plane is not inside the triangle.
+            if ((u < 0.0) || (u > 1.0))
+            {
+                return (std::pair<bool, double>(false, std::numeric_limits<double>::signaling_NaN()));
+            }
+
+            // Calculate second barycentric coordinate and test bounds.
+            const math::Vec<3> q = t ^edge_alpha_beta;
+            const double       v = (t_dir * q) / det;
+
+            // Test if intersection falls outside of triangle.
+            if ((v < 0.0) || ((u + v) > 1.0))
+            {
+                return (std::pair<bool, double>(false, std::numeric_limits<double>::signaling_NaN()));
+            }
+
+            // Calculate distance to intersection.
+            const double r_dist = (edge_alpha_gamma * q) / det;
+
+            // Check if triangle is behind ray.
+            if (r_dist < 0.0)
+            {
+                return (std::pair<bool, double>(false, std::numeric_limits<double>::signaling_NaN()));
+            }
+
+            return (std::pair<bool, double>(true, r_dist));
+        }
 
 
         //  -- Generation --
