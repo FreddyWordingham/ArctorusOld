@@ -59,18 +59,17 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            explicit Mesh(const std::string& t_serial, const math::Vec<3>& t_trans = math::Vec<3>({{0.0, 0.0, 0.0}}),
-                          const math::Vec<3>& t_dir = math::Vec<3>({{0.0, 0.0, 1.0}}), double t_spin = 0.0,
-                          const math::Vec<3>& t_scale = math::Vec<3>({{1.0, 1.0, 1.0}}));
+            explicit Mesh(const std::string& t_serial, const math::Vec<3>& t_trans = math::Vec<3>(0.0, 0.0, 0.0),
+                          const math::Vec<3>& t_dir = math::Vec<3>(0.0, 0.0, 1.0), double t_spin = 0.0,
+                          const math::Vec<3>& t_scale = math::Vec<3>(1.0, 1.0, 1.0));
 
           private:
             //  -- Constructors --
-            Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans);
+            Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_trans_mat);
 
             //  -- Initialisation --
             size_t init_num(const std::string& t_serial, const std::string& t_type_string) const;
-            std::vector<geom::Triangle> init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
-                                                 const math::Mat<4, 4>& t_dir_trans) const;
+            std::vector<geom::Triangle> init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_trans_mat) const;
 
 
             //  == METHODS ==

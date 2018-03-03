@@ -31,43 +31,11 @@ out vec4 vert_col;      //! Colour to draw the vertex with.
 
 
 
-//  == FUNCTIONS ==
-float colormap_red(float x) {
-    if (x < 0.7) {
-        return 4.0 * x - 1.5;
-    } else {
-        return -4.0 * x + 4.5;
-    }
-}
-
-float colormap_green(float x) {
-    if (x < 0.5) {
-        return 4.0 * x - 0.5;
-    } else {
-        return -4.0 * x + 3.5;
-    }
-}
-
-float colormap_blue(float x) {
-    if (x < 0.3) {
-       return 4.0 * x + 0.5;
-    } else {
-       return -4.0 * x + 2.5;
-    }
-}
-
-vec4 colormap(float x) {
-
-    if ((x < 0.0) || (x > 1.0))
-    {
-        return (vec4(1.0, 0.0, 1.0, 1.0));
-    }
-
-    float r = clamp(colormap_red(x), 0.0, 1.0);
-    float g = clamp(colormap_green(x), 0.0, 1.0);
-    float b = clamp(colormap_blue(x), 0.0, 1.0);
-    return vec4(r, g, b, 1.0);
-}
+//  == FUNCTION PROTOTYPES ==
+vec4 colourmap(const float t_x);
+float colourmap_red(const float t_x);
+float colourmap_green(const float t_x);
+float colourmap_blue(const float t_x);
 
 
 
@@ -84,5 +52,82 @@ void main()
     vert_time = time;
 
     // Colour the vertex according to wavelength.
-    vert_col = colormap((wavelength - 400E-9) / 300E-9);
+    vert_col = colourmap((wavelength - 400E-9) / 300E-9);
+}
+
+
+
+//  == FUNCTIONS ==
+/**
+ *  Convert a given value between zero and unity to an rgba colour vector.
+ *
+ *  @param  t_x Value to be converted to an rgba colour vector.
+ *
+ *  @return A colour vector.
+ */
+vec4 colourmap(const float t_x)
+{
+    // Check if t_x is outside limits.
+    if ((t_x < 0.0) || (t_x > 1.0))
+    {
+        return (vec4(1.0, 0.0, 1.0, 1.0));
+    }
+
+    // Determine red, green blue values.
+    float red = clamp(colourmap_red(t_x), 0.0, 1.0);
+    float green = clamp(colourmap_green(t_x), 0.0, 1.0);
+    float blue = clamp(colourmap_blue(t_x), 0.0, 1.0);
+
+    return vec4(red, green, blue, 1.0);
+}
+
+/**
+ *  Convert a given value between zero and unity to a red colour channel.
+ *
+ *  @param  t_x Value to be converted to a red colour channel.
+ *
+ *  @return Value of the red colour channel.
+ */
+float colourmap_red(const float t_x)
+{
+    if (t_x < 0.7)
+    {
+        return ((4.0 * t_x) - 1.5);
+    }
+
+    return ((-4.0 * t_x) + 4.5);
+}
+
+/**
+ *  Convert a given value between zero and unity to a green colour channel.
+ *
+ *  @param  t_x Value to be converted to a green colour channel.
+ *
+ *  @return Value of the green colour channel.
+ */
+float colourmap_green(const float t_x)
+{
+    if (t_x < 0.5)
+    {
+        return ((4.0 * t_x) - 0.5);
+    }
+
+    return ((-4.0 * t_x) + 3.5);
+}
+
+/**
+ *  Convert a given value between zero and unity to a blue colour channel.
+ *
+ *  @param  t_x Value to be converted to a blue colour channel.
+ *
+ *  @return Value of the blue colour channel.
+ */
+float colourmap_blue(const float t_x)
+{
+    if (t_x < 0.3)
+    {
+       return ((4.0 * t_x) + 0.5);
+    }
+
+   return ((-4.0 * t_x) + 2.5);
 }

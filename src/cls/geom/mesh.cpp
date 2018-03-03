@@ -42,8 +42,7 @@ namespace arc
          */
         Mesh::Mesh(const std::string& t_serial, const math::Vec<3>& t_trans, const math::Vec<3>& t_dir, double t_spin,
                    const math::Vec<3>& t_scale) :
-            Mesh(t_serial, math::create_pos_trans_mat(t_trans, t_dir, t_spin, t_scale),
-                 math::create_dir_trans_mat(t_dir, t_spin, t_scale))
+            Mesh(t_serial, math::create_trans_mat(t_trans, t_dir, t_spin, t_scale))
         {
             assert(t_dir.magnitude() > 0.0);
             assert(t_scale[X] != 0.0);
@@ -52,17 +51,16 @@ namespace arc
         }
 
         /**
-         *  Construct a mesh from a given serialised string and transformation matrices.
+         *  Construct a mesh from a given serialised string and transformation matrix.
          *
          *  @param  t_serial    Mesh as a serialised string.
-         *  @param  t_pos_trans Position transformation matrix.
-         *  @param  t_dir_trans Direction transformation matrix.
+         *  @param  t_trans_mat Transformation matrix.
          */
-        Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans, const math::Mat<4, 4>& t_dir_trans) :
+        Mesh::Mesh(const std::string& t_serial, const math::Mat<4, 4>& t_trans_mat) :
             m_num_vert(init_num(t_serial, POS_KEYWORD)),
             m_num_norm(init_num(t_serial, NORM_KEYWORD)),
             m_num_tri(init_num(t_serial, FACE_KEYWORD)),
-            m_tri(init_tri(t_serial, t_pos_trans, t_dir_trans))
+            m_tri(init_tri(t_serial, t_trans_mat))
         {
         }
 
@@ -103,8 +101,7 @@ namespace arc
          *  Initialise the vector of triangles forming the mesh from a serialised mesh and transformation matrices.
          *
          *  @param  t_serial    Mesh as a serialised string.
-         *  @param  t_pos_trans Position transformation matrix.
-         *  @param  t_dir_trans Direction transformation matrix.
+         *  @param  t_trans_mat Transformation matrix.
          *
          *  @post   Number of read vertex positions must equal that read initially.
          *  @post   Number of read vertex normals must equal that read initially.
@@ -112,10 +109,10 @@ namespace arc
          *
          *  @return The initialised vector of triangle faces.
          */
-        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_pos_trans,
-                                                   const math::Mat<4, 4>& t_dir_trans) const
+        std::vector<geom::Triangle> Mesh::init_tri(const std::string& t_serial, const math::Mat<4, 4>& t_trans_mat) const
         {
-            math::Mat<4, 4> Mat = math::transpose(math::inverse(t_pos_trans));
+            // Create the transposed inverted transformation matrix.
+            math::Mat<4, 4> trans_inv_mat = math::transpose(math::inverse(t_trans_mat));
 
             // Create return vector of triangles.
             std::vector<geom::Triangle> r_tri;
@@ -143,10 +140,10 @@ namespace arc
                     pos[3] = 1.0;
 
                     // Transform it using the position transformation matrix.
-                    pos = t_pos_trans * pos;
+                    pos = t_trans_mat * pos;
 
                     // Add the three-dimensional position to the vertex position list.
-                    vert_pos.push_back(math::Vec<3>({{pos[X], pos[Y], pos[Z]}}));
+                    vert_pos.push_back(math::Vec<3>(pos[X], pos[Y], pos[Z]));
                 }
                 else if (word == NORM_KEYWORD)
                 {
@@ -155,11 +152,11 @@ namespace arc
                     line_stream >> norm[X] >> norm[Y] >> norm[Z];
                     norm[3] = 1.0;
 
-                    // Transform it using the direction transformation matrix.
-                    norm = Mat * norm;
+                    // Transform it using the transverse-inverted-transformation matrix.
+                    norm = trans_inv_mat * norm;
 
                     // Add the three-dimensional normal to the vertex normal list.
-                    vert_norm.push_back(math::normalise(math::Vec<3>({{norm[X], norm[Y], norm[Z]}})));
+                    vert_norm.push_back(math::normalise(math::Vec<3>(norm[X], norm[Y], norm[Z])));
                 }
 
                 if (line_stream.fail())
@@ -171,7 +168,6 @@ namespace arc
             // Check the number of vertex positions and normals equals that expected.
             assert(vert_pos.size() == m_num_vert);
             assert(vert_norm.size() == m_num_norm);
-
 
             // Read in the triangular faces.
             utl::rewind(serial_stream);
@@ -213,10 +209,9 @@ namespace arc
                         }
                     }
 
-                    r_tri.push_back(Triangle(
-                        {{Vertex(vert_pos[pos_index[ALPHA]], vert_norm[norm_index[ALPHA]]), Vertex(vert_pos[pos_index[BETA]],
-                                                                                                   vert_norm[norm_index[BETA]]), Vertex(
-                            vert_pos[pos_index[GAMMA]], vert_norm[norm_index[GAMMA]])}}));
+                    r_tri.push_back(
+                        Triangle({{vert_pos[pos_index[ALPHA]], vert_pos[pos_index[BETA]], vert_pos[pos_index[GAMMA]]}},
+                                 {{vert_norm[norm_index[ALPHA]], vert_norm[norm_index[BETA]], vert_norm[norm_index[GAMMA]]}}));
                 }
 
                 if (line_stream.fail())

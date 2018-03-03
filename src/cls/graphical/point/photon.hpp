@@ -7,6 +7,12 @@
 
 
 
+//  == MODULE ==
+#include "gen/config.hpp"
+#ifdef ENABLE_GRAPHICS
+
+
+
 //  == GUARD ==
 #ifndef ARCTORUS_SRC_CLS_GRAPHICAL_POINT_PHOTON_HPP
 #define ARCTORUS_SRC_CLS_GRAPHICAL_POINT_PHOTON_HPP
@@ -66,3 +72,8 @@ namespace arc
 
 //  == GUARD END ==
 #endif // ARCTORUS_SRC_CLS_GRAPHICAL_POINT_PHOTON_HPP
+
+
+
+//  == MODULE END ==
+#endif

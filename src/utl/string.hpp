@@ -29,13 +29,14 @@ namespace arc
 
         //  == FUNCTION PROTOTYPES ==
         //  -- Timestamp --
-        std::string create_timestamp();
+        std::string create_timestamp(const std::string& t_format = "%Y-%m-%d %H:%M:%S");
         std::string create_time_string(int t_sec);
 
         //  -- Manipulation --
         void find_and_replace(std::string* t_source, const std::string& t_find, const std::string& t_replace);
         void filter(std::string* t_source, const std::string& t_comment_start, const std::string& t_comment_end = "\n");
         std::string strip_path(const std::string& t_path);
+        std::string strip_extension(const std::string& t_path);
         void strip_whitespace(std::string* t_str);
 
         //  -- Properties --

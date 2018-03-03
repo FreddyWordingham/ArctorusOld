@@ -48,19 +48,62 @@ set(ARCTORUS_DIR ${CMAKE_SOURCE_DIR})
 message("Build directory:'${ARCTORUS_DIR}'.")
 
 
+
 #   == LOGGING OPTIONS ==
 #   -- Colour --
-if (NOT DEFINED COLOUR)
-    set(COLOUR true)
+if (NOT DEFINED LOG_COLOUR)
+    set(LOG_COLOUR OFF)
 endif ()
-message("Coloured messages: ${COLOUR}")
+if (LOG_COLOUR)
+    set(DEFINE_LOG_COLOUR "#define ENABLE_LOG_COLOUR")
+    message("Coloured log enabled.")
+else ()
+    set(DEFINE_LOG_COLOUR "// Coloured log is disabled.")
+    message("Coloured log disabled.")
+endif ()
 
 #   -- Verbose --
-if (NOT DEFINED VERBOSE)
-    set(VERBOSE true)
+if (NOT DEFINED LOG_VERBOSE)
+    set(LOG_VERBOSE OFF)
 endif ()
-message("Verbose messages: ${VERBOSE}")
+if (LOG_VERBOSE)
+    set(DEFINE_LOG_VERBOSE "#define ENABLE_LOG_VERBOSE")
+    message("Verbose log enabled.")
+else ()
+    set(DEFINE_LOG_VERBOSE "// Verbose log is disabled.")
+    message("Verbose log disabled.")
+endif ()
 
+
+
+#   == MODULE OPTIONS ==
+#   -- Graphics --
+if (NOT DEFINED GRAPHICS)
+    set(GRAPHICS OFF)
+endif ()
+if (GRAPHICS)
+    set(DEFINE_GRAPHICS "#define ENABLE_GRAPHICS")
+    message("Graphics enabled.")
+else ()
+    set(DEFINE_GRAPHICS "// Graphics are disabled.")
+    message("Graphics disabled.")
+endif ()
+
+#   -- Photon Paths --
+if (NOT DEFINED PHOTON_PATHS)
+    set(PHOTON_PATHS OFF)
+endif ()
+if (PHOTON_PATHS)
+    if (NOT GRAPHICS)
+        message(FATAL_ERROR "Photon paths are not allowed when graphics are disabled.")
+    endif ()
+
+    set(DEFINE_PHOTON_PATHS "#define ENABLE_PHOTON_PATHS")
+    message("Photon paths enabled.")
+else ()
+    set(DEFINE_PHOTON_PATHS "// Photon paths are disabled.")
+    message("Photon paths disabled.")
+endif ()
 
 
 #   == DIRECTORIES ==
@@ -98,10 +141,14 @@ if (CMAKE_BUILD_TYPE MATCHES "debug")
         -DDEBUG                                                     \
         -g                                                          \
         -O0                                                         \
+    ")
+    if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}                     \
         -fsanitize=integer                                          \
         -fsanitize=undefined                                        \
         -fsanitize-blacklist=${CMAKE_SOURCE_DIR}/.clang-sanitizer   \
     ")
+    endif ()
 elseif (CMAKE_BUILD_TYPE MATCHES "release")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
         -DNDEBUG                            \
@@ -120,6 +167,14 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         -Wno-unknown-pragmas                \
         -Wno-weak-vtables                   \
     ")
+elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+        -Wall                               \
+        -Wextra                             \
+        -Wpedantic                          \
+        -Wno-unknown-pragmas                \
+        -Wno-unknown-warning-option         \
+    ")
 else ()
     message(FATAL_ERROR "Warning flags are not defined for compiler type: '${CMAKE_CXX_COMPILER_ID}'.")
 endif ()
@@ -134,18 +189,19 @@ add_executable(arctorus ${SOURCE_FILES} ${HEADER_FILES})
 target_include_directories(arctorus PUBLIC ${ARCTORUS_SRC_DIR})
 
 #   -- Locate Packages --
-find_package(OpenGL REQUIRED)
-find_package(SDL2 REQUIRED)
-find_package(GLEW REQUIRED)
-find_package(glfw3 3.2.1 REQUIRED)
+if (GRAPHICS)
+    find_package(OpenGL REQUIRED)
+    find_package(SDL2 REQUIRED)
+    find_package(GLEW REQUIRED)
+    find_package(glfw3 3.2.1 REQUIRED)
 
-#   -- Include System Directories --
-target_include_directories(arctorus SYSTEM PUBLIC ${OpenGL_INCLUDE_DIR})
-target_include_directories(arctorus SYSTEM PUBLIC ${SDL2_INCLUDE_DIR})
+    #   -- Include System Directories --
+    target_include_directories(arctorus SYSTEM PUBLIC ${OpenGL_INCLUDE_DIR})
+    target_include_directories(arctorus SYSTEM PUBLIC ${SDL2_INCLUDE_DIR})
 
-#   -- Link Libraries --
-target_link_libraries(arctorus ${OPENGL_LIBRARIES})
-target_link_libraries(arctorus ${SDL2_LIBRARIES})
-target_link_libraries(arctorus GLEW)
-target_link_libraries(arctorus glfw)
-#target_link_libraries(arctorus cptk)
+    #   -- Link Libraries --
+    target_link_libraries(arctorus ${OPENGL_LIBRARIES})
+    target_link_libraries(arctorus ${SDL2_LIBRARIES})
+    target_link_libraries(arctorus GLEW)
+    target_link_libraries(arctorus glfw)
+endif ()

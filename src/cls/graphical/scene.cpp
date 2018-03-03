@@ -7,6 +7,12 @@
 
 
 
+//  == MODULE ==
+#include "gen/config.hpp"
+#ifdef ENABLE_GRAPHICS
+
+
+
 //  == HEADER ==
 #include "cls/graphical/scene.hpp"
 
@@ -49,13 +55,13 @@ namespace arc
         Scene::Scene() :
             m_window(init_window()),
             m_cubemap(init_cubemap()),
-            m_cube_box(Prop(Prop::shape::SKYBOX, {1.0, 0.0, 1.0, 1.0}, 10.0)),
+            m_cube_box(Prop(Prop::originShape::SKYBOX, {1.0, 0.0, 1.0, 1.0}, 10.0)),
             m_primary_cam(std::make_unique<camera::Orbit>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
                                                           static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_secondary_cam(std::make_unique<camera::Fly>(glm::vec3({INIT_CAM_POS_X, INIT_CAM_POS_Y, INIT_CAM_POS_Z}),
                                                           static_cast<float>(WIDTH) / static_cast<float>(HEIGHT))),
             m_sun_pos(glm::vec3({INIT_SUN_POS_X, INIT_SUN_POS_Y, INIT_SUN_POS_Z})),
-            m_sun(Prop(Prop::shape::SUN, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
+            m_sun(Prop(Prop::originShape::SUN, {1.0, 1.0, 0.0, 1.0}, SUN_SIZE))
         {
         }
 
@@ -271,6 +277,37 @@ namespace arc
         }
 
         /**
+         *  Add a vector of render-able spectrometer props to the scene.
+         *
+         *  @param  t_spectrometer  Vector of spectrometers to be added to the scene.
+         *
+         *  @pre    SPECTROMETER_START_HUE must be less than SPECTROMETER_END_HUE.
+         */
+        void Scene::add_spectrometer_vector(const std::vector<detector::Spectrometer>& t_spectrometer)
+        {
+            static_assert(SPECTROMETER_START_HUE < SPECTROMETER_END_HUE);
+
+            // Return if there are no entities.
+            if (t_spectrometer.empty())
+            {
+                return;
+            }
+
+            // Calculate the hue delta.
+            const double hue_delta = (t_spectrometer.size() == 1) ? 0.0
+                                                                  : ((SPECTROMETER_END_HUE - SPECTROMETER_START_HUE) / (t_spectrometer
+                    .size() - 1));
+
+            // Add the entity props to the scene.
+            for (size_t i = 0; i < t_spectrometer.size(); ++i)
+            {
+                const auto hue = static_cast<float>(math::deg_to_rad(SPECTROMETER_START_HUE + (i * hue_delta)));
+
+                add_spectrometer(t_spectrometer[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 0.5));
+            }
+        }
+
+        /**
          *  Add a vector of render-able photon path props to the scene.
          *
          *  @param  t_phot  Vector of photon paths to be added to the scene.
@@ -279,23 +316,16 @@ namespace arc
          */
         void Scene::add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot)
         {
-            static_assert(PHOTON_START_HUE < PHOTON_END_HUE);
-
             // Return if there are no photon paths.
             if (t_phot.empty())
             {
                 return;
             }
 
-            // Calculate the hue delta.
-            const double hue_delta = (t_phot.size() == 1) ? 0.0 : ((PHOTON_END_HUE - PHOTON_START_HUE) / (t_phot.size() - 1));
-
             // Add the photon path props to the scene.
             for (size_t i = 0; i < t_phot.size(); ++i)
             {
-                const auto hue = static_cast<float>(math::deg_to_rad(PHOTON_START_HUE + (i * hue_delta)));
-
-                add_photon(t_phot[i], glm::vec4(hsv_to_rgb(hue, 1.0f, 1.0f), 1.0));
+                add_photon(t_phot[i], glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
             }
         }
 
@@ -307,22 +337,20 @@ namespace arc
         void Scene::add_grid(const mesh::Grid& t_grid)
         {
             // Add main grid bounds.
-            const float grid_padding = 0.001f;
-            m_grid.emplace_back(Prop(Prop::shape::BOX, {1.0, 1.0, 1.0, 1.0},
-                                     {static_cast<float>(t_grid.get_min_bound()[X]) - grid_padding,
-                                      static_cast<float>(t_grid.get_min_bound()[Y]) - grid_padding,
-                                      static_cast<float>(t_grid.get_min_bound()[Z]) - grid_padding},
-                                     {static_cast<float>(t_grid.get_max_bound()[X]) + grid_padding,
-                                      static_cast<float>(t_grid.get_max_bound()[Y]) + grid_padding,
-                                      static_cast<float>(t_grid.get_max_bound()[Z]) + grid_padding}));
+            m_grid.emplace_back(Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0},
+                                     {static_cast<float>(t_grid.get_min_bound()[X]),
+                                      static_cast<float>(t_grid.get_min_bound()[Y]),
+                                      static_cast<float>(t_grid.get_min_bound()[Z])},
+                                     {static_cast<float>(t_grid.get_max_bound()[X]),
+                                      static_cast<float>(t_grid.get_max_bound()[Y]),
+                                      static_cast<float>(t_grid.get_max_bound()[Z])}));
 
             // Determine maximum grid cell energy density.
             double max_energy_density = t_grid.get_max_energy_density();
             VAL(max_energy_density);
 
             // Add grid cells.
-            const float cell_padding = -0.01f;
-            for (size_t i            = 0; i < t_grid.get_num_cells(X); ++i)
+            for (size_t i = 0; i < t_grid.get_num_cells(X); ++i)
             {
                 for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
                 {
@@ -332,21 +360,16 @@ namespace arc
 
                         if (energy_density > 0.0)
                         {
+                            // Get the cell.
+                            const auto cell = t_grid.get_cell(i, j, k);
+
+                            // Calculate the cell colour.
                             const std::array<double, 3> col = utl::colourmap::transform_rainbow(
                                 energy_density / max_energy_density);
-                            m_cell.emplace_back(Prop(Prop::shape::BOX, {glm::vec3(col[R], col[G], col[B]), 0.1},
-                                                     {static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_min_bound()[X]) - cell_padding,
-                                                      static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_min_bound()[Y]) - cell_padding,
-                                                      static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_min_bound()[Z]) - cell_padding},
-                                                     {static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_max_bound()[X]) + cell_padding,
-                                                      static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_max_bound()[Y]) + cell_padding,
-                                                      static_cast<float>(t_grid.get_cell(i, j, k)
-                                                                               .get_max_bound()[Z]) + cell_padding}));
+
+                            // Add the cell prop.
+                            add_cell(cell.get_min_bound(), cell.get_max_bound(), 1e-4,
+                                     {glm::vec3(col[R], col[G], col[B]), 1.0});
                         }
                     }
                 }
@@ -370,12 +393,14 @@ namespace arc
             {
                 for (size_t j = 0; j < 3; ++j)
                 {
-                    vertices.push_back(Vertex({static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
-                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
-                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
-                                              {static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
-                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
-                                               static_cast<float>(t_ent.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
+                    // Get the vertex position and normal.
+                    const math::Vec<3>& pos  = t_ent.get_mesh().get_tri(i).get_pos(j);
+                    const math::Vec<3>& norm = t_ent.get_mesh().get_tri(i).get_norm(j);
+
+                    // Add the vertex to the list of vertices.
+                    vertices.push_back(
+                        Vertex({static_cast<float>(pos[X]), static_cast<float>(pos[Y]), static_cast<float>(pos[Z])},
+                               {static_cast<float>(norm[X]), static_cast<float>(norm[Y]), static_cast<float>(norm[Z])}));
                 }
             }
 
@@ -400,12 +425,14 @@ namespace arc
             {
                 for (size_t j = 0; j < 3; ++j)
                 {
-                    vertices.push_back(Vertex({static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
-                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
-                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
-                                              {static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
-                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
-                                               static_cast<float>(t_light.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
+                    // Get the vertex position and normal.
+                    const math::Vec<3>& pos  = t_light.get_mesh().get_tri(i).get_pos(j);
+                    const math::Vec<3>& norm = t_light.get_mesh().get_tri(i).get_norm(j);
+
+                    // Add the vertex to the list of vertices.
+                    vertices.push_back(
+                        Vertex({static_cast<float>(pos[X]), static_cast<float>(pos[Y]), static_cast<float>(pos[Z])},
+                               {static_cast<float>(norm[X]), static_cast<float>(norm[Y]), static_cast<float>(norm[Z])}));
                 }
             }
 
@@ -430,17 +457,51 @@ namespace arc
             {
                 for (size_t j = 0; j < 3; ++j)
                 {
-                    vertices.push_back(Vertex({static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[X]),
-                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[Y]),
-                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_pos()[Z])},
-                                              {static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[X]),
-                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[Y]),
-                                               static_cast<float>(t_ccd.get_mesh().get_tri(i).get_vert(j).get_norm()[Z])}));
+                    // Get the vertex position and normal.
+                    const math::Vec<3>& pos  = t_ccd.get_mesh().get_tri(i).get_pos(j);
+                    const math::Vec<3>& norm = t_ccd.get_mesh().get_tri(i).get_norm(j);
+
+                    // Add the vertex to the list of vertices.
+                    vertices.push_back(
+                        Vertex({static_cast<float>(pos[X]), static_cast<float>(pos[Y]), static_cast<float>(pos[Z])},
+                               {static_cast<float>(norm[X]), static_cast<float>(norm[Y]), static_cast<float>(norm[Z])}));
                 }
             }
 
             // Add the ccd prop into the list of render-able ccd props.
             m_ccd.emplace_back(Prop(vertices, t_col));
+        }
+
+        /**
+         *  Add a render-able spectrometer prop to the scene.
+         *
+         *  @param  t_spectrometer  Spectrometer to be added to the scene.
+         *  @param  t_col           Colour to render the prop.
+         */
+        void Scene::add_spectrometer(const detector::Spectrometer& t_spectrometer, const glm::vec4& t_col)
+        {
+            // Create vector of vertices.
+            std::vector<Vertex> vertices;
+            vertices.reserve(t_spectrometer.get_mesh().get_num_tri() * 3);
+
+            // Add vertices into list from mesh.
+            for (size_t i = 0; i < t_spectrometer.get_mesh().get_num_tri(); ++i)
+            {
+                for (size_t j = 0; j < 3; ++j)
+                {
+                    // Get the vertex position and normal.
+                    const math::Vec<3>& pos  = t_spectrometer.get_mesh().get_tri(i).get_pos(j);
+                    const math::Vec<3>& norm = t_spectrometer.get_mesh().get_tri(i).get_norm(j);
+
+                    // Add the vertex to the list of vertices.
+                    vertices.push_back(
+                        Vertex({static_cast<float>(pos[X]), static_cast<float>(pos[Y]), static_cast<float>(pos[Z])},
+                               {static_cast<float>(norm[X]), static_cast<float>(norm[Y]), static_cast<float>(norm[Z])}));
+                }
+            }
+
+            // Add the light prop into the list of render-able light props.
+            m_spectrometer.emplace_back(Prop(vertices, t_col));
         }
 
         /**
@@ -452,6 +513,22 @@ namespace arc
         void Scene::add_photon(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col)
         {
             m_phot.emplace_back(Prop(t_phot, t_col));
+        }
+
+        /**
+         *  Add a render-able cell prop to the scene.
+         *
+         *  @param  t_min       Minimum bound of the cell.
+         *  @param  t_max       Minimum bound of the cell.
+         *  @param  t_padding   Padding to apply to cell bounds.
+         *  @param  t_col       Colour of the cell prop.
+         */
+        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const double t_padding,
+                             const glm::vec4& t_col)
+        {
+            m_cell.emplace_back(
+                Prop(Prop::boundedShape::BOX, t_col, {t_min[X] + t_padding, t_min[Y] + t_padding, t_min[Z] + t_padding},
+                     {t_max[X] - t_padding, t_max[Y] - t_padding, t_max[Z] - t_padding}));
         }
 
 
@@ -477,6 +554,7 @@ namespace arc
             draw_entities();
             draw_lights();
             draw_ccds();
+            draw_spectrometers();
             draw_grid();
             draw_sun();
             draw_phots();
@@ -484,21 +562,6 @@ namespace arc
             // Swap the buffers.
             glfwSwapBuffers(m_window);
         }
-
-        /**
-         *  Add a render-able cell prop to the scene.
-         *
-         *  @param  t_min   Minimum bound of the cell.
-         *  @param  t_max   Minimum bound of the cell.
-         *  @param  t_col   Colour of the cell prop.
-         */
-        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const glm::vec4& t_col)
-        {
-            m_cell
-                .emplace_back(Prop(Prop::shape::CUBOID, t_col, {t_min[X], t_min[Y], t_min[Z]}, {t_max[X], t_max[Y], t_max[Z]}));
-        }
-
-
 
         //  -- Control --
         /**
@@ -567,7 +630,7 @@ namespace arc
         {
             glm::vec3 translate;
             glm::vec2 rotate;
-            float     speed_multiplier = 1.0f;
+            float     speed_multiplier = 0.01f;
 
             if (glfwGetKey(m_window, control::DECREASE_CAM_SPEED) == GLFW_PRESS)
             {
@@ -901,7 +964,7 @@ namespace arc
                 {
                     glUniform4f(m_normal_shader.get_col_uni(), m_light[i].get_col()[R], m_light[i].get_col()[G],
                                 m_light[i].get_col()[B], m_light[i].get_col()[A]);
-                    glUniform1f(m_normal_shader.get_light_power_uni(), m_light[i].get_power());
+                    glUniform1f(m_normal_shader.get_light_power_uni(), m_light[i].get_power() * LIGHT_NORMAL_LENGTH_MULT);
 
                     glEnableVertexAttribArray(0);
 
@@ -956,6 +1019,54 @@ namespace arc
                     glBindVertexArray(m_ccd[i].get_vao());
 
                     glDrawArrays(GL_POINTS, 0, m_ccd[i].get_num_vert());
+
+                    glBindVertexArray(0);
+                }
+            }
+        }
+
+        /**
+         *  Draw the scene's spectrometers.
+         */
+        void Scene::draw_spectrometers() const
+        {
+            // Draw diffusely lit prop mesh.
+            glUseProgram(m_diffuse_shader.get_handle());
+            glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
+
+            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), SPECTROMETER_AMB_POW);
+
+            for (size_t i = 0; i < m_spectrometer.size(); ++i)
+            {
+                glUniform4f(m_diffuse_shader.get_col_uni(), m_spectrometer[i].get_col()[R], m_spectrometer[i].get_col()[G],
+                            m_spectrometer[i].get_col()[B], m_spectrometer[i].get_col()[A]);
+
+                glEnableVertexAttribArray(0);
+
+                glBindVertexArray(m_spectrometer[i].get_vao());
+
+                glDrawArrays(GL_TRIANGLES, 0, m_spectrometer[i].get_num_vert());
+
+                glBindVertexArray(0);
+            }
+
+            // Draw normals if toggle is on.
+            if (m_toggle_light_normal)
+            {
+                glUseProgram(m_normal_shader.get_handle());
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+                for (size_t i = 0; i < m_spectrometer.size(); ++i)
+                {
+                    glUniform4f(m_normal_shader.get_col_uni(), m_spectrometer[i].get_col()[R], m_spectrometer[i].get_col()[G],
+                                m_spectrometer[i].get_col()[B], m_spectrometer[i].get_col()[A]);
+                    glUniform1f(m_normal_shader.get_light_power_uni(), SPECTROMETER_NORMAL_LENGTH);
+
+                    glEnableVertexAttribArray(0);
+
+                    glBindVertexArray(m_spectrometer[i].get_vao());
+
+                    glDrawArrays(GL_POINTS, 0, m_spectrometer[i].get_num_vert());
 
                     glBindVertexArray(0);
                 }
@@ -1153,3 +1264,8 @@ namespace arc
 
     } // namespace graphical
 } // namespace arc
+
+
+
+//  == MODULE END ==
+#endif

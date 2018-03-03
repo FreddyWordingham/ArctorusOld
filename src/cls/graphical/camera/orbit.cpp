@@ -7,6 +7,12 @@
 
 
 
+//  == MODULE ==
+#include "gen/config.hpp"
+#ifdef ENABLE_GRAPHICS
+
+
+
 //  == HEADER ==
 #include "cls/graphical/camera/orbit.hpp"
 
@@ -65,8 +71,8 @@ namespace arc
             {
                 m_azi_spin += (t_rotate[0] * 0.01f);
 
-                m_azi += t_translate[1] + m_azi_spin;
-                m_dec += t_translate[0];
+                m_azi += (t_translate[1] * 100.0f) + m_azi_spin;
+                m_dec += (t_translate[0] * 100.0f);
                 m_rho -= t_translate[2];
 
                 if (m_dec < 0.0f)
@@ -92,3 +98,8 @@ namespace arc
         } // namespace camera
     } // namespace graphical
 } // namespace arc
+
+
+
+//  == MODULE END ==
+#endif

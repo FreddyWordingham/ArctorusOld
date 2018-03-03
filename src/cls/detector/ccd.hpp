@@ -38,7 +38,9 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Properties --
-            const geom::Mesh m_mesh;    //! Mesh describing the surface of the detector.
+            const std::string  m_name;  //! Name of the ccd.
+            const geom::Mesh   m_mesh;  //! Mesh describing the surface of the detector.
+            const math::Vec<3> m_norm;  //! Normal direction.
 
             //  -- Settings --
             const bool m_col;   //! If true save the image as wavelength colours. Otherwise save as greyscale intensity.
@@ -50,23 +52,24 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            explicit Ccd(size_t t_width, size_t t_height, bool t_col,
-                         const math::Vec<3>& t_trans = math::Vec<3>({{0.0, 0.0, 0.0}}),
-                         const math::Vec<3>& t_dir = math::Vec<3>({{0.0, 0.0, 1.0}}), double t_spin = 0.0,
-                         const math::Vec<3>& t_scale = math::Vec<3>({{1.0, 1.0, 1.0}}));
+            explicit Ccd(const std::string& t_name, size_t t_width, size_t t_height, bool t_col,
+                         const math::Vec<3>& t_trans = math::Vec<3>(0.0, 0.0, 0.0),
+                         const math::Vec<3>& t_dir = math::Vec<3>(0.0, 0.0, 1.0), double t_spin = 0.0,
+                         const math::Vec<3>& t_scale = math::Vec<3>(1.0, 1.0, 1.0));
 
 
             //  == METHODS ==
           public:
             //  -- Getters --
             const geom::Mesh& get_mesh() const { return (m_mesh); }
+            const math::Vec<3>& get_norm() const { return (m_norm); }
             std::array<double, 3> get_max_value() const { return (m_image.get_max_value()); }
 
             //  -- Setters --
             void add_hit(const math::Vec<3>& t_pos, double t_weight, double t_wavelength);
 
             //  -- Save --
-            void save(const std::string& t_path, double t_norm) const;
+            void save(const std::string& t_output_dir, double t_norm) const;
         };
 
 

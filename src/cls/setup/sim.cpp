@@ -16,8 +16,10 @@
 //  -- General --
 #include "gen/optics.hpp"
 
+//  -- Utility --
+#include "utl/file.hpp"
+
 //  -- Classes --
-#include "cls/file/handle.hpp"
 #include "cls/graphical/scene.hpp"
 
 
@@ -39,14 +41,29 @@ namespace arc
          */
         Sim::Sim(const data::Json& t_json) :
             m_num_phot(t_json.parse_child<unsigned long int>("num_phot")),
+            m_roulette_weight(t_json["roulette"].parse_child<double>("weight")),
+            m_roulette_chambers(t_json["roulette"].parse_child<double>("chambers")),
             m_aether(init_aether(t_json["aether"])),
             m_entity(init_entity(t_json["entities"])),
             m_light(init_light(t_json["lights"])),
             m_ccd(init_ccd(t_json["ccds"])),
+            m_spectrometer(init_spectrometer(t_json["spectrometers"])),
             m_light_select(init_light_select()),
             m_grid(t_json["grid"].parse_child<math::Vec<3>>("min"), t_json["grid"].parse_child<math::Vec<3>>("max"),
-                   t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd)
+                   t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd, m_spectrometer)
         {
+            // Validate settings.
+            if (m_roulette_weight < 0.0)
+            {
+                ERROR("Value of m_roulette_weight is invalid.",
+                      "Value of m_roulette_weight must be non-negative, but is: '" << m_roulette_weight << "'.");
+            }
+            if (m_roulette_chambers <= 1.0)
+            {
+                ERROR("Value of m_roulette_chambers is invalid.",
+                      "Value of m_roulette_chambers must be greater than one, but is: '" << m_roulette_chambers << "'.");
+            }
+
             // Check wavelengths are valid.
             double      light_min_bound = m_light[0].get_min_bound();
             double      light_max_bound = m_light[0].get_max_bound();
@@ -106,12 +123,12 @@ namespace arc
          */
         phys::Material Sim::init_aether(const data::Json& t_json) const
         {
-            LOG("Constructing aether.");
+            LOG("Constructing aether");
 
             // Get file paths.
             const std::string mat_path = t_json.parse_child<std::string>("mat");
 
-            return (phys::Material(file::read(mat_path)));
+            return (phys::Material(utl::read(mat_path)));
         }
 
         /**
@@ -132,24 +149,24 @@ namespace arc
             // Construct the entity objects.
             for (size_t i = 0; i < entity_name.size(); ++i)
             {
-                LOG("Constructing entity : " << entity_name[i]);
+                LOG("Constructing entity       : " << entity_name[i]);
 
                 // Create a json object of the entity.
                 const data::Json json_entity = t_json[entity_name[i]];
 
                 // Get the transformation values.
-                const auto   trans = json_entity.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const auto   dir   = json_entity.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const auto   trans = json_entity.parse_child<math::Vec<3>>("trans", math::Vec<3>(0.0, 0.0, 0.0));
+                const auto   dir   = json_entity.parse_child<math::Vec<3>>("dir", math::Vec<3>(0.0, 0.0, 1.0));
                 const double rot   = math::deg_to_rad(json_entity.parse_child<double>("rot", 0.0));
-                const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+                const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get file paths.
                 const std::string mesh_path = json_entity.parse_child<std::string>("mesh");
                 const std::string mat_path  = json_entity.parse_child<std::string>("mat");
 
                 // Construct the entity object an add it to the vector of entities.
-                r_entity.emplace_back(equip::Entity(geom::Mesh(file::read(mesh_path), trans, dir, rot, scale),
-                                                    phys::Material(file::read(mat_path))));
+                r_entity.emplace_back(equip::Entity(geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale),
+                                                    phys::Material(utl::read(mat_path))));
             }
 
             return (r_entity);
@@ -173,16 +190,16 @@ namespace arc
             // Construct the light objects.
             for (size_t i = 0; i < light_name.size(); ++i)
             {
-                LOG("Constructing light : " << light_name[i]);
+                LOG("Constructing light        : " << light_name[i]);
 
                 // Create a json object of the light.
                 const data::Json json_light = t_json[light_name[i]];
 
                 // Get the transformation values.
-                const auto   trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const auto   dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const auto   trans = json_light.parse_child<math::Vec<3>>("trans", math::Vec<3>(0.0, 0.0, 0.0));
+                const auto   dir   = json_light.parse_child<math::Vec<3>>("dir", math::Vec<3>(0.0, 0.0, 1.0));
                 const double rot   = math::deg_to_rad(json_light.parse_child<double>("rot", 0.0));
-                const auto   scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+                const auto   scale = json_light.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get light properties.
                 const auto power = json_light.parse_child<double>("power");
@@ -192,8 +209,9 @@ namespace arc
                 const std::string spec_path = json_light.parse_child<std::string>("spec");
 
                 // Construct the light object an add it to the vector of lights.
-                r_light.emplace_back(equip::Light(geom::Mesh(file::read(mesh_path), trans, dir, rot, scale),
-                                                  phys::Spectrum(file::read(spec_path)), power));
+                r_light.emplace_back(
+                    equip::Light(geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), phys::Spectrum(utl::read(spec_path)),
+                                 power));
             }
 
             return (r_light);
@@ -217,26 +235,72 @@ namespace arc
             // Construct the ccd objects.
             for (size_t i = 0; i < ccd_name.size(); ++i)
             {
-                LOG("Constructing ccd : " << ccd_name[i]);
+                LOG("Constructing ccd          : " << ccd_name[i]);
 
                 // Create a json object of the ccd.
                 const data::Json json_ccd = t_json[ccd_name[i]];
 
                 // Get the transformation values.
-                const auto   trans = json_ccd.parse_child<math::Vec<3>>("trans", math::Vec<3>({{0.0, 0.0, 0.0}}));
-                const auto   dir   = json_ccd.parse_child<math::Vec<3>>("dir", math::Vec<3>({{0.0, 0.0, 1.0}}));
+                const auto   trans = json_ccd.parse_child<math::Vec<3>>("trans", math::Vec<3>(0.0, 0.0, 0.0));
+                const auto   dir   = json_ccd.parse_child<math::Vec<3>>("dir", math::Vec<3>(0.0, 0.0, 1.0));
                 const double rot   = math::deg_to_rad(json_ccd.parse_child<double>("rot", 0.0));
-                const auto   scale = json_ccd.parse_child<math::Vec<3>>("scale", math::Vec<3>({{1.0, 1.0, 1.0}}));
+                const auto   scale = json_ccd.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get ccd properties.
                 const auto pix = json_ccd.parse_child<std::array<size_t, 2>>("pixel");
                 const auto col = json_ccd.parse_child<bool>("col");
 
                 // Construct the ccd object an add it to the vector of ccds.
-                r_ccd.emplace_back(detector::Ccd(pix[X], pix[Y], col, trans, dir, rot, scale));
+                r_ccd.emplace_back(detector::Ccd(ccd_name[i], pix[X], pix[Y], col, trans, dir, rot, scale));
             }
 
             return (r_ccd);
+        }
+
+        /**
+         *  Initialise the vector of spectrometer objects.
+         *
+         *  @param  t_json  Json setup file.
+         *
+         *  @return The initialised vector of spectrometer objects.
+         */
+        std::vector<detector::Spectrometer> Sim::init_spectrometer(const data::Json& t_json) const
+        {
+            // Create the return vector of spectrometers.
+            std::vector<detector::Spectrometer> r_spectrometer;
+
+            // Get list of spectrometer names.
+            std::vector<std::string> spectrometer_name = t_json.get_child_names();
+
+            // Construct the spectrometer objects.
+            for (size_t i = 0; i < spectrometer_name.size(); ++i)
+            {
+                LOG("Constructing spectrometer : " << spectrometer_name[i]);
+
+                // Create a json object of the spectrometer.
+                const data::Json json_spectrometer = t_json[spectrometer_name[i]];
+
+                // Get the transformation values.
+                const auto   trans = json_spectrometer.parse_child<math::Vec<3>>("trans", math::Vec<3>(0.0, 0.0, 0.0));
+                const auto   dir   = json_spectrometer.parse_child<math::Vec<3>>("dir", math::Vec<3>(0.0, 0.0, 1.0));
+                const double rot   = math::deg_to_rad(json_spectrometer.parse_child<double>("rot", 0.0));
+                const auto   scale = json_spectrometer.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
+
+                // Get spectrometer properties.
+                const auto min  = json_spectrometer.parse_child<double>("min");
+                const auto max  = json_spectrometer.parse_child<double>("max");
+                const auto bins = json_spectrometer.parse_child<size_t>("bins");
+
+                // Get file paths.
+                const std::string mesh_path = json_spectrometer.parse_child<std::string>("mesh");
+
+                // Construct the spectrometer object an add it to the vector of spectrometers.
+                r_spectrometer.emplace_back(
+                    detector::Spectrometer(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), min,
+                                           max, bins));
+            }
+
+            return (r_spectrometer);
         }
 
         /**
@@ -261,21 +325,21 @@ namespace arc
         //  == METHODS ==
         //  -- Saving --
         /**
-         *  Save the grid images to a given directory.
+         *  Save the grid images.
          *
-         *  @param  t_dir   Directory to save the images to.
+         *  @param  t_output_dir    Directory to write the images to.
          */
-        void Sim::save_grid_images(const std::string& t_dir) const
+        void Sim::save_grid_images(const std::string& t_output_dir) const
         {
-            m_grid.save_images(t_dir);
+            m_grid.save_images(t_output_dir);
         }
 
         /**
-         *  Save the ccd images to a given directory.
+         *  Save the ccd images.
          *
-         *  @param  t_dir   Directory to save the images to.
+         *  @param  t_output_dir    Directory to write the images to.
          */
-        void Sim::save_ccd_images(const std::string& t_dir) const
+        void Sim::save_ccd_images(const std::string& t_output_dir) const
         {
             // Get the maximum rgb values.
             double      max = 0.0;
@@ -294,8 +358,26 @@ namespace arc
             // Save each ccd image.
             for (size_t i = 0; i < m_ccd.size(); ++i)
             {
-                m_ccd[i].save(t_dir + "/ccd_" + std::to_string(i) + ".ppm", max);
+                m_ccd[i].save(t_output_dir, max);
             }
+
+            LOG("CCD image saving complete.");
+        }
+
+        /**
+         *  Save the spectrometer data.
+         *
+         *  @param  t_output_dir    Directory to write the images to.
+         */
+        void Sim::save_spectrometer_data(const std::string& t_output_dir) const
+        {
+            // Save each spectrometer's data.
+            for (size_t i = 0; i < m_spectrometer.size(); ++i)
+            {
+                m_spectrometer[i].save(t_output_dir);
+            }
+
+            LOG("Spectrometer data saving complete.");
         }
 
 
@@ -305,6 +387,7 @@ namespace arc
          */
         void Sim::render() const
         {
+#ifdef ENABLE_GRAPHICS
             // Create a graphical scene.
             graphical::Scene scene;
 
@@ -312,7 +395,10 @@ namespace arc
             scene.add_light_vector(m_light);
             scene.add_entity_vector(m_entity);
             scene.add_ccd_vector(m_ccd);
+            scene.add_spectrometer_vector(m_spectrometer);
+#ifdef ENABLE_PHOTON_PATHS
             scene.add_photon_vector(m_path);
+#endif
             scene.add_grid(m_grid);
 
             // Render the scene.
@@ -321,6 +407,9 @@ namespace arc
                 scene.handle_input();
                 scene.render();
             }
+#else
+            WARN("Unable to render scene.", "GRAPHICS compile-time option has been set to off.");
+#endif
         }
 
 
@@ -346,26 +435,58 @@ namespace arc
 
                 // Loop until the photon exits the grid.
                 unsigned long int loops = 0;
-                while (m_grid.is_within(phot.get_pos()))
+                while (m_grid.is_within(phot.get_pos()) && (phot.get_weight() > 0.0))
                 {
-                    if (loops > 1e9)
+                    // Increment number of loops.
+                    ++loops;
+                    if (loops > 1e3)
                     {
-                        WARN("Photon removed from loop prematurely.", "Photon appeared to be stuck in main loop.");
+                        WARN("Photon removed from loop prematurely.", "Number of loops exceeded set limit.");
                         break;
                     }
-                    ++loops;
+
+                    // Call roulette if below threshold.
+                    if (phot.get_weight() < m_roulette_weight)
+                    {
+                        if (rng::random() > (1.0 / m_roulette_chambers))
+                        {
+                            // Remove the photon from simulation.
+                            cell->add_energy(energy);
+                            break;
+                        }
+
+                        phot.multiply_weight(m_roulette_chambers);
+                    }
 
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
                     const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
-                    size_t       entity_index;
+                    /*size_t       entity_index;
                     double       entity_dist;
                     math::Vec<3> entity_norm;
                     std::tie(entity_index, entity_dist, entity_norm) = cell
                         ->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+                    */
+
+                    // Check for an entity hit.
+                    bool   entity_hit;
+                    double entity_dist;
+                    size_t entity_index, entity_tri_index;
+                    std::tie(entity_hit, entity_dist, entity_index, entity_tri_index) = cell
+                        ->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+                    if (!entity_hit)
+                    {
+                        entity_dist = std::numeric_limits<double>::max();
+                    }
+
                     size_t       ccd_index;
                     double       ccd_dist;
                     math::Vec<3> ccd_norm;
                     std::tie(ccd_index, ccd_dist, ccd_norm) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
+                    size_t       spectrometer_index;
+                    double       spectrometer_dist;
+                    math::Vec<3> spectrometer_norm;
+                    std::tie(spectrometer_index, spectrometer_dist, spectrometer_norm) = cell
+                        ->get_dist_to_spectrometer(phot.get_pos(), phot.get_dir(), m_spectrometer);
 
                     assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
                     assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
@@ -373,30 +494,63 @@ namespace arc
 
                     if (entity_dist <= SMOOTHING_LENGTH)
                     {
-                        VAL(scat_dist);
-                        VAL(cell_dist);
-                        VAL(entity_dist);
-                        WARN("Photon removed from loop prematurely.",
-                             "Distance to entity is shorter than the smoothing length.");
-                        phot.move(0.1);
+                        //WARN("Photon removed from loop prematurely.",
+                        //     "Distance to entity is shorter than the smoothing length.");
 
-//                        m_path.push_back(phot.get_path());
+#ifdef ENABLE_PHOTON_PATHS
+                        m_path.push_back(phot.get_path());
+#endif
 
+                        // Remove the photon from simulation.
+                        cell->add_energy(energy);
                         break;
                     }
-                    //assert(scat_dist > SMOOTHING_LENGTH);
+
+//                    assert(scat_dist > SMOOTHING_LENGTH);
                     assert(cell_dist > SMOOTHING_LENGTH);
                     assert(entity_dist > SMOOTHING_LENGTH);
 
+                    // Photon hits a spectrometer detector.
+                    if ((spectrometer_dist < ccd_dist) && (spectrometer_dist < scat_dist) && (spectrometer_dist < entity_dist) && (spectrometer_dist < cell_dist))
+                    {
+                        energy += spectrometer_dist * phot.get_weight();
+
+                        // Move the photon to the detector surface.
+                        phot.move(spectrometer_dist);
+
+                        // Check if photon hits the front of the detector.
+                        if ((phot.get_dir() * spectrometer_norm) < 0.0)
+                        {
+                            m_spectrometer[spectrometer_index].add_hit(phot.get_wavelength(), phot.get_weight());
+                        }
+
+                        // Remove the photon from simulation.
+                        cell->add_energy(energy);
+                        break;
+                    }
+
+                    // Photon hits a ccd detector.
                     if ((ccd_dist < scat_dist) && (ccd_dist < entity_dist) && (ccd_dist < cell_dist))
                     {
-                        m_ccd[ccd_index]
-                            .add_hit(phot.get_pos() + (phot.get_dir() * ccd_dist), phot.get_weight(), phot.get_wavelength());
+                        energy += ccd_dist * phot.get_weight();
+
+                        // Move the photon to the detector surface.
+                        phot.move(ccd_dist);
+
+                        // Check if photon hits the front of the detector.
+                        if ((phot.get_dir() * m_ccd[ccd_index].get_norm()) < 0.0)
+                        {
+                            m_ccd[ccd_index].add_hit(phot.get_pos(), phot.get_weight(), phot.get_wavelength());
+                        }
+
+                        // Remove the photon from simulation.
+                        cell->add_energy(energy);
+                        break;
                     }
 
                     if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.
                     {
-                        energy += scat_dist;
+                        energy += scat_dist * phot.get_weight();
 
                         // Move to the scattering point.
                         phot.move(scat_dist);
@@ -409,13 +563,18 @@ namespace arc
                     }
                     else if (entity_dist < cell_dist)   // Change entity.
                     {
-                        // If entity normal is facing away, multiply it by -1.
-                        if ((phot.get_dir() * entity_norm) > 0.0)
-                        {
-                            entity_norm = entity_norm * -1.0;
-                        }
+                        // Get the entity triangle normal.
+                        math::Vec<3> norm = m_entity[entity_index].get_mesh().get_tri(entity_tri_index)
+                                                                  .get_norm(phot.get_pos() + (phot.get_dir() * entity_dist));
 
-                        energy += entity_dist;
+                        // If entity normal is facing away, multiply it by -1.
+                        if ((phot.get_dir() * norm) > 0.0)
+                        {
+                            norm *= -1.0;
+                        }
+                        assert(norm.is_normalised());
+
+                        energy += entity_dist * phot.get_weight();
 
                         // Determine the material indices.
                         int  index_i, index_t;
@@ -443,52 +602,56 @@ namespace arc
                         const double n_t = mat_t.get_ref_index(phot.get_wavelength());
 
                         // Calculate incident angle.
-                        const double a_i = acos(-1.0 * (phot.get_dir() * entity_norm));
+                        const double a_i = acos(-phot.get_dir() * norm);
                         assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
 
-                        // Check for total internal reflection.
-                        if (std::sin(a_i) > (n_t / n_i))
+                        // Calculate reflectance probability.
+                        double reflectance;
+                        if (std::sin(a_i) >= (n_t / n_i))   // Total internal reflectance.
+                        {
+                            reflectance = 1.0;
+                        }
+                        else                                // Specular reflectance.
+                        {
+                            const double a_t = std::asin((n_i / n_t) * std::sin(a_i));
+                            reflectance = 0.5 * ((math::square(std::sin(a_i - a_t)) / (math::square(
+                                std::sin(a_i + a_t)))) + (math::square(std::tan(a_i - a_t)) / (math::square(
+                                std::tan(a_i + a_t)))));
+                        }
+
+                        assert((reflectance >= 0.0) && (reflectance <= 1.0));
+
+                        if (rng::random() <= reflectance)                               // Reflect.
                         {
                             // Move to just before the boundary.
                             phot.move(entity_dist - SMOOTHING_LENGTH);
 
                             // Reflect the photon.
-                            phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+                            phot.set_dir(optics::reflection_dir(phot.get_dir(), norm));
                         }
-                        else
+                        else                                                            // Refract.
                         {
-                            if (rng::random() <= optics::reflection_prob(a_i, n_i, n_t))    // Reflect.
+                            // Move to just past the boundary.
+                            phot.move(entity_dist + SMOOTHING_LENGTH);
+
+                            // Refract the photon.
+                            phot.set_dir(optics::refraction_dir(phot.get_dir(), norm, n_i / n_t));
+
+                            // Photon moves to new entity.
+                            if (exiting)
                             {
-                                // Move to just before the boundary.
-                                phot.move(entity_dist - SMOOTHING_LENGTH);
-
-                                // Reflect the photon.
-                                phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+                                phot.pop_entity_index();
                             }
-                            else                                                            // Refract.
+                            else
                             {
-                                // Move to just past the boundary.
-                                phot.move(entity_dist + SMOOTHING_LENGTH);
-
-                                // Refract the photon.
-                                phot.set_dir(optics::refraction_dir(phot.get_dir(), entity_norm, n_i / n_t));
-
-                                // Photon moves to new entity.
-                                if (exiting)
-                                {
-                                    phot.pop_entity_index();
-                                }
-                                else
-                                {
-                                    phot.push_entity_index(index_t);
-                                }
-                                phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
+                                phot.push_entity_index(index_t);
                             }
+                            phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
                         }
                     }
                     else    // Exit cell.
                     {
-                        energy += cell_dist;
+                        energy += cell_dist * phot.get_weight();
 
                         // Add current energy to current cell and reset count.
                         cell->add_energy(energy);
@@ -505,9 +668,13 @@ namespace arc
                     }
                 }
 
+#ifdef ENABLE_PHOTON_PATHS
                 // Add the photon path.
                 m_path.push_back(phot.get_path());
+#endif
             }
+
+            LOG("Photon loop complete.");
         }
 
 

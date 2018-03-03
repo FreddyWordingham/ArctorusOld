@@ -36,12 +36,12 @@ namespace arc
          *
          *  @return The current time as a string.
          */
-        std::string create_timestamp()
+        std::string create_timestamp(const std::string& t_format)
         {
             std::time_t t = std::time(nullptr);
 
             std::stringstream time_stream;
-            time_stream << std::put_time(std::localtime(&t), "%d-%m-%Y %H:%M:%S");
+            time_stream << std::put_time(std::localtime(&t), t_format.c_str());
 
             return (time_stream.str());
         }
@@ -144,6 +144,29 @@ namespace arc
             }
 
             return (t_path.substr(last_slash_pos + 1));
+        }
+
+        /**
+         *  Strip the file extension leaving only the filename and extension, from the full file path.
+         *
+         *  @param  t_path  Full file path.
+         *
+         *  @pre    t_path must not be empty.
+         *
+         *  @return The path stripped of the file extension.
+         */
+        std::string strip_extension(const std::string& t_path)
+        {
+            assert(!t_path.empty());
+
+            size_t last_period_pos = t_path.find_last_of('.');
+
+            if (last_period_pos == std::string::npos)
+            {
+                return (t_path);
+            }
+
+            return (t_path.substr(0, last_period_pos));
         }
 
         /**

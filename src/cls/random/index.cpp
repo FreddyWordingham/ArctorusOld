@@ -76,7 +76,7 @@ namespace arc
                 r_cdf[i] /= r_cdf.back();
             }
 
-            assert(m_cdf.back() == 1.0);
+            assert(r_cdf.back() == 1.0);
 
             return (r_cdf);
         }

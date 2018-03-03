@@ -25,20 +25,23 @@ namespace arc
         /**
          *  Construct a cell with given bounds which may contain triangles of the given entities.
          *
-         *  @param  t_min_bound Minimum bound of the cell.
-         *  @param  t_max_bound Maximum bound of the cell.
-         *  @param  t_entity    Vector of entities which may be contained within the cell.
-         *  @param  t_light     Vector of lights which may be contained within the cell.
-         *  @param  t_ccd       Vector of ccds which may be contained within the cell.
+         *  @param  t_min_bound     Minimum bound of the cell.
+         *  @param  t_max_bound     Maximum bound of the cell.
+         *  @param  t_entity        Vector of entities which may be contained within the cell.
+         *  @param  t_light         Vector of lights which may be contained within the cell.
+         *  @param  t_ccd           Vector of ccds which may be contained within the cell.
+         *  @param  t_spectrometer  Vector of spectrometers which may be contained within the cell.
          */
         Cell::Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::vector<equip::Entity>& t_entity,
-                   const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd) :
+                   const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd,
+                   const std::vector<detector::Spectrometer>& t_spectrometer) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
             m_entity_list(init_entity_list(t_entity)),
             m_light_list(init_light_list(t_light)),
             m_ccd_list(init_ccd_list(t_ccd)),
-            m_empty(m_entity_list.empty() && m_light_list.empty() && m_ccd_list.empty())
+            m_spectrometer_list(init_spectrometer_list(t_spectrometer)),
+            m_empty(m_entity_list.empty() && m_light_list.empty() && m_ccd_list.empty() && m_spectrometer_list.empty())
         {
             assert(t_max_bound[X] > t_min_bound[X]);
             assert(t_max_bound[Y] > t_min_bound[Y]);
@@ -51,6 +54,8 @@ namespace arc
          *  Initialise the list of entity triangles found within the cell.
          *
          *  @param  t_entity    Vector of entities which may be contained within the cell.
+         *
+         *  @return The initialised list of entity triangles found within the cell.
          */
         std::vector<std::array<size_t, 2>> Cell::init_entity_list(const std::vector<equip::Entity>& t_entity) const
         {
@@ -77,6 +82,8 @@ namespace arc
          *  Initialise the list of light triangles found within the cell.
          *
          *  @param  t_light Vector of lights which may be contained within the cell.
+         *
+         *  @return The initialised list of light triangles found within the cell.
          */
         std::vector<std::array<size_t, 2>> Cell::init_light_list(const std::vector<equip::Light>& t_light) const
         {
@@ -103,6 +110,8 @@ namespace arc
          *  Initialise the list of ccd triangles found within the cell.
          *
          *  @param  t_ccd   Vector of ccds which may be contained within the cell.
+         *
+         *  @return The initialised list of ccd triangles found within the cell.
          */
         std::vector<std::array<size_t, 2>> Cell::init_ccd_list(const std::vector<detector::Ccd>& t_ccd) const
         {
@@ -126,6 +135,35 @@ namespace arc
         }
 
         /**
+         *  Initialise the list of spectrometer triangles found within the cell.
+         *
+         *  @param  t_spectrometer  Vector of spectrometers which may be contained within the cell.
+         *
+         *  @return The initialised list of spectrometer triangles found within the cell.
+         */
+        std::vector<std::array<size_t, 2>> Cell::init_spectrometer_list(
+            const std::vector<detector::Spectrometer>& t_spectrometer) const
+        {
+            std::vector<std::array<size_t, 2>> r_spectrometer_list;
+
+            const math::Vec<3> center    = (m_max_bound + m_min_bound) / 2.0;
+            const math::Vec<3> half_size = (m_max_bound - m_min_bound) / 2.0;
+
+            for (size_t i = 0; i < t_spectrometer.size(); ++i)
+            {
+                for (size_t j = 0; j < t_spectrometer[i].get_mesh().get_num_tri(); ++j)
+                {
+                    if (tri_overlap(center, half_size, t_spectrometer[i].get_mesh().get_tri(j)))
+                    {
+                        r_spectrometer_list.push_back({{i, j}});
+                    }
+                }
+            }
+
+            return (r_spectrometer_list);
+        }
+
+        /**
          *  Determine if an axis-aligned bounding box is intersecting with a triangle.
          *  Box and triangle are considered to be overlapping even if the triangle is in the plane of the box.
          *
@@ -138,9 +176,9 @@ namespace arc
         bool Cell::tri_overlap(const math::Vec<3>& t_center, const math::Vec<3>& t_half_size, const geom::Triangle& t_tri) const
         {
             // Translate everything so the box center is at the origin.
-            const math::Vec<3> v0 = t_tri.get_vert(0).get_pos() - t_center;
-            const math::Vec<3> v1 = t_tri.get_vert(1).get_pos() - t_center;
-            const math::Vec<3> v2 = t_tri.get_vert(2).get_pos() - t_center;
+            const math::Vec<3> v0 = t_tri.get_pos(0) - t_center;
+            const math::Vec<3> v1 = t_tri.get_pos(1) - t_center;
+            const math::Vec<3> v2 = t_tri.get_pos(2) - t_center;
 
             // Compute triangle edges.
             const math::Vec<3> e0 = v1 - v0;
@@ -344,6 +382,217 @@ namespace arc
             assert(r_dist > 0.0);
 
             return (r_dist);
+        }
+
+        std::tuple<bool, double, size_t, size_t> Cell::dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                                      const std::vector<equip::Entity>& t_entity) const
+        {
+            assert(t_dir.is_normalised());
+
+            // If cell contains no entity triangles, there is no hit.
+            if (m_entity_list.empty())
+            {
+                return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN()));
+            }
+
+            // Run through all entity triangles and determine if any hits occur.
+            bool        hit            = false;
+            double      r_dist         = std::numeric_limits<double>::max();
+            size_t      r_entity_index = std::numeric_limits<size_t>::signaling_NaN();
+            size_t      r_tri_index    = std::numeric_limits<size_t>::signaling_NaN();
+            for (size_t i              = 0; i < m_entity_list.size(); ++i)
+            {
+                // Get a reference to the triangle.
+                const geom::Triangle& tri = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
+
+                // Determine if there is a hit.
+                bool   tri_hit;
+                double tri_dist;
+                std::tie(tri_hit, tri_dist) = tri.intersection_dist(t_pos, t_dir);
+
+                // If a hit does occur, and it is closer than any hit so far, store the information.
+                if (tri_hit && (tri_dist < r_dist))
+                {
+                    hit            = true;
+                    r_dist         = tri_dist;
+                    r_entity_index = m_entity_list[i][0];
+                    r_tri_index    = m_entity_list[i][1];
+                }
+            }
+
+            // If a hit did occur, return the information.
+            if (hit)
+            {
+                return (std::tuple<bool, double, size_t, size_t>(true, r_dist, r_entity_index, r_tri_index));
+            }
+
+            return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN()));
+        }
+
+        /**
+         *  Determine the distance along the given ray to the nearest entity triangle.
+         *  Also return the index of the entity, as well as the normal of the entity triangle.
+         *
+         *  @param  t_pos       Initial position of the ray.
+         *  @param  t_dir       Direction of the ray.
+         *  @param  t_entity    Vector of entities within the simulation.
+         *
+         *  @return A tuple containing the entity index, distance to the entity triangle and the normal at the intersection.
+         */
+        std::tuple<size_t, double, math::Vec<3>> Cell::get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                                          const std::vector<equip::Entity>& t_entity) const
+        {
+            assert(t_dir.is_normalised());
+
+            // If cell contains no triangles, return a large dummy value.
+            if (m_empty)
+            {
+                return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
+                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
+            }
+
+            // Run through all entity triangles and determine the closest intersection distance.
+            size_t       r_index;
+            double       r_dist = std::numeric_limits<double>::max();
+            math::Vec<3> r_norm;
+            for (size_t  i      = 0; i < m_entity_list.size(); ++i)
+            {
+                // Get distance to intersection.
+                bool   intersect;
+                double tri_dist;
+                std::tie(intersect, tri_dist) = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
+                                                                             .intersection_dist(t_pos, t_dir);
+
+                // If an intersection does occur with the triangle, test if it is the closest so far.
+                if (intersect)
+                {
+                    assert(r_dist >= 0.0);
+
+                    // If this distance is the closest so far, accept it.
+                    if (tri_dist < r_dist)
+                    {
+                        r_index = m_entity_list[i][0];
+                        r_dist  = tri_dist;
+                        r_norm  = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
+                                                               .get_norm(t_pos + (t_dir * r_dist));
+                    }
+                }
+            }
+
+            return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
+        }
+
+        /**
+         *  Determine the distance along the given ray to the nearest ccd triangle.
+         *  Also return the index of the ccd, as well as the normal of the ccd triangle.
+         *
+         *  @param  t_pos   Initial position of the ray.
+         *  @param  t_dir   Direction of the ray.
+         *  @param  t_ccd   Vector of ccds within the simulation.
+         *
+         *  @return A tuple containing the ccd index, distance to the ccd triangle and the normal at the intersection.
+         */
+        std::tuple<size_t, double, math::Vec<3>> Cell::get_dist_to_ccd(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                                       const std::vector<detector::Ccd>& t_ccd) const
+        {
+            assert(t_dir.is_normalised());
+
+            // If cell contains no triangles, return a large dummy value.
+            if (m_empty)
+            {
+                return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
+                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
+            }
+
+            // Run through all ccd triangles and determine the closest intersection distance.
+            size_t       r_index;
+            double       r_dist = std::numeric_limits<double>::max();
+            math::Vec<3> r_norm;
+            for (size_t  i      = 0; i < m_ccd_list.size(); ++i)
+            {
+                // Get distance to intersection.
+                bool   intersect;
+                double tri_dist;
+                std::tie(intersect, tri_dist) = t_ccd[m_ccd_list[i][0]].get_mesh().get_tri(m_ccd_list[i][1])
+                                                                       .intersection_dist(t_pos, t_dir);
+
+                // If an intersection does occur with the triangle, test if it is the closest so far.
+                if (intersect)
+                {
+                    assert(r_dist >= 0.0);
+
+                    // If this distance is the closest so far, accept it.
+                    if (tri_dist < r_dist)
+                    {
+                        r_index = m_ccd_list[i][0];
+                        r_dist  = tri_dist;
+                        r_norm  = t_ccd[m_ccd_list[i][0]].get_mesh().get_tri(m_ccd_list[i][1])
+                                                         .get_norm(t_pos + (t_dir * r_dist));
+                    }
+                }
+            }
+
+            return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
+        }
+
+        /**
+         *  Determine the distance along the given ray to the nearest spectrometer triangle.
+         *  Also return the index of the spectrometer, as well as the normal of the spectrometer triangle.
+         *
+         *  @param  t_pos           Initial position of the ray.
+         *  @param  t_dir           Direction of the ray.
+         *  @param  t_spectrometer  Vector of spectrometers within the simulation.
+         *
+         *  @return A tuple containing the spectrometer index, distance to the spectrometer triangle and the normal at the
+         *  intersection.
+         */
+        std::tuple<size_t, double, math::Vec<3>> Cell::get_dist_to_spectrometer(const math::Vec<3>& t_pos,
+                                                                                const math::Vec<3>& t_dir, const std::vector<
+            detector::Spectrometer>& t_spectrometer) const
+        {
+            assert(t_dir.is_normalised());
+
+            // If cell contains no triangles, return a large dummy value.
+            if (m_empty)
+            {
+                return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
+                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
+            }
+
+            // Run through all spectrometer triangles and determine the closest intersection distance.
+            size_t       r_index;
+            double       r_dist = std::numeric_limits<double>::max();
+            math::Vec<3> r_norm;
+            for (size_t  i      = 0; i < m_spectrometer_list.size(); ++i)
+            {
+                // Get distance to intersection.
+                bool   intersect;
+                double tri_dist;
+                std::tie(intersect, tri_dist) = t_spectrometer[m_spectrometer_list[i][0]].get_mesh()
+                                                                                         .get_tri(m_spectrometer_list[i][1])
+                                                                                         .intersection_dist(t_pos, t_dir);
+
+                // If an intersection does occur with the triangle, test if it is the closest so far.
+                if (intersect)
+                {
+                    assert(r_dist >= 0.0);
+
+                    // If this distance is the closest so far, accept it.
+                    if (tri_dist < r_dist)
+                    {
+                        r_index = m_spectrometer_list[i][0];
+                        r_dist  = tri_dist;
+                        r_norm  = t_spectrometer[m_spectrometer_list[i][0]].get_mesh().get_tri(m_spectrometer_list[i][1])
+                                                                           .get_norm(t_pos + (t_dir * r_dist));
+                    }
+                }
+            }
+
+            return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
         }
 
 

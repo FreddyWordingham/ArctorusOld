@@ -34,6 +34,18 @@
     std::stringstream text_stream;                              \
     text_stream << std::boolalpha << t_text;                    \
     arc::term::Logger::get_instance().log(text_stream.str());   \
+}
+
+/**
+ *  Macro used to log a section message.
+ *
+ *  @param  t_text  Text of the section.
+ */
+#define SEC(t_text)                                             \
+{                                                               \
+    std::stringstream text_stream;                              \
+    text_stream << std::boolalpha << t_text;                    \
+    arc::term::Logger::get_instance().sec(text_stream.str());   \
 }                                                               \
 
 /**

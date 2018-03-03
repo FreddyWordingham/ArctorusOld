@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- Classes --
 #include "cls/data/image.hpp"
+#include "cls/detector/spectrometer.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/math/vec.hpp"
@@ -58,13 +59,14 @@ namespace arc
             //  -- Constructors --
             Grid(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, std::array<size_t, 3> t_num_cells,
                  const std::vector<equip::Entity>& t_entity, const std::vector<equip::Light>& t_light,
-                 const std::vector<detector::Ccd>& t_ccd);
+                 const std::vector<detector::Ccd>& t_ccd, const std::vector<detector::Spectrometer>& t_spectrometer);
 
           private:
             //  -- Initialisation --
             std::vector<std::vector<std::vector<Cell>>> init_cell(const std::vector<equip::Entity>& t_entity,
                                                                   const std::vector<equip::Light>& t_light,
-                                                                  const std::vector<detector::Ccd>& t_ccd) const;
+                                                                  const std::vector<detector::Ccd>& t_ccd, const std::vector<
+                detector::Spectrometer>& t_spectrometer) const;
 
 
             //  == METHODS ==
@@ -74,7 +76,7 @@ namespace arc
             const math::Vec<3>& get_max_bound() const { return (m_max_bound); }
             size_t get_num_cells() const { return (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z]); }
             size_t get_num_cells(const size_t t_dimension) const { return (m_num_cells[t_dimension]); }
-            const Cell& get_cell(const size_t t_i, const size_t t_j, const size_t t_k) const { return (m_cell[t_i][t_j][t_k]); }
+            inline const Cell& get_cell(size_t t_i, size_t t_j, size_t t_k) const;
             inline Cell& get_cell(const math::Vec<3>& t_point);
             double get_max_energy_density() const;
 
@@ -82,7 +84,12 @@ namespace arc
             inline bool is_within(const math::Vec<3>& t_pos) const;
 
             //  -- Saving --
-            void save_images(const std::string& t_dir) const;
+            void save_images(const std::string& t_output_dir) const;
+
+          private:
+            //  -- Saving --
+            void save_slices(const std::string& t_output_dir, size_t t_dimension,
+                             const std::vector<std::vector<std::vector<double>>>& t_data) const;
         };
 
 
@@ -90,7 +97,29 @@ namespace arc
         //  == METHODS ==
         //  -- Getters --
         /**
-         *  Get a reference to the cell containing the given point.
+         *  Retrieve a reference to the cell using a given index.
+         *
+         *  @param  t_i X index of the cell.
+         *  @param  t_j Y index of the cell.
+         *  @param  t_k Z index of the cell.
+         *
+         *  @pre    t_i must be less than m_num_cells[X].
+         *  @pre    t_j must be less than m_num_cells[Y].
+         *  @pre    t_k must be less than m_num_cells[Z].
+         *
+         *  @return A reference to the given cell.
+         */
+        const Cell& Grid::get_cell(const size_t t_i, const size_t t_j, const size_t t_k) const
+        {
+            assert(t_i < m_num_cells[X]);
+            assert(t_j < m_num_cells[Y]);
+            assert(t_k < m_num_cells[Z]);
+
+            return (m_cell[t_i][t_j][t_k]);
+        }
+
+        /**
+         *  Retrieve a reference to the cell containing the given point.
          *
          *  @param  t_point Point which grid cell must contain.
          *
@@ -131,7 +160,7 @@ namespace arc
          */
         bool Grid::is_within(const math::Vec<3>& t_pos) const
         {
-            return (t_pos[X] >= m_min_bound[X]) && (t_pos[X] <= m_max_bound[X]) && (t_pos[Y] >= m_min_bound[Y]) && (t_pos[Y] <= m_max_bound[Y]) && (t_pos[Z] >= m_min_bound[Z]) && (t_pos[Z] <= m_max_bound[Z]);
+            return ((t_pos[X] >= m_min_bound[X]) && (t_pos[X] <= m_max_bound[X]) && (t_pos[Y] >= m_min_bound[Y]) && (t_pos[Y] <= m_max_bound[Y]) && (t_pos[Z] >= m_min_bound[Z]) && (t_pos[Z] <= m_max_bound[Z]));
         }
 
 

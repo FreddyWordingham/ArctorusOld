@@ -95,12 +95,6 @@ namespace arc
 
 
 
-        //  == FUNCTION PROTOTYPES ==
-        //  -- File Contents --
-        std::string read(const std::string& t_file_path, bool t_filter = true);
-
-
-
         //  == OPERATORS ==
         //  -- Writing --
         /**

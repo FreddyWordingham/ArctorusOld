@@ -88,8 +88,10 @@ namespace arc
             assert((m_anisotropy >= -1.0) && (m_anisotropy <= 1.0));
             assert(m_entity_index.size() == 1);
 
+#ifdef ENABLE_PHOTON_PATHS
             // Record the initial position of the photon.
             record_path();
+#endif
         }
 
 
@@ -135,8 +137,10 @@ namespace arc
             // Update the time.
             m_time += (t_dist * m_ref_index) / SPEED_OF_LIGHT;
 
+#ifdef ENABLE_PHOTON_PATHS
             // Record the new position of the photon.
             record_path();
+#endif
         }
 
         /**
@@ -192,7 +196,7 @@ namespace arc
          */
         void Photon::multiply_weight(const double t_mult)
         {
-            assert(t_mult > 0.0);
+            assert(t_mult >= 0.0);
 
             m_weight *= t_mult;
         }
@@ -226,6 +230,7 @@ namespace arc
 
 
         //  -- Data --
+#ifdef ENABLE_PHOTON_PATHS
         /**
          *  Record the current properties of the photon to the path data.
          */
@@ -234,6 +239,7 @@ namespace arc
             m_path.emplace_back(graphical::point::Photon({m_pos[X], m_pos[Y], m_pos[Z]}, static_cast<float>(m_wavelength),
                                                          static_cast<float>(m_weight), static_cast<float>(m_time)));
         }
+#endif
 
 
 

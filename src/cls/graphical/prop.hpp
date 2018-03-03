@@ -7,6 +7,12 @@
 
 
 
+//  == MODULE ==
+#include "gen/config.hpp"
+#ifdef ENABLE_GRAPHICS
+
+
+
 //  == GUARD ==
 #ifndef ARCTORUS_SRC_CLS_GRAPHICAL_PROP_HPP
 #define ARCTORUS_SRC_CLS_GRAPHICAL_PROP_HPP
@@ -42,14 +48,21 @@ namespace arc
             //  == ENUMERATIONS ==
           public:
             /**
-             *  Enumeration of the types of shapes the Prop class can construct a vertex list of.
+             *  Enumeration of the types of origin shapes the Prop class can construct a vertex list of.
              */
-            enum class shape
+            enum class originShape
             {
                 CUBE,   //! Simple cube.
-                CUBOID, //! Simple cuboid.
                 SKYBOX, //! Skybox.
-                SUN,    //! Sun illuminator.
+                SUN     //! Sun illuminator.
+            };
+
+            /**
+             *  Enumeration of the types of bounded shapes the Prop class can construct a vertex list of.
+             */
+            enum class boundedShape
+            {
+                CUBOID, //! Simple cuboid.
                 BOX     //! Box.
             };
 
@@ -69,21 +82,21 @@ namespace arc
           public:
             //  -- Constructors --
             Prop(const std::vector<Vertex>& t_vert, const glm::vec4& t_col);
-            Prop(shape t_shape, const glm::vec4& t_col, float t_scale = 1.0);
-            Prop(shape t_shape, const glm::vec4& t_col, const glm::vec3& t_min, const glm::vec3& t_max);
+            Prop(originShape t_shape, const glm::vec4& t_col, float t_scale = 1.0);
+            Prop(boundedShape t_shape, const glm::vec4& t_col, const glm::vec3& t_min, const glm::vec3& t_max);
             Prop(const std::vector<point::Photon>& t_phot, const glm::vec4& t_col);
 
           private:
             //  -- Initialisation --
             GLuint init_vao() const;
             GLuint init_vbo() const;
-            std::vector<Vertex> init_vert(shape t_shape, float t_size) const;
-            std::vector<Vertex> init_vert(shape t_shape, const glm::vec3& t_min, const glm::vec3& t_max) const;
-            std::vector<Vertex> init_vert_cube(float t_scale) const;
-            std::vector<Vertex> init_vert_cuboid(const glm::vec3& t_min, const glm::vec3& t_max) const;
-            std::vector<Vertex> init_vert_skybox(float t_scale) const;
-            std::vector<Vertex> init_vert_sun(float t_scale) const;
-            std::vector<Vertex> init_vert_box(const glm::vec3& t_min, const glm::vec3& t_max) const;
+            std::vector<Vertex> init_origin_vert(originShape t_shape, float t_size) const;
+            std::vector<Vertex> init_bounded_vert(boundedShape t_shape, const glm::vec3& t_min, const glm::vec3& t_max) const;
+            std::vector<Vertex> init_origin_vert_cube(float t_scale) const;
+            std::vector<Vertex> init_origin_vert_skybox(float t_scale) const;
+            std::vector<Vertex> init_origin_vert_sun(float t_scale) const;
+            std::vector<Vertex> init_bounded_vert_cuboid(const glm::vec3& t_min, const glm::vec3& t_max) const;
+            std::vector<Vertex> init_bounded_vert_box(const glm::vec3& t_min, const glm::vec3& t_max) const;
 
 
             //  == METHODS ==
@@ -104,3 +117,8 @@ namespace arc
 
 //  == GUARD END ==
 #endif // ARCTORUS_SRC_CLS_GRAPHICAL_PROP_HPP
+
+
+
+//  == MODULE END ==
+#endif

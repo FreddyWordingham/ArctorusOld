@@ -7,6 +7,12 @@
 
 
 
+//  == MODULE ==
+#include "gen/config.hpp"
+#ifdef ENABLE_GRAPHICS
+
+
+
 //  == HEADER ==
 #include "cls/graphical/camera/fly.hpp"
 
@@ -89,3 +95,8 @@ namespace arc
         } // namespace camera
     } // namespace graphical
 } // namespace arc
+
+
+
+//  == MODULE END ==
+#endif

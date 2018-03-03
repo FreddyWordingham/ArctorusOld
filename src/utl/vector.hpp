@@ -463,7 +463,7 @@ namespace arc
             size_t upper_index;
 
             size_t jump = 1;
-            if (t_val >= t_vec[r_lower_index] == ascending)
+            if ((t_val >= t_vec[r_lower_index]) == ascending)
             {
                 if (r_lower_index == (t_vec.size() - 1))
                 {
@@ -471,7 +471,7 @@ namespace arc
                 }
 
                 upper_index = r_lower_index + 1;
-                while (t_val >= t_vec[upper_index] == ascending)
+                while ((t_val >= t_vec[upper_index]) == ascending)
                 {
                     r_lower_index = upper_index;
                     jump += jump;
@@ -487,7 +487,7 @@ namespace arc
             else
             {
                 upper_index = r_lower_index--;
-                while (t_val < t_vec[r_lower_index] == ascending)
+                while ((t_val < t_vec[r_lower_index]) == ascending)
                 {
                     upper_index = r_lower_index;
                     jump <<= 1;
@@ -505,7 +505,7 @@ namespace arc
             while ((upper_index - r_lower_index) != 1)
             {
                 size_t mid_index = (upper_index + r_lower_index) >> 1;
-                if (t_val >= t_vec[mid_index] == ascending)
+                if ((t_val >= t_vec[mid_index]) == ascending)
                 {
                     r_lower_index = mid_index;
                 }

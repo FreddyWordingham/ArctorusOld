@@ -31,7 +31,7 @@ namespace arc
         //  -- Boundary --
         math::Vec<3> reflection_dir(const math::Vec<3>& t_in, const math::Vec<3>& t_norm);
         math::Vec<3> refraction_dir(const math::Vec<3>& t_in, const math::Vec<3>& t_norm, double t_n);
-        double reflection_prob(double a_i, double n_i, double n_t);
+        double reflection_prob(double a_i, double t_n_i, double t_n_t);
 
 
 

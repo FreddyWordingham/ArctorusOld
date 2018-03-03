@@ -14,7 +14,7 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include <gen/ansi.hpp>
+#include "gen/ansi.hpp"
 
 
 
@@ -101,7 +101,8 @@ namespace arc
             std::array<std::string, TOTAL_COLS> r_text_col;
 
             // If not printing to a terminal, or the terminal is being piped to a file, do not initialise the ansi codes.
-            if (config::COLOUR_LOG && (&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0))
+#ifdef ENABLE_LOG_COLOUR
+            if ((&m_stream == &std::cout) && (isatty(fileno(stdout)) != 0))
             {
                 r_text_col[RESET]   = ansi::RESET;
                 r_text_col[BLACK]   = ansi::BLACK;
@@ -113,6 +114,7 @@ namespace arc
                 r_text_col[CYAN]    = ansi::CYAN;
                 r_text_col[WHITE]   = ansi::WHITE;
             }
+#endif
 
             return (r_text_col);
         }
@@ -159,6 +161,25 @@ namespace arc
         }
 
         /**
+         *  Log a section divider message.
+         *
+         *  @param  t_text  Text of the section.
+         */
+        void Logger::sec(const std::string& t_text) const
+        {
+            // Add padding lines.
+            size_t pre_pad  = 0;
+            size_t post_pad = 0;
+            if (t_text.size() < (TEXT_WIDTH - 2))
+            {
+                pre_pad  = (TEXT_WIDTH - (t_text.size() + 2)) / 2;
+                post_pad = TEXT_WIDTH - (pre_pad + t_text.size() + 2);
+            }
+
+            print_text(CYAN, LOG, std::string(pre_pad, '-') + " " + t_text + " " + std::string(post_pad, '-'));
+        }
+
+        /**
          *  Log a verbose message.
          *
          *  @param  t_text  Message text to be logged.
@@ -166,10 +187,9 @@ namespace arc
         void Logger::verb(const std::string& t_text) const
         {
             // If verbose message printing is enabled print the message.
-            if (config::VERBOSE_LOG)
-            {
-                print_text(CYAN, LOG, t_text);
-            }
+#ifdef ENABLE_LOG_VERBOSE
+            print_text(CYAN, LOG, t_text);
+#endif
         }
 
         /**
@@ -305,10 +325,10 @@ namespace arc
             assert(t_type < TOTAL_TYPES);
 
             // Form the text into lines.
-            std::vector<std::string> lines     = form_lines(t_text);
+            std::vector<std::string> lines = form_lines(t_text);
 
             // Create the timestamp string.
-            std::string              timestamp = "[" + utl::create_timestamp() + "]";
+            std::string timestamp = "[" + utl::create_timestamp() + "]";
             timestamp.resize(TIME_WIDTH, ' ');
 
             // Print the lines.
@@ -341,7 +361,7 @@ namespace arc
             std::vector<std::string> r_line;
 
             // Form lines while newline characters can still be found within the text string.
-            size_t                   newline_pos;
+            size_t newline_pos;
             while ((newline_pos = t_text.find_first_of('\n')) != std::string::npos)
             {
                 // Form the lines by splitting at newline characters.

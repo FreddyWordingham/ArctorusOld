@@ -17,6 +17,7 @@
 //  -- System --
 #include <array>
 #include <cassert>
+#include <chrono>
 #include <cstdio>
 #include <iostream>
 #include <sstream>
@@ -74,7 +75,7 @@ namespace arc
         constexpr const int VALUE_NAME_WIDTH = 16;                                      //! Space allocated to the value name.
 
         //  -- Updating --
-        constexpr const double MIN_UPDATE_DELAY = 5.0;  //! Minimum delay between temporary logs.
+        constexpr const double MIN_UPDATE_DELAY = 1.0;  //! Minimum delay between temporary logs.
 
 
 
@@ -187,6 +188,7 @@ namespace arc
           public:
             //  -- Logging --
             void log(const std::string& t_text) const;
+            void sec(const std::string& t_text) const;
             void verb(const std::string& t_text) const;
             template <typename T>
             void val(const std::string& t_name, const T& t_val) const;
