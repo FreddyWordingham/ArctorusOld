@@ -18,7 +18,7 @@
 #include "cls/setup/sim.hpp"
 
 
-#include <thread>
+/*#include <thread>
 #include <mutex>
 
 
@@ -57,7 +57,7 @@ int testMultithreadedWallet()
         threads.at(i).join();
     }
     return walletObject.getMoney();
-}
+}*/
 
 //  == MAIN ==
 /**
@@ -70,7 +70,7 @@ int testMultithreadedWallet()
  */
 int main(const int t_argc, const char** t_argv)
 {
-    int      val = 0;
+/*    int      val = 0;
     for (int k   = 0; k < 1000; k++)
     {
         if ((val = testMultithreadedWallet()) != 5000)
@@ -79,11 +79,11 @@ int main(const int t_argc, const char** t_argv)
         }
     }
 
-    return 0;
+    return 0;*/
 
 
 
-    /*SEC("Initialising Arctorus");
+    SEC("Initialising Arctorus");
 
     // Check the number of command line arguments.
     if (t_argc != 2)
@@ -140,7 +140,7 @@ int main(const int t_argc, const char** t_argv)
     if (setup.parse_child<bool>("post_render", false))
     {
         pdt.render();
-    }*/
+    }
 
     /*const std::string name("intralipid_000-5");
     const double conc = 00.5 / 100.0;
