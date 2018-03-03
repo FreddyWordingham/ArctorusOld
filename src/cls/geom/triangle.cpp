@@ -144,29 +144,10 @@ namespace arc
             }
 
             // Determine interpolated normal.
-            const math::Vec<3> phong = math::normalise(
+            const math::Vec<3> r_norm = math::normalise(
                 (m_norm[ALPHA] * alpha) + (m_norm[BETA] * beta) + (m_norm[GAMMA] * gamma));
 
-            if (USE_PHONG)
-            {
-                return (std::pair<double, math::Vec<3>>(r_dist, phong));
-            }
-
-            // Determine the incident vector.
-            const bool         flip = (t_dir * m_plane_norm) > 0.0;
-            const math::Vec<3> i    = flip ? t_dir : -t_dir;
-            assert((i * m_plane_norm) > 0.0);
-
-            const double       f      = (m_cons[ALPHA] * alpha) + (m_cons[BETA] * beta) + (m_cons[GAMMA] * gamma);
-            const double       q      = math::square(1.0 - (f * (2.0 / M_PI))) / (1.0 + (2.0 * f * (1.0 - (2.0 / M_PI))));
-            const double       b      = i * phong;
-            const double       g      = 1.0 + (q * (b - 1.0));
-            const double       p      = std::sqrt(q * ((1.0 + g) / (1.0 + b)));
-            const math::Vec<3> r_norm = math::normalise(i + ((phong * (g + (p * b))) - (i * p)));
-
-            assert(r_norm.is_normalised());
-
-            return (std::pair<double, math::Vec<3>>(r_dist, flip ? r_norm : -r_norm));
+            return (std::pair<double, math::Vec<3>>(r_dist, r_norm));
         }
 
 
