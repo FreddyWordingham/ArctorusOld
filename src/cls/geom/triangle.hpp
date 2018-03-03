@@ -40,14 +40,12 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Properties --
-            const bool         m_flat;          //! True if all normals are parallel.
             const double       m_area;          //! Area of the triangle.
             const math::Vec<3> m_plane_norm;    //! Normal of the triangle plane.
 
             //  -- Vertices --
             const std::array<math::Vec<3>, 3> m_pos;    //! Vertex positions.
             const std::array<math::Vec<3>, 3> m_norm;   //! Vertex normals.
-            const std::array<double, 3>       m_cons;   //! Consistent values used to calculate real reflections.
 
 
             //  == INSTANTIATION ==
