@@ -439,7 +439,7 @@ namespace arc
                 {
                     // Increment number of loops.
                     ++loops;
-                    if (loops > 1e6)
+                    if (loops > 1e3)
                     {
                         WARN("Photon removed from loop prematurely.", "Number of loops exceeded set limit.");
                         break;
@@ -460,11 +460,24 @@ namespace arc
 
                     const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
                     const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
-                    size_t       entity_index;
+                    /*size_t       entity_index;
                     double       entity_dist;
                     math::Vec<3> entity_norm;
                     std::tie(entity_index, entity_dist, entity_norm) = cell
                         ->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+                    */
+
+                    // Check for an entity hit.
+                    bool   entity_hit;
+                    double entity_dist;
+                    size_t entity_index, entity_tri_index;
+                    std::tie(entity_hit, entity_dist, entity_index, entity_tri_index) = cell
+                        ->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+                    if (!entity_hit)
+                    {
+                        entity_dist = std::numeric_limits<double>::max();
+                    }
+
                     size_t       ccd_index;
                     double       ccd_dist;
                     math::Vec<3> ccd_norm;
@@ -550,12 +563,16 @@ namespace arc
                     }
                     else if (entity_dist < cell_dist)   // Change entity.
                     {
+                        // Get the entity triangle normal.
+                        math::Vec<3> norm = m_entity[entity_index].get_mesh().get_tri(entity_tri_index)
+                                                                  .get_norm(phot.get_pos() + (phot.get_dir() * entity_dist));
+
                         // If entity normal is facing away, multiply it by -1.
-                        if ((phot.get_dir() * entity_norm) > 0.0)
+                        if ((phot.get_dir() * norm) > 0.0)
                         {
-                            entity_norm *= -1.0;
+                            norm *= -1.0;
                         }
-                        assert(entity_norm.is_normalised());
+                        assert(norm.is_normalised());
 
                         energy += entity_dist * phot.get_weight();
 
@@ -585,7 +602,7 @@ namespace arc
                         const double n_t = mat_t.get_ref_index(phot.get_wavelength());
 
                         // Calculate incident angle.
-                        const double a_i = acos(-phot.get_dir() * entity_norm);
+                        const double a_i = acos(-phot.get_dir() * norm);
                         assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
 
                         // Calculate reflectance probability.
@@ -610,7 +627,7 @@ namespace arc
                             phot.move(entity_dist - SMOOTHING_LENGTH);
 
                             // Reflect the photon.
-                            phot.set_dir(optics::reflection_dir(phot.get_dir(), entity_norm));
+                            phot.set_dir(optics::reflection_dir(phot.get_dir(), norm));
                         }
                         else                                                            // Refract.
                         {
@@ -618,7 +635,7 @@ namespace arc
                             phot.move(entity_dist + SMOOTHING_LENGTH);
 
                             // Refract the photon.
-                            phot.set_dir(optics::refraction_dir(phot.get_dir(), entity_norm, n_i / n_t));
+                            phot.set_dir(optics::refraction_dir(phot.get_dir(), norm, n_i / n_t));
 
                             // Photon moves to new entity.
                             if (exiting)
