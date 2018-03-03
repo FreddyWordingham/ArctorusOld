@@ -100,6 +100,38 @@ namespace arc
         }
 
         /**
+         *  Determine the barycentric coordinates for a point lying in the plane of the triangle.
+         *
+         *  @param  t_pos   Position of the point.
+         *
+         *  @pre    t_pos must be within the plane of the triangle.
+         *
+         *  @return The barycentric coordinates of the given point.
+         */
+        std::array<double, 3> Triangle::get_barycentric_coor(const math::Vec<3>& t_pos) const
+        {
+            assert(plane_dist(t_pos) <= std::numeric_limits<double>::min());
+
+            const math::Vec<3> v0 = m_pos[BETA] - m_pos[ALPHA];
+            const math::Vec<3> v1 = m_pos[GAMMA] - m_pos[ALPHA];
+            const math::Vec<3> v2 = t_pos - m_pos[ALPHA];
+
+            const double d00 = v0 * v0;
+            const double d01 = v0 * v1;
+            const double d11 = v1 * v1;
+            const double d20 = v2 * v0;
+            const double d21 = v2 * v1;
+
+            const double denom = (d00 * d11) - (d01 * d01);
+
+            const double v = (d11 * d20 - d01 * d21) / denom;
+            const double w = (d00 * d21 - d01 * d20) / denom;
+            const double u = 1.0 - v - w;
+
+            return (std::array<double, 3>({{u, v, w}}));
+        }
+
+        /**
          *  Determine if a given point falls within the triangle.
          *
          *  @param  t_pos   Position of the point.
