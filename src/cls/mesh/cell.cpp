@@ -477,7 +477,7 @@ namespace arc
                     assert(r_dist >= 0.0);
 
                     // If this distance is the closest so far, accept it.
-                    if ((tri_dist < r_dist) && (tri_dist > 0.0))
+                    if (tri_dist < r_dist)
                     {
                         r_index = m_ccd_list[i][0];
                         r_dist  = tri_dist;
@@ -521,22 +521,27 @@ namespace arc
             for (size_t  i      = 0; i < m_spectrometer_list.size(); ++i)
             {
                 // Get distance to intersection.
-                double       tri_dist;
-                math::Vec<3> tri_norm;
-                std::tie(tri_dist, tri_norm) = t_spectrometer[m_spectrometer_list[i][0]].get_mesh()
-                                                                                        .get_tri(m_spectrometer_list[i][1])
-                                                                                        .get_intersection(t_pos, t_dir);
+                bool   intersect;
+                double tri_dist;
+                std::tie(intersect, tri_dist) = t_spectrometer[m_spectrometer_list[i][0]].get_mesh()
+                                                                                         .get_tri(m_spectrometer_list[i][1])
+                                                                                         .intersection_dist(t_pos, t_dir);
 
-                // If this distance is the closest so far, accept it.
-                if ((tri_dist < r_dist) && (tri_dist > 0.0))
+                // If an intersection does occur with the triangle, test if it is the closest so far.
+                if (intersect)
                 {
-                    r_index = m_spectrometer_list[i][0];
-                    r_dist  = tri_dist;
-                    r_norm  = tri_norm;
+                    assert(r_dist >= 0.0);
+
+                    // If this distance is the closest so far, accept it.
+                    if (tri_dist < r_dist)
+                    {
+                        r_index = m_spectrometer_list[i][0];
+                        r_dist  = tri_dist;
+                        r_norm  = t_spectrometer[m_spectrometer_list[i][0]].get_mesh().get_tri(m_spectrometer_list[i][1])
+                                                                           .get_norm(t_pos + (t_dir * r_dist));
+                    }
                 }
             }
-
-            assert(r_dist > 0.0);
 
             return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
         }
