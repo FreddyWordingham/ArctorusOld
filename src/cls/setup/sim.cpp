@@ -614,9 +614,7 @@ namespace arc
                         else                                // Specular reflectance.
                         {
                             const double a_t = std::asin((n_i / n_t) * std::sin(a_i));
-                            reflectance = 0.5 * ((math::square(std::sin(a_i - a_t)) / (math::square(
-                                std::sin(a_i + a_t)))) + (math::square(std::tan(a_i - a_t)) / (math::square(
-                                std::tan(a_i + a_t)))));
+                            reflectance = optics::reflection_prob(a_i, n_i, n_t);
                         }
 
                         assert((reflectance >= 0.0) && (reflectance <= 1.0));

@@ -107,20 +107,22 @@ namespace arc
             assert(t_n_i >= 1.0);
             assert(t_n_t >= 1.0);
 
-            // Calculate transverse reflection probability.
+            // Calculate transmission angle.
+            const double a_t = std::asin((t_n_i / t_n_t) * std::sin(t_a_i));
+
+            // Calculate cosines.
             const double cos_a_i = std::cos(t_a_i);
-            const double cos_a_t = std::cos((t_n_i / t_n_t) * std::sin(t_a_i));
-            const double trans   = math::square(
-                ((t_n_t * cos_a_i) - (t_n_i * cos_a_t)) / ((t_n_t * cos_a_i) + (t_n_i * cos_a_t)));
-            const double paral   = math::square(
-                ((t_n_t * cos_a_i) - (t_n_i * cos_a_t)) / ((t_n_t * cos_a_i) + (t_n_i * cos_a_t)));
+            const double cos_a_t = std::cos(a_t);
 
-            // Determine average reflection probability.
-            const double r_ref_prob = 0.5 * (trans + paral);
+            // Calculate s-polarised reflection probability.
+            const double ref_prob_s = math::square(
+                ((t_n_i * cos_a_i) - (t_n_t * cos_a_t)) / ((t_n_i * cos_a_i) + (t_n_t * cos_a_t)));
 
-            assert((r_ref_prob >= 0.0) && (r_ref_prob <= 1.0));
+            // Calculate p-polarised reflection probability.
+            const double ref_prob_p = math::square(
+                ((t_n_i * cos_a_t) - (t_n_t * cos_a_i)) / ((t_n_i * cos_a_t) + (t_n_t * cos_a_i)));
 
-            return (r_ref_prob);
+            return (0.5 * (ref_prob_s + ref_prob_p));
         }
 
 
