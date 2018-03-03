@@ -86,37 +86,6 @@ namespace arc
             return (r_plane_norm);
         }
 
-        /**
-         *  Initialise the array of consistent normals.
-         *
-         *  @post   r_cons[i] must be positive.
-         *
-         *  @return The initialised array of consistent normal vectors.
-         */
-        std::array<double, 3> Triangle::init_cons() const
-        {
-            // If flat don't calculate consistent normal values.
-            if (m_flat)
-            {
-                return (std::array<double, 3>({{0.0, 0.0, 0.0}}));
-            }
-
-            // Create the return array of consistent normal vectors.
-            std::array<double, 3> r_cons;
-
-            // Determine the consistent normals.
-            for (size_t i = 0; i < 3; ++i)
-            {
-                const double n = m_plane_norm * m_norm[i];
-                assert(n > 0.0);
-
-                r_cons[i] = std::acos(n) * (1.0 + (0.03632 * math::square(1.0 - n)));
-                assert(r_cons[i] >= 0.0);
-            }
-
-            return (r_cons);
-        }
-
 
 
         //  == METHODS ==
