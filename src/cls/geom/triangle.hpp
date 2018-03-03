@@ -68,9 +68,9 @@ namespace arc
             //  -- Geometric --
             double plane_dist(const math::Vec<3>& t_pos) const;
             std::array<double, 3> get_barycentric_coor(const math::Vec<3>& t_pos) const;
-            bool within_tri(const math::Vec<3>& t_pos, double t_tol = 1.0e-18) const;
+            bool within_tri(const math::Vec<3>& t_pos, double t_tol = 1.0e-15) const;
             std::pair<bool, double> intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                                      double t_tol = 1.0e-18) const;
+                                                      double t_tol = 1.0e-15) const;
             math::Vec<3> get_norm(const math::Vec<3>& t_pos) const;
 
             //  -- Generation --
