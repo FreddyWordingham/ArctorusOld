@@ -31,13 +31,6 @@ namespace arc
 
 
 
-        //  == SETTINGS ==
-        //  -- Optimisations --
-        const bool USE_FLAT  = false;   //! When true do not interpolate normals.
-        const bool USE_PHONG = true;    //! When true simplify normal interpolation to use phong normals.
-
-
-
         //  == CLASS ==
         /**
          *  Triangle class used to form triangular meshes.
