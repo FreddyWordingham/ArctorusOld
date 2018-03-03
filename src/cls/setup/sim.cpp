@@ -416,261 +416,251 @@ namespace arc
         /**
          *  Run the simulation.
          */
-        void Sim::run()
+        void Sim::run_phot()
         {
-            // Run each photon.
-            for (unsigned long int i = 0; i < m_num_phot; ++i)
+            // Generate a new photon.
+            phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
+
+            // Determine the initial cell.
+            mesh::Cell* cell = &m_grid.get_cell(phot.get_pos());
+
+            // Track energy density to be added to each cell.
+            double energy = 0.0;
+
+            // Loop until the photon exits the grid.
+            unsigned long int loops = 0;
+            while (m_grid.is_within(phot.get_pos()) && (phot.get_weight() > 0.0))
             {
-                TEMP("Photon Loop", 100.0 * i / m_num_phot);
-
-                // Generate a new photon.
-                phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
-
-                // Determine the initial cell.
-                mesh::Cell* cell = &m_grid.get_cell(phot.get_pos());
-
-                // Track energy density to be added to each cell.
-                double energy = 0.0;
-
-                // Loop until the photon exits the grid.
-                unsigned long int loops = 0;
-                while (m_grid.is_within(phot.get_pos()) && (phot.get_weight() > 0.0))
+                // Increment number of loops.
+                ++loops;
+                if (loops > 1e3)
                 {
-                    // Increment number of loops.
-                    ++loops;
-                    if (loops > 1e3)
-                    {
-                        WARN("Photon removed from loop prematurely.", "Number of loops exceeded set limit.");
-                        break;
-                    }
-
-                    // Call roulette if below threshold.
-                    if (phot.get_weight() < m_roulette_weight)
-                    {
-                        if (rng::random() > (1.0 / m_roulette_chambers))
-                        {
-                            // Remove the photon from simulation.
-                            cell->add_energy(energy);
-                            break;
-                        }
-
-                        phot.multiply_weight(m_roulette_chambers);
-                    }
-
-                    const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
-                    const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
-                    /*size_t       entity_index;
-                    double       entity_dist;
-                    math::Vec<3> entity_norm;
-                    std::tie(entity_index, entity_dist, entity_norm) = cell
-                        ->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
-                    */
-
-                    // Check for an entity hit.
-                    bool   entity_hit;
-                    double entity_dist;
-                    size_t entity_index, entity_tri_index;
-                    std::tie(entity_hit, entity_dist, entity_index, entity_tri_index) = cell
-                        ->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
-                    if (!entity_hit)
-                    {
-                        entity_dist = std::numeric_limits<double>::max();
-                    }
-
-                    size_t       ccd_index;
-                    double       ccd_dist;
-                    math::Vec<3> ccd_norm;
-                    std::tie(ccd_index, ccd_dist, ccd_norm) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
-                    size_t       spectrometer_index;
-                    double       spectrometer_dist;
-                    math::Vec<3> spectrometer_norm;
-                    std::tie(spectrometer_index, spectrometer_dist, spectrometer_norm) = cell
-                        ->get_dist_to_spectrometer(phot.get_pos(), phot.get_dir(), m_spectrometer);
-
-                    assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
-                    assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
-                    assert(!math::equal(scat_dist, entity_dist, SMOOTHING_LENGTH));
-
-                    if (entity_dist <= SMOOTHING_LENGTH)
-                    {
-                        //WARN("Photon removed from loop prematurely.",
-                        //     "Distance to entity is shorter than the smoothing length.");
-
-#ifdef ENABLE_PHOTON_PATHS
-                        m_path.push_back(phot.get_path());
-#endif
-
-                        // Remove the photon from simulation.
-                        cell->add_energy(energy);
-                        break;
-                    }
-
-//                    assert(scat_dist > SMOOTHING_LENGTH);
-                    assert(cell_dist > SMOOTHING_LENGTH);
-                    assert(entity_dist > SMOOTHING_LENGTH);
-
-                    // Photon hits a spectrometer detector.
-                    if ((spectrometer_dist < ccd_dist) && (spectrometer_dist < scat_dist) && (spectrometer_dist < entity_dist) && (spectrometer_dist < cell_dist))
-                    {
-                        energy += spectrometer_dist * phot.get_weight();
-
-                        // Move the photon to the detector surface.
-                        phot.move(spectrometer_dist);
-
-                        // Check if photon hits the front of the detector.
-                        if ((phot.get_dir() * spectrometer_norm) < 0.0)
-                        {
-                            m_spectrometer[spectrometer_index].add_hit(phot.get_wavelength(), phot.get_weight());
-                        }
-
-                        // Remove the photon from simulation.
-                        cell->add_energy(energy);
-                        break;
-                    }
-
-                    // Photon hits a ccd detector.
-                    if ((ccd_dist < scat_dist) && (ccd_dist < entity_dist) && (ccd_dist < cell_dist))
-                    {
-                        energy += ccd_dist * phot.get_weight();
-
-                        // Move the photon to the detector surface.
-                        phot.move(ccd_dist);
-
-                        // Check if photon hits the front of the detector.
-                        if ((phot.get_dir() * m_ccd[ccd_index].get_norm()) < 0.0)
-                        {
-                            m_ccd[ccd_index].add_hit(phot.get_pos(), phot.get_weight(), phot.get_wavelength());
-                        }
-
-                        // Remove the photon from simulation.
-                        cell->add_energy(energy);
-                        break;
-                    }
-
-                    if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.
-                    {
-                        energy += scat_dist * phot.get_weight();
-
-                        // Move to the scattering point.
-                        phot.move(scat_dist);
-
-                        // Scatter.
-                        phot.rotate(rng::henyey_greenstein(phot.get_anisotropy()), rng::random(0.0, 2.0 * M_PI));
-
-                        // Reduce weight by albedo.
-                        phot.multiply_weight(phot.get_albedo());
-                    }
-                    else if (entity_dist < cell_dist)   // Change entity.
-                    {
-                        // Get the entity triangle normal.
-                        math::Vec<3> norm = m_entity[entity_index].get_mesh().get_tri(entity_tri_index)
-                                                                  .get_norm(phot.get_pos() + (phot.get_dir() * entity_dist));
-
-                        // If entity normal is facing away, multiply it by -1.
-                        if ((phot.get_dir() * norm) > 0.0)
-                        {
-                            norm *= -1.0;
-                        }
-                        assert(norm.is_normalised());
-
-                        energy += entity_dist * phot.get_weight();
-
-                        // Determine the material indices.
-                        int  index_i, index_t;
-                        bool exiting = phot.get_entity_index() == static_cast<int>(entity_index);
-                        if (exiting)    // Exiting the current entity.
-                        {
-                            index_i = static_cast<int>(entity_index);
-                            index_t = phot.get_prev_entity_index();
-                        }
-                        else            // Entering a new entity.
-                        {
-                            index_i = phot.get_entity_index();
-                            index_t = static_cast<int>(entity_index);
-                        }
-                        assert(index_i != index_t);
-
-                        // Get references to the materials.
-                        const phys::Material& mat_i = (index_i == -1) ? m_aether : m_entity[static_cast<size_t>(index_i)]
-                            .get_mat();
-                        const phys::Material& mat_t = (index_t == -1) ? m_aether : m_entity[static_cast<size_t>(index_t)]
-                            .get_mat();
-
-                        // Get optical properties of the materials.
-                        const double n_i = mat_i.get_ref_index(phot.get_wavelength());
-                        const double n_t = mat_t.get_ref_index(phot.get_wavelength());
-
-                        // Calculate incident angle.
-                        const double a_i = acos(-phot.get_dir() * norm);
-                        assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
-
-                        // Calculate reflectance probability.
-                        double reflectance;
-                        if (std::sin(a_i) >= (n_t / n_i))   // Total internal reflectance.
-                        {
-                            reflectance = 1.0;
-                        }
-                        else                                // Specular reflectance.
-                        {
-                            reflectance = optics::reflection_prob(a_i, n_i, n_t);
-                        }
-
-                        assert((reflectance >= 0.0) && (reflectance <= 1.0));
-
-                        if (rng::random() <= reflectance)                               // Reflect.
-                        {
-                            // Move to just before the boundary.
-                            phot.move(entity_dist - SMOOTHING_LENGTH);
-
-                            // Reflect the photon.
-                            phot.set_dir(optics::reflection_dir(phot.get_dir(), norm));
-                        }
-                        else                                                            // Refract.
-                        {
-                            // Move to just past the boundary.
-                            phot.move(entity_dist + SMOOTHING_LENGTH);
-
-                            // Refract the photon.
-                            phot.set_dir(optics::refraction_dir(phot.get_dir(), norm, n_i / n_t));
-
-                            // Photon moves to new entity.
-                            if (exiting)
-                            {
-                                phot.pop_entity_index();
-                            }
-                            else
-                            {
-                                phot.push_entity_index(index_t);
-                            }
-                            phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
-                        }
-                    }
-                    else    // Exit cell.
-                    {
-                        energy += cell_dist * phot.get_weight();
-
-                        // Add current energy to current cell and reset count.
-                        cell->add_energy(energy);
-                        energy = 0.0;
-
-                        // Move into the next cell space.
-                        phot.move(cell_dist + SMOOTHING_LENGTH);
-
-                        // Change cell if still within the grid.
-                        if (m_grid.is_within(phot.get_pos()))
-                        {
-                            cell = &m_grid.get_cell(phot.get_pos());
-                        }
-                    }
+                    WARN("Photon removed from loop prematurely.", "Number of loops exceeded set limit.");
+                    break;
                 }
 
+                // Call roulette if below threshold.
+                if (phot.get_weight() < m_roulette_weight)
+                {
+                    if (rng::random() > (1.0 / m_roulette_chambers))
+                    {
+                        // Remove the photon from simulation.
+                        cell->add_energy(energy);
+                        break;
+                    }
+
+                    phot.multiply_weight(m_roulette_chambers);
+                }
+
+                const double scat_dist = -std::log(rng::random()) / phot.get_interaction();
+                const double cell_dist = cell->get_dist_to_wall(phot.get_pos(), phot.get_dir());
+                /*size_t       entity_index;
+                double       entity_dist;
+                math::Vec<3> entity_norm;
+                std::tie(entity_index, entity_dist, entity_norm) = cell
+                    ->get_dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+                */
+
+                // Check for an entity hit.
+                bool   entity_hit;
+                double entity_dist;
+                size_t entity_index, entity_tri_index;
+                std::tie(entity_hit, entity_dist, entity_index, entity_tri_index) = cell
+                    ->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+                if (!entity_hit)
+                {
+                    entity_dist = std::numeric_limits<double>::max();
+                }
+
+                size_t       ccd_index;
+                double       ccd_dist;
+                math::Vec<3> ccd_norm;
+                std::tie(ccd_index, ccd_dist, ccd_norm) = cell->get_dist_to_ccd(phot.get_pos(), phot.get_dir(), m_ccd);
+                size_t       spectrometer_index;
+                double       spectrometer_dist;
+                math::Vec<3> spectrometer_norm;
+                std::tie(spectrometer_index, spectrometer_dist, spectrometer_norm) = cell
+                    ->get_dist_to_spectrometer(phot.get_pos(), phot.get_dir(), m_spectrometer);
+
+                assert(!math::equal(scat_dist, cell_dist, SMOOTHING_LENGTH));
+                assert(!math::equal(cell_dist, entity_dist, SMOOTHING_LENGTH));
+                assert(!math::equal(scat_dist, entity_dist, SMOOTHING_LENGTH));
+
+                if (entity_dist <= SMOOTHING_LENGTH)
+                {
+                    //WARN("Photon removed from loop prematurely.",
+                    //     "Distance to entity is shorter than the smoothing length.");
+
 #ifdef ENABLE_PHOTON_PATHS
-                // Add the photon path.
-                m_path.push_back(phot.get_path());
+                    m_path.push_back(phot.get_path());
 #endif
+
+                    // Remove the photon from simulation.
+                    cell->add_energy(energy);
+                    break;
+                }
+
+//                    assert(scat_dist > SMOOTHING_LENGTH);
+                assert(cell_dist > SMOOTHING_LENGTH);
+                assert(entity_dist > SMOOTHING_LENGTH);
+
+                // Photon hits a spectrometer detector.
+                if ((spectrometer_dist < ccd_dist) && (spectrometer_dist < scat_dist) && (spectrometer_dist < entity_dist) && (spectrometer_dist < cell_dist))
+                {
+                    energy += spectrometer_dist * phot.get_weight();
+
+                    // Move the photon to the detector surface.
+                    phot.move(spectrometer_dist);
+
+                    // Check if photon hits the front of the detector.
+                    if ((phot.get_dir() * spectrometer_norm) < 0.0)
+                    {
+                        m_spectrometer[spectrometer_index].add_hit(phot.get_wavelength(), phot.get_weight());
+                    }
+
+                    // Remove the photon from simulation.
+                    cell->add_energy(energy);
+                    break;
+                }
+
+                // Photon hits a ccd detector.
+                if ((ccd_dist < scat_dist) && (ccd_dist < entity_dist) && (ccd_dist < cell_dist))
+                {
+                    energy += ccd_dist * phot.get_weight();
+
+                    // Move the photon to the detector surface.
+                    phot.move(ccd_dist);
+
+                    // Check if photon hits the front of the detector.
+                    if ((phot.get_dir() * m_ccd[ccd_index].get_norm()) < 0.0)
+                    {
+                        m_ccd[ccd_index].add_hit(phot.get_pos(), phot.get_weight(), phot.get_wavelength());
+                    }
+
+                    // Remove the photon from simulation.
+                    cell->add_energy(energy);
+                    break;
+                }
+
+                if ((scat_dist < entity_dist) && (scat_dist < cell_dist))   // Scatter.
+                {
+                    energy += scat_dist * phot.get_weight();
+
+                    // Move to the scattering point.
+                    phot.move(scat_dist);
+
+                    // Scatter.
+                    phot.rotate(rng::henyey_greenstein(phot.get_anisotropy()), rng::random(0.0, 2.0 * M_PI));
+
+                    // Reduce weight by albedo.
+                    phot.multiply_weight(phot.get_albedo());
+                }
+                else if (entity_dist < cell_dist)   // Change entity.
+                {
+                    // Get the entity triangle normal.
+                    math::Vec<3> norm = m_entity[entity_index].get_mesh().get_tri(entity_tri_index)
+                                                              .get_norm(phot.get_pos() + (phot.get_dir() * entity_dist));
+
+                    // If entity normal is facing away, multiply it by -1.
+                    if ((phot.get_dir() * norm) > 0.0)
+                    {
+                        norm *= -1.0;
+                    }
+                    assert(norm.is_normalised());
+
+                    energy += entity_dist * phot.get_weight();
+
+                    // Determine the material indices.
+                    int  index_i, index_t;
+                    bool exiting      = phot.get_entity_index() == static_cast<int>(entity_index);
+                    if (exiting)    // Exiting the current entity.
+                    {
+                        index_i = static_cast<int>(entity_index);
+                        index_t = phot.get_prev_entity_index();
+                    }
+                    else            // Entering a new entity.
+                    {
+                        index_i = phot.get_entity_index();
+                        index_t = static_cast<int>(entity_index);
+                    }
+                    assert(index_i != index_t);
+
+                    // Get references to the materials.
+                    const phys::Material& mat_i = (index_i == -1) ? m_aether : m_entity[static_cast<size_t>(index_i)].get_mat();
+                    const phys::Material& mat_t = (index_t == -1) ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat();
+
+                    // Get optical properties of the materials.
+                    const double n_i = mat_i.get_ref_index(phot.get_wavelength());
+                    const double n_t = mat_t.get_ref_index(phot.get_wavelength());
+
+                    // Calculate incident angle.
+                    const double a_i = acos(-phot.get_dir() * norm);
+                    assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
+
+                    // Calculate reflectance probability.
+                    double reflectance;
+                    if (std::sin(a_i) >= (n_t / n_i))   // Total internal reflectance.
+                    {
+                        reflectance = 1.0;
+                    }
+                    else                                // Specular reflectance.
+                    {
+                        reflectance = optics::reflection_prob(a_i, n_i, n_t);
+                    }
+
+                    assert((reflectance >= 0.0) && (reflectance <= 1.0));
+
+                    if (rng::random() <= reflectance)                               // Reflect.
+                    {
+                        // Move to just before the boundary.
+                        phot.move(entity_dist - SMOOTHING_LENGTH);
+
+                        // Reflect the photon.
+                        phot.set_dir(optics::reflection_dir(phot.get_dir(), norm));
+                    }
+                    else                                                            // Refract.
+                    {
+                        // Move to just past the boundary.
+                        phot.move(entity_dist + SMOOTHING_LENGTH);
+
+                        // Refract the photon.
+                        phot.set_dir(optics::refraction_dir(phot.get_dir(), norm, n_i / n_t));
+
+                        // Photon moves to new entity.
+                        if (exiting)
+                        {
+                            phot.pop_entity_index();
+                        }
+                        else
+                        {
+                            phot.push_entity_index(index_t);
+                        }
+                        phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
+                    }
+                }
+                else    // Exit cell.
+                {
+                    energy += cell_dist * phot.get_weight();
+
+                    // Add current energy to current cell and reset count.
+                    cell->add_energy(energy);
+                    energy = 0.0;
+
+                    // Move into the next cell space.
+                    phot.move(cell_dist + SMOOTHING_LENGTH);
+
+                    // Change cell if still within the grid.
+                    if (m_grid.is_within(phot.get_pos()))
+                    {
+                        cell = &m_grid.get_cell(phot.get_pos());
+                    }
+                }
             }
 
-            LOG("Photon loop complete.");
+#ifdef ENABLE_PHOTON_PATHS
+            // Add the photon path.
+            m_path.push_back(phot.get_path());
+#endif
         }
 
 
