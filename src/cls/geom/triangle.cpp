@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/config.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
@@ -110,7 +116,7 @@ namespace arc
          */
         std::array<double, 3> Triangle::get_barycentric_coor(const math::Vec<3>& t_pos) const
         {
-            assert(plane_dist(t_pos) <= std::numeric_limits<double>::min());
+            assert(plane_dist(t_pos) <= 1.0e-18);
 
             const math::Vec<3> v0 = m_pos[BETA] - m_pos[ALPHA];
             const math::Vec<3> v1 = m_pos[GAMMA] - m_pos[ALPHA];

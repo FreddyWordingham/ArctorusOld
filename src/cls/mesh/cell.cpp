@@ -413,17 +413,21 @@ namespace arc
             for (size_t  i      = 0; i < m_entity_list.size(); ++i)
             {
                 // Get distance to intersection.
-                double       tri_dist;
-                math::Vec<3> tri_norm;
-                std::tie(tri_dist, tri_norm) = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
-                                                                            .get_intersection(t_pos, t_dir);
+                bool   intersect;
+                double tri_dist;
+                std::tie(intersect, tri_dist) = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
+                                                                             .intersection_dist(t_pos, t_dir);
 
                 // If this distance is the closest so far, accept it.
-                if ((tri_dist < r_dist) && (tri_dist > 0.0))
+                if (intersect)
                 {
-                    r_index = m_entity_list[i][0];
-                    r_dist  = tri_dist;
-                    r_norm  = tri_norm;
+                    if ((tri_dist < r_dist) && (tri_dist > 0.0))
+                    {
+                        r_index = m_entity_list[i][0];
+                        r_dist  = tri_dist;
+                        r_norm  = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
+                                                               .get_norm(t_pos + (t_dir * r_dist));
+                    }
                 }
             }
 
