@@ -384,6 +384,55 @@ namespace arc
             return (r_dist);
         }
 
+        std::tuple<bool, double, size_t, size_t> Cell::dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                                      const std::vector<equip::Entity>& t_entity) const
+        {
+            assert(t_dir.is_normalised());
+
+            // If cell contains no entity triangles, there is no hit.
+            if (m_entity_list.empty())
+            {
+                return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN()));
+            }
+
+            // Run through all entity triangles and determine if any hits occur.
+            bool        hit            = false;
+            double      r_dist         = std::numeric_limits<double>::max();
+            size_t      r_entity_index = std::numeric_limits<size_t>::signaling_NaN();
+            size_t      r_tri_index    = std::numeric_limits<size_t>::signaling_NaN();
+            for (size_t i              = 0; i < m_entity_list.size(); ++i)
+            {
+                // Get a reference to the triangle.
+                const geom::Triangle& tri = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
+
+                // Determine if there is a hit.
+                bool   tri_hit;
+                double tri_dist;
+                std::tie(tri_hit, tri_dist) = tri.intersection_dist(t_pos, t_dir);
+
+                // If a hit does occur, and it is closer than any hit so far, store the information.
+                if (tri_hit && (tri_dist < r_dist))
+                {
+                    hit            = true;
+                    r_dist         = tri_dist;
+                    r_entity_index = m_entity_list[i][0];
+                    r_tri_index    = m_entity_list[i][1];
+                }
+            }
+
+            // If a hit did occur, return the information.
+            if (hit)
+            {
+                return (std::tuple<bool, double, size_t, size_t>(true, r_dist, r_entity_index, r_tri_index));
+            }
+
+            return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN()));
+        }
+
         /**
          *  Determine the distance along the given ray to the nearest entity triangle.
          *  Also return the index of the entity, as well as the normal of the entity triangle.
