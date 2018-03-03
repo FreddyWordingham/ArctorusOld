@@ -46,9 +46,6 @@ namespace arc
         {
             //  == FIELDS ==
           private:
-            //  -- Settings --
-            const unsigned long int m_num_phot; //! Number of photons to simulate.
-
             //  -- Roulette --
             const double m_roulette_weight;     //! Roulette threshold.
             const double m_roulette_chambers;   //! Number of roulette chambers.

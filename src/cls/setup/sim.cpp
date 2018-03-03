@@ -40,7 +40,6 @@ namespace arc
          *  @param  t_json Json setup file.
          */
         Sim::Sim(const data::Json& t_json) :
-            m_num_phot(t_json.parse_child<unsigned long int>("num_phot")),
             m_roulette_weight(t_json["roulette"].parse_child<double>("weight")),
             m_roulette_chambers(t_json["roulette"].parse_child<double>("chambers")),
             m_aether(init_aether(t_json["aether"])),
