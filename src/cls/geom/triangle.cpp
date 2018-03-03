@@ -152,7 +152,7 @@ namespace arc
             }
 
             // Get the barycentric coordinates.
-            const std::array<double, 3> bary = get_barycentric_coor(t_pos);
+            const math::Vec<3> bary = get_barycentric_coor(t_pos);
 
             return (!((bary[ALPHA] < 0.0) || (bary[ALPHA] > 1.0) || (bary[BETA] < 0.0) || (bary[BETA] > 1.0) || ((bary[GAMMA] < 0.0) || (bary[GAMMA] > 1.0))));
         }
