@@ -48,6 +48,12 @@ namespace arc
             assert(t_scale[X] != 0.0);
             assert(t_scale[Y] != 0.0);
             assert(t_scale[Z] != 0.0);
+
+
+            if (m_tri.empty())
+            {
+                ERROR("Unable to construct geom::Mesh object.", "Mesh contains no triangles.");
+            }
         }
 
         /**
