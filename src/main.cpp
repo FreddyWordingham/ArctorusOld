@@ -18,6 +18,46 @@
 #include "cls/setup/sim.hpp"
 
 
+#include <thread>
+#include <mutex>
+
+
+
+class Wallet
+{
+    int        mMoney;
+    std::mutex mutex;
+  public:
+    Wallet() :
+        mMoney(0) {}
+    int getMoney() { return mMoney; }
+    void addMoney(int money)
+    {
+        std::lock_guard<std::mutex> lockGuard(mutex);
+        for (int                    i = 0; i < money; ++i)
+        {
+            mMoney++;
+        }
+    }
+};
+
+
+
+int testMultithreadedWallet()
+{
+    Wallet                   walletObject;
+    std::vector<std::thread> threads;
+    for (int                 i = 0; i < 5; ++i)
+    {
+        threads.push_back(std::thread(&Wallet::addMoney, &walletObject, 1000));
+    }
+
+    for (int i = 0; i < threads.size(); i++)
+    {
+        threads.at(i).join();
+    }
+    return walletObject.getMoney();
+}
 
 //  == MAIN ==
 /**
@@ -30,7 +70,20 @@
  */
 int main(const int t_argc, const char** t_argv)
 {
-    SEC("Initialising Arctorus");
+    int      val = 0;
+    for (int k   = 0; k < 1000; k++)
+    {
+        if ((val = testMultithreadedWallet()) != 5000)
+        {
+            std::cout << "Error at count = " << k << " Money in Wallet = " << val << std::endl;
+        }
+    }
+
+    return 0;
+
+
+
+    /*SEC("Initialising Arctorus");
 
     // Check the number of command line arguments.
     if (t_argc != 2)
@@ -87,7 +140,7 @@ int main(const int t_argc, const char** t_argv)
     if (setup.parse_child<bool>("post_render", false))
     {
         pdt.render();
-    }
+    }*/
 
     /*const std::string name("intralipid_000-5");
     const double conc = 00.5 / 100.0;
