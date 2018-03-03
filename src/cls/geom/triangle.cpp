@@ -143,16 +143,6 @@ namespace arc
                 return (std::pair<double, math::Vec<3>>(std::numeric_limits<double>::max(), math::Vec<3>(0.0, 0.0, 0.0)));
             }
 
-            // If triangle is flat, return the plane normal.
-            if (m_flat)
-            {
-                if ((t_dir * m_plane_norm) < 0.0)
-                {
-                    return (std::pair<double, math::Vec<3>>(r_dist, m_plane_norm));
-                }
-                return (std::pair<double, math::Vec<3>>(r_dist, -m_plane_norm));
-            }
-
             // Determine interpolated normal.
             const math::Vec<3> phong = math::normalise(
                 (m_norm[ALPHA] * alpha) + (m_norm[BETA] * beta) + (m_norm[GAMMA] * gamma));
@@ -202,12 +192,6 @@ namespace arc
 
             // Calculate the world-space cartesian coordinates from the barycentric coordinates.
             const math::Vec<3> r_pos = m_pos[GAMMA] + ((m_pos[ALPHA] - m_pos[GAMMA]) * a) + ((m_pos[BETA] - m_pos[GAMMA]) * b);
-
-            // If triangle is flat, return the plane normal.
-            if (m_flat)
-            {
-                return (std::make_pair(r_pos, m_plane_norm));
-            }
 
             // Calculate the corresponding normal.
             const math::Vec<3> r_norm = math::normalise(
