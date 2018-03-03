@@ -5,13 +5,13 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":        1e4,
+    "num_phot":        1e6,
     "pre_render":      false,
-    "post_render":     true,
+    "post_render":     false,
     "grid":            {
-        "min":   [-4.1e-3, -4.1e-3, -2.1e-3],
-        "max":   [4.1e-3, 4.1e-3, 2.1e-3],
-        "cells": [31, 31, 31]
+        "min":   [-4.1, -4.1, -2.1],
+        "max":   [4.1, 4.1, 2.1],
+        "cells": [101, 101, 101]
     },
     "aether":          {
         "mat": "materials/vacuum.mat"
@@ -36,8 +36,8 @@
     "ccds":            {
         "above": {
             "pixel": [250, 250],
-            "scale": [4e-3, 4e-3, 4e-3],
-            "trans": [0.0, 0.0, 2.0e-3],
+            "scale": [4, 4, 4],
+            "trans": [0.0, 0.0, 2.0],
             "dir":   [0.0, 0.0, -1.0],
             "col":   true
         }
