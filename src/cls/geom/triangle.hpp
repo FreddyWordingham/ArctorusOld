@@ -66,6 +66,7 @@ namespace arc
             const math::Vec<3>& get_norm(const size_t t_index) const { return (m_norm[t_index]); }
 
             //  -- Geometric --
+            double plane_dist(const math::Vec<3>& t_pos) const;
             std::pair<bool, double> intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
                                                       const double t_tol = 1e-8) const;
 

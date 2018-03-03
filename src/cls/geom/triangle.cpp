@@ -88,6 +88,18 @@ namespace arc
         //  == METHODS ==
         //  -- Geometric --
         /**
+         *  Determine the distance between a point and the plane the triangle lies within.
+         *
+         *  @param  t_pos   Position of the point.
+         *
+         *  @return Distance between the given point and the plane the triangle lies within.
+         */
+        double Triangle::plane_dist(const math::Vec<3>& t_pos) const
+        {
+            return (std::abs((m_plane_norm * t_pos) - (m_plane_norm * m_pos[ALPHA])));
+        }
+
+        /**
          *  Determine if a ray intersects the triangle and also the distance until intersection.
          *  Note that a signalling NaN is returned as the distance when an intersection does not occur.
          *  This means that intersection status should be checked before distance is used if intersection is not guaranteed.
