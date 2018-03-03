@@ -78,7 +78,7 @@ namespace arc
             size_t get_num_vert() const { return (m_num_vert); }
             size_t get_num_norm() const { return (m_num_norm); }
             size_t get_num_tri() const { return (m_num_tri); }
-            inline const Triangle& get_tri(size_t t_index) const { return (m_tri[t_index]); }
+            const Triangle& get_tri(const size_t t_index) const { return (m_tri[t_index]); }
         };
 
 
