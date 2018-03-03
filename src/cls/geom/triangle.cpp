@@ -108,7 +108,7 @@ namespace arc
          *
          *  @return The barycentric coordinates of the given point.
          */
-        std::array<double, 3> Triangle::get_barycentric_coor(const math::Vec<3>& t_pos) const
+        math::Vec<3> Triangle::get_barycentric_coor(const math::Vec<3>& t_pos) const
         {
             assert(plane_dist(t_pos) <= std::numeric_limits<double>::min());
 
@@ -128,7 +128,7 @@ namespace arc
             const double w = (d00 * d21 - d01 * d20) / denom;
             const double u = 1.0 - v - w;
 
-            return (std::array<double, 3>({{u, v, w}}));
+            return (math::Vec<3>(u, v, w));
         }
 
         /**
@@ -222,6 +222,26 @@ namespace arc
             }
 
             return (std::pair<bool, double>(true, r_dist));
+        }
+
+        /**
+         *  Determine the interpolated phong normal for the given position on the triangle.
+         *
+         *  @param  t_pos   Position of the point on the triangle.
+         *
+         *  @pre    t_pos must be within the triangle.
+         *
+         *  @return The interpolated phong normal for the given position on the triangle.
+         */
+        math::Vec<3> Triangle::get_norm(const math::Vec<3>& t_pos) const
+        {
+            assert(within_tri(t_pos));
+
+            // Get the barycentric coordinates.
+            const std::array<double, 3> bary = get_barycentric_coor(t_pos);
+
+            return (math::normalise(
+                (m_norm[ALPHA] * bary[ALPHA]) + (m_norm[BETA] * bary[BETA]) + (m_norm[GAMMA] * bary[GAMMA])));
         }
 
 
