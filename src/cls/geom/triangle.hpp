@@ -71,6 +71,7 @@ namespace arc
             bool within_tri(const math::Vec<3>& t_pos, double t_tol = std::numeric_limits<double>::min()) const;
             std::pair<bool, double> intersection_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
                                                       double t_tol = std::numeric_limits<double>::min()) const;
+            math::Vec<3> get_norm(const math::Vec<3>& t_pos) const;
 
             //  -- Generation --
             std::pair<math::Vec<3>, math::Vec<3>> gen_random_pos_and_norm() const;
