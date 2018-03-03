@@ -100,6 +100,32 @@ namespace arc
         }
 
         /**
+         *  Determine if a given point falls within the triangle.
+         *
+         *  @param  t_pos   Position of the point.
+         *  @param  t_tol   Tolerance used to determine if point is within the plane of the triangle.
+         *
+         *  @pre    t_tol must be positive.
+         *
+         *  @return True if the point falls within the triangle.
+         */
+        bool Triangle::within_tri(const math::Vec<3>& t_pos, const double t_tol) const
+        {
+            assert(t_tol >= 0.0);
+
+            // Check if point lies on the plane of the triangle.
+            if (plane_dist(t_pos) > t_tol)
+            {
+                return (false);
+            }
+
+            // Get the barycentric coordinates.
+            const std::array<double, 3> bary = get_barycentric_coor(t_pos);
+
+            return (!((bary[ALPHA] < 0.0) || (bary[ALPHA] > 1.0) || (bary[BETA] < 0.0) || (bary[BETA] > 1.0) || ((bary[GAMMA] < 0.0) || (bary[GAMMA] > 1.0))));
+        }
+
+        /**
          *  Determine if a ray intersects the triangle and also the distance until intersection.
          *  Note that a signalling NaN is returned as the distance when an intersection does not occur.
          *  This means that intersection status should be checked before distance is used if intersection is not guaranteed.
