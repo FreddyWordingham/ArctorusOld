@@ -613,7 +613,6 @@ namespace arc
                         }
                         else                                // Specular reflectance.
                         {
-                            const double a_t = std::asin((n_i / n_t) * std::sin(a_i));
                             reflectance = optics::reflection_prob(a_i, n_i, n_t);
                         }
 
