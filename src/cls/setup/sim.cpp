@@ -423,6 +423,12 @@ namespace arc
             // Run each photon through the simulation.
             for (unsigned long int i = 0; i < t_num_phot; ++i)
             {
+                if (((100 * i) % t_num_phot) == 0)
+                {
+                    LOG((100.0 * i) / t_num_phot << "% complete.");
+                }
+
+
                 // Emit a new photon.
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 

@@ -71,7 +71,7 @@ int main(const int t_argc, const char** t_argv)
     const unsigned long int num_phot     = setup.parse_child<unsigned long int>("num_phot");
     LOG("Number of photons to run: " << num_phot);
     std::vector<std::thread> threads;
-    const size_t             num_threads = std::thread::hardware_concurrency();
+    const size_t             num_threads = 2;//std::thread::hardware_concurrency();
     LOG("Number of threads: " << num_threads);
 
     const unsigned long int num_phot_per_thread = num_phot / num_threads;
