@@ -392,31 +392,30 @@ namespace arc
          *
          *  @param  t_pos       Start position of the ray.
          *  @param  t_dir       Direction of the ray.
-         *  @param  t_entity    Vector of entity objects within the simulation.
          *
          *  @return A tuple containing, hit status, distance to intersection, collision entity and triangle indices.
          */
-        std::tuple<bool, double, size_t, size_t> Cell::entity_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                                                   const std::vector<equip::Entity>& t_entity) const
+        std::tuple<bool, double, size_t, size_t> Cell::entity_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
         {
             assert(t_dir.is_normalised());
 
             // If cell contains no entity triangles, there is no hit.
             if (m_entity_list.empty())
             {
-                return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(), std::numeric_limits<size_t>::signaling_NaN(),
+                return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN(),
                                                                  std::numeric_limits<size_t>::signaling_NaN()));
             }
 
             // Run through all entity triangles and determine if any hits occur.
-            bool   hit            = false;
-            double r_dist         = std::numeric_limits<double>::max();
-            size_t r_entity_index = std::numeric_limits<size_t>::signaling_NaN();
-            size_t r_tri_index    = std::numeric_limits<size_t>::signaling_NaN();
+            bool        hit            = false;
+            double      r_dist         = std::numeric_limits<double>::max();
+            size_t      r_entity_index = std::numeric_limits<size_t>::signaling_NaN();
+            size_t      r_tri_index    = std::numeric_limits<size_t>::signaling_NaN();
             for (size_t i              = 0; i < m_entity_list.size(); ++i)
             {
                 // Get a reference to the triangle.
-                const geom::Triangle& tri = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
+                const geom::Triangle& tri = m_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
 
                 // Determine if there is a hit.
                 bool   tri_hit;
@@ -439,7 +438,8 @@ namespace arc
                 return (std::tuple<bool, double, size_t, size_t>(true, r_dist, r_entity_index, r_tri_index));
             }
 
-            return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(), std::numeric_limits<size_t>::signaling_NaN(),
+            return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN(),
                                                              std::numeric_limits<size_t>::signaling_NaN()));
         }
 
