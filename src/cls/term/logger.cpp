@@ -208,7 +208,9 @@ namespace arc
             assert(!t_cause.empty());
 
             // Increment the number of recorded warnings.
+            m_counter_mutex.lock();
             ++m_num_warnings;
+            m_counter_mutex.unlock();
 
             // Create the text string.
             std::string text = t_symptom + "\n" + t_cause;
