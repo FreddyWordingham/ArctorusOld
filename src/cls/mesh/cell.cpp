@@ -501,56 +501,65 @@ namespace arc
         }
 
         /**
-         *  Determine the distance along the given ray to the nearest ccd triangle.
-         *  Also return the index of the ccd, as well as the normal of the ccd triangle.
+         *  Determine the distance to the closest spectrometer triangle within the cell.
+         *  If no spectrometer is hit, the first value of the tuple will be set to false.
+         *  The second value of the returned tuple holds the distance to the spectrometer triangle if one was hit.
+         *  The third and fourth values of the returned tuple hold the hit spectrometer and triangle indices respectively.
+         *  If no spectrometer triangle is hit the first value is false and the others are set to NaN.
          *
-         *  @param  t_pos   Initial position of the ray.
-         *  @param  t_dir   Direction of the ray.
-         *  @param  t_ccd   Vector of ccds within the simulation.
+         *  @param  t_pos       Start position of the ray.
+         *  @param  t_dir       Direction of the ray.
          *
-         *  @return A tuple containing the ccd index, distance to the ccd triangle and the normal at the intersection.
+         *  @return A tuple containing, hit status, distance to intersection, collision spectrometer and triangle indices.
          */
-        std::tuple<size_t, double, math::Vec<3>> Cell::get_dist_to_ccd(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                                                       const std::vector<detector::Ccd>& t_ccd) const
+        std::tuple<bool, double, size_t, size_t> Cell::spectrometer_dist(const math::Vec<3>& t_pos,
+                                                                         const math::Vec<3>& t_dir) const
         {
             assert(t_dir.is_normalised());
 
-            // If cell contains no triangles, return a large dummy value.
-            if (m_empty)
+            // If cell contains no spectrometer triangles, there is no hit.
+            if (m_spectrometer_tri_list.empty())
             {
-                return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
-                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
+                return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN()));
             }
 
-            // Run through all ccd triangles and determine the closest intersection distance.
-            size_t       r_index;
-            double       r_dist = std::numeric_limits<double>::max();
-            math::Vec<3> r_norm;
-            for (size_t  i      = 0; i < m_ccd_tri_list.size(); ++i)
+            // Run through all spectrometer triangles and determine if any hits occur.
+            bool        hit                  = false;
+            double      r_dist               = std::numeric_limits<double>::max();
+            size_t      r_spectrometer_index = std::numeric_limits<size_t>::signaling_NaN();
+            size_t      r_tri_index          = std::numeric_limits<size_t>::signaling_NaN();
+            for (size_t i                    = 0; i < m_spectrometer_tri_list.size(); ++i)
             {
-                // Get distance to intersection.
-                bool   intersect;
+                // Get a reference to the triangle.
+                const geom::Triangle& tri = m_spectrometer[m_spectrometer_tri_list[i][0]].get_mesh().get_tri(
+                    m_spectrometer_tri_list[i][1]);
+
+                // Determine if there is a hit.
+                bool   tri_hit;
                 double tri_dist;
-                std::tie(intersect, tri_dist) = t_ccd[m_ccd_tri_list[i][0]].get_mesh().get_tri(m_ccd_tri_list[i][1])
-                                                                           .intersection_dist(t_pos, t_dir);
+                std::tie(tri_hit, tri_dist) = tri.intersection_dist(t_pos, t_dir);
 
-                // If an intersection does occur with the triangle, test if it is the closest so far.
-                if (intersect)
+                // If a hit does occur, and it is closer than any hit so far, store the information.
+                if (tri_hit && (tri_dist < r_dist))
                 {
-                    assert(r_dist >= 0.0);
-
-                    // If this distance is the closest so far, accept it.
-                    if (tri_dist < r_dist)
-                    {
-                        r_index = m_ccd_tri_list[i][0];
-                        r_dist  = tri_dist;
-                        r_norm  = t_ccd[m_ccd_tri_list[i][0]].get_mesh().get_tri(m_ccd_tri_list[i][1])
-                                                             .get_norm(t_pos + (t_dir * r_dist));
-                    }
+                    hit                  = true;
+                    r_dist               = tri_dist;
+                    r_spectrometer_index = m_spectrometer_tri_list[i][0];
+                    r_tri_index          = m_spectrometer_tri_list[i][1];
                 }
             }
 
-            return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
+            // If a hit did occur, return the information.
+            if (hit)
+            {
+                return (std::tuple<bool, double, size_t, size_t>(true, r_dist, r_spectrometer_index, r_tri_index));
+            }
+
+            return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN()));
         }
 
         /**
