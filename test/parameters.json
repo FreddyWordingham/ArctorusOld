@@ -1,23 +1,24 @@
 {
-    "max_threads":     4,
-    "output_dir_name": "intralipid_001-0",
-    "seed":            77,
-    "roulette":        {
+    "log_update_period": 1.0,
+    "max_threads":       4,
+    "output_dir_name":   "intralipid_001-0",
+    "seed":              77,
+    "roulette":          {
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":        1e6,
-    "pre_render":      false,
-    "post_render":     false,
-    "grid":            {
+    "num_phot":          1e6,
+    "pre_render":        false,
+    "post_render":       false,
+    "grid":              {
         "min":   [-4.1, -4.1, -2.1],
         "max":   [4.1, 4.1, 2.1],
         "cells": [11, 11, 11]
     },
-    "aether":          {
+    "aether":            {
         "mat": "materials/vacuum.mat"
     },
-    "entities":        {
+    "entities":          {
         "sphere": {
             "mesh":  "meshes/sphere.obj",
             "mat":   "materials/water.mat",
