@@ -322,6 +322,22 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Setters --
+        /**
+         *  Set the number of threads by initialising the thread progress vector.
+         *
+         *  @param  t_num_threads   Number of simulation threads.
+         *
+         *  @pre    t_num_threads must not be zero.
+         */
+        void Sim::set_num_threads(const unsigned int t_num_threads)
+        {
+            assert(t_num_threads != 0);
+
+            m_thread_progress = std::vector<double>(t_num_threads, 0.0);
+        }
+
+
         //  -- Saving --
         /**
          *  Save the grid images.
