@@ -87,7 +87,7 @@ namespace arc
         {
             std::vector<double> r_pos(m_data.size());
 
-            double offset;
+            double offset = 0.0;
             switch (t_align)
             {
                 case align::LEFT:
