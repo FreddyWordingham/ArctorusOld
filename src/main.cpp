@@ -8,6 +8,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <thread>
+
 //  -- General --
 #include "gen/math.hpp"
 
@@ -67,7 +70,6 @@ int main(const int t_argc, const char** t_argv)
     SEC("Running Simulation");
     const unsigned long int num_phot     = setup.parse_child<unsigned long int>("num_phot");
     LOG("Number of photons to run: " << num_phot);
-    /*
     std::vector<std::thread> threads;
     const size_t             num_threads = std::thread::hardware_concurrency();
     LOG("Number of threads: " << num_threads);
@@ -77,12 +79,12 @@ int main(const int t_argc, const char** t_argv)
     {
         threads.push_back(std::thread(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread));
     }
-    for (int                i                   = 0; i < threads.size(); i++)
+    for (size_t             i                   = 0; i < threads.size(); i++)
     {
         threads.at(i).join();
-    }*/
+    }
 
-    pdt.run_photons(num_phot);
+//    pdt.run_photons(num_phot);
 
     // Save grid data.
     SEC("Saving Data");
