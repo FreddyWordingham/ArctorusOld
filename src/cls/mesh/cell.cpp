@@ -38,7 +38,7 @@ namespace arc
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
             m_entity(t_entity),
-            m_entity_list(init_entity_list(t_entity)),
+            m_entity_list(init_entity_list()),
             m_light_list(init_light_list(t_light)),
             m_ccd_list(init_ccd_list(t_ccd)),
             m_spectrometer_list(init_spectrometer_list(t_spectrometer)),
@@ -54,22 +54,20 @@ namespace arc
         /**
          *  Initialise the list of entity triangles found within the cell.
          *
-         *  @param  t_entity    Vector of entities which may be contained within the cell.
-         *
          *  @return The initialised list of entity triangles found within the cell.
          */
-        std::vector<std::array<size_t, 2>> Cell::init_entity_list(const std::vector<equip::Entity>& t_entity) const
+        std::vector<std::array<size_t, 2>> Cell::init_entity_list() const
         {
             std::vector<std::array<size_t, 2>> r_entity_list;
 
             const math::Vec<3> center    = (m_max_bound + m_min_bound) / 2.0;
             const math::Vec<3> half_size = (m_max_bound - m_min_bound) / 2.0;
 
-            for (size_t i = 0; i < t_entity.size(); ++i)
+            for (size_t i = 0; i < m_entity.size(); ++i)
             {
-                for (size_t j = 0; j < t_entity[i].get_mesh().get_num_tri(); ++j)
+                for (size_t j = 0; j < m_entity[i].get_mesh().get_num_tri(); ++j)
                 {
-                    if (tri_overlap(center, half_size, t_entity[i].get_mesh().get_tri(j)))
+                    if (tri_overlap(center, half_size, m_entity[i].get_mesh().get_tri(j)))
                     {
                         r_entity_list.push_back({{i, j}});
                     }
