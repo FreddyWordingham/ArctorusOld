@@ -440,10 +440,13 @@ namespace arc
             // Run each photon through the simulation.
             for (unsigned long int i = 0; i < t_num_phot; ++i)
             {
+                // Set loop progress.
+                m_thread_progress[t_thread_index] = (100.0 * i) / t_num_phot;
+
                 // Print loop progress.
-                if (((10 * i) % t_num_phot) == 0)
+                if ((((10 * i) % t_num_phot) == 0) && (t_thread_index == 0))
                 {
-                    LOG("Thread: " << t_thread_index << " - " << (100.0 * i) / t_num_phot << "% complete.");
+                    LOG("Photon loop: " << m_thread_progress);
                 }
 
                 // Emit a new photon.

@@ -83,7 +83,7 @@ int main(const int t_argc, const char** t_argv)
         ERROR("Unable to run simulation.", "Number of threads can not be zero.");
     }
     LOG("Number of threads: " << num_threads);
-    pdt.set_num_thread(num_threads);
+    pdt.set_num_threads(num_threads);
 
     // Set off the threads.
     const unsigned long int num_phot_per_thread = num_phot / num_threads;
