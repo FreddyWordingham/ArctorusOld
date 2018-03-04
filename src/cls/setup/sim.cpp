@@ -444,10 +444,7 @@ namespace arc
                 m_thread_progress[t_thread_index] = (100.0 * i) / t_num_phot;
 
                 // Print loop progress.
-                if ((((10 * i) % t_num_phot) == 0) && (t_thread_index == 0))
-                {
-                    LOG("Photon loop: " << m_thread_progress);
-                }
+                log_progress();
 
                 // Emit a new photon.
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
@@ -760,6 +757,26 @@ namespace arc
                                                                       spectrometer_index, spectrometer_tri_index));
                 default: ERROR("Unable to simulate photon.", "Code should be unreachable.");
             }
+        }
+
+        void Sim::log_progress()
+        {
+            // Return if minimum update time has not yet passed.
+            static std::chrono::steady_clock::time_point last_update;
+            const std::chrono::steady_clock::time_point  cur_time = std::chrono::steady_clock::now();
+            if (std::chrono::duration_cast<std::chrono::duration<double>>(cur_time - last_update).count() < 1.0)
+            {
+                return;
+            }
+            last_update         = cur_time;
+
+            // Log the progress of all loops.
+            std::stringstream progress("Progress: ");
+            for (size_t       i = 0; i < m_thread_progress.size(); ++i)
+            {
+                progress << std::setw(8) << m_thread_progress[i] << " ";
+            }
+            LOG(progress.str());
         }
 
 

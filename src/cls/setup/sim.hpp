@@ -81,6 +81,7 @@ namespace arc
             //  -- Threads --
             std::vector<double> m_thread_progress;  //! Current progress of each thread.
 
+
             //  -- Data --
             mesh::Grid m_grid;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
@@ -125,6 +126,7 @@ namespace arc
             //  -- Simulation --
             std::tuple<event, double, size_t, size_t> determine_event(const phys::Photon& t_phot,
                                                                       const mesh::Cell* t_cell) const;
+            void log_progress();
         };
 
 
