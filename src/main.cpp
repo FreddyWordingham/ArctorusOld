@@ -88,7 +88,7 @@ int main(const int t_argc, const char** t_argv)
     const unsigned long int num_phot_per_thread = num_phot / num_threads;
     for (unsigned long int  i                   = 0; i < num_threads; ++i)
     {
-        threads.push_back(std::thread(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread));
+        threads.push_back(std::thread(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread, i));
     }
 
     // Wait for each thread to finish.

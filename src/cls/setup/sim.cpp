@@ -416,9 +416,10 @@ namespace arc
         /**
          *  Run a number of photons through the simulation.
          *
-         *  @param  t_num_phot  The number of photons to run.
+         *  @param  t_num_phot      The number of photons to run.
+         *  @param  t_thread_index  Index of the thread running this batch of photons.
          */
-        void Sim::run_photons(const unsigned long int t_num_phot)
+        void Sim::run_photons(const unsigned long int t_num_phot, const size_t t_thread_index)
         {
             // Run each photon through the simulation.
             for (unsigned long int i = 0; i < t_num_phot; ++i)

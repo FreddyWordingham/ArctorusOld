@@ -113,7 +113,7 @@ namespace arc
             void render() const;
 
             //  -- Simulation --
-            void run_photons(unsigned long int t_num_phot);
+            void run_photons(unsigned long int t_num_phot, size_t t_thread_index);
 
           private:
             //  -- Simulation --
