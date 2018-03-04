@@ -529,7 +529,9 @@ namespace arc
                         case event::CELL_CROSS:
                         {
                             // Increment cell-tracked properties.
+                            m_grid_mutex.lock();
                             cell->add_energy(cell_energy);
+                            m_grid_mutex.unlock();
                             cell_energy = 0.0;
 
                             // Move just past the cell boundary point.
