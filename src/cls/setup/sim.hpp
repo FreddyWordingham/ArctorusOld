@@ -44,6 +44,20 @@ namespace arc
          */
         class Sim
         {
+            //  == ENUMERATIONS ==
+            /**
+             *  Enumeration of the main types of events a photon can undergo during the simulation.
+             */
+            enum class event
+            {
+                SCATTER,            //! Scattering event.
+                CELL_CROSS,         //! Cell wall crossing.
+                ENTITY_HIT,         //! Entity triangle hit.
+                CCD_HIT,            //! Ccd triangle hit.
+                SPECTROMETER_HIT    //! Spectrometer triangle hit.
+            };
+
+
             //  == FIELDS ==
           private:
             //  -- Roulette --
