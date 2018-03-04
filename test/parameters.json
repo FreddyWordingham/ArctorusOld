@@ -7,7 +7,7 @@
         "weight":   1e-3,
         "chambers": 1e3
     },
-    "num_phot":          1e6,
+    "num_phot":          1e5,
     "pre_render":        false,
     "post_render":       false,
     "grid":              {
@@ -25,7 +25,7 @@
             "scale": [1e-3, 1e-3, 1e-3]
         }
     },
-    "lights":        {
+    "lights":            {
         "detector_led": {
             "power": 1.0,
             "mesh":  "meshes/circle.obj",
