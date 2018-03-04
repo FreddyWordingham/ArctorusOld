@@ -427,7 +427,7 @@ namespace arc
                 // Print loop progress.
                 if (((10 * i) % t_num_phot) == 0)
                 {
-                    LOG((100.0 * i) / t_num_phot << "% complete.");
+                    LOG("Thread: " << t_thread_index << " - " << (100.0 * i) / t_num_phot << "% complete.");
                 }
 
                 // Emit a new photon.

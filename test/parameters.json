@@ -1,5 +1,5 @@
 {
-    "max_threads":     1,
+    "max_threads":     4,
     "output_dir_name": "intralipid_001-0",
     "seed":            77,
     "roulette":        {

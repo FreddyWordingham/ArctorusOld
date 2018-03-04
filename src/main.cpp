@@ -97,8 +97,6 @@ int main(const int t_argc, const char** t_argv)
         threads[i].join();
     }
 
-//    pdt.run_photons(num_phot);
-
     // Save grid data.
     SEC("Saving Data");
     const std::string grid_images_dir = output_dir + "grid_images/";
