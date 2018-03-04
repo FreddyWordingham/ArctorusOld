@@ -108,7 +108,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Setters --
-            void set_num_threads(const unsigned int t_num_threads);
+            void set_num_threads(unsigned int t_num_threads);
 
             //  -- Saving --
             void save_grid_images(const std::string& t_output_dir) const;
