@@ -425,18 +425,21 @@ namespace arc
                 // Emit a new photon.
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
+                // Initialise tracked properties.
+                mesh::Cell* cell = nullptr;
+                double cell_energy = 0.0;   //! Energy to be added to cell total when exiting current cell.
+
                 // Check if photon is within a grid cell.
                 if (!m_grid.is_within(phot.get_pos()))
                 {
                     WARN("Unable to simulate photon.", "Photon does not begin with the grid.");
                     goto kill_photon;
                 }
-                mesh::Cell* cell = &m_grid.get_cell(phot.get_pos());
-                cell->add_energy(0.1);
-                assert(cell != nullptr);
-
-                // Initialise tracked properties.
-                double cell_energy = 0.0;   //! Energy to be added to cell total when exiting current cell.
+                else
+                {
+                    cell = &m_grid.get_cell(phot.get_pos());
+                    assert(cell != nullptr);
+                }
 
                 // Loop until exit condition is met.
                 while (true)
