@@ -40,6 +40,7 @@ namespace arc
             m_entity(t_entity),
             m_light(t_light),
             m_ccd(t_ccd),
+            m_spectrometer(t_spectrometer),
             m_entity_list(init_entity_list()),
             m_light_list(init_light_list(t_light)),
             m_ccd_list(init_ccd_list(t_ccd)),
