@@ -99,9 +99,9 @@ namespace arc
             const std::array<double, 3> col = m_col ? utl::colourmap::transform_rainbow((t_wavelength - 400E-9) / 300E-9)
                                                     : std::array<double, 3>({{1.0, 1.0, 1.0}});
 
-//            m_image_mutex.lock();
+            m_image_mutex.lock();
             m_image.add_to_pixel(pix_x, pix_y, {{t_weight * col[R], t_weight * col[G], t_weight * col[B]}});
-//            m_image_mutex.unlock();
+            m_image_mutex.unlock();
         }
 
 
