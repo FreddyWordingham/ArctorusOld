@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <cstddef>
 #include <vector>
 
 
