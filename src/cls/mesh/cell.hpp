@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <array>
+#include <mutex>
 #include <vector>
 
 //  -- Classes --
@@ -61,6 +62,7 @@ namespace arc
 
             //  -- Data --
             const bool m_empty;         //! True if the cell contains no triangles.
+            std::mutex m_energy_mutex;  //! Protects energy data.
             double     m_energy = 0.0;  //! Energy within the cell.
 
 
