@@ -93,7 +93,6 @@ namespace arc
                 for (size_t j = 0; j < m_num_cells[Y]; ++j)
                 {
                     r_cell[i].emplace_back(std::vector<Cell>());
-                    r_cell[i][j].reserve(m_num_cells[Z]);
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
                         r_cell[i][j].emplace_back(Cell(
