@@ -431,6 +431,7 @@ namespace arc
                     WARN("Unable to simulate photon.", "Photon does not begin with the grid.");
                 }
                 mesh::Cell* cell = &m_grid.get_cell(phot.get_pos());
+                cell->add_energy(0.1);
                 assert(cell != nullptr);
 
                 // Initialise tracked properties.
@@ -440,11 +441,39 @@ namespace arc
                 while (m_grid.is_within(phot.get_pos()) && (phot.get_weight() > 0.0))
                 {
                     // Determine event distances.
-                    event  type;                    //! Event type.
+                    event  event_type;              //! Event type.
                     double dist;                    //! Distance to the event.
                     size_t equip_index, tri_index;  //! Indices of hit equipment and triangle if hit at all.
-                    std::tie(type, dist, equip_index, tri_index) = determine_event(phot, cell);
+                    std::tie(event_type, dist, equip_index, tri_index) = determine_event(phot, cell);
+
+                    // Perform the event.
+                    switch (event_type)
+                    {
+                        case event::SCATTER:
+
+                            break;
+                        case event::CELL_CROSS:
+
+                            break;
+                        case event::ENTITY_HIT:
+
+                            break;
+                        case event::CCD_HIT:
+
+                            break;
+                        case event::SPECTROMETER_HIT:
+
+                            break;
+                    }
+
+                    phot.move(dist);
+                    break;
                 }
+
+#ifdef ENABLE_PHOTON_PATHS
+                // Add the photon path.
+                m_path.push_back(phot.get_path());
+#endif
             }
         }
 
@@ -461,9 +490,11 @@ namespace arc
         {
             // Determine scatter distance.
             const double scat_dist = -std::log(rng::random()) / t_phot.get_interaction();
+            assert(scat_dist > SMOOTHING_LENGTH);
 
             // Determine the cell distance.
             const double cell_dist = t_cell->get_dist_to_wall(t_phot.get_pos(), t_phot.get_dir());
+            assert(cell_dist > SMOOTHING_LENGTH);
 
             // Check for entity collision.
             bool   entity_hit;
@@ -490,19 +521,24 @@ namespace arc
             switch (std::distance(std::begin(dist), std::min_element(std::begin(dist), std::end(dist))))
             {
                 case 0:
+                    assert(scat_dist > SMOOTHING_LENGTH);
                     return (std::tuple<event, double, size_t, size_t>(event::SCATTER, scat_dist,
                                                                       std::numeric_limits<size_t>::signaling_NaN(),
                                                                       std::numeric_limits<size_t>::signaling_NaN()));
                 case 1:
+                    assert(cell_dist > SMOOTHING_LENGTH);
                     return (std::tuple<event, double, size_t, size_t>(event::CELL_CROSS, cell_dist,
                                                                       std::numeric_limits<size_t>::signaling_NaN(),
                                                                       std::numeric_limits<size_t>::signaling_NaN()));
                 case 2:
+                    assert(entity_dist > SMOOTHING_LENGTH);
                     return (std::tuple<event, double, size_t, size_t>(event::ENTITY_HIT, entity_dist, entity_index,
                                                                       entity_tri_index));
                 case 3:
+                    assert(ccd_dist > SMOOTHING_LENGTH);
                     return (std::tuple<event, double, size_t, size_t>(event::CCD_HIT, ccd_dist, ccd_index, ccd_tri_index));
                 case 4:
+                    assert(spectrometer_dist > SMOOTHING_LENGTH);
                     return (std::tuple<event, double, size_t, size_t>(event::SPECTROMETER_HIT, spectrometer_dist,
                                                                       spectrometer_index, spectrometer_tri_index));
                 default: ERROR("Unable to simulate photon.", "Code should be unreachable.");
