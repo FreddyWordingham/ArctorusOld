@@ -596,9 +596,9 @@ namespace arc
         {
             assert(t_energy > 0.0);
 
-//            m_energy_mutex.lock();
+            m_energy_mutex.lock();
             m_energy += t_energy;
-//            m_energy_mutex.unlock();
+            m_energy_mutex.unlock();
         }
 
 
