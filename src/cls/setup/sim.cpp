@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- General --
+#include "gen/optics.hpp"
 
 //  -- Utility --
 #include "utl/file.hpp"
@@ -458,6 +459,7 @@ namespace arc
                     {
                         // Scattering event.
                         case event::SCATTER:
+
                             // Move to the scattering point.
                             phot.move(dist);
 
@@ -477,6 +479,7 @@ namespace arc
 
                             // Cell boundary crossing.
                         case event::CELL_CROSS:
+
                             // Increment cell-tracked properties.
                             cell->add_energy(cell_energy);
                             cell_energy = 0.0;
@@ -495,7 +498,88 @@ namespace arc
 
                             break;
 
+                            // Entity collision.
                         case event::ENTITY_HIT:
+
+                            // Get the normal of the hit location.
+                            math::Vec<3> norm = m_entity[equip_index].get_mesh().get_tri(tri_index)
+                                                                     .get_norm(phot.get_pos() + (phot.get_dir() * dist));
+
+                            // If entity normal is facing away, multiply it by -1.
+                            if ((phot.get_dir() * norm) > 0.0)
+                            {
+                                norm *= -1.0;
+                            }
+                            assert(norm.is_normalised());
+
+                            // Determine the material indices.
+                            int  index_i, index_t;
+                            bool exiting      = phot.get_entity_index() == static_cast<int>(equip_index);
+                            if (exiting)    // Exiting the current entity.
+                            {
+                                index_i = static_cast<int>(equip_index);
+                                index_t = phot.get_prev_entity_index();
+                            }
+                            else            // Entering a new entity.
+                            {
+                                index_i = phot.get_entity_index();
+                                index_t = static_cast<int>(equip_index);
+                            }
+                            assert(index_i != index_t);
+
+                            // Get references to the materials.
+                            const phys::Material& mat_i = (index_i == -1) ? m_aether : m_entity[static_cast<size_t>(index_i)]
+                                .get_mat();
+                            const phys::Material& mat_t = (index_t == -1) ? m_aether : m_entity[static_cast<size_t>(index_t)]
+                                .get_mat();
+
+                            // Get refractive indices of the materials.
+                            const double n_i = mat_i.get_ref_index(phot.get_wavelength());
+                            const double n_t = mat_t.get_ref_index(phot.get_wavelength());
+
+                            // Calculate angle of incidence.
+                            const double a_i = std::acos(-phot.get_dir() * norm);
+                            assert((a_i >= 0.0) && (a_i < (M_PI / 2.0)));
+
+                            // Calculate reflectance probability.
+                            double reflectance;
+                            if (std::sin(a_i) >= (n_t / n_i))   // Total internal reflectance.
+                            {
+                                reflectance = 1.0;
+                            }
+                            else                                // Specular reflectance.
+                            {
+                                reflectance = optics::reflection_prob(a_i, n_i, n_t);
+                            }
+                            assert((reflectance >= 0.0) && (reflectance <= 1.0));
+
+                            if (rng::random() <= reflectance)   // Reflect.
+                            {
+                                // Move to just before the entity boundary.
+                                phot.move(dist - SMOOTHING_LENGTH);
+
+                                // Reflect the photon.
+                                phot.set_dir(optics::reflection_dir(phot.get_dir(), norm));
+                            }
+                            else                                // Refract.
+                            {
+                                // Move to just past the entity boundary.
+                                phot.move(dist + SMOOTHING_LENGTH);
+
+                                // Refract the photon.
+                                phot.set_dir(optics::refraction_dir(phot.get_dir(), norm, n_i / n_t));
+
+                                // Determine new optical properties.
+                                if (exiting)                    // Exiting material.
+                                {
+                                    phot.pop_entity_index();
+                                }
+                                else                            // Entering material.
+                                {
+                                    phot.push_entity_index(index_t);
+                                }
+                                phot.set_opt(index_t == -1 ? m_aether : m_entity[static_cast<size_t>(index_t)].get_mat());
+                            }
 
                             break;
 
@@ -536,9 +620,6 @@ namespace arc
                             // Kill the absorbed photon.
                             goto kill_photon;
                     }
-
-                    phot.move(dist);
-                    break;
                 }
 
                 // Photon death label.
