@@ -9,6 +9,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <algorithm>
 #include <thread>
 
 //  -- General --
@@ -68,10 +69,20 @@ int main(const int t_argc, const char** t_argv)
 
     // Run the simulation.
     SEC("Running Simulation");
+
+    // Get the number of photons to run.
     const unsigned long int num_phot     = setup.parse_child<unsigned long int>("num_phot");
     LOG("Number of photons to run: " << num_phot);
+
+    // Initialise the threads.
     std::vector<std::thread> threads;
-    const size_t             num_threads = std::thread::hardware_concurrency();
+    const unsigned int       num_threads = std::min(std::thread::hardware_concurrency(),
+                                                    setup.parse_child<unsigned int>("max_threads"));
+    if (num_threads == 0)
+    {
+        ERROR("Unable to run simulation.", "Number of threads can not be zero.");
+    }
+
     LOG("Number of threads: " << num_threads);
 
     const unsigned long int num_phot_per_thread = num_phot / num_threads;
