@@ -15,8 +15,8 @@
 
 //  == INCLUDES ==
 //  -- System --
-#include <thread>
 #include <mutex>
+#include <thread>
 
 //  -- Classes --
 #include "cls/data/json.hpp"
