@@ -361,7 +361,7 @@ namespace arc
                         if (energy_density > 0.0)
                         {
                             // Get the cell.
-                            const auto cell = t_grid.get_cell(i, j, k);
+                            const mesh::Cell& cell = t_grid.get_cell(i, j, k);
 
                             // Calculate the cell colour.
                             const std::array<double, 3> col = utl::colourmap::transform_rainbow(
