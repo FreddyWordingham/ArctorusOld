@@ -84,8 +84,7 @@ int main(const int t_argc, const char** t_argv)
     }
     LOG("Number of threads: " << num_threads);
 
-
-
+    // Set off the threads.
     const unsigned long int num_phot_per_thread = num_phot / num_threads;
     for (unsigned long int  i                   = 0; i < num_threads; ++i)
     {
