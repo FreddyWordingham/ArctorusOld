@@ -88,7 +88,7 @@ namespace arc
          *  Generate a base value through bitwise operations.
          *  All values have an equal probability of generation over time.
          *
-         *  @return A sudo random base value.
+         *  @return A sudo-random base value.
          */
         Uniform::base Uniform::gen_base()
         {
