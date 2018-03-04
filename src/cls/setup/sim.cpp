@@ -777,7 +777,11 @@ namespace arc
             {
                 progress << std::setw(8) << m_thread_progress[i];
             }
+
+            // Print the progress string.
+            m_log_mutex.lock();
             LOG(progress.str());
+            m_log_mutex.unlock();
         }
 
 
