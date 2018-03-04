@@ -448,7 +448,8 @@ namespace arc
             }
         }
 
-        std::tuple<int, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot, const mesh::Cell* t_cell) const
+        std::tuple<event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
+                                                                       const mesh::Cell* t_cell) const
         {
 
         }
