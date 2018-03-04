@@ -14,6 +14,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <mutex>
+
 //  -- Classes --
 #include "cls/data/image.hpp"
 #include "cls/geom/mesh.hpp"
@@ -46,7 +49,8 @@ namespace arc
             const bool m_col;   //! If true save the image as wavelength colours. Otherwise save as greyscale intensity.
 
             //  -- Data --
-            data::Image m_image;    //! Ccd image data.
+            std::mutex  m_image_mutex;   //! Protects image data.
+            data::Image m_image;        //! Ccd image data.
 
 
             //  == INSTANTIATION ==
