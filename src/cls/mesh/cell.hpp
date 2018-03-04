@@ -93,11 +93,6 @@ namespace arc
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
             std::tuple<bool, double, size_t, size_t> entity_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
             std::tuple<bool, double, size_t, size_t> ccd_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
-            std::tuple<size_t, double, math::Vec<3>> get_dist_to_ccd(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                                                     const std::vector<detector::Ccd>& t_ccd) const;
-            std::tuple<size_t, double, math::Vec<3>> get_dist_to_spectrometer(const math::Vec<3>& t_pos,
-                                                                              const math::Vec<3>& t_dir, const std::vector<
-                detector::Spectrometer>& t_spectrometer) const;
 
             //  -- Setters --
             void add_energy(double t_energy);
