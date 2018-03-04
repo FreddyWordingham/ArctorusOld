@@ -14,6 +14,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <limits>
 #include <sstream>
 
 //  -- Utility --
