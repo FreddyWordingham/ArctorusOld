@@ -82,17 +82,26 @@ int main(const int t_argc, const char** t_argv)
     {
         ERROR("Unable to run simulation.", "Number of threads can not be zero.");
     }
-
     LOG("Number of threads: " << num_threads);
 
+    // Calculate number of photons per thread.
     const unsigned long int num_phot_per_thread = num_phot / num_threads;
-    for (unsigned long int  i                   = 0; i < num_threads; ++i)
+
+    // Set of the lead thread.
+    threads.push_back(std::thread(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread + (num_phot % num_threads)));
+    const std::thread::id lead_thread_id = threads[0].get_id();
+    pdt.set_lead_thread_id(lead_thread_id);
+
+    // Set off the other threads.
+    for (unsigned long int i = 1; i < num_threads; ++i)
     {
         threads.push_back(std::thread(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread));
     }
+
+    // Wait for each thread to finish.
     for (size_t             i                   = 0; i < threads.size(); i++)
     {
-        threads.at(i).join();
+        threads[i].join();
     }
 
 //    pdt.run_photons(num_phot);
