@@ -736,7 +736,7 @@ namespace arc
             // Calculate the determinant.
             for (size_t i = 0; i < N; ++i)
             {
-                // Mutiply cofactor by the determinant of the minor matrix.
+                // Multiply cofactor by the determinant of the minor matrix.
                 r_det += t_mat[0][i] * cofactor(t_mat, 0, i);
             }
 
