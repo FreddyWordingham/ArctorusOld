@@ -32,7 +32,7 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  A sudo-random number generator capable of producing sudo random numbers with uniform probability.
+         *  A sudo-random number generator capable of producing sudo-random numbers with uniform probability.
          *  Primarily used to generate random doubles between zero and unity.
          */
         class Uniform
