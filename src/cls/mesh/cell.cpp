@@ -41,10 +41,10 @@ namespace arc
             m_light(t_light),
             m_ccd(t_ccd),
             m_spectrometer(t_spectrometer),
-            m_entity_tri_list(init_entity_list()),
-            m_light_tri_list(init_light_list()),
-            m_ccd_tri_list(init_ccd_list()),
-            m_spectrometer_tri_list(init_spectrometer_list()),
+            m_entity_tri_list(init_entity_tri_list()),
+            m_light_tri_list(init_light_tri_list()),
+            m_ccd_tri_list(init_ccd_tri_list()),
+            m_spectrometer_tri_list(init_spectrometer_tri_list()),
             m_empty(m_entity_tri_list.empty() && m_light_tri_list.empty() && m_ccd_tri_list.empty() && m_spectrometer_tri_list
                 .empty())
         {
