@@ -58,7 +58,7 @@ namespace arc
          *
          *  @param  t_cell  Cell to be moved.
          */
-        Cell::Cell(Cell&& t_cell) :
+        Cell::Cell(Cell&& t_cell) noexcept :
             m_min_bound(std::move(t_cell.m_min_bound)),
             m_max_bound(std::move(t_cell.m_max_bound)),
             m_entity(std::move(t_cell.m_entity)),
