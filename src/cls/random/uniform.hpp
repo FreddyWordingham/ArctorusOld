@@ -46,7 +46,7 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Mutex --
-            const std::mutex m_mutex;   //! Protects the gen_base method.
+            std::mutex m_mutex; //! Protects the gen_base method.
 
             //  -- Seed --
             const base m_seed;  //! Seed used to initialise the generator.
