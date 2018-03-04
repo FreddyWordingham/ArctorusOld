@@ -452,6 +452,9 @@ namespace arc
                 // Loop until exit condition is met.
                 while (true)
                 {
+                    // Increment loop counter.
+                    ++loops;
+
                     // Kill if photon is stuck.
                     if (loops > 1e3)
                     {
