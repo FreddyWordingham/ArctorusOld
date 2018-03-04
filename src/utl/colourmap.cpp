@@ -48,7 +48,7 @@ namespace arc
                 assert((t_x >= 0.0) && (t_x <= 1.0));
 
                 // Calculate the red component.
-                double red = 0.0;
+                double red;
                 if (t_x < 0.0)
                 {
                     red = 127.0 / 255.0;
@@ -71,7 +71,7 @@ namespace arc
                 }
 
                 // Calculate the green component.
-                double green = 0.0;
+                double green;
                 if (t_x <= 1.0 / 9.0)
                 {
                     green = 0.0;
@@ -94,7 +94,7 @@ namespace arc
                 }
 
                 // Calculate the blue component.
-                double blue = 0.0;
+                double blue;
                 if (t_x <= 3.0 / 9.0)
                 {
                     blue = 1.0;
