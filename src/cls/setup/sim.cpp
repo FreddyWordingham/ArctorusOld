@@ -507,7 +507,6 @@ namespace arc
                         // Scattering event.
                         case event::SCATTER:
                         {
-
                             // Move to the scattering point.
                             phot.move(dist);
 
@@ -644,7 +643,6 @@ namespace arc
                             // Ccd detector hit.
                         case event::CCD_HIT:
                         {
-
                             // Move to the hit location.
                             phot.move(dist);
 
