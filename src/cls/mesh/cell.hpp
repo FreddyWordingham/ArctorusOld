@@ -61,9 +61,9 @@ namespace arc
             const std::vector<std::array<size_t, 2>> m_spectrometer_tri_list;   //! List of spectrometer triangles inside cell.
 
             //  -- Data --
-            const bool m_empty;         //! True if the cell contains no triangles.
-            std::mutex m_energy_mutex;  //! Protects energy data.
-            double     m_energy = 0.0;  //! Energy within the cell.
+            const bool         m_empty;                 //! True if the cell contains no triangles.
+            mutable std::mutex m_energy_mutex;  //! Protects energy data.
+            double             m_energy = 0.0;          //! Energy within the cell.
 
 
             //  == INSTANTIATION ==
@@ -72,6 +72,7 @@ namespace arc
             Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::vector<equip::Entity>& t_entity,
                  const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd,
                  const std::vector<detector::Spectrometer>& t_spectrometer);
+            Cell(const Cell&& t_cell);
 
           private:
             //  -- Initialisation --
