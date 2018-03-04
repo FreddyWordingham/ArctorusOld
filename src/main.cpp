@@ -84,16 +84,10 @@ int main(const int t_argc, const char** t_argv)
     }
     LOG("Number of threads: " << num_threads);
 
-    // Calculate number of photons per thread.
+
+
     const unsigned long int num_phot_per_thread = num_phot / num_threads;
-
-    // Set of the lead thread.
-    threads.push_back(std::thread(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread + (num_phot % num_threads)));
-    const std::thread::id lead_thread_id = threads[0].get_id();
-    pdt.set_lead_thread_id(lead_thread_id);
-
-    // Set off the other threads.
-    for (unsigned long int i = 1; i < num_threads; ++i)
+    for (unsigned long int  i                   = 0; i < num_threads; ++i)
     {
         threads.push_back(std::thread(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread));
     }

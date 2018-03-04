@@ -78,9 +78,6 @@ namespace arc
             //  -- Tools --
             const random::Index m_light_select; //! Light selector.
 
-            //  -- Threads --
-            std::thread::id m_lead_thread_id;   //! Id of the lead thread.
-
             //  -- Data --
             mesh::Grid m_grid;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
@@ -107,9 +104,6 @@ namespace arc
 
             //  == METHODS ==
           public:
-            //  -- Setters --
-            void set_lead_thread_id(const std::thread::id t_lead_thread_id) { m_lead_thread_id = t_lead_thread_id; }
-
             //  -- Saving --
             void save_grid_images(const std::string& t_output_dir) const;
             void save_ccd_images(const std::string& t_output_dir) const;
