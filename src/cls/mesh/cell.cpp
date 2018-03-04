@@ -384,8 +384,8 @@ namespace arc
             return (r_dist);
         }
 
-        std::tuple<bool, double, size_t, size_t> Cell::dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                                                      const std::vector<equip::Entity>& t_entity) const
+        std::tuple<bool, double, size_t, size_t> Cell::entity_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
+                                                                   const std::vector<equip::Entity>& t_entity) const
         {
             assert(t_dir.is_normalised());
 

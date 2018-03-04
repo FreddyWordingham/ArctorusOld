@@ -472,7 +472,7 @@ namespace arc
                     double entity_dist;
                     size_t entity_index, entity_tri_index;
                     std::tie(entity_hit, entity_dist, entity_index, entity_tri_index) = cell
-                        ->dist_to_entity(phot.get_pos(), phot.get_dir(), m_entity);
+                        ->entity_dist(phot.get_pos(), phot.get_dir(), m_entity);
                     if (!entity_hit)
                     {
                         entity_dist = std::numeric_limits<double>::max();
