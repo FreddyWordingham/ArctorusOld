@@ -42,10 +42,10 @@ namespace arc
             m_ccd(t_ccd),
             m_spectrometer(t_spectrometer),
             m_entity_tri_list(init_entity_list()),
-            m_light_list(init_light_list()),
+            m_light_tri_list(init_light_list()),
             m_ccd_list(init_ccd_list()),
             m_spectrometer_list(init_spectrometer_list()),
-            m_empty(m_entity_tri_list.empty() && m_light_list.empty() && m_ccd_list.empty() && m_spectrometer_list.empty())
+            m_empty(m_entity_tri_list.empty() && m_light_tri_list.empty() && m_ccd_list.empty() && m_spectrometer_list.empty())
         {
             assert(t_max_bound[X] > t_min_bound[X]);
             assert(t_max_bound[Y] > t_min_bound[Y]);
