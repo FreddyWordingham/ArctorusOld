@@ -676,7 +676,9 @@ namespace arc
                             // Check if photon hits the front of the detector.
                             if ((phot.get_dir() * norm) < 0.0)
                             {
+                                m_spectrometer_mutex.lock();
                                 m_spectrometer[equip_index].add_hit(phot.get_weight(), phot.get_wavelength());
+                                m_spectrometer_mutex.unlock();
                             }
 
                             // Kill the absorbed photon.
