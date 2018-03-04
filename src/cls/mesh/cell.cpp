@@ -53,6 +53,27 @@ namespace arc
             assert(t_max_bound[Z] > t_min_bound[Z]);
         }
 
+        /**
+         *  Move construct a cell.
+         *
+         *  @param  t_cell  Cell to be moved.
+         */
+        Cell::Cell(Cell&& t_cell) :
+            m_min_bound(std::move(t_cell.m_min_bound)),
+            m_max_bound(std::move(t_cell.m_max_bound)),
+            m_entity(std::move(t_cell.m_entity)),
+            m_light(std::move(t_cell.m_light)),
+            m_ccd(std::move(t_cell.m_ccd)),
+            m_spectrometer(std::move(t_cell.m_spectrometer)),
+            m_entity_tri_list(std::move(t_cell.m_entity_tri_list)),
+            m_light_tri_list(std::move(t_cell.m_light_tri_list)),
+            m_ccd_tri_list(std::move(t_cell.m_ccd_tri_list)),
+            m_spectrometer_tri_list(std::move(t_cell.m_spectrometer_tri_list)),
+            m_empty(std::move(t_cell.m_empty)),
+            m_energy(std::move(t_cell.m_energy))
+        {
+        }
+
 
         //  -- Initialisation --
         /**
