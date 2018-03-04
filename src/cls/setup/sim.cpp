@@ -14,7 +14,6 @@
 
 //  == INCLUDES ==
 //  -- General --
-#include "gen/optics.hpp"
 
 //  -- Utility --
 #include "utl/file.hpp"
@@ -440,7 +439,11 @@ namespace arc
                 // Loop until exit condition is met.
                 while (m_grid.is_within(phot.get_pos()) && (phot.get_weight() > 0.0))
                 {
-
+                    // Determine event distances.
+                    int    type;                    //! Event type.
+                    double dist;                    //! Distance to the event.
+                    size_t equip_index, tri_index;  //! Indices of hit equipment and triangle if hit at all.
+                    std::tie(type, dist, equip_index, tri_index) = determine_event(phot, cell);
                 }
             }
         }
