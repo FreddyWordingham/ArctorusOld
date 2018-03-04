@@ -425,7 +425,7 @@ namespace arc
                 // Emit a new photon.
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
-                // Check if photon is within the grid and get current cell.
+                // Check if photon is within a grid cell.
                 if (!m_grid.is_within(phot.get_pos()))
                 {
                     WARN("Unable to simulate photon.", "Photon does not begin with the grid.");
@@ -441,12 +441,6 @@ namespace arc
                 // Loop until exit condition is met.
                 while (true)
                 {
-                    // Check if photon has exited the grid.
-                    if (!m_grid.is_within(phot.get_pos()))
-                    {
-                        goto kill_photon;
-                    }
-
                     // Determine event distances.
                     event  event_type;              //! Event type.
                     double dist;                    //! Distance to the event.
@@ -459,6 +453,7 @@ namespace arc
                     // Perform the event.
                     switch (event_type)
                     {
+                        // Scattering event.
                         case event::SCATTER:
                             // Move to the scattering point.
                             phot.move(dist);
@@ -469,10 +464,34 @@ namespace arc
                             // Reduce weight by the albedo.
                             phot.multiply_weight(phot.get_albedo());
 
-                            break;
-                        case event::CELL_CROSS:
+                            // Check that the photon still has statistical weight.
+                            if (phot.get_weight() <= 0.0)
+                            {
+                                goto kill_photon;
+                            }
 
                             break;
+
+                            // Cell boundary crossing.
+                        case event::CELL_CROSS:
+                            // Increment cell-tracked properties.
+                            cell->add_energy(cell_energy);
+                            cell_energy = 0.0;
+
+                            // Move just past the cell boundary point.
+                            phot.move(dist + SMOOTHING_LENGTH);
+
+                            // Check if photon has now exited the grid.
+                            if (!m_grid.is_within(phot.get_pos()))
+                            {
+                                goto kill_photon;
+                            }
+
+                            // Get new cell pointer if still within the grid.
+                            cell = &m_grid.get_cell(phot.get_pos());
+
+                            break;
+
                         case event::ENTITY_HIT:
 
                             break;
