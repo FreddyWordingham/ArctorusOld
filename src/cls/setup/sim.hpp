@@ -78,6 +78,9 @@ namespace arc
             //  -- Tools --
             const random::Index m_light_select; //! Light selector.
 
+            //  -- Threads --
+            std::vector<double> m_thread_progress;  //! Current progress of each thread.
+
             //  -- Data --
             mesh::Grid m_grid;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
