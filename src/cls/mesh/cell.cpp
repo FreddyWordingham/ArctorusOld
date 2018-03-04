@@ -44,9 +44,9 @@ namespace arc
             m_entity_tri_list(init_entity_list()),
             m_light_tri_list(init_light_list()),
             m_ccd_tri_list(init_ccd_list()),
-            m_spectrometer_list(init_spectrometer_list()),
-            m_empty(
-                m_entity_tri_list.empty() && m_light_tri_list.empty() && m_ccd_tri_list.empty() && m_spectrometer_list.empty())
+            m_spectrometer_tri_list(init_spectrometer_list()),
+            m_empty(m_entity_tri_list.empty() && m_light_tri_list.empty() && m_ccd_tri_list.empty() && m_spectrometer_tri_list
+                .empty())
         {
             assert(t_max_bound[X] > t_min_bound[X]);
             assert(t_max_bound[Y] > t_min_bound[Y]);
@@ -521,14 +521,14 @@ namespace arc
             size_t       r_index;
             double       r_dist = std::numeric_limits<double>::max();
             math::Vec<3> r_norm;
-            for (size_t  i      = 0; i < m_spectrometer_list.size(); ++i)
+            for (size_t  i      = 0; i < m_spectrometer_tri_list.size(); ++i)
             {
                 // Get distance to intersection.
                 bool   intersect;
                 double tri_dist;
-                std::tie(intersect, tri_dist) = t_spectrometer[m_spectrometer_list[i][0]].get_mesh()
-                                                                                         .get_tri(m_spectrometer_list[i][1])
-                                                                                         .intersection_dist(t_pos, t_dir);
+                std::tie(intersect, tri_dist) = t_spectrometer[m_spectrometer_tri_list[i][0]].get_mesh().get_tri(
+                                                                                                 m_spectrometer_tri_list[i][1])
+                                                                                             .intersection_dist(t_pos, t_dir);
 
                 // If an intersection does occur with the triangle, test if it is the closest so far.
                 if (intersect)
@@ -538,10 +538,11 @@ namespace arc
                     // If this distance is the closest so far, accept it.
                     if (tri_dist < r_dist)
                     {
-                        r_index = m_spectrometer_list[i][0];
+                        r_index = m_spectrometer_tri_list[i][0];
                         r_dist  = tri_dist;
-                        r_norm  = t_spectrometer[m_spectrometer_list[i][0]].get_mesh().get_tri(m_spectrometer_list[i][1])
-                                                                           .get_norm(t_pos + (t_dir * r_dist));
+                        r_norm  = t_spectrometer[m_spectrometer_tri_list[i][0]].get_mesh()
+                                                                               .get_tri(m_spectrometer_tri_list[i][1])
+                                                                               .get_norm(t_pos + (t_dir * r_dist));
                     }
                 }
             }
