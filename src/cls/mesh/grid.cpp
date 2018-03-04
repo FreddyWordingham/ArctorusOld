@@ -93,13 +93,14 @@ namespace arc
                 for (size_t j = 0; j < m_num_cells[Y]; ++j)
                 {
                     r_cell[i].emplace_back(std::vector<Cell>());
+                    r_cell[i][j].reserve(m_num_cells[Z]);
                     for (size_t k = 0; k < m_num_cells[Z]; ++k)
                     {
-                        r_cell[i][j].emplace_back(
+                        r_cell[i][j].emplace_back(Cell(
                             math::Vec<3>(m_min_bound[X] + (i * cell_size[X]), m_min_bound[Y] + (j * cell_size[Y]),
                                          m_min_bound[Z] + (k * cell_size[Z])),
                             math::Vec<3>(m_min_bound[X] + ((i + 1) * cell_size[X]), m_min_bound[Y] + ((j + 1) * cell_size[Y]),
-                                         m_min_bound[Z] + ((k + 1) * cell_size[Z])), t_entity, t_light, t_ccd, t_spectrometer);
+                                         m_min_bound[Z] + ((k + 1) * cell_size[Z])), t_entity, t_light, t_ccd, t_spectrometer));
 
                         // Report grid construction.
                         TEMP("Constructing grid", 100.0 * (constructed_cells / total_cells));
