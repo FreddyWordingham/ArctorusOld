@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <thread>
 #include <mutex>
 
 //  -- Classes --
@@ -76,6 +77,9 @@ namespace arc
 
             //  -- Tools --
             const random::Index m_light_select; //! Light selector.
+
+            //  -- Threads --
+            std::thread::id m_lead_thread_id;   //! Id of the lead thread.
 
             //  -- Data --
             mesh::Grid m_grid;  //! Simulation grid.
