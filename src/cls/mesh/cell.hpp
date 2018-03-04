@@ -16,7 +16,6 @@
 //  == INCLUDES ==
 //  -- System --
 #include <array>
-#include <mutex>
 #include <vector>
 
 //  -- Classes --
