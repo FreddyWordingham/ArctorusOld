@@ -411,7 +411,7 @@ namespace arc
         }
 
 
-        //  -- Running --
+        //  -- Simulation --
         /**
          *  Run a number of photons through the simulation.
          *
@@ -446,6 +446,11 @@ namespace arc
                     std::tie(type, dist, equip_index, tri_index) = determine_event(phot, cell);
                 }
             }
+        }
+
+        std::tuple<int, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot, const mesh::Cell* t_cell) const
+        {
+
         }
 
 

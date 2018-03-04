@@ -61,7 +61,7 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
-            mesh::Grid                                         m_grid;  //! Simulation grid.
+            mesh::Grid m_grid;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
             std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
 #endif
@@ -93,8 +93,12 @@ namespace arc
             //  -- Rendering --
             void render() const;
 
-            //  -- Running --
+            //  -- Simulation --
             void run_photons(unsigned long int t_num_phot);
+
+          private:
+            //  -- Simulation --
+            std::tuple<int, double, size_t, size_t> determine_event(const phys::Photon& t_phot, const mesh::Cell* t_cell) const;
         };
 
 
