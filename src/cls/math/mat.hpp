@@ -831,7 +831,7 @@ namespace arc
          *  @return Matrix of minors for the given matrix.
          */
         template <size_t N>
-        constexpr double mat_minor(const Mat<N, N>& t_mat)
+        constexpr Mat<N, N> mat_minor(const Mat<N, N>& t_mat)
         {
             static_assert(N > 2);
 
