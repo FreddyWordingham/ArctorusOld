@@ -775,7 +775,7 @@ namespace arc
             std::stringstream progress("Progress: ");
             for (size_t       i = 0; i < m_thread_progress.size(); ++i)
             {
-                progress << std::setw(8) << m_thread_progress[i] << " ";
+                progress << std::setw(8) << m_thread_progress[i];
             }
             LOG(progress.str());
         }
