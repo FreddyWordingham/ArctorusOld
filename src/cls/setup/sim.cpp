@@ -294,9 +294,9 @@ namespace arc
                 const std::string mesh_path = json_spectrometer.parse_child<std::string>("mesh");
 
                 // Construct the spectrometer object an add it to the vector of spectrometers.
-                r_spectrometer.emplace_back(
-                    detector::Spectrometer(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), min,
-                                           max, bins));
+                r_spectrometer
+                    .emplace_back(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), min, max,
+                                  bins);
             }
 
             return (r_spectrometer);
