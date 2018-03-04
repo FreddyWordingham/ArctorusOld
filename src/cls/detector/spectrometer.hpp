@@ -45,7 +45,7 @@ namespace arc
             const geom::Mesh  m_mesh;   //! Mesh describing the surface of the detector.
 
             //  -- Data --
-//            std::mutex      m_data_mutex;   //! Protects data.
+            std::mutex      m_data_mutex;   //! Protects data.
             data::Histogram m_data;         //! Wavelength data.
 
 

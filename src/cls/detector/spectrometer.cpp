@@ -83,9 +83,9 @@ namespace arc
             }
 
             // Bin the value.
-//            m_data_mutex.lock();
+            m_data_mutex.lock();
             m_data.bin_value(t_wavelength, t_weight);
-//            m_data_mutex.unlock();
+            m_data_mutex.unlock();
         }
 
 
