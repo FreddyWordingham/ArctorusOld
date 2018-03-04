@@ -78,18 +78,19 @@ namespace arc
             //  -- Tools --
             const random::Index m_light_select; //! Light selector.
 
-            //  -- Threads --
-            std::mutex          m_ccd_mutex;            //! Protects the ccd objects.
-            std::mutex          m_spectrometer_mutex;   //! Protects the spectrometer objects.
-            std::vector<double> m_thread_progress;      //! Current progress of each thread.
-            const double        m_log_update_period;    //! Period with which to update a progress print.
-
             //  -- Data --
             mesh::Grid m_grid;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
             std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
             std::mutex                                         m_path_mutex;                                    //! Protects path data.
 #endif
+
+
+            //  -- Threads --
+            std::mutex          m_ccd_mutex;            //! Protects the ccd objects.
+            std::mutex          m_spectrometer_mutex;   //! Protects the spectrometer objects.
+            std::vector<double> m_thread_progress;      //! Current progress of each thread.
+            const double        m_log_update_period;    //! Period with which to update a progress print.
 
 
             //  == INSTANTIATION ==
