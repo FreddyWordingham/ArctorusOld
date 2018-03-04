@@ -93,7 +93,7 @@ int main(const int t_argc, const char** t_argv)
     }
 
     // Wait for each thread to finish.
-    for (size_t             i                   = 0; i < threads.size(); i++)
+    for (size_t i = 0; i < threads.size(); i++)
     {
         threads[i].join();
     }

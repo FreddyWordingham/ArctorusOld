@@ -54,7 +54,7 @@ namespace arc
             std::stack<int> m_entity_index; //! A record of the entity index which the photon is currently inside of.
 
             //  -- Data --
-            double                                m_time;   //! Emission time plus current age of the particle.
+            double m_time;   //! Emission time plus current age of the particle.
 #ifdef ENABLE_PHOTON_PATHS
             std::vector<graphical::point::Photon> m_path;   //! Path data of the photon.
 #endif

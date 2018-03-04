@@ -82,7 +82,8 @@ namespace arc
             const math::Vec<3> beta  = m_mesh.get_tri(1).get_pos(2);
             const math::Vec<3> gamma = m_mesh.get_tri(1).get_pos(0);
 
-            const double theta = std::acos(((t_pos - alpha) * (gamma - alpha)) / ((t_pos - alpha).magnitude() * (gamma - alpha).magnitude()));
+            const double theta = std::acos(
+                ((t_pos - alpha) * (gamma - alpha)) / ((t_pos - alpha).magnitude() * (gamma - alpha).magnitude()));
 
             assert(theta <= (M_PI / 2.0));
 

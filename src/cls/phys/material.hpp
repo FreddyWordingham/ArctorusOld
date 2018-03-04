@@ -76,8 +76,7 @@ namespace arc
             //  -- Initialisation --
             interpolator::Linear init_albedo(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_coef,
                                              const std::vector<double>& t_scat_coef) const;
-            interpolator::Linear init_interation(const std::vector<double>& t_wavelength,
-                                                 const std::vector<double>& t_abs_coef,
+            interpolator::Linear init_interation(const std::vector<double>& t_wavelength, const std::vector<double>& t_abs_coef,
                                                  const std::vector<double>& t_scat_coef) const;
 
 
