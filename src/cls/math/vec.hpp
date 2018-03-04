@@ -26,8 +26,8 @@
 #include "utl/array.hpp"
 
 //  -- Classes --
-#include "cls/math/mat.hpp"
 #include "cls/data/json.hpp"
+#include "cls/math/mat.hpp"
 
 
 
