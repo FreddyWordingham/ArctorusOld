@@ -152,8 +152,9 @@ namespace arc
             const std::string m_padding_string; //! Padding string.
 
             //  -- Counters --
-            int m_num_warnings; //! Count of the total number of reported warnings.
-            int m_num_errors;   //! Count of the total number of reported errors.
+            std::mutex m_counter_mutex; //! Protects counters.
+            int        m_num_warnings; //! Count of the total number of reported warnings.
+            int        m_num_errors;   //! Count of the total number of reported errors.
 
 
             //  == INSTANTIATION ==
