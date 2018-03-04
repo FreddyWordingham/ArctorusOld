@@ -517,11 +517,24 @@ namespace arc
                             // Kill the absorbed photon.
                             goto kill_photon;
 
-                            break;
-
+                            // Spectrometer detector hit.
                         case event::SPECTROMETER_HIT:
 
-                            break;
+                            // Move to the hit location.
+                            phot.move(dist);
+
+                            // Get normal of the hit location.
+                            const math::Vec<3> norm = m_spectrometer[equip_index].get_mesh().get_tri(tri_index)
+                                                                                 .get_norm(phot.get_pos());
+
+                            // Check if photon hits the front of the detector.
+                            if ((phot.get_dir() * norm) < 0.0)
+                            {
+                                m_spectrometer[equip_index].add_hit(phot.get_weight(), phot.get_wavelength());
+                            }
+
+                            // Kill the absorbed photon.
+                            goto kill_photon;
                     }
 
                     phot.move(dist);
