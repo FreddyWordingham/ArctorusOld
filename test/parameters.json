@@ -1,7 +1,7 @@
 {
     "log_update_period": 10.0,
     "max_threads":       8,
-    "output_dir_name":   "intralipid_001-0",
+    "output_dir_name":   "test",
     "seed":              77,
     "roulette":          {
         "weight":   1e-3,
