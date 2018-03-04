@@ -37,6 +37,7 @@ namespace arc
                    const std::vector<detector::Spectrometer>& t_spectrometer) :
             m_min_bound(t_min_bound),
             m_max_bound(t_max_bound),
+            m_entity(t_entity),
             m_entity_list(init_entity_list(t_entity)),
             m_light_list(init_light_list(t_light)),
             m_ccd_list(init_ccd_list(t_ccd)),
