@@ -764,7 +764,7 @@ namespace arc
          *  Log the progress of all threads.
          *  Only print if more time than m_log_update_period stipulates.
          */
-        void Sim::log_progress()
+        void Sim::log_progress() const
         {
             // Return if minimum update time has not yet passed.
             static std::chrono::steady_clock::time_point last_update;
