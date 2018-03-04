@@ -1,5 +1,5 @@
 {
-    "log_update_period": 2.0,
+    "log_update_period": 10.0,
     "max_threads":       8,
     "output_dir_name":   "intralipid_001-0",
     "seed":              77,
