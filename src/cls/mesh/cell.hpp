@@ -48,9 +48,10 @@ namespace arc
             const math::Vec<3> m_max_bound; //! Maximum bound of the cell.
 
             //  -- Equipment References --
-            const std::vector<equip::Entity>& m_entity; //! Reference to the vector of entities within the simulation.
-            const std::vector<equip::Light> & m_light;  //! Reference to the vector of lights within the simulation.
-            const std::vector<equip::Light> & m_ccd;    //! Reference to the vector of ccds within the simulation.
+            const std::vector<equip::Entity>& m_entity;         //! Reference to the vector of entities within the sim.
+            const std::vector<equip::Light> & m_light;          //! Reference to the vector of lights within the sim.
+            const std::vector<equip::Light> & m_ccd;            //! Reference to the vector of ccds within the sim.
+            const std::vector<equip::Light> & m_spectrometer;   //! Reference to the vector of spectrometers within the sim.
 
             //  -- Lists --
             const std::vector<std::array<size_t, 2>> m_entity_list;         //! List of entity triangles with the cell.
