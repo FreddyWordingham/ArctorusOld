@@ -793,10 +793,11 @@ namespace arc
             last_update         = cur_time;
 
             // Log the progress of all loops.
-            std::stringstream progress("Progress: ");
+            std::stringstream progress;
+            static const int  print_width = static_cast<int>(term::TEXT_WIDTH) / m_thread_progress.size();
             for (size_t       i = 0; i < m_thread_progress.size(); ++i)
             {
-                progress << std::setw(7) << m_thread_progress[i] << " ";
+                progress << std::setw(print_width - 2) << m_thread_progress[i] << "% ";
             }
 
             // Print the progress string.
