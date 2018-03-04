@@ -483,6 +483,10 @@ namespace arc
          *  @param  t_phot  Photon whose event will be determined.
          *  @param  t_cell  Cell the photon is currently within.
          *
+         *  @post   Return distance must be greater than the smoothing length.
+         *  @post   Equipment index must not be a NaN if not a scattering or cell crossing event.
+         *  @post   Equipment triangle index must not be a NaN if not a scattering or cell crossing event.
+         *
          *  @return A tuple containing, the type of event, distance to event, indices of equipment and triangle involved.
          */
         std::tuple<Sim::event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
@@ -532,13 +536,19 @@ namespace arc
                                                                       std::numeric_limits<size_t>::signaling_NaN()));
                 case 2:
                     assert(entity_dist > SMOOTHING_LENGTH);
+                    assert(!std::isnan(entity_index));
+                    assert(!std::isnan(entity_tri_index));
                     return (std::tuple<event, double, size_t, size_t>(event::ENTITY_HIT, entity_dist, entity_index,
                                                                       entity_tri_index));
                 case 3:
                     assert(ccd_dist > SMOOTHING_LENGTH);
+                    assert(!std::isnan(ccd_index));
+                    assert(!std::isnan(ccd_tri_index));
                     return (std::tuple<event, double, size_t, size_t>(event::CCD_HIT, ccd_dist, ccd_index, ccd_tri_index));
                 case 4:
                     assert(spectrometer_dist > SMOOTHING_LENGTH);
+                    assert(!std::isnan(spectrometer_index));
+                    assert(!std::isnan(spectrometer_tri_index));
                     return (std::tuple<event, double, size_t, size_t>(event::SPECTROMETER_HIT, spectrometer_dist,
                                                                       spectrometer_index, spectrometer_tri_index));
                 default: ERROR("Unable to simulate photon.", "Code should be unreachable.");
