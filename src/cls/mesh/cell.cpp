@@ -434,59 +434,6 @@ namespace arc
         }
 
         /**
-         *  Determine the distance along the given ray to the nearest entity triangle.
-         *  Also return the index of the entity, as well as the normal of the entity triangle.
-         *
-         *  @param  t_pos       Initial position of the ray.
-         *  @param  t_dir       Direction of the ray.
-         *  @param  t_entity    Vector of entities within the simulation.
-         *
-         *  @return A tuple containing the entity index, distance to the entity triangle and the normal at the intersection.
-         */
-        std::tuple<size_t, double, math::Vec<3>> Cell::get_dist_to_entity(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir,
-                                                                          const std::vector<equip::Entity>& t_entity) const
-        {
-            assert(t_dir.is_normalised());
-
-            // If cell contains no triangles, return a large dummy value.
-            if (m_empty)
-            {
-                return (std::tuple<size_t, double, math::Vec<3>>(0, std::numeric_limits<double>::max(),
-                                                                 math::Vec<3>(0.0, 0.0, 0.0)));
-            }
-
-            // Run through all entity triangles and determine the closest intersection distance.
-            size_t       r_index;
-            double       r_dist = std::numeric_limits<double>::max();
-            math::Vec<3> r_norm;
-            for (size_t  i      = 0; i < m_entity_list.size(); ++i)
-            {
-                // Get distance to intersection.
-                bool   intersect;
-                double tri_dist;
-                std::tie(intersect, tri_dist) = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
-                                                                             .intersection_dist(t_pos, t_dir);
-
-                // If an intersection does occur with the triangle, test if it is the closest so far.
-                if (intersect)
-                {
-                    assert(r_dist >= 0.0);
-
-                    // If this distance is the closest so far, accept it.
-                    if (tri_dist < r_dist)
-                    {
-                        r_index = m_entity_list[i][0];
-                        r_dist  = tri_dist;
-                        r_norm  = t_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1])
-                                                               .get_norm(t_pos + (t_dir * r_dist));
-                    }
-                }
-            }
-
-            return (std::tuple<size_t, double, math::Vec<3>>(r_index, r_dist, r_norm));
-        }
-
-        /**
          *  Determine the distance along the given ray to the nearest ccd triangle.
          *  Also return the index of the ccd, as well as the normal of the ccd triangle.
          *
