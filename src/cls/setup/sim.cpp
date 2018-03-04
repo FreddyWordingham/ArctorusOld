@@ -452,6 +452,12 @@ namespace arc
                 // Loop until exit condition is met.
                 while (true)
                 {
+                    // Kill if photon is stuck.
+                    if (loops > 1e3)
+                    {
+                        goto kill_photon;
+                    }
+
                     // Determine event distances.
                     event  event_type;              //! Event type.
                     double dist;                    //! Distance to the event.
