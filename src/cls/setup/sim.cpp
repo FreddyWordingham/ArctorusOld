@@ -762,7 +762,10 @@ namespace arc
 
         void Sim::log_progress()
         {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wexit-time-destructors"
             static std::mutex s_progress_mutex;
+#pragma clang diagnostic pop
 
             s_progress_mutex.lock();
 
