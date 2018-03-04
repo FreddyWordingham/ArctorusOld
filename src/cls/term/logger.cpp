@@ -338,12 +338,14 @@ namespace arc
             timestamp.resize(TIME_WIDTH, ' ');
 
             // Print the lines.
+            m_stream_mutex.lock();
             m_stream << timestamp << m_text_col[t_col] << m_log_type[t_type] << lines[0];
             for (size_t i = 1; i < lines.size(); ++i)
             {
                 m_stream << "\n" << m_padding_string << lines[i];
             }
             m_stream << m_text_col[RESET] << "\n";
+            m_stream_mutex.unlock();
         }
 
 
