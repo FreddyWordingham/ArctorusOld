@@ -79,8 +79,8 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Threads --
-            std::vector<double> m_thread_progress;  //! Current progress of each thread.
-
+            std::vector<double> m_thread_progress;      //! Current progress of each thread.
+            const double        m_log_update_period;    //! Period with which to update a progress print.
 
             //  -- Data --
             mesh::Grid m_grid;  //! Simulation grid.
