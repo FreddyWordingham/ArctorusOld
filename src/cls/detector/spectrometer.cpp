@@ -46,18 +46,6 @@ namespace arc
             assert(t_num_bins > 0);
         }
 
-        /**
-         *  Move construct a ccd object.
-         *
-         *  @param  t_spectrometer  Spectrometer to be moved.
-         */
-        Spectrometer::Spectrometer(Spectrometer&& t_spectrometer) noexcept :
-            m_name(std::move(t_spectrometer.m_name)),
-            m_mesh(std::move(t_spectrometer.m_mesh)),
-            m_data(std::move(t_spectrometer.m_data))
-        {
-        }
-
 
 
         //  == METHODS ==
