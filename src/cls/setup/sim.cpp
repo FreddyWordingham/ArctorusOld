@@ -507,7 +507,7 @@ namespace arc
                             // Check for close-collision.
                             if (dist < SMOOTHING_LENGTH)
                             {
-                                WARN("Unable to simulate photon.", "Distance to entity is smaller than the smoothing length.");
+                                //WARN("Unable to simulate photon.", "Distance to entity is smaller than the smoothing length.");
                                 goto kill_photon;
                             }
 
