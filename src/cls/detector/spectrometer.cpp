@@ -46,6 +46,14 @@ namespace arc
             assert(t_num_bins > 0);
         }
 
+        /**
+         *  Move construct a ccd object.
+         *
+         *  @param  t_ccd   Ccd to be moved.
+         */
+        Spectrometer(Spectrometer
+        && t_spectrometer) noexcept;
+
 
 
         //  == METHODS ==
