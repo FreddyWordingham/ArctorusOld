@@ -695,7 +695,7 @@ namespace arc
          *  @return A tuple containing, the type of event, distance to event, indices of equipment and triangle involved.
          */
         std::tuple<Sim::event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
-                                                                            const mesh::Cell* t_cell)
+                                                                            const mesh::Cell* t_cell) const
         {
             // Determine scatter distance.
             const double scat_dist = -std::log(rng::random()) / t_phot.get_interaction();
@@ -756,10 +756,7 @@ namespace arc
                     assert(!std::isnan(spectrometer_tri_index));
                     return (std::tuple<event, double, size_t, size_t>(event::SPECTROMETER_HIT, spectrometer_dist,
                                                                       spectrometer_index, spectrometer_tri_index));
-                default:
-                    m_log_mutex.lock();
-                    ERROR("Unable to simulate photon.", "Code should be unreachable.");
-                    m_log_mutex.unlock();
+                default: ERROR("Unable to simulate photon.", "Code should be unreachable.");
             }
         }
 
@@ -786,9 +783,7 @@ namespace arc
             }
 
             // Print the progress string.
-            m_log_mutex.lock();
             LOG(progress.str());
-            m_log_mutex.unlock();
         }
 
 

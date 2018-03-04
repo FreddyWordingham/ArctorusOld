@@ -79,7 +79,6 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Threads --
-            std::mutex          m_log_mutex;            //! Protects logging.
             std::vector<double> m_thread_progress;      //! Current progress of each thread.
             const double        m_log_update_period;    //! Period with which to update a progress print.
 
