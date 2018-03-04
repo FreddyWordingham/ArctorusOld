@@ -433,8 +433,9 @@ namespace arc
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
                 // Initialise tracked properties.
-                mesh::Cell* cell = nullptr;
-                double cell_energy = 0.0;   //! Energy to be added to cell total when exiting current cell.
+                mesh::Cell* cell = nullptr;             //! Pointer to current cell containing the photon.
+                double            cell_energy = 0.0;    //! Energy to be added to cell total when exiting current cell.
+                unsigned long int loops       = 0;      //! Number of loops made of the while loop.
 
                 // Check if photon is within a grid cell.
                 if (!m_grid.is_within(phot.get_pos()))
