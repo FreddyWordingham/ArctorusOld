@@ -149,7 +149,7 @@ namespace arc
                     pos = t_trans_mat * pos;
 
                     // Add the three-dimensional position to the vertex position list.
-                    vert_pos.push_back(math::Vec<3>(pos[X], pos[Y], pos[Z]));
+                    vert_pos.emplace_back(pos[X], pos[Y], pos[Z]);
                 }
                 else if (word == NORM_KEYWORD)
                 {
@@ -162,7 +162,7 @@ namespace arc
                     norm = trans_inv_mat * norm;
 
                     // Add the three-dimensional normal to the vertex normal list.
-                    vert_norm.push_back(math::normalise(math::Vec<3>(norm[X], norm[Y], norm[Z])));
+                    vert_norm.emplace_back(math::normalise(math::Vec<3>(norm[X], norm[Y], norm[Z])));
                 }
 
                 if (line_stream.fail())
