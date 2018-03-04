@@ -137,11 +137,9 @@ namespace arc
 
             //  == FIELDS ==
           private:
-            //  -- Mutex --
-            const std::mutex m_mutex;   //! Protects writes to cout.
-
             //  -- Output Stream --
-            std::ostream& m_stream; //! Output stream to write to.
+            const std::mutex m_mutex_stream;    //! Protects writes to the stream.
+            std::ostream& m_stream;             //! Output stream to write to.
 
             //  -- Colouring --
             const std::array<std::string, TOTAL_COLS> m_text_col;   //! Array of colour escape strings.
