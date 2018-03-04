@@ -47,8 +47,9 @@ namespace arc
             const math::Vec<3> m_min_bound; //! Minimum bound of the cell.
             const math::Vec<3> m_max_bound; //! Maximum bound of the cell.
 
-            //  -- Objects --
+            //  -- Equipment References --
             const std::vector<equip::Entity>& m_entity; //! Reference to the vector of entities within the simulation.
+            const std::vector<equip::Light> & m_light;   //! Reference to the vector of lights within the simulation.
 
             //  -- Lists --
             const std::vector<std::array<size_t, 2>> m_entity_list;         //! List of entity triangles with the cell.
