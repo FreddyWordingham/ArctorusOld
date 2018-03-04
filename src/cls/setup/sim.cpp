@@ -459,6 +459,7 @@ namespace arc
                     {
                         // Scattering event.
                         case event::SCATTER:
+                        {
 
                             // Move to the scattering point.
                             phot.move(dist);
@@ -476,10 +477,11 @@ namespace arc
                             }
 
                             break;
+                        }
 
                             // Cell boundary crossing.
                         case event::CELL_CROSS:
-
+                        {
                             // Increment cell-tracked properties.
                             cell->add_energy(cell_energy);
                             cell_energy = 0.0;
@@ -497,10 +499,11 @@ namespace arc
                             cell = &m_grid.get_cell(phot.get_pos());
 
                             break;
+                        }
 
                             // Entity collision.
                         case event::ENTITY_HIT:
-
+                        {
                             // Get the normal of the hit location.
                             math::Vec<3> norm = m_entity[equip_index].get_mesh().get_tri(tri_index)
                                                                      .get_norm(phot.get_pos() + (phot.get_dir() * dist));
@@ -582,9 +585,11 @@ namespace arc
                             }
 
                             break;
+                        }
 
                             // Ccd detector hit.
                         case event::CCD_HIT:
+                        {
 
                             // Move to the hit location.
                             phot.move(dist);
@@ -600,10 +605,11 @@ namespace arc
 
                             // Kill the absorbed photon.
                             goto kill_photon;
+                        }
 
                             // Spectrometer detector hit.
                         case event::SPECTROMETER_HIT:
-
+                        {
                             // Move to the hit location.
                             phot.move(dist);
 
@@ -619,6 +625,7 @@ namespace arc
 
                             // Kill the absorbed photon.
                             goto kill_photon;
+                        }
                     }
                 }
 
@@ -638,7 +645,7 @@ namespace arc
          *  @param  t_phot  Photon whose event will be determined.
          *  @param  t_cell  Cell the photon is currently within.
          *
-         *  @post   Return distance must be greater than the smoothing length.
+         *  @post   Return distance must be positive.
          *  @post   Equipment index must not be a NaN if not a scattering or cell crossing event.
          *  @post   Equipment triangle index must not be a NaN if not a scattering or cell crossing event.
          *
@@ -680,28 +687,28 @@ namespace arc
             switch (std::distance(std::begin(dist), std::min_element(std::begin(dist), std::end(dist))))
             {
                 case 0:
-                    assert(scat_dist > SMOOTHING_LENGTH);
+                    assert(scat_dist > 0.0);
                     return (std::tuple<event, double, size_t, size_t>(event::SCATTER, scat_dist,
                                                                       std::numeric_limits<size_t>::signaling_NaN(),
                                                                       std::numeric_limits<size_t>::signaling_NaN()));
                 case 1:
-                    assert(cell_dist > SMOOTHING_LENGTH);
+                    assert(cell_dist > 0.0);
                     return (std::tuple<event, double, size_t, size_t>(event::CELL_CROSS, cell_dist,
                                                                       std::numeric_limits<size_t>::signaling_NaN(),
                                                                       std::numeric_limits<size_t>::signaling_NaN()));
                 case 2:
-                    assert(entity_dist > SMOOTHING_LENGTH);
+                    assert(entity_dist > 0.0);
                     assert(!std::isnan(entity_index));
                     assert(!std::isnan(entity_tri_index));
                     return (std::tuple<event, double, size_t, size_t>(event::ENTITY_HIT, entity_dist, entity_index,
                                                                       entity_tri_index));
                 case 3:
-                    assert(ccd_dist > SMOOTHING_LENGTH);
+                    assert(ccd_dist > 0.0);
                     assert(!std::isnan(ccd_index));
                     assert(!std::isnan(ccd_tri_index));
                     return (std::tuple<event, double, size_t, size_t>(event::CCD_HIT, ccd_dist, ccd_index, ccd_tri_index));
                 case 4:
-                    assert(spectrometer_dist > SMOOTHING_LENGTH);
+                    assert(spectrometer_dist > 0.0);
                     assert(!std::isnan(spectrometer_index));
                     assert(!std::isnan(spectrometer_tri_index));
                     return (std::tuple<event, double, size_t, size_t>(event::SPECTROMETER_HIT, spectrometer_dist,
