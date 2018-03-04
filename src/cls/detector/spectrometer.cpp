@@ -52,9 +52,9 @@ namespace arc
          *  @param  t_spectrometer  Spectrometer to be moved.
          */
         Spectrometer::Spectrometer(Spectrometer&& t_spectrometer) noexcept :
-            m_name(std::move(m_name)),
-            m_mesh(std::move(m_mesh)),
-            m_data(std::move(m_data))
+            m_name(std::move(t_spectrometer.m_name)),
+            m_mesh(std::move(t_spectrometer.m_mesh)),
+            m_data(std::move(t_spectrometer.m_data))
         {
         }
 
