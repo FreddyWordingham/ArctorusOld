@@ -14,6 +14,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <mutex>
+
 //  -- Classes --
 #include "cls/data/histogram.hpp"
 #include "cls/geom/mesh.hpp"
@@ -42,7 +45,8 @@ namespace arc
             const geom::Mesh  m_mesh;   //! Mesh describing the surface of the detector.
 
             //  -- Data --
-            data::Histogram m_data; //! Wavelength data.
+            std::mutex      m_data_mutex;   //! Protects data.
+            data::Histogram m_data;         //! Wavelength data.
 
 
             //  == INSTANTIATION ==
