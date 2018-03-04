@@ -258,7 +258,9 @@ namespace arc
          */
         void Logger::print_hr(const char t_hr_char) const
         {
+            m_stream_mutex.lock();
             m_stream << std::string(LINE_WIDTH, t_hr_char) << "\n";
+            m_stream_mutex.unlock();
         }
 
         /**
