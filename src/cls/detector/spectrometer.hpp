@@ -54,6 +54,7 @@ namespace arc
             //  -- Constructors --
             Spectrometer(const std::string& t_name, const geom::Mesh& t_mesh, double t_min_bound, double t_max_bound,
                          size_t t_num_bins);
+            Spectrometer(const Spectrometer&& t_spectrometer);
 
 
             //  == METHODS ==
