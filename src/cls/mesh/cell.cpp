@@ -42,9 +42,9 @@ namespace arc
             m_ccd(t_ccd),
             m_spectrometer(t_spectrometer),
             m_entity_list(init_entity_list()),
-            m_light_list(init_light_list(t_light)),
-            m_ccd_list(init_ccd_list(t_ccd)),
-            m_spectrometer_list(init_spectrometer_list(t_spectrometer)),
+            m_light_list(init_light_list()),
+            m_ccd_list(init_ccd_list()),
+            m_spectrometer_list(init_spectrometer_list()),
             m_empty(m_entity_list.empty() && m_light_list.empty() && m_ccd_list.empty() && m_spectrometer_list.empty())
         {
             assert(t_max_bound[X] > t_min_bound[X]);
@@ -83,22 +83,20 @@ namespace arc
         /**
          *  Initialise the list of light triangles found within the cell.
          *
-         *  @param  t_light Vector of lights which may be contained within the cell.
-         *
          *  @return The initialised list of light triangles found within the cell.
          */
-        std::vector<std::array<size_t, 2>> Cell::init_light_list(const std::vector<equip::Light>& t_light) const
+        std::vector<std::array<size_t, 2>> Cell::init_light_list() const
         {
             std::vector<std::array<size_t, 2>> r_light_list;
 
             const math::Vec<3> center    = (m_max_bound + m_min_bound) / 2.0;
             const math::Vec<3> half_size = (m_max_bound - m_min_bound) / 2.0;
 
-            for (size_t i = 0; i < t_light.size(); ++i)
+            for (size_t i = 0; i < m_light.size(); ++i)
             {
-                for (size_t j = 0; j < t_light[i].get_mesh().get_num_tri(); ++j)
+                for (size_t j = 0; j < m_light[i].get_mesh().get_num_tri(); ++j)
                 {
-                    if (tri_overlap(center, half_size, t_light[i].get_mesh().get_tri(j)))
+                    if (tri_overlap(center, half_size, m_light[i].get_mesh().get_tri(j)))
                     {
                         r_light_list.push_back({{i, j}});
                     }
@@ -111,22 +109,20 @@ namespace arc
         /**
          *  Initialise the list of ccd triangles found within the cell.
          *
-         *  @param  t_ccd   Vector of ccds which may be contained within the cell.
-         *
          *  @return The initialised list of ccd triangles found within the cell.
          */
-        std::vector<std::array<size_t, 2>> Cell::init_ccd_list(const std::vector<detector::Ccd>& t_ccd) const
+        std::vector<std::array<size_t, 2>> Cell::init_ccd_list() const
         {
             std::vector<std::array<size_t, 2>> r_ccd_list;
 
             const math::Vec<3> center    = (m_max_bound + m_min_bound) / 2.0;
             const math::Vec<3> half_size = (m_max_bound - m_min_bound) / 2.0;
 
-            for (size_t i = 0; i < t_ccd.size(); ++i)
+            for (size_t i = 0; i < m_ccd.size(); ++i)
             {
-                for (size_t j = 0; j < t_ccd[i].get_mesh().get_num_tri(); ++j)
+                for (size_t j = 0; j < m_ccd[i].get_mesh().get_num_tri(); ++j)
                 {
-                    if (tri_overlap(center, half_size, t_ccd[i].get_mesh().get_tri(j)))
+                    if (tri_overlap(center, half_size, m_ccd[i].get_mesh().get_tri(j)))
                     {
                         r_ccd_list.push_back({{i, j}});
                     }
@@ -139,23 +135,20 @@ namespace arc
         /**
          *  Initialise the list of spectrometer triangles found within the cell.
          *
-         *  @param  t_spectrometer  Vector of spectrometers which may be contained within the cell.
-         *
          *  @return The initialised list of spectrometer triangles found within the cell.
          */
-        std::vector<std::array<size_t, 2>> Cell::init_spectrometer_list(
-            const std::vector<detector::Spectrometer>& t_spectrometer) const
+        std::vector<std::array<size_t, 2>> Cell::init_spectrometer_list() const
         {
             std::vector<std::array<size_t, 2>> r_spectrometer_list;
 
             const math::Vec<3> center    = (m_max_bound + m_min_bound) / 2.0;
             const math::Vec<3> half_size = (m_max_bound - m_min_bound) / 2.0;
 
-            for (size_t i = 0; i < t_spectrometer.size(); ++i)
+            for (size_t i = 0; i < m_spectrometer.size(); ++i)
             {
-                for (size_t j = 0; j < t_spectrometer[i].get_mesh().get_num_tri(); ++j)
+                for (size_t j = 0; j < m_spectrometer[i].get_mesh().get_num_tri(); ++j)
                 {
-                    if (tri_overlap(center, half_size, t_spectrometer[i].get_mesh().get_tri(j)))
+                    if (tri_overlap(center, half_size, m_spectrometer[i].get_mesh().get_tri(j)))
                     {
                         r_spectrometer_list.push_back({{i, j}});
                     }
