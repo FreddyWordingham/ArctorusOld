@@ -41,11 +41,11 @@ namespace arc
             m_light(t_light),
             m_ccd(t_ccd),
             m_spectrometer(t_spectrometer),
-            m_entity_list(init_entity_list()),
+            m_entity_tri_list(init_entity_list()),
             m_light_list(init_light_list()),
             m_ccd_list(init_ccd_list()),
             m_spectrometer_list(init_spectrometer_list()),
-            m_empty(m_entity_list.empty() && m_light_list.empty() && m_ccd_list.empty() && m_spectrometer_list.empty())
+            m_empty(m_entity_tri_list.empty() && m_light_list.empty() && m_ccd_list.empty() && m_spectrometer_list.empty())
         {
             assert(t_max_bound[X] > t_min_bound[X]);
             assert(t_max_bound[Y] > t_min_bound[Y]);
@@ -59,7 +59,7 @@ namespace arc
          *
          *  @return The initialised list of entity triangles found within the cell.
          */
-        std::vector<std::array<size_t, 2>> Cell::init_entity_list() const
+        std::vector<std::array<size_t, 2>> Cell::init_entity_tri_list() const
         {
             std::vector<std::array<size_t, 2>> r_entity_list;
 
@@ -85,7 +85,7 @@ namespace arc
          *
          *  @return The initialised list of light triangles found within the cell.
          */
-        std::vector<std::array<size_t, 2>> Cell::init_light_list() const
+        std::vector<std::array<size_t, 2>> Cell::init_light_tri_list() const
         {
             std::vector<std::array<size_t, 2>> r_light_list;
 
@@ -111,7 +111,7 @@ namespace arc
          *
          *  @return The initialised list of ccd triangles found within the cell.
          */
-        std::vector<std::array<size_t, 2>> Cell::init_ccd_list() const
+        std::vector<std::array<size_t, 2>> Cell::init_ccd_tri_list() const
         {
             std::vector<std::array<size_t, 2>> r_ccd_list;
 
@@ -137,7 +137,7 @@ namespace arc
          *
          *  @return The initialised list of spectrometer triangles found within the cell.
          */
-        std::vector<std::array<size_t, 2>> Cell::init_spectrometer_list() const
+        std::vector<std::array<size_t, 2>> Cell::init_spectrometer_tri_list() const
         {
             std::vector<std::array<size_t, 2>> r_spectrometer_list;
 
@@ -396,7 +396,7 @@ namespace arc
             assert(t_dir.is_normalised());
 
             // If cell contains no entity triangles, there is no hit.
-            if (m_entity_list.empty())
+            if (m_entity_tri_list.empty())
             {
                 return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
                                                                  std::numeric_limits<size_t>::signaling_NaN(),
@@ -408,10 +408,10 @@ namespace arc
             double      r_dist         = std::numeric_limits<double>::max();
             size_t      r_entity_index = std::numeric_limits<size_t>::signaling_NaN();
             size_t      r_tri_index    = std::numeric_limits<size_t>::signaling_NaN();
-            for (size_t i              = 0; i < m_entity_list.size(); ++i)
+            for (size_t i              = 0; i < m_entity_tri_list.size(); ++i)
             {
                 // Get a reference to the triangle.
-                const geom::Triangle& tri = m_entity[m_entity_list[i][0]].get_mesh().get_tri(m_entity_list[i][1]);
+                const geom::Triangle& tri = m_entity[m_entity_tri_list[i][0]].get_mesh().get_tri(m_entity_tri_list[i][1]);
 
                 // Determine if there is a hit.
                 bool   tri_hit;
@@ -423,8 +423,8 @@ namespace arc
                 {
                     hit            = true;
                     r_dist         = tri_dist;
-                    r_entity_index = m_entity_list[i][0];
-                    r_tri_index    = m_entity_list[i][1];
+                    r_entity_index = m_entity_tri_list[i][0];
+                    r_tri_index    = m_entity_tri_list[i][1];
                 }
             }
 

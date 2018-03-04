@@ -54,7 +54,7 @@ namespace arc
             const std::vector<detector::Spectrometer>& m_spectrometer;  //! Reference to vector of sim spectrometers.
 
             //  -- Lists --
-            const std::vector<std::array<size_t, 2>> m_entity_list;         //! List of entity triangles with the cell.
+            const std::vector<std::array<size_t, 2>> m_entity_tri_list;     //! List of entity triangles with the cell.
             const std::vector<std::array<size_t, 2>> m_light_list;          //! List of light triangles with the cell.
             const std::vector<std::array<size_t, 2>> m_ccd_list;            //! List of ccd triangles with the cell.
             const std::vector<std::array<size_t, 2>> m_spectrometer_list;   //! List of spectrometer triangles with the cell.
@@ -73,10 +73,10 @@ namespace arc
 
           private:
             //  -- Initialisation --
-            std::vector<std::array<size_t, 2>> init_entity_list() const;
-            std::vector<std::array<size_t, 2>> init_light_list() const;
-            std::vector<std::array<size_t, 2>> init_ccd_list() const;
-            std::vector<std::array<size_t, 2>> init_spectrometer_list() const;
+            std::vector<std::array<size_t, 2>> init_entity_tri_list() const;
+            std::vector<std::array<size_t, 2>> init_light_tri_list() const;
+            std::vector<std::array<size_t, 2>> init_ccd_tri_list() const;
+            std::vector<std::array<size_t, 2>> init_spectrometer_tri_list() const;
             bool tri_overlap(const math::Vec<3>& t_center, const math::Vec<3>& t_half_size, const geom::Triangle& t_tri) const;
             bool plane_origin_overlap(const math::Vec<3>& t_norm, const math::Vec<3>& t_point,
                                       const math::Vec<3>& t_half_width) const;
