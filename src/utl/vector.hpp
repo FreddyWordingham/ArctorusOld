@@ -17,6 +17,7 @@
 //  -- System --
 #include <cassert>
 #include <cmath>
+#include <limits>
 #include <ostream>
 #include <vector>
 
