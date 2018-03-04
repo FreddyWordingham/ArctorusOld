@@ -114,9 +114,9 @@ namespace arc
         template <size_t N, size_t M>
         constexpr Mat<M, N> transpose(const Mat<N, M>& t_mat);
         template <size_t N>
-        constexpr double minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
+        constexpr double mat_minor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
         template <size_t N>
-        constexpr Mat<N, N> minor(const Mat<N, N>& t_mat);
+        constexpr Mat<N, N> mat_minor(const Mat<N, N>& t_mat);
         template <size_t N>
         constexpr double cofactor(const Mat<N, N>& t_mat, size_t t_row, size_t t_col);
         template <size_t N>
@@ -785,7 +785,7 @@ namespace arc
          *  @return Minor of the matrix element.
          */
         template <size_t N>
-        constexpr double minor(const Mat<N, N>& t_mat, const size_t t_row, const size_t t_col)
+        constexpr double mat_minor(const Mat<N, N>& t_mat, const size_t t_row, const size_t t_col)
         {
             static_assert(N > 2);
 
@@ -831,7 +831,7 @@ namespace arc
          *  @return Matrix of minors for the given matrix.
          */
         template <size_t N>
-        constexpr double minor(const Mat<N, N>& t_mat)
+        constexpr double mat_minor(const Mat<N, N>& t_mat)
         {
             static_assert(N > 2);
 
@@ -842,7 +842,7 @@ namespace arc
             {
                 for (size_t j = 0; j < N; ++j)
                 {
-                    r_mat[i][j] = minor(t_mat, i, j);
+                    r_mat[i][j] = mat_minor(t_mat, i, j);
                 }
             }
 
@@ -867,7 +867,7 @@ namespace arc
         {
             static_assert(N > 2);
 
-            return (std::pow(-1, t_row + t_col) * minor(t_mat, t_row, t_col));
+            return (std::pow(-1, t_row + t_col) * mat_minor(t_mat, t_row, t_col));
         }
 
         /**
