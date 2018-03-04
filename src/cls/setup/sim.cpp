@@ -429,6 +429,7 @@ namespace arc
                 if (!m_grid.is_within(phot.get_pos()))
                 {
                     WARN("Unable to simulate photon.", "Photon does not begin with the grid.");
+                    goto kill_photon;
                 }
                 mesh::Cell* cell = &m_grid.get_cell(phot.get_pos());
                 cell->add_energy(0.1);
@@ -438,18 +439,35 @@ namespace arc
                 double cell_energy = 0.0;   //! Energy to be added to cell total when exiting current cell.
 
                 // Loop until exit condition is met.
-                while (m_grid.is_within(phot.get_pos()) && (phot.get_weight() > 0.0))
+                while (true)
                 {
+                    // Check if photon has exited the grid.
+                    if (!m_grid.is_within(phot.get_pos()))
+                    {
+                        goto kill_photon;
+                    }
+
                     // Determine event distances.
                     event  event_type;              //! Event type.
                     double dist;                    //! Distance to the event.
                     size_t equip_index, tri_index;  //! Indices of hit equipment and triangle if hit at all.
                     std::tie(event_type, dist, equip_index, tri_index) = determine_event(phot, cell);
 
+                    // Track properties.
+                    cell_energy += dist * phot.get_weight();
+
                     // Perform the event.
                     switch (event_type)
                     {
                         case event::SCATTER:
+                            // Move to the scattering point.
+                            phot.move(dist);
+
+                            // Scatter.
+                            phot.rotate(rng::henyey_greenstein(phot.get_anisotropy()), rng::random(0.0, 2.0 * M_PI));
+
+                            // Reduce weight by the albedo.
+                            phot.multiply_weight(phot.get_albedo());
 
                             break;
                         case event::CELL_CROSS:
@@ -469,6 +487,9 @@ namespace arc
                     phot.move(dist);
                     break;
                 }
+
+                // Photon death label.
+                kill_photon:;
 
 #ifdef ENABLE_PHOTON_PATHS
                 // Add the photon path.
