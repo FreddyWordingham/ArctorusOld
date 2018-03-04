@@ -80,6 +80,7 @@ namespace arc
 
             //  -- Threads --
             std::mutex          m_ccd_mutex;            //! Protects the ccd objects.
+            std::mutex          m_spectrometer_mutex;   //! Protects the spectrometer objects.
             std::vector<double> m_thread_progress;      //! Current progress of each thread.
             const double        m_log_update_period;    //! Period with which to update a progress print.
 
