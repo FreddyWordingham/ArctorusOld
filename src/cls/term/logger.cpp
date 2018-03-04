@@ -241,7 +241,9 @@ namespace arc
             assert(!t_cause.empty());
 
             // Increment the number of recorded errors.
+            m_counter_mutex.lock();
             ++m_num_errors;
+            m_counter_mutex.unlock();
 
             // Create the text string.
             std::string text = "File: " + t_file + "\nLine: " + t_line + "\n" + t_symptom + "\n" + t_cause;
