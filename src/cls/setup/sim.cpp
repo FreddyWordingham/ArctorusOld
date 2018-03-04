@@ -479,6 +479,19 @@ namespace arc
                         goto kill_photon;
                     }
 
+                    // Roulette optimisation.
+                    if (phot.get_weight() <= m_roulette_weight)
+                    {
+                        if (rng::random() <= (1.0 / m_roulette_chambers))
+                        {
+                            phot.multiply_weight(m_roulette_chambers);
+                        }
+                        else
+                        {
+                            goto kill_photon;
+                        }
+                    }
+
                     // Determine event distances.
                     event  event_type;              //! Event type.
                     double dist;                    //! Distance to the event.
@@ -773,7 +786,7 @@ namespace arc
             {
                 return;
             }
-            last_update = cur_time;
+            last_update         = cur_time;
 
             // Log the progress of all loops.
             std::stringstream progress("Progress: ");
