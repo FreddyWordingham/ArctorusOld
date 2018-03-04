@@ -293,7 +293,9 @@ namespace arc
                 utl::find_and_replace(&line, "R", m_text_col[RED] + "~" + m_text_col[RESET]);
 
                 // Print the line with padding either side.
+                m_stream_mutex.lock();
                 m_stream << pre_title_pad << line << post_title_pad << "\n";
+                m_stream_mutex.unlock();
             }
 
             // Print middle horizontal rule.
@@ -305,7 +307,9 @@ namespace arc
             const std::string post_build_pad(LINE_WIDTH - (build.size() + pre_build_pad.size()), ' ');
 
             // Print the build information string.
+            m_stream_mutex.lock();
             m_stream << pre_build_pad << build << post_build_pad << "\n";
+            m_stream_mutex.unlock();
 
             // Print trailing horizontal rule.
             print_hr('=');
