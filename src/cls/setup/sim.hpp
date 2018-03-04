@@ -14,6 +14,9 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <mutex>
+
 //  -- Classes --
 #include "cls/data/json.hpp"
 #include "cls/detector/ccd.hpp"
@@ -78,6 +81,7 @@ namespace arc
             mesh::Grid m_grid;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
             std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
+            std::mutex                                         m_path_mutex;                                    //! Protects path data.
 #endif
 
 

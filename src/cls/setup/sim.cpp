@@ -641,7 +641,9 @@ namespace arc
 
 #ifdef ENABLE_PHOTON_PATHS
                 // Add the photon path.
+                m_path_mutex.lock();
                 m_path.push_back(phot.get_path());
+                m_path_mutex.unlock();
 #endif
             }
         }
