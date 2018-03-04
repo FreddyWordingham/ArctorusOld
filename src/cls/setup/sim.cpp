@@ -440,7 +440,7 @@ namespace arc
                 while (m_grid.is_within(phot.get_pos()) && (phot.get_weight() > 0.0))
                 {
                     // Determine event distances.
-                    int    type;                    //! Event type.
+                    event  type;                    //! Event type.
                     double dist;                    //! Distance to the event.
                     size_t equip_index, tri_index;  //! Indices of hit equipment and triangle if hit at all.
                     std::tie(type, dist, equip_index, tri_index) = determine_event(phot, cell);
@@ -448,10 +448,65 @@ namespace arc
             }
         }
 
-        std::tuple<event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
-                                                                       const mesh::Cell* t_cell) const
+        /**
+         *  Determine the next event a photon will undergo.
+         *
+         *  @param  t_phot  Photon whose event will be determined.
+         *  @param  t_cell  Cell the photon is currently within.
+         *
+         *  @return A tuple containing, the type of event, distance to event, indices of equipment and triangle involved.
+         */
+        std::tuple<Sim::event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
+                                                                            const mesh::Cell* t_cell) const
         {
+            // Determine scatter distance.
+            const double scat_dist = -std::log(rng::random()) / t_phot.get_interaction();
 
+            // Determine the cell distance.
+            const double cell_dist = t_cell->get_dist_to_wall(t_phot.get_pos(), t_phot.get_dir());
+
+            // Check for entity collision.
+            bool   entity_hit;
+            double entity_dist;
+            size_t entity_index, entity_tri_index;
+            std::tie(entity_hit, entity_dist, entity_index, entity_tri_index) = t_cell
+                ->entity_dist(t_phot.get_pos(), t_phot.get_dir());
+
+            // Check for ccd collision.
+            bool   ccd_hit;
+            double ccd_dist;
+            size_t ccd_index, ccd_tri_index;
+            std::tie(ccd_hit, ccd_dist, ccd_index, ccd_tri_index) = t_cell->ccd_dist(t_phot.get_pos(), t_phot.get_dir());
+
+            // Check for spectrometer collision.
+            bool   spectrometer_hit;
+            double spectrometer_dist;
+            size_t spectrometer_index, spectrometer_tri_index;
+            std::tie(spectrometer_hit, spectrometer_dist, spectrometer_index, spectrometer_tri_index) = t_cell
+                ->spectrometer_dist(t_phot.get_pos(), t_phot.get_dir());
+
+            // Determine which distance is shortest.
+            std::array<double, 5> dist({{scat_dist, cell_dist, entity_dist, ccd_dist, spectrometer_dist}});
+            switch (std::distance(std::begin(dist), std::min_element(std::begin(dist), std::end(dist))))
+            {
+                case 0:
+                    return (std::tuple<event, double, size_t, size_t>(event::SCATTER, scat_dist,
+                                                                      std::numeric_limits<size_t>::signaling_NaN(),
+                                                                      std::numeric_limits<size_t>::signaling_NaN()));
+                case 1:
+                    return (std::tuple<event, double, size_t, size_t>(event::CELL_CROSS, cell_dist,
+                                                                      std::numeric_limits<size_t>::signaling_NaN(),
+                                                                      std::numeric_limits<size_t>::signaling_NaN()));
+                case 2:
+                    return (std::tuple<event, double, size_t, size_t>(event::ENTITY_HIT, entity_dist, entity_index,
+                                                                      entity_tri_index));
+                case 3:
+                    return (std::tuple<event, double, size_t, size_t>(event::CCD_HIT, ccd_dist, ccd_index, ccd_tri_index));
+                case 4:
+                    return (std::tuple<event, double, size_t, size_t>(event::SPECTROMETER_HIT, spectrometer_dist,
+                                                                      spectrometer_index, spectrometer_tri_index));
+                default: ERROR("Unable to simulate photon.", "Code should be unreachable.");
+            }
         }
 
 
