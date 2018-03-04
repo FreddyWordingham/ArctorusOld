@@ -762,12 +762,10 @@ namespace arc
 
         void Sim::log_progress()
         {
-            m_progress_mutex.lock();
-
             // Return if minimum update time has not yet passed.
             static std::chrono::steady_clock::time_point last_update;
             const std::chrono::steady_clock::time_point  cur_time = std::chrono::steady_clock::now();
-            if (std::chrono::duration_cast<std::chrono::duration<double>>(cur_time - last_update).count() < m_log_update_period)
+            if (std::chrono::duration_cast<std::chrono::duration<double>>(cur_time - last_update).count() < 1.0)
             {
                 return;
             }
@@ -780,8 +778,6 @@ namespace arc
                 progress << std::setw(8) << m_thread_progress[i] << " ";
             }
             LOG(progress.str());
-
-            m_progress_mutex.unlock();
         }
 
 
