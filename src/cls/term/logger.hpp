@@ -137,6 +137,9 @@ namespace arc
 
             //  == FIELDS ==
           private:
+            //  -- Mutex --
+            const std::mutex m_mutex;   //! Protects writes to cout.
+
             //  -- Output Stream --
             std::ostream& m_stream; //! Output stream to write to.
 
