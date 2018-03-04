@@ -290,8 +290,9 @@ namespace arc
             timestamp.resize(TIME_WIDTH, ' ');
 
             // Print the temporary message.
-            m_mutex_stream
+            m_stream_mutex.lock();
             m_stream << timestamp << m_text_col[YELLOW] << m_log_type[TEMP] << text << m_text_col[RESET] << "\r";
+            m_stream_mutex.unlock();
         }
 
 
