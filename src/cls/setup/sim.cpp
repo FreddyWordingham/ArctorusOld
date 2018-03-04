@@ -762,12 +762,7 @@ namespace arc
 
         void Sim::log_progress()
         {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wexit-time-destructors"
-            static std::mutex s_progress_mutex;
-#pragma clang diagnostic pop
-
-            s_progress_mutex.lock();
+            m_progress_mutex.lock();
 
             // Return if minimum update time has not yet passed.
             static std::chrono::steady_clock::time_point last_update;
@@ -786,7 +781,7 @@ namespace arc
             }
             LOG(progress.str());
 
-            s_progress_mutex.unlock();
+            m_progress_mutex.unlock();
         }
 
 
