@@ -11,8 +11,8 @@
     "pre_render":        false,
     "post_render":       false,
     "grid":              {
-        "min":   [-4.1, -4.1, -2.1],
-        "max":   [4.1, 4.1, 2.1],
+        "min":   [-4.1e-2, -4.1e-2, -2.1e-2],
+        "max":   [4.1e-2, 4.1e-2, 2.1e-2],
         "cells": [11, 11, 11]
     },
     "aether":            {
@@ -31,15 +31,15 @@
             "mesh":  "meshes/circle.obj",
             "spec":  "spectra/laser.spc",
             "scale": [1.1e-3, 1.1e-3, 1.1e-3],
-            "trans": [0.0, 0.0, 1.5e-3],
+            "trans": [0.0, 0.0, 1.5e-2],
             "dir":   [0.0, 0.0, -1.0]
         }
     },
     "ccds":          {
         "above": {
             "pixel": [250, 250],
-            "scale": [4, 4, 4],
-            "trans": [0.0, 0.0, 2.0],
+            "scale": [4e-2, 4e-2, 4e-2],
+            "trans": [0.0, 0.0, 2.0e-2],
             "dir":   [0.0, 0.0, -1.0],
             "col":   true
         }
