@@ -54,7 +54,7 @@ namespace arc
         }
 
         /**
-         *  Move construct a cell.
+         *  Move construct a cell object.
          *
          *  @param  t_cell  Cell to be moved.
          */

@@ -51,6 +51,19 @@ namespace arc
         {
         }
 
+        /**
+         *  Move construct a ccd object.
+         *
+         *  @param  t_ccd   Ccd to be moved.
+         */
+        Ccd::Ccd(Ccd&& t_ccd) noexcept :
+            m_name(std::move(t_ccd.m_name)),
+            m_mesh(std::move(t_ccd.m_mesh)),
+            m_norm(std::move(t_ccd.m_norm)),
+            m_col(std::move(t_ccd.m_col)),
+            m_image(std::move(t_ccd.m_image))
+        {
+        }
 
 
         //  == METHODS ==
