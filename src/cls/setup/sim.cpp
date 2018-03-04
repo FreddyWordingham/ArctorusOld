@@ -504,6 +504,13 @@ namespace arc
                             // Entity collision.
                         case event::ENTITY_HIT:
                         {
+                            // Check for close-collision.
+                            if (dist < SMOOTHING_LENGTH)
+                            {
+                                WARN("Unable to simulate photon.", "Distance to entity is smaller than the smoothing length.");
+                                goto kill_photon;
+                            }
+
                             // Get the normal of the hit location.
                             math::Vec<3> norm = m_entity[equip_index].get_mesh().get_tri(tri_index)
                                                                      .get_norm(phot.get_pos() + (phot.get_dir() * dist));
