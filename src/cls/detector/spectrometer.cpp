@@ -49,7 +49,7 @@ namespace arc
         /**
          *  Move construct a ccd object.
          *
-         *  @param  t_ccd   Ccd to be moved.
+         *  @param  t_spectrometer  Spectrometer to be moved.
          */
         Spectrometer::Spectrometer(Spectrometer&& t_spectrometer) noexcept :
             m_name(std::move(m_name)),
