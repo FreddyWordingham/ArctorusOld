@@ -14,9 +14,6 @@
 
 
 //  == INCLUDES ==
-//  -- System --
-#include <mutex>
-
 //  -- Classes --
 #include "cls/data/histogram.hpp"
 #include "cls/geom/mesh.hpp"
