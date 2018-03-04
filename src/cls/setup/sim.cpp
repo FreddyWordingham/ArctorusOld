@@ -654,7 +654,9 @@ namespace arc
                             // Check if photon hits the front of the detector.
                             if ((phot.get_dir() * norm) < 0.0)
                             {
+                                m_ccd_mutex.lock();
                                 m_ccd[equip_index].add_hit(phot.get_pos(), phot.get_weight(), phot.get_wavelength());
+                                m_ccd_mutex.unlock();
                             }
 
                             // Kill the absorbed photon.
