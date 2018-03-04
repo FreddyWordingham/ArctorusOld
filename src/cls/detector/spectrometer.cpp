@@ -51,8 +51,12 @@ namespace arc
          *
          *  @param  t_ccd   Ccd to be moved.
          */
-        Spectrometer(Spectrometer
-        && t_spectrometer) noexcept;
+        Spectrometer::Spectrometer(Spectrometer&& t_spectrometer) noexcept :
+            m_name(std::move(m_name)),
+            m_mesh(std::move(m_mesh)),
+            m_data(std::move(m_data))
+        {
+        }
 
 
 
