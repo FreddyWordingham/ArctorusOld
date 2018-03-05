@@ -49,23 +49,27 @@ namespace arc
         /**
          *  Convert a given number of seconds into a sexagesimal time string.
          *
-         *  @param  t_sec   Number of seconds to convert to a time string.
+         *  @param  t_num_sec   Number of seconds to convert to a time string.
          *
          *  @pre    t_sec must be positive.
          *
          *  @return A sexagesimal string representing the given number of seconds.
          */
-        std::string create_time_string(int t_sec)
+        std::string create_time_string(const double t_num_sec)
         {
-            assert(t_sec > 0);
+            assert(t_num_sec >= 0.0);
 
-            const int hrs = t_sec / 3600;
-            t_sec %= 3600;
+            auto       sec      = static_cast<unsigned long int>(t_num_sec);
+            const auto millisec = static_cast<unsigned long int>((t_num_sec - sec) * 1000);
 
-            const int min = t_sec / 60;
-            t_sec %= 60;
+            const unsigned long int hrs = sec / 3600;
+            sec %= 3600;
 
-            return (std::to_string(hrs) + "h " + std::to_string(min) + "m " + std::to_string(t_sec) + "s");
+            const unsigned long int min = sec / 60;
+            sec %= 60;
+
+            return (std::to_string(hrs) + "hrs " + std::to_string(min) + "min " + std::to_string(sec) + "sec " + std::to_string(
+                millisec) + "ms");
         }
 
 

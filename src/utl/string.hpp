@@ -30,7 +30,7 @@ namespace arc
         //  == FUNCTION PROTOTYPES ==
         //  -- Timestamp --
         std::string create_timestamp(const std::string& t_format = "%Y-%m-%d %H:%M:%S");
-        std::string create_time_string(int t_sec);
+        std::string create_time_string(double t_num_sec);
 
         //  -- Manipulation --
         void find_and_replace(std::string* t_source, const std::string& t_find, const std::string& t_replace);
