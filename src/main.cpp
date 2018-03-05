@@ -106,6 +106,7 @@ int main(const int t_argc, const char** t_argv)
     const double sim_runtime = std::chrono::duration_cast<std::chrono::duration<double>>(
         std::chrono::steady_clock::now() - sim_start_time).count();
     LOG("Simulation runtime: " << arc::utl::create_time_string(sim_runtime));
+    LOG("Ave photon runtime: " << arc::utl::create_time_string(sim_runtime / num_phot));
 
     // Save grid data.
     SEC("Saving Data");
