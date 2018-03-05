@@ -105,7 +105,7 @@ int main(const int t_argc, const char** t_argv)
     // Calculate runtime.
     const double sim_runtime = std::chrono::duration_cast<std::chrono::duration<double>>(
         std::chrono::steady_clock::now() - sim_start_time).count();
-    LOG("Simulation runtime: " << sim_runtime);
+    LOG("Simulation runtime: " << arc::utl::create_time_string(sim_runtime));
 
     // Save grid data.
     SEC("Saving Data");
