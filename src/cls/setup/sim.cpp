@@ -371,6 +371,14 @@ namespace arc
                 }
             }
 
+            // Check maximum was not zero.
+            if (max <= 0.0)
+            {
+                WARN("Unable to save ccd images.", "Maximum pixel value was less than, or equal to, zero.");
+
+                return;
+            }
+
             // Save each ccd image.
             for (size_t i = 0; i < m_ccd.size(); ++i)
             {
