@@ -372,7 +372,7 @@ namespace arc
             }
 
             // Check maximum was not zero.
-            if (max <= 0.0)
+            if ((!m_ccd.empty()) && (max <= 0.0))
             {
                 WARN("Unable to save ccd images.", "Maximum pixel value was less than, or equal to, zero.");
 
