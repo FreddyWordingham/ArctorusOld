@@ -26,7 +26,7 @@
 
 //  == FUNCTION PROTOTYPES ==
 //  -- File --
-void save_build_info(const std::string& t_output_dir);
+void save_run_info(const std::string& t_output_dir);
 
 
 
@@ -63,7 +63,7 @@ int main(const int t_argc, const char** t_argv)
     LOG("Output directory: " << output_dir);
 
     // Save run information files.
-    save_build_info(output_dir);
+    save_run_info(output_dir);
 
     // Set the program seed.
     arc::rng::seed(setup["system"].parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
@@ -152,11 +152,11 @@ int main(const int t_argc, const char** t_argv)
  *
  *  @param  t_output_dir    Data output directory path.
  */
-void save_build_info(const std::string& t_output_dir)
+void save_run_info(const std::string& t_output_dir)
 {
     // Create the file handle.
-    arc::file::Handle build_info(t_output_dir + "build_info.txt", std::fstream::out);
+    arc::file::Handle run_info(t_output_dir + "run_info.txt", std::fstream::out);
 
     // Write the build information.
-    build_info << arc::config::BUILD_INFO;
+    run_info << arc::config::BUILD_INFO;
 }
