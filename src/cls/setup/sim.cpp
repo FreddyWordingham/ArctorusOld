@@ -322,6 +322,16 @@ namespace arc
                 // Get file paths.
                 const std::string mesh_path = json_spectrometer.parse_child<std::string>("mesh");
 
+                // Print verbose information.
+                VERB(spectrometer_name[i] << " mesh    : " << utl::strip_extension(utl::strip_path(mesh_path)));
+                VERB(spectrometer_name[i] << " trans   : " << trans);
+                VERB(spectrometer_name[i] << " dir     : " << dir);
+                VERB(spectrometer_name[i] << " rot     : " << rot);
+                VERB(spectrometer_name[i] << " scale   : " << scale);
+                VERB(spectrometer_name[i] << " range   : " << range);
+                VERB(spectrometer_name[i] << " bins    : " << bins);
+
+
                 // Construct the spectrometer object an add it to the vector of spectrometers.
                 r_spectrometer
                     .emplace_back(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), range[0],
