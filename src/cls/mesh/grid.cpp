@@ -54,9 +54,9 @@ namespace arc
             m_cell(init_cell(t_entity, t_light, t_ccd, t_spectrometer))
         {
             // Determine grid properties.
-            const size_t total_tris   = 0;
-            const size_t largest_tris = 0;
-            for (size_t  i            = 0; i < m_num_cells[X]; ++i)
+            size_t      total_tris   = 0;
+            size_t      largest_tris = 0;
+            for (size_t i            = 0; i < m_num_cells[X]; ++i)
             {
                 for (size_t j = 0; j < m_num_cells[Y]; ++j)
                 {
