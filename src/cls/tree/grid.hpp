@@ -34,7 +34,7 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  Grid mesh class storing a three-dimensional vector of uniform cells.
+         *  Grid tree class storing a three-dimensional vector of uniform cells.
          */
         class Grid
         {
