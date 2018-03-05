@@ -181,7 +181,7 @@ namespace arc
             void add_ccd_vector(const std::vector<detector::Ccd>& t_ccd);
             void add_spectrometer_vector(const std::vector<detector::Spectrometer>& t_spectrometer);
             void add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot);
-            void add_grid(const mesh::Grid& t_grid);
+            void add_grid(const tree::Grid& t_grid);
 
             //  -- Control --
             bool should_close() const;
