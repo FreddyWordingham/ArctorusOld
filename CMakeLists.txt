@@ -143,10 +143,12 @@ if (CMAKE_BUILD_TYPE MATCHES "debug")
     ")
     if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}                     \
-        -fsanitize=integer                                          \
-        -fsanitize=undefined                                        \
-        -fsanitize-blacklist=${CMAKE_SOURCE_DIR}/.clang-sanitizer   \
-    ")
+            -fsanitize=integer                                          \
+            -fsanitize=undefined                                        \
+            -fsanitize-blacklist=${CMAKE_SOURCE_DIR}/.clang-sanitizer   \
+        ")
+    elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+
     endif ()
 elseif (CMAKE_BUILD_TYPE MATCHES "release")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \

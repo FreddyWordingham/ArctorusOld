@@ -10,6 +10,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <algorithm>
+#include <experimental/filesystem>
 #include <thread>
 
 //  -- General --
@@ -159,4 +160,5 @@ void save_run_info(const std::string& t_output_dir)
 
     // Write the build information.
     run_info << arc::config::BUILD_INFO;
+    run_info << "Working directory: " << std::filesystem::current_path();
 }
