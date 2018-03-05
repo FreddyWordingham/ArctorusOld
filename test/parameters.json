@@ -1,19 +1,20 @@
 {
-    "log_update_period": 1.0,
-    "max_threads":       1,
-    "output_dir_name":   "test",
+    "log_update_period": 10.0,
+    "max_threads":       4,
+    "output_dir_name":   "intralipid_100-0",
     "seed":              77,
     "roulette":          {
         "weight":   1e-3,
         "chambers": 10
     },
-    "num_phot":          1e3,
+    "max_loops":         1e6,
+    "num_phot":          1e4,
     "pre_render":        false,
-    "post_render":       true,
+    "post_render":       false,
     "grid":              {
         "min":   [-11e-3, -11e-3, -26e-3],
         "max":   [11e-3, 11e-3, 34e-3],
-        "cells": [11, 11, 31]
+        "cells": [101, 101, 301]
     },
     "aether":            {
         "mat": "materials/intralipid_100-0.mat"
