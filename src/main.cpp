@@ -58,7 +58,7 @@ int main(const int t_argc, const char** t_argv)
 
     // Write build information to a file.
     arc::file::Handle build_info(output_dir + "build_info.txt", std::fstream::out);
-    build_info << arc::
+    build_info << arc::config::BUILD_INFO;
 
     // Set the program seed.
     arc::rng::seed(setup["system"].parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
