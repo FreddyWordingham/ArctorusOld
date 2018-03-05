@@ -130,6 +130,7 @@ namespace arc
 
             // Get file paths.
             const std::string mat_path = t_json.parse_child<std::string>("mat");
+            VERB("Aether material: " << utl::strip_extension(utl::strip_path(mat_path)));
 
             return (phys::Material(utl::read(mat_path)));
         }
