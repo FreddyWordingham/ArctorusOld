@@ -271,6 +271,14 @@ namespace arc
                 const auto pix = json_ccd.parse_child<std::array<size_t, 2>>("pixel");
                 const auto col = json_ccd.parse_child<bool>("col");
 
+                // Print verbose information.
+                VERB(ccd_name[i] << " trans   : " << trans);
+                VERB(ccd_name[i] << " dir     : " << dir);
+                VERB(ccd_name[i] << " rot     : " << rot);
+                VERB(ccd_name[i] << " scale   : " << scale);
+                VERB(ccd_name[i] << " pix     : " << pix);
+                VERB(ccd_name[i] << " col     : " << col);
+
                 // Construct the ccd object an add it to the vector of ccds.
                 r_ccd.emplace_back(ccd_name[i], pix[X], pix[Y], col, trans, dir, rot, scale);
             }
