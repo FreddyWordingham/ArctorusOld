@@ -57,7 +57,7 @@
 {                                                               \
     std::stringstream text_stream;                              \
     text_stream << std::boolalpha << t_text;                    \
-    arc::term::Logger::get_instance().log(text_stream.str());   \
+    arc::term::Logger::get_instance().verb(text_stream.str());  \
 }                                                               \
 
 /**
