@@ -53,6 +53,26 @@ namespace arc
             m_cell_vol(m_grid_vol / (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z])),
             m_cell(init_cell(t_entity, t_light, t_ccd, t_spectrometer))
         {
+            // Determine grid properties.
+            const size_t total_tris   = 0;
+            const size_t largest_tris = 0;
+            for (size_t  i            = 0; i < m_num_cells[X]; ++i)
+            {
+                for (size_t j = 0; j < m_num_cells[Y]; ++j)
+                {
+                    for (size_t k = 0; k < m_num_cells[Z]; ++k)
+                    {
+                        const size_t num_tri = m_cell[i][j][k].get_total_tri();
+                        if (num_tri > largest_tris)
+                        {
+                            largest_tris = num_tri;
+                        }
+                    }
+                }
+            }
+
+            LOG("Average triangles per cell: " << ((1.0 * total_tris) / (m_num_cells[X] * m_num_cells[Y] * m_num_cells[Z])));
+            LOG("Maximum triangles per cell: " << largest_tris);
         }
 
 
