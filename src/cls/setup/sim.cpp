@@ -45,7 +45,7 @@ namespace arc
             m_roulette_chambers(t_json["optimisation"]["roulette"].parse_child<double>("chambers")),
             m_aether(init_aether(t_json["simulation"]["aether"])),
             m_entity(init_entity(t_json["simulation"]["entities"])),
-            m_light(init_light(t_json["lights"])),
+            m_light(init_light(t_json["simulation"]["lights"])),
             m_ccd(init_ccd(t_json["ccds"])),
             m_spectrometer(init_spectrometer(t_json["spectrometers"])),
             m_light_select(init_light_select()),
