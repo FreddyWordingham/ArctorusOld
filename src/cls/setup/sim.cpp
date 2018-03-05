@@ -130,6 +130,7 @@ namespace arc
 
             // Get file paths.
             const std::string mat_path = t_json.parse_child<std::string>("mat");
+            VERB("Aether material: " << utl::strip_extension(utl::strip_path(mat_path)));
 
             return (phys::Material(utl::read(mat_path)));
         }
@@ -166,6 +167,14 @@ namespace arc
                 // Get file paths.
                 const std::string mesh_path = json_entity.parse_child<std::string>("mesh");
                 const std::string mat_path  = json_entity.parse_child<std::string>("mat");
+
+                // Print verbose information.
+                VERB(entity_name[i] << " material: " << utl::strip_extension(utl::strip_path(mat_path)));
+                VERB(entity_name[i] << " mesh    : " << utl::strip_extension(utl::strip_path(mesh_path)));
+                VERB(entity_name[i] << " trans   : " << trans);
+                VERB(entity_name[i] << " dir     : " << dir);
+                VERB(entity_name[i] << " rot     : " << rot);
+                VERB(entity_name[i] << " scale   : " << scale);
 
                 // Construct the entity object an add it to the vector of entities.
                 r_entity.emplace_back(equip::Entity(geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale),
@@ -211,6 +220,15 @@ namespace arc
                 const std::string mesh_path = json_light.parse_child<std::string>("mesh");
                 const std::string spec_path = json_light.parse_child<std::string>("spec");
 
+                // Print verbose information.
+                VERB(light_name[i] << " material: " << utl::strip_extension(utl::strip_path(spec_path)));
+                VERB(light_name[i] << " mesh    : " << utl::strip_extension(utl::strip_path(mesh_path)));
+                VERB(light_name[i] << " power   : " << power);
+                VERB(light_name[i] << " trans   : " << trans);
+                VERB(light_name[i] << " dir     : " << dir);
+                VERB(light_name[i] << " rot     : " << rot);
+                VERB(light_name[i] << " scale   : " << scale);
+
                 // Construct the light object an add it to the vector of lights.
                 r_light.emplace_back(
                     equip::Light(geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), phys::Spectrum(utl::read(spec_path)),
@@ -252,6 +270,14 @@ namespace arc
                 // Get ccd properties.
                 const auto pix = json_ccd.parse_child<std::array<size_t, 2>>("pixel");
                 const auto col = json_ccd.parse_child<bool>("col");
+
+                // Print verbose information.
+                VERB(ccd_name[i] << " trans   : " << trans);
+                VERB(ccd_name[i] << " dir     : " << dir);
+                VERB(ccd_name[i] << " rot     : " << rot);
+                VERB(ccd_name[i] << " scale   : " << scale);
+                VERB(ccd_name[i] << " pix     : " << pix);
+                VERB(ccd_name[i] << " col     : " << col);
 
                 // Construct the ccd object an add it to the vector of ccds.
                 r_ccd.emplace_back(ccd_name[i], pix[X], pix[Y], col, trans, dir, rot, scale);
@@ -295,6 +321,15 @@ namespace arc
 
                 // Get file paths.
                 const std::string mesh_path = json_spectrometer.parse_child<std::string>("mesh");
+
+                // Print verbose information.
+                VERB(spectrometer_name[i] << " mesh    : " << utl::strip_extension(utl::strip_path(mesh_path)));
+                VERB(spectrometer_name[i] << " trans   : " << trans);
+                VERB(spectrometer_name[i] << " dir     : " << dir);
+                VERB(spectrometer_name[i] << " rot     : " << rot);
+                VERB(spectrometer_name[i] << " scale   : " << scale);
+                VERB(spectrometer_name[i] << " range   : " << range);
+                VERB(spectrometer_name[i] << " bins    : " << bins);
 
                 // Construct the spectrometer object an add it to the vector of spectrometers.
                 r_spectrometer

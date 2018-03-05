@@ -188,7 +188,7 @@ namespace arc
         {
             // If verbose message printing is enabled print the message.
 #ifdef ENABLE_LOG_VERBOSE
-            print_text(CYAN, LOG, t_text);
+            print_text(CYAN, VERB, t_text);
 #endif
         }
 

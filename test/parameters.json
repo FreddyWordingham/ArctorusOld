@@ -4,7 +4,7 @@
         "max_threads":       4,
         "output_dir_name":   "intralipid_100-0",
         "seed":              77,
-        "pre_render":        true,
+        "pre_render":        false,
         "post_render":       false
     },
     "optimisation": {
@@ -15,7 +15,7 @@
         }
     },
     "simulation":   {
-        "num_phot":      1e4,
+        "num_phot":      1e2,
         "grid":          {
             "min":   [-11e-3, -11e-3, -26e-3],
             "max":   [11e-3, 11e-3, 34e-3],
