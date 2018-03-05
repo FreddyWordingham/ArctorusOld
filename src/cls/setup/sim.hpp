@@ -24,7 +24,7 @@
 #include "cls/detector/spectrometer.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
-#include "cls/mesh/grid.hpp"
+#include "cls/tree/grid.hpp"
 
 
 
@@ -80,7 +80,7 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
-            mesh::Grid m_grid;  //! Simulation grid.
+            tree::Grid m_grid;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
             std::vector<std::vector<graphical::point::Photon>> m_path;          //! Vector of photon paths.
             std::mutex                                         m_path_mutex;    //! Protects path data.
@@ -130,7 +130,7 @@ namespace arc
           private:
             //  -- Simulation --
             std::tuple<event, double, size_t, size_t> determine_event(const phys::Photon& t_phot,
-                                                                      const mesh::Cell* t_cell) const;
+                                                                      const tree::Cell* t_cell) const;
             void log_progress() const;
         };
 
