@@ -42,7 +42,7 @@ namespace arc
         Sim::Sim(const data::Json& t_json) :
             m_loop_limit(t_json["optimisation"].parse_child<unsigned long int>("loop_limit")),
             m_roulette_weight(t_json["optimisation"]["roulette"].parse_child<double>("weight")),
-            m_roulette_chambers(t_json["roulette"].parse_child<double>("chambers")),
+            m_roulette_chambers(t_json["optimisation"]["roulette"].parse_child<double>("chambers")),
             m_aether(init_aether(t_json["aether"])),
             m_entity(init_entity(t_json["entities"])),
             m_light(init_light(t_json["lights"])),
