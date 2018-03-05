@@ -290,17 +290,16 @@ namespace arc
                 const auto   scale = json_spectrometer.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get spectrometer properties.
-                const auto min  = json_spectrometer.parse_child<double>("min");
-                const auto max  = json_spectrometer.parse_child<double>("max");
-                const auto bins = json_spectrometer.parse_child<size_t>("bins");
+                const auto range = json_spectrometer.parse_child<std::array<double, 2>>("range");
+                const auto bins  = json_spectrometer.parse_child<size_t>("bins");
 
                 // Get file paths.
                 const std::string mesh_path = json_spectrometer.parse_child<std::string>("mesh");
 
                 // Construct the spectrometer object an add it to the vector of spectrometers.
                 r_spectrometer
-                    .emplace_back(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), min, max,
-                                  bins);
+                    .emplace_back(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), range[0],
+                                  range[1], bins);
             }
 
             return (r_spectrometer);
