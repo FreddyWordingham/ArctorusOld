@@ -51,7 +51,8 @@ namespace arc
             m_light_select(init_light_select()),
             m_grid(t_json["simulation"]["grid"].parse_child<math::Vec<3>>("min"),
                    t_json["simulation"]["grid"].parse_child<math::Vec<3>>("max"),
-                   t_json["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd, m_spectrometer),
+                   t_json["simulation"]["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd,
+                   m_spectrometer),
             m_log_update_period(t_json.parse_child<double>("log_update_period"))
         {
             // Validate settings.
