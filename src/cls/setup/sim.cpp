@@ -53,7 +53,7 @@ namespace arc
                    t_json["simulation"]["grid"].parse_child<math::Vec<3>>("max"),
                    t_json["simulation"]["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd,
                    m_spectrometer),
-            m_log_update_period(t_json.parse_child<double>("log_update_period"))
+            m_log_update_period(t_json["system"].parse_child<double>("log_update_period"))
         {
             // Validate settings.
             if (m_roulette_weight < 0.0)
