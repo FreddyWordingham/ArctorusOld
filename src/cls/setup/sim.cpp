@@ -221,7 +221,7 @@ namespace arc
                 const std::string spec_path = json_light.parse_child<std::string>("spec");
 
                 // Print verbose information.
-                VERB(light_name[i] << " material: " << utl::strip_extension(utl::strip_path(mat_path)));
+                VERB(light_name[i] << " material: " << utl::strip_extension(utl::strip_path(spec_path)));
                 VERB(light_name[i] << " mesh    : " << utl::strip_extension(utl::strip_path(mesh_path)));
                 VERB(light_name[i] << " power   : " << power);
                 VERB(light_name[i] << " trans   : " << trans);
