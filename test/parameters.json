@@ -1,5 +1,5 @@
 {
-    "system":        {
+    "system":       {
         "log_update_period": 10.0,
         "max_threads":       4,
         "output_dir_name":   "intralipid_100-0",
@@ -7,14 +7,14 @@
         "pre_render":        false,
         "post_render":       false
     },
-    "optimisations": {
+    "optimisation": {
         "loop_limit": 1e6,
         "roulette":   {
             "weight":   1e-3,
             "chambers": 10
         }
     },
-    "simulation":    {
+    "simulation":   {
         "num_phot":      1e4,
         "grid":          {
             "min":   [-11e-3, -11e-3, -26e-3],
