@@ -168,6 +168,14 @@ namespace arc
                 const std::string mesh_path = json_entity.parse_child<std::string>("mesh");
                 const std::string mat_path  = json_entity.parse_child<std::string>("mat");
 
+                // Print verbose information.
+                VERB(entity_name[i] << " material: " << utl::strip_extension(utl::strip_path(mat_path)));
+                VERB(entity_name[i] << " mesh    : " << utl::strip_extension(utl::strip_path(mesh_path)));
+                VERB(entity_name[i] << " trans   : " << trans);
+                VERB(entity_name[i] << " dir     : " << dir);
+                VERB(entity_name[i] << " rot     : " << rot);
+                VERB(entity_name[i] << " scale   : " << scale);
+
                 // Construct the entity object an add it to the vector of entities.
                 r_entity.emplace_back(equip::Entity(geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale),
                                                     phys::Material(utl::read(mat_path))));
