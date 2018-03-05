@@ -86,6 +86,9 @@ int main(const int t_argc, const char** t_argv)
     LOG("Number of threads: " << num_threads);
     pdt.set_num_threads(num_threads);
 
+    // Get start time of simulation.
+    const std::chrono::steady_clock::time_point sim_start_time = std::chrono::steady_clock::now();
+
     // Set off the threads.
     const unsigned long int num_phot_per_thread = num_phot / num_threads;
     for (unsigned long int  i                   = 0; i < num_threads; ++i)
@@ -98,6 +101,11 @@ int main(const int t_argc, const char** t_argv)
     {
         threads[i].join();
     }
+
+    // Calculate runtime.
+    const double sim_runtime = std::chrono::duration_cast<std::chrono::duration<double>>(
+        std::chrono::steady_clock::now() - sim_start_time).count();
+    LOG("Simulation runtime: " << sim_runtime);
 
     // Save grid data.
     SEC("Saving Data");
