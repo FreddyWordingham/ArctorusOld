@@ -496,7 +496,7 @@ namespace arc
                 phys::Photon phot = m_light[m_light_select.gen_index()].gen_photon(m_aether);
 
                 // Initialise tracked properties.
-                mesh::Cell* cell = nullptr;             //! Pointer to current cell containing the photon.
+                tree::Cell* cell = nullptr;             //! Pointer to current cell containing the photon.
                 double            cell_energy = 0.0;    //! Energy to be added to cell total when exiting current cell.
                 unsigned long int loops       = 0;      //! Number of loops made of the while loop.
 
@@ -759,7 +759,7 @@ namespace arc
          *  @return A tuple containing, the type of event, distance to event, indices of equipment and triangle involved.
          */
         std::tuple<Sim::event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
-                                                                            const mesh::Cell* t_cell) const
+                                                                            const tree::Cell* t_cell) const
         {
             // Determine scatter distance.
             const double scat_dist = -std::log(rng::random()) / t_phot.get_interaction();
