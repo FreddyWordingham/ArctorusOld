@@ -62,6 +62,9 @@ int main(const int t_argc, const char** t_argv)
     arc::utl::create_directory(output_dir);
     LOG("Output directory: " << output_dir);
 
+    // Save run information files.
+    save_build_info(output_dir);
+
     // Set the program seed.
     arc::rng::seed(setup["system"].parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
 
