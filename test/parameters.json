@@ -7,7 +7,7 @@
         "weight":   1e-3,
         "chambers": 10
     },
-    "max_loops":         1e6,
+    "loop_limit":        1e6,
     "num_phot":          1e4,
     "pre_render":        false,
     "post_render":       false,

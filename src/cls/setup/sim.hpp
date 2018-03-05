@@ -64,7 +64,8 @@ namespace arc
 
             //  == FIELDS ==
           private:
-            //  -- Roulette --
+            //  -- Optimisations --
+            const unsigned long int m_loop_limit;
             const double m_roulette_weight;     //! Roulette threshold.
             const double m_roulette_chambers;   //! Number of roulette chambers.
 
