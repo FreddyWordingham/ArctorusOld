@@ -331,7 +331,6 @@ namespace arc
                 VERB(spectrometer_name[i] << " range   : " << range);
                 VERB(spectrometer_name[i] << " bins    : " << bins);
 
-
                 // Construct the spectrometer object an add it to the vector of spectrometers.
                 r_spectrometer
                     .emplace_back(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), range[0],
