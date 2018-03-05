@@ -338,6 +338,16 @@ namespace arc
         //  == METHODS ==
         //  -- Getters --
         /**
+         *  Determine the total number of triangles contained within this cell.
+         *
+         *  @return The total number of triangles contained within this cell.
+         */
+        size_t Cell::get_total_tri() const
+        {
+            return (m_entity_tri_list.size() + m_light_tri_list.size() + m_ccd_tri_list.size() + m_spectrometer.size());
+        }
+
+        /**
          *  Determine the distance to the wall of the cell from the given position travelling along the given direction.
          *
          *  @param  t_pos   Position of the point within the cell.
