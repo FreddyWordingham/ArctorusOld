@@ -116,7 +116,7 @@ int main(const int t_argc, const char** t_argv)
     pdt.save_spectrometer_data(spectrometer_data_dir);
 
     // Render the simulation scene.
-    if (setup.parse_child<bool>("post_render", false))
+    if (setup["system"].parse_child<bool>("post_render", false))
     {
         pdt.render();
     }
