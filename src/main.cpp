@@ -56,7 +56,7 @@ int main(const int t_argc, const char** t_argv)
     LOG("Output directory: " << output_dir);
 
     // Set the program seed.
-    arc::rng::seed(setup.parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
+    arc::rng::seed(setup["system"].parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
 
     // Construct the simulation object.
     SEC("Constructing Simulation");
