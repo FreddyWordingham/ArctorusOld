@@ -4,7 +4,7 @@
         "max_threads":       4,
         "output_dir_name":   "intralipid_100-0",
         "seed":              77,
-        "pre_render":        false,
+        "pre_render":        true,
         "post_render":       false
     },
     "optimisation": {
@@ -19,10 +19,10 @@
         "grid":          {
             "min":   [-11e-3, -11e-3, -26e-3],
             "max":   [11e-3, 11e-3, 34e-3],
-            "cells": [101, 101, 301]
+            "cells": [11, 11, 31]
         },
         "aether":        {
-            "mat": "materials/intralipid_100-0.mat"
+            "mat": "materials/intralipid_010-0.mat"
         },
         "entities":      {
             "detector_mirror": {
