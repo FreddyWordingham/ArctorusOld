@@ -1,58 +1,64 @@
 {
-    "log_update_period": 10.0,
-    "max_threads":       4,
-    "output_dir_name":   "intralipid_100-0",
-    "seed":              77,
-    "roulette":          {
-        "weight":   1e-3,
-        "chambers": 10
+    "system":        {
+        "log_update_period": 10.0,
+        "max_threads":       4,
+        "output_dir_name":   "intralipid_100-0",
+        "seed":              77,
+        "pre_render":        false,
+        "post_render":       false
     },
-    "loop_limit":        1e6,
-    "num_phot":          1e4,
-    "pre_render":        false,
-    "post_render":       false,
-    "grid":              {
-        "min":   [-11e-3, -11e-3, -26e-3],
-        "max":   [11e-3, 11e-3, 34e-3],
-        "cells": [101, 101, 301]
-    },
-    "aether":            {
-        "mat": "materials/intralipid_100-0.mat"
-    },
-    "entities":          {
-        "detector_mirror": {
-            "mesh":  "meshes/detector/mirror.obj",
-            "mat":   "materials/mirror.mat",
-            "scale": [1e-3, 1e-3, 1e-3]
-        },
-        "detector_body":   {
-            "mesh":  "meshes/detector/body_flat.obj",
-            "mat":   "materials/black.mat",
-            "scale": [1e-3, 1e-3, 1e-3]
-        },
-        "vial":            {
-            "mesh":  "meshes/detector/vial.obj",
-            "mat":   "materials/vacuum.mat",
-            "scale": [1e-3, 1e-3, 1e-3]
+    "optimisations": {
+        "loop_limit": 1e6,
+        "roulette":   {
+            "weight":   1e-3,
+            "chambers": 10
         }
     },
-    "lights":            {
-        "detector_led": {
-            "power": 1.0,
-            "mesh":  "meshes/detector/led.obj",
-            "spec":  "spectra/limited_led.spc",
-            "scale": [1e-3, 1e-3, 1e-3]
-        }
-    },
-    "ccds":              {
-    },
-    "spectrometers":     {
-        "detector_spectrometer": {
-            "mesh":  "meshes/detector/spectrometer.obj",
-            "min":   0E-9,
-            "max":   1000E-9,
-            "bins":  100,
-            "scale": [1e-3, 1e-3, 1e-3]
+    "simulation":    {
+        "num_phot":      1e4,
+        "grid":          {
+            "min":   [-11e-3, -11e-3, -26e-3],
+            "max":   [11e-3, 11e-3, 34e-3],
+            "cells": [101, 101, 301]
+        },
+        "aether":        {
+            "mat": "materials/intralipid_100-0.mat"
+        },
+        "entities":      {
+            "detector_mirror": {
+                "mesh":  "meshes/detector/mirror.obj",
+                "mat":   "materials/mirror.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "detector_body":   {
+                "mesh":  "meshes/detector/body_flat.obj",
+                "mat":   "materials/black.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "vial":            {
+                "mesh":  "meshes/detector/vial.obj",
+                "mat":   "materials/vacuum.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            }
+        },
+        "lights":        {
+            "detector_led": {
+                "power": 1.0,
+                "mesh":  "meshes/detector/led.obj",
+                "spec":  "spectra/limited_led.spc",
+                "scale": [1e-3, 1e-3, 1e-3]
+            }
+        },
+        "ccds":          {
+        },
+        "spectrometers": {
+            "detector_spectrometer": {
+                "mesh":  "meshes/detector/spectrometer.obj",
+                "min":   0E-9,
+                "max":   1000E-9,
+                "bins":  100,
+                "scale": [1e-3, 1e-3, 1e-3]
+            }
         }
     }
 }
