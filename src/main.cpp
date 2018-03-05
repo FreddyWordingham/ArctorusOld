@@ -78,7 +78,7 @@ int main(const int t_argc, const char** t_argv)
     // Initialise the threads.
     std::vector<std::thread> threads;
     const unsigned int       num_threads = std::min(std::thread::hardware_concurrency(),
-                                                    setup.parse_child<unsigned int>("max_threads", 1));
+                                                    setup["system"].parse_child<unsigned int>("max_threads", 1));
     if (num_threads == 0)
     {
         ERROR("Unable to run simulation.", "Number of threads can not be zero.");
