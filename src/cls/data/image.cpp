@@ -140,10 +140,14 @@ namespace arc
          *
          *  @param  t_norm  Normalisation value.
          *
+         *  @pre    t_norm must be greater than zero.
+         *
          *  @return A string representation of the image.
          */
         std::string Image::serialise(const double t_norm) const
         {
+            assert(t_norm > 0.0);
+
             // Check there is data to be written.
             if (m_data.empty())
             {
