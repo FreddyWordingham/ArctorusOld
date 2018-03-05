@@ -482,7 +482,7 @@ namespace arc
                     ++loops;
 
                     // Kill if photon is stuck.
-                    if (loops > 1e3)
+                    if (loops > 1e6)
                     {
                         goto kill_photon;
                     }
