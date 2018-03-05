@@ -24,6 +24,12 @@
 
 
 
+//  == FUNCTION PROTOTYPES ==
+//  -- File --
+void save_build_info(const std::string& t_output_dir);
+
+
+
 //  == MAIN ==
 /**
  *  Main function of the Arctorus program.
@@ -55,10 +61,6 @@ int main(const int t_argc, const char** t_argv)
         .parse_child<std::string>("output_dir_name") + "_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
     arc::utl::create_directory(output_dir);
     LOG("Output directory: " << output_dir);
-
-    // Write build information to a file.
-    arc::file::Handle build_info(output_dir + "build_info.txt", std::fstream::out);
-    build_info << arc::config::BUILD_INFO;
 
     // Set the program seed.
     arc::rng::seed(setup["system"].parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
@@ -136,4 +138,22 @@ int main(const int t_argc, const char** t_argv)
     }
 
     return (0);
+}
+
+
+
+//  == FUNCTIONS ==
+//  -- File --
+/**
+ *  Save the current build information.
+ *
+ *  @param  t_output_dir    Data output directory path.
+ */
+void save_build_info(const std::string& t_output_dir)
+{
+    // Create the file handle.
+    arc::file::Handle build_info(t_output_dir + "build_info.txt", std::fstream::out);
+
+    // Write the build information.
+    build_info << arc::config::BUILD_INFO;
 }
