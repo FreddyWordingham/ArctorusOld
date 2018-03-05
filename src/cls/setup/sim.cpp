@@ -165,7 +165,7 @@ namespace arc
                 const auto   scale = json_entity.parse_child<math::Vec<3>>("scale", math::Vec<3>(1.0, 1.0, 1.0));
 
                 // Get file paths.
-                const std::string mesh_path = json_entity.parse_child<std::string>("tree");
+                const std::string mesh_path = json_entity.parse_child<std::string>("mesh");
                 const std::string mat_path  = json_entity.parse_child<std::string>("mat");
 
                 // Print verbose information.
@@ -217,7 +217,7 @@ namespace arc
                 const auto power = json_light.parse_child<double>("power");
 
                 // Get file paths.
-                const std::string mesh_path = json_light.parse_child<std::string>("tree");
+                const std::string mesh_path = json_light.parse_child<std::string>("mesh");
                 const std::string spec_path = json_light.parse_child<std::string>("spec");
 
                 // Print verbose information.
@@ -320,7 +320,7 @@ namespace arc
                 const auto bins  = json_spectrometer.parse_child<size_t>("bins");
 
                 // Get file paths.
-                const std::string mesh_path = json_spectrometer.parse_child<std::string>("tree");
+                const std::string mesh_path = json_spectrometer.parse_child<std::string>("mesh");
 
                 // Print verbose information.
                 VERB(spectrometer_name[i] << " tree    : " << utl::strip_extension(utl::strip_path(mesh_path)));
