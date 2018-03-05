@@ -334,7 +334,7 @@ namespace arc
          *
          *  @param  t_grid  Grid to be added to the scene.
          */
-        void Scene::add_grid(const mesh::Grid& t_grid)
+        void Scene::add_grid(const tree::Grid& t_grid)
         {
             // Add main grid bounds.
             m_grid.emplace_back(Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0},
@@ -361,7 +361,7 @@ namespace arc
                         if (energy_density > 0.0)
                         {
                             // Get the cell.
-                            const mesh::Cell& cell = t_grid.get_cell(i, j, k);
+                            const tree::Cell& cell = t_grid.get_cell(i, j, k);
 
                             // Calculate the cell colour.
                             const std::array<double, 3> col = utl::colourmap::transform_rainbow(
