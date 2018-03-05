@@ -35,6 +35,10 @@ namespace arc
              *
              *  @param  t_x Value to be mapped.
              *
+             *  @post   r_red must be between zero and unity.
+             *  @post   r_green must be between zero and unity.
+             *  @post   r_blue must be between zero and unity.
+             *
              *  @return The colour mapping of the value.
              */
             std::array<double, 3> transform_rainbow(const double t_x)
@@ -48,67 +52,71 @@ namespace arc
                 assert((t_x >= 0.0) && (t_x <= 1.0));
 
                 // Calculate the red component.
-                double red = 0.0;
+                double r_red;
                 if (t_x < 0.0)
                 {
-                    red = 127.0 / 255.0;
+                    r_red = 127.0 / 255.0;
                 }
                 else if (t_x <= 1.0 / 9.0)
                 {
-                    red = 1147.5 * (1.0 / 9.0 - t_x) / 255.0;
+                    r_red = 1147.5 * (1.0 / 9.0 - t_x) / 255.0;
                 }
                 else if (t_x <= 5.0 / 9.0)
                 {
-                    red = 0.0;
+                    r_red = 0.0;
                 }
                 else if (t_x <= 7.0 / 9.0)
                 {
-                    red = 1147.5 * (t_x - 5.0 / 9.0) / 255.0;
+                    r_red = 1147.5 * (t_x - 5.0 / 9.0) / 255.0;
                 }
                 else
                 {
-                    red = 1.0;
+                    r_red = 1.0;
                 }
 
                 // Calculate the green component.
-                double green = 0.0;
+                double r_green;
                 if (t_x <= 1.0 / 9.0)
                 {
-                    green = 0.0;
+                    r_green = 0.0;
                 }
                 else if (t_x <= 3.0 / 9.0)
                 {
-                    green = 1147.5 * (t_x - 1.0 / 9.0) / 255.0;
+                    r_green = 1147.5 * (t_x - 1.0 / 9.0) / 255.0;
                 }
                 else if (t_x <= 7.0 / 9.0)
                 {
-                    green = 1.0;
+                    r_green = 1.0;
                 }
                 else if (t_x <= 1.0)
                 {
-                    green = 1.0 - 1147.5 * (t_x - 7.0 / 9.0) / 255.0;
+                    r_green = 1.0 - 1147.5 * (t_x - 7.0 / 9.0) / 255.0;
                 }
                 else
                 {
-                    green = 0.0;
+                    r_green = 0.0;
                 }
 
                 // Calculate the blue component.
-                double blue = 0.0;
+                double r_blue;
                 if (t_x <= 3.0 / 9.0)
                 {
-                    blue = 1.0;
+                    r_blue = 1.0;
                 }
                 else if (t_x <= 5.0 / 9.0)
                 {
-                    blue = 1.0 - 1147.5 * (t_x - 3.0 / 9.0) / 255.0;
+                    r_blue = 1.0 - 1147.5 * (t_x - 3.0 / 9.0) / 255.0;
                 }
                 else
                 {
-                    blue = 0.0;
+                    r_blue = 0.0;
                 }
 
-                return (std::array<double, 3>({{red, green, blue}}));
+                assert((r_red >= 0.0) && (r_red <= 1.0));
+                assert((r_green >= 0.0) && (r_green <= 1.0));
+                assert((r_blue >= 0.0) && (r_blue <= 1.0));
+
+                return (std::array<double, 3>({{r_red, r_green, r_blue}}));
             }
 
 

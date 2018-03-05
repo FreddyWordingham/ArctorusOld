@@ -88,18 +88,22 @@ namespace arc
          *  Generate a base value through bitwise operations.
          *  All values have an equal probability of generation over time.
          *
-         *  @return A sudo random base value.
+         *  @return A sudo-random base value.
          */
         Uniform::base Uniform::gen_base()
         {
-            m_u    = m_u + static_cast<base>(2862933555777941757) + static_cast<base>(7046029254386353087);
+            m_mutex.lock();
+
+            m_u = m_u + static_cast<base>(2862933555777941757) + static_cast<base>(7046029254386353087);
             m_v ^= m_v >> 17;
             m_v ^= m_v << 31;
             m_v ^= m_v >> 8;
-            m_w    = static_cast<base>(4294957665) * (m_w & 0xffffffff) + (m_w >> 32);
+            m_w = static_cast<base>(4294957665) * (m_w & 0xffffffff) + (m_w >> 32);
             base x = m_u ^(m_u << 2);
             x ^= x >> 35;
             x ^= x << 4;
+
+            m_mutex.unlock();
 
             return ((x + m_v) ^ m_w);
         }

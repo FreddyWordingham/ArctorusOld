@@ -20,6 +20,7 @@
 #include <chrono>
 #include <cstdio>
 #include <iostream>
+#include <mutex>
 #include <sstream>
 #include <unistd.h>
 #include <vector>
@@ -138,7 +139,8 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Output Stream --
-            std::ostream& m_stream; //! Output stream to write to.
+            mutable std::mutex m_stream_mutex;  //! Protects writes to the stream.
+            std::ostream& m_stream;             //! Output stream to write to.
 
             //  -- Colouring --
             const std::array<std::string, TOTAL_COLS> m_text_col;   //! Array of colour escape strings.
@@ -151,8 +153,9 @@ namespace arc
             const std::string m_padding_string; //! Padding string.
 
             //  -- Counters --
-            int m_num_warnings; //! Count of the total number of reported warnings.
-            int m_num_errors;   //! Count of the total number of reported errors.
+            mutable std::mutex m_counter_mutex; //! Protects counters.
+            int                m_num_warnings;  //! Count of the total number of reported warnings.
+            int                m_num_errors;    //! Count of the total number of reported errors.
 
 
             //  == INSTANTIATION ==
@@ -289,7 +292,9 @@ namespace arc
             timestamp.resize(TIME_WIDTH, ' ');
 
             // Print the temporary message.
+            m_stream_mutex.lock();
             m_stream << timestamp << m_text_col[YELLOW] << m_log_type[TEMP] << text << m_text_col[RESET] << "\r";
+            m_stream_mutex.unlock();
         }
 
 

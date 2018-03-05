@@ -14,6 +14,10 @@
 
 
 //  == INCLUDES ==
+//  -- System --
+#include <mutex>
+#include <thread>
+
 //  -- Classes --
 #include "cls/data/json.hpp"
 #include "cls/detector/ccd.hpp"
@@ -33,7 +37,7 @@ namespace arc
 
 
         //  == SETTINGS ==
-        //  -- Numerical Simultion --
+        //  -- Numerical Simulation --
         constexpr const double SMOOTHING_LENGTH = 1E-12; //! Smoothing length applied to stop photons getting stuck.
 
 
@@ -44,11 +48,26 @@ namespace arc
          */
         class Sim
         {
+            //  == ENUMERATIONS ==
+            /**
+             *  Enumeration of the main types of events a photon can undergo during the simulation.
+             */
+            enum class event
+            {
+                SCATTER,            //! Scattering event.
+                CELL_CROSS,         //! Cell wall crossing.
+                ENTITY_HIT,         //! Entity triangle hit.
+                CCD_HIT,            //! Ccd triangle hit.
+                SPECTROMETER_HIT    //! Spectrometer triangle hit.
+            };
+
+
             //  == FIELDS ==
           private:
-            //  -- Roulette --
-            const double m_roulette_weight;     //! Roulette threshold.
-            const double m_roulette_chambers;   //! Number of roulette chambers.
+            //  -- Optimisations --
+            const unsigned long int m_loop_limit;           //! Maximum number of loops a photon may make.
+            const double            m_roulette_weight;      //! Roulette threshold.
+            const double            m_roulette_chambers;    //! Number of roulette chambers.
 
             //  -- Equipment --
             const phys::Material                m_aether;       //! Aether material.
@@ -61,10 +80,19 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
-            mesh::Grid                                         m_grid;  //! Simulation grid.
+            mesh::Grid m_grid;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
-            std::vector<std::vector<graphical::point::Photon>> m_path;  //! Vector of photon paths.
+            std::vector<std::vector<graphical::point::Photon>> m_path;          //! Vector of photon paths.
+            std::mutex                                         m_path_mutex;    //! Protects path data.
 #endif
+
+
+            //  -- Threads --
+            std::mutex          m_ccd_mutex;            //! Protects the ccd objects data.
+            std::mutex          m_spectrometer_mutex;   //! Protects the spectrometer objects data.
+            std::mutex          m_grid_mutex;           //! Protects the grid data.
+            std::vector<double> m_thread_progress;      //! Current progress of each thread.
+            const double        m_log_update_period;    //! Period with which to update a progress print.
 
 
             //  == INSTANTIATION ==
@@ -85,6 +113,9 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Setters --
+            void set_num_threads(unsigned int t_num_threads);
+
             //  -- Saving --
             void save_grid_images(const std::string& t_output_dir) const;
             void save_ccd_images(const std::string& t_output_dir) const;
@@ -93,8 +124,14 @@ namespace arc
             //  -- Rendering --
             void render() const;
 
-            //  -- Running --
-            void run_photons(unsigned long int t_num_phot);
+            //  -- Simulation --
+            void run_photons(unsigned long int t_num_phot, size_t t_thread_index);
+
+          private:
+            //  -- Simulation --
+            std::tuple<event, double, size_t, size_t> determine_event(const phys::Photon& t_phot,
+                                                                      const mesh::Cell* t_cell) const;
+            void log_progress() const;
         };
 
 

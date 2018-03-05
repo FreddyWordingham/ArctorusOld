@@ -208,7 +208,9 @@ namespace arc
             assert(!t_cause.empty());
 
             // Increment the number of recorded warnings.
+            m_counter_mutex.lock();
             ++m_num_warnings;
+            m_counter_mutex.unlock();
 
             // Create the text string.
             std::string text = t_symptom + "\n" + t_cause;
@@ -239,7 +241,9 @@ namespace arc
             assert(!t_cause.empty());
 
             // Increment the number of recorded errors.
+            m_counter_mutex.lock();
             ++m_num_errors;
+            m_counter_mutex.unlock();
 
             // Create the text string.
             std::string text = "File: " + t_file + "\nLine: " + t_line + "\n" + t_symptom + "\n" + t_cause;
@@ -258,7 +262,9 @@ namespace arc
          */
         void Logger::print_hr(const char t_hr_char) const
         {
+            m_stream_mutex.lock();
             m_stream << std::string(LINE_WIDTH, t_hr_char) << "\n";
+            m_stream_mutex.unlock();
         }
 
         /**
@@ -291,7 +297,9 @@ namespace arc
                 utl::find_and_replace(&line, "R", m_text_col[RED] + "~" + m_text_col[RESET]);
 
                 // Print the line with padding either side.
+                m_stream_mutex.lock();
                 m_stream << pre_title_pad << line << post_title_pad << "\n";
+                m_stream_mutex.unlock();
             }
 
             // Print middle horizontal rule.
@@ -303,7 +311,9 @@ namespace arc
             const std::string post_build_pad(LINE_WIDTH - (build.size() + pre_build_pad.size()), ' ');
 
             // Print the build information string.
+            m_stream_mutex.lock();
             m_stream << pre_build_pad << build << post_build_pad << "\n";
+            m_stream_mutex.unlock();
 
             // Print trailing horizontal rule.
             print_hr('=');
@@ -332,12 +342,14 @@ namespace arc
             timestamp.resize(TIME_WIDTH, ' ');
 
             // Print the lines.
+            m_stream_mutex.lock();
             m_stream << timestamp << m_text_col[t_col] << m_log_type[t_type] << lines[0];
             for (size_t i = 1; i < lines.size(); ++i)
             {
                 m_stream << "\n" << m_padding_string << lines[i];
             }
             m_stream << m_text_col[RESET] << "\n";
+            m_stream_mutex.unlock();
         }
 
 

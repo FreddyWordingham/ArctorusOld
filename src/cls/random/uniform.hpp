@@ -18,6 +18,7 @@
 #include <cassert>
 #include <cstdint>
 #include <limits>
+#include <mutex>
 
 
 
@@ -31,7 +32,7 @@ namespace arc
 
         //  == CLASS ==
         /**
-         *  A sudo-random number generator capable of producing sudo random numbers with uniform probability.
+         *  A sudo-random number generator capable of producing sudo-random numbers with uniform probability.
          *  Primarily used to generate random doubles between zero and unity.
          */
         class Uniform
@@ -44,6 +45,9 @@ namespace arc
 
             //  == FIELDS ==
           private:
+            //  -- Mutex --
+            std::mutex m_mutex; //! Protects the gen_base method.
+
             //  -- Seed --
             const base m_seed;  //! Seed used to initialise the generator.
 

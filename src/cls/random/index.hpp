@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- System --
+#include <cstddef>
 #include <vector>
 
 
@@ -50,7 +51,7 @@ namespace arc
 
           private:
             //  -- Initialisation --
-            std::vector<double> init_cdf(const std::vector<double> &t_p) const;
+            std::vector<double> init_cdf(const std::vector<double>& t_p) const;
 
 
             //  == METHODS ==

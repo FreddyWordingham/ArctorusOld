@@ -71,7 +71,7 @@ namespace arc
             }
 
             // Normalise the cdf values.
-            for (size_t i=0; i<r_cdf.size(); ++i)
+            for (size_t i = 0; i < r_cdf.size(); ++i)
             {
                 r_cdf[i] /= r_cdf.back();
             }

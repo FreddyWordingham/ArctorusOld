@@ -361,7 +361,7 @@ namespace arc
                         if (energy_density > 0.0)
                         {
                             // Get the cell.
-                            const auto cell = t_grid.get_cell(i, j, k);
+                            const mesh::Cell& cell = t_grid.get_cell(i, j, k);
 
                             // Calculate the cell colour.
                             const std::array<double, 3> col = utl::colourmap::transform_rainbow(
@@ -890,7 +890,7 @@ namespace arc
             glUseProgram(m_diffuse_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 
-            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), ENTITIY_AMB_POW);
+            glUniform1f(m_diffuse_shader.get_amb_pow_uni(), ENTITY_AMB_POW);
 
             for (size_t i = 0; i < m_entity.size(); ++i)
             {

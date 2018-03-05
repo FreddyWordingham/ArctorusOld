@@ -12,12 +12,6 @@
 
 
 
-//  == INCLUDES ==
-//  -- General --
-#include "gen/config.hpp"
-
-
-
 //  == NAMESPACE ==
 namespace arc
 {

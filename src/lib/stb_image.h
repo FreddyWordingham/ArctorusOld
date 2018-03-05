@@ -3552,10 +3552,14 @@ static int stbi__process_scan_header(stbi__jpeg* z)
         } // no match
         z->img_comp[which].hd = q >> 4;
         if (z->img_comp[which].hd > 3)
+        {
             return stbi__err("bad DC huff", "Corrupt JPEG");
+        }
         z->img_comp[which].ha = q & 15;
         if (z->img_comp[which].ha > 3)
+        {
             return stbi__err("bad AC huff", "Corrupt JPEG");
+        }
         z->order[i] = which;
     }
 
@@ -3627,7 +3631,9 @@ static int stbi__process_frame_header(stbi__jpeg* z, int scan)
     } // JPEG
     p = stbi__get8(s);
     if (p != 8)
-        return stbi__err("only 8-bit", "JPEG format not supported: 8-bit only"); // JPEG baseline
+    {
+        return stbi__err("only 8-bit", "JPEG format not supported: 8-bit only");
+    } // JPEG baseline
     s->img_y = stbi__get16be(s);
     if (s->img_y == 0)
         return stbi__err("no header height",
@@ -4900,7 +4906,9 @@ static int stbi__parse_huffman_block(stbi__zbuf* a)
             if (zout >= a->zout_end)
             {
                 if (!stbi__zexpand(a, zout, 1))
+                {
                     return 0;
+                }
                 zout = a->zout;
             }
             *zout++ = (char) z;
@@ -5069,16 +5077,26 @@ static int stbi__parse_uncompressed_block(stbi__zbuf* a)
     STBI_ASSERT(a->num_bits == 0);
     // now fill header the normal way
     while (k < 4)
+    {
         header[k++] = stbi__zget8(a);
+    }
     len  = header[1] * 256 + header[0];
     nlen = header[3] * 256 + header[2];
     if (nlen != (len ^ 0xffff))
+    {
         return stbi__err("zlib corrupt", "Corrupt PNG");
+    }
     if (a->zbuffer + len > a->zbuffer_end)
+    {
         return stbi__err("read past buffer", "Corrupt PNG");
+    }
     if (a->zout + len > a->zout_end)
+    {
         if (!stbi__zexpand(a, a->zout, len))
+        {
             return 0;
+        }
+    }
     memcpy(a->zout, a->zbuffer, len);
     a->zbuffer += len;
     a->zout += len;
@@ -5096,7 +5114,9 @@ static int stbi__parse_zlib_header(stbi__zbuf* a)
         return stbi__err("bad zlib header", "Corrupt PNG");
     } // zlib spec
     if (flg & 32)
-        return stbi__err("no preset dict", "Corrupt PNG"); // preset dictionary not allowed in png
+    {
+        return stbi__err("no preset dict", "Corrupt PNG");
+    } // preset dictionary not allowed in png
     if (cm != 8)
         return stbi__err("bad compression", "Corrupt PNG"); // DEFLATE required for png
     // window = 1 << (8 + cinfo)... but who cares, we fully buffer output
@@ -6267,37 +6287,53 @@ static int stbi__parse_png_file(stbi__png* z, int scan, int req_comp)
                     return 0;
                 } // zlib should set error
                 STBI_FREE(z->idata);
-                z->idata         = NULL;
+                z->idata = NULL;
                 if ((req_comp == s->img_n + 1 && req_comp != 3 && !pal_img_n) || has_trans)
+                {
                     s->img_out_n = s->img_n + 1;
+                }
                 else
+                {
                     s->img_out_n = s->img_n;
+                }
                 if (!stbi__create_png_image(z, z->expanded, raw_len, s->img_out_n, z->depth, color, interlace))
+                {
                     return 0;
+                }
                 if (has_trans)
                 {
                     if (z->depth == 16)
                     {
                         if (!stbi__compute_transparency16(z, tc16, s->img_out_n))
+                        {
                             return 0;
+                        }
                     }
                     else
                     {
                         if (!stbi__compute_transparency(z, tc, s->img_out_n))
+                        {
                             return 0;
+                        }
                     }
                 }
                 if (is_iphone && stbi__de_iphone_flag && s->img_out_n > 2)
+                {
                     stbi__de_iphone(z);
+                }
                 if (pal_img_n)
                 {
                     // pal_img_n == 3 or 4
-                    s->img_n         = pal_img_n; // record the actual colors we had
-                    s->img_out_n     = pal_img_n;
+                    s->img_n     = pal_img_n; // record the actual colors we had
+                    s->img_out_n = pal_img_n;
                     if (req_comp >= 3)
+                    {
                         s->img_out_n = req_comp;
+                    }
                     if (!stbi__expand_png_palette(z, palette, pal_len, s->img_out_n))
+                    {
                         return 0;
+                    }
                 }
                 else if (has_trans)
                 {
@@ -6697,19 +6733,27 @@ static void* stbi__bmp_load(stbi__context* s, int* x, int* y, int* comp, int req
     if (info.hsz == 12)
     {
         if (info.bpp < 24)
+        {
             psize = (info.offset - 14 - 24) / 3;
+        }
     }
     else
     {
         if (info.bpp < 16)
+        {
             psize = (info.offset - 14 - info.hsz) >> 2;
+        }
     }
 
     s->img_n = ma ? 4 : 3;
-    if (req_comp && req_comp >= 3) // we can directly decode 3 or 4
+    if (req_comp && req_comp >= 3)
+    { // we can directly decode 3 or 4
         target = req_comp;
+    }
     else
-        target = s->img_n; // if they want monochrome, we'll post-convert
+    {
+        target = s->img_n;
+    } // if they want monochrome, we'll post-convert
 
     // sanity-check size
     if (!stbi__mad3sizes_valid(target, s->img_x, s->img_y, 0))
@@ -7044,7 +7088,9 @@ static int stbi__tga_test(stbi__context* s)
     if (tga_color_type == 1)
     { // colormapped (paletted) image
         if (sz != 1 && sz != 9)
-            goto errorEnd; // colortype 1 demands image type 1 or 9
+        {
+            goto errorEnd;
+        } // colortype 1 demands image type 1 or 9
         stbi__skip(s, 4);       // skip index of first colormap entry and number of entries
         sz = stbi__get8(s);    //   check bits per palette color entry
         if ((sz != 8) && (sz != 15) && (sz != 16) && (sz != 24) && (sz != 32))
@@ -7054,11 +7100,15 @@ static int stbi__tga_test(stbi__context* s)
     else
     { // "normal" image w/o colormap
         if ((sz != 2) && (sz != 3) && (sz != 10) && (sz != 11))
-            goto errorEnd; // only RGB or grey allowed, +/- RLE
+        {
+            goto errorEnd;
+        } // only RGB or grey allowed, +/- RLE
         stbi__skip(s, 9); // skip colormap specification and image x/y origin
     }
     if (stbi__get16le(s) < 1)
-        goto errorEnd;      //   test width
+    {
+        goto errorEnd;
+    }      //   test width
     if (stbi__get16le(s) < 1)
         goto errorEnd;      //   test height
     sz = stbi__get8(s);   //   bits per pixel
@@ -8066,10 +8116,14 @@ static int stbi__gif_header(stbi__context* s, stbi__gif* g, int* comp, int is_in
     }  // can't actually tell whether it's 3 or 4 until we parse the comments
 
     if (is_info)
+    {
         return 1;
+    }
 
     if (g->flags & 0x80)
+    {
         stbi__gif_parse_colortable(s, g->pal, 2 << (g->flags & 7), -1);
+    }
 
     return 1;
 }
@@ -8273,7 +8327,9 @@ static stbi_uc* stbi__gif_load_next(stbi__context* s, stbi__gif* g, int* comp, i
         g->background = (stbi_uc*) stbi__malloc(4 * g->w * g->h);
         g->history    = (stbi_uc*) stbi__malloc(g->w * g->h);
         if (g->out == 0)
+        {
             return stbi__errpuc("outofmem", "Out of memory");
+        }
 
         // image is treated as "tranparent" at the start - ie, nothing overwrites the current background;
         // background colour is only used for pixels that are not rendered first frame, after that "background"
@@ -8563,7 +8619,9 @@ static void* stbi__gif_load(stbi__context* s, int* x, int* y, int* comp, int req
         // moved conversion to after successful load so that the same
         // can be done for multiple frames.
         if (req_comp && req_comp != 4)
+        {
             u = stbi__convert_format(u, 4, req_comp, g.w, g.h);
+        }
     }
 
     // free buffers needed for multiple frame loading;
