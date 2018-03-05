@@ -13,6 +13,7 @@
 #include <thread>
 
 //  -- General --
+#include "gen/config.hpp"
 #include "gen/math.hpp"
 
 //  -- Utility --
@@ -54,6 +55,10 @@ int main(const int t_argc, const char** t_argv)
         .parse_child<std::string>("output_dir_name") + "_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
     arc::utl::create_directory(output_dir);
     LOG("Output directory: " << output_dir);
+
+    // Write build information to a file.
+    arc::file::Handle build_info(output_dir + "build_info.txt", std::fstream::out);
+    build_info << arc::
 
     // Set the program seed.
     arc::rng::seed(setup["system"].parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
