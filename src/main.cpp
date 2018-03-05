@@ -63,7 +63,7 @@ int main(const int t_argc, const char** t_argv)
     arc::setup::Sim pdt(setup);
 
     // Render the simulation scene.
-    if (setup.parse_child<bool>("pre_render", false))
+    if (setup["system"].parse_child<bool>("pre_render", false))
     {
         pdt.render();
     }
