@@ -46,7 +46,7 @@ namespace arc
             m_aether(init_aether(t_json["simulation"]["aether"])),
             m_entity(init_entity(t_json["simulation"]["entities"])),
             m_light(init_light(t_json["simulation"]["lights"])),
-            m_ccd(init_ccd(t_json["ccds"])),
+            m_ccd(init_ccd(t_json["simulation"]["ccds"])),
             m_spectrometer(init_spectrometer(t_json["spectrometers"])),
             m_light_select(init_light_select()),
             m_grid(t_json["grid"].parse_child<math::Vec<3>>("min"), t_json["grid"].parse_child<math::Vec<3>>("max"),
