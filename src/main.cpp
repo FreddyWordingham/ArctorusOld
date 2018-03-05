@@ -72,7 +72,7 @@ int main(const int t_argc, const char** t_argv)
     SEC("Running Simulation");
 
     // Get the number of photons to run.
-    const auto num_phot                  = setup.parse_child<unsigned long int>("num_phot");
+    const auto num_phot                  = setup["simulation"].parse_child<unsigned long int>("num_phot");
     LOG("Number of photons to run: " << num_phot);
 
     // Initialise the threads.
