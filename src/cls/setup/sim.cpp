@@ -726,6 +726,7 @@ namespace arc
         {
             // Determine scatter distance.
             const double scat_dist = -std::log(rng::random()) / t_phot.get_interaction();
+            assert(scat_dist > 0.0);
 
             // Determine the cell distance.
             const double cell_dist = t_cell->get_dist_to_wall(t_phot.get_pos(), t_phot.get_dir());
