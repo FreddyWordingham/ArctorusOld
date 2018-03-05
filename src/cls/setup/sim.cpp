@@ -484,6 +484,8 @@ namespace arc
                     // Kill if photon is stuck.
                     if (loops > 1e6)
                     {
+                        WARN("Photon killed early.", "Number of loops exceeded set limit.");
+
                         goto kill_photon;
                     }
 
