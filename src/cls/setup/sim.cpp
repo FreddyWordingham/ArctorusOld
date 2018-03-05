@@ -220,6 +220,15 @@ namespace arc
                 const std::string mesh_path = json_light.parse_child<std::string>("mesh");
                 const std::string spec_path = json_light.parse_child<std::string>("spec");
 
+                // Print verbose information.
+                VERB(light_name[i] << " material: " << utl::strip_extension(utl::strip_path(mat_path)));
+                VERB(light_name[i] << " mesh    : " << utl::strip_extension(utl::strip_path(mesh_path)));
+                VERB(light_name[i] << " power   : " << power);
+                VERB(light_name[i] << " trans   : " << trans);
+                VERB(light_name[i] << " dir     : " << dir);
+                VERB(light_name[i] << " rot     : " << rot);
+                VERB(light_name[i] << " scale   : " << scale);
+
                 // Construct the light object an add it to the vector of lights.
                 r_light.emplace_back(
                     equip::Light(geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), phys::Spectrum(utl::read(spec_path)),
