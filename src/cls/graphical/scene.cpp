@@ -388,7 +388,7 @@ namespace arc
             std::vector<Vertex> vertices;
             vertices.reserve(t_ent.get_mesh().get_num_tri() * 3);
 
-            // Add vertices into list from mesh.
+            // Add vertices into list from tree.
             for (size_t i = 0; i < t_ent.get_mesh().get_num_tri(); ++i)
             {
                 for (size_t j = 0; j < 3; ++j)
@@ -420,7 +420,7 @@ namespace arc
             std::vector<Vertex> vertices;
             vertices.reserve(t_light.get_mesh().get_num_tri() * 3);
 
-            // Add vertices into list from mesh.
+            // Add vertices into list from tree.
             for (size_t i = 0; i < t_light.get_mesh().get_num_tri(); ++i)
             {
                 for (size_t j = 0; j < 3; ++j)
@@ -452,7 +452,7 @@ namespace arc
             std::vector<Vertex> vertices;
             vertices.reserve(t_ccd.get_mesh().get_num_tri() * 3);
 
-            // Add vertices into list from mesh.
+            // Add vertices into list from tree.
             for (size_t i = 0; i < t_ccd.get_mesh().get_num_tri(); ++i)
             {
                 for (size_t j = 0; j < 3; ++j)
@@ -484,7 +484,7 @@ namespace arc
             std::vector<Vertex> vertices;
             vertices.reserve(t_spectrometer.get_mesh().get_num_tri() * 3);
 
-            // Add vertices into list from mesh.
+            // Add vertices into list from tree.
             for (size_t i = 0; i < t_spectrometer.get_mesh().get_num_tri(); ++i)
             {
                 for (size_t j = 0; j < 3; ++j)
@@ -886,7 +886,7 @@ namespace arc
          */
         void Scene::draw_entities() const
         {
-            // Draw diffusely lit prop mesh.
+            // Draw diffusely lit prop tree.
             glUseProgram(m_diffuse_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 
@@ -934,7 +934,7 @@ namespace arc
          */
         void Scene::draw_lights() const
         {
-            // Draw diffusely lit prop mesh.
+            // Draw diffusely lit prop tree.
             glUseProgram(m_diffuse_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 
@@ -982,7 +982,7 @@ namespace arc
          */
         void Scene::draw_ccds() const
         {
-            // Draw diffusely lit prop mesh.
+            // Draw diffusely lit prop tree.
             glUseProgram(m_diffuse_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 
@@ -1030,7 +1030,7 @@ namespace arc
          */
         void Scene::draw_spectrometers() const
         {
-            // Draw diffusely lit prop mesh.
+            // Draw diffusely lit prop tree.
             glUseProgram(m_diffuse_shader.get_handle());
             glPolygonMode(GL_FRONT_AND_BACK, m_toggle_filled_tris ? GL_FILL : GL_LINE);
 

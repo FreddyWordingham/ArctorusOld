@@ -75,7 +75,7 @@ namespace arc
          */
         phys::Photon Light::gen_photon(const phys::Material& t_mat) const
         {
-            // Get a random position and normal from the mesh.
+            // Get a random position and normal from the tree.
             math::Vec<3> pos, norm;
             std::tie(pos, norm) = m_mesh.get_tri(m_tri_select.gen_index()).gen_random_pos_and_norm();
 
