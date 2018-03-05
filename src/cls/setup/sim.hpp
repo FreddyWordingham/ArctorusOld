@@ -65,9 +65,9 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Optimisations --
-            const unsigned long int m_loop_limit;
-            const double m_roulette_weight;     //! Roulette threshold.
-            const double m_roulette_chambers;   //! Number of roulette chambers.
+            const unsigned long int m_loop_limit;           //! Maximum number of loops a photon may make.
+            const double            m_roulette_weight;      //! Roulette threshold.
+            const double            m_roulette_chambers;    //! Number of roulette chambers.
 
             //  -- Equipment --
             const phys::Material                m_aether;       //! Aether material.
