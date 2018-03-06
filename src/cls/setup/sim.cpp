@@ -603,7 +603,7 @@ namespace arc
                             if (dist < SMOOTHING_LENGTH)
                             {
                                 m_counter_mutex.lock();
-                                ++m_error_prox;
+                                m_error_prox += phot.get_weight();
                                 m_counter_mutex.unlock();
 
                                 goto kill_photon;

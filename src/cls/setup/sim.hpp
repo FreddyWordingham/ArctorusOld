@@ -87,7 +87,7 @@ namespace arc
 #endif
 
             //  -- Counters --
-            unsigned long int m_error_prox = 0; //! A count of the number photons removed from simulation due to proximity.
+            double m_error_prox = 0.0;  //! Total weight of photons removed from sim due to proximity errors.
 
             //  -- Threads --
             std::mutex          m_ccd_mutex;            //! Protects the ccd objects data.
