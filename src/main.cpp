@@ -27,6 +27,7 @@
 
 //  == FUNCTION PROTOTYPES ==
 //  -- File --
+arc::data::Json read_setup_file(const int t_argc, const char** t_argv);
 void save_run_info(const std::string& t_output_dir);
 
 
@@ -44,18 +45,7 @@ int main(const int t_argc, const char** t_argv)
 {
     SEC("Initialising Arctorus");
 
-    // Check the number of command line arguments.
-    if (t_argc != 2)
-    {
-        ERROR("Invalid number of command line arguments passed.", "./path/to/arctorus <parameters.json>");
-    }
-
-    // Convert first command line argument to a string.
-    const std::string parameters_filepath(t_argv[1]);
-    LOG("Setup file: '" << parameters_filepath << "'.");
-
-    // Create the setup json file.
-    const arc::data::Json setup("setup_file", arc::utl::read(parameters_filepath));
+    const arc::data::Json setup = read_setup_file(t_argc, t_argv);
 
     // Create output directory and check it was created successfully,
     const std::string output_dir = "output_" + setup["system"]
@@ -148,6 +138,28 @@ int main(const int t_argc, const char** t_argv)
 
 //  == FUNCTIONS ==
 //  -- File --
+/**
+ *  Read the setup json file.
+ *
+ *  @param  t_argc  Command line argument count.
+ *  @param  t_argv  Command line argument vector.
+ */
+arc::data::Json read_setup_file(const int t_argc, const char** t_argv)
+{
+    // Check the number of command line arguments.
+    if (t_argc != 2)
+    {
+        ERROR("Invalid number of command line arguments passed.", "./path/to/arctorus <parameters.json>");
+    }
+
+    // Convert first command line argument to a string.
+    const std::string parameters_filepath(t_argv[1]);
+    LOG("Setup file: '" << parameters_filepath << "'.");
+
+    // Create the setup json file.
+    return (arc::data::Json("setup_file", arc::utl::read(parameters_filepath)));
+}
+
 /**
  *  Save the current run information.
  *
