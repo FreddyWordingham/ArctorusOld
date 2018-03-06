@@ -96,7 +96,7 @@ namespace arc
             if ((t_mode == std::fstream::out) && (t_header))
             {
                 r_file << COMMENT_CHAR << " Created by Arctorus: " << utl::create_timestamp() << "\n";
-                r_file << COMMENT_CHAR << " Build: " << config::BUILD_INFO << "\n";
+                r_file << COMMENT_CHAR << " Build: " << config::BUILD_STRING << "\n";
             }
 
             assert(r_file.is_open());
