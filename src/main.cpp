@@ -149,7 +149,7 @@ int main(const int t_argc, const char** t_argv)
 //  == FUNCTIONS ==
 //  -- File --
 /**
- *  Save the current build information.
+ *  Save the current run information.
  *
  *  @param  t_output_dir    Data output directory path.
  */
@@ -159,6 +159,9 @@ void save_run_info(const std::string& t_output_dir)
     arc::file::Handle run_info(t_output_dir + "run_info.txt", std::fstream::out);
 
     // Write the build information.
-    run_info << arc::config::BUILD_INFO;
-    run_info << "Working directory: " << std::filesystem::current_path();
+    run_info << arc::config::BUILD_INFO << "\n";
+
+    // Write current working directory.
+    char buffer[1024];
+    run_info << "Working directory: " << getcwd(buffer, sizeof(buffer)) << "\n";
 }
