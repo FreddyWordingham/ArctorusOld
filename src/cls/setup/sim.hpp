@@ -117,6 +117,9 @@ namespace arc
 
             //  == METHODS ==
           public:
+            //  -- Getters --
+            void get_error_report() const;
+
             //  -- Setters --
             void set_num_threads(unsigned int t_num_threads);
 

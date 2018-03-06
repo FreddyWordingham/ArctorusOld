@@ -360,6 +360,27 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Report the total number of errors that occured during the simulation.
+         */
+        void Sim::get_error_report() const
+        {
+            // Calculate total error.
+            const double total_error = m_error_loop + m_error_prox;
+
+            if (total_error > 0.0)
+            {
+                WARN("Photon weight was lost.", "Total weight lost to proximity errors : " << m_error_prox);
+                WARN("Photon weight was lost.", "Total weight lost to exceeding set loop limit : " << m_error_prox);
+            }
+            else
+            {
+                LOG("No errors occured during the photon loop.");
+            }
+        }
+
+
         //  -- Setters --
         /**
          *  Set the number of threads by initialising the thread progress vector.
