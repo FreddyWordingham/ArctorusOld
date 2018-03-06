@@ -86,7 +86,6 @@ namespace arc
             std::mutex                                         m_path_mutex;    //! Protects path data.
 #endif
 
-
             //  -- Threads --
             std::mutex          m_ccd_mutex;            //! Protects the ccd objects data.
             std::mutex          m_spectrometer_mutex;   //! Protects the spectrometer objects data.
