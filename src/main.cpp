@@ -27,7 +27,8 @@
 
 //  == FUNCTION PROTOTYPES ==
 //  -- File --
-arc::data::Json read_setup_file(const int t_argc, const char** t_argv);
+arc::data::Json read_setup_file(int t_argc, const char** t_argv);
+std::string create_output_dir(const std::string& t_dir_name);
 void save_run_info(const std::string& t_output_dir);
 
 
@@ -48,10 +49,7 @@ int main(const int t_argc, const char** t_argv)
     const arc::data::Json setup = read_setup_file(t_argc, t_argv);
 
     // Create output directory and check it was created successfully,
-    const std::string output_dir = "output_" + setup["system"]
-        .parse_child<std::string>("output_dir_name") + "_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
-    arc::utl::create_directory(output_dir);
-    LOG("Output directory: " << output_dir);
+    create_output_dir(setup["system"].parse_child<std::string>("output_dir_name"));
 
     // Save run information files.
     save_run_info(output_dir);
@@ -158,6 +156,25 @@ arc::data::Json read_setup_file(const int t_argc, const char** t_argv)
 
     // Create the setup json file.
     return (arc::data::Json("setup_file", arc::utl::read(parameters_filepath)));
+}
+
+/**
+ *  Create the output directory.
+ *
+ *  @param  t_dir_name  The output directory name.
+ */
+std::string create_output_dir(const std::string& t_dir_name)
+{
+    // Create the full directory name.
+    const std::string output_dir = "output_" + t_dir_name + "_" + arc::utl::create_timestamp("%Y%m%d%H%M%S") + "/";
+
+    // Create the directory.
+    arc::utl::create_directory(output_dir);
+
+    // Report directory name.
+    LOG("Output directory: " << output_dir);
+
+    return (output_dir);
 }
 
 /**
