@@ -602,7 +602,10 @@ namespace arc
                             // Check for close-collision.
                             if (dist < SMOOTHING_LENGTH)
                             {
-                                //WARN("Unable to simulate photon.", "Distance to entity is smaller than the smoothing length.");
+                                m_counter_mutex.lock();
+                                ++m_error_prox;
+                                m_counter_mutex.unlock();
+
                                 goto kill_photon;
                             }
 
