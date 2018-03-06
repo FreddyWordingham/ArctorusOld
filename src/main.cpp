@@ -223,7 +223,7 @@ void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
  *
  *  @param  t_sim   Simulation to save the data from.
  */
-void save_data(arc::setup::Sim& t_sim, const std::string& t_output_dir)
+void save_data(const arc::setup::Sim& t_sim, const std::string& t_output_dir)
 {
     // Save grid images.
     const std::string grid_images_dir = t_output_dir + "grid_images/";
