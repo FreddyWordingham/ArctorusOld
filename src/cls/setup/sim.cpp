@@ -521,7 +521,9 @@ namespace arc
                     // Kill if photon is stuck.
                     if (loops > m_loop_limit)
                     {
-                        WARN("Photon killed early.", "Number of loops exceeded set limit.");
+                        m_counter_mutex.lock();
+                        m_error_loop += phot.get_weight();
+                        m_counter_mutex.unlock();
 
                         goto kill_photon;
                     }
