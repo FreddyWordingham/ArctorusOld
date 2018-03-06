@@ -372,7 +372,7 @@ namespace arc
             if (total_error > 0.0)
             {
                 WARN("Photon weight was lost.", "Total weight lost to proximity errors : " << m_error_prox);
-                WARN("Photon weight was lost.", "Total weight lost to exceeding set loop limit : " << m_error_prox);
+                WARN("Photon weight was lost.", "Total weight lost to exceeding set loop limit : " << m_loop_limit);
             }
             else
             {
