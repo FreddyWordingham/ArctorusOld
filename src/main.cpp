@@ -49,6 +49,7 @@ int main(const int t_argc, const char** t_argv)
 {
     SEC("Initialising Arctorus");
 
+    // Read the setup file.
     const arc::data::Json setup = read_setup_file(t_argc, t_argv);
 
     // Create output directory and check it was created successfully,
