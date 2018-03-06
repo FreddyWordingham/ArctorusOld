@@ -72,7 +72,6 @@ int main(const int t_argc, const char** t_argv)
     }
 
     // Run the simulation.
-    SEC("Running Simulation");
     run_sim(setup, sim);
 
     // Save grid data.
@@ -179,6 +178,9 @@ void save_run_info(const std::string& t_output_dir)
  */
 void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
 {
+    // Print section.
+    SEC("Running Simulation");
+
     // Get the number of photons to run.
     const auto total_phot                = t_setup["simulation"].parse_child<unsigned long int>("num_phot");
     LOG("Number of photons to run: " << total_phot);
