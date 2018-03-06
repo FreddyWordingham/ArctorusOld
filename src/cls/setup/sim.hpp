@@ -86,10 +86,14 @@ namespace arc
             std::mutex                                         m_path_mutex;    //! Protects path data.
 #endif
 
+            //  -- Counters --
+            unsigned long int m_error_prox = 0; //! A count of the number photons removed from simulation due to proximity.
+
             //  -- Threads --
             std::mutex          m_ccd_mutex;            //! Protects the ccd objects data.
             std::mutex          m_spectrometer_mutex;   //! Protects the spectrometer objects data.
             std::mutex          m_grid_mutex;           //! Protects the grid data.
+            std::mitex          m_error_prox;           //! Protects the error_prox counter.
             std::vector<double> m_thread_progress;      //! Current progress of each thread.
             const double        m_log_update_period;    //! Period with which to update a progress print.
 
