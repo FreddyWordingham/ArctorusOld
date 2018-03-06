@@ -180,7 +180,7 @@ void save_run_info(const std::string& t_output_dir)
 void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
 {
     // Get the number of photons to run.
-    const auto total_phot                = t_setup["simulation"].parse_child<unsigned long int>("total_phot");
+    const auto total_phot                = t_setup["simulation"].parse_child<unsigned long int>("num_phot");
     LOG("Number of photons to run: " << total_phot);
 
     // Initialise the threads.
