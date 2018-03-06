@@ -306,7 +306,7 @@ namespace arc
             print_hr('=');
 
             // Form the build information string.
-            std::string       build = config::BUILD_INFO;
+            std::string       build = config::BUILD_STRING;
             const std::string pre_build_pad((LINE_WIDTH - build.size()) / 2, ' ');
             const std::string post_build_pad(LINE_WIDTH - (build.size() + pre_build_pad.size()), ' ');
 
