@@ -177,7 +177,7 @@ void save_run_info(const std::string& t_output_dir)
  *  @param  t_setup Json simulation setup file.
  *  @param  t_sim   Simulation object.
  */
-void run_sim(const arc::data::Json t_setup, arc::setup::Sim& t_sim)
+void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
 {
     // Get the number of photons to run.
     const auto total_phot                = t_setup["simulation"].parse_child<unsigned long int>("total_phot");
