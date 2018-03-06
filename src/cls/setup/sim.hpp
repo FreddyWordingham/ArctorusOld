@@ -87,6 +87,7 @@ namespace arc
 #endif
 
             //  -- Counters --
+            double m_error_loop = 0.0;  //! Total weight of photons removed from sim due to running beyond max loop limit.
             double m_error_prox = 0.0;  //! Total weight of photons removed from sim due to proximity errors.
 
             //  -- Threads --
