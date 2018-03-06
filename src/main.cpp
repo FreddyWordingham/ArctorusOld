@@ -47,7 +47,7 @@ void save_data(const arc::setup::Sim& t_sim, const std::string& t_output_dir);
  */
 int main(const int t_argc, const char** t_argv)
 {
-    SEC("Initialising Arctorus");
+    SEC("Initialising");
 
     // Read the setup file.
     const arc::data::Json setup = read_setup_file(t_argc, t_argv);
@@ -80,7 +80,7 @@ int main(const int t_argc, const char** t_argv)
     SEC("Saving Data");
     save_data(sim, output_dir);
 
-    // Render the simulation scene.
+    // Post-render the simulation scene.
     if (setup["system"].parse_child<bool>("post_render", false))
     {
         sim.render();
