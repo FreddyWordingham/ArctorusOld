@@ -226,17 +226,17 @@ void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
 void save_data(arc::setup::Sim& t_sim, const std::string& t_output_dir)
 {
     // Save grid images.
-    const std::string grid_images_dir = output_dir + "grid_images/";
+    const std::string grid_images_dir = t_output_dir + "grid_images/";
     arc::utl::create_directory(grid_images_dir);
     t_sim.save_grid_images(grid_images_dir);
 
     // Save ccd data.
-    const std::string ccd_images_dir = output_dir + "ccd_images/";
+    const std::string ccd_images_dir = t_output_dir + "ccd_images/";
     arc::utl::create_directory(ccd_images_dir);
     t_sim.save_ccd_images(ccd_images_dir);
 
     // Save spectrometer data.
-    const std::string spectrometer_data_dir = output_dir + "spectrometer_data/";
+    const std::string spectrometer_data_dir = t_output_dir + "spectrometer_data/";
     arc::utl::create_directory(spectrometer_data_dir);
     t_sim.save_spectrometer_data(spectrometer_data_dir);
 }
