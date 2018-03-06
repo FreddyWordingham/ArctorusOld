@@ -53,6 +53,7 @@ int main(const int t_argc, const char** t_argv)
 
     // Save run information files.
     save_run_info(output_dir);
+    arc::file::Handle(output_dir + "setup.json", std::fstream::out) << setup;
 
     // Set the program seed.
     arc::rng::seed(setup["system"].parse_child("seed", static_cast<arc::random::Uniform::base>(time(nullptr))));
@@ -61,7 +62,7 @@ int main(const int t_argc, const char** t_argv)
     SEC("Constructing Simulation");
     arc::setup::Sim pdt(setup);
 
-    // Render the simulation scene.
+    // Pre-render the simulation scene.
     if (setup["system"].parse_child<bool>("pre_render", false))
     {
         pdt.render();
