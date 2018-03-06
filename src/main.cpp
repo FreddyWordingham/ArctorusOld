@@ -33,7 +33,7 @@ void save_run_info(const std::string& t_output_dir);
 
 //  -- Simulation --
 void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim);
-
+void save_data(const arc::setup::Sim& t_sim, const std::string& t_output_dir);
 
 
 //  == MAIN ==
@@ -78,19 +78,7 @@ int main(const int t_argc, const char** t_argv)
 
     // Save grid data.
     SEC("Saving Data");
-    const std::string grid_images_dir = output_dir + "grid_images/";
-    arc::utl::create_directory(grid_images_dir);
-    sim.save_grid_images(grid_images_dir);
-
-    // Save ccd data.
-    const std::string ccd_images_dir = output_dir + "ccd_images/";
-    arc::utl::create_directory(ccd_images_dir);
-    sim.save_ccd_images(ccd_images_dir);
-
-    // Save spectrometer data.
-    const std::string spectrometer_data_dir = output_dir + "spectrometer_data/";
-    arc::utl::create_directory(spectrometer_data_dir);
-    sim.save_spectrometer_data(spectrometer_data_dir);
+    save_data(sim, output_dir);
 
     // Render the simulation scene.
     if (setup["system"].parse_child<bool>("post_render", false))
@@ -228,4 +216,27 @@ void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
         std::chrono::steady_clock::now() - sim_start_time).count();
     LOG("Simulation runtime: " << arc::utl::create_time_string(sim_runtime));
     LOG("Ave photon runtime: " << arc::utl::create_time_string(sim_runtime / total_phot));
+}
+
+/**
+ *  Save the simulation data.
+ *
+ *  @param  t_sim   Simulation to save the data from.
+ */
+void save_data(arc::setup::Sim& t_sim, const std::string& t_output_dir)
+{
+    // Save grid images.
+    const std::string grid_images_dir = output_dir + "grid_images/";
+    arc::utl::create_directory(grid_images_dir);
+    t_sim.save_grid_images(grid_images_dir);
+
+    // Save ccd data.
+    const std::string ccd_images_dir = output_dir + "ccd_images/";
+    arc::utl::create_directory(ccd_images_dir);
+    t_sim.save_ccd_images(ccd_images_dir);
+
+    // Save spectrometer data.
+    const std::string spectrometer_data_dir = output_dir + "spectrometer_data/";
+    arc::utl::create_directory(spectrometer_data_dir);
+    t_sim.save_spectrometer_data(spectrometer_data_dir);
 }
