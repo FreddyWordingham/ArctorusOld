@@ -159,7 +159,13 @@ void save_run_info(const std::string& t_output_dir)
     arc::file::Handle run_info(t_output_dir + "run_info.txt", std::fstream::out);
 
     // Write the build information.
-    run_info << arc::config::BUILD_INFO << "\n";
+    run_info << "Build information\n";
+    run_info << "Branch   : " << arc::config::BUILD_BRANCH << "\n";
+    run_info << "Hash     : " << arc::config::BUILD_HASH << "\n";
+    run_info << "Patch    : " << arc::config::BUILD_PATCH << "\n";
+    run_info << "Compiler : " << arc::config::BUILD_COMPILER << "\n";
+    run_info << "Type     : " << arc::config::BUILD_TYPE << "\n";
+    run_info << "Date     : " << arc::config::BUILD_DATE << "\n";
 
     // Write current working directory.
     char buffer[1024];
