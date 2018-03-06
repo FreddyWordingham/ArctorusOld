@@ -31,6 +31,9 @@ arc::data::Json read_setup_file(int t_argc, const char** t_argv);
 std::string create_output_dir(const std::string& t_dir_name);
 void save_run_info(const std::string& t_output_dir);
 
+//  -- Simulation --
+void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim);
+
 
 
 //  == MAIN ==
@@ -60,74 +63,38 @@ int main(const int t_argc, const char** t_argv)
 
     // Construct the simulation object.
     SEC("Constructing Simulation");
-    arc::setup::Sim pdt(setup);
+    arc::setup::Sim sim(setup);
 
     // Pre-render the simulation scene.
     if (setup["system"].parse_child<bool>("pre_render", false))
     {
-        pdt.render();
+        sim.render();
     }
 
     // Run the simulation.
     SEC("Running Simulation");
-
-    // Get the number of photons to run.
-    const auto num_phot                  = setup["simulation"].parse_child<unsigned long int>("num_phot");
-    LOG("Number of photons to run: " << num_phot);
-
-    // Initialise the threads.
-    std::vector<std::thread> threads;
-    const unsigned int       num_threads = std::min(std::thread::hardware_concurrency(),
-                                                    setup["system"].parse_child<unsigned int>("max_threads", 1));
-    if (num_threads == 0)
-    {
-        ERROR("Unable to run simulation.", "Number of threads can not be zero.");
-    }
-    LOG("Number of threads: " << num_threads);
-    pdt.set_num_threads(num_threads);
-
-    // Get start time of simulation.
-    const std::chrono::steady_clock::time_point sim_start_time = std::chrono::steady_clock::now();
-
-    // Set off the threads.
-    const unsigned long int num_phot_per_thread = num_phot / num_threads;
-    for (unsigned long int  i                   = 0; i < num_threads; ++i)
-    {
-        threads.emplace_back(&arc::setup::Sim::run_photons, &pdt, num_phot_per_thread, i);
-    }
-
-    // Wait for each thread to finish.
-    for (size_t i = 0; i < threads.size(); i++)
-    {
-        threads[i].join();
-    }
-
-    // Calculate runtime.
-    const double sim_runtime = std::chrono::duration_cast<std::chrono::duration<double>>(
-        std::chrono::steady_clock::now() - sim_start_time).count();
-    LOG("Simulation runtime: " << arc::utl::create_time_string(sim_runtime));
-    LOG("Ave photon runtime: " << arc::utl::create_time_string(sim_runtime / num_phot));
+    run_sim(setup, sim);
 
     // Save grid data.
     SEC("Saving Data");
     const std::string grid_images_dir = output_dir + "grid_images/";
     arc::utl::create_directory(grid_images_dir);
-    pdt.save_grid_images(grid_images_dir);
+    sim.save_grid_images(grid_images_dir);
 
     // Save ccd data.
     const std::string ccd_images_dir = output_dir + "ccd_images/";
     arc::utl::create_directory(ccd_images_dir);
-    pdt.save_ccd_images(ccd_images_dir);
+    sim.save_ccd_images(ccd_images_dir);
 
     // Save spectrometer data.
     const std::string spectrometer_data_dir = output_dir + "spectrometer_data/";
     arc::utl::create_directory(spectrometer_data_dir);
-    pdt.save_spectrometer_data(spectrometer_data_dir);
+    sim.save_spectrometer_data(spectrometer_data_dir);
 
     // Render the simulation scene.
     if (setup["system"].parse_child<bool>("post_render", false))
     {
-        pdt.render();
+        sim.render();
     }
 
     return (0);
@@ -200,4 +167,64 @@ void save_run_info(const std::string& t_output_dir)
     // Write current working directory.
     char buffer[1024];
     run_info << "\nWorking directory: " << getcwd(buffer, sizeof(buffer)) << "\n";
+}
+
+
+//  -- Simulation --
+/**
+ *  Initialise the threads and run the simulation.
+ *
+ *  @param  t_setup Json simulation setup file.
+ *  @param  t_sim   Simulation object.
+ */
+void run_sim(const arc::data::Json t_setup, arc::setup::Sim& t_sim)
+{
+    // Get the number of photons to run.
+    const auto total_phot                = t_setup["simulation"].parse_child<unsigned long int>("total_phot");
+    LOG("Number of photons to run: " << total_phot);
+
+    // Initialise the threads.
+    std::vector<std::thread> threads;
+    const unsigned int       num_threads = std::min(std::thread::hardware_concurrency(),
+                                                    t_setup["system"].parse_child<unsigned int>("max_threads", 1));
+    if (num_threads == 0)
+    {
+        ERROR("Unable to run simulation.", "Number of threads can not be zero.");
+    }
+    LOG("Number of threads: " << num_threads);
+    t_sim.set_num_threads(num_threads);
+
+    // Get start time of simulation.
+    const std::chrono::steady_clock::time_point sim_start_time = std::chrono::steady_clock::now();
+
+    // Load balance the threads.
+    std::vector<double> num_phot(num_threads);
+    for (size_t         i                                      = 0; i < num_threads; ++i)
+    {
+        num_phot[i] = total_phot / num_threads;
+    }
+    unsigned long int   remaining_phot                         = total_phot % num_threads;
+    assert(remaining_phot < num_threads);
+    for (size_t i = 0; i < remaining_phot; ++i)
+    {
+        ++num_phot[i];
+    }
+
+    // Set off the threads.
+    for (unsigned long int i = 0; i < num_threads; ++i)
+    {
+        threads.emplace_back(&arc::setup::Sim::run_photons, &t_sim, num_phot[i], i);
+    }
+
+    // Wait for each thread to finish.
+    for (size_t i = 0; i < threads.size(); i++)
+    {
+        threads[i].join();
+    }
+
+    // Calculate runtime.
+    const double sim_runtime = std::chrono::duration_cast<std::chrono::duration<double>>(
+        std::chrono::steady_clock::now() - sim_start_time).count();
+    LOG("Simulation runtime: " << arc::utl::create_time_string(sim_runtime));
+    LOG("Ave photon runtime: " << arc::utl::create_time_string(sim_runtime / total_phot));
 }
