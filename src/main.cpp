@@ -169,5 +169,5 @@ void save_run_info(const std::string& t_output_dir)
 
     // Write current working directory.
     char buffer[1024];
-    run_info << "Working directory: " << getcwd(buffer, sizeof(buffer)) << "\n";
+    run_info << "\nWorking directory: " << getcwd(buffer, sizeof(buffer)) << "\n";
 }
