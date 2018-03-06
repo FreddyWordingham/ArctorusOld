@@ -31,10 +31,18 @@ namespace arc
 
 
         //  == SETTINGS ==
-        //  -- Build Info --
+        //  -- Directories --
         constexpr const char* ARCTORUS_DIR = "@ARCTORUS_DIR@/";     //! Arctorus directory path.
-        constexpr const char* BUILD_INFO   = "@BUILD_BRANCH@-@BUILD_HASH@-@BUILD_PATCH@"
+
+        //  -- Build Info --
+        constexpr const char* BUILD_STRING   = "@BUILD_BRANCH@-@BUILD_HASH@-@BUILD_PATCH@"
             " : @BUILD_COMPILER@ : @BUILD_TYPE@ : @BUILD_DATE@";    //! Arctorus build information.
+        constexpr const char* BUILD_BRANCH   = "@BUILD_BRANCH@";    //! Build branch.
+        constexpr const char* BUILD_HASH     = "@BUILD_HASH@";      //! Git hash.
+        constexpr const char* BUILD_PATCH    = "@BUILD_PATCH@";     //! Git patch number.
+        constexpr const char* BUILD_COMPILER = "@BUILD_COMPILER@";  //! Compiler identification.
+        constexpr const char* BUILD_TYPE     = "@BUILD_TYPE@";      //! Optimisation type.
+        constexpr const char* BUILD_DATE     = "@BUILD_DATE@";      //! Build date.
 
 
 
