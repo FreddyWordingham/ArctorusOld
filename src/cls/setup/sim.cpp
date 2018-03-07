@@ -406,7 +406,7 @@ namespace arc
 
         //  -- Saving --
         /**
-         *  Save the grid images.
+         *  Save the tree images.
          *
          *  @param  t_output_dir    Directory to write the images to.
          *  @param  t_level         Level of depth resolution to save images with.
@@ -451,7 +451,7 @@ namespace arc
         }
 
         /**
-         *  Save the slices of one dimension of the grid.
+         *  Save the slices of one dimension of the tree.
          *
          *  @param  t_output_dir    Directory to write the images to.
          *  @param  t_dimension     Dimension to be sliced.
@@ -490,12 +490,12 @@ namespace arc
                     slice    = Z;
                     dim_name = "Z";
                     break;
-                default: ERROR("Unable to save grid slice images.",
+                default: ERROR("Unable to save tree slice images.",
                                "The given slice dimension: '" << t_dimension << "' is invalid.");
             }
 
             // Create sub-directory.
-            const std::string sub_dir = t_output_dir + "grid_" + dim_name + "_slices/";
+            const std::string sub_dir = t_output_dir + "tree_" + dim_name + "_slices/";
             utl::create_directory(sub_dir);
 
             // Write the images.
@@ -522,7 +522,7 @@ namespace arc
                             case Z:
                                 img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(t_data[j][k][i]));
                                 break;
-                            default: ERROR("Unable to save grid slice images.",
+                            default: ERROR("Unable to save tree slice images.",
                                            "The given slice dimension: '" << t_dimension << "' is invalid.");
                         }
                     }
@@ -648,10 +648,10 @@ namespace arc
                 double            cell_energy = 0.0;    //! Energy to be added to cell total when exiting cell.
                 unsigned long int loops       = 0;      //! Number of loops made of the while loop.
 
-                // Check if photon is within a grid cell.
+                // Check if photon is within a tree cell.
                 if (!m_root->is_within(phot.get_pos()))
                 {
-                    WARN("Unable to simulate photon.", "Photon does not begin with the grid.");
+                    WARN("Unable to simulate photon.", "Photon does not begin with the tree.");
                     goto kill_photon;
                 }
                 else
@@ -726,21 +726,21 @@ namespace arc
                         case event::CELL_CROSS:
                         {
                             // Increment cell-tracked properties.
-                            m_grid_mutex.lock();
+                            m_cell_mutex.lock();
                             cell->add_energy(cell_energy);
-                            m_grid_mutex.unlock();
+                            m_cell_mutex.unlock();
                             cell_energy = 0.0;
 
                             // Move just past the cell boundary point.
                             phot.move(dist + SMOOTHING_LENGTH);
 
-                            // Check if photon has now exited the grid.
+                            // Check if photon has now exited the tree.
                             if (!m_root->is_within(phot.get_pos()))
                             {
                                 goto kill_photon;
                             }
 
-                            // Get new cell pointer if still within the grid.
+                            // Get new cell pointer if still within the tree.
                             cell = m_root->get_leaf(phot.get_pos());
 
                             break;

@@ -80,7 +80,7 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
-            std::unique_ptr<tree::Cell> m_root; //! Simulation grid.
+            std::unique_ptr<tree::Cell> m_root; //! Simulation cell tree.
 #ifdef ENABLE_PHOTON_PATHS
             std::vector<std::vector<graphical::point::Photon>> m_path;          //! Vector of photon paths.
             std::mutex                                         m_path_mutex;    //! Protects path data.
@@ -93,7 +93,7 @@ namespace arc
             //  -- Threads --
             std::mutex          m_ccd_mutex;            //! Protects the ccd objects data.
             std::mutex          m_spectrometer_mutex;   //! Protects the spectrometer objects data.
-            std::mutex          m_grid_mutex;           //! Protects the grid data.
+            std::mutex          m_cell_mutex;           //! Protects the cell data.
             std::mutex          m_counter_mutex;        //! Protects the error counters.
             std::vector<double> m_thread_progress;      //! Current progress of each thread.
             const double        m_log_update_period;    //! Period with which to update a progress print.
