@@ -603,7 +603,7 @@ namespace arc
         /**
          *  Recursively search the tree for maximum number of triangles contained within a single leaf cell.
          *
-         *  @return The maxmimum number of triangles contained within a single leaf cell.
+         *  @return The maximum number of triangles contained within a single leaf cell.
          */
         size_t Cell::get_max_tri() const
         {
