@@ -332,48 +332,26 @@ namespace arc
         /**
          *  Add a render-able tree mesh to the scene.
          *
-         *  @param  t_roor  Root cell of tree to be added to the scene.
+         *  @param  t_tree  Root cell of tree to be added to the scene.
          */
-        void Scene::add_tree(const tree::Cell& t_root)
+        void Scene::add_tree(const tree::Cell& t_tree)
         {
             // Add main grid bounds.
             m_grid.emplace_back(Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0},
-                                     {static_cast<float>(t_grid.get_min_bound()[X]),
-                                      static_cast<float>(t_grid.get_min_bound()[Y]),
-                                      static_cast<float>(t_grid.get_min_bound()[Z])},
-                                     {static_cast<float>(t_grid.get_max_bound()[X]),
-                                      static_cast<float>(t_grid.get_max_bound()[Y]),
-                                      static_cast<float>(t_grid.get_max_bound()[Z])}));
+                                     {static_cast<float>(t_tree.get_min_bound()[X]),
+                                      static_cast<float>(t_tree.get_min_bound()[Y]),
+                                      static_cast<float>(t_tree.get_min_bound()[Z])},
+                                     {static_cast<float>(t_tree.get_max_bound()[X]),
+                                      static_cast<float>(t_tree.get_max_bound()[Y]),
+                                      static_cast<float>(t_tree.get_max_bound()[Z])}));
 
             // Determine maximum grid cell energy density.
-            double max_energy_density = t_grid.get_max_energy_density();
-            VAL(max_energy_density);
+            double max_energy_density = 1.0;//t_grid.get_max_energy_density();
+            VAL(1.0);
+            WARN("Unable to determine maximum energy density.", "The method get_max_energy_density is not yet written.");
 
-            // Add grid cells.
-            for (size_t i = 0; i < t_grid.get_num_cells(X); ++i)
-            {
-                for (size_t j = 0; j < t_grid.get_num_cells(Y); ++j)
-                {
-                    for (size_t k = 0; k < t_grid.get_num_cells(Z); ++k)
-                    {
-                        const double energy_density = t_grid.get_cell(i, j, k).get_energy_density();
-
-                        if (energy_density > 0.0)
-                        {
-                            // Get the cell.
-                            const tree::Cell& cell = t_grid.get_cell(i, j, k);
-
-                            // Calculate the cell colour.
-                            const std::array<double, 3> col = utl::colourmap::transform_rainbow(
-                                energy_density / max_energy_density);
-
-                            // Add the cell prop.
-                            add_cell(cell.get_min_bound(), cell.get_max_bound(), 1e-4,
-                                     {glm::vec3(col[R], col[G], col[B]), 1.0});
-                        }
-                    }
-                }
-            }
+            // Recursively add the cell props.
+            add_cell(t_root, max_energy_density);
         }
 
         /**
