@@ -75,6 +75,9 @@ namespace arc
             //  -- Children --
             const std::array<std::unique_ptr<Cell>, 8> m_child; //! Array of child cell pointers.
 
+            //  -- Data --
+            double m_energy = 0.0;  //! Total energy within the cell.
+
 
             //  == INSTANTIATION ==
           public:
