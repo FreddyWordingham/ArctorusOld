@@ -39,6 +39,9 @@ namespace arc
             const math::Vec<3> m_center;        //! Center of the cell.
             const math::Vec<3> m_half_width;    //! Half width of the cell.
 
+            //  -- Cell Data --
+            const unsigned int m_depth; //! Depth of the cell within the tree.
+
 
             //  == INSTANTIATION ==
           public:
