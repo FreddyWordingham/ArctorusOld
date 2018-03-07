@@ -404,7 +404,8 @@ namespace arc
          */
         void Sim::save_grid_images(const std::string& t_output_dir) const
         {
-            m_grid.save_images(t_output_dir);
+            //m_grid.save_images(t_output_dir);
+            WARN("Unable to save grid images.", "Grid image saving is currently unavailable.");
         }
 
         /**
