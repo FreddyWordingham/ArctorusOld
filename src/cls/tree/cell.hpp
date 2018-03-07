@@ -117,6 +117,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            bool is_leaf() const { return (m_leaf); }
             Cell* get_leaf(const math::Vec<3>& t_pos);
             bool is_within(const math::Vec<3>& t_pos) const;
             math::Vec<3> get_min_bound() const { return (m_center - m_half_width); }
