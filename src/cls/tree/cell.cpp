@@ -120,6 +120,33 @@ namespace arc
             return (r_light_tri_list);
         }
 
+        /**
+         *  Initialise the list vector list of ccd triangles within the cell.
+         *
+         *  @return The initialised list vector of ccd triangles within the cell.
+         */
+        std::vector<std::array<size_t, 2>> Cell::init_ccd_tri_list() const
+        {
+            // Create the return triangle list.
+            std::vector<std::array<size_t, 2>> r_ccd_tri_list;
+
+            // Iterate through each of the ccd sources.
+            for (size_t i = 0; i < m_ccd.size(); ++i)
+            {
+                // Iterate through each of the ccd's triangles.
+                for (size_t j = 0; j < m_ccd[i].get_mesh().get_num_tri(); ++j)
+                {
+                    // If the cell overlaps any part of the triangle, add the indices to the list.
+                    if (tri_overlap(m_ccd[i].get_mesh().get_tri(j)))
+                    {
+                        r_ccd_tri_list.emplace_back({{i, j}});
+                    }
+                }
+            }
+
+            return (r_ccd_tri_list);
+        }
+
 
 
         //  == METHODS ==
