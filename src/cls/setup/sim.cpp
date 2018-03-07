@@ -522,7 +522,7 @@ namespace arc
                 unsigned long int loops       = 0;      //! Number of loops made of the while loop.
 
                 // Check if photon is within a grid cell.
-                if (!m_grid.is_within(phot.get_pos()))
+                if (!m_root.is_within(phot.get_pos()))
                 {
                     WARN("Unable to simulate photon.", "Photon does not begin with the grid.");
                     goto kill_photon;
