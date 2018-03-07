@@ -292,6 +292,32 @@ namespace arc
         }
 
         /**
+         *  Initialise the vector list of spectrometer triangles within the cell using a sub vector list of triangles.
+         *
+         *  @param  t_spectrometer_tri_list List of spectrometer triangles which may lie within the cell.
+         *
+         *  @return The initialised list vector of spectrometer triangles within the cell.
+         */
+        std::vector<std::array<size_t, 2>> Cell::init_spectrometer_tri_list(
+            const std::vector<std::array<size_t, 2>>& t_spectrometer_tri_list) const
+        {
+            // Create the return triangle list.
+            std::vector<std::array<size_t, 2>> r_spectrometer_tri_list;
+
+            // Iterate through the vector list of triangles.
+            for (size_t i = 0; i < t_spectrometer_tri_list.size(); ++i)
+            {
+                if (tri_overlap(
+                    m_spectrometer[t_spectrometer_tri_list[i][OBJ]].get_mesh().get_tri(t_spectrometer_tri_list[i][TRI])))
+                {
+                    r_spectrometer_tri_list.push_back(t_spectrometer_tri_list[i]);
+                }
+            }
+
+            return (r_spectrometer_tri_list);
+        }
+
+        /**
          *  Determine if this cell is a terminal leaf cell.
          *
          *  @param  t_min_depth     Minimum depth for the cell to split to.
