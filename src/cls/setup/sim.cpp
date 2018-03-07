@@ -105,6 +105,9 @@ namespace arc
                                                                   << "', falls beyond the range of wavelengths handled by the materials:'"
                                                                   << mat_min_bound << "' - '" << mat_max_bound << "'.");
             }
+
+            // Log tree properties.
+            LOG("Total tree cells: " << m_root->get_total_cells());
         }
 
         /**
