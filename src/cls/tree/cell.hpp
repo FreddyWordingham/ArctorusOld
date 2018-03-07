@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include "cls/equip/entity.hpp"
 #include "cls/math/vec.hpp"
 
 
@@ -45,6 +46,9 @@ namespace arc
 
             //  -- Children --
             const std::array<std::shared_ptr<Cell>, 8> m_child; //! Array of child cell pointers.
+
+            //  -- Equipment References --
+            const std::vector<equip::Entity>& m_entity; //! Reference to vector of sim entities.
 
 
             //  == INSTANTIATION ==
