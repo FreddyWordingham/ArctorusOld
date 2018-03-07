@@ -107,6 +107,7 @@ namespace arc
             m_light_tri_list(init_light_tri_list(t_light_tri_list)),
             m_ccd_tri_list(init_ccd_tri_list(t_ccd_tri_list)),
             m_spectrometer_tri_list(init_spectrometer_tri_list(t_spectrometer_tri_list)),
+            m_depth(t_depth)
         {
         }
 
