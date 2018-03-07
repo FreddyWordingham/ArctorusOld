@@ -45,7 +45,8 @@ namespace arc
         Cell::Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const unsigned int t_min_depth,
                    const unsigned int t_max_depth, const std::vector<equip::Entity>& t_entity,
                    const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd,
-                   const std::vector<detector::Spectrometer>& m_spectrometer), m_center((t_max_bound - t_min_bound) / 2.0)
+                   const std::vector<detector::Spectrometer>& m_spectrometer) :
+            m_center((t_max_bound - t_min_bound) / 2.0)
         {
         }
 
