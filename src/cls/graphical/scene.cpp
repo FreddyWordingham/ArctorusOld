@@ -514,11 +514,11 @@ namespace arc
                      {max_bound[X], max_bound[Y], max_bound[Z]}));
 
             // Add daughter cells if cell is not a leaf.
-            if (!m_cell.is_leaf())
+            if (!t_cell.is_leaf())
             {
                 for (size_t i = 0; i < 8; ++i)
                 {
-                    add_cell(m_cell.get_daughter(i), t_max_energy_density);
+                    add_cell(t_cell.get_daughter(i), t_max_energy_density);
                 }
             }
         }
