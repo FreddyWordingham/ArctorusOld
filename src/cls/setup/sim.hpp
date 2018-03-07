@@ -136,7 +136,7 @@ namespace arc
 
           private:
             //  -- Saving --
-            void save_slices(const std::string& t_output_dir, const size_t t_dimension,
+            void save_slices(const std::string& t_output_dir, size_t t_dimension,
                              const std::vector<std::vector<std::vector<double>>>& t_data) const;
 
             //  -- Simulation --
