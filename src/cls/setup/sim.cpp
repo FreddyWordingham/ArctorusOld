@@ -413,6 +413,9 @@ namespace arc
         {
             //m_grid.save_images(t_output_dir);
             WARN("Unable to save grid images.", "Grid image saving is currently unavailable.");
+
+            std::vector<std::vector<std::vector<double>>> data_cube = m_root->get_data_cube(2);
+            VAL(data_cube);
         }
 
         /**
