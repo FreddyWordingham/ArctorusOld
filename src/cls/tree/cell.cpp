@@ -84,7 +84,7 @@ namespace arc
          *  @param  t_entity        Vector of entity objects which may lie within the cell.
          *  @param  t_light         Vector of light objects which may lie within the cell.
          *  @param  t_ccd           Vector of ccd objects which may lie within the cell.
-         *  @param  m_spectrometer  Vector of spectrometer objects which may lie within the cell.
+         *  @param  t_spectrometer  Vector of spectrometer objects which may lie within the cell.
          *  @param  t_entity_tri_list       List of entity triangles which may lie within the cell.
          *  @param  t_light_tri_list        List of light triangles which may lie within the cell.
          *  @param  t_ccd_tri_list          List of ccd triangles which may lie within the cell.
