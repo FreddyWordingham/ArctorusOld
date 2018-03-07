@@ -43,6 +43,9 @@ namespace arc
             const unsigned int m_depth; //! Depth of the cell within the tree.
             const bool         m_leaf;  //! True if the cell is a terminal cell.
 
+            //  -- Children --
+            const std::array<std::shared_ptr<Cell>, 8> m_child; //! Array of child cell pointers.
+
 
             //  == INSTANTIATION ==
           public:
