@@ -483,13 +483,7 @@ namespace arc
             // If required depth is equal to current depth, return value.
             if (t_depth == m_depth)
             {
-                double      total_energy = 0.0;
-                for (size_t i            = 0; i < 8; ++i)
-                {
-                    total_energy += m_child[i]->get_energy_density();
-                }
-
-                r_data_cube[0][0][0] = total_energy / 8.0;
+                r_data_cube[0][0][0] = get_energy_density();
 
                 return (r_data_cube);
             }
