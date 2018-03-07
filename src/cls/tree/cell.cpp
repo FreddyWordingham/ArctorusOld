@@ -486,7 +486,7 @@ namespace arc
             // Check if any dimensions fall outside of the cells.
             for (size_t i = 0; i < 3; ++i)
             {
-                if ((t_pos[i] >= (m_center[X] - m_half_width[X])) && (t_pos[i] <= (m_center[X] + m_half_width[X])))
+                if ((t_pos[i] < (m_center[X] - m_half_width[X])) || (t_pos[i] > (m_center[X] + m_half_width[X])))
                 {
                     return (false);
                 }
