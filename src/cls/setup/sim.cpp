@@ -608,7 +608,7 @@ namespace arc
                             phot.move(dist + SMOOTHING_LENGTH);
 
                             // Check if photon has now exited the grid.
-                            if (!m_grid.is_within(phot.get_pos()))
+                            if (!m_root.is_within(phot.get_pos()))
                             {
                                 goto kill_photon;
                             }
