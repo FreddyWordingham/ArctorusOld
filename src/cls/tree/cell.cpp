@@ -52,8 +52,7 @@ namespace arc
                    const std::vector<detector::Spectrometer>& m_spectrometer) :
             m_center((t_max_bound + t_min_bound) / 2.0),
             m_half_width((t_max_bound - t_min_bound) / 2.0),
-            m_depth(0),
-            m_leaf
+            m_entity(t_entity)
         {
             assert(m_half_width[X] > 0.0);
             assert(m_half_width[Y] > 0.0);
