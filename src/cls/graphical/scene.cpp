@@ -9,7 +9,7 @@
 
 //  == MODULE ==
 #include "gen/config.hpp"
-#ifdef ENABLE_GRAPHICS
+//#ifdef ENABLE_GRAPHICS
 
 
 
@@ -330,11 +330,11 @@ namespace arc
         }
 
         /**
-         *  Add a render-able grid mesh to the scene.
+         *  Add a render-able tree mesh to the scene.
          *
-         *  @param  t_grid  Grid to be added to the scene.
+         *  @param  t_roor  Root cell of tree to be added to the scene.
          */
-        void Scene::add_root(const tree::Cell& t_root)
+        void Scene::add_tree(const tree::Cell& t_root)
         {
             // Add main grid bounds.
             m_grid.emplace_back(Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0},
@@ -1268,4 +1268,4 @@ namespace arc
 
 
 //  == MODULE END ==
-#endif
+//#endif
