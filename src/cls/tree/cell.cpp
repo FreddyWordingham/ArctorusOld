@@ -466,8 +466,29 @@ namespace arc
             // If required depth is equal to current depth, return value.
             if (t_depth == m_depth)
             {
-                LOG("beep");
-                r_data_cube[0][0][0] = m_energy;
+                double      total_energy = 0.0;
+                for (size_t i            = 0; i < 8; ++i)
+                {
+                    total_energy += m_child[i]->get_energy_density();
+                }
+
+                r_data_cube[0][0][0] = total_energy / 8.0;
+
+                return (r_data_cube);
+            }
+
+            if (m_leaf)
+            {
+                for (size_t i = 0; i < res; ++i)
+                {
+                    for (size_t j = 0; j < res; ++j)
+                    {
+                        for (size_t k = 0; k < res; ++k)
+                        {
+                            r_data_cube[i][j][k] = m_energy;
+                        }
+                    }
+                }
 
                 return (r_data_cube);
             }
@@ -512,7 +533,7 @@ namespace arc
 
                 // Added data from the child data cube.
                 std::vector<std::vector<std::vector<double>>> child_cube = m_child[index]->get_data_cube(t_depth);
-                for (size_t i = 0; i < (res / 2); ++i)
+                for (size_t                                   i          = 0; i < (res / 2); ++i)
                 {
                     for (size_t j = 0; j < (res / 2); ++j)
                     {
