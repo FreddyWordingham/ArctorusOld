@@ -588,6 +588,66 @@ namespace arc
                                                              std::numeric_limits<size_t>::signaling_NaN()));
         }
 
+        /**
+         *  Determine the distance to the closest ccd triangle within the cell.
+         *  If no ccd is hit, the first value of the tuple will be set to false.
+         *  The second value of the returned tuple holds the distance to the ccd triangle if one was hit.
+         *  The third and fourth values of the returned tuple hold the hit ccd and triangle indices respectively.
+         *  If no ccd triangle is hit the first value is false and the others are set to NaN.
+         *
+         *  @param  t_pos       Start position of the ray.
+         *  @param  t_dir       Direction of the ray.
+         *
+         *  @return A tuple containing, hit status, distance to intersection, collision ccd and triangle indices.
+         */
+        std::tuple<bool, double, size_t, size_t> Cell::ccd_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const
+        {
+            assert(t_dir.is_normalised());
+
+            // If cell contains no ccd triangles, there is no hit.
+            if (m_ccd_tri_list.empty())
+            {
+                return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN(),
+                                                                 std::numeric_limits<size_t>::signaling_NaN()));
+            }
+
+            // Run through all ccd triangles and determine if any hits occur.
+            bool        hit         = false;
+            double      r_dist      = std::numeric_limits<double>::max();
+            size_t      r_ccd_index = std::numeric_limits<size_t>::signaling_NaN();
+            size_t      r_tri_index = std::numeric_limits<size_t>::signaling_NaN();
+            for (size_t i           = 0; i < m_ccd_tri_list.size(); ++i)
+            {
+                // Get a reference to the triangle.
+                const geom::Triangle& tri = m_ccd[m_ccd_tri_list[i][0]].get_mesh().get_tri(m_ccd_tri_list[i][1]);
+
+                // Determine if there is a hit.
+                bool   tri_hit;
+                double tri_dist;
+                std::tie(tri_hit, tri_dist) = tri.intersection_dist(t_pos, t_dir);
+
+                // If a hit does occur, and it is closer than any hit so far, store the information.
+                if (tri_hit && (tri_dist < r_dist))
+                {
+                    hit         = true;
+                    r_dist      = tri_dist;
+                    r_ccd_index = m_ccd_tri_list[i][0];
+                    r_tri_index = m_ccd_tri_list[i][1];
+                }
+            }
+
+            // If a hit did occur, return the information.
+            if (hit)
+            {
+                return (std::tuple<bool, double, size_t, size_t>(true, r_dist, r_ccd_index, r_tri_index));
+            }
+
+            return (std::tuple<bool, double, size_t, size_t>(false, std::numeric_limits<double>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN(),
+                                                             std::numeric_limits<size_t>::signaling_NaN()));
+        }
+
 
         //  -- Setters --
         /**

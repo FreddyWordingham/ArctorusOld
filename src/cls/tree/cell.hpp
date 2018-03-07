@@ -121,6 +121,7 @@ namespace arc
             bool is_within(const math::Vec<3>& t_pos) const;
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
             std::tuple<bool, double, size_t, size_t> entity_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
+            std::tuple<bool, double, size_t, size_t> ccd_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
 
             //  -- Setters --
             void add_energy(double t_energy);
