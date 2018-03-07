@@ -54,6 +54,7 @@ namespace arc
             m_half_width((t_max_bound - t_min_bound) / 2.0),
             m_entity(t_entity),
             m_light(t_light),
+            m_ccd(t_ccd),
         {
             assert(m_half_width[X] > 0.0);
             assert(m_half_width[Y] > 0.0);
