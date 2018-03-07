@@ -117,6 +117,9 @@ namespace arc
             Cell* get_leaf(const math::Vec<3>& t_pos);
             bool is_within(const math::Vec<3>& t_pos) const;
 
+            //  -- Setters --
+            void add_energy(double t_energy);
+
           private:
             //  -- Overlap Test --
             bool tri_overlap(const geom::Triangle& t_tri) const;

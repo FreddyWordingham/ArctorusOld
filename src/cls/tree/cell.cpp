@@ -486,6 +486,22 @@ namespace arc
         }
 
 
+        //  -- Setters --
+        /**
+         *  Add a given energy to the total energy of the cell.
+         *
+         *  @param  t_energy    Energy to add to the cell.
+         *
+         *  @pre    t_energy must be positive.
+         */
+        void Cell::add_energy(const double t_energy)
+        {
+            assert(t_energy > 0.0);
+
+            m_energy += t_energy;
+        }
+
+
         //  -- Overlap Test --
         /**
          *  Determine if the cell box is intersecting with a triangle.
