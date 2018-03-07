@@ -785,7 +785,7 @@ namespace arc
          *  @return A tuple containing, the type of event, distance to event, indices of equipment and triangle involved.
          */
         std::tuple<Sim::event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
-                                                                            const tree::Cell* t_cell) const
+                                                                            const std::unique_ptr<tree::Cell> t_cell) const
         {
             // Determine scatter distance.
             const double scat_dist = -std::log(rng::random()) / t_phot.get_interaction();
