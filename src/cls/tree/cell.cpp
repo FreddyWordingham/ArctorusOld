@@ -466,6 +466,7 @@ namespace arc
             // If required depth is equal to current depth, return value.
             if (t_depth == m_depth)
             {
+                LOG("beep");
                 r_data_cube[0][0][0] = m_energy;
 
                 return (r_data_cube);
@@ -510,7 +511,7 @@ namespace arc
                 }
 
                 // Create the child data cube.
-                std::vector<std::vector<std::vector<double>>> child_cube;
+                std::vector<std::vector<std::vector<double>>> child_cube = m_child[index]->get_data_cube(t_depth - 1);
                 child_cube.reserve(res / 2);
                 for (size_t i = 0; i < (res / 2); ++i)
                 {
