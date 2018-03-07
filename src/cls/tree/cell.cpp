@@ -59,7 +59,8 @@ namespace arc
             m_entity_tri_list(init_entity_tri_list()),
             m_light_tri_list(init_light_tri_list()),
             m_ccd_tri_list(init_ccd_tri_list()),
-            m_spectrometer_tri_list(init_spectrometer_tri_list())
+            m_spectrometer_tri_list(init_spectrometer_tri_list()),
+            m_depth(0),
         {
             assert(m_half_width[X] > 0.0);
             assert(m_half_width[Y] > 0.0);
