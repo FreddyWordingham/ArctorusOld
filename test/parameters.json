@@ -14,6 +14,8 @@
             "chambers": 10
         }
     },
+    "tree":         {
+    }
     "simulation":   {
         "num_phot": 1e4,
         "grid":     {
