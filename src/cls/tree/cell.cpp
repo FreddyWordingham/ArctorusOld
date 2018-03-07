@@ -437,6 +437,17 @@ namespace arc
 
         //  == METHODS ==
         //  -- Getters --
+
+        std::vector<std::vector<std::vector<double>>> Cell::get_data_cube(const size_t t_res) const
+        {
+            // Create the return data cube.
+            std::vector<std::vector<std::vector<double>>> r_data_cube;
+
+            return (r_data_cube);
+        }
+
+
+
         /**
          *  Determine the total number of cells attached to this cell recursively.
          *

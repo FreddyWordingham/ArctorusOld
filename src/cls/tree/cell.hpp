@@ -117,6 +117,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            std::vector<std::vector<std::vector<double>>> get_data_cube(size_t t_res) const;
             bool is_leaf() const { return (m_leaf); }
             const std::unique_ptr<Cell>& get_child(const size_t t_index) const { return (m_child[t_index]); }
             unsigned long int get_total_cells() const;
