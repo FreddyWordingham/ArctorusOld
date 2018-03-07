@@ -354,6 +354,75 @@ namespace arc
             return (total_triangles <= t_max_tri);
         }
 
+        /**
+         *  Initialise the array of daughter cells.
+         *
+         *  @param  t_min_depth     Minimum depth for the cell to split to.
+         *  @param  t_max_depth     Maximum depth for the cell to split to.
+         *  @param  t_max_tri       Target maximum number of triangles to contain within leaf cells.
+         *
+         *  @return The initialised array of daughter cells.
+         */
+        std::array<std::unique_ptr<Cell>, 8> Cell::init_child(const unsigned int t_min_depth, const unsigned int t_max_depth,
+                                                              const unsigned int t_max_tri) const
+        {
+            // If cell is a leaf, do not create children.
+            if (m_leaf)
+            {
+                return (std::array<std::unique_ptr<Cell>, 8>(
+                    {{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}}));
+            }
+
+            const unsigned int daughter_depth = m_depth + 1;
+            const math::Vec<3> half_width     = m_half_width / 2.0;
+            const math::Vec<3> offset         = m_half_width / 4.0;
+
+            return (std::array<std::unique_ptr<Cell>, 8>(
+                {{std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                                         math::Vec<3>(m_center[X] + offset[X], m_center[Y] + offset[Y],
+                                                      m_center[Z] + offset[Z]), half_width, m_entity, m_light, m_ccd,
+                                         m_spectrometer, m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
+                                         m_spectrometer_tri_list), std::make_unique<Cell>(daughter_depth, t_min_depth,
+                                                                                          t_max_depth, t_max_tri,
+                                                                                          math::Vec<3>(m_center[X] - offset[X],
+                                                                                                       m_center[Y] + offset[Y],
+                                                                                                       m_center[Z] + offset[Z]),
+                                                                                          half_width, m_entity, m_light, m_ccd,
+                                                                                          m_spectrometer, m_entity_tri_list,
+                                                                                          m_light_tri_list, m_ccd_tri_list,
+                                                                                          m_spectrometer_tri_list), std::make_unique<
+                    Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                          math::Vec<3>(m_center[X] + offset[X], m_center[Y] - offset[Y], m_center[Z] + offset[Z]), half_width,
+                          m_entity, m_light, m_ccd, m_spectrometer, m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
+                          m_spectrometer_tri_list), std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                                                                           math::Vec<3>(m_center[X] - offset[X],
+                                                                                        m_center[Y] - offset[Y],
+                                                                                        m_center[Z] + offset[Z]), half_width,
+                                                                           m_entity, m_light, m_ccd, m_spectrometer,
+                                                                           m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
+                                                                           m_spectrometer_tri_list), std::make_unique<Cell>(
+                    daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                    math::Vec<3>(m_center[X] + offset[X], m_center[Y] + offset[Y], m_center[Z] - offset[Z]), half_width,
+                    m_entity, m_light, m_ccd, m_spectrometer, m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
+                    m_spectrometer_tri_list), std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                                                                     math::Vec<3>(m_center[X] - offset[X],
+                                                                                  m_center[Y] + offset[Y],
+                                                                                  m_center[Z] - offset[Z]), half_width,
+                                                                     m_entity, m_light, m_ccd, m_spectrometer,
+                                                                     m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
+                                                                     m_spectrometer_tri_list), std::make_unique<Cell>(
+                    daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                    math::Vec<3>(m_center[X] + offset[X], m_center[Y] - offset[Y], m_center[Z] - offset[Z]), half_width,
+                    m_entity, m_light, m_ccd, m_spectrometer, m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
+                    m_spectrometer_tri_list), std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                                                                     math::Vec<3>(m_center[X] - offset[X],
+                                                                                  m_center[Y] - offset[Y],
+                                                                                  m_center[Z] - offset[Z]), half_width,
+                                                                     m_entity, m_light, m_ccd, m_spectrometer,
+                                                                     m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
+                                                                     m_spectrometer_tri_list)}}));
+        }
+
 
 
         //  == METHODS ==
