@@ -151,7 +151,7 @@ namespace arc
             // Iterate through the vector list of triangles.
             for (size_t i = 0; i < t_entity_tri_list.size(); ++i)
             {
-                if (tri_overlap(m_entity[t_entity_tri_list[i][0]].get_mesh().get_tri(t_entity_tri_list[i][1])))
+                if (tri_overlap(m_entity[t_entity_tri_list[i][OBJ]].get_mesh().get_tri(t_entity_tri_list[i][TRI])))
                 {
                     r_entity_tri_list.push_back(t_entity_tri_list[i]);
                 }
