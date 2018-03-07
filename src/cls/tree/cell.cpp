@@ -461,6 +461,15 @@ namespace arc
             return (total_energy_density / 8.0);
         }
 
+        /**
+         *  Form a data cube of the cell's energy density to a given depth resolution.
+         *
+         *  @param  t_depth Depth resolution of the data cube.
+         *
+         *  @pre    t_depth must be greater than, or equal to, the cell depth.
+         *
+         *  @return A data cube of the cell's energy density.
+         */
         std::vector<std::vector<std::vector<double>>> Cell::get_data_cube(const size_t t_depth) const
         {
             assert(t_depth >= m_depth);
@@ -564,8 +573,6 @@ namespace arc
 
             return (r_data_cube);
         }
-
-
 
         /**
          *  Determine the total number of cells attached to this cell recursively.
