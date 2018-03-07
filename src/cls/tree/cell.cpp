@@ -79,10 +79,10 @@ namespace arc
             for (size_t i = 0; i < m_light_tri_list; ++i)
             {
                 // Iterate through each of the light's triangles.
-                for (size_t j = 0; j < m_light_tri_list[i].get_mesh().get_num_tri(); ++j)
+                for (size_t j = 0; j < m_light[i].get_mesh().get_num_tri(); ++j)
                 {
                     // If the cell overlaps any part of the triangle, add the indices to the list.
-                    if (tri_overlap(m_light_tri_list[i].get_mesh().get_tri(j)))
+                    if (tri_overlap(m_light[i].get_mesh().get_tri(j)))
                     {
                         r_light_tri_list.emplace_back({{i, j}});
                     }
