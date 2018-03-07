@@ -73,7 +73,7 @@ namespace arc
             const bool         m_leaf;  //! True if the cell is a terminal cell.
 
             //  -- Children --
-            const std::array<std::shared_ptr<Cell>, 8> m_child; //! Array of child cell pointers.
+            const std::array<std::unique_ptr<Cell>, 8> m_child; //! Array of child cell pointers.
 
 
             //  == INSTANTIATION ==
