@@ -36,8 +36,6 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Bounds --
-            const math::Vec<3> m_min_bound; //! Minimum spatial bound of the cell.
-            const math::Vec<3> m_max_bound; //! Minimum spatial bound of the cell.
 
 
             //  == INSTANTIATION ==
