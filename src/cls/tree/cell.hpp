@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- Classes --
 #include "cls/detector/ccd.hpp"
+#include "cls/detector/spectrometer.hpp"
 #include "cls/equip/entity.hpp"
 #include "cls/equip/light.hpp"
 #include "cls/math/vec.hpp"
@@ -50,9 +51,10 @@ namespace arc
             const std::array<std::shared_ptr<Cell>, 8> m_child; //! Array of child cell pointers.
 
             //  -- Equipment References --
-            const std::vector<equip::Entity>& m_entity; //! Reference to vector of sim entities.
-            const std::vector<equip::Light> & m_light;  //! Reference to vector of sim lights.
-            const std::vector<detector::Ccd>& m_ccd;    //! Reference to vector of sim ccds.
+            const std::vector<equip::Entity>         & m_entity;        //! Reference to vector of sim entities.
+            const std::vector<equip::Light>          & m_light;         //! Reference to vector of sim lights.
+            const std::vector<detector::Ccd>         & m_ccd;           //! Reference to vector of sim ccds.
+            const std::vector<detector::Spectrometer>& m_spectrometer;  //! Reference to vector of sim spectrometers.
 
 
             //  == INSTANTIATION ==
