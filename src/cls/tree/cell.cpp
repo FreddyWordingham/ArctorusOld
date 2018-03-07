@@ -460,6 +460,34 @@ namespace arc
         }
 
         /**
+         *  Recursively search the tree for maximum number of triangles contained within a single leaf cell.
+         *
+         *  @return The maxmimum number of triangles contained within a single leaf cell.
+         */
+        size_t Cell::get_max_tri() const
+        {
+            // If this cell is a leaf, return its number of triangles.
+            if (m_leaf)
+            {
+                return (m_entity_tri_list.size() + m_light_tri_list.size() + m_ccd_tri_list.size() + m_spectrometer_tri_list
+                    .size());
+            }
+
+            // If this cell is not a leaf, determine the maximum number of triangles within a child cell.
+            size_t      max_tri = 0;
+            for (size_t i       = 0; i < 8; ++i)
+            {
+                size_t child_tri = m_child[i]->get_max_tri();
+                if (child_tri) > max_tri)
+                {
+                    max_tri = child_tri;
+                }
+            }
+
+            return (max_tri);
+        }
+
+        /**
          *  Retrieve a pointer to the leaf cell for a given position within the cell.
          *
          *  @param  t_pos   Position of the point.
