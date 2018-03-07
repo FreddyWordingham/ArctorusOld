@@ -234,7 +234,7 @@ void save_data(const arc::data::Json& t_setup, const arc::setup::Sim& t_sim, con
     // Save tree images.
     const std::string tree_images_dir = t_output_dir + "tree_images/";
     arc::utl::create_directory(tree_images_dir);
-    const size_t res = t_setup["tree"].parse_child<size_t>("image_res");
+    const auto res = t_setup["tree"].parse_child<size_t>("image_res");
     t_sim.save_tree_images(tree_images_dir, res);
 
     // Save ccd data.
