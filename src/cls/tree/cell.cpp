@@ -503,15 +503,18 @@ namespace arc
                 return (r_data_cube);
             }
 
+            // If this cell is a leaf, fill the data cube uniformly with this cells energy density.
             if (m_leaf)
             {
+                const double energy_density = get_energy_density();
+
                 for (size_t i = 0; i < res; ++i)
                 {
                     for (size_t j = 0; j < res; ++j)
                     {
                         for (size_t k = 0; k < res; ++k)
                         {
-                            r_data_cube[i][j][k] = m_energy;
+                            r_data_cube[i][j][k] = energy_density;
                         }
                     }
                 }
@@ -519,6 +522,7 @@ namespace arc
                 return (r_data_cube);
             }
 
+            // Add child cell data to the data cube.
             for (size_t index = 0; index < 8; ++index)
             {
                 size_t i_offset = 0;
