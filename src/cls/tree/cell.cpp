@@ -102,6 +102,7 @@ namespace arc
             m_entity(t_entity),
             m_light(t_light),
             m_ccd(t_ccd),
+            m_spectrometer(t_spectrometer),
         {
         }
 
