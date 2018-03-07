@@ -36,6 +36,7 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Bounds --
+            const math::Vec<3> m_center;    //! Center of the cell.
 
 
             //  == INSTANTIATION ==
