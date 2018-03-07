@@ -436,14 +436,14 @@ namespace arc
          *
          *  @return A pointer to the leaf cell containing the given position.
          */
-        std::unique_ptr<Cell> Cell::get_leaf(const math::Vec<3>& t_pos) const
+        Cell* Cell::get_leaf(const math::Vec<3>& t_pos) const
         {
             assert(is_within(t_pos));
 
             // If this cell is a leaf, return a pointer to this cell.
             if (m_leaf)
             {
-                return (std::make_unique<Cell>(this));
+                return (this);
             }
 
             // Determine the child index.

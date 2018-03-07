@@ -114,7 +114,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
-            std::unique_ptr<Cell> get_leaf(const math::Vec<3>& t_pos) const;
+            Cell* get_leaf(const math::Vec<3>& t_pos) const;
             bool is_within(const math::Vec<3>& t_pos) const;
 
           private:
