@@ -56,6 +56,7 @@ namespace arc
             m_light(t_light),
             m_ccd(t_ccd),
             m_spectrometer(t_spectrometer),
+            m_light_tri_list(init_light_tri_list())
         {
             assert(m_half_width[X] > 0.0);
             assert(m_half_width[Y] > 0.0);
