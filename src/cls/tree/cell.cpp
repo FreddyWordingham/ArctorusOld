@@ -33,11 +33,11 @@ namespace arc
          *  Tree will stop reproducing until either the maxmium depth is reached, or the target maximum number of triangles has
          *  been reached.
          *
-         *  @param  t_min_bound     Minimum spatial bound of the cell.
-         *  @param  t_max_bound     Maximum spatial bound of the cell.
          *  @param  t_min_depth     Minimum depth for the cell to split to.
          *  @param  t_max_depth     Maximum depth for the cell to split to.
          *  @param  t_max_tri       Target maximum number of triangles to contain within leaf cells.
+         *  @param  t_min_bound     Minimum spatial bound of the cell.
+         *  @param  t_max_bound     Maximum spatial bound of the cell.
          *  @param  t_entity        Vector of entity objects which may lie within the cell.
          *  @param  t_light         Vector of light objects which may lie within the cell.
          *  @param  t_ccd           Vector of ccd objects which may lie within the cell.
@@ -47,8 +47,8 @@ namespace arc
          *  @post   m_half_width[Y] must be positive.
          *  @post   m_half_width[Z] must be positive.
          */
-        Cell::Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const unsigned int t_min_depth,
-                   const unsigned int t_max_depth, const unsigned int t_max_tri, const std::vector<equip::Entity>& t_entity,
+        Cell::Cell(const unsigned int t_min_depth, const unsigned int t_max_depth, const unsigned int t_max_tri,
+                   const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const std::vector<equip::Entity>& t_entity,
                    const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd,
                    const std::vector<detector::Spectrometer>& t_spectrometer) :
             m_center((t_max_bound + t_min_bound) / 2.0),
