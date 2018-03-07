@@ -18,11 +18,6 @@
     }
     "simulation":   {
         "num_phot": 1e4,
-        "grid":     {
-            "min":   [-4.1e-2, -4.1e-2, -2.1e-2],
-            "max":   [4.1e-2, 4.1e-2, 2.1e-2],
-            "cells": [101, 101, 101]
-        },
         "aether":   {
             "mat": "materials/vacuum.mat"
         },
