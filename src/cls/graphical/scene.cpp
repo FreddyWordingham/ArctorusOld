@@ -351,7 +351,7 @@ namespace arc
             WARN("Unable to determine maximum energy density.", "The method get_max_energy_density is not yet written.");
 
             // Recursively add the cell props.
-            add_cell(t_root, max_energy_density);
+            add_cell(t_tree, max_energy_density);
         }
 
         /**
@@ -496,17 +496,20 @@ namespace arc
         /**
          *  Add a render-able cell prop to the scene.
          *
-         *  @param  t_min       Minimum bound of the cell.
-         *  @param  t_max       Minimum bound of the cell.
-         *  @param  t_padding   Padding to apply to cell bounds.
-         *  @param  t_col       Colour of the cell prop.
+         *  @param  t_cell                  Cell to be added to the scene.
+         *  @param  t_max_energy_density    Maximum energy density of all cells within the complete tree.
          */
-        void Scene::add_cell(const math::Vec<3>& t_min, const math::Vec<3>& t_max, const double t_padding,
-                             const glm::vec4& t_col)
+        void Scene::add_cell(const tree::Cell& t_cell, const double t_max_energy_density)
         {
-            m_cell.emplace_back(
-                Prop(Prop::boundedShape::BOX, t_col, {t_min[X] + t_padding, t_min[Y] + t_padding, t_min[Z] + t_padding},
-                     {t_max[X] - t_padding, t_max[Y] - t_padding, t_max[Z] - t_padding}));
+            // Determine the prop colour.
+            const std::array<double, 3> col = utl::colourmap::transform_rainbow(0.5 / t_max_energy_density);
+
+            // Get cell bounds.
+            const math::Vec<3> min_bound = t_cell.get_min_bound();
+            const math::Vec<3> max_bound = t_cell.get_max_bound();
+
+            m_cell.emplace_back(Prop(Prop::boundedShape::BOX, col, {min_bound[X], min_bound[Y], min_bound[Z]},
+                                     {max_bound[X], max_bound[Y], max_bound[Z]}));
         }
 
 

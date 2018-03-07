@@ -119,8 +119,8 @@ namespace arc
             //  -- Getters --
             Cell* get_leaf(const math::Vec<3>& t_pos);
             bool is_within(const math::Vec<3>& t_pos) const;
-            const math::Vec<3>& get_min_bound() const { return (m_center - m_half_width); }
-            const math::Vec<3>& get_max_bound() const { return (m_center + m_half_width); }
+            math::Vec<3> get_min_bound() const { return (m_center - m_half_width); }
+            math::Vec<3> get_max_bound() const { return (m_center + m_half_width); }
             double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
             std::tuple<bool, double, size_t, size_t> entity_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
             std::tuple<bool, double, size_t, size_t> ccd_dist(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
