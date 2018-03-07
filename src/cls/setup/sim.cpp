@@ -529,7 +529,7 @@ namespace arc
                 }
                 else
                 {
-                    cell = &m_grid.get_cell(phot.get_pos());
+                    cell = &m_root.get_leaf(phot.get_pos());
                     assert(cell != nullptr);
                 }
 
