@@ -41,6 +41,10 @@ namespace arc
          *  @param  t_light         Vector of light objects which may lie within the cell.
          *  @param  t_ccd           Vector of ccd objects which may lie within the cell.
          *  @param  m_spectrometer  Vector of spectrometer objects which may lie within the cell.
+         *
+         *  @post   m_half_width[X] must be positive.
+         *  @post   m_half_width[Y] must be positive.
+         *  @post   m_half_width[Z] must be positive.
          */
         Cell::Cell(const math::Vec<3>& t_min_bound, const math::Vec<3>& t_max_bound, const unsigned int t_min_depth,
                    const unsigned int t_max_depth, const std::vector<equip::Entity>& t_entity,
@@ -49,6 +53,9 @@ namespace arc
             m_center((t_max_bound + t_min_bound) / 2.0),
             m_half_width((t_max_bound - t_min_bound) / 2.0)
         {
+            assert(m_half_width[X] > 0.0);
+            assert(m_half_width[Y] > 0.0);
+            assert(m_half_width[Z] > 0.0);
         }
 
 
