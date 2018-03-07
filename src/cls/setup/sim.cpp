@@ -481,7 +481,7 @@ namespace arc
 #ifdef ENABLE_PHOTON_PATHS
             scene.add_photon_vector(m_path);
 #endif
-            scene.add_grid(m_grid);
+            scene.add_tree(m_root);
 
             // Render the scene.
             while (!scene.should_close())
