@@ -77,7 +77,7 @@ int main(const int t_argc, const char** t_argv)
     SEC("Running Simulation");
     run_sim(setup, sim);
 
-    // Save grid data.
+    // Save tree data.
     SEC("Saving Data");
     save_data(setup, sim, output_dir);
 
