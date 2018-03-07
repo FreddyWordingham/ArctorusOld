@@ -118,6 +118,7 @@ namespace arc
           public:
             //  -- Getters --
             bool is_leaf() const { return (m_leaf); }
+            const std::unique_ptr<Cell>& get_child(const size_t t_index) const { return (m_child[t_index]); }
             Cell* get_leaf(const math::Vec<3>& t_pos);
             bool is_within(const math::Vec<3>& t_pos) const;
             math::Vec<3> get_min_bound() const { return (m_center - m_half_width); }
