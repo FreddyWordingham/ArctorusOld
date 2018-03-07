@@ -23,11 +23,11 @@
         "max_bound": [11e-3, 11e-3, 34e-3]
     },
     "simulation":   {
-        "num_phot":      1e3,
-        "aether":        {
+        "num_phot": 1e4,
+        "aether":   {
             "mat": "materials/intralipid_010-0.mat"
         },
-        "entities":      {
+        "entities": {
             "detector_mirror": {
                 "mesh":  "meshes/detector/mirror.obj",
                 "mat":   "materials/mirror.mat",
