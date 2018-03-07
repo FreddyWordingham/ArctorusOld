@@ -4,7 +4,7 @@
         "max_threads":       8,
         "output_dir_name":   "rainbow",
         "seed":              77,
-        "pre_render":        true,
+        "pre_render":        false,
         "post_render":       true
     },
     "optimisation": {
@@ -38,7 +38,7 @@
                 "scale": [0.1e-3, 0.1e-3, 0.1e-3]
             }
         },
-        "lights":        {
+        "lights":   {
             "detector_led": {
                 "power": 1.0,
                 "mesh":  "meshes/circle.obj",

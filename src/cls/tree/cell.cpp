@@ -458,7 +458,7 @@ namespace arc
                     r_data_cube[i][j].reserve(res);
                     for (size_t k = 0; k < res; ++k)
                     {
-                        r_data_cube[i][j].emplace_back(1.0);
+                        r_data_cube[i][j].emplace_back(0.0);
                     }
                 }
             }
@@ -510,30 +510,21 @@ namespace arc
                     default: ERROR("Error occured.", "Code reached unreachable location.");
                 }
 
-                // Create the child data cube.
-                std::vector<std::vector<std::vector<double>>> child_cube = m_child[index]->get_data_cube(t_depth - 1);
-                child_cube.reserve(res / 2);
-                for (size_t i = 0; i < (res / 2); ++i)
-                {
-                    child_cube.emplace_back(std::vector<std::vector<double>>());
-                    child_cube[i].reserve(res / 2);
-                    for (size_t j = 0; j < (res / 2); ++j)
-                    {
-                        child_cube[i].emplace_back(std::vector<double>());
-                        child_cube[i][j].reserve(res / 2);
-                        for (size_t k = 0; k < (res / 2); ++k)
-                        {
-                            child_cube[i][j].emplace_back(1.0);
-                        }
-                    }
-                }
-
+                // Added data from the child data cube.
+                std::vector<std::vector<std::vector<double>>> child_cube = m_child[index]->get_data_cube(t_depth);
                 for (size_t i = 0; i < (res / 2); ++i)
                 {
                     for (size_t j = 0; j < (res / 2); ++j)
                     {
                         for (size_t k = 0; k < (res / 2); ++k)
                         {
+                            VAL(t_depth);
+                            VAL(m_depth);
+                            VAL(index);
+                            VAL(res);
+                            VAL(i + i_offset);
+                            VAL(j + j_offset);
+                            VAL(k + k_offset);
                             r_data_cube[i + i_offset][j + j_offset][k + k_offset] = child_cube[i][j][k];
                         }
                     }
