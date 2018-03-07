@@ -58,7 +58,6 @@ namespace arc
         template <typename T>
         T str_to(const std::string& t_str);
 
-
         //  -- Geometry --
         template <size_t N>
         constexpr double dist(const Vec<N>& t_start, const Vec<N>& t_end);
