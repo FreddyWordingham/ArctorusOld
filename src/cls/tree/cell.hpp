@@ -81,7 +81,8 @@ namespace arc
 
             //  == METHODS ==
           private:
-
+            //  -- Overlap Test --
+            bool plane_overlap(const math::Vec<3>& t_norm, const math::Vec<3>& t_point) const;
         };
 
 

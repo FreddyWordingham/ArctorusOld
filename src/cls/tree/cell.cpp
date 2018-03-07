@@ -93,5 +93,41 @@ namespace arc
         }
 
 
+
+        //  == METHODS ==
+        //  -- Overlap Test --
+        /**
+         *  Determine if a plane described by a given normal and point overlaps with the box centered at the origin.
+         *
+         *  @param  t_norm          Normal of the plane.
+         *  @param  t_point         Point located on the plane.
+         *
+         *  @return True if the plane and box are intersecting.
+         */
+        bool Cell::plane_overlap(const math::Vec<3>& t_norm, const math::Vec<3>& t_point) const
+        {
+            math::Vec<3> min, max;
+
+            for (size_t q = 0; q < 3; ++q)
+            {
+                double v = t_point[q];
+
+                if (t_norm[q] > 0.0)
+                {
+                    min[q] = -m_half_width[q] - v;
+                    max[q] = m_half_width[q] - v;
+                }
+                else
+                {
+                    min[q] = m_half_width[q] - v;
+                    max[q] = -m_half_width[q] - v;
+                }
+            }
+
+            return (((t_norm * min) <= 0.0) && ((t_norm * max) >= 0.0));
+        }
+
+
+
     } // namespace tree
 } // namespace arc
