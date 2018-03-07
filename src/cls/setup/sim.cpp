@@ -419,7 +419,7 @@ namespace arc
 
             // Normalise the data cube.
             double      max = 0.0;
-            size_t      res = static_cast<size_t>(1) << 3;
+            size_t      res = static_cast<size_t>(1) << 6;
             for (size_t i   = 0; i < res; ++i)
             {
                 for (size_t j = 0; j < res; ++j)
@@ -433,6 +433,7 @@ namespace arc
                     }
                 }
             }
+            assert(max > 0.0);
             for (size_t i   = 0; i < res; ++i)
             {
                 for (size_t j = 0; j < res; ++j)
