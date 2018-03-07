@@ -428,6 +428,43 @@ namespace arc
         //  == METHODS ==
         //  -- Getters --
         /**
+         *  Retrieve a pointer to the leaf cell for a given position within the cell.
+         *
+         *  @param  t_pos   Position of the point.
+         *
+         *  @pre    t_pos must be within the current cell.
+         *
+         *  @return A pointer to the leaf cell containing the given position.
+         */
+        std::unique_ptr<Cell> Cell::get_leaf(const math::Vec<3>& t_pos) const
+        {
+            assert(is_within(t_pos));
+
+            // If this cell is a leaf, return a pointer to this cell.
+            if (m_leaf)
+            {
+                return (std::make_unique<Cell>(this));
+            }
+
+            // Determine the child index.
+            size_t child_index = 0;
+            if (t_pos[X] < m_center[X])
+            {
+                child_index += 1;
+            }
+            if (t_pos[Y] < m_center[Y])
+            {
+                child_index += 2;
+            }
+            if (t_pos[Z] < m_center[Z])
+            {
+                child_index += 4;
+            }
+
+            return (m_child[child_index]->get_leaf(t_pos));
+        }
+
+        /**
          *  Determine if a given point falls within the bounds of the cell.
          *
          *  @param  t_pos   Position of the point.
