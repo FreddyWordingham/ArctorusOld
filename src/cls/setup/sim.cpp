@@ -49,10 +49,9 @@ namespace arc
             m_ccd(init_ccd(t_json["simulation"]["ccds"])),
             m_spectrometer(init_spectrometer(t_json["simulation"]["spectrometers"])),
             m_light_select(init_light_select()),
-            m_grid(t_json["simulation"]["grid"].parse_child<math::Vec<3>>("min"),
-                   t_json["simulation"]["grid"].parse_child<math::Vec<3>>("max"),
-                   t_json["simulation"]["grid"].parse_child<std::array<size_t, 3>>("cells"), m_entity, m_light, m_ccd,
-                   m_spectrometer),
+            m_root(t_json["tree"].parse_child<unsigned int>("min_depth"), t_json["tree"].parse_child<unsigned int>("max_depth"),
+                   t_json["tree"].parse_child<unsigned int>("max_tri"), t_json["tree"].parse_child<math::Vec<3>>("min_bound"),
+                   t_json["tree"].parse_child<math::Vec<3>>("max_bound"), m_entity, m_light, m_ccd, m_spectrometer),
             m_log_update_period(t_json["system"].parse_child<double>("log_update_period"))
         {
             // Validate settings.
