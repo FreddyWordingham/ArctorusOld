@@ -452,6 +452,8 @@ namespace arc
             VAL(m_depth);
             VAL(m_center);
             VAL(m_half_width);
+            VAL(m_center + m_half_width);
+            VAL(m_center - m_half_width);
             LOG(" ");
             assert(is_within(t_pos));
 
@@ -491,7 +493,7 @@ namespace arc
             // Check if any dimensions fall outside of the cells.
             for (size_t i = 0; i < 3; ++i)
             {
-                if ((t_pos[i] < (m_center[X] - m_half_width[X])) || (t_pos[i] > (m_center[X] + m_half_width[X])))
+                if ((t_pos[i] < (m_center[i] - m_half_width[i])) || (t_pos[i] > (m_center[i] + m_half_width[i])))
                 {
                     return (false);
                 }
