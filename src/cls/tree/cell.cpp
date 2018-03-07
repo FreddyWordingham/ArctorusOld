@@ -101,6 +101,7 @@ namespace arc
             m_half_width(t_half_width),
             m_entity(t_entity),
             m_light(t_light),
+            m_ccd(t_ccd),
         {
         }
 
