@@ -63,7 +63,7 @@ namespace arc
             m_spectrometer_tri_list(init_spectrometer_tri_list()),
             m_depth(0),
             m_leaf(init_leaf(t_min_depth, t_max_depth, t_max_tri)),
-            m_child(init_child(m_min_depth, m_max_depth, t_max_tri))
+            m_child(init_child(t_min_depth, t_max_depth, t_max_tri))
         {
             assert(m_half_width[X] > 0.0);
             assert(m_half_width[Y] > 0.0);
