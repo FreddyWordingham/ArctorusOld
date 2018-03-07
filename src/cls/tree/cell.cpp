@@ -436,7 +436,7 @@ namespace arc
          *
          *  @return A pointer to the leaf cell containing the given position.
          */
-        Cell* Cell::get_leaf(const math::Vec<3>& t_pos) const
+        Cell* Cell::get_leaf(const math::Vec<3>& t_pos)
         {
             assert(is_within(t_pos));
 
