@@ -38,7 +38,16 @@ namespace arc
         class Cell
         {
             //  == ENUMERATIONS ==
-
+            //  -- Indices --
+          public:
+            /**
+             *  Enumeration of the triangle list indices.
+             */
+            enum list_index
+            {
+                OBJ,    //! List object index.
+                TRI     //! List triangle index.
+            };
 
 
             //  == FIELDS ==
