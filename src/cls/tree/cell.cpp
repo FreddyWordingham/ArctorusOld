@@ -438,6 +438,28 @@ namespace arc
         //  == METHODS ==
         //  -- Getters --
         /**
+         *  Determine the total number of cells attached to this cell recursively.
+         *
+         *  @return The total number of cells attached to this cell.
+         */
+        unsigned long int Cell::get_total_cells() const
+        {
+            // Count this cell.
+            unsigned long int count = 1;
+
+            // Recursively count child cells.
+            if (!m_leaf)
+            {
+                for (size_t i = 0; i < 8; ++i)
+                {
+                    count += m_child[i]->get_total_cells();
+                }
+            }
+
+            return (count);
+        }
+
+        /**
          *  Retrieve a pointer to the leaf cell for a given position within the cell.
          *
          *  @param  t_pos   Position of the point.
