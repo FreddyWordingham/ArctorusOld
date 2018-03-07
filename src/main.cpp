@@ -232,7 +232,7 @@ void save_data(const arc::setup::Sim& t_sim, const std::string& t_output_dir)
     // Save grid images.
     const std::string grid_images_dir = t_output_dir + "grid_images/";
     arc::utl::create_directory(grid_images_dir);
-    t_sim.save_grid_images(grid_images_dir);
+    t_sim.save_tree_images(grid_images_dir);
 
     // Save ccd data.
     const std::string ccd_images_dir = t_output_dir + "ccd_images/";
