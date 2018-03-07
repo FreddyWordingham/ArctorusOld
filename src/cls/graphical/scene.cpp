@@ -518,7 +518,7 @@ namespace arc
             {
                 for (size_t i = 0; i < 8; ++i)
                 {
-                    add_cell(t_cell.get_daughter(i), t_max_energy_density);
+                    add_cell(t_cell.get_child(i), t_max_energy_density);
                 }
             }
         }
