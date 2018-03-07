@@ -338,12 +338,12 @@ namespace arc
         {
             // Add main grid bounds.
             m_grid.emplace_back(Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0},
-                                     {static_cast<float>(t_tree.get_min_bound()[X]),
-                                      static_cast<float>(t_tree.get_min_bound()[Y]),
-                                      static_cast<float>(t_tree.get_min_bound()[Z])},
-                                     {static_cast<float>(t_tree.get_max_bound()[X]),
-                                      static_cast<float>(t_tree.get_max_bound()[Y]),
-                                      static_cast<float>(t_tree.get_max_bound()[Z])}));
+                                     {static_cast<float>(t_tree->get_min_bound()[X]),
+                                      static_cast<float>(t_tree->get_min_bound()[Y]),
+                                      static_cast<float>(t_tree->get_min_bound()[Z])},
+                                     {static_cast<float>(t_tree->get_max_bound()[X]),
+                                      static_cast<float>(t_tree->get_max_bound()[Y]),
+                                      static_cast<float>(t_tree->get_max_bound()[Z])}));
 
             // Determine maximum grid cell energy density.
             double max_energy_density = 1.0;//t_grid.get_max_energy_density();
