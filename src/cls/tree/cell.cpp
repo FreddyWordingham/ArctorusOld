@@ -135,7 +135,7 @@ namespace arc
                     // If the cell overlaps any part of the triangle, add the indices to the list.
                     if (tri_overlap(m_entity[i].get_mesh().get_tri(j)))
                     {
-                        r_entity_tri_list.emplace_back({{i, j}});
+                        r_entity_tri_list.push_back({{i, j}});
                     }
                 }
             }
@@ -187,7 +187,7 @@ namespace arc
                     // If the cell overlaps any part of the triangle, add the indices to the list.
                     if (tri_overlap(m_light[i].get_mesh().get_tri(j)))
                     {
-                        r_light_tri_list.emplace_back({{i, j}});
+                        r_light_tri_list.push_back({{i, j}});
                     }
                 }
             }
@@ -239,7 +239,7 @@ namespace arc
                     // If the cell overlaps any part of the triangle, add the indices to the list.
                     if (tri_overlap(m_ccd[i].get_mesh().get_tri(j)))
                     {
-                        r_ccd_tri_list.emplace_back({{i, j}});
+                        r_ccd_tri_list.push_back({{i, j}});
                     }
                 }
             }
@@ -291,7 +291,7 @@ namespace arc
                     // If the cell overlaps any part of the triangle, add the indices to the list.
                     if (tri_overlap(m_spectrometer[i].get_mesh().get_tri(j)))
                     {
-                        r_spectrometer_tri_list.emplace_back({{i, j}});
+                        r_spectrometer_tri_list.push_back({{i, j}});
                     }
                 }
             }
