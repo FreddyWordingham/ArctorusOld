@@ -43,13 +43,6 @@ namespace arc
             const math::Vec<3> m_center;        //! Center of the cell.
             const math::Vec<3> m_half_width;    //! Half width of the cell.
 
-            //  -- Depth Data --
-            const unsigned int m_depth; //! Depth of the cell within the tree.
-            const bool         m_leaf;  //! True if the cell is a terminal cell.
-
-            //  -- Children --
-            const std::array<std::shared_ptr<Cell>, 8> m_child; //! Array of child cell pointers.
-
             //  -- Equipment References --
             const std::vector<equip::Entity>         & m_entity;        //! Reference to vector of sim entities.
             const std::vector<equip::Light>          & m_light;         //! Reference to vector of sim lights.
@@ -61,6 +54,13 @@ namespace arc
             const std::vector<std::array<size_t, 2>> m_light_tri_list;          //! List of light triangles inside cell.
             const std::vector<std::array<size_t, 2>> m_ccd_tri_list;            //! List of ccd triangles inside cell.
             const std::vector<std::array<size_t, 2>> m_spectrometer_tri_list;   //! List of spectrometer triangles inside cell.
+
+            //  -- Depth Data --
+            const unsigned int m_depth; //! Depth of the cell within the tree.
+            const bool         m_leaf;  //! True if the cell is a terminal cell.
+
+            //  -- Children --
+            const std::array<std::shared_ptr<Cell>, 8> m_child; //! Array of child cell pointers.
 
 
             //  == INSTANTIATION ==
