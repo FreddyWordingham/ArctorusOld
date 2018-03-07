@@ -112,6 +112,10 @@ namespace arc
 
 
             //  == METHODS ==
+          public:
+            //  -- Getters --
+            bool is_within(const math::Vec<3>& t_pos) const;
+
           private:
             //  -- Overlap Test --
             bool tri_overlap(const geom::Triangle& t_tri) const;

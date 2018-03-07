@@ -426,6 +426,29 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Determine if a given point falls within the bounds of the cell.
+         *
+         *  @param  t_pos   Position of the point.
+         *
+         *  @return True if the point does fall within the bounds of the cell.
+         */
+        bool Cell::is_within(const math::Vec<3>& t_pos) const
+        {
+            // Check if any dimensions fall outside of the cells.
+            for (size_t i = 0; i < 3; ++i)
+            {
+                if ((t_pos[i] >= (m_center[X] - m_half_width[X])) && (t_pos[i] <= (m_center[X] + m_half_width[X])))
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
+
         //  -- Overlap Test --
         /**
          *  Determine if the cell box is intersecting with a triangle.
