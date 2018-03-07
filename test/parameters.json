@@ -4,8 +4,8 @@
         "max_threads":       1,
         "output_dir_name":   "rainbow",
         "seed":              77,
-        "pre_render":        false,
-        "post_render":       false
+        "pre_render":        true,
+        "post_render":       true
     },
     "optimisation": {
         "loop_limit": 2e2,
@@ -22,11 +22,11 @@
         "max_bound": [4.1e-2, 4.1e-2, 2.1e-2]
     },
     "simulation":   {
-        "num_phot":      1e4,
-        "aether":        {
+        "num_phot": 1e3,
+        "aether":   {
             "mat": "materials/vacuum.mat"
         },
-        "entities":      {
+        "entities": {
             "water_drop": {
                 "mesh":  "meshes/sphere.obj",
                 "mat":   "materials/water.mat",
