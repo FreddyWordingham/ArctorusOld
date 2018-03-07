@@ -97,6 +97,144 @@ namespace arc
         //  == METHODS ==
         //  -- Overlap Test --
         /**
+         *  Determine if the cell box is intersecting with a triangle.
+         *  Cell and triangle are considered to be overlapping even if the triangle is in the plane of the box.
+         *
+         *  @param  t_tri       Triangle to test intersection with.
+         *
+         *  @return True if the cell and triangle are intersecting.
+         */
+        bool Cell::tri_overlap(const geom::Triangle& t_tri) const
+        {
+            // Translate everything so the box center is at the origin.
+            const math::Vec<3> v0 = t_tri.get_pos(0) - m_center;
+            const math::Vec<3> v1 = t_tri.get_pos(1) - m_center;
+            const math::Vec<3> v2 = t_tri.get_pos(2) - m_center;
+
+            // Compute triangle edges.
+            const math::Vec<3> e0 = v1 - v0;
+            const math::Vec<3> e1 = v2 - v1;
+            const math::Vec<3> e2 = v0 - v2;
+
+            double p0, p2, rad;
+
+            p0  = (e0[Z] * v0[Y]) - (e0[Y] * v0[Z]);
+            p2  = (e0[Z] * v2[Y]) - (e0[Y] * v2[Z]);
+            rad = (std::fabs(e0[Z]) * m_half_width[Y]) + (std::fabs(e0[Y]) * m_half_width[Z]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            p0  = (-e0[Z] * v0[X]) + (e0[X] * v0[Z]);
+            p2  = (-e0[Z] * v2[X]) + (e0[X] * v2[Z]);
+            rad = (std::fabs(e0[Z]) * m_half_width[X]) + (std::fabs(e0[X]) * m_half_width[Z]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            p0  = (e0[Y] * v1[X]) - (e0[X] * v1[Y]);
+            p2  = (e0[Y] * v2[X]) - (e0[X] * v2[Y]);
+            rad = (std::fabs(e0[Y]) * m_half_width[X]) + (std::fabs(e0[X]) * m_half_width[Y]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            p0  = (e1[Z] * v0[Y]) - (e1[Y] * v0[Z]);
+            p2  = (e1[Z] * v2[Y]) - (e1[Y] * v2[Z]);
+            rad = (std::fabs(e1[Z]) * m_half_width[Y]) + (std::fabs(e1[Y]) * m_half_width[Z]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            p0  = (-e1[Z] * v0[X]) + (e1[X] * v0[Z]);
+            p2  = (-e1[Z] * v2[X]) + (e1[X] * v2[Z]);
+            rad = (std::fabs(e1[Z]) * m_half_width[X]) + (std::fabs(e1[X]) * m_half_width[Z]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            p0  = (e1[Y] * v0[X]) - (e1[X] * v0[Y]);
+            p2  = (e1[Y] * v1[X]) - (e1[X] * v1[Y]);
+            rad = (std::fabs(e1[Y]) * m_half_width[X]) + (std::fabs(e1[X]) * m_half_width[Y]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            p0  = (e2[Z] * v0[Y]) - (e2[Y] * v0[Z]);
+            p2  = (e2[Z] * v1[Y]) - (e2[Y] * v1[Z]);
+            rad = (std::fabs(e2[Z]) * m_half_width[Y]) + (std::fabs(e2[Y]) * m_half_width[Z]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            p0  = (-e2[Z] * v0[X]) + (e2[X] * v0[Z]);
+            p2  = (-e2[Z] * v1[X]) + (e2[X] * v1[Z]);
+            rad = (std::fabs(e2[Z]) * m_half_width[X]) + (std::fabs(e2[X]) * m_half_width[Z]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            p0  = (e2[Y] * v1[X]) - (e2[X] * v1[Y]);
+            p2  = (e2[Y] * v2[X]) - (e2[X] * v2[Y]);
+            rad = (std::fabs(e2[Y]) * m_half_width[X]) + (std::fabs(e2[X]) * m_half_width[Y]);
+            if ((std::min(p0, p2) > rad) || (std::max(p0, p2) < -rad))
+            {
+                return (false);
+            }
+
+            auto find_min_max = [](const double x0, const double x1, const double x2, double& min, double& max)
+            {
+                min = max = x0;
+
+                if (x1 < min)
+                {
+                    min = x1;
+                }
+                if (x1 > max)
+                {
+                    max = x1;
+                }
+                if (x2 < min)
+                {
+                    min = x2;
+                }
+                if (x2 > max)
+                {
+                    max = x2;
+                }
+            };
+
+            double min, max;
+            find_min_max(v0[X], v1[X], v2[X], min, max);
+            if ((min > m_half_width[X]) || (max < -m_half_width[X]))
+            {
+                return (false);
+            }
+
+            find_min_max(v0[Y], v1[Y], v2[Y], min, max);
+            if ((min > m_half_width[Y]) || (max < -m_half_width[Y]))
+            {
+                return (false);
+            }
+
+            find_min_max(v0[Z], v1[Z], v2[Z], min, max);
+            if ((min > m_half_width[Z]) || (max < -m_half_width[Z]))
+            {
+                return (false);
+            }
+
+            return (plane_overlap(e0 ^ e1, v0));
+        }
+
+        /**
          *  Determine if a plane described by a given normal and point overlaps with the box centered at the origin.
          *
          *  @param  t_norm          Normal of the plane.
