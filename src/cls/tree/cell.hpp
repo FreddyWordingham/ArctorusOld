@@ -59,6 +59,7 @@ namespace arc
             //  -- Lists --
             const std::vector<std::array<size_t, 2>> m_entity_tri_list; //! List of entity triangles inside cell.
             const std::vector<std::array<size_t, 2>> m_light_tri_list;  //! List of light triangles inside cell.
+            const std::vector<std::array<size_t, 2>> m_ccd_tri_list;    //! List of ccd triangles inside cell.
 
 
             //  == INSTANTIATION ==
