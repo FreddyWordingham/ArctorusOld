@@ -412,9 +412,7 @@ namespace arc
          */
         void Sim::save_tree_images(const std::string& t_output_dir) const
         {
-            //m_grid.save_images(t_output_dir);
-            WARN("Unable to save grid images.", "Grid image saving is currently unavailable.");
-
+            // Form the data cube.
             std::vector<std::vector<std::vector<double>>> data_cube = m_root->get_data_cube(6);
 
             // Normalise the data cube.
@@ -445,6 +443,7 @@ namespace arc
                 }
             }
 
+            // Save slices of the data cube.
             save_slices(t_output_dir, X, data_cube);
             save_slices(t_output_dir, Y, data_cube);
             save_slices(t_output_dir, Z, data_cube);
