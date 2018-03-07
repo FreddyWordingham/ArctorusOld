@@ -385,7 +385,7 @@ namespace arc
 
             const unsigned int daughter_depth = m_depth + 1;
             const math::Vec<3> half_width     = m_half_width / 2.0;
-            const math::Vec<3> offset         = m_half_width / 4.0;
+            const math::Vec<3> offset         = m_half_width / 2.0;
 
             return (std::array<std::unique_ptr<Cell>, 8>(
                 {{std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
@@ -448,6 +448,11 @@ namespace arc
          */
         Cell* Cell::get_leaf(const math::Vec<3>& t_pos)
         {
+            VAL(t_pos);
+            VAL(m_depth);
+            VAL(m_center);
+            VAL(m_half_width);
+            LOG(" ");
             assert(is_within(t_pos));
 
             // If this cell is a leaf, return a pointer to this cell.
