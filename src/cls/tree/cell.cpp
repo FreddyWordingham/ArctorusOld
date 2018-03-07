@@ -99,6 +99,7 @@ namespace arc
                    const std::vector<std::array<size_t, 2>>& t_spectrometer_tri_list) :
             m_center(t_center),
             m_half_width(t_half_width),
+            m_entity(t_entity),
         {
         }
 
