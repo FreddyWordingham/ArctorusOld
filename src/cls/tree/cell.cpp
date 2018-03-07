@@ -440,8 +440,10 @@ namespace arc
 
         std::vector<std::vector<std::vector<double>>> Cell::get_data_cube(const size_t t_depth) const
         {
+            assert(t_depth >= m_depth);
+
             // Convert depth resolution to linear resolution.
-            const size_t res = static_cast<size_t>(1) << t_depth;
+            const size_t res = static_cast<size_t>(1) << (t_depth - m_depth);
 
             // Create the return data cube.
             std::vector<std::vector<std::vector<double>>> r_data_cube;
@@ -457,6 +459,82 @@ namespace arc
                     for (size_t k = 0; k < res; ++k)
                     {
                         r_data_cube[i][j].emplace_back(1.0);
+                    }
+                }
+            }
+
+            // If required depth is equal to current depth, return value.
+            if (t_depth == m_depth)
+            {
+                r_data_cube[0][0][0] = m_energy;
+
+                return (r_data_cube);
+            }
+
+            for (size_t index = 0; index < 8; ++index)
+            {
+                size_t i_offset = 0;
+                size_t j_offset = 0;
+                size_t k_offset = 0;
+                switch (index)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        i_offset = res / 2;
+                        break;
+                    case 2:
+                        j_offset = res / 2;
+                        break;
+                    case 3:
+                        i_offset = res / 2;
+                        j_offset = res / 2;
+                        break;
+                    case 4:
+                        k_offset = res / 2;
+                        break;
+                    case 5:
+                        i_offset = res / 2;
+                        k_offset = res / 2;
+                        break;
+                    case 6:
+                        j_offset = res / 2;
+                        k_offset = res / 2;
+                        break;
+                    case 7:
+                        i_offset = res / 2;
+                        j_offset = res / 2;
+                        k_offset = res / 2;
+                        break;
+                    default: ERROR("Error occured.", "Code reached unreachable location.");
+                }
+
+                // Create the child data cube.
+                std::vector<std::vector<std::vector<double>>> child_cube;
+                child_cube.reserve(res / 2);
+                for (size_t i = 0; i < (res / 2); ++i)
+                {
+                    child_cube.emplace_back(std::vector<std::vector<double>>());
+                    child_cube[i].reserve(res / 2);
+                    for (size_t j = 0; j < (res / 2); ++j)
+                    {
+                        child_cube[i].emplace_back(std::vector<double>());
+                        child_cube[i][j].reserve(res / 2);
+                        for (size_t k = 0; k < (res / 2); ++k)
+                        {
+                            child_cube[i][j].emplace_back(1.0);
+                        }
+                    }
+                }
+
+                for (size_t i = 0; i < (res / 2); ++i)
+                {
+                    for (size_t j = 0; j < (res / 2); ++j)
+                    {
+                        for (size_t k = 0; k < (res / 2); ++k)
+                        {
+                            r_data_cube[i + i_offset][j + j_offset][k + k_offset] = child_cube[i][j][k];
+                        }
                     }
                 }
             }
