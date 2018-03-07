@@ -409,8 +409,9 @@ namespace arc
          *  Save the grid images.
          *
          *  @param  t_output_dir    Directory to write the images to.
+         *  @param  t_level         Level of depth resolution to save images with.
          */
-        void Sim::save_tree_images(const std::string& t_output_dir) const
+        void Sim::save_tree_images(const std::string& t_output_dir, const size_t t_level) const
         {
             // Form the data cube.
             std::vector<std::vector<std::vector<double>>> data_cube = m_root->get_data_cube(6);
