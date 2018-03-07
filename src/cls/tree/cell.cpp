@@ -550,13 +550,6 @@ namespace arc
                     {
                         for (size_t k = 0; k < (res / 2); ++k)
                         {
-                            VAL(t_depth);
-                            VAL(m_depth);
-                            VAL(index);
-                            VAL(res);
-                            VAL(i + i_offset);
-                            VAL(j + j_offset);
-                            VAL(k + k_offset);
                             r_data_cube[i + i_offset][j + j_offset][k + k_offset] = child_cube[i][j][k];
                         }
                     }
