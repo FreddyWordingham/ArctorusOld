@@ -56,6 +56,9 @@ namespace arc
             const std::vector<detector::Ccd>         & m_ccd;           //! Reference to vector of sim ccds.
             const std::vector<detector::Spectrometer>& m_spectrometer;  //! Reference to vector of sim spectrometers.
 
+            //  -- Lists --
+            const std::vector<std::array<size_t, 2>> m_entity_tri_list; //! List of entity triangles inside cell.
+
 
             //  == INSTANTIATION ==
           public:
