@@ -448,13 +448,6 @@ namespace arc
          */
         Cell* Cell::get_leaf(const math::Vec<3>& t_pos)
         {
-            VAL(t_pos);
-            VAL(m_depth);
-            VAL(m_center);
-            VAL(m_half_width);
-            VAL(m_center + m_half_width);
-            VAL(m_center - m_half_width);
-            LOG(" ");
             assert(is_within(t_pos));
 
             // If this cell is a leaf, return a pointer to this cell.
