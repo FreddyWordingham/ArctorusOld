@@ -17,6 +17,7 @@
 #include "gen/optics.hpp"
 
 //  -- Utility --
+#include "utl/colourmap.hpp"
 #include "utl/file.hpp"
 
 //  -- Classes --
@@ -415,7 +416,121 @@ namespace arc
             WARN("Unable to save grid images.", "Grid image saving is currently unavailable.");
 
             std::vector<std::vector<std::vector<double>>> data_cube = m_root->get_data_cube(3);
-            VAL(data_cube);
+
+            // Normalise the data cube.
+            double      max = 0.0;
+            size_t      res = static_cast<size_t>(1) << 3;
+            for (size_t i   = 0; i < res; ++i)
+            {
+                for (size_t j = 0; j < res; ++j)
+                {
+                    for (size_t k = 0; k < res; ++k)
+                    {
+                        if (data_cube[i][j][k] > max)
+                        {
+                            max = data_cube[i][j][k];
+                        }
+                    }
+                }
+            }
+            for (size_t i   = 0; i < res; ++i)
+            {
+                for (size_t j = 0; j < res; ++j)
+                {
+                    for (size_t k = 0; k < res; ++k)
+                    {
+                        data_cube[i][j][k] /= max;
+                    }
+                }
+            }
+
+            save_slices(t_output_dir, X, data_cube);
+            save_slices(t_output_dir, Y, data_cube);
+            save_slices(t_output_dir, Z, data_cube);
+        }
+
+        /**
+         *  Save the slices of one dimension of the grid.
+         *
+         *  @param  t_output_dir    Directory to write the images to.
+         *  @param  t_dimension     Dimension to be sliced.
+         *  @param  t_data          Data to be sliced into images.
+         *
+         *  @pre    t_dimension must be less than three.
+         */
+        void Sim::save_slices(const std::string& t_output_dir, const size_t t_dimension,
+                              const std::vector<std::vector<std::vector<double>>>& t_data) const
+        {
+            assert(t_dimension < 3);
+
+            size_t res = t_data.size();
+
+            // Set dimensions.
+            size_t      width, height, slice;
+            std::string dim_name;
+            switch (t_dimension)
+            {
+                case X:
+                    width    = Y;
+                    height   = Z;
+                    slice    = X;
+                    dim_name = "X";
+                    break;
+                case Y:
+                    width    = X;
+                    height   = Z;
+                    slice    = Y;
+                    dim_name = "Y";
+                    break;
+                case Z:
+                    width    = X;
+                    height   = Y;
+                    slice    = Z;
+                    dim_name = "Z";
+                    break;
+                default: ERROR("Unable to save grid slice images.",
+                               "The given slice dimension: '" << t_dimension << "' is invalid.");
+            }
+
+            // Create sub-directory.
+            const std::string sub_dir = t_output_dir + "grid_" + dim_name + "_slices/";
+            utl::create_directory(sub_dir);
+
+            // Write the images.
+            for (size_t i = 0; i < res; ++i)
+            {
+                TEMP("Saving " + dim_name + " slices", 100.0 * i / res);
+
+                // Create the image.
+                data::Image img(res, res);
+
+                // Write each pixel.
+                for (size_t j = 0; j < res; ++j)
+                {
+                    for (size_t k = 0; k < res; ++k)
+                    {
+                        switch (t_dimension)
+                        {
+                            case X:
+                                img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(t_data[i][j][k]));
+                                break;
+                            case Y:
+                                img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(t_data[j][i][k]));
+                                break;
+                            case Z:
+                                img.add_to_pixel(j, k, utl::colourmap::transform_rainbow(t_data[j][k][i]));
+                                break;
+                            default: ERROR("Unable to save grid slice images.",
+                                           "The given slice dimension: '" << t_dimension << "' is invalid.");
+                        }
+                    }
+                }
+
+                // Save the image.
+                img.save(sub_dir + dim_name + "_" + std::to_string(i) + ".ppm");
+            }
+
+            LOG("Grid " << dim_name << " slice image saving complete.");
         }
 
         /**

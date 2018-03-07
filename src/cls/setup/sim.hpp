@@ -135,6 +135,10 @@ namespace arc
             void run_photons(unsigned long int t_num_phot, size_t t_thread_index);
 
           private:
+            //  -- Saving --
+            void save_slices(const std::string& t_output_dir, const size_t t_dimension,
+                             const std::vector<std::vector<std::vector<double>>>& t_data) const;
+
             //  -- Simulation --
             std::tuple<event, double, size_t, size_t> determine_event(const phys::Photon& t_phot,
                                                                       const tree::Cell* t_cell) const;
