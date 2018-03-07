@@ -437,6 +437,23 @@ namespace arc
 
         //  == METHODS ==
         //  -- Getters --
+        double Cell::get_energy_density() const
+        {
+            // If this cell is a leaf cell, return its energy density.
+            if (m_leaf)
+            {
+                return (m_energy / get_vol());
+            }
+
+            // If this cell is a parent, calculate the average energy density of its child cells.
+            double      total_energy_density = 0.0;
+            for (size_t i                    = 0; i < 8; ++i)
+            {
+                total_energy_density += m_child[i]->get_energy_density();
+            }
+
+            return (total_energy_density / 8.0);
+        }
 
         std::vector<std::vector<std::vector<double>>> Cell::get_data_cube(const size_t t_depth) const
         {
