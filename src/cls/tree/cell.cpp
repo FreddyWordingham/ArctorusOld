@@ -69,6 +69,37 @@ namespace arc
             assert(m_half_width[Z] > 0.0);
         }
 
+        /**
+         *  Construct a daughter cell to record a sub-list of entity, light, ccd and spectrometer objects.
+         *  Only tests overlaps of triangles listed within the given triangle directory lists.
+         *  Depth, cell center and cell half-width are set using given values.
+         *
+         *  @param  t_depth         Depth of the cell.
+         *  @param  t_min_depth     Minimum depth for the cell to split to.
+         *  @param  t_max_depth     Maximum depth for the cell to split to.
+         *  @param  t_max_tri       Target maximum number of triangles to contain within leaf cells.
+         *  @param  t_center        Center of the cell.
+         *  @param  t_half_width    Half-width of the cell.
+         *  @param  t_entity        Vector of entity objects which may lie within the cell.
+         *  @param  t_light         Vector of light objects which may lie within the cell.
+         *  @param  t_ccd           Vector of ccd objects which may lie within the cell.
+         *  @param  m_spectrometer  Vector of spectrometer objects which may lie within the cell.
+         *  @param  t_entity_tri_list       List of entity triangles which may lie within the cell.
+         *  @param  t_light_tri_list        List of light triangles which may lie within the cell.
+         *  @param  t_ccd_tri_list          List of ccd triangles which may lie within the cell.
+         *  @param  t_spectrometer_tri_list List of spectrometer triangles which may lie within the cell.
+         */
+        Cell::Cell(unsigned int t_depth, unsigned int t_min_depth, unsigned int t_max_depth, unsigned int t_max_tri,
+                   const math::Vec<3>& t_center, const math::Vec<3>& t_half_width, const std::vector<equip::Entity>& t_entity,
+                   const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd,
+                   const std::vector<detector::Spectrometer>& m_spectrometer,
+                   const std::vector<std::array<size_t, 2>>& t_entity_tri_list,
+                   const std::vector<std::array<size_t, 2>>& t_light_tri_list,
+                   const std::vector<std::array<size_t, 2>>& t_ccd_tri_list,
+                   const std::vector<std::array<size_t, 2>>& t_spectrometer_tri_list) :
+        {
+        }
+
 
         //  -- Initialisation --
         /**

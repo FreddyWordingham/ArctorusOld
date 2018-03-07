@@ -70,6 +70,14 @@ namespace arc
                  const math::Vec<3>& t_max_bound, const std::vector<equip::Entity>& t_entity,
                  const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd,
                  const std::vector<detector::Spectrometer>& m_spectrometer);
+            Cell(unsigned int t_depth, unsigned int t_min_depth, unsigned int t_max_depth, unsigned int t_max_tri,
+                 const math::Vec<3>& t_center, const math::Vec<3>& t_half_width, const std::vector<equip::Entity>& t_entity,
+                 const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd,
+                 const std::vector<detector::Spectrometer>& m_spectrometer,
+                 const std::vector<std::array<size_t, 2>>& t_entity_tri_list,
+                 const std::vector<std::array<size_t, 2>>& t_light_tri_list,
+                 const std::vector<std::array<size_t, 2>>& t_ccd_tri_list,
+                 const std::vector<std::array<size_t, 2>>& t_spectrometer_tri_list);
 
           private:
             //  -- Initialisation --
