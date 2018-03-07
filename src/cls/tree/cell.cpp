@@ -558,7 +558,7 @@ namespace arc
                         j_offset = res / 2;
                         k_offset = res / 2;
                         break;
-                    default: ERROR("Error occured.", "Code reached unreachable location.");
+                    default: ERROR("Unable to retrieve cell data cube.", "Invalid enumeration index: '" << index << "'.");
                 }
 
                 // Added data from the child data cube.
