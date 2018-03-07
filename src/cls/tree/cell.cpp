@@ -478,7 +478,7 @@ namespace arc
             for (size_t i       = 0; i < 8; ++i)
             {
                 size_t child_tri = m_child[i]->get_max_tri();
-                if (child_tri) > max_tri)
+                if (child_tri > max_tri)
                 {
                     max_tri = child_tri;
                 }
