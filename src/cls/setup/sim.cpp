@@ -464,6 +464,7 @@ namespace arc
         {
             assert(t_dimension < 3);
 
+            // Determine image resolution.
             size_t res = t_data.size();
 
             // Set dimensions.
