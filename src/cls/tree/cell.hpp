@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- Classes --
 #include "cls/equip/entity.hpp"
+#include "cls/equip/light.hpp"
 #include "cls/math/vec.hpp"
 
 
@@ -49,6 +50,7 @@ namespace arc
 
             //  -- Equipment References --
             const std::vector<equip::Entity>& m_entity; //! Reference to vector of sim entities.
+            const std::vector<equip::Light> & m_light;  //! Reference to vector of sim lights.
 
 
             //  == INSTANTIATION ==
