@@ -81,7 +81,7 @@ namespace arc
         }
 
         /**
-         *  Construct a daughter cell to record a sub-list of entity, light, ccd and spectrometer objects.
+         *  Construct a child cell to record a sub-list of entity, light, ccd and spectrometer objects.
          *  Only tests overlaps of triangles listed within the given triangle directory lists.
          *  Depth, cell center and cell half-width are set using given values.
          *
@@ -365,13 +365,13 @@ namespace arc
         }
 
         /**
-         *  Initialise the array of daughter cells.
+         *  Initialise the array of child cells.
          *
          *  @param  t_min_depth     Minimum depth for the cell to split to.
          *  @param  t_max_depth     Maximum depth for the cell to split to.
          *  @param  t_max_tri       Target maximum number of triangles to contain within leaf cells.
          *
-         *  @return The initialised array of daughter cells.
+         *  @return The initialised array of child cells.
          */
         std::array<std::unique_ptr<Cell>, 8> Cell::init_child(const unsigned int t_min_depth, const unsigned int t_max_depth,
                                                               const unsigned int t_max_tri) const
@@ -383,17 +383,17 @@ namespace arc
                     {{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}}));
             }
 
-            const unsigned int daughter_depth = m_depth + 1;
-            const math::Vec<3> half_width     = m_half_width / 2.0;
-            const math::Vec<3> offset         = m_half_width / 2.0;
+            const unsigned int child_depth = m_depth + 1;
+            const math::Vec<3> half_width  = m_half_width / 2.0;
+            const math::Vec<3> offset      = m_half_width / 2.0;
 
             return (std::array<std::unique_ptr<Cell>, 8>(
-                {{std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                {{std::make_unique<Cell>(child_depth, t_min_depth, t_max_depth, t_max_tri,
                                          math::Vec<3>(m_center[X] + offset[X], m_center[Y] + offset[Y],
                                                       m_center[Z] + offset[Z]), half_width, m_entity, m_light, m_ccd,
                                          m_spectrometer, m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
-                                         m_spectrometer_tri_list), std::make_unique<Cell>(daughter_depth, t_min_depth,
-                                                                                          t_max_depth, t_max_tri,
+                                         m_spectrometer_tri_list), std::make_unique<Cell>(child_depth, t_min_depth, t_max_depth,
+                                                                                          t_max_tri,
                                                                                           math::Vec<3>(m_center[X] - offset[X],
                                                                                                        m_center[Y] + offset[Y],
                                                                                                        m_center[Z] + offset[Z]),
@@ -401,30 +401,30 @@ namespace arc
                                                                                           m_spectrometer, m_entity_tri_list,
                                                                                           m_light_tri_list, m_ccd_tri_list,
                                                                                           m_spectrometer_tri_list), std::make_unique<
-                    Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                    Cell>(child_depth, t_min_depth, t_max_depth, t_max_tri,
                           math::Vec<3>(m_center[X] + offset[X], m_center[Y] - offset[Y], m_center[Z] + offset[Z]), half_width,
                           m_entity, m_light, m_ccd, m_spectrometer, m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
-                          m_spectrometer_tri_list), std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                          m_spectrometer_tri_list), std::make_unique<Cell>(child_depth, t_min_depth, t_max_depth, t_max_tri,
                                                                            math::Vec<3>(m_center[X] - offset[X],
                                                                                         m_center[Y] - offset[Y],
                                                                                         m_center[Z] + offset[Z]), half_width,
                                                                            m_entity, m_light, m_ccd, m_spectrometer,
                                                                            m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
                                                                            m_spectrometer_tri_list), std::make_unique<Cell>(
-                    daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                    child_depth, t_min_depth, t_max_depth, t_max_tri,
                     math::Vec<3>(m_center[X] + offset[X], m_center[Y] + offset[Y], m_center[Z] - offset[Z]), half_width,
                     m_entity, m_light, m_ccd, m_spectrometer, m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
-                    m_spectrometer_tri_list), std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                    m_spectrometer_tri_list), std::make_unique<Cell>(child_depth, t_min_depth, t_max_depth, t_max_tri,
                                                                      math::Vec<3>(m_center[X] - offset[X],
                                                                                   m_center[Y] + offset[Y],
                                                                                   m_center[Z] - offset[Z]), half_width,
                                                                      m_entity, m_light, m_ccd, m_spectrometer,
                                                                      m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
                                                                      m_spectrometer_tri_list), std::make_unique<Cell>(
-                    daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                    child_depth, t_min_depth, t_max_depth, t_max_tri,
                     math::Vec<3>(m_center[X] + offset[X], m_center[Y] - offset[Y], m_center[Z] - offset[Z]), half_width,
                     m_entity, m_light, m_ccd, m_spectrometer, m_entity_tri_list, m_light_tri_list, m_ccd_tri_list,
-                    m_spectrometer_tri_list), std::make_unique<Cell>(daughter_depth, t_min_depth, t_max_depth, t_max_tri,
+                    m_spectrometer_tri_list), std::make_unique<Cell>(child_depth, t_min_depth, t_max_depth, t_max_tri,
                                                                      math::Vec<3>(m_center[X] - offset[X],
                                                                                   m_center[Y] - offset[Y],
                                                                                   m_center[Z] - offset[Z]), half_width,
