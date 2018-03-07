@@ -438,10 +438,28 @@ namespace arc
         //  == METHODS ==
         //  -- Getters --
 
-        std::vector<std::vector<std::vector<double>>> Cell::get_data_cube(const size_t t_res) const
+        std::vector<std::vector<std::vector<double>>> Cell::get_data_cube(const size_t t_depth) const
         {
+            // Convert depth resolution to linear resolution.
+            const size_t res = static_cast<size_t>(1) << t_depth;
+
             // Create the return data cube.
             std::vector<std::vector<std::vector<double>>> r_data_cube;
+            r_data_cube.reserve(res);
+            for (size_t i = 0; i < res; ++i)
+            {
+                r_data_cube.emplace_back(std::vector<std::vector<double>>());
+                r_data_cube[i].reserve(res);
+                for (size_t j = 0; j < res; ++j)
+                {
+                    r_data_cube[i].emplace_back(std::vector<double>());
+                    r_data_cube[i][j].reserve(res);
+                    for (size_t k = 0; k < res; ++k)
+                    {
+                        r_data_cube[i][j].emplace_back(1.0);
+                    }
+                }
+            }
 
             return (r_data_cube);
         }
