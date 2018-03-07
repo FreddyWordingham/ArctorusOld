@@ -43,6 +43,7 @@ namespace arc
          *  @param  t_ccd           Vector of ccd objects which may lie within the cell.
          *  @param  m_spectrometer  Vector of spectrometer objects which may lie within the cell.
          *
+         *  @post   t_min_depth must be less than, or equal to, t_max_depth.
          *  @post   t_max_bound[X] must be greater than t_min_bound[X].
          *  @post   t_max_bound[Y] must be greater than t_min_bound[Y].
          *  @post   t_max_bound[Z] must be greater than t_min_bound[Z].
@@ -68,6 +69,8 @@ namespace arc
             m_leaf(init_leaf(t_min_depth, t_max_depth, t_max_tri)),
             m_child(init_child(t_min_depth, t_max_depth, t_max_tri))
         {
+            assert(t_min_depth <= t_max_depth);
+
             assert(t_max_bound[X] > t_min_bound[X]);
             assert(t_max_bound[Y] > t_min_bound[Y]);
             assert(t_max_bound[Z] > t_min_bound[Z]);
