@@ -1,7 +1,7 @@
 {
     "system":       {
         "log_update_period": 10.0,
-        "max_threads":       8,
+        "max_threads":       1,
         "output_dir_name":   "rainbow",
         "seed":              77,
         "pre_render":        false,
