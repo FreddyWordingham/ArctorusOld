@@ -107,7 +107,8 @@ namespace arc
             }
 
             // Log tree properties.
-            LOG("Total tree cells: " << m_root->get_total_cells());
+            LOG("Total tree cells   : " << m_root->get_total_cells());
+            LOG("Max leaf triangles : " << m_root->get_max_tri());
         }
 
         /**
