@@ -38,7 +38,7 @@
 #include "cls/graphical/shader/normal.hpp"
 #include "cls/graphical/shader/path.hpp"
 #include "cls/graphical/shader/skybox.hpp"
-#include "cls/tree/grid.hpp"
+#include "cls/tree/cell.hpp"
 
 
 
@@ -181,7 +181,7 @@ namespace arc
             void add_ccd_vector(const std::vector<detector::Ccd>& t_ccd);
             void add_spectrometer_vector(const std::vector<detector::Spectrometer>& t_spectrometer);
             void add_photon_vector(const std::vector<std::vector<point::Photon>>& t_phot);
-            void add_grid(const tree::Grid& t_grid);
+            void add_root(const tree::Cell& t_root);
 
             //  -- Control --
             bool should_close() const;
