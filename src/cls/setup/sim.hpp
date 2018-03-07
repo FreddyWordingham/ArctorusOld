@@ -80,7 +80,7 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Data --
-            tree::Grid m_grid;  //! Simulation grid.
+            tree::Cell m_root;  //! Simulation grid.
 #ifdef ENABLE_PHOTON_PATHS
             std::vector<std::vector<graphical::point::Photon>> m_path;          //! Vector of photon paths.
             std::mutex                                         m_path_mutex;    //! Protects path data.
