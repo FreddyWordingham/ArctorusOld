@@ -46,7 +46,7 @@ namespace arc
                    const unsigned int t_max_depth, const std::vector<equip::Entity>& t_entity,
                    const std::vector<equip::Light>& t_light, const std::vector<detector::Ccd>& t_ccd,
                    const std::vector<detector::Spectrometer>& m_spectrometer) :
-            m_center((t_max_bound - t_min_bound) / 2.0),
+            m_center((t_max_bound + t_min_bound) / 2.0),
             m_half_width((t_max_bound - t_min_bound) / 2.0)
         {
         }
