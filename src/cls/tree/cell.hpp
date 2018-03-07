@@ -39,7 +39,7 @@ namespace arc
         {
             //  == ENUMERATIONS ==
             //  -- Indices --
-          public:
+          private:
             /**
              *  Enumeration of the triangle list indices.
              */
