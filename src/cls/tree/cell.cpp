@@ -148,6 +148,33 @@ namespace arc
             return (r_ccd_tri_list);
         }
 
+        /**
+         *  Initialise the list vector list of spectrometer triangles within the cell.
+         *
+         *  @return The initialised list vector of spectrometer triangles within the cell.
+         */
+        std::vector<std::array<size_t, 2>> Cell::init_spectrometer_tri_list() const
+        {
+            // Create the return triangle list.
+            std::vector<std::array<size_t, 2>> r_spectrometer_tri_list;
+
+            // Iterate through each of the spectrometer sources.
+            for (size_t i = 0; i < m_spectrometer.size(); ++i)
+            {
+                // Iterate through each of the spectrometer's triangles.
+                for (size_t j = 0; j < m_spectrometer[i].get_mesh().get_num_tri(); ++j)
+                {
+                    // If the cell overlaps any part of the triangle, add the indices to the list.
+                    if (tri_overlap(m_spectrometer[i].get_mesh().get_tri(j)))
+                    {
+                        r_spectrometer_tri_list.emplace_back({{i, j}});
+                    }
+                }
+            }
+
+            return (r_spectrometer_tri_list);
+        }
+
 
 
         //  == METHODS ==
