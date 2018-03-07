@@ -102,14 +102,14 @@ namespace arc
             m_entity(t_entity),
             m_light(t_light),
             m_ccd(t_ccd),
-            m_spectrometer(t_spectrometer),
+            m_spectrometer(t_spectrometer)
         {
         }
 
 
         //  -- Initialisation --
         /**
-         *  Initialise the list vector list of entity triangles within the cell.
+         *  Initialise the vector list of entity triangles within the cell.
          *
          *  @return The initialised list vector of entity triangles within the cell.
          */
@@ -136,7 +136,32 @@ namespace arc
         }
 
         /**
-         *  Initialise the list vector list of light triangles within the cell.
+         *  Initialise the vector list of entity triangles within the cell using a sub vector list of triangles.
+         *
+         *  @param  t_entity_tri_list   List of entity triangles which may lie within the cell.
+         *
+         *  @return The initialised list vector of entity triangles within the cell.
+         */
+        std::vector<std::array<size_t, 2>> Cell::init_entity_tri_list(
+            const std::vector<std::array<size_t, 2>>& t_entity_tri_list) const
+        {
+            // Create the return triangle list.
+            std::vector<std::array<size_t, 2>> r_entity_tri_list;
+
+            // Iterate through the vector list of triangles.
+            for (size_t i = 0; i < t_entity_tri_list.size(); ++i)
+            {
+                if (tri_overlap(m_entity[t_entity_tri_list[i][0]].get_mesh().get_tri(t_entity_tri_list[i][1])))
+                {
+                    r_entity_tri_list.push_back(t_entity_tri_list[i]);
+                }
+            }
+
+            return (r_entity_tri_list);
+        }
+
+        /**
+         *  Initialise the vector list of light triangles within the cell.
          *
          *  @return The initialised list vector of light triangles within the cell.
          */
@@ -163,7 +188,7 @@ namespace arc
         }
 
         /**
-         *  Initialise the list vector list of ccd triangles within the cell.
+         *  Initialise the vector list of ccd triangles within the cell.
          *
          *  @return The initialised list vector of ccd triangles within the cell.
          */
@@ -190,7 +215,7 @@ namespace arc
         }
 
         /**
-         *  Initialise the list vector list of spectrometer triangles within the cell.
+         *  Initialise the vector list of spectrometer triangles within the cell.
          *
          *  @return The initialised list vector of spectrometer triangles within the cell.
          */
