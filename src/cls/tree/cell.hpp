@@ -77,6 +77,7 @@ namespace arc
             std::vector<std::array<size_t, 2>> init_light_tri_list() const;
             std::vector<std::array<size_t, 2>> init_ccd_tri_list() const;
             std::vector<std::array<size_t, 2>> init_spectrometer_tri_list() const;
+            bool init_leaf(unsigned int t_min_depth, unsigned int t_max_depth, unsigned int t_max_tri) const;
 
             //  == OPERATORS ==
           private:

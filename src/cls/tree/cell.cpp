@@ -179,6 +179,35 @@ namespace arc
             return (r_spectrometer_tri_list);
         }
 
+        /**
+         *  Determine if this cell is a terminal leaf cell.
+         *
+         *  @param  t_min_depth     Minimum depth for the cell to split to.
+         *  @param  t_max_depth     Maximum depth for the cell to split to.
+         *  @param  t_max_tri       Target maximum number of triangles to contain within leaf cells.
+         *
+         *  @return True if this cell is a terminal leaf cell.
+         */
+        bool Cell::init_leaf(const unsigned int t_min_depth, const unsigned int t_max_depth, const unsigned int t_max_tri) const
+        {
+            // If the cell has reached the maximum allowed depth, it is required to be terminal.
+            if (m_depth >= t_max_depth)
+            {
+                return (true);
+            }
+
+            // If the cell has not yet reached the minimum splitting depth, it must procreate.
+            if (m_depth < t_min_depth)
+            {
+                return (false);
+            }
+
+            // Otherwise, only split if the number of contained triangles exceeds that of the maximum limit.
+            size_t total_triangles = m_entity_tri_list.size() + m_light_tri_list.size() + m_ccd_tri_list
+                .size() + m_spectrometer_tri_list.size();
+            return (total_triangles <= t_max_tri);
+        }
+
 
 
         //  == METHODS ==
