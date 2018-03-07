@@ -105,6 +105,7 @@ namespace arc
             m_spectrometer(t_spectrometer),
             m_entity_tri_list(init_entity_tri_list(t_entity_tri_list)),
             m_light_tri_list(init_light_tri_list(t_light_tri_list)),
+            m_ccd_tri_list(init_ccd_tri_list(t_ccd_tri_list)),
         {
         }
 
