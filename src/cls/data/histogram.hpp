@@ -35,6 +35,7 @@ namespace arc
         class Histogram
         {
             //  == ENUMERATIONS ==
+            //  -- Alignment --
           public:
             /**
              *  Enumeration of the bin alignment positions which may be set when calling get_bin_pos.

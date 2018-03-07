@@ -37,6 +37,10 @@ namespace arc
          */
         class Cell
         {
+            //  == ENUMERATIONS ==
+
+
+
             //  == FIELDS ==
           private:
             //  -- Bounds --
