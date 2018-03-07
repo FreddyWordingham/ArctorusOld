@@ -525,14 +525,14 @@ namespace arc
                 unsigned long int loops       = 0;      //! Number of loops made of the while loop.
 
                 // Check if photon is within a grid cell.
-                if (!m_root.is_within(phot.get_pos()))
+                if (!m_root->is_within(phot.get_pos()))
                 {
                     WARN("Unable to simulate photon.", "Photon does not begin with the grid.");
                     goto kill_photon;
                 }
                 else
                 {
-                    cell = m_root.get_leaf(phot.get_pos());
+                    cell = m_root->get_leaf(phot.get_pos());
                     assert(cell != nullptr);
                 }
 
@@ -611,13 +611,13 @@ namespace arc
                             phot.move(dist + SMOOTHING_LENGTH);
 
                             // Check if photon has now exited the grid.
-                            if (!m_root.is_within(phot.get_pos()))
+                            if (!m_root->is_within(phot.get_pos()))
                             {
                                 goto kill_photon;
                             }
 
                             // Get new cell pointer if still within the grid.
-                            cell = m_root.get_leaf(phot.get_pos());
+                            cell = m_root->get_leaf(phot.get_pos());
 
                             break;
                         }
