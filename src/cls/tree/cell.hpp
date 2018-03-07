@@ -117,6 +117,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            double get_vol() const { return ((m_half_width[X] * 2.0) * (m_half_width[Y] * 2.0) * (m_half_width[Z] * 2.0)); }
             double get_energy_density() const;
             std::vector<std::vector<std::vector<double>>> get_data_cube(size_t t_depth) const;
             bool is_leaf() const { return (m_leaf); }
