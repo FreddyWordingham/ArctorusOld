@@ -119,6 +119,7 @@ namespace arc
             //  -- Getters --
             Cell* get_leaf(const math::Vec<3>& t_pos);
             bool is_within(const math::Vec<3>& t_pos) const;
+            double get_dist_to_wall(const math::Vec<3>& t_pos, const math::Vec<3>& t_dir) const;
 
             //  -- Setters --
             void add_energy(double t_energy);
