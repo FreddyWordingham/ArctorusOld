@@ -17,7 +17,7 @@
     "tree":         {
         "max_tri":   100,
         "min_depth": 0,
-        "max_depth": 3,
+        "max_depth": 6,
         "min_bound": [-4.1e-2, -4.1e-2, -2.1e-2],
         "max_bound": [4.1e-2, 4.1e-2, 2.1e-2]
     },
