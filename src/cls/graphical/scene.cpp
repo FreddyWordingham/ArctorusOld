@@ -9,7 +9,7 @@
 
 //  == MODULE ==
 #include "gen/config.hpp"
-//#ifdef ENABLE_GRAPHICS
+#ifdef ENABLE_GRAPHICS
 
 
 
@@ -1260,4 +1260,4 @@ namespace arc
 
 
 //  == MODULE END ==
-//#endif
+#endif
