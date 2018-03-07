@@ -33,7 +33,7 @@ void save_run_info(const std::string& t_output_dir);
 
 //  -- Simulation --
 void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim);
-void save_data(const arc::setup::Sim& t_sim, const std::string& t_output_dir);
+void save_data(const arc::data::Json& t_setup, const arc::setup::Sim& t_sim, const std::string& t_output_dir);
 
 
 
@@ -79,7 +79,7 @@ int main(const int t_argc, const char** t_argv)
 
     // Save grid data.
     SEC("Saving Data");
-    save_data(sim, output_dir);
+    save_data(setup, sim, output_dir);
 
     // Post-render the simulation scene.
     if (setup["system"].parse_child<bool>("post_render", false))
@@ -225,14 +225,16 @@ void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
 /**
  *  Save the simulation data.
  *
- *  @param  t_sim   Simulation to save the data from.
+ *  @param  t_setup         Json simulation setup file.
+ *  @param  t_sim           Simulation to save the data from.
+ *  @param  t_output_dir    Directory to save data to.
  */
-void save_data(const arc::setup::Sim& t_sim, const std::string& t_output_dir)
+void save_data(const arc::data::Json& t_setup, const arc::setup::Sim& t_sim, const std::string& t_output_dir)
 {
-    // Save grid images.
-    const std::string grid_images_dir = t_output_dir + "grid_images/";
-    arc::utl::create_directory(grid_images_dir);
-    t_sim.save_tree_images(grid_images_dir);
+    // Save tree images.
+    const std::string tree_images_dir = t_output_dir + "tree_images/";
+    arc::utl::create_directory(tree_images_dir);
+    t_sim.save_tree_images(tree_images_dir);
 
     // Save ccd data.
     const std::string ccd_images_dir = t_output_dir + "ccd_images/";
