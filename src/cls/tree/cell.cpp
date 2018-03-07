@@ -56,6 +56,7 @@ namespace arc
             m_light(t_light),
             m_ccd(t_ccd),
             m_spectrometer(t_spectrometer),
+            m_entity_tri_list(init_entity_tri_list()),
             m_light_tri_list(init_light_tri_list())
         {
             assert(m_half_width[X] > 0.0);
@@ -65,6 +66,33 @@ namespace arc
 
 
         //  -- Initialisation --
+        /**
+         *  Initialise the list vector list of entity triangles within the cell.
+         *
+         *  @return The initialised list vector of entity triangles within the cell.
+         */
+        std::vector<std::array<size_t, 2>> Cell::init_entity_tri_list() const
+        {
+            // Create the return triangle list.
+            std::vector<std::array<size_t, 2>> r_entity_tri_list;
+
+            // Iterate through each of the entity sources.
+            for (size_t i = 0; i < m_entity.size(); ++i)
+            {
+                // Iterate through each of the entity's triangles.
+                for (size_t j = 0; j < m_entity[i].get_mesh().get_num_tri(); ++j)
+                {
+                    // If the cell overlaps any part of the triangle, add the indices to the list.
+                    if (tri_overlap(m_entity[i].get_mesh().get_tri(j)))
+                    {
+                        r_entity_tri_list.emplace_back({{i, j}});
+                    }
+                }
+            }
+
+            return (r_entity_tri_list);
+        }
+
         /**
          *  Initialise the list vector list of light triangles within the cell.
          *
