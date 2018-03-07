@@ -508,8 +508,9 @@ namespace arc
             const math::Vec<3> min_bound = t_cell.get_min_bound();
             const math::Vec<3> max_bound = t_cell.get_max_bound();
 
-            m_cell.emplace_back(Prop(Prop::boundedShape::BOX, col, {min_bound[X], min_bound[Y], min_bound[Z]},
-                                     {max_bound[X], max_bound[Y], max_bound[Z]}));
+            m_cell.emplace_back(
+                Prop(Prop::boundedShape::BOX, {col[R], col[G], col[B], 1.0f}, {min_bound[X], min_bound[Y], min_bound[Z]},
+                     {max_bound[X], max_bound[Y], max_bound[Z]}));
         }
 
 
