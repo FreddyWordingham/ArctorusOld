@@ -614,7 +614,7 @@ namespace arc
                             }
 
                             // Get new cell pointer if still within the grid.
-                            cell = &m_grid.get_cell(phot.get_pos());
+                            cell = &m_root.get_leaf(phot.get_pos());
 
                             break;
                         }
