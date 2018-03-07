@@ -499,14 +499,14 @@ namespace arc
          *  @param  t_cell                  Cell to be added to the scene.
          *  @param  t_max_energy_density    Maximum energy density of all cells within the complete tree.
          */
-        void Scene::add_cell(const tree::Cell& t_cell, const double t_max_energy_density)
+        void Scene::add_cell(const std::unique_ptr<tree::Cell>& t_cell, const double t_max_energy_density)
         {
             // Determine the prop colour.
             const std::array<double, 3> col = utl::colourmap::transform_rainbow(0.5 / t_max_energy_density);
 
             // Get cell bounds.
-            const math::Vec<3> min_bound = t_cell.get_min_bound();
-            const math::Vec<3> max_bound = t_cell.get_max_bound();
+            const math::Vec<3> min_bound = t_cell->get_min_bound();
+            const math::Vec<3> max_bound = t_cell->get_max_bound();
 
             // Add the drawable cell prop.
             m_cell.emplace_back(
@@ -514,11 +514,11 @@ namespace arc
                      {max_bound[X], max_bound[Y], max_bound[Z]}));
 
             // Add daughter cells if cell is not a leaf.
-            if (!t_cell.is_leaf())
+            if (!t_cell->is_leaf())
             {
                 for (size_t i = 0; i < 8; ++i)
                 {
-                    add_cell(t_cell.get_child(i), t_max_energy_density);
+                    add_cell(t_cell->get_child(i), t_max_energy_density);
                 }
             }
         }
