@@ -334,7 +334,7 @@ namespace arc
          *
          *  @param  t_tree  Root cell of tree to be added to the scene.
          */
-        void Scene::add_tree(const tree::Cell& t_tree)
+        void Scene::add_tree(const std::unique_ptr<tree::Cell>& t_tree)
         {
             // Add main grid bounds.
             m_grid.emplace_back(Prop(Prop::boundedShape::BOX, {1.0, 1.0, 1.0, 1.0},
