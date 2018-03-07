@@ -437,6 +437,12 @@ namespace arc
 
         //  == METHODS ==
         //  -- Getters --
+        /**
+         *  Determine the energy density of the cell.
+         *  If the cell is not a leaf cell, the energy density returned is the average energy density of the child cells.
+         *
+         *  @return The average energy density of the cell.
+         */
         double Cell::get_energy_density() const
         {
             // If this cell is a leaf cell, return its energy density.
