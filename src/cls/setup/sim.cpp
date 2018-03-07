@@ -414,11 +414,11 @@ namespace arc
         void Sim::save_tree_images(const std::string& t_output_dir, const size_t t_level) const
         {
             // Form the data cube.
-            std::vector<std::vector<std::vector<double>>> data_cube = m_root->get_data_cube(6);
+            std::vector<std::vector<std::vector<double>>> data_cube = m_root->get_data_cube(t_level);
 
             // Normalise the data cube.
             double      max = 0.0;
-            size_t      res = static_cast<size_t>(1) << 6;
+            size_t      res = data_cube.size();
             for (size_t i   = 0; i < res; ++i)
             {
                 for (size_t j = 0; j < res; ++j)
