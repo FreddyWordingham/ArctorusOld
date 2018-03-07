@@ -240,6 +240,31 @@ namespace arc
         }
 
         /**
+         *  Initialise the vector list of ccd triangles within the cell using a sub vector list of triangles.
+         *
+         *  @param  t_ccd_tri_list  List of ccd triangles which may lie within the cell.
+         *
+         *  @return The initialised list vector of ccd triangles within the cell.
+         */
+        std::vector<std::array<size_t, 2>> Cell::init_ccd_tri_list(
+            const std::vector<std::array<size_t, 2>>& t_ccd_tri_list) const
+        {
+            // Create the return triangle list.
+            std::vector<std::array<size_t, 2>> r_ccd_tri_list;
+
+            // Iterate through the vector list of triangles.
+            for (size_t i = 0; i < t_ccd_tri_list.size(); ++i)
+            {
+                if (tri_overlap(m_ccd[t_ccd_tri_list[i][OBJ]].get_mesh().get_tri(t_ccd_tri_list[i][TRI])))
+                {
+                    r_ccd_tri_list.push_back(t_ccd_tri_list[i]);
+                }
+            }
+
+            return (r_ccd_tri_list);
+        }
+
+        /**
          *  Initialise the vector list of spectrometer triangles within the cell.
          *
          *  @return The initialised list vector of spectrometer triangles within the cell.
