@@ -1,8 +1,8 @@
 {
     "system":       {
-        "log_update_period": 10.0,
+        "log_update_period": 1.0,
         "max_threads":       8,
-        "output_dir_name":   "intralipid",
+        "output_dir_name":   "intralipid_010-0",
         "seed":              77,
         "pre_render":        false,
         "post_render":       false
@@ -28,35 +28,37 @@
             "mat": "materials/intralipid_010-0.mat"
         },
         "entities": {
-            "detector_mirror": {
-                "mesh":  "meshes/detector/mirror.obj",
+            "mirror": {
+                "mesh":  "meshes/mirror.obj",
                 "mat":   "materials/mirror.mat",
                 "scale": [1e-3, 1e-3, 1e-3]
             },
-            "detector_body":   {
-                "mesh":  "meshes/detector/body_flat.obj",
+            "body":   {
+                "mesh":  "meshes/body.obj",
                 "mat":   "materials/black.mat",
-                "scale": [1e-3, 1e-3, 1e-3]
+                "scale": [1e-3, 1e-3, 1e-3],
+                "trans": [0, 0, 1e-5]
             },
-            "vial":            {
-                "mesh":  "meshes/detector/vial.obj",
+            "vial":   {
+                "mesh":  "meshes/vial.obj",
                 "mat":   "materials/vacuum.mat",
-                "scale": [1e-3, 1e-3, 1e-3]
+                "scale": [1e-3, 1e-3, 1e-3],
+                "trans": [0, 0, 10e-3]
             }
         },
         "lights":        {
-            "detector_led": {
+            "led": {
                 "power": 1.0,
-                "mesh":  "meshes/detector/led.obj",
-                "spec":  "spectra/limited_led.spc",
+                "mesh":  "meshes/led.obj",
+                "spec":  "spectra/led.spc",
                 "scale": [1e-3, 1e-3, 1e-3]
             }
         },
         "ccds":          {
         },
         "spectrometers": {
-            "detector_spectrometer": {
-                "mesh":  "meshes/detector/spectrometer.obj",
+            "spectrometer": {
+                "mesh":  "meshes/spectrometer.obj",
                 "range": [0E-9, 1000E-9],
                 "bins":  100,
                 "scale": [1e-3, 1e-3, 1e-3]
