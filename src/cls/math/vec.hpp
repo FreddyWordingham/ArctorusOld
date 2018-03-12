@@ -854,8 +854,6 @@ namespace arc
         }
 
 
-
-
         //  -- Properties --
         /**
          *  Determine if the vec is normalised to within a given tolerance.
