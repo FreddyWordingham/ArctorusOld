@@ -64,6 +64,12 @@ namespace arc
             DynamicHistogram(double t_min_bound, double t_max_bound, size_t t_num_bins);
 
 
+            //  == OPERATORS ==
+          public:
+            //  -- Printing --
+            friend std::ostream& operator<<(std::ostream& t_stream, const DynamicHistogram& t_hist);
+
+
             //  == METHODS ==
           public:
             //  -- Getters --

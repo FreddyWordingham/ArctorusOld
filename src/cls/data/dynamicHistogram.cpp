@@ -58,6 +58,26 @@ namespace arc
 
 
 
+        //  == OPERATORS ==
+        //  -- Printing --
+        /**
+         *  Enable printing of a histogram to a given ostream.
+         *  Histogram is converted to a table before printing.
+         *
+         *  @param  t_stream    Stream to write to.
+         *  @param  t_hist      Histogram to be written.
+         *
+         *  @return A reference to the stream post-write.
+         */
+        std::ostream& operator<<(std::ostream& t_stream, const DynamicHistogram& t_hist)
+        {
+            t_stream << t_hist.serialise();
+
+            return (t_stream);
+        }
+
+
+
         //  == METHODS ==
         //  -- Getters --
         /**
