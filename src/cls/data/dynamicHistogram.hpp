@@ -71,6 +71,9 @@ namespace arc
             double get_max_bound() const { return (m_max_bound); }
             double get_bin_width() const { return (m_bin_width); }
             size_t get_num_bin() const { return (m_data.size()); }
+
+            //  -- Serialisation --
+            std::string serialise(bool t_normalise = false, align t_align = align::CENTER) const;
         };
 
 

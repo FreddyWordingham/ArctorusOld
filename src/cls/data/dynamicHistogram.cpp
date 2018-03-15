@@ -16,6 +16,13 @@
 //  -- System --
 #include <cassert>
 
+//  -- Utility --
+#include "utl/vector.hpp"
+
+//  -- Classes --
+#include "cls/data/column.hpp"
+#include "cls/data/table.hpp"
+
 
 
 //  == NAMESPACE ==
@@ -50,7 +57,25 @@ namespace arc
 
 
 
-        //  -- Initialisation --
+        //  == METHODS ==
+        //  -- Serialisation --
+        /**
+         *  Create a string representation of the histogram.
+         *
+         *  @param  t_normalise When true, normalise the count data to a maximum of unity.
+         *  @param  t_align     Alignment position of the bin.
+         *
+         *  @return A string representation of the histogram.
+         */
+        std::string DynamicHistogram::serialise(const bool t_normalise, const align t_align) const
+        {
+            std::stringstream stream;
+
+            stream << Table(std::vector<Column>(
+                {Column("bin", get_bin_pos(t_align)), Column("count", (t_normalise ? (m_data / utl::max(m_data)) : m_data))}));
+
+            return (stream.str());
+        }
 
 
 
