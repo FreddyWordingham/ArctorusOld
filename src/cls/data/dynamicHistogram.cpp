@@ -116,6 +116,27 @@ namespace arc
         }
 
 
+        //  -- Collection --
+        /**
+         *  Bin the given value within the histogram.
+         *
+         *  @param  t_val       Value to be binned.
+         *  @param  t_weight    Weight of the value to be binned.
+         *
+         *  @pre    t_val must be within the bound limits.
+         *  @pre    t_weight must be positive.
+         */
+        void DynamicHistogram::bin_value(double t_val, double t_weight)
+        {
+            assert((t_val >= m_min_bound) && (t_val <= m_max_bound));
+            assert(t_weight > 0.0);
+
+            const auto bin = static_cast<size_t>((t_val - m_min_bound) / m_bin_width);
+
+            (bin == m_data.size()) ? m_data[bin - 1] += t_weight : m_data[bin] += t_weight;
+        }
+
+
 
         //  -- Serialisation --
         /**
