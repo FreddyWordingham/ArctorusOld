@@ -91,6 +91,11 @@ namespace arc
 
             //  -- Saving --
             void save(const std::string& t_path, bool t_normalise = false, align t_align = align::CENTER) const;
+
+
+          public:
+            //  -- Growth --
+            void ascend();
         };
 
 

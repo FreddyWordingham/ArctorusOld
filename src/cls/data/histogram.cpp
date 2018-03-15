@@ -186,6 +186,36 @@ namespace arc
         }
 
 
+        //  -- Growth --
+        /**
+         *  Increase the max bound of the histogram's range.
+         *
+         *  @pre    m_dynamic must be true.
+         */
+        void Histogram::ascend()
+        {
+            assert(m_dynamic);
+
+            // Increase the maximum bound and bin width.
+            m_max_bound += (m_max_bound - m_min_bound);
+            m_bin_width *= 2.0;
+
+            // Determine the number of bins.
+            const size_t num_bins = m_data.size();
+
+            // Re-bin the data.
+            for (size_t i = 0; i < (num_bins / 2); ++i)
+            {
+                m_data[i] = m_data[i * 2] + m_data[(i * 2) + 1];
+            }
+            for (size_t i = (num_bins / 2); i < num_bins; ++i)
+            {
+                m_data[i] = 0.0;
+            }
+        }
+
+
+
 
     } // namespace data
 } // namespace arc
