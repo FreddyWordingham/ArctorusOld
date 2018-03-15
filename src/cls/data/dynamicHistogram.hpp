@@ -79,11 +79,12 @@ namespace arc
             size_t get_num_bin() const { return (m_data.size()); }
             std::vector<double> get_bin_pos(align t_align = align::CENTER) const;
 
-            //  -- Growth --
-            void ascend();
-
             //  -- Serialisation --
             std::string serialise(bool t_normalise = false, align t_align = align::CENTER) const;
+
+          public:
+            //  -- Growth --
+            void ascend();
         };
 
 

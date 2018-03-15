@@ -53,6 +53,9 @@ int main(const int t_argc, const char** t_argv)
 
     std::cout << hist << "\n";
 
+    hist.ascend();
+    std::cout << hist << "\n";
+
     /*
     SEC("Initialising");
 
