@@ -58,6 +58,9 @@ namespace arc
             const double        m_bin_width;    //! Width of the histogram bins.
             std::vector<double> m_data;         //! Histogram bin data.
 
+            //  -- Settings --
+            const bool m_dynamic;   //! If true, histogram will grow to encompass out of bounds values.
+
 
             //  == INSTANTIATION ==
           public:
