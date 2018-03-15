@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <cassert>
+#include <sstream>
 
 //  -- Utility --
 #include "utl/vector.hpp"
