@@ -46,6 +46,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            DynamicHistogram(double t_min_bound, double t_max_bound, size_t t_num_bins);
 
           private:
             //  -- Initialisation --
