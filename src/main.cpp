@@ -51,9 +51,19 @@ int main(const int t_argc, const char** t_argv)
 {
     arc::data::Histogram hist(0.0, 1.0, 10, true);
 
+    hist.bin_value(0.1);
+    hist.bin_value(0.15);
+    hist.bin_value(0.05);
+    hist.bin_value(0.155);
+    hist.bin_value(0.1555);
+    hist.bin_value(0.3555);
+    hist.bin_value(0.3555);
+
+    hist.bin_value(0.6555);
+
     std::cout << hist << "\n";
 
-//    hist.ascend();
+    hist.ascend();
     std::cout << hist << "\n";
 
     /*
