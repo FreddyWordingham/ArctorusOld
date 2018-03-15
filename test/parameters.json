@@ -1,11 +1,11 @@
 {
     "system":       {
-        "log_update_period": 10.0,
-        "max_threads":       4,
-        "output_dir_name":   "intralipid_100-0",
+        "log_update_period": 1.0,
+        "max_threads":       16,
+        "output_dir_name":   "threelayer",
         "seed":              77,
         "pre_render":        false,
-        "post_render":       false
+        "post_render":       true
     },
     "optimisation": {
         "loop_limit": 1e6,
@@ -15,49 +15,55 @@
         }
     },
     "simulation":   {
-        "num_phot":      1e2,
+        "num_phot":      1e4,
         "grid":          {
             "min":   [-11e-3, -11e-3, -26e-3],
             "max":   [11e-3, 11e-3, 34e-3],
             "cells": [11, 11, 31]
         },
         "aether":        {
-            "mat": "materials/intralipid_010-0.mat"
+            "mat": "vacuum.mat"
         },
         "entities":      {
-            "detector_mirror": {
-                "mesh":  "meshes/detector/mirror.obj",
-                "mat":   "materials/mirror.mat",
+            "layer_one": {
+                "mesh":  "plane.obj",
+                "mat":   "mat1.mat",
+                "trans": [1e-3, 0.0, 1e-3],
                 "scale": [1e-3, 1e-3, 1e-3]
             },
-            "detector_body":   {
-                "mesh":  "meshes/detector/body_flat.obj",
-                "mat":   "materials/black.mat",
+            "layer_two":   {
+                "mesh":  "plane.obj",
+                "mat":   "mat2.mat",
+                "trans": [1e-3, 0.0, 2e-3],
                 "scale": [1e-3, 1e-3, 1e-3]
             },
-            "vial":            {
-                "mesh":  "meshes/detector/vial.obj",
-                "mat":   "materials/vacuum.mat",
+            "layer_three":   {
+                "mesh":  "plane.obj",
+                "mat":   "mat3.mat",
+                "trans": [1e-3, 0.0, 3e-3],
                 "scale": [1e-3, 1e-3, 1e-3]
             }
         },
         "lights":        {
-            "detector_led": {
+            "laser": {
                 "power": 1.0,
-                "mesh":  "meshes/detector/led.obj",
-                "spec":  "spectra/limited_led.spc",
-                "scale": [1e-3, 1e-3, 1e-3]
+                "mesh":  "circle.obj",
+                "spec":  "laser.spc",
+                "trans": [0.0, 0.0, 0.0],
+                "scale": [1e-4, 1e-4, 1e-4]
             }
         },
         "ccds":          {
+            "ccd_one":  {
+                "trans": [0.0, 0.0, 4e-3],
+                "dir": [0.0, 0.0, -1.0],
+                "scale": [5e-4, 5e-4, 5e-4],
+                "pixel": [200, 200],
+                "col": false
+            }
         },
         "spectrometers": {
-            "detector_spectrometer": {
-                "mesh":  "meshes/detector/spectrometer.obj",
-                "range": [0E-9, 1000E-9],
-                "bins":  100,
-                "scale": [1e-3, 1e-3, 1e-3]
             }
         }
-    }
 }
+
