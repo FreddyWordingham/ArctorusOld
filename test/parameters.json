@@ -2,9 +2,9 @@
     "system":       {
         "log_update_period": 1.0,
         "max_threads":       8,
-        "output_dir_name":   "intralipid_010-0",
+        "output_dir_name":   "rainbow",
         "seed":              77,
-        "pre_render":        false,
+        "pre_render":        true,
         "post_render":       false
     },
     "optimisation": {
@@ -16,53 +16,112 @@
     },
     "tree":         {
         "max_tri":   18,
-        "min_depth": 0,
-        "max_depth": 8,
-        "image_res": 4,
-        "min_bound": [-11e-3, -11e-3, -26e-3],
-        "max_bound": [11e-3, 11e-3, 34e-3]
+        "min_depth": 6,
+        "max_depth": 10,
+        "image_res": 6,
+        "min_bound": [-4e-3, -4e-3, -8e-3],
+        "max_bound": [4e-3, 4e-3, 0.1e-3]
     },
     "simulation":   {
-        "num_phot": 1e4,
-        "aether":   {
-            "mat": "materials/intralipid_010-0.mat"
+        "num_phot":      1e3,
+        "aether":        {
+            "mat": "materials/vacuum.mat"
         },
-        "entities": {
-            "mirror": {
-                "mesh":  "meshes/mirror.obj",
-                "mat":   "materials/mirror.mat",
+        "entities":      {
+            "dermis":                                {
+                "mesh":  "skin/dermis.obj",
+                "mat":   "materials/glass.mat",
                 "scale": [1e-3, 1e-3, 1e-3]
             },
-            "body":   {
-                "mesh":  "meshes/body.obj",
-                "mat":   "materials/black.mat",
-                "scale": [1e-3, 1e-3, 1e-3],
-                "trans": [0, 0, 1e-5]
+            "blood_vessels":                         {
+                "mesh":  "skin/blood_vessels.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
             },
-            "vial":   {
-                "mesh":  "meshes/vial.obj",
-                "mat":   "materials/vacuum.mat",
-                "scale": [1e-3, 1e-3, 1e-3],
-                "trans": [0, 0, 10e-3]
+            "artery":                                {
+                "mesh":  "skin/artery.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "dermis_with_capillary_loops":           {
+                "mesh":  "skin/dermis_with_capillary_loops.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "dermis_with_depth_plexus_of_vessels":   {
+                "mesh":  "skin/dermis_with_depth_plexus_of_vessels.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "dermis_with_surface_plexus_of_vessels": {
+                "mesh":  "skin/dermis_with_surface_plexus_of_vessels.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "eccrine_sweat_gland":                   {
+                "mesh":  "skin/eccrine_sweat_gland.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "epidermis":                             {
+                "mesh":  "skin/epidermis.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "hair":                                  {
+                "mesh":  "skin/hair.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "hair_follicle_receptor":                {
+                "mesh":  "skin/hair_follicle_receptor.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "hair_root":                             {
+                "mesh":  "skin/hair_root.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "horny_tissue_layer":                    {
+                "mesh":  "skin/horny_tissue_layer.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "hypodermic_fat":                        {
+                "mesh":  "skin/hypodermic_fat.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "muscle_tissue":                         {
+                "mesh":  "skin/muscle_tissue.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "tumour":                                {
+                "mesh":  "skin/tumour.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
+            },
+            "vein":                                  {
+                "mesh":  "skin/vein.obj",
+                "mat":   "materials/glass.mat",
+                "scale": [1e-3, 1e-3, 1e-3]
             }
         },
         "lights":        {
-            "led": {
+            "detector_led": {
                 "power": 1.0,
-                "mesh":  "meshes/led.obj",
-                "spec":  "spectra/led.spc",
-                "scale": [1e-3, 1e-3, 1e-3]
+                "mesh":  "meshes/square.obj",
+                "spec":  "spectra/laser.spc",
+                "scale": [8e-3, 8e-3, 1e-3],
+                "trans": [0.0, 0.0, 0.01e+6],
+                "dir":   [0.0, 0.0, -1.0]
             }
         },
         "ccds":          {
         },
         "spectrometers": {
-            "spectrometer": {
-                "mesh":  "meshes/spectrometer.obj",
-                "range": [0E-9, 1000E-9],
-                "bins":  100,
-                "scale": [1e-3, 1e-3, 1e-3]
-            }
         }
     }
 }
