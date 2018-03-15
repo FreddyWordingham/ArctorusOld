@@ -45,6 +45,7 @@ namespace arc
          *
          *  @pre    t_max_bound must be greater than t_min_bound.
          *  @pre    t_num_bins must be greater than 0.
+         *  @pre    t_num_bins must be even.
          */
         DynamicHistogram::DynamicHistogram(const double t_min_bound, const double t_max_bound, const size_t t_num_bins) :
             m_min_bound(t_min_bound),
@@ -54,6 +55,7 @@ namespace arc
         {
             assert(t_max_bound > t_min_bound);
             assert(t_num_bins > 0);
+            assert((t_num_bins % 2) == 0);
         }
 
 
@@ -111,6 +113,20 @@ namespace arc
             }
 
             return (r_pos);
+        }
+
+
+        //  -- Growth --
+        /**
+         *  Increase the max bound of the histogram's range.
+         */
+        void DynamicHistogram::ascend()
+        {
+            // Increase the maximum bound.
+            m_max_bound += (m_max_bound - m_min_bound);
+
+            // Re-bin the data.
+            for (size_t)
         }
 
 
