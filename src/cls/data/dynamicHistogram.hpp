@@ -63,16 +63,13 @@ namespace arc
             //  -- Constructors --
             DynamicHistogram(double t_min_bound, double t_max_bound, size_t t_num_bins);
 
-          private:
-            //  -- Initialisation --
-
-
-            //  == OPERATORS ==
-          private:
-
 
             //  == METHODS ==
-          private:
+          public:
+            double get_min_bound() const { return (m_min_bound); }
+            double get_max_bound() const { return (m_max_bound); }
+            double get_bin_width() const { return (m_bin_width); }
+            size_t get_num_bin() const { return (m_data.size()); }
         };
 
 
