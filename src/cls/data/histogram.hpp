@@ -65,7 +65,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            Histogram(double t_min_bound, double t_max_bound, size_t t_num_bins);
+            Histogram(double t_min_bound, double t_max_bound, size_t t_num_bins, bool t_dynamic = false);
 
 
             //  == OPERATORS ==
