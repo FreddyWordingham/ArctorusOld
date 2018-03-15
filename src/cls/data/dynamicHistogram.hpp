@@ -33,6 +33,20 @@ namespace arc
          */
         class DynamicHistogram
         {
+            //  == ENUMERATIONS ==
+            //  -- Alignment --
+          public:
+            /**
+             *  Enumeration of the bin alignment positions which may be set when calling get_bin_pos.
+             */
+            enum class align
+            {
+                LEFT,   //! Save bin left position.
+                CENTER, //! Save bin center position.
+                RIGHT   //! Save bin right position.
+            };
+
+
             //  == FIELDS ==
           private:
             //  -- Bounds --
