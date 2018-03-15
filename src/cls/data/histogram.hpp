@@ -51,11 +51,11 @@ namespace arc
             //  == FIELDS ==
           private:
             //  -- Bounds --
-            const double m_min_bound;   //! Minimum bound of the histogram range.
-            const double m_max_bound;   //! Minimum bound of the histogram range.
+            double m_min_bound; //! Minimum bound of the histogram range.
+            double m_max_bound; //! Minimum bound of the histogram range.
 
             //  -- Data --
-            const double        m_bin_width;    //! Width of the histogram bins.
+            double              m_bin_width;    //! Width of the histogram bins.
             std::vector<double> m_data;         //! Histogram bin data.
 
             //  -- Settings --

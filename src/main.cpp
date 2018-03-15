@@ -22,7 +22,7 @@
 
 //  -- Classes --
 #include "cls/setup/sim.hpp"
-#include "cls/data/dynamicHistogram.hpp"
+#include "cls/data/histogram.hpp"
 
 
 
@@ -49,11 +49,11 @@ void save_data(const arc::data::Json& t_setup, const arc::setup::Sim& t_sim, con
  */
 int main(const int t_argc, const char** t_argv)
 {
-    arc::data::DynamicHistogram hist(0.0, 1.0, 10);
+    arc::data::Histogram hist(0.0, 1.0, 10, true);
 
     std::cout << hist << "\n";
 
-    hist.ascend();
+//    hist.ascend();
     std::cout << hist << "\n";
 
     /*
