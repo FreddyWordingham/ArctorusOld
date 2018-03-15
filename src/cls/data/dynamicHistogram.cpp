@@ -58,6 +58,41 @@ namespace arc
 
 
         //  == METHODS ==
+        //  -- Getters --
+        /**
+         *  Create a vector of bin positions.
+         *
+         *  @param  t_align Set bin alignment position to the left, middle, or right of the bin.
+         *
+         *  @return A vector of bin positions.
+         */
+        std::vector<double> DynamicHistogram::get_bin_pos(const align t_align) const
+        {
+            std::vector<double> r_pos(m_data.size());
+
+            double offset = 0.0;
+            switch (t_align)
+            {
+                case align::LEFT:
+                    offset = 0.0;
+                    break;
+                case align::CENTER:
+                    offset = 0.5;
+                    break;
+                case align::RIGHT:
+                    offset = 1.0;
+                    break;
+            }
+
+            for (size_t i = 0; i < r_pos.size(); ++i)
+            {
+                r_pos[i] = m_min_bound + ((i + offset) * m_bin_width);
+            }
+
+            return (r_pos);
+        }
+
+
         //  -- Serialisation --
         /**
          *  Create a string representation of the histogram.
