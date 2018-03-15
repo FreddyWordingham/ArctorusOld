@@ -49,7 +49,9 @@ void save_data(const arc::data::Json& t_setup, const arc::setup::Sim& t_sim, con
  */
 int main(const int t_argc, const char** t_argv)
 {
-    arc::data::DynamicHistogram hist(0.0, 1.0, 100);
+    arc::data::DynamicHistogram hist(0.0, 1.0, 10);
+
+    std::cout << hist << "\n";
 
     /*
     SEC("Initialising");
