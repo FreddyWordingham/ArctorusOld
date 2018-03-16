@@ -80,8 +80,9 @@ namespace arc
             const random::Index m_light_select; //! Light selector.
 
             //  -- Tree --
-            std::unique_ptr<tree::Cell> m_root;     //! Simulation cell tree.
-            data::Histogram             m_scatters; //! Histogram of photon total scatterings.
+            std::unique_ptr<tree::Cell> m_root;         //! Simulation cell tree.
+            data::Histogram             m_scatters;     //! Histogram of photon total scatterings.
+            data::Histogram             m_exit_weight;  //! Histogram of photon total scatterings.
 
             //  -- Data --
 #ifdef ENABLE_PHOTON_PATHS
