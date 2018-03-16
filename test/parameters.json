@@ -23,18 +23,18 @@
         "max_bound": [1.0e-0, 1.0e-0, 1.0e-0]
     },
     "simulation":   {
-        "num_phot":      1e4,
-        "aether":        {
+        "num_phot": 1e6,
+        "aether":   {
             "mat": "materials/scatter.mat"
         },
-        "entities":      {
+        "entities": {
             "sphere": {
                 "mesh":  "meshes/sphere.obj",
                 "mat":   "materials/vacuum.mat",
                 "scale": [1e-0, 1e-0, 1e-0]
             }
         },
-        "lights":        {
+        "lights":   {
             "detector_led": {
                 "power": 1.0,
                 "mesh":  "meshes/sphere.obj",
