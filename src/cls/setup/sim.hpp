@@ -124,6 +124,7 @@ namespace arc
           public:
             //  -- Getters --
             data::Histogram& get_scatter_hist() const { return (m_scatters); }
+            data::Histogram& get_exit_weight_hist() const { return (m_exit_weight); }
             void get_error_report() const;
 
             //  -- Setters --
