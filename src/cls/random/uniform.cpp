@@ -27,6 +27,27 @@ namespace arc
 
 
         //  == INSTANTIATION ==
+        //  -- Singleton --
+        /**
+         *  Retrieve an instance of the uniform random number generator class.
+         *  Implements a singleton whereby only one uniform object may be created.
+         *  Uses lazy initialisation.
+         *
+         *  @param  t_seed  Seed used to initialise the random number generator.
+         *
+         *  @return The initialised uniform object.
+         */
+        Uniform& Uniform::get_instance(const base t_seed)
+        {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wexit-time-destructors"
+            static Uniform s_uni(t_seed);
+#pragma clang diagnostic pop
+
+            return (s_uni);
+        }
+
+
         //  -- Constructors --
         /**
          *  Construct a uniform random number generator using a given seed.
