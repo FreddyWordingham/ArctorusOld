@@ -11,7 +11,7 @@ col = ['r.', 'g.', 'b.', 'k.', 'y.', 'c.', 'm.']
 #   == FUNCTIONS ==
 #   -- Reading --
 #
-#   Read data in from a csv file, skipping the first row w.
+#   Read data in from a csv file, skipping the first row.
 #
 def read_datafile(t_fileName):
     data = np.genfromtxt(t_fileName, delimiter=',', comments='#')
