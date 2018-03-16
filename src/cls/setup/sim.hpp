@@ -153,8 +153,8 @@ namespace arc
                              const std::vector<std::vector<std::vector<double>>>& t_data) const;
 
             //  -- Simulation --
-            std::tuple<event, double, size_t, size_t> determine_event(const phys::Photon& t_phot,
-                                                                      const tree::Cell* t_cell) const;
+            std::tuple<event, double, size_t, size_t> determine_event(const phys::Photon& t_phot, const tree::Cell* t_cell,
+                                                                      size_t t_thread_index) const;
             void log_progress() const;
         };
 

@@ -938,8 +938,9 @@ namespace arc
         /**
          *  Determine the next event a photon will undergo.
          *
-         *  @param  t_phot  Photon whose event will be determined.
-         *  @param  t_cell  Cell the photon is currently within.
+         *  @param  t_phot          Photon whose event will be determined.
+         *  @param  t_cell          Cell the photon is currently within.
+         *  @param  t_thread_index  Index of the thread running this batch of photons.
          *
          *  @post   Return distance must be positive.
          *  @post   Equipment index must not be a NaN if not a scattering or cell crossing event.
@@ -948,7 +949,8 @@ namespace arc
          *  @return A tuple containing, the type of event, distance to event, indices of equipment and triangle involved.
          */
         std::tuple<Sim::event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
-                                                                            const tree::Cell* t_cell) const
+                                                                            const tree::Cell* t_cell,
+                                                                            const size_t t_thread_index) const
         {
             // Determine scatter distance.
             const double scat_dist = -std::log(m_rng[t_thread_index](m_mersenne_twister_engine[t_thread_index])) / t_phot
