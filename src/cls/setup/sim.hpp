@@ -123,6 +123,7 @@ namespace arc
             //  == METHODS ==
           public:
             //  -- Getters --
+            data::Histogram& get_scatter_hist() const { return (m_scatters); }
             void get_error_report() const;
 
             //  -- Setters --
