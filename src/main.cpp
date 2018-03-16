@@ -22,7 +22,6 @@
 
 //  -- Classes --
 #include "cls/setup/sim.hpp"
-#include "cls/data/histogram.hpp"
 
 
 
@@ -49,25 +48,6 @@ void save_data(const arc::data::Json& t_setup, const arc::setup::Sim& t_sim, con
  */
 int main(const int t_argc, const char** t_argv)
 {
-    arc::data::Histogram hist(0.0, 0.7, 10, true);
-
-    hist.bin_value(0.1);
-    hist.bin_value(0.15);
-    hist.bin_value(0.05);
-    hist.bin_value(0.155);
-    hist.bin_value(0.1555);
-    hist.bin_value(0.3555);
-    hist.bin_value(0.3555);
-    hist.bin_value(0.6555);
-
-    std::cout << hist << "\n";
-
-
-    hist.bin_value(16.555);
-    std::cout << hist << "\n";
-
-
-    /*
     SEC("Initialising");
 
     // Read the setup file.
@@ -106,7 +86,6 @@ int main(const int t_argc, const char** t_argv)
     {
         sim.render();
     }
-    */
 
     return (0);
 }
