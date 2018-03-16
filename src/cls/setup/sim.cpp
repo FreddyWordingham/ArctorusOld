@@ -435,7 +435,7 @@ namespace arc
                 }
             }
             assert(max > 0.0);
-            for (size_t i   = 0; i < res; ++i)
+            for (size_t i = 0; i < res; ++i)
             {
                 for (size_t j = 0; j < res; ++j)
                 {
@@ -649,6 +649,7 @@ namespace arc
                 tree::Cell* cell = nullptr;             //! Pointer to current cell containing the photon.
                 double            cell_energy = 0.0;    //! Energy to be added to cell total when exiting cell.
                 unsigned long int loops       = 0;      //! Number of loops made of the while loop.
+                unsigned long int num_scat    = 0;      //! Number of photon scatterings made.
 
                 // Check if photon is within a tree cell.
                 if (!m_root->is_within(phot.get_pos()))
@@ -706,6 +707,8 @@ namespace arc
                         // Scattering event.
                         case event::SCATTER:
                         {
+                            ++num_scat;
+
                             // Move to the scattering point.
                             phot.move(dist);
 
