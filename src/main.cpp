@@ -16,6 +16,7 @@
 //  -- General --
 #include "gen/config.hpp"
 #include "gen/math.hpp"
+#include "gen/rng.hpp"
 
 //  -- Utility --
 #include "utl/file.hpp"
