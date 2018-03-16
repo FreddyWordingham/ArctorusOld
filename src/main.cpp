@@ -175,9 +175,8 @@ void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
 
     // Initialise the threads.
     std::vector<std::thread> threads;
-    //const unsigned int       num_threads = std::min(std::thread::hardware_concurrency(),
-    //                                                t_setup["system"].parse_child<unsigned int>("max_threads", 1));
-    const unsigned int       num_threads = 32;
+    const unsigned int       num_threads = std::min(std::thread::hardware_concurrency(),
+                                                    t_setup["system"].parse_child<unsigned int>("max_threads", 1));
     if (num_threads == 0)
     {
         ERROR("Unable to run simulation.", "Number of threads can not be zero.");
