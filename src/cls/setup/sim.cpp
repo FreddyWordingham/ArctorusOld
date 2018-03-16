@@ -946,7 +946,7 @@ namespace arc
 
             // Determine the cell distance.
             const double cell_dist = t_cell->get_dist_to_wall(t_phot.get_pos(), t_phot.get_dir());
-            assert(cell_dist > SMOOTHING_LENGTH);
+//            assert(cell_dist > SMOOTHING_LENGTH);
 
             // Check for entity collision.
             bool   entity_hit;
