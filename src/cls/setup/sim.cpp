@@ -15,6 +15,7 @@
 //  == INCLUDES ==
 //  -- General --
 #include "gen/optics.hpp"
+#include "gen/rng.hpp"
 
 //  -- Utility --
 #include "utl/colourmap.hpp"
