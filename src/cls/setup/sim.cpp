@@ -591,6 +591,20 @@ namespace arc
             LOG("Spectrometer data saving complete.");
         }
 
+        /**
+         *  Save the histogram data.
+         *
+         *  @param  t_output_dir    Directory to write the histograms to.
+         */
+        void Sim::save_histogram_data(const std::string& t_output_dir) const
+        {
+            // Save the scattering data.
+            m_scatters.save(t_output_dir + "scatters.dat");
+
+            // Save the exit weight data.
+            m_exit_weight.save(t_output_dir + "weight.dat");
+        }
+
 
         //  -- Rendering --
         /**

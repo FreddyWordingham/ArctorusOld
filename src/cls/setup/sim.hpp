@@ -132,6 +132,7 @@ namespace arc
             void save_tree_images(const std::string& t_output_dir, size_t t_level) const;
             void save_ccd_images(const std::string& t_output_dir) const;
             void save_spectrometer_data(const std::string& t_output_dir) const;
+            void save_histogram_data(const std::string& t_output_dir) const;
 
             //  -- Rendering --
             void render() const;
