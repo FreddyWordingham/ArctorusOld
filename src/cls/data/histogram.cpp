@@ -241,6 +241,8 @@ namespace arc
 
             file.comment() << "Total counts: " << utl::total(m_data) << "\n";
             file.comment() << "Normalised: " << std::boolalpha << t_normalise << "\n";
+            file.comment() << "Average: " << get_average() << "\n";
+            file.comment() << "Most probable: " << get_most_probable() << "\n";
 
             file << serialise(t_normalise, t_align);
         }
