@@ -96,6 +96,7 @@ namespace arc
           public:
             //  -- Growth --
             void ascend();
+            void descend();
         };
 
 

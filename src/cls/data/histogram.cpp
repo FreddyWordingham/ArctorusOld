@@ -196,7 +196,7 @@ namespace arc
         {
             assert(m_dynamic);
 
-            // Increase the maximum bound and bin width.
+            // Increase the maximum bound and double the bin width.
             m_max_bound += (m_max_bound - m_min_bound);
             m_bin_width *= 2.0;
 
@@ -214,6 +214,34 @@ namespace arc
             }
         }
 
+        /**
+         *  Decrease the min bound of the histogram's range.
+         *
+         *  @pre    m_dynamic must be true.
+         */
+        void Histogram::descend()
+        {
+            assert(m_dynamic);
+
+            // Decrease the minimum bound and double the bin width.
+            m_min_bound -= (m_max_bound - m_min_bound);
+            m_bin_width *= 2.0;
+
+            // Determine the number of bins.
+            const size_t num_bins = m_data.size();
+
+            // Re-bin the data.
+            for (size_t i = (num_bins - 1); i >= (num_bins / 2); --i)
+            {
+                VAL(i);
+                const size_t j = (2 * i) - num_bins;
+                m_data[i] = m_data[j] + m_data[j + 1];
+            }
+            for (size_t i = 0; i < (num_bins / 2); ++i)
+            {
+                m_data[i] = 0.0;
+            }
+        }
 
 
 
