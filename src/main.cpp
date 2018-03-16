@@ -217,6 +217,10 @@ void run_sim(const arc::data::Json& t_setup, arc::setup::Sim& t_sim)
         std::chrono::steady_clock::now() - sim_start_time).count();
     LOG("Simulation runtime: " << arc::utl::create_time_string(sim_runtime));
     LOG("Ave photon runtime: " << arc::utl::create_time_string(sim_runtime / total_phot));
+    LOG("Ave scatters: " << t_sim.get_scatter_hist().get_average());
+    LOG("MP scatters: " << t_sim.get_scatter_hist().get_most_probable());
+    LOG("Ave exit weight: " << t_sim.get_exit_weight_hist().get_average());
+    LOG("MP exit weight: " << t_sim.get_exit_weight_hist().get_most_probable());
 
     // Report any warnings.
     t_sim.get_error_report();
