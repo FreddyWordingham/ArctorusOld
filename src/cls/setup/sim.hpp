@@ -99,6 +99,7 @@ namespace arc
             std::mutex          m_spectrometer_mutex;   //! Protects the spectrometer objects data.
             std::mutex          m_cell_mutex;           //! Protects the cell data.
             std::mutex          m_counter_mutex;        //! Protects the error counters.
+            std::mutex          m_hist_mutex;           //! Protects the data histograms.
             std::vector<double> m_thread_progress;      //! Current progress of each thread.
             const double        m_log_update_period;    //! Period with which to update a progress print.
 
