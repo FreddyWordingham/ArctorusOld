@@ -83,6 +83,7 @@ namespace arc
             size_t get_num_bin() const { return (m_data.size()); }
             std::vector<double> get_bin_pos(align t_align = align::CENTER) const;
             double get_average() const;
+            double get_most_probable() const;
 
             //  -- Collection --
             void bin_value(double t_val, double t_weight = 1.0);

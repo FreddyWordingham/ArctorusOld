@@ -131,6 +131,16 @@ namespace arc
             return (ave / total);
         }
 
+        /**
+         *  Determine the most probable value from the histogram data.
+         *
+         *  @return The most probable value of the histogram.
+         */
+        double Histogram::get_most_probable() const
+        {
+            return (m_min_bound + (m_bin_width * (utl::max_index(m_data) + 0.5)));
+        }
+
 
         //  -- Collection --
         /**
