@@ -5,7 +5,7 @@
         "output_dir_name":   "rainbow",
         "seed":              77,
         "pre_render":        false,
-        "post_render":       true
+        "post_render":       false
     },
     "optimisation": {
         "loop_limit": 1e6,
@@ -19,39 +19,30 @@
         "min_depth": 6,
         "max_depth": 10,
         "image_res": 6,
-        "min_bound": [-4.1e-2, -4.1e-2, -2.1e-2],
-        "max_bound": [4.1e-2, 4.1e-2, 2.1e-2]
+        "min_bound": [-1.0e-0, -1.0e-0, -1.0e-0],
+        "max_bound": [1.0e-0, 1.0e-0, 1.0e-0]
     },
     "simulation":   {
         "num_phot":      1e4,
         "aether":        {
-            "mat": "materials/vacuum.mat"
+            "mat": "materials/scatter.mat"
         },
         "entities":      {
             "sphere": {
-                "mesh":  "meshes/high_sphere.obj",
-                "mat":   "materials/water.mat",
-                "scale": [1e-3, 1e-3, 1e-3]
+                "mesh":  "meshes/sphere.obj",
+                "mat":   "materials/vacuum.mat",
+                "scale": [1e-0, 1e-0, 1e-0]
             }
         },
         "lights":        {
             "detector_led": {
                 "power": 1.0,
-                "mesh":  "meshes/circle.obj",
+                "mesh":  "meshes/sphere.obj",
                 "spec":  "spectra/laser.spc",
-                "scale": [1.1e-3, 1.1e-3, 1.1e-3],
-                "trans": [0.0, 0.0, 1.25e-2],
-                "dir":   [0.0, 0.0, -1.0]
+                "scale": [1e-12, 1e-12, 1e-12]
             }
         },
         "ccds":          {
-            "above": {
-                "pixel": [250, 250],
-                "scale": [4e-2, 4e-2, 4e-2],
-                "trans": [0.0, 0.0, 2.0e-2],
-                "dir":   [0.0, 0.0, -1.0],
-                "col":   true
-            }
         },
         "spectrometers": {
         }

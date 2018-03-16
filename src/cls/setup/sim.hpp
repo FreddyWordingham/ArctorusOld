@@ -16,6 +16,7 @@
 //  == INCLUDES ==
 //  -- System --
 #include <mutex>
+#include <random>
 #include <thread>
 
 //  -- Classes --
@@ -102,6 +103,10 @@ namespace arc
             std::mutex          m_hist_mutex;           //! Protects the data histograms.
             std::vector<double> m_thread_progress;      //! Current progress of each thread.
             const double        m_log_update_period;    //! Period with which to update a progress print.
+
+            //  -- Random Number Generation --
+            std::vector<std::mt19937>                     m_mersenne_twister_engine;
+            std::vector<std::uniform_real_distribution<>> m_rng;
 
 
             //  == INSTANTIATION ==

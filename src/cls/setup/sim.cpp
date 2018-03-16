@@ -403,7 +403,16 @@ namespace arc
         {
             assert(t_num_threads != 0);
 
-            m_thread_progress = std::vector<double>(t_num_threads, 0.0);
+            m_thread_progress    = std::vector<double>(t_num_threads, 0.0);
+
+
+            // Random number generator initialisation.
+            std::random_device rd;
+            for (size_t        i = 0; i < t_num_threads; ++i)
+            {
+                m_mersenne_twister_engine.emplace_back(rd());
+                m_rng.emplace_back(0.0, 1.0);
+            }
         }
 
 
