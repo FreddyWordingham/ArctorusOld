@@ -4,8 +4,8 @@
         "max_threads":       8,
         "output_dir_name":   "rainbow",
         "seed":              77,
-        "pre_render":        true,
-        "post_render":       true
+        "pre_render":        false,
+        "post_render":       false
     },
     "optimisation": {
         "loop_limit": 1e6,
@@ -23,15 +23,15 @@
         "max_bound": [1.0e-0, 1.0e-0, 1.0e-0]
     },
     "simulation":   {
-        "num_phot":      1e3,
+        "num_phot":      1e5,
         "aether":        {
-            "mat": "materials/intralipid_000-1.mat"
+            "mat": "materials/scatter.mat"
         },
         "entities":      {
             "sphere": {
                 "mesh":  "meshes/sphere.obj",
                 "mat":   "materials/vacuum.mat",
-                "scale": [1e-2, 1e-2, 1e-2]
+                "scale": [1e-0, 1e-0, 1e-0]
             }
         },
         "lights":        {
@@ -39,7 +39,7 @@
                 "power": 1.0,
                 "mesh":  "meshes/sphere.obj",
                 "spec":  "spectra/laser.spc",
-                "scale": [1e-3, 1e-3, 1e-3]
+                "scale": [1e-6, 1e-6, 1e-6]
             }
         },
         "ccds":          {
