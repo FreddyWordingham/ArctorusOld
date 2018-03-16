@@ -892,6 +892,12 @@ namespace arc
                 // Photon death label.
                 kill_photon:;
 
+                // Add photon data to histograms.
+                m_hist_mutex.lock();
+                m_scatters(phot.get_weight() * num_scat);
+                m_exit_weight(phot.get_weight());
+                m_hist_mutex.unlock();
+
 #ifdef ENABLE_PHOTON_PATHS
                 // Add the photon path.
                 m_path_mutex.lock();
