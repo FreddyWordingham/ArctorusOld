@@ -56,6 +56,7 @@ namespace arc
                                                 t_json["tree"].parse_child<math::Vec<3>>("min_bound"),
                                                 t_json["tree"].parse_child<math::Vec<3>>("max_bound"), m_entity, m_light, m_ccd,
                                                 m_spectrometer)),
+            m_scatters(0.0, 100.0, 1000, true),
             m_log_update_period(t_json["system"].parse_child<double>("log_update_period"))
         {
             // Validate settings.
