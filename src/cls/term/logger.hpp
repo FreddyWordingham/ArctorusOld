@@ -66,11 +66,11 @@ namespace arc
         constexpr const char* ERROR_TYPE_STRING = "[!ERROR!]";  //! String indicating an error message.
 
         //  -- Formatting --
-        constexpr const int LINE_WIDTH       = 128;                                     //! Total width of a single line.
-        constexpr const int TITLE_WIDTH      = 64;                                      //! Total width of the title.
-        constexpr const int TIME_WIDTH       = 22;                                      //! Space allocated to the time buffer.
-        constexpr const int TYPE_WIDTH       = 10;                                      //! Space allocated to the type buffer.
-        constexpr const int MIN_TEXT_WIDTH   = 64;                                      //! Minimum guaranteed text width.
+        constexpr const int LINE_WIDTH     = 144;                                     //! Total width of a single line.
+        constexpr const int TITLE_WIDTH    = 64;                                      //! Total width of the title.
+        constexpr const int TIME_WIDTH     = 22;                                      //! Space allocated to the time buffer.
+        constexpr const int TYPE_WIDTH     = 10;                                      //! Space allocated to the type buffer.
+        constexpr const int MIN_TEXT_WIDTH = 64;                                      //! Minimum guaranteed text width.
         constexpr const int TEXT_WIDTH       = LINE_WIDTH - (TIME_WIDTH + TYPE_WIDTH);  //! Width allocated to the text buffer.
         constexpr const int WRAP_INDENT      = 2;                                       //! Indentation width of wrapped lines.
         constexpr const int VALUE_NAME_WIDTH = 16;                                      //! Space allocated to the value name.
