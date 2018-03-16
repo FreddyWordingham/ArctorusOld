@@ -23,7 +23,7 @@
         "max_bound": [1.0e-0, 1.0e-0, 1.0e-0]
     },
     "simulation":   {
-        "num_phot": 1e6,
+        "num_phot": 1e4,
         "aether":   {
             "mat": "materials/scatter.mat"
         },
