@@ -162,7 +162,7 @@ namespace arc
                     if (t_val < m_min_bound)
                     {
                         const double m      = 1 + ((t_val - m_max_bound) / (m_max_bound - m_min_bound));
-                        const auto   growth = static_cast<unsigned int>(std::ceil(std::log2(m)));
+                        const auto   growth = 1 + static_cast<unsigned int>(std::log2(m));
 
                         for (unsigned int i = 0; i < growth; ++i)
                         {
@@ -172,7 +172,7 @@ namespace arc
                     else
                     {
                         const double m      = 1 + ((t_val - m_max_bound) / (m_max_bound - m_min_bound));
-                        const auto   growth = static_cast<unsigned int>(std::ceil(std::log2(m)));
+                        const auto   growth = 1 + static_cast<unsigned int>(std::log2(m));
 
                         for (unsigned int i = 0; i < growth; ++i)
                         {

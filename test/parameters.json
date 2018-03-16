@@ -39,7 +39,7 @@
                 "power": 1.0,
                 "mesh":  "meshes/sphere.obj",
                 "spec":  "spectra/laser.spc",
-                "scale": [1e-6, 1e-6, 1e-6]
+                "scale": [1e-12, 1e-12, 1e-12]
             }
         },
         "ccds":          {
