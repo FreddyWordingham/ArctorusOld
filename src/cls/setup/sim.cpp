@@ -720,7 +720,7 @@ namespace arc
                     event  event_type;              //! Event type.
                     double dist;                    //! Distance to the event.
                     size_t equip_index, tri_index;  //! Indices of hit equipment and triangle if hit at all.
-                    std::tie(event_type, dist, equip_index, tri_index) = determine_event(phot, cell);
+                    std::tie(event_type, dist, equip_index, tri_index) = determine_event(phot, cell, t_thread_index);
 
                     // Track properties.
                     cell_energy += dist * phot.get_weight();
