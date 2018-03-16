@@ -950,7 +950,7 @@ namespace arc
          */
         std::tuple<Sim::event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
                                                                             const tree::Cell* t_cell,
-                                                                            const size_t t_thread_index) const
+                                                                            const size_t t_thread_index)
         {
             // Determine scatter distance.
             const double scat_dist = -std::log(m_rng[t_thread_index](m_mersenne_twister_engine[t_thread_index])) / t_phot
