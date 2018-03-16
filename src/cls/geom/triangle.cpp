@@ -12,6 +12,12 @@
 
 
 
+//  == INCLUDES ==
+//  -- General --
+#include "gen/rng.hpp"
+
+
+
 //  == NAMESPACE ==
 namespace arc
 {
