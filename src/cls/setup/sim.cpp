@@ -911,8 +911,8 @@ namespace arc
 
                 // Add photon data to histograms.
                 m_hist_mutex.lock();
-                m_scatters(phot.get_weight() * num_scat);
-                m_exit_weight(phot.get_weight());
+                m_scatters.bin_value(num_scat, phot.get_weight());
+                m_exit_weight.bin_value(phot.get_weight());
                 m_hist_mutex.unlock();
 
 #ifdef ENABLE_PHOTON_PATHS
