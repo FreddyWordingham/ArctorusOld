@@ -246,4 +246,9 @@ void save_data(const arc::data::Json& t_setup, const arc::setup::Sim& t_sim, con
     const std::string spectrometer_data_dir = t_output_dir + "spectrometer_data/";
     arc::utl::create_directory(spectrometer_data_dir);
     t_sim.save_spectrometer_data(spectrometer_data_dir);
+
+    // Save histogram data.
+    const std::string hist_data_dir = t_output_dir + "hist_data/";
+    arc::utl::create_directory(hist_data_dir);
+    t_sim.save_histogram_data(hist_data_dir);
 }
