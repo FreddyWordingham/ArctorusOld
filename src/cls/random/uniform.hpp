@@ -59,13 +59,10 @@ namespace arc
 
             //  == INSTANTIATION ==
           public:
-            //  -- Singleton --
-            static Uniform& get_instance(base t_seed = 0);
-
-          private:
             //  -- Constructors --
             explicit Uniform(base t_seed);
 
+          private:
             //  -- Initialisation --
             void init_generation_variables();
 
