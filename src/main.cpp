@@ -49,7 +49,7 @@ void save_data(const arc::data::Json& t_setup, const arc::setup::Sim& t_sim, con
  */
 int main(const int t_argc, const char** t_argv)
 {
-    arc::data::Histogram hist(-1.0, 2.0, 10, true);
+    arc::data::Histogram hist(0.0, 0.7, 10, true);
 
     hist.bin_value(0.1);
     hist.bin_value(0.15);
@@ -58,19 +58,14 @@ int main(const int t_argc, const char** t_argv)
     hist.bin_value(0.1555);
     hist.bin_value(0.3555);
     hist.bin_value(0.3555);
-
     hist.bin_value(0.6555);
 
     std::cout << hist << "\n";
 
-    hist.descend();
+
+    hist.bin_value(16.555);
     std::cout << hist << "\n";
 
-    hist.descend();
-    std::cout << hist << "\n";
-
-    hist.ascend();
-    std::cout << hist << "\n";
 
     /*
     SEC("Initialising");

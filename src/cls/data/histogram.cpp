@@ -120,13 +120,44 @@ namespace arc
          *  @param  t_val       Value to be binned.
          *  @param  t_weight    Weight of the value to be binned.
          *
-         *  @pre    t_val must be within the bound limits.
          *  @pre    t_weight must be positive.
          */
         void Histogram::bin_value(double t_val, double t_weight)
         {
-            assert((t_val >= m_min_bound) && (t_val <= m_max_bound));
             assert(t_weight > 0.0);
+
+            if ((t_val < m_min_bound) || (t_val > m_max_bound))
+            {
+                if (m_dynamic)
+                {
+                    if (t_val < m_min_bound)
+                    {
+                        const double m      = 1 + ((t_val - m_max_bound) / (m_max_bound - m_min_bound));
+                        const auto   growth = static_cast<unsigned int>(std::ceil(std::log2(m)));
+
+                        for (unsigned int i = 0; i < growth; ++i)
+                        {
+                            descend();
+                        }
+                    }
+                    else
+                    {
+                        const double m      = 1 + ((t_val - m_max_bound) / (m_max_bound - m_min_bound));
+                        const auto   growth = static_cast<unsigned int>(std::ceil(std::log2(m)));
+
+                        for (unsigned int i = 0; i < growth; ++i)
+                        {
+                            ascend();
+                        }
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            assert((t_val >= m_min_bound) && (t_val <= m_max_bound));
 
             const auto bin = static_cast<size_t>((t_val - m_min_bound) / m_bin_width);
 
