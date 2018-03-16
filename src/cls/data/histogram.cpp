@@ -112,6 +112,25 @@ namespace arc
             return (r_pos);
         }
 
+        /**
+         *  Determine the average value from the histogram data.
+         *
+         *  @return The average value of the histogram.
+         */
+        double Histogram::get_average() const
+        {
+            double      total = 0.0;
+            double      ave   = 0.0;
+            for (size_t i     = 0; i < m_data.size(); ++i)
+            {
+                const double x = ((i + 0.5) * m_bin_width);
+                total += m_data[i];
+                ave += x * m_data[i];
+            }
+
+            return (ave / total);
+        }
+
 
         //  -- Collection --
         /**
