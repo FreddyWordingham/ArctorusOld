@@ -1019,7 +1019,7 @@ namespace arc
 
             // Log the progress of all loops.
             std::stringstream progress;
-            static const int  print_width = static_cast<int>(term::TEXT_WIDTH / m_thread_progress.size());
+            static const auto print_width = static_cast<int>(term::TEXT_WIDTH / m_thread_progress.size());
             for (size_t       i           = 0; i < m_thread_progress.size(); ++i)
             {
                 progress << std::setw(print_width - 2) << m_thread_progress[i] << "% ";
