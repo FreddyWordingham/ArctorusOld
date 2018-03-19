@@ -193,6 +193,29 @@ namespace arc
             return (*this);
         }
 
+        /**
+         *  Determine the cross-product of this vec and another given vec.
+         *  This vec acts as the left hand side operand.
+         *
+         *  @param  t_rhs   Vec to perform cross product with.
+         *
+         *  @pre    N must equal three.
+         *
+         *  @return A reference to this vec post-operation.
+         */
+        constexpr vec3& vec3::operator^=(const vec3& t_rhs) noexcept
+        {
+            const double lhs_x = x;
+            const double lhs_y = y;
+            const double lhs_z = z;
+
+            x = (lhs_y * t_rhs.z) - (lhs_z * t_rhs.y);
+            y = (lhs_z * t_rhs.x) - (lhs_x * t_rhs.z);
+            z = (lhs_x * t_rhs.y) - (lhs_y * t_rhs.x);
+
+            return (*this);
+        }
+
 
 
     } // namespace math
