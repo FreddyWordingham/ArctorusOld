@@ -113,6 +113,22 @@ namespace arc
             return (*this);
         }
 
+        /**
+         *  Add the data element values of another vec to this vec.
+         *
+         *  @param  t_rhs   Vec of data elements to add to this vec.
+         *
+         *  @return A reference to this vec post-addition.
+         */
+        constexpr vec3& vec3::operator+=(const vec3& t_rhs) noexcept
+        {
+            x += t_rhs.x;
+            y += t_rhs.y;
+            z += t_rhs.z;
+
+            return (*this);
+        }
+
 
 
     } // namespace math
