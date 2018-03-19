@@ -129,6 +129,38 @@ namespace arc
             return (*this);
         }
 
+        /**
+         *  Subtract a value from all data elements of the vec.
+         *
+         *  @param  t_rhs   Value to subtract from each vec data element.
+         *
+         *  @return A reference to this vec post-subtraction.
+         */
+        constexpr vec3& vec3::operator-=(const double t_rhs) noexcept
+        {
+            x -= t_rhs;
+            y -= t_rhs;
+            z -= t_rhs;
+
+            return (*this);
+        }
+
+        /**
+         *  Subtract the data element values of another vec to this vec.
+         *
+         *  @param  t_rhs   Vec of data elements to subtract from this vec.
+         *
+         *  @return A reference to this vec post-subtraction.
+         */
+        constexpr vec3& vec3::operator-=(const vec3& t_rhs) noexcept
+        {
+            x -= t_rhs.x;
+            y -= t_rhs.y;
+            z -= t_rhs.z;
+
+            return (*this);
+        }
+
 
 
     } // namespace math
