@@ -48,12 +48,17 @@ namespace arc
             explicit constexpr vec3() noexcept;
             constexpr vec3(double t_x, double t_y, double t_z) noexcept;
 
-          private:
-            //  -- Initialisation --
-
 
             //  == OPERATORS ==
-          private:
+          public:
+            //  -- Mathematical --
+            constexpr vec3& operator+=(double t_rhs) noexcept;
+            constexpr vec3& operator+=(const vec3& t_rhs) noexcept;
+            constexpr vec3& operator-=(double t_rhs) noexcept;
+            constexpr vec3& operator-=(const vec3& t_rhs) noexcept;
+            constexpr vec3& operator*=(double t_rhs) noexcept;
+            constexpr vec3& operator/=(double t_rhs) noexcept;
+            constexpr vec3& operator^=(const vec3& t_rhs) noexcept;
 
 
             //  == METHODS ==
@@ -86,6 +91,26 @@ namespace arc
             y(t_y),
             z(t_z)
         {
+        }
+
+
+
+        //  == OPERATORS ==
+        //  -- Mathematical --
+        /**
+         *  Add a value to all data elements of the vec.
+         *
+         *  @param  t_rhs   Value to add to each vec data element.
+         *
+         *  @return A reference to this vec post-addition.
+         */
+        constexpr vec3& vec3::operator+=(const double t_rhs) noexcept
+        {
+            x += t_rhs;
+            y += t_rhs;
+            z += t_rhs;
+
+            return (*this);
         }
 
 
