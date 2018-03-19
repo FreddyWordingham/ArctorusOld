@@ -35,7 +35,11 @@ namespace arc
         class Vec3
         {
             //  == FIELDS ==
-          private:
+          public:
+            //  -- Data --
+            double x;   //! X-dimension value.
+            double y;   //! Y-dimension value.
+            double z;   //! Z-dimension value.
 
 
             //  == INSTANTIATION ==
