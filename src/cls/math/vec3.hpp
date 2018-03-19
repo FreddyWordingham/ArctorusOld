@@ -32,7 +32,7 @@ namespace arc
          *  Acts as a mathematical vector of double values.
          *  Should not be used for general purpose storage.
          */
-        class Vec3
+        class vec3
         {
             //  == FIELDS ==
           public:
