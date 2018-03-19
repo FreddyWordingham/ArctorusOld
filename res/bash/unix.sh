@@ -15,10 +15,10 @@ clean_arc()
     cd $ARCTORUS_DIR > /dev/null;
 
     # Remove files.
-    rm -r bin/* > /dev/null;
-    rm -r build/debug/* > /dev/null;
-    rm -r build/release/* > /dev/null;
-    rm src/hdr/config.hpp > /dev/null;
+    rm -r bin/*;
+    rm -r build/debug/*;
+    rm -r build/release/*;
+    rm src/hdr/config.hpp;
 
     # Change to previous directory.
     cd - > /dev/null;
