@@ -161,6 +161,22 @@ namespace arc
             return (*this);
         }
 
+        /**
+         *  Multiply all data elements of the vec by a value.
+         *
+         *  @param  t_rhs   Value to multiply each vec data element by.
+         *
+         *  @return A reference to this vec post-multiplication.
+         */
+        constexpr vec3& vec3::operator*=(const double t_rhs) noexcept
+        {
+            x *= t_rhs;
+            y *= t_rhs;
+            z *= t_rhs;
+
+            return (*this);
+        }
+
 
 
     } // namespace math
