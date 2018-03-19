@@ -41,9 +41,6 @@ build_arc()
     # Change directory.
     cd $ARCTORUS_DIR/build/$1 > /dev/null;
 
-    # Clean.
-    clean;
-
     # Run cmake.
     cmake -j 4 -DCMAKE_BUILD_TYPE=$1 -DCMAKE_C_COMPILER=$2 -DCMAKE_CXX_COMPILER=$3 -DLOG_COLOUR=$4 -DLOG_VERBOSE=$5 -DGRAPHICS=$6 -DPHOTON_PATHS=$7 ../..;
 
