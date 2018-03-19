@@ -403,8 +403,9 @@ namespace arc
         {
             assert(t_num_threads != 0);
 
-            m_thread_progress    = std::vector<double>(t_num_threads, 0.0);
+            const auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
 
+            m_thread_progress    = std::vector<double>(t_num_threads, 0.0);
 
             // Random number generator initialisation.
             std::random_device rd;
