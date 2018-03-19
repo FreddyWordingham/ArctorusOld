@@ -105,8 +105,8 @@ namespace arc
             const double        m_log_update_period;    //! Period with which to update a progress print.
 
             //  -- Random Number Generation --
-            std::vector<std::mt19937>              m_mersenne_twister_engine;
-            std::uniform_real_distribution<double> m_uniform_dist;              //! Distribution to draw random numbers from.
+            std::vector<std::mt19937>              m_rng_engine;    //! Random number generator engine.
+            std::uniform_real_distribution<double> m_uniform_dist;  //! Distribution to draw random numbers from.
 
 
             //  == INSTANTIATION ==
