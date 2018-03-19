@@ -45,8 +45,8 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
-            explicit constexpr vec3();
-            constexpr vec3(double t_x, double t_y, double t_z);
+            explicit constexpr vec3() noexcept;
+            constexpr vec3(double t_x, double t_y, double t_z) noexcept;
 
           private:
             //  -- Initialisation --
@@ -67,7 +67,7 @@ namespace arc
         /**
          *  Construct a vec3 with values initialised to zero.
          */
-        constexpr vec3::vec3() :
+        constexpr vec3::vec3() noexcept :
             x(0.0),
             y(0.0),
             z(0.0)
@@ -81,7 +81,7 @@ namespace arc
          *  @param  t_y Value to initialise the y-dimension data element to.
          *  @param  t_z Value to initialise the z-dimension data element to.
          */
-        constexpr vec3::vec3(const double t_x, const double t_y, const double t_z) :
+        constexpr vec3::vec3(const double t_x, const double t_y, const double t_z) noexcept :
             x(t_x),
             y(t_y),
             z(t_z)
