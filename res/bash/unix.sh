@@ -28,7 +28,7 @@ clean_arc()
 #   Build Arctorus.
 #   Previous build files are deleted prior to building.
 #
-build()
+build_arc()
 {
     # Check number of command line arguments.
     if [ "$#" -ne 7 ]; then
