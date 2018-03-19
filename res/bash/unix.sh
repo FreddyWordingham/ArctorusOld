@@ -1,6 +1,6 @@
 #   == ALIASES ==
 alias arc=$ARCTORUS_DIR/bin/arctorus
-alias plot=python3 ~/Arctorus/res/python/plot.py
+alias plot='python3 ~/Arctorus/res/python/plot.py'
 
 
 
