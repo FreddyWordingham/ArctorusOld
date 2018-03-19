@@ -45,6 +45,7 @@ namespace arc
             //  == INSTANTIATION ==
           public:
             //  -- Constructors --
+            explicit constexpr vec3();
             constexpr vec3(double t_x, double t_y, double t_z);
 
           private:
@@ -63,6 +64,16 @@ namespace arc
 
         //  == INSTANTIATION ==
         //  -- Constructors --
+        /**
+         *  Construct a vec3 with values initialised to zero.
+         */
+        constexpr vec3::vec3() :
+            x(0.0),
+            y(0.0),
+            z(0.0)
+        {
+        }
+
         /**
          *  Construct a vec3 with initialised values.
          *
