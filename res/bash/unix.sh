@@ -1,2 +1,2 @@
 #   == ALIASES ==
-alias arctorus=$ARC_DIR/bin/arctorus
+alias arctorus=ARCTORUS_DIR/bin/arctorus
