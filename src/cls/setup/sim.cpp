@@ -403,12 +403,12 @@ namespace arc
         void Sim::set_num_threads(const unsigned int t_num_threads)
         {
             assert(t_num_threads != 0);
-            m_thread_progress    = std::vector<double>(t_num_threads, 0.0);
+            m_thread_progress = std::vector<double>(t_num_threads, 0.0);
 
             // Random number generator initialisation.
             const auto seed = static_cast<size_t>(std::chrono::high_resolution_clock::now().time_since_epoch().count());
             LOG("Simulation seed: " << seed);
-            for (size_t        i = 0; i < t_num_threads; ++i)
+            for (size_t i = 0; i < t_num_threads; ++i)
             {
                 m_rng_engine.emplace_back(seed + i);
             }
@@ -705,7 +705,7 @@ namespace arc
                     // Roulette optimisation.
                     if (phot.get_weight() <= m_roulette_weight)
                     {
-                        if (m_rng[t_thread_index](m_mersenne_twister_engine[t_thread_index]) <= (1.0 / m_roulette_chambers))
+                        if (m_uniform_dist(m_rng_engine[t_thread_index]) <= (1.0 / m_roulette_chambers))
                         {
                             phot.multiply_weight(m_roulette_chambers);
                         }
@@ -737,7 +737,7 @@ namespace arc
 
                             // Scatter.
                             phot.rotate(rng::henyey_greenstein(phot.get_anisotropy()),
-                                        m_rng[t_thread_index](m_mersenne_twister_engine[t_thread_index]) * 2.0 * M_PI);
+                                        m_uniform_dist(m_rng_engine[t_thread_index]) * 2.0 * M_PI);
 
                             // Reduce weight by the albedo.
                             phot.multiply_weight(phot.get_albedo());
@@ -840,7 +840,7 @@ namespace arc
                             }
                             assert((reflectance >= 0.0) && (reflectance <= 1.0));
 
-                            if (m_rng[t_thread_index](m_mersenne_twister_engine[t_thread_index]) <= reflectance)   // Reflect.
+                            if (m_uniform_dist(m_rng_engine[t_thread_index]) <= reflectance)   // Reflect.
                             {
                                 // Move to just before the entity boundary.
                                 phot.move(dist - SMOOTHING_LENGTH);
@@ -952,8 +952,7 @@ namespace arc
                                                                             const size_t t_thread_index)
         {
             // Determine scatter distance.
-            const double scat_dist = -std::log(m_rng[t_thread_index](m_mersenne_twister_engine[t_thread_index])) / t_phot
-                .get_interaction();
+            const double scat_dist = -std::log(m_uniform_dist(m_rng_engine[t_thread_index]) / t_phot.get_interaction());
             assert(scat_dist > 0.0);
 
             // Determine the cell distance.
