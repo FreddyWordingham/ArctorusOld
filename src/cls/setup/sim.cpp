@@ -403,17 +403,14 @@ namespace arc
         void Sim::set_num_threads(const unsigned int t_num_threads)
         {
             assert(t_num_threads != 0);
-
-            const auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-
             m_thread_progress    = std::vector<double>(t_num_threads, 0.0);
 
             // Random number generator initialisation.
-            std::random_device rd;
+            const auto seed = static_cast<size_t>(std::chrono::high_resolution_clock::now().time_since_epoch().count());
+            LOG("Simulation seed: " << seed);
             for (size_t        i = 0; i < t_num_threads; ++i)
             {
-                m_mersenne_twister_engine.emplace_back(rd());
-                m_rng.emplace_back(0.0, 1.0);
+                m_rng_engine.emplace_back(seed + i);
             }
         }
 
