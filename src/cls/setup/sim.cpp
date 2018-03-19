@@ -59,7 +59,8 @@ namespace arc
                                                 m_spectrometer)),
             m_scatters(0.0, 100.0, 100, true),
             m_exit_weight(0.0, 1.0, 100, true),
-            m_log_update_period(t_json["system"].parse_child<double>("log_update_period"))
+            m_log_update_period(t_json["system"].parse_child<double>("log_update_period")),
+            m_uniform_dist(0.0, 1.0)
         {
             // Validate settings.
             if (m_roulette_weight < 0.0)
