@@ -46,7 +46,8 @@ namespace arc
             double       m_weight;  //! Statistical weight of the particle.
 
             //  -- Optical --
-            const double    m_wavelength;   //! Wavelength of the photon packet.
+            //const double    m_wavelength;   //! Wavelength of the photon packet.
+            double          m_wavelength;   //! Current wavelength.
             double          m_ref_index;    //! Current refractive index.
             double          m_albedo;       //! Current albedo.
             double          m_interaction;  //! Current interaction coefficient.
@@ -116,6 +117,7 @@ namespace arc
             void rotate(double t_dec, double t_azi);
             void multiply_weight(double t_mult);
             void set_opt(const phys::Material& t_mat);
+            void change_wavelength(double t_new_wavelength);
 
           private:
             //  -- Data --

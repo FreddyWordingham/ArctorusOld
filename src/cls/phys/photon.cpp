@@ -144,6 +144,19 @@ namespace arc
         }
 
         /**
+         *  Change the photon's wavelength
+         *
+         *  @param  t_wavelength_change  New wavelength of the photon.
+         *
+         */
+        void Photon::change_wavelength(const double t_wavelength_change)
+        {
+            // Change the wavelength of the photon.
+            m_wavelength = m_wavelength - t_wavelength_change;
+        }
+
+
+        /**
          *  Rotate the particle by a given declination and then a given azimuthal rotation.
          *
          *  @param  t_dec   Declination angle away from current direction vector.

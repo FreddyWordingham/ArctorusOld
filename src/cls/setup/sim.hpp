@@ -58,7 +58,8 @@ namespace arc
                 CELL_CROSS,         //! Cell wall crossing.
                 ENTITY_HIT,         //! Entity triangle hit.
                 CCD_HIT,            //! Ccd triangle hit.
-                SPECTROMETER_HIT    //! Spectrometer triangle hit.
+                SPECTROMETER_HIT,    //! Spectrometer triangle hit.
+                RAMAN              //! Raman scattering event.
             };
 
 

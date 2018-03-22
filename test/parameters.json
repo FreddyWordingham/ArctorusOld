@@ -22,26 +22,26 @@
             "cells": [11, 11, 31]
         },
         "aether":        {
-            "mat": "vacuum.mat"
+            "mat": "mat.mat"
         },
         "entities":      {
             "layer_one": {
                 "mesh":  "plane.obj",
                 "mat":   "mat1.mat",
-                "trans": [1e-3, 0.0, 1e-3],
-                "scale": [1e-3, 1e-3, 1e-3]
+                "trans": [1e-2, 0.0, 1e-3],
+                "scale": [1e-2, 1e-2, 1e-2]
             },
             "layer_two":   {
                 "mesh":  "plane.obj",
                 "mat":   "mat2.mat",
-                "trans": [1e-3, 0.0, 2e-3],
-                "scale": [1e-3, 1e-3, 1e-3]
+                "trans": [1e-2, 0.0, 2e-3],
+                "scale": [1e-2, 1e-2, 1e-2]
             },
             "layer_three":   {
                 "mesh":  "plane.obj",
                 "mat":   "mat3.mat",
-                "trans": [1e-3, 0.0, 3e-3],
-                "scale": [1e-3, 1e-3, 1e-3]
+                "trans": [1e-2, 0.0, 3e-3],
+                "scale": [1e-2, 1e-2, 1e-2]
             }
         },
         "lights":        {
@@ -55,9 +55,9 @@
         },
         "ccds":          {
             "ccd_one":  {
-                "trans": [0.0, 0.0, 4e-3],
+                "trans": [0.0, 0.0, 10e-3],
                 "dir": [0.0, 0.0, -1.0],
-                "scale": [5e-4, 5e-4, 5e-4],
+                "scale": [5e-3, 5e-3, 5e-3],
                 "pixel": [200, 200],
                 "col": false
             }

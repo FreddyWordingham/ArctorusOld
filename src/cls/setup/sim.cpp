@@ -499,6 +499,7 @@ namespace arc
                 mesh::Cell* cell = nullptr;             //! Pointer to current cell containing the photon.
                 double            cell_energy = 0.0;    //! Energy to be added to cell total when exiting current cell.
                 unsigned long int loops       = 0;      //! Number of loops made of the while loop.
+                unsigned long int raman_count = 0;    //! Number of Raman scatters that occur.
 
                 // Check if photon is within a grid cell.
                 if (!m_grid.is_within(phot.get_pos()))
@@ -551,6 +552,33 @@ namespace arc
                     // Perform the event.
                     switch (event_type)
                     {
+                        // Raman event.
+                        case event::RAMAN:
+                        {
+                            // Move to the scattering point.
+                            phot.move(dist);
+
+                            //Change wavelength by an amount.
+                            phot.change_wavelength(50E-9);
+
+                            // Scatter.
+                            phot.rotate(rng::henyey_greenstein(phot.get_anisotropy()), rng::random(0.0, 2.0 * M_PI));
+
+                            //Raman counter.
+                            raman_count = raman_count + 1;
+                            std::cout << "Raman count:  " << raman_count << std::endl;
+
+                            // Reduce weight by the albedo.
+                            phot.multiply_weight(phot.get_albedo());
+
+                            // Check that the photon still has statistical weight.
+                            if (phot.get_weight() <= 0.0)
+                            {
+                                goto kill_photon;
+                            }
+
+                            break;
+                        }
                         // Scattering event.
                         case event::SCATTER:
                         {
@@ -761,6 +789,10 @@ namespace arc
         std::tuple<Sim::event, double, size_t, size_t> Sim::determine_event(const phys::Photon& t_phot,
                                                                             const mesh::Cell* t_cell) const
         {
+            // Determine raman distance.
+            const double raman_dist = -std::log(rng::random()) / t_phot.get_interaction();
+            assert(raman_dist > 0.0);
+
             // Determine scatter distance.
             const double scat_dist = -std::log(rng::random()) / t_phot.get_interaction();
             assert(scat_dist > 0.0);
@@ -790,7 +822,7 @@ namespace arc
                 ->spectrometer_dist(t_phot.get_pos(), t_phot.get_dir());
 
             // Determine which distance is shortest.
-            std::array<double, 5> dist({{scat_dist, cell_dist, entity_dist, ccd_dist, spectrometer_dist}});
+            std::array<double, 6> dist({{scat_dist, cell_dist, entity_dist, ccd_dist, spectrometer_dist, raman_dist}});
             switch (std::distance(std::begin(dist), std::min_element(std::begin(dist), std::end(dist))))
             {
                 case 0:
@@ -820,6 +852,11 @@ namespace arc
                     assert(!std::isnan(spectrometer_tri_index));
                     return (std::tuple<event, double, size_t, size_t>(event::SPECTROMETER_HIT, spectrometer_dist,
                                                                       spectrometer_index, spectrometer_tri_index));
+                case 5:
+                    assert(raman_dist > 0.0);
+                    return(std::tuple<event, double, size_t, size_t>(event::RAMAN, raman_dist,
+                                                                      std::numeric_limits<size_t>::signaling_NaN(),
+                                                                      std::numeric_limits<size_t>::signaling_NaN()));
                 default: ERROR("Unable to simulate photon.", "Code should be unreachable.");
             }
         }
