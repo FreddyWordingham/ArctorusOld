@@ -59,7 +59,7 @@
                 "dir": [0.0, 0.0, -1.0],
                 "scale": [5e-3, 5e-3, 5e-3],
                 "pixel": [200, 200],
-                "col": false
+                "col": true
             }
         },
         "spectrometers": {

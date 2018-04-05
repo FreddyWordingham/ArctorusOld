@@ -331,7 +331,7 @@ namespace arc
                 VERB(spectrometer_name[i] << " range   : " << range);
                 VERB(spectrometer_name[i] << " bins    : " << bins);
 
-                // Construct the spectrometer object an add it to the vector of spectrometers.
+                // Construct the spectrometer object and add it to the vector of spectrometers.
                 r_spectrometer
                     .emplace_back(spectrometer_name[i], geom::Mesh(utl::read(mesh_path), trans, dir, rot, scale), range[0],
                                   range[1], bins);
@@ -504,7 +504,7 @@ namespace arc
                 // Check if photon is within a grid cell.
                 if (!m_grid.is_within(phot.get_pos()))
                 {
-                    WARN("Unable to simulate photon.", "Photon does not begin with the grid.");
+                    WARN("Unable to simulate photon.", "Photon does not begin within the grid.");
                     goto kill_photon;
                 }
                 else
