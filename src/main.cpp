@@ -81,7 +81,7 @@ int main(const int t_argc, const char** t_argv)
                                                     setup["system"].parse_child<unsigned int>("max_threads", 1));
     if (num_threads == 0)
     {
-        ERROR("Unable to run simulation.", "Number of threads can not be zero.");
+        ERROR("Unable to run simulation.", "Number of threads cannot be zero.");
     }
     LOG("Number of threads: " << num_threads);
     pdt.set_num_threads(num_threads);

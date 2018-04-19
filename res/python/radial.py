@@ -119,27 +119,10 @@ for i in range(0, len(red_profileSums)-1):
         continue
     blue_averageRadialProfile[i] = blue_profileSums[i] / blue_profileCounts[i]
 
-    if red_averageRadialProfile[i] != 0 and green_averageRadialProfile != 0 and blue_averageRadialProfile[i] != 0:
-        print('Profile sums', red_profileSums[i], green_profileSums[i], blue_profileSums[i])
-        print('Profile counts', red_profileCounts[i], green_profileCounts[i], blue_profileCounts[i])
-        print('Average', red_averageRadialProfile[i], green_averageRadialProfile[i], blue_averageRadialProfile[i])
-    #print('Averages:    ', red_averageRadialProfile[i], green_averageRadialProfile[i], blue_averageRadialProfile[i])
-
-#Debugging
-#for i in range(0, len(red_list)):
-#    if red_list[i][0] != 0:
-#        print('red list greater than 0 :    ', i, red_list[i])
-#    if green_list[i][0] != 0:
-#        print('green list greater than 0:   ', i, green_list[i])
-#    if blue_list[i][0] != 0:
-#        print('blue list greater than 0:    ', i, blue_list[i])
-
 # Plot it.
 fig, (ax1, ax2, ax3) = plt.subplots(nrows = 3, ncols = 1)
 ax1.plot(range(0, len(red_averageRadialProfile)), red_averageRadialProfile, color = 'red')
 ax2.plot(range(0, len(green_averageRadialProfile)), green_averageRadialProfile, color = 'green')
 ax3.plot(range(0, len(blue_averageRadialProfile)), blue_averageRadialProfile, color = 'blue')
-#plt.plot(range(0, len(red_averageRadialProfile)), red_averageRadialProfile, color = 'red')
-#plt.plot(range(0, len(green_averageRadialProfile)), green_averageRadialProfile, color = 'green')
-#plt.plot(range(0, len(blue_averageRadialProfile)), blue_averageRadialProfile, color = 'blue')
+
 plt.show()

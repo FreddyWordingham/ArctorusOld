@@ -10,6 +10,11 @@
 //  == HEADER ==
 #include "cls/setup/sim.hpp"
 
+// File Writing
+#include <iostream>
+#include <fstream>
+using namespace std;
+ofstream myfile;
 
 
 //  == INCLUDES ==
@@ -483,6 +488,7 @@ namespace arc
          */
         void Sim::run_photons(const unsigned long int t_num_phot, const size_t t_thread_index)
         {
+            unsigned long int total_raman_count = 0;    //! Total number of Raman scatters that occur.
             // Run each photon through the simulation.
             for (unsigned long int i = 0; i < t_num_phot; ++i)
             {
@@ -499,7 +505,8 @@ namespace arc
                 mesh::Cell* cell = nullptr;             //! Pointer to current cell containing the photon.
                 double            cell_energy = 0.0;    //! Energy to be added to cell total when exiting current cell.
                 unsigned long int loops       = 0;      //! Number of loops made of the while loop.
-                unsigned long int raman_count = 0;    //! Number of Raman scatters that occur.
+                unsigned long int raman_count = 0;      //! Number of Raman scatters that occur.
+                unsigned long int depth_tag = 0;        //! Tracking whether the photon Raman scattered in top or bottom layer.
 
                 // Check if photon is within a grid cell.
                 if (!m_grid.is_within(phot.get_pos()))
@@ -559,14 +566,36 @@ namespace arc
                             phot.move(dist);
 
                             //Change wavelength by an amount.
-                            phot.change_wavelength(50E-9);
+                            phot.change_wavelength(5E-9);
 
                             // Scatter.
                             phot.rotate(rng::henyey_greenstein(phot.get_anisotropy()), rng::random(0.0, 2.0 * M_PI));
 
                             //Raman counter.
-                            raman_count = raman_count + 1;
-                            std::cout << "Raman count:  " << raman_count << std::endl;
+                            if (raman_count == 1)
+                            {
+                                std::cout << "Only Raman scattering once" << std::endl;
+                            }
+                            else
+                            {
+                                raman_count = raman_count + 1;
+                                total_raman_count = total_raman_count + 1;
+                            }
+                            //std::cout << "Raman count:  " << raman_count << std::endl;
+                            //std::cout << "Raman scatter pos" << phot.get_pos() << std::endl;
+
+                            //Determine if scattering occurred in top or bottom layer
+                            double depth = phot.get_pos()[2];
+
+                            if (depth < 1E-3)
+                            {
+                                depth_tag = 1;
+                            }
+
+                            else
+                            {
+                                depth_tag = 2;
+                            }
 
                             // Reduce weight by the albedo.
                             phot.multiply_weight(phot.get_albedo());
@@ -726,11 +755,24 @@ namespace arc
                             // Get normal of the hit location.
                             const math::Vec<3> norm = m_ccd[equip_index].get_mesh().get_tri(tri_index).get_norm(phot.get_pos());
 
-                            // Check if photon hits the front of the detector.
-                            if ((phot.get_dir() * norm) < 0.0)
+                            // Check if photon hits the front of the detector and that the photon has been Raman scattered.
+                           // if ((phot.get_dir() * norm) < 0.0)
+                            if ((phot.get_dir() * norm) < 0.0 and raman_count != 0)
                             {
                                 m_ccd_mutex.lock();
-                                m_ccd[equip_index].add_hit(phot.get_pos(), phot.get_weight(), phot.get_wavelength());
+
+
+                                switch (depth_tag)
+                                {
+                                    case 1:
+                                        m_ccd[equip_index].add_hit(phot.get_pos(), phot.get_weight(), 700E-9);
+                                        break;
+                                    case 2:
+                                        m_ccd[equip_index].add_hit(phot.get_pos(), phot.get_weight(), 400E-9);
+                                        break;
+                                    default:
+                                        ERROR("Gone fucked up.", "depth_tag should be 1 or 2.");
+                                }
                                 m_ccd_mutex.unlock();
                             }
 
@@ -772,6 +814,8 @@ namespace arc
                 m_path_mutex.unlock();
 #endif
             }
+
+            std::cout << "Total number of Raman scatters" << total_raman_count << std::endl;
         }
 
         /**

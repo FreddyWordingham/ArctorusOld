@@ -8,7 +8,7 @@ i = 0
 j = 0
 k = 0
 
-f = open(os.path.expanduser("~/Arctorus/test/output_threelayer_20180405163445/ccd_images/ccd_one.ppm"))
+f = open(os.path.expanduser("~/Arctorus/test/output_threelayer_2018040163445/ccd_images/ccd_one.ppm"))
 data = f.read()
 f.close()
 
@@ -54,9 +54,6 @@ for column in range(1, columns):
             profileSums[thisDistance][i] = profileSums[thisDistance][i] + np.double(pixel[row, column][i])
             profileCounts[thisDistance][i] = profileCounts[thisDistance][i] + 1
 
-#for i in range(len(profileSums)):
-#    print('blue sums', profileSums[i][2])
-
 # Divide the sums by the counts at each distance to get the average profile
 for i in range(0, len(profileSums)):
     for j in range(0, len(profileSums[i])):
@@ -68,17 +65,8 @@ red_list = [averageRadialProfile[i][0] for i in range(len(averageRadialProfile))
 green_list = [averageRadialProfile[i][1] for i in range(len(averageRadialProfile))]
 blue_list = [averageRadialProfile[i][2] for i in range(len(averageRadialProfile))]
 
-for i in range(len(red_list)):
-    if (red_list[i] != 0.0):
-        print('red list entry: ', red_list[i], i)
-    if (green_list[i] != 0.0):
-        print('green list entry: ', green_list[i], i)
-    if (blue_list[i] != 0.0):
-        print('blue list entry: ', blue_list[i], i)
-
 total_list = [red_list[i]+green_list[i]+blue_list[i] for i in range(len(averageRadialProfile))]
 
-#print('red list', red_list)
 
 # Plot it.
 plt.plot(range(0, len(averageRadialProfile)), red_list, color = 'red', label = 'Red pixel count')
