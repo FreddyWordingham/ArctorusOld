@@ -16,8 +16,12 @@
 //  -- Utility --
 #include "utl/colourmap.hpp"
 #include "utl/file.hpp"
+#include <fstream>
+using namespace std;
 
-
+//file stuff
+//ofstream myfile;
+//myfile.open ("loc.txt");
 
 //  == NAMESPACE ==
 namespace arc
@@ -105,7 +109,6 @@ namespace arc
 
             m_image.save(t_output_dir + m_name + ".ppm", t_norm);
         }
-
 
 
     } // namespace detector

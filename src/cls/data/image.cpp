@@ -196,7 +196,5 @@ namespace arc
             file << serialise(t_norm);
         }
 
-
-
     } // namespace data
 } // namespace arc

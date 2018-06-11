@@ -15,6 +15,7 @@
 
 //  == INCLUDES ==
 //  -- Classes --
+#include <cls/file/handle.hpp>
 #include "cls/data/image.hpp"
 #include "cls/geom/mesh.hpp"
 
@@ -47,6 +48,10 @@ namespace arc
 
             //  -- Data --
             data::Image m_image;        //! Ccd image data.
+            //data::Image m_file;         //! CCD file data for benchmarking
+
+            std::vector<math::Vec<3>> m_pos{};
+            std::vector<double> m_wavelength{};
 
 
             //  == INSTANTIATION ==
@@ -68,11 +73,28 @@ namespace arc
             //  -- Setters --
             void add_hit(const math::Vec<3>& t_pos, double t_weight, double t_wavelength);
 
+            void add_count(const math::Vec<3>& t_pos, const double t_wavelength)
+            {
+                m_pos.push_back(t_pos);
+                m_wavelength.push_back(t_wavelength);
+            }
+
             //  -- Save --
             void save(const std::string& t_output_dir, double t_norm) const;
+
+            void save_pos_data(const std::string& t_path) const
+            {
+                assert(m_pos.size() == m_wavelength.size());
+                //std::cout << m_pos.size() << "," << m_wavelength.size() << std::endl;
+
+                file::Handle file(t_path, std::fstream::out);
+
+                for (size_t i=0; i<m_pos.size(); ++i)
+                {
+                    file << m_pos[i][0] << "\t" << m_pos[i][1] <<"\t"<< m_wavelength[i] << "\n";
+                }
+            }
         };
-
-
 
     } // namespace detector
 } // namespace arc

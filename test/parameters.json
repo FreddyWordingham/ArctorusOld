@@ -8,7 +8,7 @@
         "post_render":       false
     },
     "optimisation": {
-        "loop_limit": 1e6,
+        "loop_limit": 1250,
         "roulette":   {
             "weight":   1e-3,
             "chambers": 10
@@ -17,25 +17,19 @@
     "simulation":   {
         "num_phot":      1e6,
         "grid":          {
-        "min":   [-11e-3, -11e-3, -26e-3],
-        "max":   [11e-3, 11e-3, 34e-3],
-        "cells": [11, 11, 31]
+        "min":   [-44e-3, -44e-3, -44e-3],
+        "max":   [44e-3, 44e-3, 82e-3],
+        "cells": [1,1,1]
     },
     "aether":        {
-        "mat": "mat.mat"
+        "mat": "benchmarkMat05.mat"
     },
     "entities":      {
         "layer_one": {
             "mesh":  "plane.obj",
             "mat":   "benchmarkMat05.mat",
-            "trans": [1e-2, 0.0, 0.0],
-            "scale": [1e-2, 1e-2, 1e-2]
-        },
-        "layer_two":   {
-            "mesh":  "plane.obj",
-            "mat":   "benchmarkMat05.mat",
-            "trans": [1e-2, 0.0, 1e-3],
-            "scale": [1e-2, 1e-2, 1e-2]
+            "trans": [1e-2, 0.0, -5e-3],
+            "scale": [1, 1, 1]
         }
     },
     "lights":        {
@@ -43,15 +37,15 @@
             "power": 1.0,
             "mesh":  "circle.obj",
             "spec":  "benchmark.spc",
-            "trans": [0.0, 0.0, 2e-4],
+            "trans": [0.0, 0.0, -9.99e-4],
             "scale": [1e-6, 1e-6, 1e-6]
         }
     },
     "ccds":          {
         "ccd_one":  {
-            "trans": [0.0, 0.0, -1e-2],
+            "trans": [0.0, 0.0, -1e-3],
             "dir": [0.0, 0.0, 1.0],
-            "scale": [1e-2, 1e-2, 1e-2],
+            "scale": [1, 1, 1],
             "pixel": [200, 200],
             "col": true
         }
@@ -60,3 +54,4 @@
     }
   }
 }
+

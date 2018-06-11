@@ -131,7 +131,7 @@ namespace arc
           private:
             //  -- Simulation --
             std::tuple<event, double, size_t, size_t> determine_event(const phys::Photon& t_phot,
-                                                                      const mesh::Cell* t_cell) const;
+                                                                      const mesh::Cell* t_cell, double t_x) const;
             void log_progress() const;
         };
 

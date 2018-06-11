@@ -152,7 +152,7 @@ namespace arc
         void Photon::change_wavelength(const double t_wavelength_change)
         {
             // Change the wavelength of the photon.
-            m_wavelength = m_wavelength - t_wavelength_change;
+            m_wavelength = m_wavelength + t_wavelength_change;
         }
 
 

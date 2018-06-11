@@ -182,7 +182,11 @@ namespace arc
         void Grid::save_images(const std::string& t_output_dir) const
         {
             // Get maximum energy density.
-            const double max_energy_density = get_max_energy_density();
+            double max_energy_density = get_max_energy_density();
+            if (max_energy_density <= 0.0)
+            {
+                max_energy_density = 1.0;
+            }
 
             // Calculate energy density fractions.
             std::vector<std::vector<std::vector<double>>> energy_density;

@@ -67,6 +67,7 @@ namespace arc
 
             //  -- Saving --
             void save(const std::string& t_path, double t_nor = 1.0) const;
+//            void write(const std::string& t_path, std::vector<3> t_pos, double t_wavelength) const;
         };
 
 
