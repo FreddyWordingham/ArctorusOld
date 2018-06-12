@@ -425,7 +425,7 @@ namespace arc
             for (size_t i = 0; i < m_ccd.size(); ++i)
             {
                 m_ccd[i].save(t_output_dir, max);
-                m_ccd[i].save_pos_data("output_Everall_" + std::to_string(i) + ".dat");
+                m_ccd[i].save_pos_data("output_Mat05_" + std::to_string(i) + ".dat");
             }
 
             LOG("CCD image saving complete.");
