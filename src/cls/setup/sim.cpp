@@ -425,7 +425,7 @@ namespace arc
             for (size_t i = 0; i < m_ccd.size(); ++i)
             {
                 m_ccd[i].save(t_output_dir, max);
-                m_ccd[i].save_pos_data("output_Mat05_" + std::to_string(i) + ".dat");
+                m_ccd[i].save_pos_data("output_Everall04_" + std::to_string(i) + ".dat");
             }
 
             LOG("CCD image saving complete.");
@@ -531,7 +531,7 @@ namespace arc
                 // Loop until exit condition is met.
                 while (true)
                 {
-                    double x = 0.2E-3;
+                    double x = 40E-6;
                     // Increment loop counter.
                     //++loops;
 
@@ -583,7 +583,7 @@ namespace arc
                             ++loops;
                             phot.move(x);
                             //std::cout << "scatt x" << x << std::endl;
-                            x = 0.2E-3;
+                            x = 40E-6;
 
                             // Scatter.
                             phot.rotate(rng::henyey_greenstein(phot.get_anisotropy()), rng::random(0.0, 2.0 * M_PI));

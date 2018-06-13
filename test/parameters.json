@@ -5,29 +5,29 @@
         "output_dir_name":   "benchmark",
         "seed":              77,
         "pre_render":        false,
-        "post_render":       false
+        "post_render":       true
     },
     "optimisation": {
-        "loop_limit": 1250,
+        "loop_limit": 500,
         "roulette":   {
             "weight":   1e-3,
             "chambers": 10
         }
     },
     "simulation":   {
-        "num_phot":      1e6,
+        "num_phot":      1e4,
         "grid":          {
         "min":   [-44e-3, -44e-3, -44e-3],
         "max":   [44e-3, 44e-3, 82e-3],
         "cells": [1,1,1]
     },
     "aether":        {
-        "mat": "benchmarkMat05.mat"
+        "mat": "benchmarkEverall04.mat"
     },
     "entities":      {
         "layer_one": {
             "mesh":  "plane.obj",
-            "mat":   "benchmarkMat05.mat",
+            "mat":   "benchmarkEverall04.mat",
             "trans": [1e-2, 0.0, -5e-3],
             "scale": [1, 1, 1]
         }
