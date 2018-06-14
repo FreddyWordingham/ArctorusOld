@@ -514,7 +514,8 @@ namespace arc
                 double            cell_energy = 0.0;    //! Energy to be added to cell total when exiting current cell.
                 unsigned long int loops       = 0;      //! Number of loops made of the while loop.
                 unsigned long int raman_count = 0;      //! Number of Raman scatters that occur.
-                unsigned long int depth_tag = 0;        //! Tracking whether the photon Raman scattered in top or bottom layer.
+                double depth = -10.0;                   //! Depth of Raman photon generation.
+                unsigned long int loopcount = 0;        //! Final number of loops made before exiting.
 
                 // Check if photon is within a grid cell.
                 if (!m_grid.is_within(phot.get_pos()))
@@ -532,13 +533,12 @@ namespace arc
                 while (true)
                 {
                     double x = 40E-6;
-                    // Increment loop counter.
-                    //++loops;
 
                     // Kill if photon is stuck.
                     if (loops > m_loop_limit)
                     {
                         //WARN("Photon killed early.", "Number of loops exceeded set limit.");
+                        loopcount = loops;
                         ++killed;
                         if (raman_count > 0)
                         {
@@ -556,6 +556,7 @@ namespace arc
                         }
                         else
                         {
+                            loopcount = loops;
                             goto kill_photon;
                         }
                     }
@@ -591,7 +592,7 @@ namespace arc
                             //Check whether a Raman scatter occurs.
                             const double rand = rng::random(0.0, 1.0);
                             //std::cout << "random number" << rand << std::endl;
-                            if (rand - pow(10, -0.005*0.2) > 0.0)
+                            if (rand <= 0.01)
                             {
                                 //Ensure only Raman scattered once.
                                 if (raman_count == 1)
@@ -602,20 +603,9 @@ namespace arc
                                 {
                                     raman_count = raman_count + 1;
                                     total_raman_count = total_raman_count + 1;
-                                    //loops = 0;
-                                    //Determine if scattering occurred in top or bottom layer.
-                                    double depth = phot.get_pos()[2];
-
-                                    if (depth < 0.0)
-                                    {
-                                        depth_tag = 1;
-                                        //std::cout << "In top layer" << depth << std::endl;
-                                    }
-
-                                    else
-                                    {
-                                        depth_tag = 2;
-                                    }
+                                    //Record depth of Raman generation.
+                                     depth = phot.get_pos()[2];
+                                    //std::cout << i << ',' << depth << std::endl;
                                 }
                             }
 
@@ -625,6 +615,7 @@ namespace arc
                             // Check that the photon still has statistical weight.
                             if (phot.get_weight() <= 0.0)
                             {
+                                loopcount = loops;
                                 goto kill_photon;
                             }
 
@@ -652,6 +643,7 @@ namespace arc
                                 {
                                     ++raman_escapee;
                                 }
+                                loopcount = loops;
                                 goto kill_photon;
                             }
 
@@ -730,10 +722,9 @@ namespace arc
                                 x = x - dist + SMOOTHING_LENGTH;
                                 //Check whether a Raman scatter occurs.
                                 const double rand = rng::random(0.0, 1.0);
-                                //std::cout << "random number" << rand << std::endl;
-                                if (rand - pow(10, -0.005*dist) > 0.0)
+                                if (rand <= 0.01)
                                 {
-                                    //Check if only Raman scattered once.
+                                    //Ensure only Raman scattered once.
                                     if (raman_count == 1)
                                     {
 
@@ -742,20 +733,8 @@ namespace arc
                                     {
                                         raman_count = raman_count + 1;
                                         total_raman_count = total_raman_count + 1;
-                                        //loops = 0;
-                                        //Determine if scattering occurred in top or bottom layer.
-                                        double depth = phot.get_pos()[2];
-
-                                        if (depth < 0.0)
-                                        {
-                                            depth_tag = 1;
-                                            //std::cout << "In top layer" << depth << std::endl;
-                                        }
-
-                                        else
-                                        {
-                                            depth_tag = 2;
-                                        }
+                                        //Record depth of Raman generation.
+                                        depth = phot.get_pos()[2];
                                     }
                                 }
                                 // Reflect the photon.
@@ -766,13 +745,11 @@ namespace arc
                                 // Move to just past the entity boundary.
                                 phot.move(dist + SMOOTHING_LENGTH);
                                 x = x - dist - SMOOTHING_LENGTH;
-
                                 //Check whether a Raman scatter occurs.
                                 const double rand = rng::random(0.0, 1.0);
-                                //std::cout << "random number" << rand << std::endl;
-                                if (rand - pow(10, -0.005*dist) > 0.0)
+                                if (rand <= 0.01)
                                 {
-                                    //Check if only Raman scattered once.
+                                    //Ensure only Raman scattered once.
                                     if (raman_count == 1)
                                     {
 
@@ -781,23 +758,10 @@ namespace arc
                                     {
                                         raman_count = raman_count + 1;
                                         total_raman_count = total_raman_count + 1;
-                                        //loops = 0;
-                                        //Determine if scattering occurred in top or bottom layer.
-                                        double depth = phot.get_pos()[2];
-
-                                        if (depth < 0.0)
-                                        {
-                                            depth_tag = 1;
-                                            //std::cout << "In top layer" << depth << std::endl;
-                                        }
-
-                                        else
-                                        {
-                                            depth_tag = 2;
-                                        }
+                                        //Record depth of Raman generation.
+                                        depth = phot.get_pos()[2];
                                     }
                                 }
-
                                 // Refract the photon.
                                 phot.set_dir(optics::refraction_dir(phot.get_dir(), norm, n_i / n_t));
 
@@ -822,13 +786,11 @@ namespace arc
                             // Move to the hit location.
                             phot.move(dist);
                             x = x - dist;
-
                             //Check whether a Raman scatter occurs.
                             const double rand = rng::random(0.0, 1.0);
-                            //std::cout << "random number" << rand << std::endl;
-                            if (rand - pow(10, -0.005*dist) > 0.0)
+                            if (rand <= 0.01)
                             {
-                                //Check if only Raman scattered once.
+                                //Ensure only Raman scattered once.
                                 if (raman_count == 1)
                                 {
 
@@ -837,46 +799,23 @@ namespace arc
                                 {
                                     raman_count = raman_count + 1;
                                     total_raman_count = total_raman_count + 1;
-                                    //loops = 0;
-                                    //Determine if scattering occurred in top or bottom layer.
-                                    double depth = phot.get_pos()[2];
-
-                                    if (depth < 0.0)
-                                    {
-                                        depth_tag = 1;
-                                        //std::cout << "In top layer" << depth << std::endl;
-                                    }
-
-                                    else
-                                    {
-                                        depth_tag = 2;
-                                    }
+                                    //Record depth of Raman generation.
+                                    depth = phot.get_pos()[2];
                                 }
                             }
 
                             // Get normal of the hit location.
                             const math::Vec<3> norm = m_ccd[equip_index].get_mesh().get_tri(tri_index).get_norm(phot.get_pos());
-
+                            loopcount = loops;
                             // Check if photon hits the front of the detector and that the photon has been Raman scattered.
                            // if ((phot.get_dir() * norm) < 0.0)
                             if (((phot.get_dir() * norm) < 0.0 ) && (raman_count != 0))
                             {
                                 m_ccd_mutex.lock();
 
+                                m_ccd[equip_index].add_hit(phot.get_pos(), phot.get_weight(), 700E-9);
+                                m_ccd[equip_index].add_count(phot.get_pos(), depth, loopcount);
 
-                                switch (depth_tag)
-                                {
-                                    case 1:
-                                        m_ccd[equip_index].add_hit(phot.get_pos(), phot.get_weight(), 700E-9);
-                                        m_ccd[equip_index].add_count(phot.get_pos(), 700E-9);
-                                        break;
-                                    case 2:
-                                        m_ccd[equip_index].add_hit(phot.get_pos(), phot.get_weight(), 400E-9);
-                                        m_ccd[equip_index].add_count(phot.get_pos(), 400E-9);
-                                        break;
-                                    default:
-                                        ERROR("Gone fucked up.", "depth_tag should be 1 or 2.");
-                                }
                                 m_ccd_mutex.unlock();
                             }
 
@@ -886,6 +825,7 @@ namespace arc
                             {
                                 ++raman_correct_exit;
                             }
+
                             goto kill_photon;
                         }
 
@@ -908,12 +848,14 @@ namespace arc
                             }
 
                             // Kill the absorbed photon.
+                            loopcount = loops;
                             goto kill_photon;
                         }
                     }
                 }
 
                 // Photon death label.
+                loopcount = loops;
                 kill_photon:;
 
 #ifdef ENABLE_PHOTON_PATHS

@@ -15,10 +15,10 @@
 
 //  == OPTIONS ==
 //  -- Compile-Time --
-#define ENABLE_LOG_COLOUR
-#define ENABLE_LOG_VERBOSE
-#define ENABLE_GRAPHICS
-#define ENABLE_PHOTON_PATHS
+// Coloured log is disabled.
+// Verbose log is disabled.
+// Graphics are disabled.
+// Photon paths are disabled.
 
 
 
@@ -33,8 +33,8 @@ namespace arc
         //  == SETTINGS ==
         //  -- Build Info --
         constexpr const char* ARCTORUS_DIR = "/Users/lm579/Arctorus/";     //! Arctorus directory path.
-        constexpr const char* BUILD_INFO   = "raman_mat_benchmark-7785381e-2730"
-            " : Clang : debug : 2018-04-19";    //! Arctorus build information.
+        constexpr const char* BUILD_INFO   = "benchmark_Everall-dc42c203-2733"
+            " : Clang : release : 2018-06-13";    //! Arctorus build information.
 
 
 
@@ -45,4 +45,3 @@ namespace arc
 
 //  == GUARD END ==
 #endif // ARCTORUS_RES_SRC_GEN_CONFIG_HPP_IN
-

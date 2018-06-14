@@ -52,6 +52,8 @@ namespace arc
 
             std::vector<math::Vec<3>> m_pos{};
             std::vector<double> m_wavelength{};
+            std::vector<double> m_depth{};
+            std::vector<int> m_loopcount{};
 
 
             //  == INSTANTIATION ==
@@ -73,10 +75,11 @@ namespace arc
             //  -- Setters --
             void add_hit(const math::Vec<3>& t_pos, double t_weight, double t_wavelength);
 
-            void add_count(const math::Vec<3>& t_pos, const double t_wavelength)
+            void add_count(const math::Vec<3>& t_pos, const double t_depth, const int t_loopcount)
             {
                 m_pos.push_back(t_pos);
-                m_wavelength.push_back(t_wavelength);
+                m_depth.push_back(t_depth);
+                m_loopcount.push_back(t_loopcount);
             }
 
             //  -- Save --
@@ -84,14 +87,14 @@ namespace arc
 
             void save_pos_data(const std::string& t_path) const
             {
-                assert(m_pos.size() == m_wavelength.size());
-                //std::cout << m_pos.size() << "," << m_wavelength.size() << std::endl;
+                assert(m_pos.size() == m_depth.size());
+                assert(m_pos.size() == m_loopcount.size());
 
                 file::Handle file(t_path, std::fstream::out);
 
                 for (size_t i=0; i<m_pos.size(); ++i)
                 {
-                    file << m_pos[i][0] << "\t" << m_pos[i][1] <<"\t"<< m_wavelength[i] << "\n";
+                    file << m_pos[i][0] << "\t" << m_pos[i][1] <<"\t"<< m_depth[i] << "\t"<<m_loopcount[i]<<"\n";
                 }
             }
         };
